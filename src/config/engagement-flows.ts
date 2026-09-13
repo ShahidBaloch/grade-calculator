@@ -1,0 +1,127 @@
+import type { CalculatorSlug } from "@/types/calculator";
+
+export interface EngagementFlow {
+  from: CalculatorSlug;
+  to: CalculatorSlug | "guide:final-exam-tips" | "grading-scales";
+  title: string;
+  description: string;
+}
+
+export const engagementFlows: EngagementFlow[] = [
+  {
+    from: "ez-grader",
+    to: "weighted-grade-calculator",
+    title: "Add this score to your course average",
+    description: "Track multiple assignments with the weighted grade calculator.",
+  },
+  {
+    from: "ez-grader",
+    to: "test-grade-calculator",
+    title: "Calculate from correct answers instead",
+    description: "Switch to counting correct answers with optional bonus points.",
+  },
+  {
+    from: "test-grade-calculator",
+    to: "ez-grader",
+    title: "Grade by number wrong instead",
+    description: "Use the EZ grader chart for quick wrong-answer grading.",
+  },
+  {
+    from: "weighted-grade-calculator",
+    to: "final-grade-calculator",
+    title: "What do you need on your final?",
+    description: "Plan your final exam target based on your current average.",
+  },
+  {
+    from: "weighted-grade-calculator",
+    to: "gpa-calculator",
+    title: "Convert to GPA",
+    description: "See how your course average maps to GPA points.",
+  },
+  {
+    from: "final-grade-calculator",
+    to: "weighted-grade-calculator",
+    title: "Recalculate with updated scores",
+    description: "Update your weighted average after new assignments.",
+  },
+  {
+    from: "final-grade-calculator",
+    to: "guide:final-exam-tips",
+    title: "Study tips for your target score",
+    description: "Read our guide on preparing for your final exam.",
+  },
+  {
+    from: "gpa-calculator",
+    to: "cumulative-gpa-calculator",
+    title: "Add previous semesters",
+    description: "Combine this semester with your overall GPA.",
+  },
+  {
+    from: "gpa-calculator",
+    to: "weighted-grade-calculator",
+    title: "Calculate course average first",
+    description: "Build your GPA from individual assignment scores.",
+  },
+  {
+    from: "cumulative-gpa-calculator",
+    to: "gpa-calculator",
+    title: "Calculate this semester's GPA",
+    description: "Start with your current semester courses.",
+  },
+  {
+    from: "weighted-gpa-calculator",
+    to: "raise-gpa-calculator",
+    title: "Plan your target GPA",
+    description: "See what grades you need to reach your goal.",
+  },
+  {
+    from: "raise-gpa-calculator",
+    to: "gpa-calculator",
+    title: "Calculate current semester GPA",
+    description: "Start with your current course grades.",
+  },
+  {
+    from: "high-school-gpa-calculator",
+    to: "weighted-gpa-calculator",
+    title: "Try weighted GPA",
+    description: "Add Honors and AP course bonuses.",
+  },
+  {
+    from: "college-gpa-calculator",
+    to: "cumulative-gpa-calculator",
+    title: "Add previous semesters",
+    description: "Combine with your overall college GPA.",
+  },
+  {
+    from: "percentage-to-letter-grade",
+    to: "letter-grade-calculator",
+    title: "Convert letter to percentage",
+    description: "Go the other direction with our letter grade calculator.",
+  },
+  {
+    from: "letter-grade-calculator",
+    to: "percentage-to-letter-grade",
+    title: "Convert percentage to letter",
+    description: "Go the other direction with our percentage converter.",
+  },
+  {
+    from: "canvas-grade-calculator",
+    to: "weighted-grade-calculator",
+    title: "Calculate with individual assignments",
+    description: "Break down scores by assignment instead of groups.",
+  },
+  {
+    from: "eoc-grade-calculator",
+    to: "final-grade-calculator",
+    title: "Try the full final grade calculator",
+    description: "More modes including reverse and point-based grading.",
+  },
+];
+
+export function getFlowsForCalculator(slug: CalculatorSlug): EngagementFlow[] {
+  return engagementFlows.filter((flow) => flow.from === slug);
+}
+
+export function getPrimaryFlow(slug: CalculatorSlug): EngagementFlow | undefined {
+  return getFlowsForCalculator(slug)[0];
+}

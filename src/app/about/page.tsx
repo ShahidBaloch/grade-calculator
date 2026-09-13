@@ -1,0 +1,54 @@
+import Link from "next/link";
+import { ContentPageLayout } from "@/components/content/ContentPageLayout";
+import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
+import { siteConfig } from "@/config/site";
+import { createPageMetadata } from "@/lib/seo/metadata";
+
+export const metadata = createPageMetadata({
+  title: "About Us",
+  description:
+    "GradeCalculator provides free, fast, and private grade and GPA calculators for students and teachers worldwide.",
+  path: "/about",
+});
+
+export default function AboutPage() {
+  const breadcrumbs = [{ name: "Home", href: "/" }, { name: "About", href: "/about" }];
+
+  return (
+    <>
+      <BreadcrumbJsonLd items={breadcrumbs} />
+      <ContentPageLayout
+        title="About GradeCalculator"
+        description="Free tools for students and teachers — built for speed, accuracy, and privacy."
+        breadcrumbs={breadcrumbs}
+      >
+        <div className="space-y-6 text-[var(--color-text-muted)]">
+          <p>
+            {siteConfig.name} is a free online platform for calculating test scores, weighted course
+            averages, final exam targets, and GPA. We built it because existing grade calculator sites
+            are often slow, ad-heavy, and missing the tools students actually search for.
+          </p>
+          <p>
+            Our calculators run entirely in your browser. We don&apos;t store your grades on our servers,
+            and we don&apos;t require sign-up. Your grading scale is detected automatically from your
+            location, with support for US, UK, Canadian, Australian, and New Zealand systems.
+          </p>
+          <h2 className="text-xl font-semibold text-[var(--color-text)]">What we offer</h2>
+          <ul className="list-disc space-y-2 pl-5">
+            <li>EZ Grader and test grade calculators for quick quiz scoring</li>
+            <li>Weighted grade and final exam calculators for course planning</li>
+            <li>Semester and cumulative GPA calculators</li>
+            <li>Grading scale reference charts and educational guides</li>
+          </ul>
+          <p>
+            Questions or feedback?{" "}
+            <Link href="/contact" className="text-[var(--color-primary)] hover:underline">
+              Contact us
+            </Link>
+            .
+          </p>
+        </div>
+      </ContentPageLayout>
+    </>
+  );
+}
