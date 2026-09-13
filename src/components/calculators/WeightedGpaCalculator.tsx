@@ -2,7 +2,9 @@
 
 import * as React from "react";
 import { getPrimaryFlow } from "@/config/engagement-flows";
+import { calculatorBySlug } from "@/config/calculators";
 import { NextStepCard } from "@/components/engagement/NextStepCard";
+import { ExampleScenarios } from "@/components/engagement/ExampleScenarios";
 import { DynamicRowList } from "@/components/calculators/shared/DynamicRowList";
 import { CalculatorToolbar } from "@/components/calculators/shared/CalculatorToolbar";
 import { ScaleSelector } from "@/components/calculators/shared/ScaleSelector";
@@ -12,8 +14,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { calculateWeightedGpa } from "@/lib/calculators/weighted-gpa";
 import type { CourseWeightType } from "@/lib/calculators/schemas/gpa.schema";
 import { formatGpa } from "@/lib/utils/format";
-import { STORAGE_KEYS } from "@/lib/constants";
-import { setStorageItem } from "@/lib/utils/storage";
 import { useCalculatorPersistence } from "@/hooks/useCalculatorPersistence";
 import { useGradingScale } from "@/hooks/useGradingScale";
 
@@ -36,10 +36,7 @@ export function WeightedGpaCalculator() {
     courses: defaultCourses,
   });
   const { courses } = state;
-
-  React.useEffect(() => {
-    setStorageItem(STORAGE_KEYS.recentCalculator, "weighted-gpa-calculator");
-  }, []);
+  const examples = calculatorBySlug["weighted-gpa-calculator"].examples;
 
   const result = React.useMemo(
     () => calculateWeightedGpa({ courses }, scaleId),
@@ -51,6 +48,25 @@ export function WeightedGpaCalculator() {
   return (
     <div className="calculator-print-area space-y-6">
       <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
+      {examples.length > 0 && (
+        <ExampleScenarios
+          examples={examples}
+          onSelect={(values) => {
+            if (!Array.isArray(values.courses)) return;
+            updateCourses(
+              values.courses.map((row, index) => {
+                const course = row as Partial<CourseRow>;
+                return {
+                  name: course.name ?? `Course ${index + 1}`,
+                  grade: String(course.grade ?? "B"),
+                  credits: typeof course.credits === "number" ? course.credits : 3,
+                  courseType: course.courseType ?? "regular",
+                };
+              }),
+            );
+          }}
+        />
+      )}
       <ScaleSelector />
       <p className="text-sm text-[var(--color-text-muted)]">
         Honors courses get +0.5 GPA points; AP/IB courses get +1.0. Check your school&apos;s policy.

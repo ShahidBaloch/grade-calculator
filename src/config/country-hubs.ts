@@ -14,6 +14,7 @@ export interface CountryHubConfig {
   gradingScalePath: string;
   featuredCalculators: CalculatorSlug[];
   keywords: string[];
+  hreflang: string;
   /** Overrides the default “tools lock to this hub’s scale” banner. */
   scaleLockNote?: string;
 }
@@ -53,6 +54,7 @@ export const countryHubs: CountryHubConfig[] = [
       "eoc-grade-calculator",
     ],
     keywords: ["grade calculator usa", "us gpa calculator", "easy grader"],
+    hreflang: "en-US",
   },
   {
     code: "uk",
@@ -87,6 +89,7 @@ export const countryHubs: CountryHubConfig[] = [
       "letter-grade-calculator",
     ],
     keywords: ["uk grade calculator", "degree classification calculator", "uk grading scale"],
+    hreflang: "en-GB",
     scaleLockNote:
       "Most featured tools on this hub lock to the UK Degree scale. The GCSE calculator locks to the 9–1 scale. Worldwide default pages keep a scale selector.",
   },
@@ -117,6 +120,7 @@ export const countryHubs: CountryHubConfig[] = [
       "cumulative-gpa-calculator",
     ],
     keywords: ["canada gpa calculator", "canadian grading scale", "grade calculator canada"],
+    hreflang: "en-CA",
   },
   {
     code: "au",
@@ -150,6 +154,7 @@ export const countryHubs: CountryHubConfig[] = [
       "letter-grade-calculator",
     ],
     keywords: ["australian gpa calculator", "7 point gpa scale", "grade calculator australia"],
+    hreflang: "en-AU",
   },
   {
     code: "nz",
@@ -178,6 +183,7 @@ export const countryHubs: CountryHubConfig[] = [
       "cumulative-gpa-calculator",
     ],
     keywords: ["nz gpa calculator", "new zealand grading scale", "grade calculator nz"],
+    hreflang: "en-NZ",
   },
 ];
 

@@ -2,14 +2,14 @@
 
 import * as React from "react";
 import { getPrimaryFlow } from "@/config/engagement-flows";
+import { calculatorBySlug } from "@/config/calculators";
 import { NextStepCard } from "@/components/engagement/NextStepCard";
+import { ExampleScenarios } from "@/components/engagement/ExampleScenarios";
 import { CalculatorToolbar } from "@/components/calculators/shared/CalculatorToolbar";
 import { ScaleSelector } from "@/components/calculators/shared/ScaleSelector";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { convertLetterToPercent } from "@/lib/calculators/grade-converter";
-import { STORAGE_KEYS } from "@/lib/constants";
-import { setStorageItem } from "@/lib/utils/storage";
 import { useCalculatorPersistence } from "@/hooks/useCalculatorPersistence";
 import { useGradingScale } from "@/hooks/useGradingScale";
 
@@ -19,10 +19,7 @@ export function LetterGradeCalculator() {
     "letter-grade-calculator",
     { letter: "B+" },
   );
-
-  React.useEffect(() => {
-    setStorageItem(STORAGE_KEYS.recentCalculator, "letter-grade-calculator");
-  }, []);
+  const examples = calculatorBySlug["letter-grade-calculator"].examples;
 
   const result = React.useMemo(
     () => convertLetterToPercent(state.letter, scaleId),
@@ -32,6 +29,16 @@ export function LetterGradeCalculator() {
   return (
     <div className="calculator-print-area space-y-6">
       <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
+      {examples.length > 0 && (
+        <ExampleScenarios
+          examples={examples}
+          onSelect={(values) =>
+            setState({
+              letter: typeof values.letter === "string" ? values.letter : state.letter,
+            })
+          }
+        />
+      )}
       <ScaleSelector />
       <div className="space-y-2">
         <Label htmlFor="letter-grade-input">Letter grade</Label>

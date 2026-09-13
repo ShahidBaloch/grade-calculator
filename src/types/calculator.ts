@@ -1,5 +1,3 @@
-export type GradeInputMode = "percentage" | "letter" | "points";
-
 export type CalculatorStatus = "idle" | "valid" | "warning" | "error";
 
 export type FinalGradeStatus = "achievable" | "impossible" | "already_met";

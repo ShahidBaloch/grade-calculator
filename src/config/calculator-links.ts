@@ -67,7 +67,7 @@ export const calculatorResourceLinks: Record<CalculatorSlug, CalculatorResourceL
     gradingScale: { path: "/grading-scales/australia", title: "Australian grading scale" },
   },
   "gcse-grade-calculator": {
-    guide: { path: "/guides/understanding-letter-grades", title: "Understanding letter grades" },
+    guide: { path: "/guides/gcse-9-1-grades", title: "How GCSE 9–1 grades work" },
     gradingScale: { path: "/grading-scales/gcse", title: "UK GCSE 9–1 scale" },
   },
 };

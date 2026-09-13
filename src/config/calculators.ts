@@ -177,6 +177,13 @@ export const calculators: CalculatorConfig[] = [
                 { name: "Honors Algebra", grade: "B+", credits: 1, courseType: "honors" },
               ],
             },
+            {
+              name: "Spring",
+              courses: [
+                { name: "AP Biology", grade: "A-", credits: 1, courseType: "ap" },
+                { name: "History", grade: "B", credits: 1, courseType: "regular" },
+              ],
+            },
           ],
         },
       },
@@ -244,9 +251,9 @@ export const calculators: CalculatorConfig[] = [
         label: "Typical Canvas course",
         values: {
           groups: [
-            { name: "Assignments", weight: 30, current: 88 },
-            { name: "Quizzes", weight: 20, current: 92 },
-            { name: "Exams", weight: 50, current: 81 },
+            { name: "Assignments", weight: 30, score: 88 },
+            { name: "Quizzes", weight: 20, score: 92 },
+            { name: "Exams", weight: 50, score: 81 },
           ],
         },
       },
@@ -282,6 +289,12 @@ export const calculators: CalculatorConfig[] = [
         values: {
           year2Weight: 40,
           year3Weight: 60,
+          modules: [
+            { name: "Public Law", mark: 68, credits: 30, year: 2 },
+            { name: "Contract", mark: 64, credits: 30, year: 2 },
+            { name: "Dissertation", mark: 72, credits: 40, year: 3 },
+            { name: "Equity", mark: 66, credits: 20, year: 3 },
+          ],
         },
       },
     ],

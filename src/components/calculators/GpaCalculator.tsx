@@ -11,8 +11,6 @@ import { ScaleSelector } from "@/components/calculators/shared/ScaleSelector";
 import { Input } from "@/components/ui/input";
 import { calculateSemesterGpa } from "@/lib/calculators/gpa";
 import { formatGpa } from "@/lib/utils/format";
-import { STORAGE_KEYS } from "@/lib/constants";
-import { setStorageItem } from "@/lib/utils/storage";
 import { useCalculatorPersistence } from "@/hooks/useCalculatorPersistence";
 import { useGradingScale } from "@/hooks/useGradingScale";
 
@@ -30,10 +28,6 @@ export function GpaCalculator() {
   const { courses } = state;
   const setCourses = (next: typeof defaultCourses) => setState({ courses: next });
   const examples = calculatorBySlug["gpa-calculator"].examples;
-
-  React.useEffect(() => {
-    setStorageItem(STORAGE_KEYS.recentCalculator, "gpa-calculator");
-  }, []);
 
   const result = React.useMemo(
     () => calculateSemesterGpa({ courses }, scaleId),

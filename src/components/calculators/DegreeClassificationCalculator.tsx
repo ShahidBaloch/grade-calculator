@@ -2,7 +2,9 @@
 
 import * as React from "react";
 import { getPrimaryFlow } from "@/config/engagement-flows";
+import { calculatorBySlug } from "@/config/calculators";
 import { NextStepCard } from "@/components/engagement/NextStepCard";
+import { ExampleScenarios } from "@/components/engagement/ExampleScenarios";
 import { CalculatorToolbar } from "@/components/calculators/shared/CalculatorToolbar";
 import { DynamicRowList } from "@/components/calculators/shared/DynamicRowList";
 import { FormulaBreakdown } from "@/components/calculators/shared/FormulaBreakdown";
@@ -11,8 +13,6 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { calculateDegreeClassification } from "@/lib/calculators/degree-classification";
 import type { DegreeModule } from "@/lib/calculators/degree-classification";
-import { STORAGE_KEYS } from "@/lib/constants";
-import { setStorageItem } from "@/lib/utils/storage";
 import { useCalculatorPersistence } from "@/hooks/useCalculatorPersistence";
 
 const defaultModules: DegreeModule[] = [
@@ -28,10 +28,7 @@ export function DegreeClassificationCalculator() {
     { modules: defaultModules, year2Weight: 40, year3Weight: 60 },
   );
   const { modules, year2Weight, year3Weight } = state;
-
-  React.useEffect(() => {
-    setStorageItem(STORAGE_KEYS.recentCalculator, "degree-classification-calculator");
-  }, []);
+  const examples = calculatorBySlug["degree-classification-calculator"].examples;
 
   const result = React.useMemo(
     () => calculateDegreeClassification({ modules, year2Weight, year3Weight }),
@@ -43,6 +40,29 @@ export function DegreeClassificationCalculator() {
   return (
     <div className="calculator-print-area space-y-6">
       <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
+      {examples.length > 0 && (
+        <ExampleScenarios
+          examples={examples}
+          onSelect={(values) => {
+            const nextModules = Array.isArray(values.modules)
+              ? values.modules.map((row, index) => {
+                  const courseModule = row as Partial<DegreeModule>;
+                  return {
+                    name: courseModule.name ?? `Module ${index + 1}`,
+                    mark: typeof courseModule.mark === "number" ? courseModule.mark : 60,
+                    credits: typeof courseModule.credits === "number" ? courseModule.credits : 20,
+                    year: courseModule.year === 2 || courseModule.year === 3 ? courseModule.year : 3,
+                  };
+                })
+              : modules;
+            setState({
+              modules: nextModules,
+              year2Weight: typeof values.year2Weight === "number" ? values.year2Weight : year2Weight,
+              year3Weight: typeof values.year3Weight === "number" ? values.year3Weight : year3Weight,
+            });
+          }}
+        />
+      )}
       <p className="text-sm text-[var(--color-text-muted)]">
         Enter module marks and credits. If you include both Year 2 and Year 3, we apply your year
         weights (common pattern: 40% / 60%).

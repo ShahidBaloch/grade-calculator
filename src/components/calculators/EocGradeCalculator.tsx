@@ -2,7 +2,9 @@
 
 import * as React from "react";
 import { getPrimaryFlow } from "@/config/engagement-flows";
+import { calculatorBySlug } from "@/config/calculators";
 import { NextStepCard } from "@/components/engagement/NextStepCard";
+import { ExampleScenarios } from "@/components/engagement/ExampleScenarios";
 import { CalculatorToolbar } from "@/components/calculators/shared/CalculatorToolbar";
 import { FormulaBreakdown } from "@/components/calculators/shared/FormulaBreakdown";
 import { ResultDisplay } from "@/components/calculators/shared/ResultDisplay";
@@ -11,8 +13,6 @@ import { WeightInput } from "@/components/calculators/shared/WeightInput";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { calculateEocGrade } from "@/lib/calculators/eoc-grade";
-import { STORAGE_KEYS } from "@/lib/constants";
-import { setStorageItem } from "@/lib/utils/storage";
 import { useCalculatorPersistence } from "@/hooks/useCalculatorPersistence";
 import { useGradingScale } from "@/hooks/useGradingScale";
 
@@ -23,10 +23,7 @@ export function EocGradeCalculator() {
     eocWeight: 25,
     targetGrade: 85,
   });
-
-  React.useEffect(() => {
-    setStorageItem(STORAGE_KEYS.recentCalculator, "eoc-grade-calculator");
-  }, []);
+  const examples = calculatorBySlug["eoc-grade-calculator"].examples;
 
   const result = React.useMemo(
     () =>
@@ -46,6 +43,18 @@ export function EocGradeCalculator() {
   return (
     <div className="calculator-print-area space-y-6">
       <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
+      {examples.length > 0 && (
+        <ExampleScenarios
+          examples={examples}
+          onSelect={(values) =>
+            setState({
+              currentGrade: typeof values.currentGrade === "number" ? values.currentGrade : state.currentGrade,
+              eocWeight: typeof values.eocWeight === "number" ? values.eocWeight : state.eocWeight,
+              targetGrade: typeof values.targetGrade === "number" ? values.targetGrade : state.targetGrade,
+            })
+          }
+        />
+      )}
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="space-y-2">
           <Label>Current course grade (%)</Label>

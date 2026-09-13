@@ -10,6 +10,10 @@ module.exports = {
         "http://localhost:3000/gpa-calculator",
         "http://localhost:3000/final-grade-calculator",
         "http://localhost:3000/calculators",
+        "http://localhost:3000/gcse-grade-calculator",
+        "http://localhost:3000/degree-classification-calculator",
+        "http://localhost:3000/uk",
+        "http://localhost:3000/uk/gcse-grade-calculator",
       ],
       numberOfRuns: 1,
       settings: {
@@ -28,7 +32,7 @@ module.exports = {
     },
     upload: {
       target: "filesystem",
-      outputDir: "./docs/phase-6/lighthouse-reports",
+      outputDir: "./lighthouse-reports",
     },
   },
 };

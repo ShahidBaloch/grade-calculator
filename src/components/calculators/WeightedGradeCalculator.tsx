@@ -2,7 +2,9 @@
 
 import * as React from "react";
 import { getPrimaryFlow } from "@/config/engagement-flows";
+import { calculatorBySlug } from "@/config/calculators";
 import { NextStepCard } from "@/components/engagement/NextStepCard";
+import { ExampleScenarios } from "@/components/engagement/ExampleScenarios";
 import { CalculatorToolbar } from "@/components/calculators/shared/CalculatorToolbar";
 import { DynamicRowList } from "@/components/calculators/shared/DynamicRowList";
 import { ResultDisplay } from "@/components/calculators/shared/ResultDisplay";
@@ -10,8 +12,6 @@ import { ScaleSelector } from "@/components/calculators/shared/ScaleSelector";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { calculateWeightedGrade } from "@/lib/calculators/weighted-grade";
-import { STORAGE_KEYS } from "@/lib/constants";
-import { setStorageItem } from "@/lib/utils/storage";
 import { useCalculatorPersistence } from "@/hooks/useCalculatorPersistence";
 import { useGradingScale } from "@/hooks/useGradingScale";
 import type { WeightedGradeInput } from "@/lib/calculators/schemas/weighted-grade.schema";
@@ -78,10 +78,7 @@ export function WeightedGradeCalculator() {
     },
   );
   const { globalMode, weightMode, items } = state;
-
-  React.useEffect(() => {
-    setStorageItem(STORAGE_KEYS.recentCalculator, "weighted-grade-calculator");
-  }, []);
+  const examples = calculatorBySlug["weighted-grade-calculator"].examples;
 
   const result = React.useMemo(
     () => calculateWeightedGrade({ globalMode, weightMode, items }, scaleId),
@@ -93,6 +90,26 @@ export function WeightedGradeCalculator() {
   return (
     <div className="calculator-print-area space-y-6">
       <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
+      {examples.length > 0 && (
+        <ExampleScenarios
+          examples={examples}
+          onSelect={(values) => {
+            if (!Array.isArray(values.items)) return;
+            setState({
+              ...state,
+              items: values.items.map((row, index) => {
+                const item = row as { name?: string; score?: number | string; weight?: number; maxPoints?: number };
+                return {
+                  name: item.name ?? `Item ${index + 1}`,
+                  score: item.score ?? 0,
+                  weight: typeof item.weight === "number" ? item.weight : 0,
+                  maxPoints: item.maxPoints ?? 100,
+                };
+              }),
+            });
+          }}
+        />
+      )}
       <ScaleSelector />
       <div className="grid gap-4 sm:grid-cols-2">
         <ModeButtons

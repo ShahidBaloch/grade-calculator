@@ -57,6 +57,49 @@ test.describe("Core calculator flows", () => {
     await expect(page.locator(".text-5xl").first()).not.toHaveText("—");
   });
 
+  test("Raise GPA calculator shows a required GPA", async ({ page }) => {
+    await page.goto("/raise-gpa-calculator");
+    await expect(page.getByRole("heading", { level: 1, name: /raise gpa/i })).toBeVisible();
+    await expect(page.getByText("Required GPA").first()).toBeVisible();
+    await expect(page.getByText("3.80").first()).toBeVisible();
+  });
+
+  test("College GPA calculator shows term GPA and standing", async ({ page }) => {
+    await page.goto("/college-gpa-calculator");
+    await expect(page.getByRole("heading", { level: 1, name: /college gpa/i })).toBeVisible();
+    await expect(page.getByText("College term GPA").first()).toBeVisible();
+    await expect(page.getByText(/dean's-list|good academic standing|good-standing/i).first()).toBeVisible();
+  });
+
+  test("UK hub 404s a tool that is not featured", async ({ page }) => {
+    const response = await page.goto("/uk/gpa-calculator");
+    expect(response?.status()).toBe(404);
+    await expect(page.getByRole("heading", { level: 1, name: /page not found/i })).toBeVisible();
+  });
+
+  test("UK weighted grade geo copy loads", async ({ page }) => {
+    await page.goto("/uk/weighted-grade-calculator");
+    await expect(page).toHaveURL(/\/uk\/weighted-grade-calculator/);
+    await expect(page.getByRole("heading", { level: 1, name: /weighted grade/i })).toBeVisible();
+  });
+
+  test("Australia ATAR geo copy loads", async ({ page }) => {
+    await page.goto("/au/atar-calculator");
+    await expect(page).toHaveURL(/\/au\/atar-calculator/);
+    await expect(page.getByRole("heading", { level: 1, name: /atar/i })).toBeVisible();
+  });
+
+  test("legacy letter-grade URL redirects", async ({ page }) => {
+    await page.goto("/letter-grade-to-percentage");
+    await expect(page).toHaveURL(/\/letter-grade-calculator$/);
+    await expect(page.getByRole("heading", { level: 1, name: /letter grade/i })).toBeVisible();
+  });
+
+  test("GCSE 9-1 guide page loads", async ({ page }) => {
+    await page.goto("/guides/gcse-9-1-grades");
+    await expect(page.getByRole("heading", { level: 1, name: /gcse/i })).toBeVisible();
+  });
+
   test("navigation header links work", async ({ page, isMobile }) => {
     await page.goto("/");
     if (isMobile) {

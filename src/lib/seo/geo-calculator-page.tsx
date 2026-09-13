@@ -41,6 +41,7 @@ export function createGeoCalculatorMetadata(code: string, slug: string) {
     languages: {
       "x-default": `${siteConfig.url}${config.path}`,
       en: `${siteConfig.url}${config.path}`,
+      [hub.hreflang]: `${siteConfig.url}${path}`,
     },
   });
 }

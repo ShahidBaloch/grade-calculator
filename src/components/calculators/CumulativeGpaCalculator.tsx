@@ -2,7 +2,9 @@
 
 import * as React from "react";
 import { getPrimaryFlow } from "@/config/engagement-flows";
+import { calculatorBySlug } from "@/config/calculators";
 import { NextStepCard } from "@/components/engagement/NextStepCard";
+import { ExampleScenarios } from "@/components/engagement/ExampleScenarios";
 import { CalculatorToolbar } from "@/components/calculators/shared/CalculatorToolbar";
 import { DynamicRowList } from "@/components/calculators/shared/DynamicRowList";
 import { ScaleSelector } from "@/components/calculators/shared/ScaleSelector";
@@ -10,8 +12,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { calculateCumulativeGpa } from "@/lib/calculators/cumulative-gpa";
 import { formatGpa } from "@/lib/utils/format";
-import { STORAGE_KEYS } from "@/lib/constants";
-import { setStorageItem } from "@/lib/utils/storage";
 import { useCalculatorPersistence } from "@/hooks/useCalculatorPersistence";
 import { useGradingScale } from "@/hooks/useGradingScale";
 
@@ -32,10 +32,7 @@ export function CumulativeGpaCalculator() {
     },
   );
   const { previousGpa, previousCredits, courses } = state;
-
-  React.useEffect(() => {
-    setStorageItem(STORAGE_KEYS.recentCalculator, "cumulative-gpa-calculator");
-  }, []);
+  const examples = calculatorBySlug["cumulative-gpa-calculator"].examples;
 
   const result = React.useMemo(
     () =>
@@ -53,6 +50,19 @@ export function CumulativeGpaCalculator() {
   return (
     <div className="calculator-print-area space-y-6">
       <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
+      {examples.length > 0 && (
+        <ExampleScenarios
+          examples={examples}
+          onSelect={(values) =>
+            setState({
+              ...state,
+              previousGpa: typeof values.previousGpa === "number" ? values.previousGpa : state.previousGpa,
+              previousCredits:
+                typeof values.previousCredits === "number" ? values.previousCredits : state.previousCredits,
+            })
+          }
+        />
+      )}
       <ScaleSelector />
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="space-y-2">

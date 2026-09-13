@@ -12,8 +12,6 @@ import { ScaleSelector } from "@/components/calculators/shared/ScaleSelector";
 import { CalculatorToolbar } from "@/components/calculators/shared/CalculatorToolbar";
 import { calculateEzGrader } from "@/lib/calculators/ez-grader";
 import { useCalculatorPersistence } from "@/hooks/useCalculatorPersistence";
-import { STORAGE_KEYS } from "@/lib/constants";
-import { setStorageItem } from "@/lib/utils/storage";
 import { useGradingScale } from "@/hooks/useGradingScale";
 import type { CalculatorSlug } from "@/types/calculator";
 
@@ -24,10 +22,6 @@ export function EzGrader({ slug = "ez-grader" }: { slug?: CalculatorSlug }) {
     wrongAnswers: 0,
   });
   const { totalQuestions, wrongAnswers } = state;
-
-  React.useEffect(() => {
-    setStorageItem(STORAGE_KEYS.recentCalculator, slug);
-  }, [slug]);
 
   const result = React.useMemo(
     () => calculateEzGrader({ totalQuestions, wrongAnswers }, scaleId),

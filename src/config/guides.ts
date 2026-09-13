@@ -455,7 +455,7 @@ export const guides: GuideConfig[] = [
       "What A through F mean in percentages and GPA points, and why the same letter differs by school.",
     keywords: ["letter grades", "what is a b plus", "letter grade percentage"],
     readTime: "10 min read",
-    relatedGuides: ["gpa-scale-explained", "how-to-calculate-weighted-grades"],
+    relatedGuides: ["gpa-scale-explained", "how-to-calculate-weighted-grades", "gcse-9-1-grades"],
     relatedCalculators: ["letter-grade-calculator", "percentage-to-letter-grade"],
     sections: [
       {
@@ -549,6 +549,72 @@ export const guides: GuideConfig[] = [
         question: "Should I study if I already have an A locked?",
         answer:
           "Check whether the syllabus has a minimum final or a curve. If both are safe, a light review is enough.",
+      },
+    ],
+  },
+  {
+    slug: "gcse-9-1-grades",
+    path: "/guides/gcse-9-1-grades",
+    title: "How GCSE 9–1 Grades Work",
+    description:
+      "Understand England’s GCSE 9–1 scale, what a standard pass means, and how to map a percentage to a grade for planning.",
+    keywords: [
+      "gcse grades",
+      "gcse 9-1",
+      "what is a gcse grade 4",
+      "gcse percentage to grade",
+    ],
+    readTime: "10 min read",
+    embeddedCalculator: "gcse-grade-calculator",
+    relatedGuides: ["understanding-letter-grades", "gpa-scale-explained"],
+    relatedCalculators: ["gcse-grade-calculator", "degree-classification-calculator", "percentage-to-letter-grade"],
+    sections: [
+      {
+        heading: "9 is the top, 1 is the bottom",
+        body:
+          "England’s reformed GCSEs use numbers, not A*–G. Grade 9 is the highest, then 8, 7, and so on down to 1. U (unclassified) sits below 1. A 9 is harder to earn than the old A*; most high A* work maps nearer to 8 or 9 depending on the paper.",
+      },
+      {
+        heading: "What counts as a pass",
+        body:
+          "Grade 4 is a standard pass. Grade 5 is often called a strong pass. Many sixth forms and employers ask for grade 4 or 5 in English and maths. That is not the same as a US D or C — do not convert it on a US A–F table.",
+      },
+      {
+        heading: "Percentage bands are not official",
+        body:
+          "Exam boards set new grade boundaries every series and every subject. A 70% might be a 7 on one paper and a 6 on another. Our GCSE calculator uses a simplified educational map so you can plan. It is not Ofqual, AQA, Edexcel, OCR, or WJEC.",
+      },
+      {
+        heading: "How to use the GCSE calculator",
+        body:
+          "Enter a percentage from 0–100. Read the 9–1 grade, whether it is a standard pass (4+), the percentage band we used, and an approximate legacy A*–G letter. Change the number to see what it would take to move up a grade.",
+      },
+      {
+        heading: "Legacy A*–G letters",
+        body:
+          "Older certificates and some international GCSEs still show letters. Roughly, 7–9 sit near A/A*, 4 is around a C, and 1 is a G. Use that only as a memory aid. If your school still reports letters, use the letter-grade tools on the matching scale instead.",
+      },
+      {
+        heading: "GCSEs are not a UK degree class",
+        body:
+          "A First at university is typically 70%+ on a degree classification. A GCSE 7 is also often near 70% on our educational table, but they are different qualifications. After you have A-level or university marks, switch to the UK degree classification calculator.",
+      },
+      {
+        heading: "Scotland, Wales, and Northern Ireland",
+        body:
+          "This guide is about the England 9–1 scale. Scotland uses National 5 / Higher. Wales and Northern Ireland may still mix letters and numbers depending on the board. Check your exam board’s page before you treat a number as official.",
+      },
+    ],
+    faqs: [
+      {
+        question: "Is grade 4 a pass?",
+        answer:
+          "Yes. Grade 4 is a standard pass and grade 5 is often called a strong pass. Confirm what your sixth form or college asks for in English and maths.",
+      },
+      {
+        question: "Are these official exam-board boundaries?",
+        answer:
+          "No. Official boundaries change by subject and exam series. The calculator is a planning estimate only.",
       },
     ],
   },

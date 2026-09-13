@@ -13,8 +13,6 @@ import { Label } from "@/components/ui/label";
 import { calculateSemesterGpa } from "@/lib/calculators/gpa";
 import { getScaleMaxGpa } from "@/lib/grading-scales";
 import { formatGpa } from "@/lib/utils/format";
-import { STORAGE_KEYS } from "@/lib/constants";
-import { setStorageItem } from "@/lib/utils/storage";
 import { useCalculatorPersistence } from "@/hooks/useCalculatorPersistence";
 import { useGradingScale } from "@/hooks/useGradingScale";
 
@@ -38,10 +36,6 @@ export function CollegeGpaCalculator() {
   });
   const { courses } = state;
   const examples = calculatorBySlug["college-gpa-calculator"].examples;
-
-  React.useEffect(() => {
-    setStorageItem(STORAGE_KEYS.recentCalculator, "college-gpa-calculator");
-  }, []);
 
   const maxGpa = getScaleMaxGpa(scaleId);
   const excludedCount = courses.filter((course) => course.countsTowardGpa === false).length;

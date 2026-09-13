@@ -2,15 +2,15 @@
 
 import * as React from "react";
 import { getPrimaryFlow } from "@/config/engagement-flows";
+import { calculatorBySlug } from "@/config/calculators";
 import { NextStepCard } from "@/components/engagement/NextStepCard";
+import { ExampleScenarios } from "@/components/engagement/ExampleScenarios";
 import { CalculatorToolbar } from "@/components/calculators/shared/CalculatorToolbar";
 import { DynamicRowList } from "@/components/calculators/shared/DynamicRowList";
 import { ResultDisplay } from "@/components/calculators/shared/ResultDisplay";
 import { ScaleSelector } from "@/components/calculators/shared/ScaleSelector";
 import { Input } from "@/components/ui/input";
 import { calculateCanvasGrade } from "@/lib/calculators/canvas-grade";
-import { STORAGE_KEYS } from "@/lib/constants";
-import { setStorageItem } from "@/lib/utils/storage";
 import { useCalculatorPersistence } from "@/hooks/useCalculatorPersistence";
 import { useGradingScale } from "@/hooks/useGradingScale";
 
@@ -33,10 +33,7 @@ export function CanvasGradeCalculator() {
     groups: defaultGroups,
   });
   const { groups } = state;
-
-  React.useEffect(() => {
-    setStorageItem(STORAGE_KEYS.recentCalculator, "canvas-grade-calculator");
-  }, []);
+  const examples = calculatorBySlug["canvas-grade-calculator"].examples;
 
   const result = React.useMemo(
     () => calculateCanvasGrade({ groups }, scaleId),
@@ -48,6 +45,24 @@ export function CanvasGradeCalculator() {
   return (
     <div className="calculator-print-area space-y-6">
       <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
+      {examples.length > 0 && (
+        <ExampleScenarios
+          examples={examples}
+          onSelect={(values) => {
+            if (!Array.isArray(values.groups)) return;
+            updateGroups(
+              values.groups.map((row, index) => {
+                const group = row as { name?: string; score?: number; current?: number; weight?: number };
+                return {
+                  name: group.name ?? `Group ${index + 1}`,
+                  score: typeof group.score === "number" ? group.score : (group.current ?? 0),
+                  weight: typeof group.weight === "number" ? group.weight : 0,
+                };
+              }),
+            );
+          }}
+        />
+      )}
       <ScaleSelector />
       <p className="text-sm text-[var(--color-text-muted)]">
         Enter each Canvas assignment group with its average score and weight percentage.

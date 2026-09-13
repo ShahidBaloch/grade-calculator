@@ -2,15 +2,15 @@
 
 import * as React from "react";
 import { getPrimaryFlow } from "@/config/engagement-flows";
+import { calculatorBySlug } from "@/config/calculators";
 import { NextStepCard } from "@/components/engagement/NextStepCard";
+import { ExampleScenarios } from "@/components/engagement/ExampleScenarios";
 import { CalculatorToolbar } from "@/components/calculators/shared/CalculatorToolbar";
 import { ResultDisplay } from "@/components/calculators/shared/ResultDisplay";
 import { ScaleSelector } from "@/components/calculators/shared/ScaleSelector";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { convertPercentToLetter } from "@/lib/calculators/grade-converter";
-import { STORAGE_KEYS } from "@/lib/constants";
-import { setStorageItem } from "@/lib/utils/storage";
 import { useCalculatorPersistence } from "@/hooks/useCalculatorPersistence";
 import { useGradingScale } from "@/hooks/useGradingScale";
 
@@ -20,10 +20,7 @@ export function PercentageToLetterCalculator() {
     "percentage-to-letter-grade",
     { percent: 85 },
   );
-
-  React.useEffect(() => {
-    setStorageItem(STORAGE_KEYS.recentCalculator, "percentage-to-letter-grade");
-  }, []);
+  const examples = calculatorBySlug["percentage-to-letter-grade"].examples;
 
   const result = React.useMemo(
     () => convertPercentToLetter(state.percent, scaleId),
@@ -33,6 +30,16 @@ export function PercentageToLetterCalculator() {
   return (
     <div className="calculator-print-area space-y-6">
       <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
+      {examples.length > 0 && (
+        <ExampleScenarios
+          examples={examples}
+          onSelect={(values) =>
+            setState({
+              percent: typeof values.percent === "number" ? values.percent : state.percent,
+            })
+          }
+        />
+      )}
       <ScaleSelector />
       <div className="space-y-2">
         <Label htmlFor="percent-to-letter">Percentage</Label>

@@ -12,8 +12,6 @@ import { ScaleSelector } from "@/components/calculators/shared/ScaleSelector";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { calculateTestGrade } from "@/lib/calculators/test-grade";
-import { STORAGE_KEYS } from "@/lib/constants";
-import { setStorageItem } from "@/lib/utils/storage";
 import { useCalculatorPersistence } from "@/hooks/useCalculatorPersistence";
 import { useGradingScale } from "@/hooks/useGradingScale";
 
@@ -31,10 +29,6 @@ export function TestGradeCalculator() {
     defaultState,
   );
   const { inputMode, totalQuestions, count, bonusPoints } = state;
-
-  React.useEffect(() => {
-    setStorageItem(STORAGE_KEYS.recentCalculator, "test-grade-calculator");
-  }, []);
 
   const result = React.useMemo(
     () =>

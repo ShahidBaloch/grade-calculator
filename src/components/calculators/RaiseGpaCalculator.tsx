@@ -14,8 +14,6 @@ import { Label } from "@/components/ui/label";
 import { calculateRaiseGpa } from "@/lib/calculators/raise-gpa";
 import { getScaleMaxGpa } from "@/lib/grading-scales";
 import { formatGpa } from "@/lib/utils/format";
-import { STORAGE_KEYS } from "@/lib/constants";
-import { setStorageItem } from "@/lib/utils/storage";
 import { useCalculatorPersistence } from "@/hooks/useCalculatorPersistence";
 import { useGradingScale } from "@/hooks/useGradingScale";
 
@@ -34,10 +32,6 @@ export function RaiseGpaCalculator() {
     defaultState,
   );
   const examples = calculatorBySlug["raise-gpa-calculator"].examples;
-
-  React.useEffect(() => {
-    setStorageItem(STORAGE_KEYS.recentCalculator, "raise-gpa-calculator");
-  }, []);
 
   const result = React.useMemo(() => calculateRaiseGpa({ ...state, maxGpa }), [state, maxGpa]);
   const data = result.data;

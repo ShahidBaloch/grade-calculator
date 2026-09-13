@@ -56,6 +56,7 @@ export const footerNav = {
     { label: "GPA Scale Explained", href: "/guides/gpa-scale-explained" },
     { label: "Weighted vs Unweighted GPA", href: "/guides/weighted-vs-unweighted-gpa" },
     { label: "Understanding Letter Grades", href: "/guides/understanding-letter-grades" },
+    { label: "How GCSE 9–1 Grades Work", href: "/guides/gcse-9-1-grades" },
     { label: "Final Exam Tips", href: "/guides/final-exam-tips" },
     { label: "All Guides", href: "/guides" },
   ],

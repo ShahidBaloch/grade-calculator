@@ -21,8 +21,6 @@ import {
   calculateFinalGradePoints,
   calculateFinalGradeReverse,
 } from "@/lib/calculators/final-grade-modes";
-import { STORAGE_KEYS } from "@/lib/constants";
-import { setStorageItem } from "@/lib/utils/storage";
 import { useCalculatorPersistence } from "@/hooks/useCalculatorPersistence";
 import { useGradingScale } from "@/hooks/useGradingScale";
 import type { FinalGradeMode } from "@/types/calculator";
@@ -47,10 +45,6 @@ export function FinalGradeCalculator() {
     "final-grade-calculator",
     defaultState,
   );
-
-  React.useEffect(() => {
-    setStorageItem(STORAGE_KEYS.recentCalculator, "final-grade-calculator");
-  }, []);
 
   const requiredResult = React.useMemo(
     () =>

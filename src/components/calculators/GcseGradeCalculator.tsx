@@ -10,8 +10,6 @@ import { FormulaBreakdown } from "@/components/calculators/shared/FormulaBreakdo
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { calculateGcseGrade } from "@/lib/calculators/gcse-grade";
-import { STORAGE_KEYS } from "@/lib/constants";
-import { setStorageItem } from "@/lib/utils/storage";
 import { useCalculatorPersistence } from "@/hooks/useCalculatorPersistence";
 
 export function GcseGradeCalculator() {
@@ -20,10 +18,6 @@ export function GcseGradeCalculator() {
     { percent: 72 },
   );
   const examples = calculatorBySlug["gcse-grade-calculator"].examples;
-
-  React.useEffect(() => {
-    setStorageItem(STORAGE_KEYS.recentCalculator, "gcse-grade-calculator");
-  }, []);
 
   const result = React.useMemo(() => calculateGcseGrade(state.percent), [state.percent]);
   const data = result.data;

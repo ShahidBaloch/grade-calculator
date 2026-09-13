@@ -37,6 +37,10 @@ describe("SEO audit", () => {
     expect(new URL(siteConfig.url).pathname).toBe("/");
   });
 
+  it("includes the GCSE 9-1 guide", () => {
+    expect(guides.some((guide) => guide.path === "/guides/gcse-9-1-grades")).toBe(true);
+  });
+
   it("sitemap includes country hubs and guides", () => {
     const urls = sitemap().map((entry) => entry.url);
     for (const hub of countryHubs) {

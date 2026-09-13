@@ -2,7 +2,9 @@
 
 import * as React from "react";
 import { getPrimaryFlow } from "@/config/engagement-flows";
+import { calculatorBySlug } from "@/config/calculators";
 import { NextStepCard } from "@/components/engagement/NextStepCard";
+import { ExampleScenarios } from "@/components/engagement/ExampleScenarios";
 import { CalculatorToolbar } from "@/components/calculators/shared/CalculatorToolbar";
 import { DynamicRowList } from "@/components/calculators/shared/DynamicRowList";
 import { FormulaBreakdown } from "@/components/calculators/shared/FormulaBreakdown";
@@ -11,8 +13,6 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { calculateAtar } from "@/lib/calculators/atar";
 import type { AtarSubject } from "@/lib/calculators/atar";
-import { STORAGE_KEYS } from "@/lib/constants";
-import { setStorageItem } from "@/lib/utils/storage";
 import { useCalculatorPersistence } from "@/hooks/useCalculatorPersistence";
 
 const AUTHORITIES = [
@@ -41,10 +41,7 @@ export function AtarCalculator() {
   const { subjects, targetAtar } = state;
   const authority = state.authority || "generic";
   const authorityMeta = AUTHORITIES.find((item) => item.id === authority) ?? AUTHORITIES[0];
-
-  React.useEffect(() => {
-    setStorageItem(STORAGE_KEYS.recentCalculator, "atar-calculator");
-  }, []);
+  const examples = calculatorBySlug["atar-calculator"].examples;
 
   const result = React.useMemo(
     () =>
@@ -60,6 +57,27 @@ export function AtarCalculator() {
   return (
     <div className="calculator-print-area space-y-6">
       <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
+      {examples.length > 0 && (
+        <ExampleScenarios
+          examples={examples}
+          onSelect={(values) => {
+            const nextSubjects = Array.isArray(values.subjects)
+              ? values.subjects.map((row, index) => {
+                  const subject = row as Partial<AtarSubject>;
+                  return {
+                    name: subject.name ?? `Subject ${index + 1}`,
+                    scaledScore: typeof subject.scaledScore === "number" ? subject.scaledScore : 70,
+                  };
+                })
+              : subjects;
+            setState({
+              ...state,
+              subjects: nextSubjects,
+              targetAtar: typeof values.targetAtar === "number" ? values.targetAtar : targetAtar,
+            });
+          }}
+        />
+      )}
       <p className="text-sm text-[var(--color-text-muted)]">
         Enter scaled subject scores from 0–100. We average the best four and count a fifth at 10%.
         This is an estimate only — official {authorityMeta.name} ATARs use state scaling we cannot republish.
