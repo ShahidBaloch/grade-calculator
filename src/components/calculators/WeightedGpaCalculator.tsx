@@ -79,6 +79,7 @@ export function WeightedGpaCalculator() {
         renderRow={(course, index) => (
           <div className="grid gap-2 sm:grid-cols-4">
             <Input
+              aria-label={`Course ${index + 1} name`}
               placeholder="Course"
               value={course.name}
               onChange={(e) => {
@@ -88,6 +89,7 @@ export function WeightedGpaCalculator() {
               }}
             />
             <Input
+              aria-label={`Course ${index + 1} grade`}
               placeholder="Grade"
               value={course.grade}
               onChange={(e) => {
@@ -97,6 +99,7 @@ export function WeightedGpaCalculator() {
               }}
             />
             <Input
+              aria-label={`Course ${index + 1} credits`}
               type="number"
               placeholder="Credits"
               value={course.credits}
@@ -114,7 +117,7 @@ export function WeightedGpaCalculator() {
                 updateCourses(next);
               }}
             >
-              <SelectTrigger>
+              <SelectTrigger aria-label={`Course ${index + 1} type`}>
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>

@@ -1,5 +1,13 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { siteConfig } from "@/config/site";
+
+export const metadata: Metadata = {
+  title: `Page not found | ${siteConfig.name}`,
+  description: "That URL does not exist. Try EZ Grader or another calculator.",
+  robots: { index: false, follow: false },
+};
 
 const suggestions = [
   { href: "/", label: "EZ Grader" },

@@ -2,7 +2,7 @@ import { CalculatorLayout } from "@/components/calculators/CalculatorLayout";
 import { CalculatorPageSections } from "@/components/calculators/CalculatorPageSections";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { calculatorBySlug } from "@/config/calculators";
+import { calculatorBySlug, getCalculatorPath } from "@/config/calculators";
 import { webApplicationJsonLd, faqPageJsonLd, howToJsonLd } from "@/lib/seo/jsonld";
 import { calculatorContent } from "@/config/calculator-content";
 import type { CalculatorSlug } from "@/types/calculator";
@@ -27,7 +27,7 @@ export function CalculatorRoute({
 }: CalculatorRouteProps) {
   const config = calculatorBySlug[slug];
   const content = calculatorContent[slug];
-  const pagePath = path ?? config.path;
+  const pagePath = path ?? getCalculatorPath(slug);
 
   const breadcrumbs = breadcrumbHome
     ? [{ name: "Home", href: "/" }]

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { CheckSquare, GraduationCap, LayoutGrid, Scale, Target } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { isQuickToolActive } from "@/lib/utils/tool-switcher";
 
 const tools = [
   { href: "/", label: "EZ", icon: CheckSquare },
@@ -23,7 +24,7 @@ export function ToolSwitcher() {
     >
       <ul className="grid h-14 grid-cols-5">
         {tools.map((tool) => {
-          const active = pathname === tool.href;
+          const active = isQuickToolActive(pathname, tool.href);
           const Icon = tool.icon;
           return (
             <li key={tool.href}>

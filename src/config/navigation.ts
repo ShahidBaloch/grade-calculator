@@ -1,78 +1,30 @@
+import { calculators, getCalculatorPath } from "@/config/calculators";
+import { countryHubs } from "@/config/country-hubs";
+import { gradingScalePages } from "@/config/grading-scale-pages";
+import { guides } from "@/config/guides";
+
+const calculatorLinks = calculators.map((calculator) => ({
+  label: calculator.name,
+  href: getCalculatorPath(calculator.slug),
+}));
+
 export const mainNav = [
   {
     label: "Calculators",
     href: "/calculators",
-    children: [
-      { label: "EZ Grader", href: "/" },
-      { label: "Test Grade Calculator", href: "/test-grade-calculator" },
-      { label: "Weighted Grade Calculator", href: "/weighted-grade-calculator" },
-      { label: "Final Grade Calculator", href: "/final-grade-calculator" },
-      { label: "GPA Calculator", href: "/gpa-calculator" },
-      { label: "Cumulative GPA Calculator", href: "/cumulative-gpa-calculator" },
-      { label: "Weighted GPA Calculator", href: "/weighted-gpa-calculator" },
-      { label: "Raise GPA Calculator", href: "/raise-gpa-calculator" },
-      { label: "High School GPA Calculator", href: "/high-school-gpa-calculator" },
-      { label: "College GPA Calculator", href: "/college-gpa-calculator" },
-      { label: "Percentage to Letter Grade", href: "/percentage-to-letter-grade" },
-      { label: "Letter Grade Calculator", href: "/letter-grade-calculator" },
-      { label: "Canvas Grade Calculator", href: "/canvas-grade-calculator" },
-      { label: "EOC Grade Calculator", href: "/eoc-grade-calculator" },
-      { label: "UK Degree Classification", href: "/degree-classification-calculator" },
-      { label: "GCSE Grade Calculator", href: "/gcse-grade-calculator" },
-      { label: "ATAR Calculator", href: "/atar-calculator" },
-      { label: "All Calculators", href: "/calculators" },
-    ],
+    children: [...calculatorLinks, { label: "All Calculators", href: "/calculators" }],
   },
   { label: "Guides", href: "/guides" },
   { label: "Grading Scales", href: "/grading-scales" },
 ];
 
 export const footerNav = {
-  calculators: [
-    { label: "EZ Grader", href: "/" },
-    { label: "Test Grade Calculator", href: "/test-grade-calculator" },
-    { label: "Weighted Grade Calculator", href: "/weighted-grade-calculator" },
-    { label: "Final Grade Calculator", href: "/final-grade-calculator" },
-    { label: "GPA Calculator", href: "/gpa-calculator" },
-    { label: "Cumulative GPA Calculator", href: "/cumulative-gpa-calculator" },
-    { label: "Weighted GPA Calculator", href: "/weighted-gpa-calculator" },
-    { label: "Raise GPA Calculator", href: "/raise-gpa-calculator" },
-    { label: "High School GPA Calculator", href: "/high-school-gpa-calculator" },
-    { label: "College GPA Calculator", href: "/college-gpa-calculator" },
-    { label: "Percentage to Letter Grade", href: "/percentage-to-letter-grade" },
-    { label: "Letter Grade Calculator", href: "/letter-grade-calculator" },
-    { label: "EOC Grade Calculator", href: "/eoc-grade-calculator" },
-    { label: "Canvas Grade Calculator", href: "/canvas-grade-calculator" },
-    { label: "UK Degree Classification", href: "/degree-classification-calculator" },
-    { label: "GCSE Grade Calculator", href: "/gcse-grade-calculator" },
-    { label: "ATAR Calculator", href: "/atar-calculator" },
-    { label: "All Calculators", href: "/calculators" },
-  ],
-  guides: [
-    { label: "How to Calculate GPA", href: "/guides/how-to-calculate-gpa" },
-    { label: "What Grade on My Final?", href: "/guides/what-grade-do-i-need-on-my-final" },
-    { label: "How to Calculate Weighted Grades", href: "/guides/how-to-calculate-weighted-grades" },
-    { label: "How to Raise Your GPA", href: "/guides/how-to-raise-your-gpa" },
-    { label: "GPA Scale Explained", href: "/guides/gpa-scale-explained" },
-    { label: "Weighted vs Unweighted GPA", href: "/guides/weighted-vs-unweighted-gpa" },
-    { label: "Understanding Letter Grades", href: "/guides/understanding-letter-grades" },
-    { label: "How GCSE 9–1 Grades Work", href: "/guides/gcse-9-1-grades" },
-    { label: "Final Exam Tips", href: "/guides/final-exam-tips" },
-    { label: "All Guides", href: "/guides" },
-  ],
+  calculators: [...calculatorLinks, { label: "All Calculators", href: "/calculators" }],
+  guides: [...guides.map((guide) => ({ label: guide.title, href: guide.path })), { label: "All Guides", href: "/guides" }],
   reference: [
-    { label: "US Grading Scale", href: "/grading-scales/us" },
-    { label: "UK Grading Scale", href: "/grading-scales/uk" },
-    { label: "UK GCSE Scale", href: "/grading-scales/gcse" },
-    { label: "Canada Grading Scale", href: "/grading-scales/canada" },
-    { label: "Australia Grading Scale", href: "/grading-scales/australia" },
-    { label: "New Zealand Grading Scale", href: "/grading-scales/new-zealand" },
+    ...gradingScalePages.map((page) => ({ label: page.title, href: page.path })),
     { label: "All Scales", href: "/grading-scales" },
-    { label: "United States", href: "/us" },
-    { label: "United Kingdom", href: "/uk" },
-    { label: "Canada", href: "/ca" },
-    { label: "Australia", href: "/au" },
-    { label: "New Zealand", href: "/nz" },
+    ...countryHubs.map((hub) => ({ label: hub.name, href: hub.path })),
   ],
   company: [
     { label: "About", href: "/about" },

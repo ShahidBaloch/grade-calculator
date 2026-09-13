@@ -226,7 +226,7 @@ export function HighSchoolGpaCalculator() {
       ))}
       {result.data && (
         <>
-          <div className="rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-6">
+          <div aria-live="polite" className="rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-6">
             <Label>Overall GPA</Label>
             <p className="text-5xl font-bold">{formatGpa(result.data.gpa)}</p>
           </div>

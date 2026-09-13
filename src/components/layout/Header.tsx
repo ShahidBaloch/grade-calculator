@@ -63,27 +63,32 @@ export function Header() {
               <SheetHeader>
                 <SheetTitle>Menu</SheetTitle>
               </SheetHeader>
-              <nav className="mt-6 flex flex-col gap-2">
-                {mainNav.flatMap((item) =>
-                  item.children
-                    ? item.children.map((child) => (
+              <nav className="mt-6 flex min-h-0 flex-1 flex-col gap-4" aria-label="Mobile">
+                {mainNav.map((item) =>
+                  item.children ? (
+                    <div key={item.label} className="flex flex-col gap-1">
+                      <p className="px-3 text-xs font-semibold uppercase tracking-wide text-[var(--color-text-muted)]">
+                        {item.label}
+                      </p>
+                      {item.children.map((child) => (
                         <Link
-                          key={child.href}
+                          key={`${child.href}-${child.label}`}
                           href={child.href}
                           className="rounded-md px-3 py-3 text-sm font-medium hover:bg-[var(--color-bg-subtle)]"
                         >
                           {child.label}
                         </Link>
-                      ))
-                    : [
-                        <Link
-                          key={item.href}
-                          href={item.href}
-                          className="rounded-md px-3 py-3 text-sm font-medium hover:bg-[var(--color-bg-subtle)]"
-                        >
-                          {item.label}
-                        </Link>,
-                      ],
+                      ))}
+                    </div>
+                  ) : (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className="rounded-md px-3 py-3 text-sm font-medium hover:bg-[var(--color-bg-subtle)]"
+                    >
+                      {item.label}
+                    </Link>
+                  ),
                 )}
               </nav>
             </SheetContent>

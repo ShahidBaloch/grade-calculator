@@ -1,4 +1,4 @@
-import { calculatorBySlug } from "@/config/calculators";
+import { calculatorBySlug, getCalculatorPath } from "@/config/calculators";
 import { isCalculatorSlug, type CalculatorSlug } from "@/types/calculator";
 
 export interface RecentCalculator {
@@ -13,7 +13,7 @@ export function serializeRecentCalculator(recent: RecentCalculator): string {
 export function parseRecentCalculator(stored: string | null): RecentCalculator | null {
   if (!stored) return null;
   if (isCalculatorSlug(stored) && calculatorBySlug[stored]) {
-    return { slug: stored, path: calculatorBySlug[stored].path };
+    return { slug: stored, path: getCalculatorPath(stored) };
   }
   try {
     const parsed = JSON.parse(stored) as Partial<RecentCalculator>;
@@ -24,7 +24,8 @@ export function parseRecentCalculator(stored: string | null): RecentCalculator |
       typeof parsed.path === "string" &&
       parsed.path.startsWith("/")
     ) {
-      return { slug: parsed.slug, path: parsed.path };
+      const path = parsed.path === "/ez-grader" ? getCalculatorPath(parsed.slug) : parsed.path;
+      return { slug: parsed.slug, path };
     }
   } catch {
     return null;

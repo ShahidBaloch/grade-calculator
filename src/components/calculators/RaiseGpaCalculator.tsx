@@ -108,7 +108,7 @@ export function RaiseGpaCalculator() {
       {data && (
         <>
           {data.status !== "achievable" && <StatusBadge status={data.status} />}
-          <div className="rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-6">
+          <div aria-live="polite" className="rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-6">
             <Label>Required GPA</Label>
             <p className="text-5xl font-bold">{formatGpa(data.requiredGpa)}</p>
             <p className="mt-2 text-sm text-[var(--color-text-muted)]">{data.message}</p>

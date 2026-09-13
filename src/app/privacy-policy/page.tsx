@@ -35,8 +35,12 @@ export default function PrivacyPolicyPage() {
             <h2 className="text-lg font-semibold text-[var(--color-text)]">Information we collect</h2>
             <ul className="mt-2 list-disc space-y-2 pl-5">
               <li>
-                <strong>Local storage:</strong> Optional preferences (theme, grading scale, last
-                calculator used) stored on your device only.
+                <strong>Local storage:</strong> Optional preferences stored on your device only —
+                theme (<span className="font-mono text-xs">gc-theme</span>), grading-scale
+                preference (<span className="font-mono text-xs">gc-scale</span>), last calculator
+                used (<span className="font-mono text-xs">gc-recent-calculator</span>), and the last
+                inputs for each tool (<span className="font-mono text-xs">gc-state-*</span>). We
+                never receive these values.
               </li>
               <li>
                 <strong>Geo cookies:</strong> A cookie may store your detected country code to select

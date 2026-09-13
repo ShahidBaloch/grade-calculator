@@ -52,8 +52,11 @@ export default function CookiePolicyPage() {
           <section>
             <h2 className="text-lg font-semibold text-[var(--color-text)]">Stored on your device only</h2>
             <p className="mt-2">
-              Theme (<span className="font-mono text-xs">gc-theme</span>), grading-scale preference,
-              and last calculator used are saved in localStorage, not cookies. Clearing site data in
+              These keys stay in localStorage, not cookies: theme (
+              <span className="font-mono text-xs">gc-theme</span>), grading-scale preference (
+              <span className="font-mono text-xs">gc-scale</span>), last calculator used (
+              <span className="font-mono text-xs">gc-recent-calculator</span>), and per-calculator
+              inputs (<span className="font-mono text-xs">gc-state-*</span>). Clearing site data in
               your browser removes them.
             </p>
           </section>

@@ -57,8 +57,9 @@ export function EocGradeCalculator() {
       )}
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="space-y-2">
-          <Label>Current course grade (%)</Label>
+          <Label htmlFor="eoc-current-grade">Current course grade (%)</Label>
           <Input
+            id="eoc-current-grade"
             type="number"
             min={0}
             max={100}
@@ -67,8 +68,9 @@ export function EocGradeCalculator() {
           />
         </div>
         <div className="space-y-2">
-          <Label>Target grade (%)</Label>
+          <Label htmlFor="eoc-target-grade">Target grade (%)</Label>
           <Input
+            id="eoc-target-grade"
             type="number"
             min={0}
             max={100}

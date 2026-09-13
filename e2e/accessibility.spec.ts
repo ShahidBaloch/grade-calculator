@@ -11,6 +11,8 @@ const criticalPages = [
   "/faq",
   "/uk",
   "/contact",
+  "/canvas-grade-calculator",
+  "/eoc-grade-calculator",
 ];
 
 for (const path of criticalPages) {

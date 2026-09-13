@@ -7,9 +7,11 @@ export interface CalculatorResourceLinks {
 
 export const calculatorResourceLinks: Record<CalculatorSlug, CalculatorResourceLinks> = {
   "ez-grader": {
+    guide: { path: "/guides/understanding-letter-grades", title: "Understanding letter grades" },
     gradingScale: { path: "/grading-scales", title: "Grading scales" },
   },
   "test-grade-calculator": {
+    guide: { path: "/guides/understanding-letter-grades", title: "Understanding letter grades" },
     gradingScale: { path: "/grading-scales", title: "Letter grade charts" },
   },
   "weighted-grade-calculator": {
@@ -45,9 +47,11 @@ export const calculatorResourceLinks: Record<CalculatorSlug, CalculatorResourceL
     gradingScale: { path: "/grading-scales", title: "GPA scales" },
   },
   "percentage-to-letter-grade": {
+    guide: { path: "/guides/understanding-letter-grades", title: "Understanding letter grades" },
     gradingScale: { path: "/grading-scales", title: "Letter grade charts" },
   },
   "letter-grade-calculator": {
+    guide: { path: "/guides/understanding-letter-grades", title: "Understanding letter grades" },
     gradingScale: { path: "/grading-scales", title: "Letter grade charts" },
   },
   "canvas-grade-calculator": {

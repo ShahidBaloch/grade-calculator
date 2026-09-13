@@ -9,7 +9,7 @@ import {
   encodeCalculatorState,
   readStateFromSearchParams,
 } from "@/lib/utils/calculator-state";
-import { calculatorBySlug } from "@/config/calculators";
+import { getCalculatorPath } from "@/config/calculators";
 import { serializeRecentCalculator } from "@/lib/utils/recent-calculator";
 import { getStorageItem, setStorageItem } from "@/lib/utils/storage";
 import { isCalculatorSlug } from "@/types/calculator";
@@ -24,10 +24,11 @@ export function useCalculatorPersistence<T>(slug: string, initialState: T) {
   React.useEffect(() => {
     if (!isCalculatorSlug(slug)) return;
     // Homepage EZ Grader is the default landing page, not a "resume" target.
-    if (pathname === "/") return;
+    // Guide embeds should not overwrite recent with a /guides/... URL.
+    if (pathname === "/" || pathname.startsWith("/guides/")) return;
     setStorageItem(
       STORAGE_KEYS.recentCalculator,
-      serializeRecentCalculator({ slug, path: pathname || calculatorBySlug[slug].path }),
+      serializeRecentCalculator({ slug, path: pathname || getCalculatorPath(slug) }),
     );
   }, [slug, pathname]);
 

@@ -103,6 +103,7 @@ export function CumulativeGpaCalculator() {
         renderRow={(course, index) => (
           <div className="grid gap-2 sm:grid-cols-3">
             <Input
+              aria-label={`Course ${index + 1} name`}
               placeholder="Course"
               value={course.name}
               onChange={(e) => {
@@ -112,6 +113,7 @@ export function CumulativeGpaCalculator() {
               }}
             />
             <Input
+              aria-label={`Course ${index + 1} grade`}
               placeholder="Grade"
               value={course.grade}
               onChange={(e) => {
@@ -121,6 +123,7 @@ export function CumulativeGpaCalculator() {
               }}
             />
             <Input
+              aria-label={`Course ${index + 1} credits`}
               type="number"
               placeholder="Credits"
               value={course.credits}

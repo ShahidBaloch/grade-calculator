@@ -29,3 +29,18 @@ export type { RaiseGpaResult } from "./raise-gpa";
 export type { HsGpaResult } from "./high-school-gpa";
 export type { PercentToLetterResult, LetterToPercentResult } from "./grade-converter";
 export type { CanvasGradeResult } from "./canvas-grade";
+export type { EocGradeInput } from "./eoc-grade";
+export type {
+  DegreeClassificationInput,
+  DegreeClassificationResult,
+  DegreeModule,
+  UkClassification,
+} from "./degree-classification";
+export type { AtarInput, AtarResult, AtarSubject } from "./atar";
+export type { GcseGradeResult } from "./gcse-grade";
+export type {
+  FinalGradeDroppedInput,
+  FinalGradePointsInput,
+  FinalGradeReverseInput,
+  FinalGradeReverseResult,
+} from "./final-grade-modes";

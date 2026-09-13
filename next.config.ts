@@ -15,6 +15,11 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: "/easy-grader",
+        destination: "/",
+        permanent: true,
+      },
+      {
         source: "/average-grade-calculator",
         destination: "/weighted-grade-calculator",
         permanent: true,

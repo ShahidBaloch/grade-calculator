@@ -75,6 +75,7 @@ export function CanvasGradeCalculator() {
         renderRow={(group, index) => (
           <div className="grid gap-2 sm:grid-cols-3">
             <Input
+              aria-label={`Assignment group ${index + 1} name`}
               placeholder="Group name"
               value={group.name}
               onChange={(e) => {
@@ -84,6 +85,7 @@ export function CanvasGradeCalculator() {
               }}
             />
             <Input
+              aria-label={`Assignment group ${index + 1} score`}
               type="number"
               placeholder="Score %"
               value={group.score}
@@ -94,6 +96,7 @@ export function CanvasGradeCalculator() {
               }}
             />
             <Input
+              aria-label={`Assignment group ${index + 1} weight`}
               type="number"
               placeholder="Weight %"
               value={group.weight}

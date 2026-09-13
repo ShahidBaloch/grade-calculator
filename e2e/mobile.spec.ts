@@ -16,6 +16,13 @@ test.describe("Mobile UX", () => {
     await expect(page.getByRole("navigation", { name: "Quick tools" })).toBeVisible();
   });
 
+  test("mobile tool switcher highlights GPA on a geo copy", async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto("/us/gpa-calculator");
+    const gpa = page.getByRole("navigation", { name: "Quick tools" }).getByRole("link", { name: "GPA" });
+    await expect(gpa).toHaveClass(/text-\[var\(--color-primary\)\]/);
+  });
+
   test("country hub renders on mobile", async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto("/uk");

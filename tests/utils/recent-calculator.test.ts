@@ -20,6 +20,20 @@ describe("recent calculator storage", () => {
     });
   });
 
+  it("maps a legacy EZ Grader slug to the homepage", () => {
+    expect(parseRecentCalculator("ez-grader")).toEqual({
+      slug: "ez-grader",
+      path: "/",
+    });
+  });
+
+  it("normalizes a stored /ez-grader path", () => {
+    expect(parseRecentCalculator(serializeRecentCalculator({ slug: "ez-grader", path: "/ez-grader" }))).toEqual({
+      slug: "ez-grader",
+      path: "/",
+    });
+  });
+
   it("rejects unknown slugs", () => {
     expect(parseRecentCalculator("not-a-tool")).toBeNull();
   });

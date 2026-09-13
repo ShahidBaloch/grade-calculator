@@ -159,8 +159,9 @@ export function FinalGradeCalculator() {
         <div className="grid gap-4 sm:grid-cols-2">
           {state.mode === "reverse" && (
             <div className="space-y-2">
-              <Label>Current grade (%)</Label>
+              <Label htmlFor="final-reverse-current">Current grade (%)</Label>
               <Input
+                id="final-reverse-current"
                 type="number"
                 min={0}
                 max={100}
@@ -170,8 +171,9 @@ export function FinalGradeCalculator() {
             </div>
           )}
           <div className="space-y-2">
-            <Label>Final exam score (%)</Label>
+            <Label htmlFor="final-exam-score">Final exam score (%)</Label>
             <Input
+              id="final-exam-score"
               type="number"
               min={0}
               max={100}
@@ -185,32 +187,36 @@ export function FinalGradeCalculator() {
       {state.mode === "points" && (
         <div className="grid gap-4 sm:grid-cols-2">
           <div className="space-y-2">
-            <Label>Current points earned</Label>
+            <Label htmlFor="final-current-points">Current points earned</Label>
             <Input
+              id="final-current-points"
               type="number"
               value={state.currentPoints}
               onChange={(e) => setState({ ...state, currentPoints: Number(e.target.value) })}
             />
           </div>
           <div className="space-y-2">
-            <Label>Current points possible</Label>
+            <Label htmlFor="final-current-max">Current points possible</Label>
             <Input
+              id="final-current-max"
               type="number"
               value={state.currentMaxPoints}
               onChange={(e) => setState({ ...state, currentMaxPoints: Number(e.target.value) })}
             />
           </div>
           <div className="space-y-2">
-            <Label>Final points earned</Label>
+            <Label htmlFor="final-points-earned">Final points earned</Label>
             <Input
+              id="final-points-earned"
               type="number"
               value={state.finalPoints}
               onChange={(e) => setState({ ...state, finalPoints: Number(e.target.value) })}
             />
           </div>
           <div className="space-y-2">
-            <Label>Final points possible</Label>
+            <Label htmlFor="final-points-possible">Final points possible</Label>
             <Input
+              id="final-points-possible"
               type="number"
               value={state.finalMaxPoints}
               onChange={(e) => setState({ ...state, finalMaxPoints: Number(e.target.value) })}
@@ -238,6 +244,7 @@ export function FinalGradeCalculator() {
             addLabel="Add test"
             renderRow={(score, index) => (
               <Input
+                aria-label={`Test ${index + 1} score`}
                 type="number"
                 min={0}
                 max={100}

@@ -77,6 +77,12 @@ test.describe("Core calculator flows", () => {
     await expect(page.getByRole("heading", { level: 1, name: /page not found/i })).toBeVisible();
   });
 
+  test("Canada hub 404s a tool that is not featured", async ({ page }) => {
+    const response = await page.goto("/ca/ez-grader");
+    expect(response?.status()).toBe(404);
+    await expect(page.getByRole("heading", { level: 1, name: /page not found/i })).toBeVisible();
+  });
+
   test("UK weighted grade geo copy loads", async ({ page }) => {
     await page.goto("/uk/weighted-grade-calculator");
     await expect(page).toHaveURL(/\/uk\/weighted-grade-calculator/);
@@ -112,6 +118,12 @@ test.describe("Core calculator flows", () => {
     await expect(page.getByRole("heading", { level: 1, name: /ez grader/i })).toBeVisible();
   });
 
+  test("easy-grader alias redirects home", async ({ page }) => {
+    await page.goto("/easy-grader");
+    await expect(page).toHaveURL(/\/$/);
+    await expect(page.getByRole("heading", { level: 1, name: /ez grader/i })).toBeVisible();
+  });
+
   test("legacy average-grade URL redirects", async ({ page }) => {
     await page.goto("/average-grade-calculator");
     await expect(page).toHaveURL(/\/weighted-grade-calculator$/);
@@ -128,6 +140,8 @@ test.describe("Core calculator flows", () => {
     ["/canvas-grade-calculator", /canvas/i],
     ["/eoc-grade-calculator", /eoc/i],
     ["/us", /united states/i],
+    ["/ca", /canada/i],
+    ["/nz", /new zealand/i],
     ["/contact", /contact/i],
   ];
 

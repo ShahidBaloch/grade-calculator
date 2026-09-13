@@ -1,3 +1,5 @@
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 import { calculators } from "@/config/calculators";
 import { countryCalculatorPaths } from "@/config/country-hubs";
@@ -16,9 +18,11 @@ import {
 } from "@/lib/seo/jsonld";
 import sitemap from "@/app/sitemap";
 import { getCalculatorPath } from "@/config/calculators";
+import { calculatorResourceLinks } from "@/config/calculator-links";
 import { footerNav, mainNav } from "@/config/navigation";
 import { calculatorHreflangLanguages, countryHubHreflangLanguages } from "@/lib/seo/hreflang";
 import { siteConfig } from "@/config/site";
+import { siteFaqs } from "@/config/site-faq";
 
 describe("SEO audit", () => {
   it("sitemap includes all calculator routes", () => {
@@ -139,6 +143,37 @@ describe("SEO audit", () => {
     }
   });
 
+  it("footer lists every guide, scale page, and country hub", () => {
+    const guideHrefs = new Set(footerNav.guides.map((item) => item.href));
+    const referenceHrefs = new Set(footerNav.reference.map((item) => item.href));
+    for (const guide of guides) {
+      expect(guideHrefs.has(guide.path), `footer missing guide ${guide.slug}`).toBe(true);
+    }
+    for (const page of gradingScalePages) {
+      expect(referenceHrefs.has(page.path), `footer missing scale ${page.slug}`).toBe(true);
+    }
+    for (const hub of countryHubs) {
+      expect(referenceHrefs.has(hub.path), `footer missing hub ${hub.code}`).toBe(true);
+    }
+  });
+
+  it("every calculator resource link points at a real guide or scale page", () => {
+    const guidePaths = new Set(guides.map((guide) => guide.path));
+    const scalePaths = new Set([...gradingScalePages.map((page) => page.path), "/grading-scales"]);
+    for (const calculator of calculators) {
+      const links = calculatorResourceLinks[calculator.slug];
+      expect(links, `missing resource links for ${calculator.slug}`).toBeDefined();
+      if (links.guide) {
+        expect(guidePaths.has(links.guide.path), `unknown guide ${links.guide.path}`).toBe(true);
+      }
+      if (links.gradingScale) {
+        expect(scalePaths.has(links.gradingScale.path), `unknown scale ${links.gradingScale.path}`).toBe(
+          true,
+        );
+      }
+    }
+  });
+
   it("every guide embed points at a real calculator", () => {
     const slugs = new Set(calculators.map((calculator) => calculator.slug));
     for (const guide of guides) {
@@ -155,5 +190,25 @@ describe("SEO audit", () => {
     expect(home).toBeDefined();
     const calc = entries.find((e) => e.url.includes("/gpa-calculator"));
     expect(calc?.priority).toBeGreaterThanOrEqual(0.9);
+  });
+
+  it("404 metadata is noindex and does not set a homepage canonical", () => {
+    const source = readFileSync(resolve("src/app/not-found.tsx"), "utf8");
+    expect(source).toContain("index: false");
+    expect(source).toContain("follow: false");
+    expect(source).not.toContain('canonical: "/"');
+    const layout = readFileSync(resolve("src/app/layout.tsx"), "utf8");
+    expect(layout).not.toContain('canonical: "/"');
+  });
+
+  it("legal and FAQ copy mention calculator state storage", () => {
+    const privacy = readFileSync(resolve("src/app/privacy-policy/page.tsx"), "utf8");
+    const cookies = readFileSync(resolve("src/app/cookie-policy/page.tsx"), "utf8");
+    expect(privacy).toContain("gc-state-*");
+    expect(privacy).toContain("gc-scale");
+    expect(cookies).toContain("gc-state-*");
+    expect(cookies).toContain("gc-scale");
+    const faq = siteFaqs.find((item) => item.question.includes("private"));
+    expect(faq?.answer).toMatch(/last inputs/i);
   });
 });
