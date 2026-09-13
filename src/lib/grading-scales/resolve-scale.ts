@@ -10,6 +10,7 @@ const PATH_SCALE_LOCKS: Array<{ prefix: string; scaleId: ScaleId }> = [
   { prefix: "/ca", scaleId: "ca-standard" },
   { prefix: "/au", scaleId: "au-seven-point" },
   { prefix: "/nz", scaleId: "nz-nine-point" },
+  { prefix: "/grading-scales/us", scaleId: "us-standard" },
   { prefix: "/grading-scales/uk", scaleId: "uk-degree" },
   { prefix: "/grading-scales/canada", scaleId: "ca-standard" },
   { prefix: "/grading-scales/australia", scaleId: "au-seven-point" },

@@ -10,7 +10,7 @@ import { DynamicRowList } from "@/components/calculators/shared/DynamicRowList";
 import { ScaleSelector } from "@/components/calculators/shared/ScaleSelector";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { calculateSemesterGpa } from "@/lib/calculators/gpa";
+import { calculateCollegeTermGpa } from "@/lib/calculators/gpa";
 import { getScaleMaxGpa } from "@/lib/grading-scales";
 import { formatGpa } from "@/lib/utils/format";
 import { useCalculatorPersistence } from "@/hooks/useCalculatorPersistence";
@@ -40,14 +40,7 @@ export function CollegeGpaCalculator() {
   const maxGpa = getScaleMaxGpa(scaleId);
   const excludedCount = courses.filter((course) => course.countsTowardGpa === false).length;
 
-  const result = React.useMemo(
-    () =>
-      calculateSemesterGpa(
-        { courses: courses.filter((course) => course.countsTowardGpa !== false) },
-        scaleId,
-      ),
-    [courses, scaleId],
-  );
+  const result = React.useMemo(() => calculateCollegeTermGpa(courses, scaleId), [courses, scaleId]);
 
   const standing = result.data
     ? result.data.gpa / maxGpa >= 0.875

@@ -2,7 +2,7 @@ export { calculateEzGrader } from "./ez-grader";
 export { calculateTestGrade } from "./test-grade";
 export { calculateWeightedGrade } from "./weighted-grade";
 export { calculateFinalGradeRequired } from "./final-grade";
-export { calculateSemesterGpa, getWeightedGpaBump } from "./gpa";
+export { calculateSemesterGpa, calculateCollegeTermGpa, getWeightedGpaBump } from "./gpa";
 export { calculateCumulativeGpa } from "./cumulative-gpa";
 export { calculateWeightedGpa } from "./weighted-gpa";
 export { calculateRaiseGpa } from "./raise-gpa";

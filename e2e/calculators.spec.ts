@@ -100,6 +100,12 @@ test.describe("Core calculator flows", () => {
     await expect(page.getByRole("heading", { level: 1, name: /gcse/i })).toBeVisible();
   });
 
+  test("Raise GPA guide embeds the calculator", async ({ page }) => {
+    await page.goto("/guides/how-to-raise-your-gpa");
+    await expect(page.getByRole("heading", { name: /try it yourself/i })).toBeVisible();
+    await expect(page.getByText("Required GPA").first()).toBeVisible();
+  });
+
   test("legacy ez-grader URL redirects home", async ({ page }) => {
     await page.goto("/ez-grader");
     await expect(page).toHaveURL(/\/$/);

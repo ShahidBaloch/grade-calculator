@@ -3,9 +3,11 @@ import { CalculatorCard } from "@/components/calculators/shared/CalculatorCard";
 import { FaqAccordion } from "@/components/content/FaqAccordion";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { calculatorBySlug } from "@/config/calculators";
 import type { CountryHubConfig } from "@/config/country-hubs";
 import { getScale } from "@/lib/grading-scales";
+import { faqPageJsonLd } from "@/lib/seo/jsonld";
 
 interface CountryHubContentProps {
   hub: CountryHubConfig;
@@ -23,6 +25,7 @@ export function CountryHubContent({ hub }: CountryHubContentProps) {
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8">
+      {hub.faqs && hub.faqs.length > 0 && <JsonLd data={faqPageJsonLd(hub.faqs)} />}
       <BreadcrumbJsonLd items={breadcrumbs} />
       <Breadcrumbs items={breadcrumbs} />
       <p className="mt-6 text-4xl" aria-hidden>

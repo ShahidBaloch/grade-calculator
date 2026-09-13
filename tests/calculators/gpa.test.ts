@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { calculateSemesterGpa, getWeightedGpaBump } from "@/lib/calculators/gpa";
+import { calculateCollegeTermGpa, calculateSemesterGpa, getWeightedGpaBump } from "@/lib/calculators/gpa";
 
 describe("calculateSemesterGpa", () => {
   it("calculates semester GPA from letter grades", () => {
@@ -30,6 +30,27 @@ describe("calculateSemesterGpa", () => {
   it("returns idle without courses", () => {
     const result = calculateSemesterGpa({ courses: [] });
     expect(result.status).toBe("error");
+  });
+});
+
+describe("calculateCollegeTermGpa", () => {
+  it("excludes pass/fail courses from term GPA", () => {
+    const result = calculateCollegeTermGpa([
+      { name: "Biology", grade: "A", credits: 3, countsTowardGpa: true },
+      { name: "PE", grade: "P", credits: 1, countsTowardGpa: false },
+    ]);
+    expect(result.status).toBe("valid");
+    expect(result.data?.totalCredits).toBe(3);
+    expect(result.data?.gpa).toBe(4);
+    expect(result.data?.courses).toHaveLength(1);
+  });
+
+  it("errors when every course is excluded", () => {
+    const result = calculateCollegeTermGpa([
+      { name: "Audit", grade: "P", credits: 3, countsTowardGpa: false },
+    ]);
+    expect(result.status).toBe("error");
+    expect(result.errors?.[0]).toMatch(/letter-graded/i);
   });
 });
 

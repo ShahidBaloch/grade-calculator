@@ -10,6 +10,12 @@ describe("resolve-scale", () => {
     expect(getLockedScaleFromPath("/uk/degree-classification-calculator")).toBe("uk-degree");
   });
 
+  it("locks US and sibling grading-scale reference pages", () => {
+    expect(getLockedScaleFromPath("/grading-scales/us")).toBe("us-standard");
+    expect(getLockedScaleFromPath("/grading-scales/uk")).toBe("uk-degree");
+    expect(getLockedScaleFromPath("/grading-scales/canada")).toBe("ca-standard");
+  });
+
   it("returns null for root calculator paths", () => {
     expect(getLockedScaleFromPath("/gpa-calculator")).toBeNull();
     expect(getLockedScaleFromPath("/degree-classification-calculator")).toBeNull();

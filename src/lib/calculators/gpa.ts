@@ -108,3 +108,22 @@ export function calculateSemesterGpa(
     },
   };
 }
+
+export interface CollegeCourseInput {
+  name?: string;
+  grade: string | number;
+  credits: number;
+  countsTowardGpa?: boolean;
+}
+
+/** Letter-graded college term GPA — pass/fail and audits are excluded. */
+export function calculateCollegeTermGpa(
+  courses: CollegeCourseInput[],
+  scaleId: ScaleId = "us-standard",
+): CalculatorResult<GpaResult> {
+  const letterGraded = courses.filter((course) => course.countsTowardGpa !== false);
+  if (letterGraded.length === 0) {
+    return { status: "error", errors: ["Add at least one letter-graded course"] };
+  }
+  return calculateSemesterGpa({ courses: letterGraded }, scaleId);
+}

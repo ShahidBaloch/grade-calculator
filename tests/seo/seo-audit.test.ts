@@ -16,6 +16,7 @@ import {
 } from "@/lib/seo/jsonld";
 import sitemap from "@/app/sitemap";
 import { getCalculatorPath } from "@/config/calculators";
+import { footerNav, mainNav } from "@/config/navigation";
 import { calculatorHreflangLanguages, countryHubHreflangLanguages } from "@/lib/seo/hreflang";
 import { siteConfig } from "@/config/site";
 
@@ -126,6 +127,26 @@ describe("SEO audit", () => {
     });
     expect(howTo["@type"]).toBe("HowTo");
     expect(howTo.step).toHaveLength(2);
+  });
+
+  it("nav and footer list every calculator", () => {
+    const navHrefs = new Set(mainNav.flatMap((item) => item.children?.map((child) => child.href) ?? [item.href]));
+    const footerHrefs = new Set(footerNav.calculators.map((item) => item.href));
+    for (const calculator of calculators) {
+      const href = getCalculatorPath(calculator.slug);
+      expect(navHrefs.has(href), `nav missing ${calculator.slug}`).toBe(true);
+      expect(footerHrefs.has(href), `footer missing ${calculator.slug}`).toBe(true);
+    }
+  });
+
+  it("every guide embed points at a real calculator", () => {
+    const slugs = new Set(calculators.map((calculator) => calculator.slug));
+    for (const guide of guides) {
+      if (!guide.embeddedCalculator) continue;
+      expect(slugs.has(guide.embeddedCalculator), `unknown embed ${guide.embeddedCalculator}`).toBe(
+        true,
+      );
+    }
   });
 
   it("sitemap priorities follow roadmap tiers", () => {
