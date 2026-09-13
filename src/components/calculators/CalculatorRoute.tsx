@@ -10,6 +10,8 @@ import type { CalculatorSlug } from "@/types/calculator";
 interface CalculatorRouteProps {
   slug: CalculatorSlug;
   calculator: React.ReactNode;
+  /** Override when this page is a geo copy (e.g. /uk/...). */
+  path?: string;
   breadcrumbHome?: boolean;
   aside?: React.ReactNode;
   below?: React.ReactNode;
@@ -18,19 +20,21 @@ interface CalculatorRouteProps {
 export function CalculatorRoute({
   slug,
   calculator,
+  path,
   breadcrumbHome = false,
   aside,
   below,
 }: CalculatorRouteProps) {
   const config = calculatorBySlug[slug];
   const content = calculatorContent[slug];
+  const pagePath = path ?? config.path;
 
   const breadcrumbs = breadcrumbHome
     ? [{ name: "Home", href: "/" }]
     : [
         { name: "Home", href: "/" },
         { name: "Calculators", href: "/calculators" },
-        { name: config.name, href: config.path },
+        { name: config.name, href: pagePath },
       ];
 
   return (
@@ -40,7 +44,7 @@ export function CalculatorRoute({
           webApplicationJsonLd({
             name: config.name,
             description: config.description,
-            path: config.path,
+            path: pagePath,
           }),
           howToJsonLd({
             name: `How to use the ${config.name}`,

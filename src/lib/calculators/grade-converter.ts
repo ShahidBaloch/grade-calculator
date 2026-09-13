@@ -1,4 +1,4 @@
-import { getScale, letterToPercent, percentToLetter } from "@/lib/grading-scales";
+import { letterToPercent, percentToLetter } from "@/lib/grading-scales";
 import type { ScaleId } from "@/types/grading-scale";
 import type { CalculatorResult } from "./types";
 
@@ -25,7 +25,6 @@ export function convertPercentToLetter(
   }
 
   const lookup = percentToLetter(percent, scaleId);
-  const scale = getScale(scaleId);
   const band = lookup.band;
 
   return {

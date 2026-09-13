@@ -8,6 +8,7 @@ export function createPageMetadata({
   path,
   keywords = [],
   noIndex = false,
+  languages,
 }: PageMetadataInput): Metadata {
   const url = `${siteConfig.url}${path}`;
   const fullTitle = title.includes(siteConfig.name) ? title : `${title} | ${siteConfig.name}`;
@@ -17,7 +18,10 @@ export function createPageMetadata({
     title: fullTitle,
     description,
     keywords,
-    alternates: { canonical: url },
+    alternates: {
+      canonical: url,
+      ...(languages ? { languages } : {}),
+    },
     openGraph: {
       title: fullTitle,
       description,

@@ -40,7 +40,7 @@ export const gradingScalePages: GradingScalePageConfig[] = [
       "UK universities classify undergraduate degrees using degree classes rather than a single GPA number. A First Class (1st) typically requires 70% or above.",
     notes: [
       "UK marking is often stricter — 70%+ is considered excellent (First Class).",
-      "GCSE uses a separate 9–1 numeric scale (see UK GCSE in calculator settings).",
+      "GCSE uses a separate 9–1 numeric scale — open the GCSE scale page and calculator.",
       "Postgraduate programmes may use different criteria.",
     ],
   },
@@ -90,6 +90,22 @@ export const gradingScalePages: GradingScalePageConfig[] = [
       "NCEA uses a separate standards-based system for secondary school.",
       "University boundaries may vary slightly by institution.",
       "Our calculators use the NZ 9-point preset for university-style grading.",
+    ],
+  },
+  {
+    slug: "gcse",
+    path: "/grading-scales/gcse",
+    scaleId: "uk-gcse",
+    title: "UK GCSE Grading Scale (9–1)",
+    description:
+      "England GCSE 9–1 percentage bands used in our educational converter, plus how they relate to the old A*–G letters.",
+    keywords: ["gcse grading scale", "gcse 9-1", "gcse grade boundaries"],
+    intro:
+      "England’s GCSE 9–1 scale replaced A*–G. Grade 9 is the highest. Grade 4 is commonly a standard pass and grade 5 a strong pass. Official boundaries move every series.",
+    notes: [
+      "This table is an educational default for planning, not a live awarding-body boundary set.",
+      "Wales and Northern Ireland may still use different letter systems.",
+      "University admissions use A-levels or equivalents, not this GCSE converter.",
     ],
   },
 ];

@@ -4,6 +4,7 @@ export interface PageMetadataInput {
   path: string;
   keywords?: string[];
   noIndex?: boolean;
+  languages?: Record<string, string>;
 }
 
 export interface BreadcrumbItem {

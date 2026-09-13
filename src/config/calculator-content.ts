@@ -103,39 +103,54 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
   },
   "gpa-calculator": {
     howItWorks: [
-      "Add each course with letter grade and credit hours.",
-      "We convert grades to GPA points using your grading scale.",
-      "Your semester GPA is quality points divided by total credits.",
+      "List this term's courses with the letter or percent you earned and the credit hours.",
+      "Each grade is converted to quality points on the scale you pick (US 4.0 by default).",
+      "Semester GPA is quality points divided by credit hours — it does not include past terms.",
     ],
-    formula: "GPA = Σ(GPA points × Credits) ÷ Σ(Credits)",
-    workedExample: "An A (4.0) in 3 credits and a B (3.0) in 3 credits → GPA 3.50.",
+    formula: "Semester GPA = quality points this term ÷ credit hours this term",
+    workedExample:
+      "English A (4.0 × 3 cr = 12 QP) and Math B (3.0 × 3 cr = 9 QP) → 21 ÷ 6 = 3.50 semester GPA.",
     faqs: [
       {
         question: "How do I calculate semester GPA?",
-        answer: "Multiply each course's GPA points by credits, sum them, and divide by total credits.",
+        answer:
+          "Convert each letter to GPA points, multiply by that course's credits, add those quality points, then divide by this term's total credits.",
       },
       {
-        question: "Is this weighted GPA?",
-        answer: "This version uses standard letter-to-GPA conversion. For Honors/AP weighting, use our Weighted GPA Calculator.",
+        question: "Is this the same as weighted or cumulative GPA?",
+        answer:
+          "No. This tool is one term, unweighted. Use Weighted GPA for Honors/AP bonuses, or Cumulative GPA to fold in previous semesters.",
+      },
+      {
+        question: "Can I enter a percentage instead of a letter?",
+        answer: "Yes. Type 92 or B+ — we map both through your selected grading scale.",
       },
     ],
   },
   "cumulative-gpa-calculator": {
     howItWorks: [
-      "Optionally enter your previous cumulative GPA and total credits.",
-      "Add your current semester courses with grades and credits.",
-      "See your updated overall GPA.",
+      "Enter the GPA and credit total already on your transcript (or clear both if this is your first term).",
+      "Add this semester's courses with grades and credits.",
+      "We combine prior quality points with this term to show your new overall GPA.",
     ],
-    formula: "Cumulative GPA = (Prior QP + Current QP) ÷ Total Credits",
-    workedExample: "3.5 GPA over 30 credits plus a 3.7 semester (15 credits) → cumulative ≈ 3.57.",
+    formula: "Cumulative GPA = (prior GPA × prior credits + this term QP) ÷ all credits",
+    workedExample:
+      "Transcript 3.50 over 30 credits (105 QP) plus a 3.70 semester of 15 credits (55.5 QP) → 160.5 ÷ 45 ≈ 3.57.",
     faqs: [
       {
         question: "What is cumulative GPA?",
-        answer: "It's your overall GPA across all completed semesters, weighted by credit hours.",
+        answer:
+          "It is the credit-weighted average of every completed course on your record, not just the current semester.",
       },
       {
-        question: "Can I skip previous GPA?",
-        answer: "Yes. Leave previous fields empty to see only your current semester GPA.",
+        question: "What if I am a first-semester student?",
+        answer:
+          "Clear the previous GPA and previous credits fields. The result is then identical to a single-term GPA.",
+      },
+      {
+        question: "Why is the example pre-filled with 3.5 and 30 credits?",
+        answer:
+          "Those numbers are a demo only. Replace them with your transcript totals, or delete them for a first-term calculation.",
       },
     ],
   },
@@ -165,7 +180,8 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
       "See the GPA you need in those future courses.",
     ],
     formula: "Required GPA = (target × total credits − current × prior credits) ÷ future credits",
-    workedExample: "3.2 GPA over 60 credits, want 3.5 with 15 credits left → need 4.4 GPA (not achievable on 4.0 scale).",
+    workedExample:
+      "3.2 GPA over 60 credits, want 3.5 with 15 more credits → need 4.70 (impossible on a 4.0 scale). Want 3.4 with 30 more credits → need 3.80.",
     faqs: [
       {
         question: "How do I raise my GPA?",
@@ -179,39 +195,60 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
   },
   "high-school-gpa-calculator": {
     howItWorks: [
-      "Add semesters or quarters with course grades.",
-      "Optionally enable weighted GPA for Honors/AP courses.",
-      "See GPA per period and your overall high school GPA.",
+      "Add a block for each semester or quarter, then list the courses in that period.",
+      "Turn on weighted GPA to mark Honors (+0.5), AP (+1.0), or IB (+1.0) per course.",
+      "See GPA for every period plus one overall high school GPA.",
     ],
-    formula: "GPA = Σ(grade points × credits) ÷ Σ(credits)",
-    workedExample: "Fall 3.7 + Spring 3.5 across equal credits → overall 3.6.",
+    formula: "HS GPA = Σ((base points + Honors/AP/IB bonus) × credits) ÷ Σ(credits)",
+    workedExample:
+      "Unweighted Fall A and Honors B+ is 3.65. With weighting, the B+ becomes 3.8 and that period rises to 3.90.",
     faqs: [
       {
         question: "How is high school GPA calculated?",
-        answer: "Each course grade converts to GPA points, multiplied by credits, then averaged across all courses.",
+        answer:
+          "Each course maps to GPA points. If weighted is on, Honors adds 0.5 and AP/IB add 1.0 (capped at 5.0), then we average by credits across all periods.",
       },
       {
-        question: "Can I track by semester?",
-        answer: "Yes. Add a period for each semester or quarter and see per-period and cumulative GPA.",
+        question: "Can I track by semester or quarter?",
+        answer:
+          "Yes. Add a period for Fall, Spring, or each quarter. You get a GPA per period and a combined high school GPA.",
+      },
+      {
+        question: "Does my school use the same Honors and AP bonuses?",
+        answer:
+          "Policies vary. We use common US defaults. If your school uses +1.0 for Honors or a 6.0 scale, treat this as an estimate.",
       },
     ],
   },
   "college-gpa-calculator": {
     howItWorks: [
-      "Add each college course with letter grade and credit hours.",
-      "GPA points are weighted by credit hours.",
-      "Your semester GPA updates as you type.",
+      "Enter each college course with its letter grade and credit hours (usually 1–5, often 3 or 4).",
+      "A 4-credit lab counts more than a 1-credit seminar — that is the college-specific piece.",
+      "Pass/fail and audited courses stay out; only letter-graded credits enter the GPA.",
     ],
-    formula: "GPA = Σ(GPA points × credit hours) ÷ Σ(credit hours)",
-    workedExample: "A (4.0) in 4 credits + B+ (3.3) in 3 credits → GPA 3.69.",
+    formula: "College semester GPA = Σ(GPA points × credit hours) ÷ letter-graded credit hours",
+    workedExample:
+      "A 4-credit A (16 QP) plus a 3-credit B+ (9.9 QP) → 25.9 ÷ 7 ≈ 3.70. The lab pulls the average up more than a 3-credit B+ would alone.",
     faqs: [
       {
         question: "How is college GPA different from high school?",
-        answer: "College GPA uses credit hours (typically 1–5 per course) rather than Carnegie units. The math is the same.",
+        answer:
+          "The algebra is similar, but college weights by credit hours (labs and lectures differ) and usually does not add Honors/AP bonuses. Use this tool for a single college term.",
       },
       {
-        question: "What about pass/fail courses?",
-        answer: "Pass/fail courses are usually excluded from GPA. Only enter letter-graded courses.",
+        question: "What about pass/fail or transfer courses?",
+        answer:
+          "Most colleges exclude P/F and audits from GPA. Transfer credit policies differ — only enter courses your registrar counts toward GPA.",
+      },
+      {
+        question: "Should I use this or the semester GPA calculator?",
+        answer:
+          "Use this when you think in credit hours, pass/fail exclusions, and academic-standing ranges. Use the generic semester GPA tool for a plain term list, or Cumulative GPA when you also have a transcript total.",
+      },
+      {
+        question: "What does dean's list or good standing mean here?",
+        answer:
+          "We show a typical range (about 3.5+ / 2.0+ on a 4.0 scale). Your college catalog is the official rule.",
       },
     ],
   },
@@ -228,6 +265,11 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
         question: "What percentage is a B?",
         answer: "On the US Standard scale, B is typically 83–86%. Exact ranges vary by school.",
       },
+      {
+        question: "Does 85% always become a B?",
+        answer:
+          "Not on every scale. US Lenient may call 85% a B+, and UK or Australian tables use different cutoffs. Change the scale before you convert.",
+      },
     ],
   },
   "letter-grade-calculator": {
@@ -242,6 +284,11 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
       {
         question: "What percentage is an A?",
         answer: "On US Standard, A is 93–96% and A+ is 97–100%. Select your scale for exact ranges.",
+      },
+      {
+        question: "Why do you show a midpoint instead of a range only?",
+        answer:
+          "Weighted averages need a single number. We use the midpoint of the letter band, then still display the full range underneath.",
       },
     ],
   },
@@ -259,27 +306,123 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
         answer: "Canvas weights assignment groups. Each group's average is multiplied by its weight percentage.",
       },
       {
-        question: "My weights don't add to 100%.",
-        answer: "We still calculate but show a warning. Canvas may normalize weights differently.",
+        question: "Canvas says my groups do not add to 100%.",
+        answer:
+          "Canvas can hide unused groups or drop unposted assignments. We still compute a weighted mean and warn if your entered weights are not 100%, so you can match what the LMS is actually using.",
       },
     ],
   },
   "eoc-grade-calculator": {
     howItWorks: [
-      "Enter your current course grade before the EOC exam.",
-      "Enter how much the EOC counts toward your final grade.",
-      "Enter your target grade to see what you need on the EOC.",
+      "Enter your course average before the state End-of-Course exam (not a teacher-written final).",
+      "Enter the district weight for the EOC — often 20–30% in Florida, Texas, and similar states.",
+      "Set the report-card grade you need. We solve for the EOC score that gets you there.",
     ],
-    formula: "Required EOC = (target − current × (1 − w)) ÷ w",
-    workedExample: "Current 82%, EOC worth 25%, want 85% → need 94% on the EOC.",
+    formula: "Required EOC % = (report-card target − class average × (1 − EOC weight)) ÷ EOC weight",
+    workedExample:
+      "Class average 82%, Florida-style EOC at 25%, want an 85% on the report card → you need 94% on the EOC.",
     faqs: [
       {
         question: "What is an EOC exam?",
-        answer: "End-of-Course exams are standardized tests that count toward your final course grade, common in US states like Florida and Texas.",
+        answer:
+          "An End-of-Course exam is a state or district standardized test that is averaged into the course grade. It is not the same as a teacher's classroom final.",
+      },
+      {
+        question: "How is this different from the final grade calculator?",
+        answer:
+          "The final grade tool is for a teacher-set exam with extra modes (reverse, points, drop lowest). This EOC tool is for one high-stakes state test with a published weight.",
       },
       {
         question: "How much is the EOC worth?",
-        answer: "Typically 20–30% of your course grade, but it varies by state and district. Check with your teacher.",
+        answer:
+          "Many Florida and Texas courses use about 20–30%. Always confirm the current district policy — weights change by year and subject.",
+      },
+    ],
+  },
+  "degree-classification-calculator": {
+    howItWorks: [
+      "Add each UK module with its mark (0–100) and credit value.",
+      "Tag modules as Year 2 or Year 3. If both years appear, we apply your year weights (often 40/60).",
+      "Read the credit-weighted average and the predicted First / 2:1 / 2:2 / Third.",
+    ],
+    formula:
+      "If both years: Overall = Y2 average × w2 + Y3 average × w3. Otherwise: Σ(mark × credits) ÷ Σ(credits).",
+    workedExample:
+      "Year 2 average 62% at 40% and Year 3 average 74% at 60% → overall 69.2% → Upper Second (2:1), 0.8 marks from a First.",
+    faqs: [
+      {
+        question: "What marks make a First or a 2:1?",
+        answer:
+          "Common UK bands are First 70%+, 2:1 60–69%, 2:2 50–59%, Third 40–49%, Fail below 40%. Some programmes use 69.5% rounding or a borderline viva.",
+      },
+      {
+        question: "Do all universities weight Year 2 and Year 3 the same way?",
+        answer:
+          "No. 40/60 is common; some use 30/70 or count Level 5/6 differently. Set the weights your handbook publishes.",
+      },
+      {
+        question: "Is this an official classification?",
+        answer:
+          "No. Boards apply discretion, condonement, and credit rules we cannot see. Use this to plan, then confirm with your exam board.",
+      },
+    ],
+  },
+  "atar-calculator": {
+    howItWorks: [
+      "Enter scaled subject scores from 0–100 (not raw school marks).",
+      "We average the best four scores and count a fifth at 10% — a simplified national model.",
+      "Optionally set a target ATAR to see the counted average this curve associates with that rank.",
+    ],
+    formula: "Counted average → educational ATAR lookup curve (not UAC/VTAC/QTAC official tables)",
+    workedExample:
+      "Four scaled scores of 80 map to an estimated ATAR of 90.00 on this curve. A fifth score of 50 adds 5 points to the counted set (10% of 50).",
+    faqs: [
+      {
+        question: "Is this an official ATAR?",
+        answer:
+          "No. Official ATARs use state scaling and a yearly rank table. Treat the output as a planning estimate only.",
+      },
+      {
+        question: "Should I enter raw marks or scaled scores?",
+        answer:
+          "Scaled scores. Raw school percentages are adjusted by the state authority before they enter an ATAR.",
+      },
+      {
+        question: "How is ATAR different from GPA?",
+        answer:
+          "ATAR is a percentile rank among a Year 12 cohort (0–99.95). Australian university GPA is usually a 7-point course average after you enrol.",
+      },
+      {
+        question: "Why can't you use official UAC or VTAC tables?",
+        answer:
+          "Those rank tables are published for a specific year and state and are not free to republish as a live calculator. Pick your authority for the right disclaimer, then treat our curve as a planning estimate.",
+      },
+    ],
+  },
+  "gcse-grade-calculator": {
+    howItWorks: [
+      "Enter a percentage mark from 0–100.",
+      "We map it to the England 9–1 GCSE table used in this tool.",
+      "Read the numeric grade, whether it is a standard pass (4+), and an approximate legacy A*–G letter.",
+    ],
+    formula: "Grade = 9–1 band matching the percentage on the educational GCSE table",
+    workedExample:
+      "72% maps to grade 7 (70–79%), about an old A, and counts as a standard pass.",
+    faqs: [
+      {
+        question: "Is grade 4 a pass?",
+        answer:
+          "Grade 4 is commonly called a standard pass and grade 5 a strong pass. Employers and sixth forms may ask for a 4 or a 5 in English and maths.",
+      },
+      {
+        question: "Are these official exam-board boundaries?",
+        answer:
+          "No. Real boundaries move by subject and series. Use this to understand the 9–1 idea, then check the awarding body for that paper.",
+      },
+      {
+        question: "How does this relate to a UK degree classification?",
+        answer:
+          "GCSEs are secondary qualifications. University results use First / 2:1 / 2:2 / Third. Open the degree classification calculator for those marks.",
       },
     ],
   },

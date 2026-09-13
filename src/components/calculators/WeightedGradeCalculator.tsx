@@ -3,6 +3,7 @@
 import * as React from "react";
 import { getPrimaryFlow } from "@/config/engagement-flows";
 import { NextStepCard } from "@/components/engagement/NextStepCard";
+import { CalculatorToolbar } from "@/components/calculators/shared/CalculatorToolbar";
 import { DynamicRowList } from "@/components/calculators/shared/DynamicRowList";
 import { ResultDisplay } from "@/components/calculators/shared/ResultDisplay";
 import { ScaleSelector } from "@/components/calculators/shared/ScaleSelector";
@@ -11,22 +12,72 @@ import { Label } from "@/components/ui/label";
 import { calculateWeightedGrade } from "@/lib/calculators/weighted-grade";
 import { STORAGE_KEYS } from "@/lib/constants";
 import { setStorageItem } from "@/lib/utils/storage";
+import { useCalculatorPersistence } from "@/hooks/useCalculatorPersistence";
 import { useGradingScale } from "@/hooks/useGradingScale";
 import type { WeightedGradeInput } from "@/lib/calculators/schemas/weighted-grade.schema";
 
-const defaultRow = { name: "", score: 0, weight: 0 };
+type ScoreMode = WeightedGradeInput["globalMode"];
+type WeightMode = WeightedGradeInput["weightMode"];
+
+interface WeightedRow {
+  name: string;
+  score: number | string;
+  weight: number;
+  maxPoints?: number;
+}
+
+const defaultItems: WeightedRow[] = [
+  { name: "Homework", score: 92, weight: 20, maxPoints: 100 },
+  { name: "Midterm", score: 85, weight: 30, maxPoints: 100 },
+  { name: "Final", score: 88, weight: 50, maxPoints: 100 },
+];
+
+function ModeButtons<T extends string>({
+  label,
+  value,
+  options,
+  onChange,
+}: {
+  label: string;
+  value: T;
+  options: Array<{ value: T; label: string }>;
+  onChange: (value: T) => void;
+}) {
+  return (
+    <div className="space-y-2">
+      <Label>{label}</Label>
+      <div className="flex flex-wrap gap-2">
+        {options.map((option) => (
+          <button
+            key={option.value}
+            type="button"
+            aria-pressed={value === option.value}
+            onClick={() => onChange(option.value)}
+            className={`rounded-md border px-4 py-2 text-sm min-h-11 ${
+              value === option.value
+                ? "border-[var(--color-primary)] bg-[var(--color-primary-subtle)]"
+                : "border-[var(--color-border)]"
+            }`}
+          >
+            {option.label}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export function WeightedGradeCalculator() {
   const { scaleId } = useGradingScale();
-  const [globalMode, setGlobalMode] = React.useState<WeightedGradeInput["globalMode"]>("percentage");
-  const [weightMode, setWeightMode] = React.useState<WeightedGradeInput["weightMode"]>("percent");
-  const [items, setItems] = React.useState<
-    Array<{ name: string; score: number | string; weight: number }>
-  >([
-    { name: "Homework", score: 92, weight: 20 },
-    { name: "Midterm", score: 85, weight: 30 },
-    { name: "Final", score: 88, weight: 50 },
-  ]);
+  const { state, setState, resetState, shareUrl, copied } = useCalculatorPersistence(
+    "weighted-grade-calculator",
+    {
+      globalMode: "percentage" as ScoreMode,
+      weightMode: "percent" as WeightMode,
+      items: defaultItems,
+    },
+  );
+  const { globalMode, weightMode, items } = state;
 
   React.useEffect(() => {
     setStorageItem(STORAGE_KEYS.recentCalculator, "weighted-grade-calculator");
@@ -37,27 +88,55 @@ export function WeightedGradeCalculator() {
     [globalMode, weightMode, items, scaleId],
   );
 
+  const updateItems = (next: WeightedRow[]) => setState({ ...state, items: next });
+
   return (
-    <div className="space-y-6">
+    <div className="calculator-print-area space-y-6">
+      <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
       <ScaleSelector />
+      <div className="grid gap-4 sm:grid-cols-2">
+        <ModeButtons
+          label="Score format"
+          value={globalMode}
+          onChange={(value) => setState({ ...state, globalMode: value })}
+          options={[
+            { value: "percentage", label: "Percentage" },
+            { value: "letter", label: "Letter grade" },
+            { value: "points", label: "Points earned" },
+          ]}
+        />
+        <ModeButtons
+          label="Weight format"
+          value={weightMode}
+          onChange={(value) => setState({ ...state, weightMode: value })}
+          options={[
+            { value: "percent", label: "Percent weights" },
+            { value: "points", label: "Point weights" },
+          ]}
+        />
+      </div>
       <DynamicRowList
         items={items}
-        onAdd={() => setItems([...items, { ...defaultRow }])}
-        onRemove={(index) => setItems(items.filter((_, i) => i !== index))}
+        onAdd={() =>
+          updateItems([...items, { name: "", score: globalMode === "letter" ? "B" : 0, weight: 0, maxPoints: 100 }])
+        }
+        onRemove={(index) => updateItems(items.filter((_, i) => i !== index))}
         renderRow={(item, index) => (
-          <div className="grid gap-2 sm:grid-cols-3">
+          <div className={`grid gap-2 ${globalMode === "points" ? "sm:grid-cols-4" : "sm:grid-cols-3"}`}>
             <Input
               placeholder="Name"
+              aria-label={`Assignment ${index + 1} name`}
               value={item.name}
               onChange={(e) => {
                 const next = [...items];
                 next[index] = { ...item, name: e.target.value };
-                setItems(next);
+                updateItems(next);
               }}
             />
             <Input
               type={globalMode === "letter" ? "text" : "number"}
-              placeholder="Score"
+              placeholder={globalMode === "letter" ? "Grade (A, B+)" : "Score"}
+              aria-label={`Assignment ${index + 1} score`}
               value={item.score}
               onChange={(e) => {
                 const next = [...items];
@@ -65,17 +144,31 @@ export function WeightedGradeCalculator() {
                   ...item,
                   score: globalMode === "letter" ? e.target.value : Number(e.target.value) || 0,
                 };
-                setItems(next);
+                updateItems(next);
               }}
             />
+            {globalMode === "points" && (
+              <Input
+                type="number"
+                placeholder="Max points"
+                aria-label={`Assignment ${index + 1} max points`}
+                value={item.maxPoints ?? 100}
+                onChange={(e) => {
+                  const next = [...items];
+                  next[index] = { ...item, maxPoints: Number(e.target.value) || 0 };
+                  updateItems(next);
+                }}
+              />
+            )}
             <Input
               type="number"
-              placeholder="Weight"
+              placeholder={weightMode === "percent" ? "Weight %" : "Weight points"}
+              aria-label={`Assignment ${index + 1} weight`}
               value={item.weight}
               onChange={(e) => {
                 const next = [...items];
                 next[index] = { ...item, weight: Number(e.target.value) || 0 };
-                setItems(next);
+                updateItems(next);
               }}
             />
           </div>

@@ -2,7 +2,7 @@ import type { CalculatorSlug } from "@/types/calculator";
 
 export interface EngagementFlow {
   from: CalculatorSlug;
-  to: CalculatorSlug | "guide:final-exam-tips" | "grading-scales";
+  to: CalculatorSlug | "guide:final-exam-tips" | "guide:what-grade-do-i-need-on-my-final" | "grading-scales";
   title: string;
   description: string;
 }
@@ -115,6 +115,24 @@ export const engagementFlows: EngagementFlow[] = [
     to: "final-grade-calculator",
     title: "Try the full final grade calculator",
     description: "More modes including reverse and point-based grading.",
+  },
+  {
+    from: "degree-classification-calculator",
+    to: "weighted-grade-calculator",
+    title: "Recalculate a single year average",
+    description: "Use the weighted grade calculator if your handbook uses category weights instead of credits.",
+  },
+  {
+    from: "atar-calculator",
+    to: "gpa-calculator",
+    title: "Switch to university GPA",
+    description: "ATAR is a school-leaver rank. After you enrol, Australian GPA is usually a 7-point average.",
+  },
+  {
+    from: "gcse-grade-calculator",
+    to: "percentage-to-letter-grade",
+    title: "Convert on another scale",
+    description: "Use the percentage-to-letter tool if you need US, Canadian, or Australian bands instead.",
   },
 ];
 

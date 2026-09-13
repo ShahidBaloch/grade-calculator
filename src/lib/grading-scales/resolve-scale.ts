@@ -3,6 +3,8 @@ import type { CountryCode, ScaleId } from "@/types/grading-scale";
 
 /** Map URL prefixes to locked scale (geo landing pages). */
 const PATH_SCALE_LOCKS: Array<{ prefix: string; scaleId: ScaleId }> = [
+  { prefix: "/uk/gcse-grade-calculator", scaleId: "uk-gcse" },
+  { prefix: "/grading-scales/gcse", scaleId: "uk-gcse" },
   { prefix: "/us", scaleId: "us-standard" },
   { prefix: "/uk", scaleId: "uk-degree" },
   { prefix: "/ca", scaleId: "ca-standard" },

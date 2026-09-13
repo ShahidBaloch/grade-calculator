@@ -31,6 +31,14 @@ export function getScale(scaleId: ScaleId): GradingScale {
   return gradingScales[scaleId];
 }
 
+/** Highest GPA this scale can award (4.0, 7.0, 9.0, …). */
+export function getScaleMaxGpa(scaleId: ScaleId): number {
+  const scale = getScale(scaleId);
+  if (typeof scale.gpaMax === "number") return scale.gpaMax;
+  const values = scale.bands.map((band) => band.gpa).filter((n): n is number => n != null);
+  return values.length ? Math.max(...values) : 4;
+}
+
 export function getScaleForCountry(country: CountryCode): GradingScale {
   return getScale(countryDefaults[country]);
 }

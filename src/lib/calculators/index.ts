@@ -10,6 +10,9 @@ export { calculateHighSchoolGpa } from "./high-school-gpa";
 export { convertPercentToLetter, convertLetterToPercent } from "./grade-converter";
 export { calculateCanvasGrade } from "./canvas-grade";
 export { calculateEocGrade } from "./eoc-grade";
+export { calculateDegreeClassification, classifyUkMark } from "./degree-classification";
+export { calculateAtar, estimateAtarFromAverage } from "./atar";
+export { calculateGcseGrade } from "./gcse-grade";
 export {
   calculateFinalGradeReverse,
   calculateFinalGradePoints,

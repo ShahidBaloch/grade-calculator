@@ -150,7 +150,8 @@ export const calculators: CalculatorConfig[] = [
     mvp: false,
     relatedSlugs: ["gpa-calculator", "cumulative-gpa-calculator", "weighted-gpa-calculator"],
     examples: [
-      { label: "Reach 3.5", values: { currentGpa: 3.2, currentCredits: 60, targetGpa: 3.5, futureCredits: 15 } },
+      { label: "Reach 3.4", values: { currentGpa: 3.2, currentCredits: 60, targetGpa: 3.4, futureCredits: 30 } },
+      { label: "Need 4.70", values: { currentGpa: 3.2, currentCredits: 60, targetGpa: 3.5, futureCredits: 15 } },
     ],
   },
   {
@@ -163,7 +164,23 @@ export const calculators: CalculatorConfig[] = [
     category: "gpa",
     mvp: false,
     relatedSlugs: ["weighted-gpa-calculator", "gpa-calculator", "raise-gpa-calculator"],
-    examples: [],
+    examples: [
+      {
+        label: "Two semesters",
+        values: {
+          weighted: true,
+          periods: [
+            {
+              name: "Fall",
+              courses: [
+                { name: "English", grade: "A", credits: 1, courseType: "regular" },
+                { name: "Honors Algebra", grade: "B+", credits: 1, courseType: "honors" },
+              ],
+            },
+          ],
+        },
+      },
+    ],
   },
   {
     slug: "college-gpa-calculator",
@@ -175,7 +192,18 @@ export const calculators: CalculatorConfig[] = [
     category: "gpa",
     mvp: false,
     relatedSlugs: ["gpa-calculator", "cumulative-gpa-calculator", "raise-gpa-calculator"],
-    examples: [],
+    examples: [
+      {
+        label: "Lab-heavy term",
+        values: {
+          courses: [
+            { name: "Intro to Psychology", grade: "A", credits: 3, countsTowardGpa: true },
+            { name: "Calculus I", grade: "B+", credits: 4, countsTowardGpa: true },
+            { name: "PE (pass/fail)", grade: "P", credits: 1, countsTowardGpa: false },
+          ],
+        },
+      },
+    ],
   },
   {
     slug: "percentage-to-letter-grade",
@@ -211,7 +239,18 @@ export const calculators: CalculatorConfig[] = [
     category: "grade",
     mvp: false,
     relatedSlugs: ["weighted-grade-calculator", "final-grade-calculator"],
-    examples: [],
+    examples: [
+      {
+        label: "Typical Canvas course",
+        values: {
+          groups: [
+            { name: "Assignments", weight: 30, current: 88 },
+            { name: "Quizzes", weight: 20, current: 92 },
+            { name: "Exams", weight: 50, current: 81 },
+          ],
+        },
+      },
+    ],
   },
   {
     slug: "eoc-grade-calculator",
@@ -225,6 +264,66 @@ export const calculators: CalculatorConfig[] = [
     relatedSlugs: ["final-grade-calculator", "weighted-grade-calculator"],
     examples: [
       { label: "Need 85%", values: { currentGrade: 82, eocWeight: 25, targetGrade: 85 } },
+    ],
+  },
+  {
+    slug: "degree-classification-calculator",
+    name: "UK Degree Classification Calculator",
+    shortName: "UK Class",
+    description: "Predict First, 2:1, 2:2, or Third from credit-weighted UK module marks.",
+    path: "/degree-classification-calculator",
+    icon: "Award",
+    category: "gpa",
+    mvp: false,
+    relatedSlugs: ["weighted-grade-calculator", "letter-grade-calculator", "gpa-calculator"],
+    examples: [
+      {
+        label: "Typical law mix",
+        values: {
+          year2Weight: 40,
+          year3Weight: 60,
+        },
+      },
+    ],
+  },
+  {
+    slug: "atar-calculator",
+    name: "ATAR Calculator",
+    shortName: "ATAR",
+    description: "Estimate an Australian ATAR from scaled subject scores (educational model).",
+    path: "/atar-calculator",
+    icon: "Target",
+    category: "conversion",
+    mvp: false,
+    relatedSlugs: ["gpa-calculator", "letter-grade-calculator", "percentage-to-letter-grade"],
+    examples: [
+      {
+        label: "Strong four",
+        values: {
+          subjects: [
+            { name: "English", scaledScore: 88 },
+            { name: "Methods", scaledScore: 86 },
+            { name: "Chemistry", scaledScore: 84 },
+            { name: "History", scaledScore: 82 },
+          ],
+          targetAtar: 90,
+        },
+      },
+    ],
+  },
+  {
+    slug: "gcse-grade-calculator",
+    name: "GCSE Grade Calculator",
+    shortName: "GCSE",
+    description: "Convert a percentage to the England 9–1 GCSE scale (educational boundaries).",
+    path: "/gcse-grade-calculator",
+    icon: "Hash",
+    category: "conversion",
+    mvp: false,
+    relatedSlugs: ["percentage-to-letter-grade", "degree-classification-calculator", "letter-grade-calculator"],
+    examples: [
+      { label: "Grade 7", values: { percent: 72 } },
+      { label: "Standard pass", values: { percent: 42 } },
     ],
   },
 ];

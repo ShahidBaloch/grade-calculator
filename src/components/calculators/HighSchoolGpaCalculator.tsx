@@ -9,7 +9,9 @@ import { ScaleSelector } from "@/components/calculators/shared/ScaleSelector";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { calculateHighSchoolGpa } from "@/lib/calculators/high-school-gpa";
+import type { CourseWeightType } from "@/lib/calculators/schemas/gpa.schema";
 import { formatGpa } from "@/lib/utils/format";
 import { STORAGE_KEYS } from "@/lib/constants";
 import { setStorageItem } from "@/lib/utils/storage";
@@ -20,6 +22,7 @@ interface CourseRow {
   name: string;
   grade: string;
   credits: number;
+  courseType: CourseWeightType;
 }
 
 interface PeriodRow {
@@ -27,19 +30,21 @@ interface PeriodRow {
   courses: CourseRow[];
 }
 
+const defaultCourse: CourseRow = { name: "", grade: "B", credits: 1, courseType: "regular" };
+
 const defaultPeriods: PeriodRow[] = [
   {
     name: "Fall Semester",
     courses: [
-      { name: "English", grade: "A", credits: 1 },
-      { name: "Algebra", grade: "B+", credits: 1 },
+      { name: "English", grade: "A", credits: 1, courseType: "regular" },
+      { name: "Honors Algebra", grade: "B+", credits: 1, courseType: "honors" },
     ],
   },
   {
     name: "Spring Semester",
     courses: [
-      { name: "Biology", grade: "A-", credits: 1 },
-      { name: "History", grade: "B", credits: 1 },
+      { name: "AP Biology", grade: "A-", credits: 1, courseType: "ap" },
+      { name: "History", grade: "B", credits: 1, courseType: "regular" },
     ],
   },
 ];
@@ -80,10 +85,16 @@ export function HighSchoolGpaCalculator() {
         />
         Use weighted GPA (Honors/AP)
       </label>
+      {weighted && (
+        <p className="text-sm text-[var(--color-text-muted)]">
+          Set each course to Regular, Honors (+0.5), AP (+1.0), or IB (+1.0). Check your school&apos;s policy.
+        </p>
+      )}
       {periods.map((period, periodIndex) => (
         <div key={periodIndex} className="rounded-lg border border-[var(--color-border)] p-4">
           <div className="mb-3 flex items-center gap-2">
             <Input
+              aria-label={`Period ${periodIndex + 1} name`}
               value={period.name}
               onChange={(e) => {
                 const next = [...periods];
@@ -108,7 +119,7 @@ export function HighSchoolGpaCalculator() {
               const next = [...periods];
               next[periodIndex] = {
                 ...period,
-                courses: [...period.courses, { name: "", grade: "B", credits: 1 }],
+                courses: [...period.courses, { ...defaultCourse }],
               };
               updatePeriods(next);
             }}
@@ -121,44 +132,55 @@ export function HighSchoolGpaCalculator() {
               updatePeriods(next);
             }}
             addLabel="Add course"
-            renderRow={(course, courseIndex) => (
-              <div className="grid gap-2 sm:grid-cols-3">
-                <Input
-                  placeholder="Course"
-                  value={course.name}
-                  onChange={(e) => {
-                    const next = [...periods];
-                    const courses = [...period.courses];
-                    courses[courseIndex] = { ...course, name: e.target.value };
-                    next[periodIndex] = { ...period, courses };
-                    updatePeriods(next);
-                  }}
-                />
-                <Input
-                  placeholder="Grade"
-                  value={course.grade}
-                  onChange={(e) => {
-                    const next = [...periods];
-                    const courses = [...period.courses];
-                    courses[courseIndex] = { ...course, grade: e.target.value };
-                    next[periodIndex] = { ...period, courses };
-                    updatePeriods(next);
-                  }}
-                />
-                <Input
-                  type="number"
-                  placeholder="Credits"
-                  value={course.credits}
-                  onChange={(e) => {
-                    const next = [...periods];
-                    const courses = [...period.courses];
-                    courses[courseIndex] = { ...course, credits: Number(e.target.value) || 0 };
-                    next[periodIndex] = { ...period, courses };
-                    updatePeriods(next);
-                  }}
-                />
-              </div>
-            )}
+            renderRow={(course, courseIndex) => {
+              const updateCourse = (patch: Partial<CourseRow>) => {
+                const next = [...periods];
+                const courses = [...period.courses];
+                courses[courseIndex] = { ...course, courseType: course.courseType ?? "regular", ...patch };
+                next[periodIndex] = { ...period, courses };
+                updatePeriods(next);
+              };
+
+              return (
+                <div className={`grid gap-2 ${weighted ? "sm:grid-cols-4" : "sm:grid-cols-3"}`}>
+                  <Input
+                    aria-label={`${period.name || "Period"} course ${courseIndex + 1} name`}
+                    placeholder="Course"
+                    value={course.name}
+                    onChange={(e) => updateCourse({ name: e.target.value })}
+                  />
+                  <Input
+                    aria-label={`${period.name || "Period"} course ${courseIndex + 1} grade`}
+                    placeholder="Grade"
+                    value={course.grade}
+                    onChange={(e) => updateCourse({ grade: e.target.value })}
+                  />
+                  <Input
+                    aria-label={`${period.name || "Period"} course ${courseIndex + 1} credits`}
+                    type="number"
+                    placeholder="Credits"
+                    value={course.credits}
+                    onChange={(e) => updateCourse({ credits: Number(e.target.value) || 0 })}
+                  />
+                  {weighted && (
+                    <Select
+                      value={course.courseType ?? "regular"}
+                      onValueChange={(value: CourseWeightType) => updateCourse({ courseType: value })}
+                    >
+                      <SelectTrigger aria-label={`Course type for ${course.name || `row ${courseIndex + 1}`}`}>
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="regular">Regular</SelectItem>
+                        <SelectItem value="honors">Honors (+0.5)</SelectItem>
+                        <SelectItem value="ap">AP (+1.0)</SelectItem>
+                        <SelectItem value="ib">IB (+1.0)</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  )}
+                </div>
+              );
+            }}
           />
         </div>
       ))}
@@ -166,7 +188,7 @@ export function HighSchoolGpaCalculator() {
         type="button"
         variant="outline"
         onClick={() =>
-          updatePeriods([...periods, { name: `Period ${periods.length + 1}`, courses: [{ name: "", grade: "B", credits: 1 }] }])
+          updatePeriods([...periods, { name: `Period ${periods.length + 1}`, courses: [{ ...defaultCourse }] }])
         }
       >
         Add semester / quarter

@@ -31,7 +31,7 @@ export function Header() {
                     {item.label}
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="start">
+                <DropdownMenuContent align="start" className="max-h-[70vh] overflow-y-auto">
                   {item.children.map((child) => (
                     <DropdownMenuItem key={child.href} asChild>
                       <Link href={child.href}>{child.label}</Link>

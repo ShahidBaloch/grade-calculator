@@ -23,7 +23,7 @@ export default function GuidesHubPage() {
         <Breadcrumbs items={breadcrumbs} />
         <h1 className="mt-4 text-3xl font-bold">Guides & How-To Articles</h1>
         <p className="mt-2 text-[var(--color-text-muted)]">
-          Learn how grades and GPA work, with free embedded calculators in every guide.
+          Learn how grades and GPA work. Four guides include a live calculator; the rest link to the matching tools.
         </p>
         <div className="mt-8 grid gap-4 sm:grid-cols-2">
           {guides.map((guide) => (

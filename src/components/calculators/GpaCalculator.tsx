@@ -2,7 +2,10 @@
 
 import * as React from "react";
 import { getPrimaryFlow } from "@/config/engagement-flows";
+import { calculatorBySlug } from "@/config/calculators";
 import { NextStepCard } from "@/components/engagement/NextStepCard";
+import { ExampleScenarios } from "@/components/engagement/ExampleScenarios";
+import { CalculatorToolbar } from "@/components/calculators/shared/CalculatorToolbar";
 import { DynamicRowList } from "@/components/calculators/shared/DynamicRowList";
 import { ScaleSelector } from "@/components/calculators/shared/ScaleSelector";
 import { Input } from "@/components/ui/input";
@@ -10,15 +13,23 @@ import { calculateSemesterGpa } from "@/lib/calculators/gpa";
 import { formatGpa } from "@/lib/utils/format";
 import { STORAGE_KEYS } from "@/lib/constants";
 import { setStorageItem } from "@/lib/utils/storage";
+import { useCalculatorPersistence } from "@/hooks/useCalculatorPersistence";
 import { useGradingScale } from "@/hooks/useGradingScale";
+
+const defaultCourses = [
+  { name: "English", grade: "A", credits: 3 },
+  { name: "Math", grade: "B+", credits: 3 },
+  { name: "History", grade: "A-", credits: 3 },
+];
 
 export function GpaCalculator() {
   const { scaleId } = useGradingScale();
-  const [courses, setCourses] = React.useState([
-    { name: "English", grade: "A", credits: 3 },
-    { name: "Math", grade: "B+", credits: 3 },
-    { name: "History", grade: "A-", credits: 3 },
-  ]);
+  const { state, setState, resetState, shareUrl, copied } = useCalculatorPersistence("gpa-calculator", {
+    courses: defaultCourses,
+  });
+  const { courses } = state;
+  const setCourses = (next: typeof defaultCourses) => setState({ courses: next });
+  const examples = calculatorBySlug["gpa-calculator"].examples;
 
   React.useEffect(() => {
     setStorageItem(STORAGE_KEYS.recentCalculator, "gpa-calculator");
@@ -30,8 +41,33 @@ export function GpaCalculator() {
   );
 
   return (
-    <div className="space-y-6">
+    <div className="calculator-print-area space-y-6">
+      <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
+      {examples.length > 0 && (
+        <ExampleScenarios
+          examples={examples}
+          onSelect={(values) => {
+            if (Array.isArray(values.courses)) {
+              setCourses(
+                values.courses.map((row, index) => {
+                  const course = row as { name?: string; grade?: string | number; credits?: number };
+                  return {
+                    name: course.name ?? `Course ${index + 1}`,
+                    grade: String(course.grade ?? "B"),
+                    credits: typeof course.credits === "number" ? course.credits : 3,
+                  };
+                }),
+              );
+            }
+          }}
+        />
+      )}
       <ScaleSelector />
+      <div className="hidden gap-2 text-xs text-[var(--color-text-muted)] sm:grid sm:grid-cols-3">
+        <span>Course</span>
+        <span>Grade</span>
+        <span>Credits</span>
+      </div>
       <DynamicRowList
         items={courses}
         onAdd={() => setCourses([...courses, { name: "", grade: "B", credits: 3 }])}
@@ -40,6 +76,7 @@ export function GpaCalculator() {
         renderRow={(course, index) => (
           <div className="grid gap-2 sm:grid-cols-3">
             <Input
+              aria-label={`Course ${index + 1} name`}
               placeholder="Course"
               value={course.name}
               onChange={(e) => {
@@ -49,6 +86,7 @@ export function GpaCalculator() {
               }}
             />
             <Input
+              aria-label={`Course ${index + 1} grade`}
               placeholder="Grade (A, B+, 92)"
               value={course.grade}
               onChange={(e) => {
@@ -58,6 +96,7 @@ export function GpaCalculator() {
               }}
             />
             <Input
+              aria-label={`Course ${index + 1} credits`}
               type="number"
               placeholder="Credits"
               value={course.credits}

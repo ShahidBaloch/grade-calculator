@@ -1,6 +1,8 @@
 "use client";
 
 import * as React from "react";
+import { getPrimaryFlow } from "@/config/engagement-flows";
+import { NextStepCard } from "@/components/engagement/NextStepCard";
 import { CalculatorToolbar } from "@/components/calculators/shared/CalculatorToolbar";
 import { ResultDisplay } from "@/components/calculators/shared/ResultDisplay";
 import { ScaleSelector } from "@/components/calculators/shared/ScaleSelector";
@@ -33,8 +35,9 @@ export function PercentageToLetterCalculator() {
       <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
       <ScaleSelector />
       <div className="space-y-2">
-        <Label>Percentage</Label>
+        <Label htmlFor="percent-to-letter">Percentage</Label>
         <Input
+          id="percent-to-letter"
           type="number"
           min={0}
           max={100}
@@ -54,6 +57,9 @@ export function PercentageToLetterCalculator() {
           <p className="text-sm text-[var(--color-text-muted)]">
             Range on this scale: {result.data.rangeLabel}
           </p>
+          {getPrimaryFlow("percentage-to-letter-grade") && (
+            <NextStepCard flow={getPrimaryFlow("percentage-to-letter-grade")!} />
+          )}
         </>
       )}
     </div>

@@ -5,6 +5,7 @@ import { getPrimaryFlow } from "@/config/engagement-flows";
 import { calculatorBySlug } from "@/config/calculators";
 import { NextStepCard } from "@/components/engagement/NextStepCard";
 import { ExampleScenarios } from "@/components/engagement/ExampleScenarios";
+import { CalculatorToolbar } from "@/components/calculators/shared/CalculatorToolbar";
 import { NumberStepper } from "@/components/calculators/shared/NumberStepper";
 import { ResultDisplay } from "@/components/calculators/shared/ResultDisplay";
 import { ScaleSelector } from "@/components/calculators/shared/ScaleSelector";
@@ -13,14 +14,23 @@ import { Input } from "@/components/ui/input";
 import { calculateTestGrade } from "@/lib/calculators/test-grade";
 import { STORAGE_KEYS } from "@/lib/constants";
 import { setStorageItem } from "@/lib/utils/storage";
+import { useCalculatorPersistence } from "@/hooks/useCalculatorPersistence";
 import { useGradingScale } from "@/hooks/useGradingScale";
+
+const defaultState = {
+  inputMode: "correct" as "correct" | "wrong",
+  totalQuestions: 20,
+  count: 15,
+  bonusPoints: 0,
+};
 
 export function TestGradeCalculator() {
   const { scaleId } = useGradingScale();
-  const [inputMode, setInputMode] = React.useState<"correct" | "wrong">("correct");
-  const [totalQuestions, setTotalQuestions] = React.useState(20);
-  const [count, setCount] = React.useState(15);
-  const [bonusPoints, setBonusPoints] = React.useState(0);
+  const { state, setState, resetState, shareUrl, copied } = useCalculatorPersistence(
+    "test-grade-calculator",
+    defaultState,
+  );
+  const { inputMode, totalQuestions, count, bonusPoints } = state;
 
   React.useEffect(() => {
     setStorageItem(STORAGE_KEYS.recentCalculator, "test-grade-calculator");
@@ -42,16 +52,18 @@ export function TestGradeCalculator() {
   );
 
   return (
-    <div className="space-y-6">
+    <div className="calculator-print-area space-y-6">
+      <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
       <ExampleScenarios
         examples={calculatorBySlug["test-grade-calculator"].examples}
         onSelect={(values) => {
-          if (typeof values.totalQuestions === "number") setTotalQuestions(values.totalQuestions);
-          if (typeof values.correctAnswers === "number") {
-            setInputMode("correct");
-            setCount(values.correctAnswers);
-          }
-          if (typeof values.bonusPoints === "number") setBonusPoints(values.bonusPoints);
+          setState({
+            ...state,
+            totalQuestions: typeof values.totalQuestions === "number" ? values.totalQuestions : totalQuestions,
+            inputMode: typeof values.correctAnswers === "number" ? "correct" : inputMode,
+            count: typeof values.correctAnswers === "number" ? values.correctAnswers : count,
+            bonusPoints: typeof values.bonusPoints === "number" ? values.bonusPoints : bonusPoints,
+          });
         }}
       />
       <ScaleSelector />
@@ -60,7 +72,8 @@ export function TestGradeCalculator() {
           <button
             key={mode}
             type="button"
-            onClick={() => setInputMode(mode)}
+            aria-pressed={inputMode === mode}
+            onClick={() => setState({ ...state, inputMode: mode })}
             className={`rounded-md border px-4 py-2 text-sm min-h-11 ${
               inputMode === mode
                 ? "border-[var(--color-primary)] bg-[var(--color-primary-subtle)]"
@@ -72,23 +85,30 @@ export function TestGradeCalculator() {
         ))}
       </div>
       <div className="grid gap-4 sm:grid-cols-2">
-        <NumberStepper label="Total questions" value={totalQuestions} min={1} max={999} onChange={setTotalQuestions} />
+        <NumberStepper
+          label="Total questions"
+          value={totalQuestions}
+          min={1}
+          max={999}
+          onChange={(value) => setState({ ...state, totalQuestions: value })}
+        />
         <NumberStepper
           label={inputMode === "correct" ? "Correct answers" : "Wrong answers"}
           value={count}
           min={0}
           max={totalQuestions}
-          onChange={setCount}
+          onChange={(value) => setState({ ...state, count: value })}
         />
       </div>
       <div className="space-y-2">
-        <Label>Bonus points (optional)</Label>
+        <Label htmlFor="bonus-points">Bonus points (optional)</Label>
         <Input
+          id="bonus-points"
           type="number"
           min={0}
           max={100}
           value={bonusPoints}
-          onChange={(e) => setBonusPoints(Number(e.target.value) || 0)}
+          onChange={(e) => setState({ ...state, bonusPoints: Number(e.target.value) || 0 })}
         />
       </div>
       {result.errors?.[0] && <p className="text-sm text-[var(--color-error)]">{result.errors[0]}</p>}

@@ -3,6 +3,7 @@
 import * as React from "react";
 import { getPrimaryFlow } from "@/config/engagement-flows";
 import { NextStepCard } from "@/components/engagement/NextStepCard";
+import { CalculatorToolbar } from "@/components/calculators/shared/CalculatorToolbar";
 import { DynamicRowList } from "@/components/calculators/shared/DynamicRowList";
 import { ScaleSelector } from "@/components/calculators/shared/ScaleSelector";
 import { Input } from "@/components/ui/input";
@@ -11,17 +12,26 @@ import { calculateCumulativeGpa } from "@/lib/calculators/cumulative-gpa";
 import { formatGpa } from "@/lib/utils/format";
 import { STORAGE_KEYS } from "@/lib/constants";
 import { setStorageItem } from "@/lib/utils/storage";
+import { useCalculatorPersistence } from "@/hooks/useCalculatorPersistence";
 import { useGradingScale } from "@/hooks/useGradingScale";
+
+const defaultCourses = [
+  { name: "Biology", grade: "A", credits: 4 },
+  { name: "Chemistry", grade: "B+", credits: 4 },
+  { name: "Psychology", grade: "A-", credits: 3 },
+];
 
 export function CumulativeGpaCalculator() {
   const { scaleId } = useGradingScale();
-  const [previousGpa, setPreviousGpa] = React.useState<number | "">(3.5);
-  const [previousCredits, setPreviousCredits] = React.useState<number | "">(30);
-  const [courses, setCourses] = React.useState([
-    { name: "Biology", grade: "A", credits: 4 },
-    { name: "Chemistry", grade: "B+", credits: 4 },
-    { name: "Psychology", grade: "A-", credits: 3 },
-  ]);
+  const { state, setState, resetState, shareUrl, copied } = useCalculatorPersistence(
+    "cumulative-gpa-calculator",
+    {
+      previousGpa: 3.5 as number | "",
+      previousCredits: 30 as number | "",
+      courses: defaultCourses,
+    },
+  );
+  const { previousGpa, previousCredits, courses } = state;
 
   React.useEffect(() => {
     setStorageItem(STORAGE_KEYS.recentCalculator, "cumulative-gpa-calculator");
@@ -41,34 +51,44 @@ export function CumulativeGpaCalculator() {
   );
 
   return (
-    <div className="space-y-6">
+    <div className="calculator-print-area space-y-6">
+      <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
       <ScaleSelector />
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="space-y-2">
-          <Label>Previous cumulative GPA (optional)</Label>
+          <Label htmlFor="previous-gpa">Previous cumulative GPA (optional)</Label>
           <Input
+            id="previous-gpa"
             type="number"
             step="0.01"
             min={0}
             max={5}
             value={previousGpa}
-            onChange={(e) => setPreviousGpa(e.target.value === "" ? "" : Number(e.target.value))}
+            onChange={(e) =>
+              setState({ ...state, previousGpa: e.target.value === "" ? "" : Number(e.target.value) })
+            }
           />
         </div>
         <div className="space-y-2">
-          <Label>Previous credits (optional)</Label>
+          <Label htmlFor="previous-credits">Previous credits (optional)</Label>
           <Input
+            id="previous-credits"
             type="number"
             min={0}
             value={previousCredits}
-            onChange={(e) => setPreviousCredits(e.target.value === "" ? "" : Number(e.target.value))}
+            onChange={(e) =>
+              setState({
+                ...state,
+                previousCredits: e.target.value === "" ? "" : Number(e.target.value),
+              })
+            }
           />
         </div>
       </div>
       <DynamicRowList
         items={courses}
-        onAdd={() => setCourses([...courses, { name: "", grade: "B", credits: 3 }])}
-        onRemove={(index) => setCourses(courses.filter((_, i) => i !== index))}
+        onAdd={() => setState({ ...state, courses: [...courses, { name: "", grade: "B", credits: 3 }] })}
+        onRemove={(index) => setState({ ...state, courses: courses.filter((_, i) => i !== index) })}
         addLabel="Add course"
         renderRow={(course, index) => (
           <div className="grid gap-2 sm:grid-cols-3">
@@ -78,7 +98,7 @@ export function CumulativeGpaCalculator() {
               onChange={(e) => {
                 const next = [...courses];
                 next[index] = { ...course, name: e.target.value };
-                setCourses(next);
+                setState({ ...state, courses: next });
               }}
             />
             <Input
@@ -87,7 +107,7 @@ export function CumulativeGpaCalculator() {
               onChange={(e) => {
                 const next = [...courses];
                 next[index] = { ...course, grade: e.target.value };
-                setCourses(next);
+                setState({ ...state, courses: next });
               }}
             />
             <Input
@@ -97,7 +117,7 @@ export function CumulativeGpaCalculator() {
               onChange={(e) => {
                 const next = [...courses];
                 next[index] = { ...course, credits: Number(e.target.value) || 0 };
-                setCourses(next);
+                setState({ ...state, courses: next });
               }}
             />
           </div>

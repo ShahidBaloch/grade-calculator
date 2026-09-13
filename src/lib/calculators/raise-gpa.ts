@@ -14,7 +14,8 @@ export function calculateRaiseGpa(input: RaiseGpaInput): CalculatorResult<RaiseG
     return { status: "error", errors: ["Invalid input"] };
   }
 
-  const { currentGpa, currentCredits, targetGpa, futureCredits } = parsed.data;
+  const { currentGpa, currentCredits, targetGpa, futureCredits, maxGpa } = parsed.data;
+  const ceiling = maxGpa ?? 4;
 
   if (futureCredits <= 0) {
     return { status: "error", errors: ["Future credits must be greater than 0"] };
@@ -31,13 +32,13 @@ export function calculateRaiseGpa(input: RaiseGpaInput): CalculatorResult<RaiseG
     `Required GPA = ${requiredGpa.toFixed(2)}`,
   ];
 
-  if (requiredGpa > 4.0) {
+  if (requiredGpa > ceiling) {
     return {
       status: "valid",
       data: {
         requiredGpa,
         status: "impossible",
-        message: `You would need a ${requiredGpa.toFixed(2)} GPA — above a perfect 4.0. Try a lower target or more credits.`,
+        message: `You would need a ${requiredGpa.toFixed(2)} GPA — above a perfect ${ceiling.toFixed(1)}. Try a lower target or more credits.`,
         formulaSteps,
       },
     };

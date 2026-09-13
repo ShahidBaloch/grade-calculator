@@ -35,9 +35,11 @@ export default function AboutPage() {
           </p>
           <h2 className="text-xl font-semibold text-[var(--color-text)]">What we offer</h2>
           <ul className="list-disc space-y-2 pl-5">
-            <li>EZ Grader and test grade calculators for quick quiz scoring</li>
+            <li>EZ Grader, test grade, Canvas, and EOC calculators for classroom scoring</li>
             <li>Weighted grade and final exam calculators for course planning</li>
-            <li>Semester and cumulative GPA calculators</li>
+            <li>Semester, cumulative, high school, college, and raise-GPA tools</li>
+            <li>UK degree classification, GCSE 9–1 bands, and an educational Australian ATAR estimate</li>
+            <li>Country hubs for the US, UK, Canada, Australia, and New Zealand</li>
             <li>Grading scale reference charts and educational guides</li>
           </ul>
           <p>

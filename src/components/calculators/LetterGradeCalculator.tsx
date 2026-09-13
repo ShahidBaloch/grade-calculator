@@ -1,6 +1,8 @@
 "use client";
 
 import * as React from "react";
+import { getPrimaryFlow } from "@/config/engagement-flows";
+import { NextStepCard } from "@/components/engagement/NextStepCard";
 import { CalculatorToolbar } from "@/components/calculators/shared/CalculatorToolbar";
 import { ScaleSelector } from "@/components/calculators/shared/ScaleSelector";
 import { Input } from "@/components/ui/input";
@@ -32,8 +34,9 @@ export function LetterGradeCalculator() {
       <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
       <ScaleSelector />
       <div className="space-y-2">
-        <Label>Letter grade</Label>
+        <Label htmlFor="letter-grade-input">Letter grade</Label>
         <Input
+          id="letter-grade-input"
           placeholder="e.g. A-, B+, C"
           value={state.letter}
           onChange={(e) => setState({ letter: e.target.value })}
@@ -48,6 +51,9 @@ export function LetterGradeCalculator() {
             {result.data.letter} · Range {result.data.rangeLabel} · GPA {result.data.gpa.toFixed(1)}
           </p>
         </div>
+      )}
+      {getPrimaryFlow("letter-grade-calculator") && result.status === "valid" && (
+        <NextStepCard flow={getPrimaryFlow("letter-grade-calculator")!} />
       )}
     </div>
   );

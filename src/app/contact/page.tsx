@@ -27,10 +27,10 @@ export default function ContactPage() {
           </p>
           <p>
             <a
-              href="mailto:hello@gradecalculator.com"
+              href={`mailto:${siteConfig.email}`}
               className="text-lg font-medium text-[var(--color-primary)] hover:underline"
             >
-              hello@gradecalculator.com
+              {siteConfig.email}
             </a>
           </p>
           <p>

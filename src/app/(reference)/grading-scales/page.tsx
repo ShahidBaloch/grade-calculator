@@ -8,7 +8,7 @@ import { breadcrumbJsonLd } from "@/lib/seo/jsonld";
 export const metadata = createPageMetadata({
   title: "Grading Scales by Country",
   description:
-    "Compare letter grades, percentages, and GPA points across US, UK, and Australian grading systems.",
+    "Compare letter grades, percentages, and GPA points across US, UK, Canadian, Australian, and New Zealand grading systems.",
   path: "/grading-scales",
   keywords: ["grading scale", "letter grade chart", "gpa scale"],
 });
@@ -26,8 +26,9 @@ export default function GradingScalesHubPage() {
         <Breadcrumbs items={breadcrumbs} />
         <h1 className="mt-4 text-3xl font-bold">Grading Scales by Country</h1>
         <p className="mt-2 text-[var(--color-text-muted)]">
-          Reference charts for US, UK, and Australian grading systems. Scales are applied automatically
-          based on your location, or choose one in any calculator.
+          Reference charts for US, UK, Canadian, Australian, and New Zealand grading systems. Scales
+          can be selected in any calculator. Location detection is used when the host provides a
+          country header.
         </p>
         <div className="mt-8 grid gap-4 sm:grid-cols-2">
           {gradingScalePages.map((page) => (

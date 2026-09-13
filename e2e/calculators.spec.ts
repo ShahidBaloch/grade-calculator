@@ -32,6 +32,31 @@ test.describe("Core calculator flows", () => {
     await expect(page.getByRole("link", { name: /ez grader/i }).first()).toBeVisible();
   });
 
+  test("UK degree classification default page predicts a class", async ({ page }) => {
+    await page.goto("/degree-classification-calculator");
+    await expect(page.getByRole("heading", { level: 1 })).toContainText(/degree classification/i);
+    await expect(page.getByText("Upper Second (2:1)").first()).toBeVisible();
+  });
+
+  test("UK hub GCSE page locks a country path", async ({ page }) => {
+    await page.goto("/uk/gcse-grade-calculator");
+    await expect(page).toHaveURL(/\/uk\/gcse-grade-calculator/);
+    await expect(page.getByRole("heading", { level: 1, name: /gcse/i })).toBeVisible();
+  });
+
+  test("GCSE calculator maps a percentage", async ({ page }) => {
+    await page.goto("/gcse-grade-calculator");
+    await expect(page.getByRole("heading", { level: 1, name: /gcse/i })).toBeVisible();
+    await expect(page.getByText("GCSE grade (9–1)").first()).toBeVisible();
+  });
+
+  test("ATAR default page shows an estimate", async ({ page }) => {
+    await page.goto("/atar-calculator");
+    await expect(page.getByRole("heading", { level: 1, name: /atar/i })).toBeVisible();
+    await expect(page.getByText("Estimated ATAR").first()).toBeVisible();
+    await expect(page.locator(".text-5xl").first()).not.toHaveText("—");
+  });
+
   test("navigation header links work", async ({ page, isMobile }) => {
     await page.goto("/");
     if (isMobile) {

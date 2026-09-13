@@ -58,7 +58,7 @@ export default function PrivacyPolicyPage() {
           <section>
             <h2 className="text-lg font-semibold text-[var(--color-text)]">Contact</h2>
             <p className="mt-2">
-              Privacy questions: hello@gradecalculator.com
+              Privacy questions: {siteConfig.email}
             </p>
           </section>
         </div>

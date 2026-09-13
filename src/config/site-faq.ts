@@ -1,31 +1,29 @@
 import type { FaqItem } from "@/types/seo";
-import { calculatorContent } from "@/config/calculator-content";
-import type { CalculatorSlug } from "@/types/calculator";
-
-const slugs: CalculatorSlug[] = [
-  "ez-grader",
-  "test-grade-calculator",
-  "weighted-grade-calculator",
-  "final-grade-calculator",
-  "gpa-calculator",
-  "cumulative-gpa-calculator",
-];
 
 export const siteFaqs: FaqItem[] = [
   {
     question: "Are these grade calculators free?",
     answer:
-      "Yes. All calculators on GradeCalculator are 100% free with no sign-up, no ads at launch, and no data stored on our servers.",
+      "Yes. Every calculator is free to use with no sign-up. Calculations run in your browser.",
   },
   {
     question: "Is my grade data private?",
     answer:
-      "Yes. All calculations run in your browser. We do not upload your grades to any server. Optional localStorage saves your last-used calculator locally on your device.",
+      "Yes. We do not upload your grades to a server. Optional localStorage only saves your last-used calculator on this device.",
   },
   {
     question: "What grading scale do you use?",
     answer:
-      "We default to the US Standard 4.0 scale. Your location may be detected automatically to use UK, Canadian, Australian, or New Zealand scales. You can change the scale in any calculator.",
+      "The worldwide default is US Standard 4.0. Location may switch the scale to UK, Canadian, Australian, or New Zealand. You can change it in any calculator that has a scale selector.",
   },
-  ...slugs.flatMap((slug) => calculatorContent[slug].faqs),
+  {
+    question: "Do you have country-specific tools?",
+    answer:
+      "Yes. Use the UK degree classification and GCSE 9–1 calculators, and the ATAR calculator for an educational Australian rank estimate. Country hubs at /us, /uk, /ca, /au, and /nz open featured tools with that country's scale locked.",
+  },
+  {
+    question: "Where do I find a specific calculator?",
+    answer:
+      "Open All Calculators for the full list, or use the Calculators menu. Each tool page has its own how-to, formula, and FAQ — this page covers site-wide questions only.",
+  },
 ];

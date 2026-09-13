@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { calculators } from "@/config/calculators";
+import { countryCalculatorPaths } from "@/config/country-hubs";
 import { calculatorContent } from "@/config/calculator-content";
 import { calculatorKeywords } from "@/lib/seo/keywords";
 import { countryHubs } from "@/config/country-hubs";
@@ -21,6 +22,19 @@ describe("SEO audit", () => {
         true,
       );
     }
+  });
+
+  it("sitemap includes geo copies of worldwide tools", () => {
+    const urls = sitemap().map((entry) => entry.url);
+    for (const path of countryCalculatorPaths) {
+      expect(urls.some((url) => url.endsWith(path))).toBe(true);
+    }
+  });
+
+  it("does not use the competitor domain as the default site URL", async () => {
+    const { siteConfig } = await import("@/config/site");
+    expect(siteConfig.url).not.toContain("gradecalculator.com");
+    expect(new URL(siteConfig.url).pathname).toBe("/");
   });
 
   it("sitemap includes country hubs and guides", () => {

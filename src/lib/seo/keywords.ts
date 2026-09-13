@@ -63,4 +63,11 @@ export const calculatorKeywords: Record<CalculatorSlug, string[]> = {
     "eoc grade calculator",
     "end of course calculator",
   ],
+  "degree-classification-calculator": [
+    "degree classification calculator",
+    "uk degree calculator",
+    "2:1 calculator",
+  ],
+  "atar-calculator": ["atar calculator", "estimate atar", "australian atar"],
+  "gcse-grade-calculator": ["gcse grade calculator", "gcse 9-1", "percentage to gcse grade"],
 };

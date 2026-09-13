@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { calculators } from "@/config/calculators";
-import { countryHubs } from "@/config/country-hubs";
+import { countryCalculatorPaths, countryHubs } from "@/config/country-hubs";
 import { gradingScalePages } from "@/config/grading-scale-pages";
 import { guides } from "@/config/guides";
 import { siteConfig } from "@/config/site";
@@ -19,11 +19,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/cookie-policy", priority: 0.3, changeFrequency: "yearly" as const },
   ];
 
-  const calculatorPages = calculators.map((c) => ({
-    path: c.path,
-    priority: 0.9,
-    changeFrequency: "monthly" as const,
-  }));
+  const calculatorPages = [
+    ...calculators.map((c) => ({
+      path: c.path,
+      priority: 0.9,
+      changeFrequency: "monthly" as const,
+    })),
+    ...countryCalculatorPaths.map((path) => ({
+      path,
+      priority: 0.8,
+      changeFrequency: "monthly" as const,
+    })),
+  ];
 
   const guidePages = guides.map((g) => ({
     path: g.path,

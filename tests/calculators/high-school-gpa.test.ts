@@ -24,4 +24,24 @@ describe("calculateHighSchoolGpa", () => {
     const result = calculateHighSchoolGpa({ periods: [] });
     expect(result.status).toBe("error");
   });
+
+  it("applies Honors and AP bonuses only when weighted is on", () => {
+    const input = {
+      periods: [
+        {
+          name: "Fall",
+          courses: [
+            { grade: "A", credits: 1, courseType: "regular" as const },
+            { grade: "A", credits: 1, courseType: "ap" as const },
+          ],
+        },
+      ],
+    };
+
+    const unweighted = calculateHighSchoolGpa(input, "us-standard", { useWeightedScale: false });
+    const weighted = calculateHighSchoolGpa(input, "us-standard", { useWeightedScale: true });
+
+    expect(unweighted.data?.gpa).toBe(4);
+    expect(weighted.data?.gpa).toBe(4.5);
+  });
 });

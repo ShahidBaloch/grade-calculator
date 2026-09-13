@@ -12,6 +12,14 @@ describe("resolve-scale", () => {
 
   it("returns null for root calculator paths", () => {
     expect(getLockedScaleFromPath("/gpa-calculator")).toBeNull();
+    expect(getLockedScaleFromPath("/degree-classification-calculator")).toBeNull();
+    expect(getLockedScaleFromPath("/atar-calculator")).toBeNull();
+  });
+
+  it("locks Canadian and GCSE scales on their geo paths", () => {
+    expect(getLockedScaleFromPath("/ca/gpa-calculator")).toBe("ca-standard");
+    expect(getLockedScaleFromPath("/uk/gcse-grade-calculator")).toBe("uk-gcse");
+    expect(getLockedScaleFromPath("/uk/gpa-calculator")).toBe("uk-degree");
   });
 
   it("defaults to US standard without geo or user preference", () => {

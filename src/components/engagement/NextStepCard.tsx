@@ -6,8 +6,10 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 
 function resolveHref(to: EngagementFlow["to"]): string {
   if (to === "grading-scales") return "/grading-scales";
-  if (to === "guide:final-exam-tips") return "/guides/final-exam-tips";
-  return calculatorBySlug[to].path;
+  if (to.startsWith("guide:")) {
+    return `/guides/${to.slice("guide:".length)}`;
+  }
+  return calculatorBySlug[to as keyof typeof calculatorBySlug].path;
 }
 
 export function NextStepCard({ flow }: { flow: EngagementFlow }) {
