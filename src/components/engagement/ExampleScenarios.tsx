@@ -10,7 +10,7 @@ interface ExampleScenariosProps {
 
 export function ExampleScenarios({ examples, onSelect }: ExampleScenariosProps) {
   return (
-    <div className="flex gap-2 overflow-x-auto pb-2">
+    <div className="no-print flex gap-2 overflow-x-auto pb-2">
       {examples.map((example) => (
         <Button
           key={example.label}

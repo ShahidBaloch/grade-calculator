@@ -1,5 +1,6 @@
 import { CalculatorRoute } from "@/components/calculators/CalculatorRoute";
 import { WeightedGpaCalculator } from "@/components/calculators/WeightedGpaCalculator";
+import { calculatorHreflangLanguages } from "@/lib/seo/hreflang";
 import { createPageMetadata } from "@/lib/seo/metadata";
 import { calculatorKeywords } from "@/lib/seo/keywords";
 import { calculatorBySlug } from "@/config/calculators";
@@ -11,6 +12,7 @@ export const metadata = createPageMetadata({
   description: config.description,
   path: "/weighted-gpa-calculator",
   keywords: calculatorKeywords["weighted-gpa-calculator"],
+  languages: calculatorHreflangLanguages("weighted-gpa-calculator"),
 });
 
 export default function WeightedGpaCalculatorPage() {

@@ -6,7 +6,7 @@ import { CheckSquare, GraduationCap, LayoutGrid, Scale, Target } from "lucide-re
 import { cn } from "@/lib/utils";
 
 const tools = [
-  { href: "/ez-grader", label: "EZ", icon: CheckSquare },
+  { href: "/", label: "EZ", icon: CheckSquare },
   { href: "/weighted-grade-calculator", label: "Weighted", icon: Scale },
   { href: "/final-grade-calculator", label: "Final", icon: Target },
   { href: "/gpa-calculator", label: "GPA", icon: GraduationCap },
@@ -23,7 +23,7 @@ export function ToolSwitcher() {
     >
       <ul className="grid h-14 grid-cols-5">
         {tools.map((tool) => {
-          const active = pathname === tool.href || (tool.href === "/ez-grader" && pathname === "/");
+          const active = pathname === tool.href;
           const Icon = tool.icon;
           return (
             <li key={tool.href}>

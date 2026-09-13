@@ -6,6 +6,7 @@ import { PopularToolsGrid } from "@/components/engagement/PopularToolsGrid";
 import { RecentlyUsed } from "@/components/engagement/RecentlyUsed";
 import { InlineGuideTeaser } from "@/components/engagement/InlineGuideTeaser";
 import { createPageMetadata } from "@/lib/seo/metadata";
+import { calculatorHreflangLanguages } from "@/lib/seo/hreflang";
 import { calculatorKeywords } from "@/lib/seo/keywords";
 
 export const metadata = createPageMetadata({
@@ -14,12 +15,14 @@ export const metadata = createPageMetadata({
     "Free grade calculator and EZ grader for teachers and students. Score tests instantly, calculate weighted grades, finals, and GPA.",
   path: "/",
   keywords: calculatorKeywords["ez-grader"],
+  languages: calculatorHreflangLanguages("ez-grader"),
 });
 
 export default function HomePage() {
   return (
     <CalculatorRoute
       slug="ez-grader"
+      path="/"
       breadcrumbHome
       calculator={
         <Suspense fallback={null}>

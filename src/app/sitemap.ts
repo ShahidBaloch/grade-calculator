@@ -20,11 +20,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   const calculatorPages = [
-    ...calculators.map((c) => ({
-      path: c.path,
-      priority: 0.9,
-      changeFrequency: "monthly" as const,
-    })),
+    ...calculators
+      .filter((c) => c.slug !== "ez-grader")
+      .map((c) => ({
+        path: c.path,
+        priority: 0.9,
+        changeFrequency: "monthly" as const,
+      })),
     ...countryCalculatorPaths.map((path) => ({
       path,
       priority: 0.8,

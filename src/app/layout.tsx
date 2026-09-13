@@ -6,7 +6,9 @@ import { ToolSwitcher } from "@/components/engagement/ToolSwitcher";
 import { GradingScaleProvider } from "@/components/providers/grading-scale-provider";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { siteConfig } from "@/config/site";
+import { organizationJsonLd, webSiteJsonLd } from "@/lib/seo/jsonld";
 import "./globals.css";
 
 const inter = Inter({
@@ -30,6 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem storageKey="gc-theme">
           <GradingScaleProvider>
             <TooltipProvider>
+              <JsonLd data={[organizationJsonLd(), webSiteJsonLd()]} />
               <a
                 href="#main-content"
                 className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-[var(--color-primary)] focus:px-4 focus:py-2 focus:text-white"

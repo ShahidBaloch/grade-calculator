@@ -349,6 +349,8 @@ export const mvpCalculators = calculators.filter((c) => c.mvp);
 
 export const extendedCalculators = calculators.filter((c) => !c.mvp);
 
+/** Public href — EZ Grader lives on the homepage. */
 export function getCalculatorPath(slug: CalculatorSlug): string {
+  if (slug === "ez-grader") return "/";
   return calculatorBySlug[slug].path;
 }

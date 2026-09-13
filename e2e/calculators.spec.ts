@@ -100,6 +100,38 @@ test.describe("Core calculator flows", () => {
     await expect(page.getByRole("heading", { level: 1, name: /gcse/i })).toBeVisible();
   });
 
+  test("legacy ez-grader URL redirects home", async ({ page }) => {
+    await page.goto("/ez-grader");
+    await expect(page).toHaveURL(/\/$/);
+    await expect(page.getByRole("heading", { level: 1, name: /ez grader/i })).toBeVisible();
+  });
+
+  test("legacy average-grade URL redirects", async ({ page }) => {
+    await page.goto("/average-grade-calculator");
+    await expect(page).toHaveURL(/\/weighted-grade-calculator$/);
+    await expect(page.getByRole("heading", { level: 1, name: /weighted grade/i })).toBeVisible();
+  });
+
+  const smokePages: Array<[string, RegExp]> = [
+    ["/test-grade-calculator", /test grade/i],
+    ["/cumulative-gpa-calculator", /cumulative gpa/i],
+    ["/weighted-gpa-calculator", /weighted gpa/i],
+    ["/high-school-gpa-calculator", /high school gpa/i],
+    ["/percentage-to-letter-grade", /percentage to letter/i],
+    ["/letter-grade-calculator", /letter grade/i],
+    ["/canvas-grade-calculator", /canvas/i],
+    ["/eoc-grade-calculator", /eoc/i],
+    ["/us", /united states/i],
+    ["/contact", /contact/i],
+  ];
+
+  for (const [path, heading] of smokePages) {
+    test(`${path} loads`, async ({ page }) => {
+      await page.goto(path);
+      await expect(page.getByRole("heading", { level: 1 })).toContainText(heading);
+    });
+  }
+
   test("navigation header links work", async ({ page, isMobile }) => {
     await page.goto("/");
     if (isMobile) {

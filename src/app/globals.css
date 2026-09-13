@@ -113,19 +113,62 @@ body {
 }
 
 @media print {
+  @page {
+    margin: 0.5in;
+  }
+
   header,
   footer,
   nav,
-  .no-print {
+  aside,
+  .no-print,
+  nextjs-portal,
+  [data-nextjs-toast] {
     display: none !important;
   }
 
+  html,
   body {
     background: white !important;
     color: black !important;
+    padding: 0 !important;
+    margin: 0 !important;
   }
 
+  body {
+    padding-bottom: 0 !important;
+  }
+
+  a[href]::after {
+    content: none !important;
+  }
+
+  /* Do not keep the whole tool on one page — that left page 1 blank. */
   .calculator-print-area {
+    break-inside: auto;
+  }
+
+  .calculator-print-area > * + * {
+    margin-top: 0.5rem !important;
+  }
+
+  .print-result {
     break-inside: avoid;
+    padding: 0.75rem !important;
+  }
+
+  .print-result .text-5xl {
+    font-size: 1.75rem !important;
+    line-height: 1.2 !important;
+  }
+
+  .calculator-print-area table {
+    font-size: 11px;
+  }
+
+  .calculator-print-area th,
+  .calculator-print-area td {
+    padding-top: 0.12rem !important;
+    padding-bottom: 0.12rem !important;
   }
 }

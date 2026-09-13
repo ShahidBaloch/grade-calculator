@@ -1,7 +1,7 @@
 import { CalculatorRoute } from "@/components/calculators/CalculatorRoute";
 import { AtarCalculator } from "@/components/calculators/AtarCalculator";
 import { calculatorBySlug } from "@/config/calculators";
-import { siteConfig } from "@/config/site";
+import { calculatorHreflangLanguages } from "@/lib/seo/hreflang";
 import { calculatorKeywords } from "@/lib/seo/keywords";
 import { createPageMetadata } from "@/lib/seo/metadata";
 
@@ -13,11 +13,7 @@ export const metadata = createPageMetadata({
   description: config.description,
   path: auPath,
   keywords: calculatorKeywords["atar-calculator"],
-  languages: {
-    "x-default": `${siteConfig.url}${config.path}`,
-    en: `${siteConfig.url}${config.path}`,
-    "en-AU": `${siteConfig.url}${auPath}`,
-  },
+  languages: calculatorHreflangLanguages("atar-calculator"),
 });
 
 export default function AtarCalculatorPage() {

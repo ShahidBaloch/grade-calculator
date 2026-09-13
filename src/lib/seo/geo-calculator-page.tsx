@@ -3,8 +3,8 @@ import { CalculatorRoute } from "@/components/calculators/CalculatorRoute";
 import { getCalculatorElement } from "@/components/calculators/calculator-map";
 import { calculatorBySlug } from "@/config/calculators";
 import { countryHubs } from "@/config/country-hubs";
-import { siteConfig } from "@/config/site";
 import { calculatorKeywords } from "@/lib/seo/keywords";
+import { calculatorHreflangLanguages } from "@/lib/seo/hreflang";
 import { createPageMetadata } from "@/lib/seo/metadata";
 import type { CalculatorSlug } from "@/types/calculator";
 import { isCalculatorSlug } from "@/types/calculator";
@@ -38,11 +38,7 @@ export function createGeoCalculatorMetadata(code: string, slug: string) {
     description: `${config.description} Locked to the ${hub.name} grading scale on this page.`,
     path,
     keywords: [...calculatorKeywords[slug], ...hub.keywords],
-    languages: {
-      "x-default": `${siteConfig.url}${config.path}`,
-      en: `${siteConfig.url}${config.path}`,
-      [hub.hreflang]: `${siteConfig.url}${path}`,
-    },
+    languages: calculatorHreflangLanguages(slug),
   });
 }
 

@@ -1,5 +1,6 @@
 import { CalculatorRoute } from "@/components/calculators/CalculatorRoute";
 import { RaiseGpaCalculator } from "@/components/calculators/RaiseGpaCalculator";
+import { calculatorHreflangLanguages } from "@/lib/seo/hreflang";
 import { createPageMetadata } from "@/lib/seo/metadata";
 import { calculatorKeywords } from "@/lib/seo/keywords";
 import { calculatorBySlug } from "@/config/calculators";
@@ -11,6 +12,7 @@ export const metadata = createPageMetadata({
   description: config.description,
   path: "/raise-gpa-calculator",
   keywords: calculatorKeywords["raise-gpa-calculator"],
+  languages: calculatorHreflangLanguages("raise-gpa-calculator"),
 });
 
 export default function RaiseGpaCalculatorPage() {

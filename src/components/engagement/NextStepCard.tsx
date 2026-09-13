@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { calculatorBySlug } from "@/config/calculators";
+import { getCalculatorPath } from "@/config/calculators";
+import type { CalculatorSlug } from "@/types/calculator";
 import type { EngagementFlow } from "@/config/engagement-flows";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -9,14 +10,14 @@ function resolveHref(to: EngagementFlow["to"]): string {
   if (to.startsWith("guide:")) {
     return `/guides/${to.slice("guide:".length)}`;
   }
-  return calculatorBySlug[to as keyof typeof calculatorBySlug].path;
+  return getCalculatorPath(to as CalculatorSlug);
 }
 
 export function NextStepCard({ flow }: { flow: EngagementFlow }) {
   const href = resolveHref(flow.to);
 
   return (
-    <Card className="hover:shadow-md transition-shadow">
+    <Card className="no-print hover:shadow-md transition-shadow">
       <CardHeader>
         <CardTitle className="text-base">{flow.title}</CardTitle>
         <CardDescription>{flow.description}</CardDescription>

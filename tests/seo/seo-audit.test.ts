@@ -10,18 +10,52 @@ import {
   breadcrumbJsonLd,
   faqPageJsonLd,
   howToJsonLd,
+  organizationJsonLd,
   webApplicationJsonLd,
+  webSiteJsonLd,
 } from "@/lib/seo/jsonld";
 import sitemap from "@/app/sitemap";
+import { getCalculatorPath } from "@/config/calculators";
+import { calculatorHreflangLanguages, countryHubHreflangLanguages } from "@/lib/seo/hreflang";
+import { siteConfig } from "@/config/site";
 
 describe("SEO audit", () => {
   it("sitemap includes all calculator routes", () => {
     const urls = sitemap().map((entry) => entry.url);
+    expect(urls.some((url) => url === siteConfig.url || url === `${siteConfig.url}/`)).toBe(true);
+    expect(urls).not.toContain(`${siteConfig.url}/ez-grader`);
     for (const calculator of calculators) {
+      if (calculator.slug === "ez-grader") continue;
       expect(urls.some((url) => url.endsWith(calculator.path) || url.endsWith(`${calculator.path}/`))).toBe(
         true,
       );
     }
+  });
+
+  it("EZ Grader public path is the homepage", () => {
+    expect(getCalculatorPath("ez-grader")).toBe("/");
+  });
+
+  it("worldwide GPA hreflang lists geo copies", () => {
+    const languages = calculatorHreflangLanguages("gpa-calculator");
+    expect(languages["x-default"]).toBe(`${siteConfig.url}/gpa-calculator`);
+    expect(languages["en-US"]).toBe(`${siteConfig.url}/us/gpa-calculator`);
+    expect(languages["en-CA"]).toBe(`${siteConfig.url}/ca/gpa-calculator`);
+    expect(languages["en-AU"]).toBe(`${siteConfig.url}/au/gpa-calculator`);
+    expect(languages["en-NZ"]).toBe(`${siteConfig.url}/nz/gpa-calculator`);
+    expect(languages["en-GB"]).toBeUndefined();
+  });
+
+  it("country hubs share a reciprocal hreflang cluster", () => {
+    const languages = countryHubHreflangLanguages();
+    expect(languages["x-default"]).toBe(siteConfig.url);
+    expect(languages["en-GB"]).toBe(`${siteConfig.url}/uk`);
+    expect(languages["en-US"]).toBe(`${siteConfig.url}/us`);
+  });
+
+  it("emits Organization and WebSite JSON-LD", () => {
+    expect(organizationJsonLd()["@type"]).toBe("Organization");
+    expect(webSiteJsonLd()["@type"]).toBe("WebSite");
   });
 
   it("sitemap includes geo copies of worldwide tools", () => {

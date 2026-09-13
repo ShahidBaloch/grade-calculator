@@ -22,7 +22,7 @@ export function ResultDisplay({
   return (
     <div
       aria-live="polite"
-      className="rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-6"
+      className="print-result rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-6"
     >
       <p className="text-sm text-[var(--color-text-muted)]">{label}</p>
       <p className="mt-1 text-5xl font-bold tracking-tight">

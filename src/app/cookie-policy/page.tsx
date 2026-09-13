@@ -6,7 +6,7 @@ import { createPageMetadata } from "@/lib/seo/metadata";
 
 export const metadata = createPageMetadata({
   title: "Cookie Policy",
-  description: `How ${siteConfig.name} uses cookies — geo scale detection and theme preferences only.`,
+  description: `How ${siteConfig.name} uses cookies — geo scale detection only. Theme is saved in localStorage.`,
   path: "/cookie-policy",
 });
 
@@ -46,13 +46,16 @@ export default function CookiePolicyPage() {
                   <td className="py-2">Stores detected country code (ISO)</td>
                   <td className="py-2">30 days</td>
                 </tr>
-                <tr>
-                  <td className="py-2 font-mono text-xs">gc-theme</td>
-                  <td className="py-2">Dark/light mode preference</td>
-                  <td className="py-2">Persistent</td>
-                </tr>
               </tbody>
             </table>
+          </section>
+          <section>
+            <h2 className="text-lg font-semibold text-[var(--color-text)]">Stored on your device only</h2>
+            <p className="mt-2">
+              Theme (<span className="font-mono text-xs">gc-theme</span>), grading-scale preference,
+              and last calculator used are saved in localStorage, not cookies. Clearing site data in
+              your browser removes them.
+            </p>
           </section>
           <section>
             <h2 className="text-lg font-semibold text-[var(--color-text)]">Managing cookies</h2>

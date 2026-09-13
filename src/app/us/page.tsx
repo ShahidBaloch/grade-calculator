@@ -1,5 +1,6 @@
 import { CountryHubContent } from "@/components/content/CountryHubContent";
 import { countryHubByPath } from "@/config/country-hubs";
+import { countryHubHreflangLanguages } from "@/lib/seo/hreflang";
 import { createPageMetadata } from "@/lib/seo/metadata";
 
 const hub = countryHubByPath["/us"];
@@ -9,6 +10,7 @@ export const metadata = createPageMetadata({
   description: hub.description,
   path: "/us",
   keywords: hub.keywords,
+  languages: countryHubHreflangLanguages(),
 });
 
 export default function UsHubPage() {

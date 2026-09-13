@@ -1,7 +1,7 @@
 import { CalculatorRoute } from "@/components/calculators/CalculatorRoute";
 import { GcseGradeCalculator } from "@/components/calculators/GcseGradeCalculator";
 import { calculatorBySlug } from "@/config/calculators";
-import { siteConfig } from "@/config/site";
+import { calculatorHreflangLanguages } from "@/lib/seo/hreflang";
 import { calculatorKeywords } from "@/lib/seo/keywords";
 import { createPageMetadata } from "@/lib/seo/metadata";
 
@@ -12,11 +12,7 @@ export const metadata = createPageMetadata({
   description: config.description,
   path: config.path,
   keywords: calculatorKeywords["gcse-grade-calculator"],
-  languages: {
-    "x-default": `${siteConfig.url}${config.path}`,
-    en: `${siteConfig.url}${config.path}`,
-    "en-GB": `${siteConfig.url}/uk/gcse-grade-calculator`,
-  },
+  languages: calculatorHreflangLanguages("gcse-grade-calculator"),
 });
 
 export default function GcseGradeCalculatorPage() {

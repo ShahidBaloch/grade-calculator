@@ -15,7 +15,7 @@ import {
   Target,
   TrendingUp,
 } from "lucide-react";
-import type { CalculatorConfig } from "@/config/calculators";
+import { getCalculatorPath, type CalculatorConfig } from "@/config/calculators";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
@@ -44,7 +44,7 @@ interface CalculatorCardProps {
 
 export function CalculatorCard({ calculator, variant = "default", href }: CalculatorCardProps) {
   const Icon = iconMap[calculator.icon as keyof typeof iconMap] ?? Calculator;
-  const path = href ?? calculator.path;
+  const path = href ?? getCalculatorPath(calculator.slug);
 
   if (variant === "mini") {
     return (

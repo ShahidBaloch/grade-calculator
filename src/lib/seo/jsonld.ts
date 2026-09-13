@@ -1,4 +1,4 @@
-import { siteConfig } from "@/config/site";
+import { absoluteUrl, siteConfig } from "@/config/site";
 import type { BreadcrumbItem, FaqItem } from "@/types/seo";
 
 export function webApplicationJsonLd({
@@ -15,13 +15,38 @@ export function webApplicationJsonLd({
     "@type": "WebApplication",
     name,
     description,
-    url: `${siteConfig.url}${path}`,
+    url: absoluteUrl(path),
     applicationCategory: "EducationalApplication",
     operatingSystem: "Any",
     offers: {
       "@type": "Offer",
       price: "0",
       priceCurrency: "USD",
+    },
+  };
+}
+
+export function organizationJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: siteConfig.name,
+    url: siteConfig.url,
+    email: siteConfig.email,
+    logo: absoluteUrl("/icon"),
+  };
+}
+
+export function webSiteJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: siteConfig.name,
+    url: siteConfig.url,
+    description: siteConfig.description,
+    publisher: {
+      "@type": "Organization",
+      name: siteConfig.name,
     },
   };
 }
@@ -34,7 +59,7 @@ export function breadcrumbJsonLd(items: BreadcrumbItem[]) {
       "@type": "ListItem",
       position: index + 1,
       name: item.name,
-      item: `${siteConfig.url}${item.href}`,
+      item: absoluteUrl(item.href),
     })),
   };
 }

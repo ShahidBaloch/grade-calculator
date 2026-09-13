@@ -5,8 +5,12 @@ const criticalPages = [
   "/",
   "/gpa-calculator",
   "/final-grade-calculator",
+  "/weighted-grade-calculator",
+  "/test-grade-calculator",
   "/calculators",
   "/faq",
+  "/uk",
+  "/contact",
 ];
 
 for (const path of criticalPages) {

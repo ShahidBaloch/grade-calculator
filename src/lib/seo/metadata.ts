@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { siteConfig } from "@/config/site";
+import { absoluteUrl, siteConfig } from "@/config/site";
 import type { PageMetadataInput } from "@/types/seo";
 
 export function createPageMetadata({
@@ -10,7 +10,7 @@ export function createPageMetadata({
   noIndex = false,
   languages,
 }: PageMetadataInput): Metadata {
-  const url = `${siteConfig.url}${path}`;
+  const url = absoluteUrl(path);
   const fullTitle = title.includes(siteConfig.name) ? title : `${title} | ${siteConfig.name}`;
 
   return {

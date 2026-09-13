@@ -1,5 +1,6 @@
 import { CalculatorRoute } from "@/components/calculators/CalculatorRoute";
 import { CanvasGradeCalculator } from "@/components/calculators/CanvasGradeCalculator";
+import { calculatorHreflangLanguages } from "@/lib/seo/hreflang";
 import { createPageMetadata } from "@/lib/seo/metadata";
 import { calculatorKeywords } from "@/lib/seo/keywords";
 import { calculatorBySlug } from "@/config/calculators";
@@ -11,6 +12,7 @@ export const metadata = createPageMetadata({
   description: config.description,
   path: "/canvas-grade-calculator",
   keywords: calculatorKeywords["canvas-grade-calculator"],
+  languages: calculatorHreflangLanguages("canvas-grade-calculator"),
 });
 
 export default function CanvasGradeCalculatorPage() {

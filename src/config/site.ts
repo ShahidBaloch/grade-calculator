@@ -13,3 +13,8 @@ export const siteConfig = {
   ogImage: "/opengraph-image",
   locale: "en_US",
 };
+
+export function absoluteUrl(path: string): string {
+  if (!path || path === "/") return siteConfig.url;
+  return `${siteConfig.url}${path.startsWith("/") ? path : `/${path}`}`;
+}

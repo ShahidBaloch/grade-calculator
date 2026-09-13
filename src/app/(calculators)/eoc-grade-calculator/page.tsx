@@ -1,5 +1,6 @@
 import { CalculatorRoute } from "@/components/calculators/CalculatorRoute";
 import { EocGradeCalculator } from "@/components/calculators/EocGradeCalculator";
+import { calculatorHreflangLanguages } from "@/lib/seo/hreflang";
 import { createPageMetadata } from "@/lib/seo/metadata";
 import { calculatorKeywords } from "@/lib/seo/keywords";
 import { calculatorBySlug } from "@/config/calculators";
@@ -11,6 +12,7 @@ export const metadata = createPageMetadata({
   description: config.description,
   path: "/eoc-grade-calculator",
   keywords: calculatorKeywords["eoc-grade-calculator"],
+  languages: calculatorHreflangLanguages("eoc-grade-calculator"),
 });
 
 export default function EocGradeCalculatorPage() {

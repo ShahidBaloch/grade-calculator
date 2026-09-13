@@ -1,5 +1,6 @@
 import { CalculatorRoute } from "@/components/calculators/CalculatorRoute";
 import { TestGradeCalculator } from "@/components/calculators/TestGradeCalculator";
+import { calculatorHreflangLanguages } from "@/lib/seo/hreflang";
 import { createPageMetadata } from "@/lib/seo/metadata";
 import { calculatorKeywords } from "@/lib/seo/keywords";
 import { calculatorBySlug } from "@/config/calculators";
@@ -11,6 +12,7 @@ export const metadata = createPageMetadata({
   description: config.description,
   path: "/test-grade-calculator",
   keywords: calculatorKeywords["test-grade-calculator"],
+  languages: calculatorHreflangLanguages("test-grade-calculator"),
 });
 
 export default function TestGradeCalculatorPage() {

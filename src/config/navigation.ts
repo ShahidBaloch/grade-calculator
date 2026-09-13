@@ -3,7 +3,7 @@ export const mainNav = [
     label: "Calculators",
     href: "/calculators",
     children: [
-      { label: "EZ Grader", href: "/ez-grader" },
+      { label: "EZ Grader", href: "/" },
       { label: "Test Grade Calculator", href: "/test-grade-calculator" },
       { label: "Weighted Grade Calculator", href: "/weighted-grade-calculator" },
       { label: "Final Grade Calculator", href: "/final-grade-calculator" },
@@ -29,7 +29,7 @@ export const mainNav = [
 
 export const footerNav = {
   calculators: [
-    { label: "EZ Grader", href: "/ez-grader" },
+    { label: "EZ Grader", href: "/" },
     { label: "Test Grade Calculator", href: "/test-grade-calculator" },
     { label: "Weighted Grade Calculator", href: "/weighted-grade-calculator" },
     { label: "Final Grade Calculator", href: "/final-grade-calculator" },

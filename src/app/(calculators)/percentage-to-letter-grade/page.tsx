@@ -1,5 +1,6 @@
 import { CalculatorRoute } from "@/components/calculators/CalculatorRoute";
 import { PercentageToLetterCalculator } from "@/components/calculators/PercentageToLetterCalculator";
+import { calculatorHreflangLanguages } from "@/lib/seo/hreflang";
 import { createPageMetadata } from "@/lib/seo/metadata";
 import { calculatorKeywords } from "@/lib/seo/keywords";
 import { calculatorBySlug } from "@/config/calculators";
@@ -11,6 +12,7 @@ export const metadata = createPageMetadata({
   description: config.description,
   path: "/percentage-to-letter-grade",
   keywords: calculatorKeywords["percentage-to-letter-grade"],
+  languages: calculatorHreflangLanguages("percentage-to-letter-grade"),
 });
 
 export default function PercentageToLetterGradePage() {

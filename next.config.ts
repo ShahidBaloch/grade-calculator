@@ -9,6 +9,16 @@ const nextConfig: NextConfig = {
         destination: "/letter-grade-calculator",
         permanent: true,
       },
+      {
+        source: "/ez-grader",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/average-grade-calculator",
+        destination: "/weighted-grade-calculator",
+        permanent: true,
+      },
     ];
   },
 };

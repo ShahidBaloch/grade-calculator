@@ -25,6 +25,7 @@ export function NumberStepper({ label, value, min = 0, max = 999, onChange }: Nu
           type="button"
           variant="outline"
           size="icon"
+          className="no-print"
           aria-label={`Decrease ${label}`}
           onClick={() => onChange(clamp(value - 1))}
         >
@@ -43,6 +44,7 @@ export function NumberStepper({ label, value, min = 0, max = 999, onChange }: Nu
           type="button"
           variant="outline"
           size="icon"
+          className="no-print"
           aria-label={`Increase ${label}`}
           onClick={() => onChange(clamp(value + 1))}
         >

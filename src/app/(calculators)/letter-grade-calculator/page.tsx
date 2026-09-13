@@ -1,5 +1,6 @@
 import { CalculatorRoute } from "@/components/calculators/CalculatorRoute";
 import { LetterGradeCalculator } from "@/components/calculators/LetterGradeCalculator";
+import { calculatorHreflangLanguages } from "@/lib/seo/hreflang";
 import { createPageMetadata } from "@/lib/seo/metadata";
 import { calculatorKeywords } from "@/lib/seo/keywords";
 import { calculatorBySlug } from "@/config/calculators";
@@ -11,6 +12,7 @@ export const metadata = createPageMetadata({
   description: config.description,
   path: "/letter-grade-calculator",
   keywords: calculatorKeywords["letter-grade-calculator"],
+  languages: calculatorHreflangLanguages("letter-grade-calculator"),
 });
 
 export default function LetterGradeCalculatorPage() {
