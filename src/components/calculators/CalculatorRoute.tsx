@@ -3,6 +3,7 @@ import { CalculatorPageSections } from "@/components/calculators/CalculatorPageS
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { calculatorBySlug, getCalculatorPath } from "@/config/calculators";
+import { countryHubByPath } from "@/config/country-hubs";
 import { webApplicationJsonLd, faqPageJsonLd, howToJsonLd } from "@/lib/seo/jsonld";
 import { calculatorContent } from "@/config/calculator-content";
 import type { CalculatorSlug } from "@/types/calculator";
@@ -28,14 +29,22 @@ export function CalculatorRoute({
   const config = calculatorBySlug[slug];
   const content = calculatorContent[slug];
   const pagePath = path ?? getCalculatorPath(slug);
+  const geoSegment = pagePath.split("/").filter(Boolean)[0];
+  const geoHub = geoSegment ? countryHubByPath[`/${geoSegment}`] : undefined;
 
   const breadcrumbs = breadcrumbHome
     ? [{ name: "Home", href: "/" }]
-    : [
-        { name: "Home", href: "/" },
-        { name: "Calculators", href: "/calculators" },
-        { name: config.name, href: pagePath },
-      ];
+    : geoHub
+      ? [
+          { name: "Home", href: "/" },
+          { name: geoHub.name, href: geoHub.path },
+          { name: config.name, href: pagePath },
+        ]
+      : [
+          { name: "Home", href: "/" },
+          { name: "Calculators", href: "/calculators" },
+          { name: config.name, href: pagePath },
+        ];
 
   return (
     <>

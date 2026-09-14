@@ -33,7 +33,9 @@ export function CalculatorLayout({
           </p>
           <div className="mt-6 print:mt-3">{calculator}</div>
         </section>
-        {content && <aside className="no-print mt-8 lg:mt-14">{content}</aside>}
+        {content && (
+          <aside className="no-print mt-8 lg:sticky lg:top-20 lg:mt-4 lg:self-start">{content}</aside>
+        )}
       </div>
       {below && <div className="no-print mt-12">{below}</div>}
     </div>

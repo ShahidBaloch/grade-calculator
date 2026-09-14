@@ -89,3 +89,82 @@ export function calculateWeightedGrade(
     warnings: warnings.length ? warnings : undefined,
   };
 }
+
+export interface RemainingWorkResult {
+  requiredPercent: number;
+  status: "achievable" | "impossible" | "already_met";
+  message: string;
+  completedWeight: number;
+  remainingWeight: number;
+  completedAverage: number;
+}
+
+/** Solve for the average needed on unfinished weight to hit a desired overall. */
+export function calculateRemainingWorkRequired(
+  completed: { percent: number; weight: number }[],
+  remainingWeight: number,
+  desiredOverall: number,
+): CalculatorResult<RemainingWorkResult> {
+  if (remainingWeight <= 0) {
+    return { status: "error", errors: ["Remaining weight must be greater than 0"] };
+  }
+  if (desiredOverall < 0 || desiredOverall > 100) {
+    return { status: "error", errors: ["Desired overall must be between 0 and 100"] };
+  }
+
+  let completedWeight = 0;
+  let completedSum = 0;
+  for (const item of completed) {
+    if (item.weight <= 0) continue;
+    completedWeight += item.weight;
+    completedSum += item.percent * item.weight;
+  }
+
+  if (completedWeight <= 0) {
+    return { status: "error", errors: ["Enter completed work with weight before planning remaining"] };
+  }
+
+  const totalWeight = completedWeight + remainingWeight;
+  const requiredPercent = (desiredOverall * totalWeight - completedSum) / remainingWeight;
+  const completedAverage = completedSum / completedWeight;
+
+  if (requiredPercent > 100) {
+    return {
+      status: "valid",
+      data: {
+        requiredPercent,
+        status: "impossible",
+        message: `You need ${requiredPercent.toFixed(1)}% on remaining work — not achievable without extra credit.`,
+        completedWeight,
+        remainingWeight,
+        completedAverage,
+      },
+    };
+  }
+
+  if (requiredPercent <= 0) {
+    return {
+      status: "valid",
+      data: {
+        requiredPercent: Math.max(0, requiredPercent),
+        status: "already_met",
+        message: "You've already met your target even if remaining work scores 0%.",
+        completedWeight,
+        remainingWeight,
+        completedAverage,
+      },
+    };
+  }
+
+  return {
+    status: "valid",
+    data: {
+      requiredPercent,
+      status: "achievable",
+      message: `You need ${requiredPercent.toFixed(1)}% average on the remaining ${remainingWeight}% of the course.`,
+      completedWeight,
+      remainingWeight,
+      completedAverage,
+    },
+  };
+}

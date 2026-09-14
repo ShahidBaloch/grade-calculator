@@ -78,6 +78,10 @@ export function AtarCalculator() {
           }}
         />
       )}
+      <p className="rounded-md border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-3 text-sm text-[var(--color-text-muted)]">
+        Use <strong className="font-medium text-[var(--color-text)]">scaled</strong> subject scores
+        (after state scaling), not raw school marks. Raw marks will overestimate or underestimate ATAR.
+      </p>
       <p className="text-sm text-[var(--color-text-muted)]">
         Enter scaled subject scores from 0–100. We average the best four and count a fifth at 10%.
         This is an estimate only — official {authorityMeta.name} ATARs use state scaling we cannot republish.

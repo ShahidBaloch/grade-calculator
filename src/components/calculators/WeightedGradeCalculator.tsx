@@ -11,10 +11,15 @@ import { ResultDisplay } from "@/components/calculators/shared/ResultDisplay";
 import { ScaleSelector } from "@/components/calculators/shared/ScaleSelector";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { calculateWeightedGrade } from "@/lib/calculators/weighted-grade";
+import {
+  calculateRemainingWorkRequired,
+  calculateWeightedGrade,
+} from "@/lib/calculators/weighted-grade";
 import { useCalculatorPersistence } from "@/hooks/useCalculatorPersistence";
 import { useGradingScale } from "@/hooks/useGradingScale";
 import type { WeightedGradeInput } from "@/lib/calculators/schemas/weighted-grade.schema";
+import { StatusBadge } from "@/components/calculators/shared/StatusBadge";
+import { WeightInput } from "@/components/calculators/shared/WeightInput";
 
 type ScoreMode = WeightedGradeInput["globalMode"];
 type WeightMode = WeightedGradeInput["weightMode"];
@@ -75,15 +80,26 @@ export function WeightedGradeCalculator() {
       globalMode: "percentage" as ScoreMode,
       weightMode: "percent" as WeightMode,
       items: defaultItems,
+      desiredOverall: 90,
+      remainingWeight: 0,
     },
   );
-  const { globalMode, weightMode, items } = state;
+  const { globalMode, weightMode, items, desiredOverall, remainingWeight } = state;
   const examples = calculatorBySlug["weighted-grade-calculator"].examples;
 
   const result = React.useMemo(
     () => calculateWeightedGrade({ globalMode, weightMode, items }, scaleId),
     [globalMode, weightMode, items, scaleId],
   );
+
+  const remainingResult = React.useMemo(() => {
+    if (!result.data || remainingWeight <= 0) return null;
+    return calculateRemainingWorkRequired(
+      result.data.rows.map((row) => ({ percent: row.normalizedPercent, weight: row.weight })),
+      remainingWeight,
+      desiredOverall,
+    );
+  }, [result.data, remainingWeight, desiredOverall]);
 
   const updateItems = (next: WeightedRow[]) => setState({ ...state, items: next });
 
@@ -203,7 +219,61 @@ export function WeightedGradeCalculator() {
         letterGrade={result.data?.letterGrade}
         gpa={result.data?.gpa}
       />
-      {getPrimaryFlow("weighted-grade-calculator") && result.status === "valid" && (
+      {result.data && (
+        <p className="text-sm text-[var(--color-text-muted)]">
+          Weighted average = (score × weight) for each row, divided by total weight{" "}
+          {result.data.totalWeight}
+          {weightMode === "percent" ? "%" : ""}.
+        </p>
+      )}
+
+      <div className="space-y-4 rounded-lg border border-[var(--color-border)] p-4">
+        <div>
+          <h3 className="text-sm font-semibold">What do I need on remaining work?</h3>
+          <p className="mt-1 text-sm text-[var(--color-text-muted)]">
+            Enter unfinished course weight and your target overall. Rows above are treated as completed.
+          </p>
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2">
+          <div className="space-y-2">
+            <Label htmlFor="desired-overall">Desired overall (%)</Label>
+            <Input
+              id="desired-overall"
+              type="number"
+              min={0}
+              max={100}
+              value={desiredOverall}
+              onChange={(e) => setState({ ...state, desiredOverall: Number(e.target.value) })}
+            />
+          </div>
+          <WeightInput
+            label="Remaining weight"
+            value={remainingWeight}
+            onChange={(v) => setState({ ...state, remainingWeight: v })}
+          />
+        </div>
+        {remainingResult?.errors?.[0] && (
+          <p className="text-sm text-[var(--color-error)]">{remainingResult.errors[0]}</p>
+        )}
+        {remainingResult?.data && (
+          <>
+            {remainingResult.data.status !== "achievable" && (
+              <StatusBadge status={remainingResult.data.status} />
+            )}
+            <ResultDisplay
+              label={
+                remainingResult.data.status === "impossible"
+                  ? "Need on remaining (over 100%)"
+                  : "Need on remaining work"
+              }
+              percent={remainingResult.data.requiredPercent}
+            />
+            <p className="text-sm text-[var(--color-text-muted)]">{remainingResult.data.message}</p>
+          </>
+        )}
+      </div>
+
+      {getPrimaryFlow("weighted-grade-calculator") && result.data && (
         <NextStepCard flow={getPrimaryFlow("weighted-grade-calculator")!} />
       )}
     </div>

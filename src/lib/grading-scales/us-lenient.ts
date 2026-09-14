@@ -2,7 +2,7 @@ import type { GradingScale } from "@/types/grading-scale";
 
 export const usLenientScale: GradingScale = {
   id: "us-lenient",
-  name: "US Lenient (10-point)",
+  name: "US 10-point letter bands",
   country: "US",
   gpaMax: 4.0,
   passPercent: 60,

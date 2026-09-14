@@ -9,6 +9,8 @@ const GEO_COUNTRY_TO_MARKET: Record<string, CountryCode> = {
   CA: "CA",
   AU: "AU",
   NZ: "NZ",
+  IN: "IN",
+  PK: "PK",
 };
 
 export function getMarketFromGeoCountry(isoCountry: string | null | undefined): CountryCode | null {

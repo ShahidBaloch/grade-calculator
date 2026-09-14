@@ -1,12 +1,19 @@
-import { mvpCalculators } from "@/config/calculators";
-import { CalculatorCard } from "@/components/calculators/shared/CalculatorCard";
+import Link from "next/link";
+import { getCalculatorPath, mvpCalculators } from "@/config/calculators";
 
 export function PopularToolsGrid() {
   return (
-    <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
+    <ul className="grid grid-cols-1 gap-2 sm:grid-cols-2">
       {mvpCalculators.map((calculator) => (
-        <CalculatorCard key={calculator.slug} calculator={calculator} variant="mini" />
+        <li key={calculator.slug}>
+          <Link
+            href={getCalculatorPath(calculator.slug)}
+            className="flex min-h-11 items-center rounded-md border border-[var(--color-border)] px-3 py-2 text-sm font-medium hover:bg-[var(--color-bg-subtle)] hover:text-[var(--color-primary)]"
+          >
+            {calculator.name}
+          </Link>
+        </li>
       ))}
-    </div>
+    </ul>
   );
 }

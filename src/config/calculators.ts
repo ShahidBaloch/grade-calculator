@@ -339,6 +339,23 @@ export const calculators: CalculatorConfig[] = [
       { label: "Standard pass", values: { percent: 42 } },
     ],
   },
+  {
+    slug: "cgpa-to-percentage",
+    name: "CGPA to Percentage Calculator",
+    shortName: "CGPA %",
+    description:
+      "Convert CGPA to percentage (and back) for India CBSE/UGC and Pakistan HEC formulas.",
+    path: "/cgpa-to-percentage",
+    icon: "Percent",
+    category: "conversion",
+    mvp: false,
+    relatedSlugs: ["gpa-calculator", "cumulative-gpa-calculator", "percentage-to-letter-grade"],
+    examples: [
+      { label: "India 8.2 CGPA", values: { mode: "cgpa-to-percent", formulaId: "india-cbse-9.5", value: 8.2 } },
+      { label: "Pakistan 3.4 CGPA", values: { mode: "cgpa-to-percent", formulaId: "pakistan-hec-25", value: 3.4 } },
+      { label: "76% → CGPA", values: { mode: "percent-to-cgpa", formulaId: "india-cbse-9.5", value: 76 } },
+    ],
+  },
 ];
 
 export const calculatorBySlug = Object.fromEntries(

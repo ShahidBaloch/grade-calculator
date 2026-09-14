@@ -44,6 +44,20 @@ export const countries: CountryConfig[] = [
     defaultScaleId: "nz-nine-point",
     hubPath: "/nz",
   },
+  {
+    code: "IN",
+    name: "India",
+    flag: "🇮🇳",
+    defaultScaleId: "in-ten-point",
+    hubPath: "/in",
+  },
+  {
+    code: "PK",
+    name: "Pakistan",
+    flag: "🇵🇰",
+    defaultScaleId: "pk-hec",
+    hubPath: "/pk",
+  },
 ];
 
 export const countryByCode = Object.fromEntries(

@@ -20,7 +20,7 @@ export function ToolSwitcher() {
   return (
     <nav
       aria-label="Quick tools"
-      className="fixed inset-x-0 bottom-0 z-40 border-t border-[var(--color-border)] bg-[var(--color-bg)] md:hidden"
+      className="fixed inset-x-0 bottom-0 z-40 border-t border-[var(--color-border)] bg-[var(--color-bg)] pb-[env(safe-area-inset-bottom)] md:hidden"
     >
       <ul className="grid h-14 grid-cols-5">
         {tools.map((tool) => {

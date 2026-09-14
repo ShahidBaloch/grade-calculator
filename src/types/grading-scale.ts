@@ -1,4 +1,4 @@
-export type CountryCode = "US" | "UK" | "CA" | "AU" | "NZ";
+export type CountryCode = "US" | "UK" | "CA" | "AU" | "NZ" | "IN" | "PK";
 
 export type ScaleId =
   | "us-standard"
@@ -7,7 +7,9 @@ export type ScaleId =
   | "uk-gcse"
   | "ca-standard"
   | "au-seven-point"
-  | "nz-nine-point";
+  | "nz-nine-point"
+  | "in-ten-point"
+  | "pk-hec";
 
 export interface GradeBand {
   letter: string;

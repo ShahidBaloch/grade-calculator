@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import { CalculatorRoute } from "@/components/calculators/CalculatorRoute";
 import { CalculatorPageSections } from "@/components/calculators/CalculatorPageSections";
 import { EzGrader } from "@/components/calculators/EzGrader";
+import { HomepageIntentLinks } from "@/components/engagement/HomepageIntentLinks";
 import { PopularToolsGrid } from "@/components/engagement/PopularToolsGrid";
 import { RecentlyUsed } from "@/components/engagement/RecentlyUsed";
 import { InlineGuideTeaser } from "@/components/engagement/InlineGuideTeaser";
@@ -26,7 +27,10 @@ export default function HomePage() {
       breadcrumbHome
       calculator={
         <Suspense fallback={null}>
-          <EzGrader slug="ez-grader" />
+          <div className="space-y-6">
+            <HomepageIntentLinks activeHref="/" />
+            <EzGrader slug="ez-grader" />
+          </div>
         </Suspense>
       }
       aside={

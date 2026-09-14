@@ -70,4 +70,13 @@ export const calculatorKeywords: Record<CalculatorSlug, string[]> = {
   ],
   "atar-calculator": ["atar calculator", "estimate atar", "australian atar"],
   "gcse-grade-calculator": ["gcse grade calculator", "gcse 9-1", "percentage to gcse grade"],
+  "cgpa-to-percentage": [
+    "cgpa to percentage",
+    "cgpa calculator",
+    "percentage to cgpa",
+    "cgpa to percentage india",
+    "cgpa to percentage pakistan",
+    "hec cgpa to percentage",
+    "cbse cgpa to percentage",
+  ],
 };

@@ -74,4 +74,8 @@ export const calculatorResourceLinks: Record<CalculatorSlug, CalculatorResourceL
     guide: { path: "/guides/gcse-9-1-grades", title: "How GCSE 9–1 grades work" },
     gradingScale: { path: "/grading-scales/gcse", title: "UK GCSE 9–1 scale" },
   },
+  "cgpa-to-percentage": {
+    guide: { path: "/guides/how-to-calculate-gpa", title: "How to calculate GPA" },
+    gradingScale: { path: "/grading-scales/india", title: "India 10-point CGPA scale" },
+  },
 };

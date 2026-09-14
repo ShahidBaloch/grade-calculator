@@ -34,6 +34,42 @@ export function EzGrader({ slug = "ez-grader" }: { slug?: CalculatorSlug }) {
   return (
     <div className="calculator-print-area space-y-6">
       <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
+      <div className="grid gap-4 sm:grid-cols-2">
+        <NumberStepper
+          label="Total questions"
+          value={totalQuestions}
+          min={1}
+          max={999}
+          onChange={(v) =>
+            setState({
+              ...state,
+              totalQuestions: v,
+              wrongAnswers: Math.min(wrongAnswers, Math.max(0, v)),
+            })
+          }
+        />
+        <NumberStepper
+          label="Wrong answers"
+          value={wrongAnswers}
+          min={0}
+          max={Math.max(totalQuestions, wrongAnswers)}
+          onChange={(v) => setState({ ...state, wrongAnswers: v })}
+          error={
+            wrongAnswers > totalQuestions
+              ? `Wrong answers can't exceed total questions (${totalQuestions})`
+              : null
+          }
+        />
+      </div>
+      {result.errors?.[0] && wrongAnswers <= totalQuestions && (
+        <p className="text-sm text-[var(--color-error)]">{result.errors[0]}</p>
+      )}
+      <ResultDisplay
+        label="Score"
+        percent={result.data?.scorePercent}
+        letterGrade={result.data?.letterGrade}
+        gpa={result.data?.gpa}
+      />
       <ExampleScenarios
         examples={examples}
         onSelect={(values) => {
@@ -46,29 +82,6 @@ export function EzGrader({ slug = "ez-grader" }: { slug?: CalculatorSlug }) {
         }}
       />
       <ScaleSelector />
-      <div className="grid gap-4 sm:grid-cols-2">
-        <NumberStepper
-          label="Total questions"
-          value={totalQuestions}
-          min={1}
-          max={999}
-          onChange={(v) => setState({ ...state, totalQuestions: v })}
-        />
-        <NumberStepper
-          label="Wrong answers"
-          value={wrongAnswers}
-          min={0}
-          max={totalQuestions}
-          onChange={(v) => setState({ ...state, wrongAnswers: v })}
-        />
-      </div>
-      {result.errors?.[0] && <p className="text-sm text-[var(--color-error)]">{result.errors[0]}</p>}
-      <ResultDisplay
-        label="Score"
-        percent={result.data?.scorePercent}
-        letterGrade={result.data?.letterGrade}
-        gpa={result.data?.gpa}
-      />
       {result.data?.chart && <GradeChart rows={result.data.chart} highlightWrong={wrongAnswers} />}
       {flow && result.status === "valid" && <NextStepCard flow={flow} />}
     </div>

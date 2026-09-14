@@ -24,7 +24,7 @@ export const gradingScalePages: GradingScalePageConfig[] = [
       "The US Standard 4.0 scale is the most common grading system in American high schools and colleges. Letter grades map to percentage ranges, and each letter converts to GPA points for semester calculations.",
     notes: [
       "Many schools use plus/minus modifiers (A-, B+, etc.) with the ranges shown below.",
-      "Some high schools use a 10-point scale (90–100 = A) — see US Lenient in our calculator settings.",
+      "Some high schools use a 10-point scale (90–100 = A) — see US 10-point letter bands in our calculator settings.",
       "Weighted GPA (honors/AP) may add extra points beyond this table.",
     ],
   },

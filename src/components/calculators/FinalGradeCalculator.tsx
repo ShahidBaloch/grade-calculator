@@ -100,6 +100,11 @@ export function FinalGradeCalculator() {
       <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
       <ExampleScenarios
         examples={calculatorBySlug["final-grade-calculator"].examples}
+        activeValues={{
+          currentGrade: state.currentGrade,
+          desiredGrade: state.desiredGrade,
+          finalWeight: state.finalWeight,
+        }}
         onSelect={(values) => {
           setState({
             ...state,
@@ -282,8 +287,14 @@ export function FinalGradeCalculator() {
         <>
           {requiredData.status !== "achievable" && <StatusBadge status={requiredData.status} />}
           <ResultDisplay
-            label={requiredData.status === "achievable" ? "Required on final" : "Result"}
-            percent={requiredData.status === "achievable" ? requiredData.requiredPercent : requiredData.targetPercent}
+            label={
+              requiredData.status === "impossible"
+                ? "Need on final (over 100%)"
+                : requiredData.status === "already_met"
+                  ? "Need on final (already met)"
+                  : "Required on final"
+            }
+            percent={requiredData.requiredPercent}
             placeholder="—"
           />
           <p className="text-sm text-[var(--color-text-muted)]">{requiredData.message}</p>

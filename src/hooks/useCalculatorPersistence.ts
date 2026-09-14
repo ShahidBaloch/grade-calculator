@@ -35,17 +35,20 @@ export function useCalculatorPersistence<T>(slug: string, initialState: T) {
   React.useEffect(() => {
     const fromUrl = readStateFromSearchParams<T>(window.location.search);
     if (fromUrl) {
-      setState(fromUrl);
+      setState({ ...initialState, ...fromUrl });
       setHydrated(true);
       return;
     }
 
     const stored = getStorageItem(storageKey);
     if (stored) {
-      const parsed = decodeCalculatorState<T>(stored);
-      if (parsed) setState(parsed);
+      const parsed = decodeCalculatorState<Partial<T>>(stored);
+      // Merge so newly added fields keep their defaults after schema upgrades.
+      if (parsed) setState({ ...initialState, ...parsed });
     }
     setHydrated(true);
+    // initialState is only used for first hydrate / schema upgrades — omit from deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- avoid re-hydrate loops from inline defaults
   }, [storageKey]);
 
   React.useEffect(() => {

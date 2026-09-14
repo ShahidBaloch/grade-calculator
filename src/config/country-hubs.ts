@@ -185,6 +185,87 @@ export const countryHubs: CountryHubConfig[] = [
     keywords: ["nz gpa calculator", "new zealand grading scale", "grade calculator nz"],
     hreflang: "en-NZ",
   },
+  {
+    code: "in",
+    path: "/in",
+    name: "India",
+    flag: "🇮🇳",
+    scaleId: "in-ten-point",
+    description:
+      "India grade and CGPA tools on the common 10-point university scale, plus CGPA to percentage converters (CBSE ×9.5 and more).",
+    details: [
+      "Most Indian universities report a 10-point CGPA (O = 10). CBSE and many UGC colleges convert with Percentage ≈ CGPA × 9.5; Anna University and some IITs/NITs use ×10.",
+      "Use the CGPA to Percentage calculator for conversion formulas, then GPA tools with the India 10-point scale locked on this hub.",
+    ],
+    faqs: [
+      {
+        question: "How do I convert CGPA to percentage in India?",
+        answer:
+          "CBSE/UGC commonly uses Percentage = CGPA × 9.5. Some universities use ×10 or (CGPA − 0.75) × 10. Pick your formula in the CGPA to Percentage calculator and confirm your handbook.",
+      },
+      {
+        question: "Is India CGPA the same as US GPA?",
+        answer:
+          "No. India often uses a 10-point CGPA. US applications usually need a 4.0 GPA estimate — convert carefully and follow each university’s evaluation service.",
+      },
+    ],
+    gradingScalePath: "/grading-scales/india",
+    featuredCalculators: [
+      "cgpa-to-percentage",
+      "gpa-calculator",
+      "cumulative-gpa-calculator",
+      "percentage-to-letter-grade",
+      "weighted-grade-calculator",
+    ],
+    keywords: [
+      "cgpa calculator india",
+      "cgpa to percentage",
+      "india grade calculator",
+      "10 point cgpa",
+      "cbse cgpa to percentage",
+    ],
+    hreflang: "en-IN",
+  },
+  {
+    code: "pk",
+    path: "/pk",
+    name: "Pakistan",
+    flag: "🇵🇰",
+    scaleId: "pk-hec",
+    description:
+      "Pakistan grade and GPA tools on the HEC 4.0 scale, with CGPA to percentage (×25) conversion.",
+    details: [
+      "HEC Absolute grading is commonly A = 85–100 (4.0). Percentage is often estimated as CGPA × 25 on a 4.0 scale.",
+      "Always match your university’s published table — campus variants exist for A− / B+ points.",
+    ],
+    faqs: [
+      {
+        question: "How do I convert CGPA to percentage in Pakistan?",
+        answer:
+          "A common HEC-style estimate is Percentage = CGPA × 25 (for a 4.0 maximum). Use the CGPA to Percentage calculator with the Pakistan HEC formula and verify against your transcript.",
+      },
+      {
+        question: "Is Pakistan GPA the same as US GPA?",
+        answer:
+          "Both often use a 4.0 idea, but percentage cutoffs and letter bands differ. Prefer your university’s official conversion for applications abroad.",
+      },
+    ],
+    gradingScalePath: "/grading-scales/pakistan",
+    featuredCalculators: [
+      "cgpa-to-percentage",
+      "gpa-calculator",
+      "cumulative-gpa-calculator",
+      "percentage-to-letter-grade",
+      "weighted-grade-calculator",
+    ],
+    keywords: [
+      "cgpa calculator pakistan",
+      "hec cgpa to percentage",
+      "pakistan gpa calculator",
+      "grade calculator pakistan",
+    ],
+    hreflang: "en-PK",
+  },
 ];
 
 export const countryHubByPath = Object.fromEntries(

@@ -10,11 +10,15 @@ const PATH_SCALE_LOCKS: Array<{ prefix: string; scaleId: ScaleId }> = [
   { prefix: "/ca", scaleId: "ca-standard" },
   { prefix: "/au", scaleId: "au-seven-point" },
   { prefix: "/nz", scaleId: "nz-nine-point" },
+  { prefix: "/in", scaleId: "in-ten-point" },
+  { prefix: "/pk", scaleId: "pk-hec" },
   { prefix: "/grading-scales/us", scaleId: "us-standard" },
   { prefix: "/grading-scales/uk", scaleId: "uk-degree" },
   { prefix: "/grading-scales/canada", scaleId: "ca-standard" },
   { prefix: "/grading-scales/australia", scaleId: "au-seven-point" },
   { prefix: "/grading-scales/new-zealand", scaleId: "nz-nine-point" },
+  { prefix: "/grading-scales/india", scaleId: "in-ten-point" },
+  { prefix: "/grading-scales/pakistan", scaleId: "pk-hec" },
 ];
 
 const VALID_SCALE_IDS = new Set<string>(Object.keys(gradingScales));
@@ -37,6 +41,12 @@ export function getScaleHintFromLocale(): ScaleId | null {
   if (locale === "en-au" || locale.endsWith("-au")) return countryDefaults.AU;
   if (locale === "en-ca" || locale.endsWith("-ca")) return countryDefaults.CA;
   if (locale === "en-nz" || locale.endsWith("-nz")) return countryDefaults.NZ;
+  if (locale === "en-in" || locale.endsWith("-in") || locale.startsWith("hi")) {
+    return countryDefaults.IN;
+  }
+  if (locale === "en-pk" || locale.endsWith("-pk") || locale.startsWith("ur")) {
+    return countryDefaults.PK;
+  }
 
   return null;
 }

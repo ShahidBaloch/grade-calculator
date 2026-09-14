@@ -1,6 +1,8 @@
 import { auSevenPointScale } from "./au-seven-point";
 import { caStandardScale } from "./ca-standard";
+import { inTenPointScale } from "./in-ten-point";
 import { nzNinePointScale } from "./nz-nine-point";
+import { pkHecScale } from "./pk-hec";
 import { ukDegreeScale } from "./uk-degree";
 import { ukGcseScale } from "./uk-gcse";
 import { usLenientScale } from "./us-lenient";
@@ -15,6 +17,8 @@ export const countryDefaults: Record<CountryCode, ScaleId> = {
   CA: "ca-standard",
   AU: "au-seven-point",
   NZ: "nz-nine-point",
+  IN: "in-ten-point",
+  PK: "pk-hec",
 };
 
 export const gradingScales: Record<ScaleId, GradingScale> = {
@@ -25,6 +29,8 @@ export const gradingScales: Record<ScaleId, GradingScale> = {
   "ca-standard": caStandardScale,
   "au-seven-point": auSevenPointScale,
   "nz-nine-point": nzNinePointScale,
+  "in-ten-point": inTenPointScale,
+  "pk-hec": pkHecScale,
 };
 
 export function getScale(scaleId: ScaleId): GradingScale {
@@ -63,9 +69,9 @@ export function letterToPercent(letter: string, scaleId: ScaleId = DEFAULT_SCALE
 
 export function getGradeBandClass(letter: string): "a" | "b" | "c" | "d" | "f" {
   const first = letter.trim().charAt(0).toUpperCase();
-  if (first === "A") return "a";
+  if (first === "A" || first === "O" || first === "S" || first === "H") return "a";
   if (first === "B") return "b";
-  if (first === "C") return "c";
+  if (first === "C" || first === "P") return "c";
   if (first === "D") return "d";
   return "f";
 }

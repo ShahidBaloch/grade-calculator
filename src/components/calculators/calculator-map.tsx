@@ -1,5 +1,6 @@
 import { AtarCalculator } from "@/components/calculators/AtarCalculator";
 import { CanvasGradeCalculator } from "@/components/calculators/CanvasGradeCalculator";
+import { CgpaToPercentageCalculator } from "@/components/calculators/CgpaToPercentageCalculator";
 import { CollegeGpaCalculator } from "@/components/calculators/CollegeGpaCalculator";
 import { CumulativeGpaCalculator } from "@/components/calculators/CumulativeGpaCalculator";
 import { DegreeClassificationCalculator } from "@/components/calculators/DegreeClassificationCalculator";
@@ -35,6 +36,7 @@ export const calculatorComponentBySlug: Record<CalculatorSlug, React.ComponentTy
   "degree-classification-calculator": DegreeClassificationCalculator,
   "atar-calculator": AtarCalculator,
   "gcse-grade-calculator": GcseGradeCalculator,
+  "cgpa-to-percentage": CgpaToPercentageCalculator,
 };
 
 export function getCalculatorElement(slug: CalculatorSlug) {

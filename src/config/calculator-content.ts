@@ -268,7 +268,7 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
       {
         question: "Does 85% always become a B?",
         answer:
-          "Not on every scale. US Lenient may call 85% a B+, and UK or Australian tables use different cutoffs. Change the scale before you convert.",
+          "Not on every scale. US 10-point letter bands may call 85% a B+, and UK or Australian tables use different cutoffs. Change the scale before you convert.",
       },
     ],
   },

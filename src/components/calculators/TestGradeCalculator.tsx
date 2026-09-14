@@ -92,6 +92,11 @@ export function TestGradeCalculator() {
           min={0}
           max={totalQuestions}
           onChange={(value) => setState({ ...state, count: value })}
+          error={
+            count > totalQuestions
+              ? `${inputMode === "correct" ? "Correct" : "Wrong"} answers can't exceed total questions (${totalQuestions})`
+              : null
+          }
         />
       </div>
       <div className="space-y-2">

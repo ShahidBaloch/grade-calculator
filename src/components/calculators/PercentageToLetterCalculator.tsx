@@ -60,6 +60,7 @@ export function PercentageToLetterCalculator() {
             percent={result.data.percent}
             letterGrade={result.data.letter}
             gpa={result.data.gpa}
+            primaryLetter
           />
           <p className="text-sm text-[var(--color-text-muted)]">
             Range on this scale: {result.data.rangeLabel}
