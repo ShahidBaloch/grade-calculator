@@ -153,7 +153,9 @@ describe("SEO audit", () => {
       expect(referenceHrefs.has(page.path), `footer missing scale ${page.slug}`).toBe(true);
     }
     for (const hub of countryHubs) {
-      expect(referenceHrefs.has(hub.path), `footer missing hub ${hub.code}`).toBe(true);
+      expect(footerNav.countries.some((l) => l.href === hub.path), `footer missing hub ${hub.code}`).toBe(
+        true,
+      );
     }
   });
 

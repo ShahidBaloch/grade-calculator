@@ -7,7 +7,7 @@ export function Footer() {
 
   return (
     <footer className="border-t border-[var(--color-border)] bg-[var(--color-bg-subtle)]">
-      <div className="mx-auto grid max-w-7xl gap-8 px-4 py-12 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mx-auto grid max-w-7xl gap-8 px-4 py-12 sm:grid-cols-2 lg:grid-cols-5">
         <div>
           <h2 className="mb-3 text-sm font-semibold">Calculators</h2>
           <ul className="space-y-2 text-sm text-[var(--color-text-muted)]">
@@ -24,6 +24,18 @@ export function Footer() {
           <h2 className="mb-3 text-sm font-semibold">Guides</h2>
           <ul className="space-y-2 text-sm text-[var(--color-text-muted)]">
             {footerNav.guides.map((link) => (
+              <li key={link.href}>
+                <Link href={link.href} className="hover:text-[var(--color-primary)]">
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h2 className="mb-3 text-sm font-semibold">Countries</h2>
+          <ul className="space-y-2 text-sm text-[var(--color-text-muted)]">
+            {footerNav.countries.map((link) => (
               <li key={link.href}>
                 <Link href={link.href} className="hover:text-[var(--color-primary)]">
                   {link.label}

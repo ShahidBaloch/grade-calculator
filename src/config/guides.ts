@@ -618,6 +618,68 @@ export const guides: GuideConfig[] = [
       },
     ],
   },
+  {
+    slug: "cgpa-to-percentage",
+    path: "/guides/cgpa-to-percentage",
+    title: "How to Convert CGPA to Percentage (India & Pakistan)",
+    description:
+      "Learn CBSE ×9.5, ×10, SPPU, and Pakistan HEC ×25 formulas, plus how SGPA rolls into CGPA.",
+    keywords: [
+      "cgpa to percentage",
+      "how to convert cgpa to percentage",
+      "sgpa vs cgpa",
+      "hec cgpa to percentage",
+      "cbse cgpa formula",
+    ],
+    readTime: "8 min read",
+    embeddedCalculator: "cgpa-to-percentage",
+    relatedGuides: ["how-to-calculate-gpa", "gpa-scale-explained"],
+    relatedCalculators: ["cgpa-to-percentage", "sgpa-to-cgpa", "cgpa-calculator", "percentage-to-cgpa"],
+    sections: [
+      {
+        heading: "CGPA vs percentage",
+        body:
+          "Many Indian and Pakistani universities report a Cumulative Grade Point Average (CGPA) on a points scale. Percentage is a 0–100 mark. Conversion is a policy choice, not a universal law — always prefer the formula on your marksheet or handbook.",
+      },
+      {
+        heading: "India: CBSE / UGC ×9.5",
+        body:
+          "A widely used estimate is Percentage = CGPA × 9.5 on a 10-point scale. Example: 8.2 × 9.5 = 77.9%. This appears often for CBSE and many UGC-affiliated colleges.",
+      },
+      {
+        heading: "India: ×10 and SPPU variants",
+        body:
+          "Anna University, VIT, and some IIT/NIT policies use Percentage ≈ CGPA × 10. SPPU Pune and some Mumbai University rules use Percentage ≈ (CGPA − 0.75) × 10. Pick the matching option in our converter.",
+      },
+      {
+        heading: "Pakistan: HEC ×25",
+        body:
+          "On a common HEC Absolute 4.0 table, Percentage ≈ CGPA × 25 (the same idea as CGPA ÷ 4 × 100). Example: 3.4 × 25 = 85%. Campus letter cutoffs can still differ — check your university.",
+      },
+      {
+        heading: "SGPA vs CGPA",
+        body:
+          "SGPA is one semester. CGPA is the credit-weighted average of all completed SGPAs: CGPA = Σ(SGPA × credits) ÷ Σ(credits). Use the SGPA to CGPA calculator when you have multiple terms.",
+      },
+      {
+        heading: "10-point CGPA to US 4.0 GPA",
+        body:
+          "There is no single official map. A simple planning estimate is US GPA ≈ CGPA × 0.4. Admissions offices and WES may use different tables — treat converters as educational only.",
+      },
+    ],
+    faqs: [
+      {
+        question: "Which India formula should I use?",
+        answer:
+          "Start with what your transcript or handbook prints. If it is silent, CBSE/UGC ×9.5 is the most common public estimate, then confirm with your controller of examinations.",
+      },
+      {
+        question: "Can I convert percentage back to CGPA?",
+        answer:
+          "Yes — reverse the same formula (for ×9.5, CGPA = % ÷ 9.5). Use the Percentage to CGPA calculator.",
+      },
+    ],
+  },
 ];
 
 export const guideBySlug = Object.fromEntries(guides.map((g) => [g.slug, g])) as Record<

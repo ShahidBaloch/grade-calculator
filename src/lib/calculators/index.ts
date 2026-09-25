@@ -13,6 +13,14 @@ export { calculateEocGrade } from "./eoc-grade";
 export { calculateDegreeClassification, classifyUkMark } from "./degree-classification";
 export { calculateAtar, estimateAtarFromAverage } from "./atar";
 export { calculateGcseGrade } from "./gcse-grade";
+export { convertCgpa } from "./cgpa-convert";
+export { calculateSgpaToCgpa } from "./sgpa-to-cgpa";
+export { convertCgpa10ToGpa4 } from "./cgpa-to-gpa";
+export {
+  defaultCoursesForScale,
+  gradePlaceholderForScale,
+  semesterResultLabel,
+} from "./gpa-defaults";
 export {
   calculateFinalGradeReverse,
   calculateFinalGradePoints,

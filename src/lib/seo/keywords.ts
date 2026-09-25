@@ -21,7 +21,7 @@ export const calculatorKeywords: Record<CalculatorSlug, string[]> = {
   "cumulative-gpa-calculator": [
     "cumulative gpa calculator",
     "overall gpa calculator",
-    "cgpa calculator",
+    "running gpa calculator",
   ],
   "weighted-gpa-calculator": [
     "weighted gpa calculator",
@@ -72,11 +72,34 @@ export const calculatorKeywords: Record<CalculatorSlug, string[]> = {
   "gcse-grade-calculator": ["gcse grade calculator", "gcse 9-1", "percentage to gcse grade"],
   "cgpa-to-percentage": [
     "cgpa to percentage",
-    "cgpa calculator",
-    "percentage to cgpa",
     "cgpa to percentage india",
     "cgpa to percentage pakistan",
     "hec cgpa to percentage",
     "cbse cgpa to percentage",
+  ],
+  "percentage-to-cgpa": [
+    "percentage to cgpa",
+    "percent to cgpa",
+    "marks to cgpa",
+    "percentage to cgpa india",
+  ],
+  "sgpa-to-cgpa": [
+    "sgpa to cgpa",
+    "sgpa to cgpa calculator",
+    "convert sgpa to cgpa",
+    "how to calculate cgpa from sgpa",
+  ],
+  "cgpa-calculator": [
+    "cgpa calculator",
+    "sgpa calculator",
+    "cgpa calculator india",
+    "10 point cgpa calculator",
+  ],
+  "cgpa-to-gpa": [
+    "cgpa to gpa",
+    "10 to 4 gpa",
+    "10 point to 4.0",
+    "convert cgpa to gpa",
+    "india cgpa to us gpa",
   ],
 };

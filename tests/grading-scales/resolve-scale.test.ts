@@ -6,6 +6,13 @@ import {
 } from "@/lib/grading-scales/resolve-scale";
 
 describe("resolve-scale", () => {
+  it("locks India and Pakistan hub paths", () => {
+    expect(getLockedScaleFromPath("/in/cgpa-to-percentage")).toBe("in-ten-point");
+    expect(getLockedScaleFromPath("/pk/gpa-calculator")).toBe("pk-hec");
+    expect(getLockedScaleFromPath("/grading-scales/india")).toBe("in-ten-point");
+    expect(getLockedScaleFromPath("/grading-scales/pakistan")).toBe("pk-hec");
+  });
+
   it("locks UK scale on /uk paths", () => {
     expect(getLockedScaleFromPath("/uk/degree-classification-calculator")).toBe("uk-degree");
   });

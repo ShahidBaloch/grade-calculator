@@ -11,28 +11,40 @@ import { ScaleSelector } from "@/components/calculators/shared/ScaleSelector";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { calculateCumulativeGpa } from "@/lib/calculators/cumulative-gpa";
+import { defaultCoursesForScale, gradePlaceholderForScale } from "@/lib/calculators/gpa-defaults";
+import { getScaleMaxGpa } from "@/lib/grading-scales";
 import { formatGpa } from "@/lib/utils/format";
 import { useCalculatorPersistence } from "@/hooks/useCalculatorPersistence";
 import { useGradingScale } from "@/hooks/useGradingScale";
 
-const defaultCourses = [
-  { name: "Biology", grade: "A", credits: 4 },
-  { name: "Chemistry", grade: "B+", credits: 4 },
-  { name: "Psychology", grade: "A-", credits: 3 },
-];
-
 export function CumulativeGpaCalculator() {
   const { scaleId } = useGradingScale();
+  const gpaMax = getScaleMaxGpa(scaleId);
   const { state, setState, resetState, shareUrl, copied } = useCalculatorPersistence(
     "cumulative-gpa-calculator",
     {
       previousGpa: 3.5 as number | "",
       previousCredits: 30 as number | "",
-      courses: defaultCourses,
+      courses: defaultCoursesForScale(scaleId),
     },
   );
   const { previousGpa, previousCredits, courses } = state;
   const examples = calculatorBySlug["cumulative-gpa-calculator"].examples;
+
+  React.useEffect(() => {
+    const check = calculateCumulativeGpa(
+      {
+        previousGpa: previousGpa === "" ? 0 : previousGpa,
+        previousCredits: previousCredits === "" ? 0 : previousCredits,
+        courses,
+      },
+      scaleId,
+    );
+    if (check.errors?.some((e) => e.toLowerCase().includes("invalid"))) {
+      setState({ ...state, courses: defaultCoursesForScale(scaleId) });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [scaleId]);
 
   const result = React.useMemo(
     () =>
@@ -66,13 +78,13 @@ export function CumulativeGpaCalculator() {
       <ScaleSelector />
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="space-y-2">
-          <Label htmlFor="previous-gpa">Previous cumulative GPA (optional)</Label>
+          <Label htmlFor="previous-gpa">Previous cumulative GPA / CGPA (optional)</Label>
           <Input
             id="previous-gpa"
             type="number"
             step="0.01"
             min={0}
-            max={5}
+            max={gpaMax}
             value={previousGpa}
             onChange={(e) =>
               setState({ ...state, previousGpa: e.target.value === "" ? "" : Number(e.target.value) })
@@ -114,7 +126,7 @@ export function CumulativeGpaCalculator() {
             />
             <Input
               aria-label={`Course ${index + 1} grade`}
-              placeholder="Grade"
+              placeholder={gradePlaceholderForScale(scaleId)}
               value={course.grade}
               onChange={(e) => {
                 const next = [...courses];

@@ -19,14 +19,22 @@ import { formatGpa } from "@/lib/utils/format";
 import { useCalculatorPersistence } from "@/hooks/useCalculatorPersistence";
 import { useGradingScale } from "@/hooks/useGradingScale";
 
-export function GpaCalculator() {
-  const { scaleId } = useGradingScale();
-  const { state, setState, resetState, shareUrl, copied } = useCalculatorPersistence("gpa-calculator", {
-    courses: defaultCoursesForScale(scaleId),
-  });
+/** Course-based SGPA tool for India/Pakistan “CGPA calculator” search intent. */
+export function CgpaCalculator() {
+  const { scaleId, setScaleId, isScaleLocked } = useGradingScale();
+  const { state, setState, resetState, shareUrl, copied } = useCalculatorPersistence(
+    "cgpa-calculator",
+    { courses: defaultCoursesForScale("in-ten-point") },
+  );
   const { courses } = state;
   const setCourses = (next: typeof courses) => setState({ courses: next });
-  const examples = calculatorBySlug["gpa-calculator"].examples;
+  const examples = calculatorBySlug["cgpa-calculator"].examples;
+
+  React.useEffect(() => {
+    if (!isScaleLocked && scaleId !== "in-ten-point" && scaleId !== "pk-hec") {
+      setScaleId("in-ten-point");
+    }
+  }, [isScaleLocked, scaleId, setScaleId]);
 
   React.useEffect(() => {
     const check = calculateSemesterGpa({ courses }, scaleId);
@@ -54,7 +62,7 @@ export function GpaCalculator() {
                   const course = row as { name?: string; grade?: string | number; credits?: number };
                   return {
                     name: course.name ?? `Course ${index + 1}`,
-                    grade: String(course.grade ?? "B"),
+                    grade: String(course.grade ?? "A"),
                     credits: typeof course.credits === "number" ? course.credits : 3,
                   };
                 }),
@@ -71,7 +79,7 @@ export function GpaCalculator() {
       </div>
       <DynamicRowList
         items={courses}
-        onAdd={() => setCourses([...courses, { name: "", grade: "B", credits: 3 }])}
+        onAdd={() => setCourses([...courses, { name: "", grade: "A", credits: 3 }])}
         onRemove={(index) => setCourses(courses.filter((_, i) => i !== index))}
         addLabel="Add course"
         renderRow={(course, index) => (
@@ -123,12 +131,12 @@ export function GpaCalculator() {
         <p className="text-5xl font-bold">{result.data ? formatGpa(result.data.gpa) : "—"}</p>
         {result.data && (
           <p className="mt-2 text-sm text-[var(--color-text-muted)]">
-            {result.data.totalCredits} credit hours
+            {result.data.totalCredits} credit hours this term
           </p>
         )}
       </div>
-      {getPrimaryFlow("gpa-calculator") && result.status === "valid" && (
-        <NextStepCard flow={getPrimaryFlow("gpa-calculator")!} />
+      {getPrimaryFlow("cgpa-calculator") && result.status === "valid" && (
+        <NextStepCard flow={getPrimaryFlow("cgpa-calculator")!} />
       )}
     </div>
   );

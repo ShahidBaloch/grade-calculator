@@ -134,6 +134,42 @@ export const engagementFlows: EngagementFlow[] = [
     title: "Convert on another scale",
     description: "Use the percentage-to-letter tool if you need US, Canadian, or Australian bands instead.",
   },
+  {
+    from: "cgpa-to-percentage",
+    to: "sgpa-to-cgpa",
+    title: "Combine semester SGPAs",
+    description: "Turn multiple SGPA values into an overall credit-weighted CGPA.",
+  },
+  {
+    from: "cgpa-to-percentage",
+    to: "cgpa-to-gpa",
+    title: "Convert 10-point CGPA to US 4.0",
+    description: "Estimate a 4.0 GPA for study-abroad planning.",
+  },
+  {
+    from: "percentage-to-cgpa",
+    to: "cgpa-calculator",
+    title: "Calculate this semester’s SGPA",
+    description: "Enter course grades and credits on the India or Pakistan scale.",
+  },
+  {
+    from: "sgpa-to-cgpa",
+    to: "cgpa-to-percentage",
+    title: "Convert CGPA to percentage",
+    description: "Apply CBSE ×9.5, ×10, SPPU, or Pakistan HEC ×25.",
+  },
+  {
+    from: "cgpa-calculator",
+    to: "sgpa-to-cgpa",
+    title: "Roll into overall CGPA",
+    description: "Add prior semester SGPAs and credits for a cumulative CGPA.",
+  },
+  {
+    from: "cgpa-to-gpa",
+    to: "cgpa-to-percentage",
+    title: "Also convert to percentage",
+    description: "Use India or Pakistan percentage formulas when a school asks for %.",
+  },
 ];
 
 export function getFlowsForCalculator(slug: CalculatorSlug): EngagementFlow[] {

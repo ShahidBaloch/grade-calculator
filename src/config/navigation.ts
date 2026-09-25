@@ -8,11 +8,21 @@ const calculatorLinks = calculators.map((calculator) => ({
   href: getCalculatorPath(calculator.slug),
 }));
 
+const countryLinks = countryHubs.map((hub) => ({
+  label: hub.name,
+  href: hub.path,
+}));
+
 export const mainNav = [
   {
     label: "Calculators",
     href: "/calculators",
     children: [...calculatorLinks, { label: "All Calculators", href: "/calculators" }],
+  },
+  {
+    label: "Countries",
+    href: "/us",
+    children: countryLinks,
   },
   { label: "Guides", href: "/guides" },
   { label: "Grading Scales", href: "/grading-scales" },
@@ -24,8 +34,8 @@ export const footerNav = {
   reference: [
     ...gradingScalePages.map((page) => ({ label: page.title, href: page.path })),
     { label: "All Scales", href: "/grading-scales" },
-    ...countryHubs.map((hub) => ({ label: hub.name, href: hub.path })),
   ],
+  countries: countryLinks,
   company: [
     { label: "About", href: "/about" },
     { label: "Contact", href: "/contact" },

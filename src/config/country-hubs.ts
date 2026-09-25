@@ -212,10 +212,11 @@ export const countryHubs: CountryHubConfig[] = [
     gradingScalePath: "/grading-scales/india",
     featuredCalculators: [
       "cgpa-to-percentage",
+      "cgpa-calculator",
+      "sgpa-to-cgpa",
+      "percentage-to-cgpa",
+      "cgpa-to-gpa",
       "gpa-calculator",
-      "cumulative-gpa-calculator",
-      "percentage-to-letter-grade",
-      "weighted-grade-calculator",
     ],
     keywords: [
       "cgpa calculator india",
@@ -223,6 +224,7 @@ export const countryHubs: CountryHubConfig[] = [
       "india grade calculator",
       "10 point cgpa",
       "cbse cgpa to percentage",
+      "sgpa to cgpa",
     ],
     hreflang: "en-IN",
   },
@@ -253,10 +255,11 @@ export const countryHubs: CountryHubConfig[] = [
     gradingScalePath: "/grading-scales/pakistan",
     featuredCalculators: [
       "cgpa-to-percentage",
+      "cgpa-calculator",
+      "sgpa-to-cgpa",
+      "percentage-to-cgpa",
       "gpa-calculator",
       "cumulative-gpa-calculator",
-      "percentage-to-letter-grade",
-      "weighted-grade-calculator",
     ],
     keywords: [
       "cgpa calculator pakistan",

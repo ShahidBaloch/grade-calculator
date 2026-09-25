@@ -104,12 +104,12 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
   "gpa-calculator": {
     howItWorks: [
       "List this term's courses with the letter or percent you earned and the credit hours.",
-      "Each grade is converted to quality points on the scale you pick (US 4.0 by default).",
-      "Semester GPA is quality points divided by credit hours — it does not include past terms.",
+      "Each grade is converted to quality points on the scale you pick (US 4.0 worldwide default; India/Pakistan hubs lock local scales).",
+      "Semester GPA (SGPA on India 10-point) is quality points divided by credit hours — it does not include past terms.",
     ],
     formula: "Semester GPA = quality points this term ÷ credit hours this term",
     workedExample:
-      "English A (4.0 × 3 cr = 12 QP) and Math B (3.0 × 3 cr = 9 QP) → 21 ÷ 6 = 3.50 semester GPA.",
+      "English A (4.0 × 3 cr = 12 QP) and Math B (3.0 × 3 cr = 9 QP) → 21 ÷ 6 = 3.50 semester GPA. On India 10-point, O/A+/A map to 10/9/8 points the same way.",
     faqs: [
       {
         question: "How do I calculate semester GPA?",
@@ -119,7 +119,7 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
       {
         question: "Is this the same as weighted or cumulative GPA?",
         answer:
-          "No. This tool is one term, unweighted. Use Weighted GPA for Honors/AP bonuses, or Cumulative GPA to fold in previous semesters.",
+          "No. This tool is one term, unweighted. Use Weighted GPA for Honors/AP bonuses, or Cumulative GPA / SGPA to CGPA to fold in previous semesters.",
       },
       {
         question: "Can I enter a percentage instead of a letter?",
@@ -423,6 +423,118 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
         question: "How does this relate to a UK degree classification?",
         answer:
           "GCSEs are secondary qualifications. University results use First / 2:1 / 2:2 / Third. Open the degree classification calculator for those marks.",
+      },
+    ],
+  },
+  "cgpa-to-percentage": {
+    howItWorks: [
+      "Choose CGPA → percentage or percentage → CGPA.",
+      "Pick the formula that matches your board or university (India ×9.5 / ×10 / SPPU, or Pakistan HEC ×25).",
+      "Enter your value and read the converted result instantly.",
+    ],
+    formula: "India CBSE: % = CGPA × 9.5 · Pakistan HEC: % = CGPA × 25",
+    workedExample:
+      "An 8.2 CGPA on the CBSE ×9.5 rule becomes 77.9%. A 3.4 CGPA on HEC ×25 becomes 85%.",
+    faqs: [
+      {
+        question: "Which India formula should I use?",
+        answer:
+          "CBSE and many UGC colleges use ×9.5. Anna University, VIT, and some IITs/NITs use ×10. SPPU/Mumbai often use (CGPA − 0.75) × 10. Check your handbook.",
+      },
+      {
+        question: "What is the Pakistan HEC conversion?",
+        answer:
+          "A common estimate on a 4.0 scale is Percentage = CGPA × 25. Confirm with your university before official use.",
+      },
+      {
+        question: "Is this official for admissions?",
+        answer:
+          "No. These are educational estimates for planning. Applications abroad may require WES or school-specific evaluation.",
+      },
+    ],
+  },
+  "percentage-to-cgpa": {
+    howItWorks: [
+      "Enter your percentage marks (0–100).",
+      "Choose the India or Pakistan formula your institution uses.",
+      "Read the estimated CGPA on that scale.",
+    ],
+    formula: "India CBSE: CGPA = % ÷ 9.5 · Pakistan HEC: CGPA = % ÷ 25",
+    workedExample: "76% on CBSE ×9.5 ≈ 8.00 CGPA. 85% on HEC ×25 ≈ 3.40 CGPA.",
+    faqs: [
+      {
+        question: "Is percentage to CGPA the reverse of CGPA to percentage?",
+        answer:
+          "Yes for the same formula. Always use the rule printed on your marksheet or handbook.",
+      },
+      {
+        question: "Can I use this for CBSE Class 10?",
+        answer:
+          "CBSE historically published CGPA with ×9.5 for some certificates. Newer marksheets may show percentages directly — follow what your board printed.",
+      },
+    ],
+  },
+  "sgpa-to-cgpa": {
+    howItWorks: [
+      "Add each completed semester with its SGPA and total credits for that term.",
+      "We multiply SGPA × credits for every semester, then divide by total credits.",
+      "The result is your overall credit-weighted CGPA.",
+    ],
+    formula: "CGPA = Σ(SGPA × credits) ÷ Σ(credits)",
+    workedExample:
+      "Semesters 8.2×22, 7.8×24, and 8.5×23 → (180.4 + 187.2 + 195.5) ÷ 69 = 8.16 CGPA.",
+    faqs: [
+      {
+        question: "What is the difference between SGPA and CGPA?",
+        answer:
+          "SGPA is one semester. CGPA is the credit-weighted average of all semester SGPAs completed so far.",
+      },
+      {
+        question: "Do all semesters need the same credits?",
+        answer:
+          "No. Enter the real credit total from each semester marksheet so heavier terms count more.",
+      },
+    ],
+  },
+  "cgpa-calculator": {
+    howItWorks: [
+      "List this semester’s courses with letter/percent grades and credit hours.",
+      "Use India 10-point (O–F) or Pakistan HEC bands — this page prefers those scales.",
+      "Your semester SGPA is quality points ÷ credits. Combine terms with SGPA to CGPA next.",
+    ],
+    formula: "SGPA = Σ(grade points × credits) ÷ Σ(credits)",
+    workedExample:
+      "Physics O (10×4), Math A+ (9×4), Chemistry A (8×3) → (40+36+24) ÷ 11 = 9.09 SGPA.",
+    faqs: [
+      {
+        question: "Is this a CGPA or SGPA calculator?",
+        answer:
+          "This page calculates one semester (SGPA). Use SGPA to CGPA to roll multiple semesters into overall CGPA.",
+      },
+      {
+        question: "Which scale should Pakistan students use?",
+        answer: "Select Pakistan HEC 4.0 (or open the Pakistan hub) so letter bands match HEC Absolute grading.",
+      },
+    ],
+  },
+  "cgpa-to-gpa": {
+    howItWorks: [
+      "Enter your 10-point CGPA.",
+      "Choose a planning method (simple ×0.4 or percentage bridge).",
+      "Read an estimated US 4.0 GPA — confirm with the target school or WES for official use.",
+    ],
+    formula: "US GPA ≈ CGPA × 0.4 (linear) · or (CGPA × 9.5) ÷ 25 (percentage bridge)",
+    workedExample: "8.2 CGPA × 0.4 ≈ 3.28 on a 4.0 scale.",
+    faqs: [
+      {
+        question: "Is there an official 10-point to 4.0 conversion?",
+        answer:
+          "No single official table. Universities and evaluation services use their own. Treat this as a planning estimate.",
+      },
+      {
+        question: "Should I use this for Pakistan HEC CGPA?",
+        answer:
+          "HEC is already on a 4.0 idea. This converter is for Indian 10-point CGPA mapping to US 4.0.",
       },
     ],
   },

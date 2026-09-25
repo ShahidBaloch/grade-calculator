@@ -14,12 +14,27 @@ export const siteFaqs: FaqItem[] = [
   {
     question: "What grading scale do you use?",
     answer:
-      "The worldwide default is US Standard 4.0. Location may switch the scale to UK, Canadian, Australian, or New Zealand. You can change it in any calculator that has a scale selector.",
+      "The worldwide default is US Standard 4.0. Location may switch the scale to UK, Canadian, Australian, New Zealand, India (10-point), or Pakistan (HEC 4.0). You can change it in any calculator that has a scale selector.",
   },
   {
     question: "Do you have country-specific tools?",
     answer:
-      "Yes. Use the UK degree classification and GCSE 9–1 calculators, and the ATAR calculator for an educational Australian rank estimate. Country hubs at /us, /uk, /ca, /au, and /nz open featured tools with that country's scale locked.",
+      "Yes. Use the Countries menu for hubs at /us, /uk, /ca, /au, /nz, /in, and /pk. India and Pakistan hubs feature CGPA tools with local scales locked.",
+  },
+  {
+    question: "How do I convert CGPA to percentage in India?",
+    answer:
+      "CBSE and many UGC colleges use Percentage = CGPA × 9.5. Some universities use ×10 or (CGPA − 0.75) × 10. Open the CGPA to Percentage calculator and pick your formula.",
+  },
+  {
+    question: "What is the difference between SGPA and CGPA?",
+    answer:
+      "SGPA is one semester’s grade point average. CGPA is the credit-weighted average of all semester SGPAs. Use the SGPA to CGPA calculator to combine terms.",
+  },
+  {
+    question: "How do I convert CGPA to percentage in Pakistan?",
+    answer:
+      "A common HEC-style estimate on a 4.0 scale is Percentage = CGPA × 25. Use the CGPA to Percentage calculator with the Pakistan HEC formula and confirm your university table.",
   },
   {
     question: "Where do I find a specific calculator?",

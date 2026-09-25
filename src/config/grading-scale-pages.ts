@@ -108,6 +108,37 @@ export const gradingScalePages: GradingScalePageConfig[] = [
       "University admissions use A-levels or equivalents, not this GCSE converter.",
     ],
   },
+  {
+    slug: "india",
+    path: "/grading-scales/india",
+    scaleId: "in-ten-point",
+    title: "India 10-Point CGPA Scale",
+    description:
+      "India university 10-point CGPA letter bands (O–F) with percentage ranges used in our calculators.",
+    keywords: ["india cgpa scale", "10 point cgpa", "ugc grading scale", "cbse cgpa"],
+    intro:
+      "Many Indian universities use a 10-point CGPA with letter bands such as O, A+, A, and B+. Percentage conversion is separate — CBSE/UGC often uses ×9.5.",
+    notes: [
+      "Board marksheets and university CGPA tables are not identical — check your institution.",
+      "Use the CGPA to Percentage calculator for ×9.5, ×10, and SPPU-style formulas.",
+      "US applications may need a separate 4.0 conversion via WES or the target school.",
+    ],
+  },
+  {
+    slug: "pakistan",
+    path: "/grading-scales/pakistan",
+    scaleId: "pk-hec",
+    title: "Pakistan HEC 4.0 Grading Scale",
+    description:
+      "Pakistan HEC Absolute grading bands on a 4.0 GPA scale with common percentage ranges.",
+    keywords: ["hec grading scale", "pakistan gpa scale", "hec absolute grading"],
+    intro:
+      "Pakistani universities commonly follow HEC Absolute grading on a 4.0 scale (A typically 85–100%). Percentage is often estimated as CGPA × 25.",
+    notes: [
+      "Some campuses publish slightly different A− / B+ quality points — verify your handbook.",
+      "Use the CGPA to Percentage calculator with the Pakistan HEC (×25) formula for quick estimates.",
+    ],
+  },
 ];
 
 export const gradingScaleBySlug = Object.fromEntries(

@@ -29,16 +29,24 @@ interface CgpaState {
   value: number;
 }
 
-export function CgpaToPercentageCalculator() {
+type CgpaConvertSlug = "cgpa-to-percentage" | "percentage-to-cgpa";
+
+export function CgpaToPercentageCalculator({
+  storageKey = "cgpa-to-percentage",
+  defaultMode = "cgpa-to-percent",
+}: {
+  storageKey?: CgpaConvertSlug;
+  defaultMode?: CgpaConvertMode;
+} = {}) {
   const { state, setState, resetState, shareUrl, copied } = useCalculatorPersistence<CgpaState>(
-    "cgpa-to-percentage",
+    storageKey,
     {
-      mode: "cgpa-to-percent",
+      mode: defaultMode,
       formulaId: "india-cbse-9.5",
-      value: 8.2,
+      value: defaultMode === "percent-to-cgpa" ? 76 : 8.2,
     },
   );
-  const examples = calculatorBySlug["cgpa-to-percentage"].examples;
+  const examples = calculatorBySlug[storageKey].examples;
   const formula = cgpaFormulas.find((f) => f.id === state.formulaId) ?? cgpaFormulas[0];
 
   const result = React.useMemo(
@@ -151,8 +159,8 @@ export function CgpaToPercentageCalculator() {
         </div>
       )}
 
-      {getPrimaryFlow("cgpa-to-percentage") && result.status === "valid" && (
-        <NextStepCard flow={getPrimaryFlow("cgpa-to-percentage")!} />
+      {getPrimaryFlow(storageKey) && result.status === "valid" && (
+        <NextStepCard flow={getPrimaryFlow(storageKey)!} />
       )}
     </div>
   );

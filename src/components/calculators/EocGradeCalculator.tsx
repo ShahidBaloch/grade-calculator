@@ -90,7 +90,7 @@ export function EocGradeCalculator() {
           {data.status !== "achievable" && <StatusBadge status={data.status} />}
           <ResultDisplay
             label={data.status === "achievable" ? "Required on EOC" : "Result"}
-            percent={data.status === "achievable" ? data.requiredPercent : data.targetPercent}
+            percent={data.requiredPercent}
             placeholder="—"
           />
           <p className="text-sm text-[var(--color-text-muted)]">{data.message}</p>

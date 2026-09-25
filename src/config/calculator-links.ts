@@ -75,7 +75,23 @@ export const calculatorResourceLinks: Record<CalculatorSlug, CalculatorResourceL
     gradingScale: { path: "/grading-scales/gcse", title: "UK GCSE 9–1 scale" },
   },
   "cgpa-to-percentage": {
-    guide: { path: "/guides/how-to-calculate-gpa", title: "How to calculate GPA" },
+    guide: { path: "/guides/cgpa-to-percentage", title: "How to convert CGPA to percentage" },
+    gradingScale: { path: "/grading-scales/india", title: "India 10-point CGPA scale" },
+  },
+  "percentage-to-cgpa": {
+    guide: { path: "/guides/cgpa-to-percentage", title: "How to convert CGPA to percentage" },
+    gradingScale: { path: "/grading-scales/india", title: "India 10-point CGPA scale" },
+  },
+  "sgpa-to-cgpa": {
+    guide: { path: "/guides/cgpa-to-percentage", title: "How to convert CGPA to percentage" },
+    gradingScale: { path: "/grading-scales/india", title: "India 10-point CGPA scale" },
+  },
+  "cgpa-calculator": {
+    guide: { path: "/guides/cgpa-to-percentage", title: "How to convert CGPA to percentage" },
+    gradingScale: { path: "/grading-scales/india", title: "India 10-point CGPA scale" },
+  },
+  "cgpa-to-gpa": {
+    guide: { path: "/guides/cgpa-to-percentage", title: "How to convert CGPA to percentage" },
     gradingScale: { path: "/grading-scales/india", title: "India 10-point CGPA scale" },
   },
 };

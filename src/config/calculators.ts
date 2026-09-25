@@ -348,12 +348,92 @@ export const calculators: CalculatorConfig[] = [
     path: "/cgpa-to-percentage",
     icon: "Percent",
     category: "conversion",
-    mvp: false,
-    relatedSlugs: ["gpa-calculator", "cumulative-gpa-calculator", "percentage-to-letter-grade"],
+    mvp: true,
+    relatedSlugs: ["percentage-to-cgpa", "sgpa-to-cgpa", "cgpa-calculator"],
     examples: [
       { label: "India 8.2 CGPA", values: { mode: "cgpa-to-percent", formulaId: "india-cbse-9.5", value: 8.2 } },
       { label: "Pakistan 3.4 CGPA", values: { mode: "cgpa-to-percent", formulaId: "pakistan-hec-25", value: 3.4 } },
       { label: "76% → CGPA", values: { mode: "percent-to-cgpa", formulaId: "india-cbse-9.5", value: 76 } },
+    ],
+  },
+  {
+    slug: "percentage-to-cgpa",
+    name: "Percentage to CGPA Calculator",
+    shortName: "% → CGPA",
+    description:
+      "Convert percentage marks to CGPA using India CBSE/UGC or Pakistan HEC formulas.",
+    path: "/percentage-to-cgpa",
+    icon: "Percent",
+    category: "conversion",
+    mvp: false,
+    relatedSlugs: ["cgpa-to-percentage", "cgpa-calculator", "sgpa-to-cgpa"],
+    examples: [
+      { label: "76% CBSE", values: { mode: "percent-to-cgpa", formulaId: "india-cbse-9.5", value: 76 } },
+      { label: "85% HEC", values: { mode: "percent-to-cgpa", formulaId: "pakistan-hec-25", value: 85 } },
+    ],
+  },
+  {
+    slug: "sgpa-to-cgpa",
+    name: "SGPA to CGPA Calculator",
+    shortName: "SGPA→CGPA",
+    description:
+      "Combine semester SGPA values and credits into an overall credit-weighted CGPA.",
+    path: "/sgpa-to-cgpa",
+    icon: "Layers",
+    category: "gpa",
+    mvp: true,
+    relatedSlugs: ["cgpa-calculator", "cgpa-to-percentage", "cumulative-gpa-calculator"],
+    examples: [
+      {
+        label: "3 semesters",
+        values: {
+          terms: [
+            { label: "Sem 1", sgpa: 8.2, credits: 22 },
+            { label: "Sem 2", sgpa: 7.8, credits: 24 },
+            { label: "Sem 3", sgpa: 8.5, credits: 23 },
+          ],
+        },
+      },
+    ],
+  },
+  {
+    slug: "cgpa-calculator",
+    name: "CGPA Calculator",
+    shortName: "CGPA",
+    description:
+      "Calculate semester SGPA / CGPA from course grades and credits on India 10-point or Pakistan HEC scales.",
+    path: "/cgpa-calculator",
+    icon: "GraduationCap",
+    category: "gpa",
+    mvp: false,
+    relatedSlugs: ["sgpa-to-cgpa", "cgpa-to-percentage", "cgpa-to-gpa"],
+    examples: [
+      {
+        label: "India sample",
+        values: {
+          courses: [
+            { name: "Physics", grade: "O", credits: 4 },
+            { name: "Mathematics", grade: "A+", credits: 4 },
+            { name: "Chemistry", grade: "A", credits: 3 },
+          ],
+        },
+      },
+    ],
+  },
+  {
+    slug: "cgpa-to-gpa",
+    name: "CGPA to GPA Converter (10 to 4.0)",
+    shortName: "10→4 GPA",
+    description:
+      "Convert Indian 10-point CGPA to an estimated US 4.0 GPA for planning applications abroad.",
+    path: "/cgpa-to-gpa",
+    icon: "ArrowLeftRight",
+    category: "conversion",
+    mvp: false,
+    relatedSlugs: ["cgpa-to-percentage", "cgpa-calculator", "gpa-calculator"],
+    examples: [
+      { label: "8.2 → 4.0", values: { cgpa: 8.2, methodId: "linear-0.4" } },
+      { label: "Via % bridge", values: { cgpa: 8.2, methodId: "percent-bridge" } },
     ],
   },
 ];

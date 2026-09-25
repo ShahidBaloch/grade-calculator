@@ -5,6 +5,10 @@ const INTENTS = [
   { href: "/weighted-grade-calculator", label: "Course grade", description: "Weighted average" },
   { href: "/final-grade-calculator", label: "What I need on final", description: "Final exam target" },
   { href: "/gpa-calculator", label: "GPA", description: "Semester GPA" },
+  { href: "/cgpa-calculator", label: "CGPA / SGPA", description: "India & Pakistan" },
+  { href: "/cgpa-to-percentage", label: "CGPA ↔ %", description: "×9.5 / HEC ×25" },
+  { href: "/in", label: "India hub", description: "10-point tools" },
+  { href: "/pk", label: "Pakistan hub", description: "HEC 4.0 tools" },
 ] as const;
 
 export function HomepageIntentLinks({ activeHref = "/" }: { activeHref?: string }) {

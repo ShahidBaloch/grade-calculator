@@ -1,5 +1,7 @@
 import { AtarCalculator } from "@/components/calculators/AtarCalculator";
 import { CanvasGradeCalculator } from "@/components/calculators/CanvasGradeCalculator";
+import { CgpaCalculator } from "@/components/calculators/CgpaCalculator";
+import { CgpaToGpaCalculator } from "@/components/calculators/CgpaToGpaCalculator";
 import { CgpaToPercentageCalculator } from "@/components/calculators/CgpaToPercentageCalculator";
 import { CollegeGpaCalculator } from "@/components/calculators/CollegeGpaCalculator";
 import { CumulativeGpaCalculator } from "@/components/calculators/CumulativeGpaCalculator";
@@ -11,8 +13,10 @@ import { GcseGradeCalculator } from "@/components/calculators/GcseGradeCalculato
 import { GpaCalculator } from "@/components/calculators/GpaCalculator";
 import { HighSchoolGpaCalculator } from "@/components/calculators/HighSchoolGpaCalculator";
 import { LetterGradeCalculator } from "@/components/calculators/LetterGradeCalculator";
+import { PercentageToCgpaCalculator } from "@/components/calculators/PercentageToCgpaCalculator";
 import { PercentageToLetterCalculator } from "@/components/calculators/PercentageToLetterCalculator";
 import { RaiseGpaCalculator } from "@/components/calculators/RaiseGpaCalculator";
+import { SgpaToCgpaCalculator } from "@/components/calculators/SgpaToCgpaCalculator";
 import { TestGradeCalculator } from "@/components/calculators/TestGradeCalculator";
 import { WeightedGradeCalculator } from "@/components/calculators/WeightedGradeCalculator";
 import { WeightedGpaCalculator } from "@/components/calculators/WeightedGpaCalculator";
@@ -37,6 +41,10 @@ export const calculatorComponentBySlug: Record<CalculatorSlug, React.ComponentTy
   "atar-calculator": AtarCalculator,
   "gcse-grade-calculator": GcseGradeCalculator,
   "cgpa-to-percentage": CgpaToPercentageCalculator,
+  "percentage-to-cgpa": PercentageToCgpaCalculator,
+  "sgpa-to-cgpa": SgpaToCgpaCalculator,
+  "cgpa-calculator": CgpaCalculator,
+  "cgpa-to-gpa": CgpaToGpaCalculator,
 };
 
 export function getCalculatorElement(slug: CalculatorSlug) {
