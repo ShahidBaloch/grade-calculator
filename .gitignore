@@ -1,5 +1,6 @@
 # dependencies
 /node_modules
+/node_modules_backup/
 /.pnp
 .pnp.*
 .yarn/*
@@ -25,7 +26,12 @@
 
 # misc
 .DS_Store
+Thumbs.db
+desktop.ini
 *.pem
+
+# editor / agent (local; planning docs live outside this repo)
+.cursor/
 
 # debug
 npm-debug.log*
@@ -34,7 +40,9 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # env files
-.env*.local
+.env
+.env.*
+!.env.example
 
 # vercel
 .vercel
