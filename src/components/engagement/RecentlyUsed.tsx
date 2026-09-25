@@ -4,22 +4,19 @@ import Link from "next/link";
 import * as React from "react";
 import { calculatorBySlug } from "@/config/calculators";
 import { STORAGE_KEYS } from "@/lib/constants";
+import { useStorageItem } from "@/hooks/useStorageItem";
 import { parseRecentCalculator } from "@/lib/utils/recent-calculator";
-import { getStorageItem } from "@/lib/utils/storage";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export function RecentlyUsed() {
-  const [recent, setRecent] = React.useState<{ slug: string; path: string; name: string } | null>(
-    null,
-  );
-
-  React.useEffect(() => {
-    const parsed = parseRecentCalculator(getStorageItem(STORAGE_KEYS.recentCalculator));
-    if (!parsed) return;
+  const stored = useStorageItem(STORAGE_KEYS.recentCalculator);
+  const recent = React.useMemo(() => {
+    const parsed = parseRecentCalculator(stored);
+    if (!parsed) return null;
     const calculator = calculatorBySlug[parsed.slug];
-    if (!calculator) return;
-    setRecent({ slug: parsed.slug, path: parsed.path, name: calculator.name });
-  }, []);
+    if (!calculator) return null;
+    return { slug: parsed.slug, path: parsed.path, name: calculator.name };
+  }, [stored]);
 
   if (!recent) return null;
 

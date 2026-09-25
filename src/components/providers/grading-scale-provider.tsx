@@ -9,8 +9,9 @@ import {
   resolveDefaultScaleId,
 } from "@/lib/grading-scales/resolve-scale";
 import { GEO_COOKIES, STORAGE_KEYS } from "@/lib/constants";
+import { useStorageItem } from "@/hooks/useStorageItem";
 import { getCookie } from "@/lib/utils/cookies";
-import { getStorageItem, setStorageItem } from "@/lib/utils/storage";
+import { setStorageItem } from "@/lib/utils/storage";
 import type { GradingScale, ScaleId } from "@/types/grading-scale";
 
 interface GradingScaleContextValue {
@@ -35,37 +36,38 @@ export function GradingScaleProvider({ children }: { children: React.ReactNode }
   const lockedScaleId = getLockedScaleFromPath(pathname);
   const isScaleLocked = lockedScaleId !== null;
 
-  const [scaleId, setScaleIdState] = React.useState<ScaleId>(() =>
-    resolveDefaultScaleId({
-      pathname,
-      userScaleId: null,
-      geoScaleId: null,
-      useLocaleHint: false,
-    }),
+  const userScaleRaw = useStorageItem(STORAGE_KEYS.scale);
+  const geoScaleId = React.useSyncExternalStore(
+    () => () => {},
+    readGeoScaleFromCookie,
+    () => null,
   );
-  const [geoScaleId, setGeoScaleId] = React.useState<ScaleId | null>(null);
 
-  React.useEffect(() => {
-    const userScale = getStorageItem(STORAGE_KEYS.scale);
-    const geoScale = readGeoScaleFromCookie();
-    setGeoScaleId(geoScale);
+  const autoScaleId = React.useMemo(
+    () =>
+      resolveDefaultScaleId({
+        pathname,
+        userScaleId: isScaleLocked ? null : isValidScaleId(userScaleRaw) ? userScaleRaw : null,
+        geoScaleId: isScaleLocked ? null : geoScaleId,
+        useLocaleHint: !userScaleRaw && !geoScaleId && !isScaleLocked,
+      }),
+    [pathname, isScaleLocked, userScaleRaw, geoScaleId],
+  );
 
-    const resolved = resolveDefaultScaleId({
-      pathname,
-      userScaleId: isScaleLocked ? null : isValidScaleId(userScale) ? userScale : null,
-      geoScaleId: isScaleLocked ? null : geoScale,
-      useLocaleHint: !userScale && !geoScale && !isScaleLocked,
-    });
-    setScaleIdState(resolved);
-  }, [pathname, isScaleLocked]);
+  const [userPick, setUserPick] = React.useState<{ pathname: string; scaleId: ScaleId } | null>(
+    null,
+  );
+
+  const scaleId =
+    userPick && userPick.pathname === pathname && !isScaleLocked ? userPick.scaleId : autoScaleId;
 
   const setScaleId = React.useCallback(
     (next: ScaleId) => {
       if (isScaleLocked) return;
-      setScaleIdState(next);
+      setUserPick({ pathname, scaleId: next });
       setStorageItem(STORAGE_KEYS.scale, next);
     },
-    [isScaleLocked],
+    [isScaleLocked, pathname],
   );
 
   const activeScaleId = lockedScaleId ?? scaleId;
