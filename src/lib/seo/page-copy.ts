@@ -1,5 +1,30 @@
 /** Visible copy that makes each indexable URL a different search intent. */
 export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: string }> = {
+  "/": {
+    title: "Grade Calculator & Easy Grader",
+    description:
+      "Free grade calculator and easy grader for quizzes and tests. Score by questions wrong, then open weighted course grades, finals, and GPA tools. Grading scale follows your location.",
+  },
+  "/weighted-grade-calculator": {
+    title: "Weighted Grade Calculator — Course & Class Average",
+    description:
+      "Free weighted grade calculator for class and course averages. Enter assignment scores and weights for homework, exams, and your gradebook total.",
+  },
+  "/test-grade-calculator": {
+    title: "Test & Exam Grade Calculator",
+    description:
+      "Calculate test or exam grades from correct answers, wrong answers, or bonus points. See your percentage and letter grade instantly.",
+  },
+  "/gpa-calculator": {
+    title: "GPA Calculator — Semester & Term GPA",
+    description:
+      "Free GPA calculator for semester and term GPA. Add courses with letter grades or percentages and credit hours on your grading scale.",
+  },
+  "/final-grade-calculator": {
+    title: "Final Grade Calculator — Exam Score Needed",
+    description:
+      "Find what you need on your final exam to hit your target course grade. Enter current grade, final weight, and goal — for high school and college finals.",
+  },
   "/au/gpa-calculator": {
     title: "Australia GPA Calculator — UQ 7-Point and Monash 4-Point",
     description:

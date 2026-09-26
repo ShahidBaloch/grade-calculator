@@ -55,7 +55,7 @@ export const calculatorResourceLinks: Record<CalculatorSlug, CalculatorResourceL
     gradingScale: { path: "/grading-scales", title: "Letter grade charts" },
   },
   "canvas-grade-calculator": {
-    guide: { path: "/guides/how-to-calculate-weighted-grades", title: "How weighted grades work" },
+    guide: { path: "/guides/lms-course-grades-explained", title: "LMS course grades explained" },
     gradingScale: { path: "/grading-scales", title: "Grading scales" },
   },
   "eoc-grade-calculator": {

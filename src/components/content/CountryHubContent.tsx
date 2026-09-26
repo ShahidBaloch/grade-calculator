@@ -62,6 +62,21 @@ export function CountryHubContent({ hub }: CountryHubContentProps) {
         </p>
       ))}
 
+      {hub.relatedGuides && hub.relatedGuides.length > 0 && (
+        <section className="mt-8 max-w-2xl">
+          <h2 className="text-xl font-semibold">Guides</h2>
+          <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-[var(--color-text-muted)]">
+            {hub.relatedGuides.map((guide) => (
+              <li key={guide.path}>
+                <Link href={guide.path} className="text-[var(--color-primary)] hover:underline">
+                  {guide.title}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
       {hub.faqs && hub.faqs.length > 0 && (
         <section className="mt-10 max-w-3xl">
           <h2 className="text-xl font-semibold">FAQ for {hub.name}</h2>

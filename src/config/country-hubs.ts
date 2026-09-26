@@ -17,6 +17,8 @@ export interface CountryHubConfig {
   hreflang: string;
   /** Overrides the default “tools lock to this hub’s scale” banner. */
   scaleLockNote?: string;
+  /** Optional guides linked from the country hub page. */
+  relatedGuides?: Array<{ path: string; title: string }>;
 }
 
 export const countryHubs: CountryHubConfig[] = [
@@ -43,6 +45,16 @@ export const countryHubs: CountryHubConfig[] = [
         answer:
           "Canvas uses assignment groups with weights. The Canvas calculator matches that LMS layout; the weighted grade calculator is better for a simple syllabus table.",
       },
+      {
+        question: "How do I estimate grades in Blackboard or Moodle?",
+        answer:
+          "Both use weighted categories like a syllabus table. Model your category averages and weights in the weighted grade calculator, or read our LMS course grades guide for Canvas, Blackboard, Moodle, and Google Classroom.",
+      },
+      {
+        question: "Does Google Classroom have a built-in weighted gradebook?",
+        answer:
+          "Classroom scoring is often per assignment without full LMS-style group weights. Total your points or use category weights from your teacher’s rubric in the weighted grade calculator.",
+      },
     ],
     gradingScalePath: "/grading-scales/us",
     featuredCalculators: [
@@ -52,7 +64,19 @@ export const countryHubs: CountryHubConfig[] = [
       "canvas-grade-calculator",
       "eoc-grade-calculator",
     ],
-    keywords: ["grade calculator usa", "us gpa calculator", "easy grader"],
+    relatedGuides: [
+      {
+        path: "/guides/lms-course-grades-explained",
+        title: "LMS course grades — Canvas, Blackboard, Moodle & Google Classroom",
+      },
+    ],
+    keywords: [
+      "grade calculator usa",
+      "us gpa calculator",
+      "easy grader",
+      "canvas grade calculator",
+      "blackboard grade calculator",
+    ],
     hreflang: "en-US",
   },
   {

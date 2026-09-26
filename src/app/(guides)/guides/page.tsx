@@ -10,7 +10,13 @@ export const metadata = createPageMetadata({
   description:
     "Free guides on calculating GPA, weighted grades, final exam targets, and understanding grading scales.",
   path: "/guides",
-  keywords: ["how to calculate gpa", "weighted grades guide", "final exam tips"],
+  keywords: [
+    "how to calculate gpa",
+    "weighted grades guide",
+    "final exam tips",
+    "canvas grade calculator",
+    "lms course grades",
+  ],
 });
 
 export default function GuidesHubPage() {

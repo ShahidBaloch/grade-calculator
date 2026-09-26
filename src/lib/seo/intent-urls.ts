@@ -69,6 +69,19 @@ const STATIC_REDIRECTS: Array<{ source: string; destination: string }> = [
   { source: "/us/ez-grader", destination: "/" },
   { source: "/easy-grader", destination: "/" },
   { source: "/average-grade-calculator", destination: "/weighted-grade-calculator" },
+  { source: "/grading-calculator", destination: "/" },
+  { source: "/class-grade-calculator", destination: "/weighted-grade-calculator" },
+  { source: "/course-grade-calculator", destination: "/weighted-grade-calculator" },
+  { source: "/overall-grade-calculator", destination: "/weighted-grade-calculator" },
+  { source: "/grade-book-calculator", destination: "/weighted-grade-calculator" },
+  { source: "/final-exam-grade-calculator", destination: "/final-grade-calculator" },
+  { source: "/exam-grade-calculator", destination: "/test-grade-calculator" },
+  { source: "/semester-gpa-calculator", destination: "/gpa-calculator" },
+  { source: "/grade-calculator-final", destination: "/final-grade-calculator" },
+  { source: "/percent-to-letter-grade", destination: "/percentage-to-letter-grade" },
+  { source: "/blackboard-grade-calculator", destination: "/weighted-grade-calculator" },
+  { source: "/moodle-grade-calculator", destination: "/weighted-grade-calculator" },
+  { source: "/google-classroom-grade-calculator", destination: "/weighted-grade-calculator" },
 ];
 
 /** 301 map. Sources must not be indexed. */

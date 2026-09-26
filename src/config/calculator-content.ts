@@ -41,6 +41,16 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
         answer:
           "We default to the common US 4.0 GPA scale. Your region may be detected automatically, or you can pick a different scale in the calculator settings.",
       },
+      {
+        question: "What is my grade on this test?",
+        answer:
+          "Enter how many questions were on the test and how many you missed. The grader shows correct count, percentage, and letter grade for that score.",
+      },
+      {
+        question: "How do I get a percentage from wrong answers?",
+        answer:
+          "Percentage = (Total − Wrong) ÷ Total × 100. The EZ grader does that math for you and maps the result to a letter on your selected scale.",
+      },
     ],
   },
   "test-grade-calculator": {
@@ -59,6 +69,16 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
       {
         question: "What if bonus pushes me over 100%?",
         answer: "We cap the displayed score at 100% and note that bonus points were included.",
+      },
+      {
+        question: "How do I calculate my exam grade?",
+        answer:
+          "Pick correct or wrong answers, enter the question total, then add your count. The result is your exam percentage; we also show the matching letter grade.",
+      },
+      {
+        question: "Can I use this for a quiz score out of 10 or 20?",
+        answer:
+          "Yes. Set total questions to 10, 20, or any number your teacher used. Bonus points work the same way for quizzes and tests.",
       },
     ],
   },
@@ -80,6 +100,16 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
         question: "My weights don't add to 100%. Is that OK?",
         answer:
           "We divide by the total weight you entered (normalized average), not by 100. If your syllabus says weights must total 100%, fix the rows until they do — we show the running total and a warning when percent mode ≠ 100%.",
+      },
+      {
+        question: "How do I calculate my course grade?",
+        answer:
+          "List each category (homework, quizzes, exams) with its average score and syllabus weight. The calculator multiplies score × weight, sums, and divides by total weight for your course average.",
+      },
+      {
+        question: "What is my class grade if categories have different weights?",
+        answer:
+          "That is a weighted average, not a simple mean. Enter each weighted row from your syllabus; the total is your class grade before the final if the final is listed separately.",
       },
     ],
   },
@@ -106,6 +136,16 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
         question: "Does this support RogerHub-style modes?",
         answer:
           "Yes. Switch modes to predict your overall grade, use point-based grading, or drop your lowest test score.",
+      },
+      {
+        question: "How are final grades calculated in a class?",
+        answer:
+          "Most classes combine your work before the final with the final exam using weights from the syllabus. This tool solves for the final score you need once you know current average and final weight.",
+      },
+      {
+        question: "How do you calculate what you need on a final exam?",
+        answer:
+          "Use Required = (Target − Current × (1 − w)) ÷ w, where w is the final as a decimal (40% → 0.4). The calculator applies the same formula and flags targets above 100%.",
       },
     ],
   },
@@ -137,6 +177,16 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
         question: "How do I convert Australian GPA to US 4.0?",
         answer:
           "There is no official linear map (for example GPA ÷ 7 × 4). Pick your university preset on /au and follow the receiving institution or credential evaluator — do not treat this calculator as a WES-equivalent conversion.",
+      },
+      {
+        question: "What is an unweighted GPA?",
+        answer:
+          "Unweighted GPA treats every course the same — an A is 4.0 whether it is PE or AP. This semester calculator uses that model; use Weighted GPA if your school adds Honors or AP points.",
+      },
+      {
+        question: "How do you calculate GPA from letter grades?",
+        answer:
+          "Convert each letter to points on your scale, multiply by credit hours for quality points, add them up, and divide by total credit hours for the term. Enter courses above and we do each step.",
       },
     ],
     primarySources: [
@@ -328,6 +378,11 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
         question: "Canvas says my groups do not add to 100%.",
         answer:
           "Canvas can hide unused groups or drop unposted assignments. We still compute a weighted mean and warn if your entered weights are not 100%, so you can match what the LMS is actually using.",
+      },
+      {
+        question: "What about Blackboard, Moodle, or Google Classroom?",
+        answer:
+          "Blackboard and Moodle usually use weighted categories too — enter them like assignment groups, or use the weighted grade calculator. Google Classroom is often points-based; see our LMS course grades guide for which tool fits each platform.",
       },
     ],
   },

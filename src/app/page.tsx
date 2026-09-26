@@ -6,11 +6,14 @@ import { GeoQuickLinks } from "@/components/engagement/GeoQuickLinks";
 import { createPageMetadata } from "@/lib/seo/metadata";
 import { calculatorHreflangLanguages } from "@/lib/seo/hreflang";
 import { calculatorKeywords } from "@/lib/seo/keywords";
+import { pageDescription, pageTitle } from "@/lib/seo/page-copy";
 
 export const metadata = createPageMetadata({
-  title: "Grade Calculator — EZ Grader & Free Online Tools",
-  description:
-    "Free grade calculator. Score a test with the EZ Grader, or open weighted grades, finals, and GPA. The grading scale follows your location.",
+  title: pageTitle("/", "Grade Calculator"),
+  description: pageDescription(
+    "/",
+    "Free grade calculator. Score a test with the EZ Grader, or open weighted grades, finals, and GPA.",
+  ),
   path: "/",
   keywords: calculatorKeywords["ez-grader"],
   languages: calculatorHreflangLanguages("ez-grader"),

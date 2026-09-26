@@ -124,7 +124,11 @@ export const guides: GuideConfig[] = [
     ],
     readTime: "11 min read",
     embeddedCalculator: "final-grade-calculator",
-    relatedGuides: ["how-to-calculate-weighted-grades", "how-to-calculate-gpa"],
+    relatedGuides: [
+      "how-final-grades-are-calculated",
+      "how-to-calculate-weighted-grades",
+      "how-to-calculate-gpa",
+    ],
     relatedCalculators: ["final-grade-calculator", "weighted-grade-calculator"],
     sections: [
       {
@@ -197,6 +201,180 @@ export const guides: GuideConfig[] = [
     ],
   },
   {
+    slug: "how-final-grades-are-calculated",
+    path: "/guides/how-final-grades-are-calculated",
+    title: "How Final Grades Are Calculated",
+    description:
+      "How teachers combine coursework and a final exam into one course grade — weighted averages, formulas, and examples with a free final grade calculator.",
+    keywords: [
+      "how are final grades calculated",
+      "how to calculate final grade",
+      "how final grades are calculated",
+      "how do you calculate final grades",
+      "how to calculate final grades",
+      "final grade formula",
+    ],
+    readTime: "10 min read",
+    embeddedCalculator: "final-grade-calculator",
+    relatedGuides: [
+      "what-grade-do-i-need-on-my-final",
+      "how-to-calculate-weighted-grades",
+      "lms-course-grades-explained",
+      "final-exam-tips",
+    ],
+    relatedCalculators: ["final-grade-calculator", "weighted-grade-calculator", "canvas-grade-calculator"],
+    sections: [
+      {
+        heading: "Course grade vs final exam score",
+        body:
+          "Your final exam is usually one graded piece inside a larger course average. Homework, quizzes, labs, and midterms typically count for the rest. The course grade is a weighted blend of everything — not “the final percentage” by itself.",
+      },
+      {
+        heading: "The weighted-average idea",
+        body:
+          "Think of each category as a slice of the pie. If homework is 20%, quizzes 30%, and the final 50%, your course grade is 0.20 × homework average + 0.30 × quiz average + 0.50 × final exam score. That structure is the same whether you use percents or points.",
+      },
+      {
+        heading: "Formula when only the final is left",
+        body:
+          "If everything before the final is already averaged into one number (your current grade) and the final has weight w, then Course = Current × (1 − w) + Final × w. Rearranging tells you what final score you need for a target — that is what the final grade calculator solves.",
+      },
+      {
+        heading: "Worked example",
+        body:
+          "Current average 82%, final worth 30%, you score 90% on the final. Course = 82 × 0.70 + 90 × 0.30 = 57.4 + 27 = 84.4%. If you needed an 85%, you would plug the target into the calculator to see the required final (about 91.3% here).",
+      },
+      {
+        heading: "Points-based syllabi",
+        body:
+          "Some teachers publish “400 points before the final, final 200 points” instead of percents. Total weight for the final is still 200 ÷ 600 ≈ 33.3%. Convert your earned points to a percent in each bucket, or use point mode on the final grade tool if your class is tracked that way.",
+      },
+      {
+        heading: "Where your current grade comes from",
+        body:
+          "Before any final math, you need an honest current average. Use the weighted grade calculator for a simple syllabus table, or the Canvas calculator if your LMS uses assignment groups. A wrong “current” number makes every final projection wrong.",
+      },
+      {
+        heading: "Drop-lowest and extra credit",
+        body:
+          "If your teacher drops the lowest quiz, recalculate the quiz category after the drop before you lock in “current.” Extra credit might sit in its own bucket or bump one category — follow the syllabus, then model the result in the weighted tool.",
+      },
+      {
+        heading: "Classroom finals vs EOC tests",
+        body:
+          "A teacher-written final follows the formulas above. State End-of-Course exams use a published district weight — use the EOC calculator for those rules, not a generic classroom final unless your handbook says they are the same.",
+      },
+      {
+        heading: "Letter grades at the end",
+        body:
+          "Schools map the final course percent to A, B, C, and so on using their grading scale. The percent comes first; the letter is a lookup. Pick the scale that matches your school in the calculator settings.",
+      },
+    ],
+    faqs: [
+      {
+        question: "How do teachers calculate final grades?",
+        answer:
+          "They combine category averages using the weights on the syllabus, then map the total percent to a letter. The final exam is one weighted category unless the district mandates a separate EOC rule.",
+      },
+      {
+        question: "Is the final always 20% or 40%?",
+        answer:
+          "No. Each course sets its own weight — common values are 15–40%, but labs, portfolios, and year-long projects can change the split. Always use your official syllabus.",
+      },
+      {
+        question: "Can my final grade go down if I fail the exam?",
+        answer:
+          "Yes, when the final counts for a meaningful share of the course. A low final pulls down Current × (1 − w) + Final × w. Use the calculator with your real weights to see the impact.",
+      },
+    ],
+  },
+  {
+    slug: "lms-course-grades-explained",
+    path: "/guides/lms-course-grades-explained",
+    title: "LMS Course Grades Explained",
+    description:
+      "How Canvas, Blackboard, Moodle, and Google Classroom turn assignments into a course grade — and which free calculator to use on GradeCalculator.",
+    keywords: [
+      "canvas grade calculator",
+      "blackboard grade calculator",
+      "moodle grade calculator",
+      "google classroom grade calculator",
+      "lms grade calculator",
+      "canvas assignment groups",
+    ],
+    readTime: "11 min read",
+    embeddedCalculator: "canvas-grade-calculator",
+    relatedGuides: [
+      "how-to-calculate-weighted-grades",
+      "how-final-grades-are-calculated",
+      "what-grade-do-i-need-on-my-final",
+    ],
+    relatedCalculators: [
+      "canvas-grade-calculator",
+      "weighted-grade-calculator",
+      "final-grade-calculator",
+    ],
+    sections: [
+      {
+        heading: "Every LMS is a weighted average",
+        body:
+          "Learning management systems combine scores from homework, quizzes, discussions, and exams. The math is almost always a weighted mean — only the labels change (assignment groups, grade center columns, categories, or Classroom topics).",
+      },
+      {
+        heading: "Canvas: assignment groups",
+        body:
+          "Canvas shows each group’s average and its weight toward the course total. Enter those groups in our Canvas grade calculator. Match only the groups your teacher counts; ignore empty or unused groups that Canvas hides from the total.",
+      },
+      {
+        heading: "Blackboard: Grade Center weights",
+        body:
+          "Blackboard Ultra and Original both support weighted columns or calculated columns. Find the weight on the syllabus or in Grade Center setup, then model each category average in the weighted grade calculator — same math as Canvas groups.",
+      },
+      {
+        heading: "Moodle: gradebook categories",
+        body:
+          "Moodle often uses category weights (Aggregation = Weighted mean of grades). Export or read each category percent from the gradebook, enter weights from the course settings, and use the weighted grade calculator if you are not mirroring Moodle’s exact drop rules.",
+      },
+      {
+        heading: "Google Classroom",
+        body:
+          "Classroom lists assignments with points but may not expose full category weights. If your teacher publishes category weights, use the weighted calculator. If everything is total points, add earned points and divide by possible points, or score each assignment in the test grade tool.",
+      },
+      {
+        heading: "Which GradeCalculator tool should I use?",
+        body:
+          "Canvas-style group weights → Canvas grade calculator. Paper syllabus or Blackboard/Moodle categories → weighted grade calculator. Planning a final exam target after you know your LMS average → final grade calculator.",
+      },
+      {
+        heading: "Unposted, missing, and dropped scores",
+        body:
+          "LMS totals often exclude missing work until a due date passes, or drop the lowest quiz. Recalculate after the gradebook updates. Our tools do not log into your school account — you type the averages your portal shows.",
+      },
+      {
+        heading: "Teachers and privacy",
+        body:
+          "All calculators run in your browser. We do not store grades you enter. Teachers can use the EZ grader on the homepage for quick quiz scoring without uploading rosters.",
+      },
+    ],
+    faqs: [
+      {
+        question: "Is there a Blackboard grade calculator?",
+        answer:
+          "We do not connect to Blackboard. Use the weighted grade calculator with your category averages and weights from the Grade Center or syllabus — the same formula Blackboard uses for weighted totals.",
+      },
+      {
+        question: "Can I calculate Moodle grades without exporting CSV?",
+        answer:
+          "Yes. Read each category’s percentage from the Moodle gradebook, enter the category weights, and use the weighted grade calculator. For a single quiz, use the test grade calculator.",
+      },
+      {
+        question: "Why does my manual total differ from Canvas by 0.1%?",
+        answer:
+          "Rounding on each assignment, hidden rules, or unposted items in Canvas can shift the total slightly. Trust the LMS for official grades; use these tools for planning.",
+      },
+    ],
+  },
+  {
     slug: "how-to-calculate-weighted-grades",
     path: "/guides/how-to-calculate-weighted-grades",
     title: "How to Calculate Weighted Grades",
@@ -209,7 +387,12 @@ export const guides: GuideConfig[] = [
     ],
     readTime: "11 min read",
     embeddedCalculator: "weighted-grade-calculator",
-    relatedGuides: ["what-grade-do-i-need-on-my-final", "how-to-calculate-gpa"],
+    relatedGuides: [
+      "lms-course-grades-explained",
+      "how-final-grades-are-calculated",
+      "what-grade-do-i-need-on-my-final",
+      "how-to-calculate-gpa",
+    ],
     relatedCalculators: ["weighted-grade-calculator", "final-grade-calculator"],
     sections: [
       {
@@ -505,7 +688,11 @@ export const guides: GuideConfig[] = [
       "Turn a required final percentage into a study plan, and know when the target is already locked in.",
     keywords: ["final exam tips", "study for finals", "what do i need on my final"],
     readTime: "10 min read",
-    relatedGuides: ["what-grade-do-i-need-on-my-final", "how-to-calculate-weighted-grades"],
+    relatedGuides: [
+      "how-final-grades-are-calculated",
+      "what-grade-do-i-need-on-my-final",
+      "how-to-calculate-weighted-grades",
+    ],
     relatedCalculators: ["final-grade-calculator", "eoc-grade-calculator"],
     sections: [
       {
