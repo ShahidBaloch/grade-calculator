@@ -15,7 +15,7 @@ export default function PrivacyPolicyPage() {
     { name: "Home", href: "/" },
     { name: "Privacy Policy", href: "/privacy-policy" },
   ];
-  const updated = "September 13, 2026";
+  const updated = "September 26, 2026";
 
   return (
     <>
@@ -47,8 +47,23 @@ export default function PrivacyPolicyPage() {
                 the appropriate grading scale. No personal information is included.
               </li>
               <li>
-                <strong>Analytics:</strong> We do not use analytics at launch. If added later, this
-                policy will be updated.
+                <strong>Hosting and security:</strong> Our site may be delivered through a CDN or
+                security provider (such as Cloudflare). Those services can process standard request
+                metadata (for example IP address and user agent) to protect the site and improve
+                performance. We do not receive your calculator inputs from those logs.
+              </li>
+              <li>
+                <strong>Analytics:</strong> We may use privacy-oriented, aggregated analytics (for
+                example through our CDN) to understand traffic. Those tools do not receive the grades
+                you type into calculators.
+              </li>
+              <li>
+                <strong>Advertising:</strong> If we enable Google AdSense or similar programs, ad
+                partners may set cookies or use similar technologies to show and measure ads. See our{" "}
+                <a href="/cookie-policy" className="text-[var(--color-primary)] hover:underline">
+                  Cookie Policy
+                </a>{" "}
+                for details and how to manage preferences.
               </li>
             </ul>
           </section>

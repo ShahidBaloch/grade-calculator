@@ -13,11 +13,13 @@ import { GcseGradeCalculator } from "@/components/calculators/GcseGradeCalculato
 import { GpaCalculator } from "@/components/calculators/GpaCalculator";
 import { HighSchoolGpaCalculator } from "@/components/calculators/HighSchoolGpaCalculator";
 import { LetterGradeCalculator } from "@/components/calculators/LetterGradeCalculator";
+import { McmasterGpaToUsCalculator } from "@/components/calculators/McmasterGpaToUsCalculator";
 import { PercentageToCgpaCalculator } from "@/components/calculators/PercentageToCgpaCalculator";
 import { PercentageToLetterCalculator } from "@/components/calculators/PercentageToLetterCalculator";
 import { RaiseGpaCalculator } from "@/components/calculators/RaiseGpaCalculator";
 import { SgpaToCgpaCalculator } from "@/components/calculators/SgpaToCgpaCalculator";
 import { TestGradeCalculator } from "@/components/calculators/TestGradeCalculator";
+import { UkDegreeToUsGpaReferenceCalculator } from "@/components/calculators/UkDegreeToUsGpaReferenceCalculator";
 import { WeightedGradeCalculator } from "@/components/calculators/WeightedGradeCalculator";
 import { WeightedGpaCalculator } from "@/components/calculators/WeightedGpaCalculator";
 import type { CalculatorSlug } from "@/types/calculator";
@@ -45,6 +47,8 @@ export const calculatorComponentBySlug: Record<CalculatorSlug, React.ComponentTy
   "sgpa-to-cgpa": SgpaToCgpaCalculator,
   "cgpa-calculator": CgpaCalculator,
   "cgpa-to-gpa": CgpaToGpaCalculator,
+  "mcmaster-gpa-to-us-gpa": McmasterGpaToUsCalculator,
+  "uk-degree-to-us-gpa-reference": UkDegreeToUsGpaReferenceCalculator,
 };
 
 export function getCalculatorElement(slug: CalculatorSlug) {

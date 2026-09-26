@@ -94,4 +94,12 @@ export const calculatorResourceLinks: Record<CalculatorSlug, CalculatorResourceL
     guide: { path: "/guides/cgpa-to-percentage", title: "How to convert CGPA to percentage" },
     gradingScale: { path: "/grading-scales/india", title: "India 10-point CGPA scale" },
   },
+  "mcmaster-gpa-to-us-gpa": {
+    guide: { path: "/guides/gpa-scale-explained", title: "GPA scale explained" },
+    gradingScale: { path: "/grading-scales/canada", title: "Canadian grading scales" },
+  },
+  "uk-degree-to-us-gpa-reference": {
+    guide: { path: "/guides/gpa-scale-explained", title: "GPA scale explained" },
+    gradingScale: { path: "/grading-scales/uk", title: "UK degree classification scale" },
+  },
 };

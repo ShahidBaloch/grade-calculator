@@ -310,12 +310,12 @@ export const guides: GuideConfig[] = [
       {
         heading: "UK classifications are not GPA",
         body:
-          "UK degrees are labelled First, 2:1, 2:2, and Third from percentage averages. There is no official conversion to 4.0. If an application form asks for GPA, follow that university’s published chart rather than a generic website.",
+          "UK degrees are labelled First, 2:1, 2:2, and Third from percentage averages. There is no official conversion to US 4.0 for self-reporting. Harvard GSAS and Stanford Graduate Admissions tell applicants to use transcript format — do not invent a GPA. Our /uk-degree-to-us-gpa-reference page shows illustrative comparisons only when you need rough planning.",
       },
       {
         heading: "Canada, Australia, and New Zealand",
         body:
-          "Canada may use 4.0 or 4.33. Australia commonly uses HD/D/C/P on a 7-point GPA. Several New Zealand universities use a 9-point letter scale. Open the matching grading-scale page before you convert a mark.",
+          "Canada may use 4.0 or 4.33 presets that differ by campus — treat our Canadian charts as illustrative, not a single national standard (UBC tells students to use the evaluating body's scale for admissions). Australia uses institution-specific GPA or WAM. Several New Zealand universities use a 9-point letter scale. Open the matching grading-scale page before you convert a mark.",
       },
       {
         heading: "How to pick a scale in our tools",
@@ -325,7 +325,7 @@ export const guides: GuideConfig[] = [
       {
         heading: "ATAR is a rank, not a GPA",
         body:
-          "An Australian ATAR of 80.00 means the student is around the 80th percentile of the Year 12 cohort after scaling. It is not a course average. After enrolment, universities usually switch to a 7-point GPA. Do not paste an ATAR into a US 4.0 box.",
+          "An Australian ATAR of 80.00 means the student is around the 80th percentile of the Year 12 cohort after scaling. It is not a course average and must not be converted to US GPA with (ATAR ÷ 99.95) × 4, to an Australian university GPA, or to a UK degree class. After enrolment, universities use institution-specific GPA or WAM from coursework — not ATAR.",
       },
       {
         heading: "Transcript legends beat any website",

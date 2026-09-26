@@ -63,10 +63,10 @@ export const countryHubs: CountryHubConfig[] = [
     flag: "🇨🇦",
     scaleId: "ca-standard",
     description:
-      "Canadian grade and GPA tools with the 4.0 / 4.33 letter scale used by many universities.",
+      "Canadian grade and GPA tools with illustrative presets — each university publishes its own tables.",
     details: [
-      "Canadian institutions mix percentage marks, 4.0 GPA, and 4.33 scales (A+ = 4.33). Ontario high schools also report a 100-point average that is not a GPA.",
-      "Always check your faculty calendar. McGill, U of T, and UBC do not share one conversion table.",
+      "Canadian institutions mix percentage marks, 4.0 GPA, 4.33 scales (A+ = 4.33), and specialty scales such as McMaster's 12-point GPA. There is no one “standard Canadian conversion” shared by UBC, Waterloo, and Guelph.",
+      "This hub defaults GPA tools to an illustrative 4.0-cap preset for planning. For McMaster 12-point transcripts, use the dedicated McMaster→US lookup. Always check your faculty calendar before official submissions.",
     ],
     faqs: [
       {
@@ -77,12 +77,23 @@ export const countryHubs: CountryHubConfig[] = [
       {
         question: "Which Canadian scale should I use?",
         answer:
-          "This hub locks tools to the Common Canadian 4.0 preset (A+ = 4.0). If your transcript uses A+ = 4.33, open the grading scales page for Canada 4.33 or ask your registrar which table matches your record.",
+          "This hub defaults to an illustrative Canadian 4.0-cap preset (A+ = 4.0). If your transcript uses A+ = 4.33, open /grading-scales/canada-433. McMaster 12-point GPA needs the McMaster lookup tool — not this preset.",
+      },
+      {
+        question: "Can I use this chart for UBC or Waterloo admissions conversions?",
+        answer:
+          "Only as informal planning. UBC advises using the evaluating body's scale when converting percentage grades for admissions. Follow each university's published table or the receiving program's instructions.",
+      },
+      {
+        question: "How do I convert McMaster's 12-point GPA to US 4.0?",
+        answer:
+          "Do not divide by 3. McMaster publishes a lookup table (for example 11 → 3.9, 10 → 3.7). Use the McMaster 12-point to US 4.0 calculator on this hub.",
       },
     ],
     gradingScalePath: "/grading-scales/canada",
     featuredCalculators: [
       "gpa-calculator",
+      "mcmaster-gpa-to-us-gpa",
       "college-gpa-calculator",
       "weighted-grade-calculator",
       "cumulative-gpa-calculator",
@@ -92,7 +103,7 @@ export const countryHubs: CountryHubConfig[] = [
     keywords: ["canada gpa calculator", "canadian grading scale", "grade calculator canada"],
     hreflang: "en-CA",
     scaleLockNote:
-      "Tools on this hub lock to the Common Canadian 4.0 preset. Many universities record A+ as 4.33 — see /grading-scales/canada-433 for that option.",
+      "GPA tools on this hub default to an illustrative Canadian 4.0-cap preset — not a national standard. Use /mcmaster-gpa-to-us-gpa for McMaster 12-point GPA and /grading-scales/canada-433 when A+ = 4.33 on your transcript.",
   },
   {
     code: "uk",
@@ -110,7 +121,12 @@ export const countryHubs: CountryHubConfig[] = [
       {
         question: "How do I convert a UK mark to GPA?",
         answer:
-          "There is no official UK-to-US GPA. Select the UK degree scale in a calculator for a local letter/class band, then treat any 4.0 number as an estimate only.",
+          "UK degrees use classifications (First, 2:1, 2:2, Third), not an official US 4.0 GPA. Use /uk-degree-to-us-gpa-reference only for an illustrative comparison — do not self-report converted GPAs unless the receiving institution requires it.",
+      },
+      {
+        question: "Should I put 3.7 on a US application for a 2:1?",
+        answer:
+          "Usually no. Report your degree class and marks as shown on your transcript unless the form explicitly asks for a US-style GPA. Harvard GSAS and Stanford Graduate Admissions both instruct applicants not to invent a 4.0 GPA when the transcript does not include one.",
       },
       {
         question: "Where is the degree classification calculator?",
@@ -121,6 +137,7 @@ export const countryHubs: CountryHubConfig[] = [
     gradingScalePath: "/grading-scales/uk",
     featuredCalculators: [
       "degree-classification-calculator",
+      "uk-degree-to-us-gpa-reference",
       "gcse-grade-calculator",
       "weighted-grade-calculator",
       "final-grade-calculator",
@@ -129,7 +146,7 @@ export const countryHubs: CountryHubConfig[] = [
     keywords: ["uk grade calculator", "degree classification calculator", "uk grading scale"],
     hreflang: "en-GB",
     scaleLockNote:
-      "Tools on this hub lock to the UK Degree scale. The GCSE calculator locks to the 9–1 scale. Worldwide /degree-classification-calculator and /gcse-grade-calculator pages use the same UK presets.",
+      "Tools on this hub lock to UK degree classification bands (not US GPA). For an illustrative US 4.0 comparison only, open /uk-degree-to-us-gpa-reference — not for self-reporting on applications.",
   },
   {
     code: "au",
@@ -138,24 +155,37 @@ export const countryHubs: CountryHubConfig[] = [
     flag: "🇦🇺",
     scaleId: "au-seven-point",
     description:
-      "Australian grade tools using a common 7-point example scale (HD, D, C, P, F). Institution tables vary.",
+      "Australian grade tools with institution-specific GPA presets — not one national scale.",
     details: [
-      "Most Australian universities report High Distinction, Distinction, Credit, Pass, and Fail, often mapped to a 7-point GPA. ATAR is a separate rank used for school-leaver admissions — it is not a course GPA.",
-      "Use the ATAR calculator for a planning estimate from scaled Year 12 scores. After you enrol, switch to the 7-point GPA tools.",
+      "Australian universities use different GPA methodologies. UQ publishes a 7-point scale; Monash uses a 4-point GPA (maximum 4.0). UNSW and others may report WAM (Weighted Average Mark) instead of GPA. Grade points are not universal across institutions.",
+      "Pick your university preset in the GPA calculators on this hub, or use the generic 7-point example for illustration only. ATAR is a separate school-leaver rank — it is not a course GPA.",
+      "There is no official linear Australian-to-US GPA conversion (for example AU GPA × 4/7). Use each institution's handbook or the receiving admissions office.",
     ],
     faqs: [
       {
         question: "What is a 7.0 GPA in Australia?",
         answer:
-          "A 7.0 is typically a High Distinction average. A Distinction is often 6.0. Confirm your university’s table before using the number officially.",
+          "On UQ's 7-point scale, 7.0 is typically High Distinction. Monash uses a 4-point GPA where HD is 4.0. Always confirm your university's table — do not assume every campus uses 7-point grade points.",
+      },
+      {
+        question: "Does Monash use the same 7-point scale as UQ?",
+        answer:
+          "No. Monash calculates GPA on a 4-point scale (4.0 maximum). Select the Monash preset in the GPA calculator, or read Monash's official GPA policy.",
       },
       {
         question: "Where is the ATAR calculator?",
         answer:
-          "Use the worldwide default at /atar-calculator, or the Australia page at /au/atar-calculator (Australian scale locked). Enter scaled subject scores. The result is an educational estimate, not an official UAC or QTAC ATAR.",
+          "Use the worldwide default at /atar-calculator, or the Australia page at /au/atar-calculator. Enter scaled subject scores. The result is an educational estimate, not an official UAC or QTAC ATAR — and it is not a GPA or UK classification.",
+      },
+      {
+        question: "Can I turn my ATAR into a US or university GPA on this site?",
+        answer:
+          "No. We do not provide ATAR → US GPA, ATAR → university GPA, or ATAR → UK degree class conversions because there is no valid direct equivalency.",
       },
     ],
     gradingScalePath: "/grading-scales/australia",
+    scaleLockNote:
+      "GPA tools on this hub let you choose an Australian preset (generic example, UQ 7-point, or Monash 4-point). ATAR uses scaled scores, not GPA points.",
     featuredCalculators: [
       "atar-calculator",
       "gpa-calculator",

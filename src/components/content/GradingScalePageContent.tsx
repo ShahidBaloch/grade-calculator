@@ -19,6 +19,29 @@ export function GradingScalePageContent({ config }: { config: GradingScalePageCo
           ))}
         </ul>
       </section>
+      {scale.sources.length > 0 && (
+        <section>
+          <h2 className="text-xl font-semibold">Sources</h2>
+          <ul className="mt-3 list-disc space-y-2 pl-5 text-[var(--color-text-muted)]">
+            {scale.sources.map((source) => (
+              <li key={source}>
+                {/^https?:\/\//i.test(source) ? (
+                  <a
+                    href={source}
+                    className="text-[var(--color-primary)] hover:underline"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    {source}
+                  </a>
+                ) : (
+                  source
+                )}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
       <section>
         <h2 className="text-xl font-semibold">Other grading scales</h2>
         <ul className="mt-3 space-y-2">

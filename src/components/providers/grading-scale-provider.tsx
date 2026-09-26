@@ -6,6 +6,7 @@ import { getScale } from "@/lib/grading-scales";
 import {
   getLockedScaleFromPath,
   isValidScaleId,
+  normalizeScaleForPath,
   resolveDefaultScaleId,
 } from "@/lib/grading-scales/resolve-scale";
 import { GEO_COOKIES, STORAGE_KEYS } from "@/lib/constants";
@@ -70,7 +71,7 @@ export function GradingScaleProvider({ children }: { children: React.ReactNode }
     [isScaleLocked, pathname],
   );
 
-  const activeScaleId = lockedScaleId ?? scaleId;
+  const activeScaleId = normalizeScaleForPath(pathname, lockedScaleId ?? scaleId);
 
   const value = React.useMemo(
     () => ({

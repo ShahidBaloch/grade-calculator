@@ -8,6 +8,8 @@ export type ScaleId =
   | "ca-standard"
   | "ca-four-three-three"
   | "au-seven-point"
+  | "au-uq-seven-point"
+  | "au-monash-four-point"
   | "nz-nine-point"
   | "in-ten-point"
   | "pk-hec";

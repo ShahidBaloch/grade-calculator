@@ -30,8 +30,13 @@ export default function AboutPage() {
           </p>
           <p>
             Our calculators run entirely in your browser. We don&apos;t store your grades on our servers,
-            and we don&apos;t require sign-up. Your grading scale is detected automatically from your
-            location, with support for US, UK, Canadian, Australian, and New Zealand systems.
+            and we don&apos;t require sign-up. Geo cookies, CDN security, optional analytics, and
+            advertising (if enabled) are described in our{" "}
+            <Link href="/privacy-policy" className="text-[var(--color-primary)] hover:underline">
+              Privacy Policy
+            </Link>
+            . Your grading scale is detected automatically from your location, with support for US, UK,
+            Canadian, Australian, and New Zealand systems.
           </p>
           <h2 className="text-xl font-semibold text-[var(--color-text)]">What we offer</h2>
           <ul className="list-disc space-y-2 pl-5">

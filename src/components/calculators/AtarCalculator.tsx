@@ -11,7 +11,7 @@ import { FormulaBreakdown } from "@/components/calculators/shared/FormulaBreakdo
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { calculateAtar } from "@/lib/calculators/atar";
+import { calculateAtar, ATAR_CROSS_SYSTEM_DISCLAIMER } from "@/lib/calculators/atar";
 import type { AtarAuthority, AtarSubject } from "@/lib/calculators/atar";
 import { useCalculatorPersistence } from "@/hooks/useCalculatorPersistence";
 
@@ -89,6 +89,40 @@ export function AtarCalculator() {
         Select your state admission centre, then enter <strong className="font-medium text-[var(--color-text)]">scaled</strong>{" "}
         subject scores (0–100). Each authority uses different aggregation rules — we apply a simplified
         planning model for the option you choose, not an official {authorityMeta.name} calculation.
+        {authority === "vtac" && (
+          <>
+            {" "}
+            For VCE, VTAC uses a primary four plus up to two 10% increments (fifth/sixth study), not 10% of
+            every extra score.
+          </>
+        )}
+        {authority === "qtac" && (
+          <>
+            {" "}
+            For QCE, mark Applied or VET subjects — QTAC eligible aggregates can be five General subjects,
+            four General plus one Applied, or four General plus Certificate III+ VET.
+          </>
+        )}
+        {authority === "uac" && (
+          <>
+            {" "}
+            For HSC, tick English rows (or include “English” in the name) so we model UAC’s best two English
+            units plus best eight remaining.
+          </>
+        )}
+        {authority === "tisc" && (
+          <>
+            {" "}
+            For WACE, tag LOTE, Mathematics Methods, and Mathematics Specialist rows for TISC 10% bonuses.
+          </>
+        )}
+        {authority === "satac" && (
+          <>
+            {" "}
+            For SACE/SATAC, enter at least five scaled scores so we can model 60 credits from your top three
+            TAS results plus a flexible 30-credit block.
+          </>
+        )}
       </p>
       <div className="space-y-2">
         <Label htmlFor="atar-authority">State admission centre (changes the planning formula)</Label>
@@ -122,36 +156,106 @@ export function AtarCalculator() {
           }
         />
       </div>
+      <p className="rounded-md border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-3 text-sm text-[var(--color-text-muted)]">
+        {ATAR_CROSS_SYSTEM_DISCLAIMER}
+      </p>
       <DynamicRowList
         items={subjects}
         addLabel="Add subject"
         onAdd={() => updateSubjects([...subjects, { name: "", scaledScore: 70 }])}
         onRemove={(index) => updateSubjects(subjects.filter((_, i) => i !== index))}
         renderRow={(subject, index) => (
-          <div className="grid gap-2 sm:grid-cols-2">
-            <Input
-              placeholder="Subject"
-              aria-label={`Subject ${index + 1} name`}
-              value={subject.name ?? ""}
-              onChange={(e) => {
-                const next = [...subjects];
-                next[index] = { ...subject, name: e.target.value };
-                updateSubjects(next);
-              }}
-            />
-            <Input
-              type="number"
-              placeholder="Scaled score"
-              aria-label={`Subject ${index + 1} scaled score`}
-              min={0}
-              max={100}
-              value={subject.scaledScore}
-              onChange={(e) => {
-                const next = [...subjects];
-                next[index] = { ...subject, scaledScore: Number(e.target.value) || 0 };
-                updateSubjects(next);
-              }}
-            />
+          <div className="space-y-2">
+            <div className="grid gap-2 sm:grid-cols-2">
+              <Input
+                placeholder="Subject"
+                aria-label={`Subject ${index + 1} name`}
+                value={subject.name ?? ""}
+                onChange={(e) => {
+                  const next = [...subjects];
+                  next[index] = { ...subject, name: e.target.value };
+                  updateSubjects(next);
+                }}
+              />
+              <Input
+                type="number"
+                placeholder="Scaled score"
+                aria-label={`Subject ${index + 1} scaled score`}
+                min={0}
+                max={100}
+                value={subject.scaledScore}
+                onChange={(e) => {
+                  const next = [...subjects];
+                  next[index] = { ...subject, scaledScore: Number(e.target.value) || 0 };
+                  updateSubjects(next);
+                }}
+              />
+            </div>
+            {authority === "qtac" && (
+              <div className="space-y-1">
+                <Label className="text-xs text-[var(--color-text-muted)]">QCE subject type</Label>
+                <Select
+                  value={subject.qceType ?? "general"}
+                  onValueChange={(value) => {
+                    const next = [...subjects];
+                    next[index] = {
+                      ...subject,
+                      qceType: value as AtarSubject["qceType"],
+                    };
+                    updateSubjects(next);
+                  }}
+                >
+                  <SelectTrigger aria-label={`Subject ${index + 1} QCE type`}>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="general">General (Senior)</SelectItem>
+                    <SelectItem value="applied">Applied</SelectItem>
+                    <SelectItem value="vet">VET (Cert III+)</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            )}
+            {authority === "uac" && (
+              <label className="flex items-center gap-2 text-sm text-[var(--color-text-muted)]">
+                <input
+                  type="checkbox"
+                  checked={subject.hscEnglish ?? /english/i.test(subject.name ?? "")}
+                  onChange={(e) => {
+                    const next = [...subjects];
+                    next[index] = { ...subject, hscEnglish: e.target.checked };
+                    updateSubjects(next);
+                  }}
+                />
+                Count as English (HSC / UAC)
+              </label>
+            )}
+            {authority === "tisc" && (
+              <div className="space-y-1">
+                <Label className="text-xs text-[var(--color-text-muted)]">WACE bonus (optional)</Label>
+                <Select
+                  value={subject.waceBonus ?? "none"}
+                  onValueChange={(value) => {
+                    const next = [...subjects];
+                    next[index] = {
+                      ...subject,
+                      waceBonus: value as AtarSubject["waceBonus"],
+                    };
+                    updateSubjects(next);
+                  }}
+                >
+                  <SelectTrigger aria-label={`Subject ${index + 1} WACE bonus`}>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="none">None (primary four candidate)</SelectItem>
+                    <SelectItem value="lote">LOTE (10% bonus)</SelectItem>
+                    <SelectItem value="maths-methods">Mathematics Methods (10%)</SelectItem>
+                    <SelectItem value="maths-specialist">Mathematics Specialist (10%)</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            )}
           </div>
         )}
       />

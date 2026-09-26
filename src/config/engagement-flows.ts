@@ -124,9 +124,10 @@ export const engagementFlows: EngagementFlow[] = [
   },
   {
     from: "atar-calculator",
-    to: "gpa-calculator",
-    title: "Switch to university GPA",
-    description: "ATAR is a school-leaver rank. After you enrol, Australian GPA is usually a 7-point average.",
+    to: "weighted-grade-calculator",
+    title: "Model school subject averages",
+    description:
+      "ATAR is a Year 12 cohort rank — it does not convert to GPA. Use weighted grades to plan individual assessments, not to translate ATAR into university or US GPA.",
   },
   {
     from: "gcse-grade-calculator",

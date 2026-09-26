@@ -102,4 +102,16 @@ export const calculatorKeywords: Record<CalculatorSlug, string[]> = {
     "convert cgpa to gpa",
     "india cgpa to us gpa",
   ],
+  "mcmaster-gpa-to-us-gpa": [
+    "mcmaster gpa to us",
+    "12 point gpa to 4.0",
+    "mcmaster 12 point gpa",
+    "canadian gpa to us gpa",
+  ],
+  "uk-degree-to-us-gpa-reference": [
+    "uk gpa to us gpa",
+    "uk degree to us gpa",
+    "2:1 to gpa",
+    "uk classification to 4.0",
+  ],
 };

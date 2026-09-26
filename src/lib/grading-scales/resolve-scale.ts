@@ -1,4 +1,5 @@
 import { countryDefaults, DEFAULT_SCALE_ID, gradingScales } from "./index";
+import { isAustralianScaleId } from "./au-presets";
 import type { CountryCode, ScaleId } from "@/types/grading-scale";
 
 /** Worldwide calculator routes that follow US letter/GPA recording (root paths). */
@@ -28,7 +29,6 @@ const PATH_SCALE_LOCKS: Array<{ prefix: string; scaleId: ScaleId }> = [
   { prefix: "/us", scaleId: "us-standard" },
   { prefix: "/uk", scaleId: "uk-degree" },
   { prefix: "/ca", scaleId: "ca-standard" },
-  { prefix: "/au", scaleId: "au-seven-point" },
   { prefix: "/nz", scaleId: "nz-nine-point" },
   { prefix: "/in", scaleId: "in-ten-point" },
   { prefix: "/pk", scaleId: "pk-hec" },
@@ -36,6 +36,8 @@ const PATH_SCALE_LOCKS: Array<{ prefix: string; scaleId: ScaleId }> = [
   { prefix: "/grading-scales/uk", scaleId: "uk-degree" },
   { prefix: "/grading-scales/canada-433", scaleId: "ca-four-three-three" },
   { prefix: "/grading-scales/canada", scaleId: "ca-standard" },
+  { prefix: "/grading-scales/australia-uq", scaleId: "au-uq-seven-point" },
+  { prefix: "/grading-scales/australia-monash", scaleId: "au-monash-four-point" },
   { prefix: "/grading-scales/australia", scaleId: "au-seven-point" },
   { prefix: "/grading-scales/new-zealand", scaleId: "nz-nine-point" },
   { prefix: "/grading-scales/india", scaleId: "in-ten-point" },
@@ -57,6 +59,19 @@ export function getLockedScaleFromPath(pathname: string): ScaleId | null {
   }
 
   return null;
+}
+
+/** Default scale when visiting a regional hub without a hard lock (e.g. /au GPA tools). */
+export function getPathDefaultScaleId(pathname: string): ScaleId | null {
+  if (pathname.startsWith("/au")) return "au-seven-point";
+  return null;
+}
+
+export function normalizeScaleForPath(pathname: string, scaleId: ScaleId): ScaleId {
+  if (pathname.startsWith("/au") && !isAustralianScaleId(scaleId)) {
+    return "au-seven-point";
+  }
+  return scaleId;
 }
 
 /** Soft hint from browser locale — fallback after geo cookie. */
@@ -87,6 +102,8 @@ export function resolveDefaultScaleId({
   if (locked) return locked;
   if (isValidScaleId(userScaleId)) return userScaleId;
   if (isValidScaleId(geoScaleId)) return geoScaleId;
+  const pathDefault = getPathDefaultScaleId(pathname);
+  if (pathDefault) return pathDefault;
   if (useLocaleHint) {
     const hinted = getScaleHintFromLocale();
     if (hinted) return hinted;
@@ -95,6 +112,8 @@ export function resolveDefaultScaleId({
 }
 
 export function countryCodeFromScaleId(scaleId: ScaleId): CountryCode {
+  const scale = gradingScales[scaleId];
+  if (scale?.country) return scale.country;
   return (
     (Object.entries(countryDefaults).find(([, id]) => id === scaleId)?.[0] as CountryCode) ?? "US"
   );

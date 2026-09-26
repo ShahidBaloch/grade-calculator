@@ -23,6 +23,7 @@ import { footerNav, mainNav } from "@/config/navigation";
 import { calculatorHreflangLanguages, countryHubHreflangLanguages } from "@/lib/seo/hreflang";
 import { siteConfig } from "@/config/site";
 import { siteFaqs } from "@/config/site-faq";
+import { isLowValueProgrammaticPath } from "@/lib/seo/programmatic-pages";
 
 describe("SEO audit", () => {
   it("sitemap includes all calculator routes", () => {
@@ -208,9 +209,18 @@ describe("SEO audit", () => {
     const cookies = readFileSync(resolve("src/app/cookie-policy/page.tsx"), "utf8");
     expect(privacy).toContain("gc-state-*");
     expect(privacy).toContain("gc-scale");
+    expect(privacy).toMatch(/Cloudflare|CDN/i);
     expect(cookies).toContain("gc-state-*");
     expect(cookies).toContain("gc-scale");
     const faq = siteFaqs.find((item) => item.question.includes("private"));
     expect(faq?.answer).toMatch(/last inputs/i);
+  });
+
+  it("sitemap excludes low-value programmatic URL patterns", () => {
+    const paths = sitemap().map((entry) => new URL(entry.url).pathname);
+    for (const path of paths) {
+      expect(isLowValueProgrammaticPath(path), `low-value path in sitemap: ${path}`).toBe(false);
+    }
+    expect(isLowValueProgrammaticPath("/3/4-as-a-percent")).toBe(true);
   });
 });

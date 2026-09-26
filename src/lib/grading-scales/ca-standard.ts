@@ -2,7 +2,7 @@ import type { GradingScale } from "@/types/grading-scale";
 
 export const caStandardScale: GradingScale = {
   id: "ca-standard",
-  name: "Common Canadian 4.0 preset",
+  name: "Illustrative Canadian percentage-to-GPA preset (4.0 cap)",
   country: "CA",
   gpaMax: 4.0,
   passPercent: 50,
@@ -19,5 +19,8 @@ export const caStandardScale: GradingScale = {
     { letter: "D", min: 50, max: 59, gpa: 1.0 },
     { letter: "F", min: 0, max: 49, gpa: 0.0 },
   ],
-  sources: ["Common Canadian university scale", "Ontario/BC variants"],
+  sources: [
+    "Illustrative planning preset only — not a national Canadian standard",
+    "UBC and other schools advise using the evaluating body's scale for admissions conversions",
+  ],
 };

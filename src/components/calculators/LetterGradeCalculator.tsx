@@ -50,6 +50,13 @@ export function LetterGradeCalculator() {
         />
       )}
       <ScaleSelector />
+      {scaleId === "uk-degree" && (
+        <p className="rounded-md border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-3 text-sm text-[var(--color-text-muted)]">
+          UK degree classes are not US GPA values. Do not report an invented 4.0 GPA unless the
+          application explicitly asks you to convert — many US graduate schools want transcript format
+          as issued.
+        </p>
+      )}
       <div className="space-y-2">
         <Label htmlFor="letter-grade-input">Letter grade</Label>
         <Input
@@ -67,7 +74,7 @@ export function LetterGradeCalculator() {
           <p className="mt-2 text-sm text-[var(--color-text-muted)]">
             {result.data.letter} · Range {result.data.rangeLabel}
             {scaleId === "uk-degree"
-              ? " · Not an official UK GPA conversion"
+              ? " · UK classification band only (not a US GPA)"
               : ` · GPA ${result.data.gpa.toFixed(1)}`}
           </p>
         </div>

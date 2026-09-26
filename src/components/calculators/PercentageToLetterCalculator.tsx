@@ -59,12 +59,22 @@ export function PercentageToLetterCalculator() {
             label="Letter grade"
             percent={result.data.percent}
             letterGrade={result.data.letter}
-            gpa={result.data.gpa}
+            gpa={scaleId === "uk-degree" ? null : result.data.gpa}
             primaryLetter
           />
           <p className="text-sm text-[var(--color-text-muted)]">
             Range on this scale: {result.data.rangeLabel}
           </p>
+          {scaleId === "uk-degree" && (
+            <p className="text-sm text-[var(--color-text-muted)]">
+              UK classifications are not US GPA. For an illustrative US 4.0 comparison only (not for
+              self-reporting), open the{" "}
+              <a href="/uk-degree-to-us-gpa-reference" className="text-[var(--color-primary)] hover:underline">
+                UK degree class to US GPA reference
+              </a>
+              .
+            </p>
+          )}
           {getPrimaryFlow("percentage-to-letter-grade") && (
             <NextStepCard flow={getPrimaryFlow("percentage-to-letter-grade")!} />
           )}

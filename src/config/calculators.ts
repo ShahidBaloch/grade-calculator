@@ -303,12 +303,13 @@ export const calculators: CalculatorConfig[] = [
     slug: "atar-calculator",
     name: "ATAR Calculator",
     shortName: "ATAR",
-    description: "Estimate an Australian ATAR from scaled subject scores (educational model).",
+    description:
+      "Estimate an Australian ATAR from scaled subject scores (educational model). Does not convert ATAR to US GPA, university GPA, or UK degree class.",
     path: "/atar-calculator",
     icon: "Target",
     category: "conversion",
     mvp: false,
-    relatedSlugs: ["gpa-calculator", "letter-grade-calculator", "percentage-to-letter-grade"],
+    relatedSlugs: ["weighted-grade-calculator", "letter-grade-calculator"],
     examples: [
       {
         label: "Strong four",
@@ -434,6 +435,38 @@ export const calculators: CalculatorConfig[] = [
     examples: [
       { label: "8.2 → 4.0", values: { cgpa: 8.2, methodId: "linear-0.4" } },
       { label: "Via % bridge", values: { cgpa: 8.2, methodId: "percent-bridge" } },
+    ],
+  },
+  {
+    slug: "mcmaster-gpa-to-us-gpa",
+    name: "McMaster 12-Point GPA to US 4.0",
+    shortName: "McMaster→US",
+    description:
+      "Convert McMaster University's 12-point GPA to a US 4.0 equivalent using McMaster's official lookup table — not ÷3.",
+    path: "/mcmaster-gpa-to-us-gpa",
+    icon: "ArrowLeftRight",
+    category: "conversion",
+    mvp: false,
+    relatedSlugs: ["cgpa-to-gpa", "gpa-calculator", "college-gpa-calculator"],
+    examples: [
+      { label: "11 → 3.9", values: { mcmasterTwelve: 11 } },
+      { label: "10 → 3.7", values: { mcmasterTwelve: 10 } },
+    ],
+  },
+  {
+    slug: "uk-degree-to-us-gpa-reference",
+    name: "UK Degree Class to US GPA — Approximate Reference",
+    shortName: "UK→US ref",
+    description:
+      "See how a UK First / 2:1 / 2:2 / Third might compare to a US 4.0 scale for planning only — not instructions to self-report on applications.",
+    path: "/uk-degree-to-us-gpa-reference",
+    icon: "ArrowLeftRight",
+    category: "conversion",
+    mvp: false,
+    relatedSlugs: ["degree-classification-calculator", "letter-grade-calculator", "gpa-calculator"],
+    examples: [
+      { label: "2:1 reference", values: { mode: "classification", classification: "Upper Second (2:1)" } },
+      { label: "65% → class", values: { mode: "percent", percent: 65 } },
     ],
   },
 ];

@@ -31,7 +31,9 @@ export type CalculatorSlug =
   | "percentage-to-cgpa"
   | "sgpa-to-cgpa"
   | "cgpa-calculator"
-  | "cgpa-to-gpa";
+  | "cgpa-to-gpa"
+  | "mcmaster-gpa-to-us-gpa"
+  | "uk-degree-to-us-gpa-reference";
 
 const CALCULATOR_SLUGS: CalculatorSlug[] = [
   "ez-grader",
@@ -56,6 +58,8 @@ const CALCULATOR_SLUGS: CalculatorSlug[] = [
   "sgpa-to-cgpa",
   "cgpa-calculator",
   "cgpa-to-gpa",
+  "mcmaster-gpa-to-us-gpa",
+  "uk-degree-to-us-gpa-reference",
 ];
 
 export function isCalculatorSlug(value: string): value is CalculatorSlug {

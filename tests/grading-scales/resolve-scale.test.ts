@@ -83,15 +83,21 @@ describe("resolve-scale", () => {
     ).toBe("us-lenient");
   });
 
-  it("prefers locked path over geo and user preference", () => {
+  it("defaults Australian hub paths to the generic example without hard-locking scale selection", () => {
+    expect(getLockedScaleFromPath("/au/gpa-calculator")).toBeNull();
     expect(
       resolveDefaultScaleId({
         pathname: "/au/gpa-calculator",
-        userScaleId: "us-standard",
-        geoScaleId: "us-standard",
+        userScaleId: null,
+        geoScaleId: null,
         useLocaleHint: false,
       }),
     ).toBe("au-seven-point");
+  });
+
+  it("locks institution-specific Australian grading scale reference pages", () => {
+    expect(getLockedScaleFromPath("/grading-scales/australia-uq")).toBe("au-uq-seven-point");
+    expect(getLockedScaleFromPath("/grading-scales/australia-monash")).toBe("au-monash-four-point");
   });
 
   it("hints primary market scales from browser locale when available", () => {

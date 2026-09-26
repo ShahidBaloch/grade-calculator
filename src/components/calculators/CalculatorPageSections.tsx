@@ -53,6 +53,28 @@ export function CalculatorPageSections({
           <FormulaBreakdown steps={[content.workedExample]} />
         </div>
       </section>
+      {content.primarySources && content.primarySources.length > 0 && (
+        <section>
+          <h2 className="text-xl font-semibold">Primary sources</h2>
+          <p className="mt-2 text-sm text-[var(--color-text-muted)]">
+            Confirm rules with the authority or institution — our models are planning aids only.
+          </p>
+          <ul className="mt-3 list-disc space-y-2 pl-5 text-sm">
+            {content.primarySources.map((source) => (
+              <li key={source.href}>
+                <a
+                  href={source.href}
+                  className="text-[var(--color-primary)] hover:underline"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  {source.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
       <section>
         <h2 className="text-xl font-semibold">FAQ</h2>
         <div className="mt-3">

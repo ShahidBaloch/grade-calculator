@@ -6,7 +6,7 @@ import { createPageMetadata } from "@/lib/seo/metadata";
 
 export const metadata = createPageMetadata({
   title: "Cookie Policy",
-  description: `How ${siteConfig.name} uses cookies — geo scale detection only. Theme is saved in localStorage.`,
+  description: `How ${siteConfig.name} uses cookies — geo detection, optional analytics, and advertising if enabled.`,
   path: "/cookie-policy",
 });
 
@@ -22,8 +22,9 @@ export default function CookiePolicyPage() {
       <ContentPageLayout title="Cookie Policy" breadcrumbs={breadcrumbs}>
         <div className="space-y-6 text-[var(--color-text-muted)]">
           <p>
-            {siteConfig.name} uses a minimal set of cookies to improve your experience. We do not use
-            advertising or tracking cookies.
+            {siteConfig.name} uses a minimal set of cookies for geo-based grading-scale defaults and,
+            when enabled, aggregated analytics or advertising. Calculator grades stay in your browser;
+            we do not store them on our servers.
           </p>
           <section>
             <h2 className="text-lg font-semibold text-[var(--color-text)]">Cookies we use</h2>
@@ -48,6 +49,19 @@ export default function CookiePolicyPage() {
                 </tr>
               </tbody>
             </table>
+          </section>
+          <section>
+            <h2 className="text-lg font-semibold text-[var(--color-text)]">Analytics and advertising</h2>
+            <p className="mt-2">
+              When enabled, our CDN or analytics partner (for example Cloudflare Web Analytics) may use
+              cookies or similar signals to measure aggregated traffic — not the numbers you enter in
+              calculators.
+            </p>
+            <p className="mt-2">
+              If we show Google AdSense or other ads, Google and its partners may use cookies to serve
+              and measure ads. You can manage ad personalization in your Google account settings and
+              clear ad-related cookies in your browser.
+            </p>
           </section>
           <section>
             <h2 className="text-lg font-semibold text-[var(--color-text)]">Stored on your device only</h2>

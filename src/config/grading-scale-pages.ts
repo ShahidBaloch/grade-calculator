@@ -34,63 +34,99 @@ export const gradingScalePages: GradingScalePageConfig[] = [
     scaleId: "uk-degree",
     title: "UK Degree Classification Scale",
     description:
-      "UK university degree classifications: First (1st), Upper Second (2:1), Lower Second (2:2), Third, and Fail with percentage boundaries.",
+      "UK university degree classifications: First (1st), Upper Second (2:1), Lower Second (2:2), Third, and Fail with percentage boundaries — not US GPA.",
     keywords: ["uk grading scale", "degree classification", "2:1 grade", "first class degree"],
     intro:
-      "UK universities classify undergraduate degrees using degree classes rather than a single GPA number. A First Class (1st) typically requires 70% or above.",
+      "UK universities classify undergraduate degrees using degree classes rather than a US-style GPA. Percentage marks map to First (70%+), 2:1 (60–69%), 2:2 (50–59%), Third (40–49%), and Fail below 40%.",
     notes: [
-      "UK marking is often stricter — 70%+ is considered excellent (First Class).",
+      "This table shows UK bands only — it does not assign an official US 4.0 GPA.",
+      "Do not self-report converted GPAs (for example 2:1 → 3.7) unless the receiving institution requires it.",
+      "For an illustrative US comparison only, open /uk-degree-to-us-gpa-reference.",
       "GCSE uses a separate 9–1 numeric scale — open the GCSE scale page and calculator.",
-      "Postgraduate programmes may use different criteria.",
     ],
   },
   {
     slug: "australia",
     path: "/grading-scales/australia",
     scaleId: "au-seven-point",
-    title: "Common Australian 7-Point Example Scale",
+    title: "Generic Australian 7-Point Example (Illustrative)",
     description:
-      "Australian university grading: HD, D, C, P, F bands with percentage ranges and 7.0 GPA points.",
+      "Illustrative HD, D, C, P, F bands with 7.0 GPA points — not a national standard. Compare UQ and Monash presets for institution-specific tables.",
     keywords: ["australian gpa calculator", "australia grading scale", "hd grade", "7.0 gpa scale"],
     intro:
-      "Many Australian universities use HD, D, C, P, and F bands, often mapped to a 7-point GPA for planning. Boundaries vary by institution — treat this table as a common example, not a national standard.",
+      "Many planning examples use HD, D, C, P, and F bands mapped to a 7-point GPA. Real universities publish their own scales — UQ uses 7-point GPA, Monash uses 4-point GPA, and UNSW often emphasises WAM. Treat this page as an illustrative example only.",
     notes: [
-      "Exact boundaries can vary slightly between universities.",
-      "Some institutions use a 4.0 scale — check your transcript.",
+      "Grade points are not universal across Australian institutions.",
+      "UQ publishes a 7-point scale — see the UQ grading scale reference page.",
+      "Monash uses a 4-point GPA (maximum 4.0) — see the Monash grading scale reference page.",
       "ATAR is a separate measure for school leavers entering university.",
+      "Do not use AU GPA × 4/7 as an official US GPA conversion.",
+      "ATAR is a Year 12 rank — do not convert ATAR to GPA or UK classifications.",
+    ],
+  },
+  {
+    slug: "australia-uq",
+    path: "/grading-scales/australia-uq",
+    scaleId: "au-uq-seven-point",
+    title: "University of Queensland (UQ) — 7-Point GPA",
+    description:
+      "UQ HD/D/C/P/F percentage bands and 7-point GPA values. Other universities may use different GPA methodologies.",
+    keywords: ["uq gpa scale", "uq grading scale", "7 point gpa uq"],
+    intro:
+      "The University of Queensland publishes a 7-point GPA scale for coursework grades. UQ notes that other institutions use different grading scales and GPA calculation methods — always read your own handbook.",
+    notes: [
+      "Confirm current bands on UQ's official grading systems page before official use.",
+      "Monash and other universities are not on this 7-point table.",
+      "This is a reference for planning — not a national Australian standard.",
+    ],
+  },
+  {
+    slug: "australia-monash",
+    path: "/grading-scales/australia-monash",
+    scaleId: "au-monash-four-point",
+    title: "Monash University — 4-Point GPA",
+    description:
+      "Monash HD/D/C/P/N bands on a 4-point GPA scale (maximum 4.0), per Monash's published GPA policy.",
+    keywords: ["monash gpa scale", "monash grading scale", "monash 4 point gpa"],
+    intro:
+      "Monash University calculates GPA on a 4-point grading scale with 4.0 as the maximum. This is not the same as the 7-point model used at universities such as UQ.",
+    notes: [
+      "Monash uses N (not F) for fail grades on transcripts in many contexts.",
+      "Do not map Monash GPA to US 4.0 with a simple ×1 formula without the receiving institution's guidance.",
+      "Select this preset in /au GPA calculators when estimating Monash coursework.",
     ],
   },
   {
     slug: "canada",
     path: "/grading-scales/canada",
     scaleId: "ca-standard",
-    title: "Common Canadian 4.0 Preset",
+    title: "Illustrative Canadian Percentage-to-GPA Preset (4.0 cap)",
     description:
-      "Canadian letter grade to percentage and 4.0 GPA conversion chart for universities and colleges.",
+      "Example Canadian letter bands and 4.0 GPA points for planning — not a single national standard used at every university.",
     keywords: ["canadian grading scale", "canada gpa scale", "letter grade canada"],
     intro:
-      "Many Canadian universities use a 4.0-style letter scale, but A+ may be 4.0 or 4.33 and percentage cutoffs differ by province and campus. This page shows one common 4.0 preset.",
+      "This chart shows one illustrative way to map percentage marks to letter grades and 4.0 GPA points. Canadian universities do not share one official percentage-to-GPA conversion — UBC tells students to use the evaluating body's scale when converting for admissions, and Waterloo, Guelph, McGill, and others publish their own tables.",
     notes: [
-      "Provincial standards vary — always confirm with your institution.",
+      "Label this as a planning preset, not a “standard Canadian conversion.”",
       "Quebec CEGEP and some programs may use different scales.",
-      "Our calculators include a Common Canadian 4.0 preset.",
-      "If your transcript awards A+ = 4.33 quality points, open the Canada 4.33 GPA reference page.",
+      "McMaster uses a separate 12-point GPA — use /mcmaster-gpa-to-us-gpa with McMaster's lookup, not 12 ÷ 3.",
+      "If your transcript awards A+ = 4.33 quality points, open the Canada 4.33 reference page.",
     ],
   },
   {
     slug: "canada-433",
     path: "/grading-scales/canada-433",
     scaleId: "ca-four-three-three",
-    title: "Canadian Grading Scale (4.33 GPA)",
+    title: "Illustrative Canadian Preset (A+ = 4.33 GPA)",
     description:
-      "Canadian letter grade chart where A+ = 4.33 GPA points — common at several universities.",
+      "Example chart where A+ earns 4.33 quality points — used at some universities, not universal across Canada.",
     keywords: ["canada 4.33 gpa", "canadian a+ 4.33", "ubc grading scale"],
     intro:
-      "Many Canadian universities cap quality points at 4.33 and assign A+ = 4.33, A = 4.0, and so on. Percentage cutoffs often match the common Canadian 4.0 preset; the difference is how A+ converts to GPA points on your transcript.",
+      "Several Canadian universities record A+ as 4.33 quality points on a 4.33-cap scale. That is still institution-specific — identical percentage cutoffs are not guaranteed for every program or admissions conversion.",
     notes: [
       "Use this preset when your faculty calendar lists A+ = 4.33.",
-      "Ontario and other provinces may still use A+ = 4.0 on a 4.0 scale — use the common Canadian 4.0 preset instead.",
-      "Canada hub calculators lock to the Common Canadian 4.0 preset; compare both tables before official submissions.",
+      "Ontario and other provinces may still use A+ = 4.0 on a 4.0 scale — use the illustrative 4.0-cap preset instead.",
+      "For US or international applications, follow the receiving institution's or credential evaluator's table.",
     ],
   },
   {

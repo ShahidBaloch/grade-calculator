@@ -9,7 +9,7 @@ export const siteFaqs: FaqItem[] = [
   {
     question: "Is my grade data private?",
     answer:
-      "Yes. We do not upload your grades to a server. Optional localStorage on this device may save theme, grading-scale preference, the last calculator you opened, and that tool's last inputs. Clear site data in your browser to remove them.",
+      "Your calculator inputs are processed in your browser and are not uploaded to our servers. Optional localStorage on this device may save theme, grading-scale preference, the last calculator you opened, and that tool's last inputs. The site may use geo cookies, CDN security, aggregated analytics, or advertising cookies as described in our Privacy and Cookie policies. Clear site data in your browser to remove local saves.",
   },
   {
     question: "What grading scale do you use?",

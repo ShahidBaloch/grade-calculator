@@ -2,7 +2,7 @@ import type { GradingScale } from "@/types/grading-scale";
 
 export const auSevenPointScale: GradingScale = {
   id: "au-seven-point",
-  name: "Common Australian 7-point example scale",
+  name: "Generic Australian example (7-point HD/D/C/P) — illustrative only",
   country: "AU",
   gpaMax: 7.0,
   passPercent: 50,
@@ -13,5 +13,8 @@ export const auSevenPointScale: GradingScale = {
     { letter: "P", min: 50, max: 64, gpa: 4.0 },
     { letter: "F", min: 0, max: 49, gpa: 0.0 },
   ],
-  sources: ["Australian university common bands", "TEQSA"],
+  sources: [
+    "Illustrative planning bands only — confirm your university handbook",
+    "TEQSA (Australian higher education quality framework)",
+  ],
 };

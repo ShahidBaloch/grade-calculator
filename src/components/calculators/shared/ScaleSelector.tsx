@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { Label } from "@/components/ui/label";
 import {
   Select,
@@ -9,14 +10,25 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { gradingScales } from "@/lib/grading-scales";
+import { AU_INSTITUTION_SCALE_IDS } from "@/lib/grading-scales/au-presets";
 import { useGradingScale } from "@/hooks/useGradingScale";
 import type { ScaleId } from "@/types/grading-scale";
 
 const scaleOptions = Object.values(gradingScales);
 
+function scaleOptionsForPath(pathname: string | null) {
+  if (pathname?.startsWith("/au")) {
+    return scaleOptions.filter((option) => AU_INSTITUTION_SCALE_IDS.includes(option.id));
+  }
+  return scaleOptions;
+}
+
 export function ScaleSelector() {
+  const pathname = usePathname();
   const { scaleId, setScaleId, isScaleLocked } = useGradingScale();
   const scale = gradingScales[scaleId];
+  const options = scaleOptionsForPath(pathname);
+  const onAustralianHub = Boolean(pathname?.startsWith("/au"));
 
   return (
     <>
@@ -37,7 +49,7 @@ export function ScaleSelector() {
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              {scaleOptions.map((option) => (
+              {options.map((option) => (
                 <SelectItem key={option.id} value={option.id}>
                   {option.name}
                 </SelectItem>
@@ -45,7 +57,9 @@ export function ScaleSelector() {
             </SelectContent>
           </Select>
           <p className="text-xs text-[var(--color-text-muted)]">
-            US 4.0 preset is the default. Change only if your school uses a different scale.
+            {onAustralianHub
+              ? "Australian grade points are not universal — pick your university preset (or the generic example). UNSW and others may use WAM instead of GPA; follow your handbook."
+              : "US 4.0 preset is the default. Change only if your school uses a different scale."}
           </p>
         </div>
       )}

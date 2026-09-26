@@ -39,7 +39,12 @@ export default function HomePage() {
           <section>
             <h2 className="text-xl font-semibold">Popular calculators</h2>
             <p className="mt-2 text-sm text-[var(--color-text-muted)]">
-              Free grade and GPA tools — instant results, no sign-up.
+              Free grade and GPA tools — instant results, no sign-up. Grades stay in your browser; see
+              our{" "}
+              <a href="/privacy-policy" className="text-[var(--color-primary)] hover:underline">
+                Privacy Policy
+              </a>{" "}
+              for cookies, analytics, and ads.
             </p>
             <div className="mt-4">
               <PopularToolsGrid />

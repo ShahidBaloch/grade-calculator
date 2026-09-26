@@ -1,4 +1,6 @@
+import { auMonashFourPointScale } from "./au-monash-four-point";
 import { auSevenPointScale } from "./au-seven-point";
+import { auUqSevenPointScale } from "./au-uq-seven-point";
 import { caFourThreeThreeScale } from "./ca-four-three-three";
 import { caStandardScale } from "./ca-standard";
 import { inTenPointScale } from "./in-ten-point";
@@ -30,6 +32,8 @@ export const gradingScales: Record<ScaleId, GradingScale> = {
   "ca-standard": caStandardScale,
   "ca-four-three-three": caFourThreeThreeScale,
   "au-seven-point": auSevenPointScale,
+  "au-uq-seven-point": auUqSevenPointScale,
+  "au-monash-four-point": auMonashFourPointScale,
   "nz-nine-point": nzNinePointScale,
   "in-ten-point": inTenPointScale,
   "pk-hec": pkHecScale,

@@ -1,9 +1,9 @@
 import type { GradingScale } from "@/types/grading-scale";
 
-/** Common Canadian university scale where A+ earns 4.33 quality points (UBC, SFU, and others). */
+/** Illustrative 4.33 quality-point preset — some campuses cap A+ at 4.33; confirm your transcript. */
 export const caFourThreeThreeScale: GradingScale = {
   id: "ca-four-three-three",
-  name: "Canada 4.33 GPA",
+  name: "Illustrative Canadian preset (A+ = 4.33)",
   country: "CA",
   gpaMax: 4.33,
   passPercent: 50,
@@ -20,5 +20,8 @@ export const caFourThreeThreeScale: GradingScale = {
     { letter: "D", min: 50, max: 59, gpa: 1.0 },
     { letter: "F", min: 0, max: 49, gpa: 0.0 },
   ],
-  sources: ["Common Canadian 4.33 scale", "Confirm your faculty calendar"],
+  sources: [
+    "Illustrative preset — percentage cutoffs and A+ handling vary by campus",
+    "https://students.ubc.ca/enrolment/academic-records/grading-scale-gpa",
+  ],
 };

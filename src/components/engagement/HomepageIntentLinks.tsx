@@ -8,7 +8,7 @@ const INTENTS = [
   { href: "/us", label: "United States", description: "US grading tools" },
   { href: "/ca", label: "Canada", description: "Canadian letter & GPA" },
   { href: "/uk", label: "United Kingdom", description: "Degree class & GCSE" },
-  { href: "/au", label: "Australia", description: "7-point GPA & ATAR" },
+  { href: "/au", label: "Australia", description: "Institution GPA & ATAR" },
   { href: "/degree-classification-calculator", label: "UK degree class", description: "First / 2:1 / 2:2" },
   { href: "/atar-calculator", label: "ATAR estimate", description: "Year 12 planning tool" },
 ] as const;

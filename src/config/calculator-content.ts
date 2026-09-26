@@ -1,11 +1,18 @@
 import type { CalculatorSlug } from "@/types/calculator";
 import type { FaqItem } from "@/types/seo";
 
+export interface PrimarySourceLink {
+  label: string;
+  href: string;
+}
+
 export interface CalculatorContent {
   howItWorks: string[];
   formula: string;
   workedExample: string;
   faqs: FaqItem[];
+  /** Official or primary references — not a substitute for reading the authority's rules. */
+  primarySources?: PrimarySourceLink[];
 }
 
 export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
@@ -340,6 +347,12 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
     ],
   },
   "degree-classification-calculator": {
+    primarySources: [
+      {
+        label: "QAA — UK quality code (assessment)",
+        href: "https://www.qaa.ac.uk/quality-code",
+      },
+    ],
     howItWorks: [
       "Add each UK module with its mark (0–100) and credit value.",
       "Tag modules as Year 2 or Year 3. If both years appear, we apply your year weights (often 40/60).",
@@ -368,14 +381,22 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
     ],
   },
   "atar-calculator": {
+    primarySources: [
+      { label: "UAC (NSW & ACT)", href: "https://www.uac.edu.au/" },
+      { label: "VTAC (Victoria)", href: "https://www.vtac.edu.au/" },
+      { label: "QTAC (Queensland)", href: "https://www.qtac.edu.au/" },
+      { label: "TISC (Western Australia)", href: "https://www.tisc.edu.au/" },
+      { label: "SATAC (SA & NT)", href: "https://www.satac.edu.au/" },
+    ],
     howItWorks: [
       "Enter scaled subject scores from 0–100 (not raw school marks).",
-      "We use a planning-only curve: best four scaled scores in full, with a fifth at 10% when you enter five subjects. This does not mirror UAC, VTAC, QTAC, TISC, or SATAC rules.",
+      "Choose your state admission centre. Queensland (QTAC/QCE) allows five General, four General plus Applied, or four General plus VET — not General-only. NSW (UAC) uses best two English plus best eight others. Victoria (VTAC) uses primary four plus up to two 10% increments. WA (TISC) adds LOTE, Methods, and Specialist bonuses. SA/NT (SATAC) models 90 credits (three TAS blocks plus flexible 30).",
       "Optionally set a target ATAR to see the counted average this curve associates with that rank.",
     ],
-    formula: "Counted average → educational ATAR lookup curve (not UAC/VTAC/QTAC official tables)",
+    formula:
+      "Counted average → educational ATAR lookup curve (VTAC: primary 4 + up to two 10% increments; not official UAC/VTAC/QTAC tables)",
     workedExample:
-      "Four scaled scores of 80 map to an estimated ATAR of 90.00 on this curve. A fifth score of 50 adds 5 points to the counted set (10% of 50).",
+      "VTAC planning: four scaled scores of 80 plus fifth 70 (10% → 7) and sixth 60 (10% → 6) → aggregate 333 on divisor 4.2 ≈ 79.29 counted average before the ATAR curve.",
     faqs: [
       {
         question: "Is this an official ATAR?",
@@ -390,12 +411,47 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
       {
         question: "How is ATAR different from GPA?",
         answer:
-          "ATAR is a percentile rank among a Year 12 cohort (0–99.95). Australian university GPA is usually a 7-point course average after you enrol.",
+          "ATAR is a percentile rank among a Year 12 cohort (0–99.95). University GPA depends on your institution (7-point, 4-point, WAM, etc.) — it is not interchangeable with ATAR or US 4.0 GPA.",
+      },
+      {
+        question: "Can I convert ATAR to US GPA with (ATAR ÷ 99.95) × 4?",
+        answer:
+          "No. That formula is not valid. ATAR is a school-leaver rank; US GPA is a course grade average on a 4.0 scale. Do not use ATAR in US GPA fields or claim a WES-equivalent GPA from ATAR alone.",
+      },
+      {
+        question: "Does ATAR convert to Australian university GPA or a UK 2:1?",
+        answer:
+          "No. After you enrol, universities calculate GPA or WAM from coursework — ATAR does not map to those numbers. UK degree classifications come from degree marks, not ATAR.",
       },
       {
         question: "Why can't you use official UAC or VTAC tables?",
         answer:
           "Those rank tables are published for a specific year and state and are not free to republish as a live calculator. Pick your authority for the right disclaimer, then treat our curve as a planning estimate.",
+      },
+      {
+        question: "How does VCE / VTAC count fifth and sixth subjects?",
+        answer:
+          "VTAC builds from a primary four scaled scores, then allows up to two permitted 10% increments — typically from fifth and/or sixth permissible VCE studies — not 10% of every additional score you enter.",
+      },
+      {
+        question: "Does QTAC only count General QCE subjects?",
+        answer:
+          "No. Eligible QTAC aggregates can be five General subjects, four General plus one Applied subject, or four General plus a Certificate III or higher VET qualification. Mark Applied or VET rows in the calculator when they apply.",
+      },
+      {
+        question: "How does UAC count HSC subjects?",
+        answer:
+          "UAC uses your best two units of English plus your best eight units from remaining courses — not simply your five highest scaled scores. Tag English rows or include “English” in the subject name for this planning view.",
+      },
+      {
+        question: "Does SATAC drop my lowest 10 credits?",
+        answer:
+          "SATAC’s ATAR aggregate is based on 90 credits (commonly three 20-credit TAS results plus a flexible 30-credit block). This tool models that structure; it is not “take 100 credits and discard the lowest 10”.",
+      },
+      {
+        question: "What WACE bonuses does TISC use?",
+        answer:
+          "TISC can add 10% of your LOTE, Mathematics Methods, and Mathematics Specialist scaled scores on top of your best four — not LOTE alone. Tag those subjects in the WACE bonus column.",
       },
     ],
   },
@@ -535,6 +591,65 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
         question: "Should I use this for Pakistan HEC CGPA?",
         answer:
           "HEC is already on a 4.0 idea. This converter is for Indian 10-point CGPA mapping to US 4.0.",
+      },
+    ],
+  },
+  "mcmaster-gpa-to-us-gpa": {
+    primarySources: [
+      {
+        label: "McMaster — grading & GPA",
+        href: "https://registrar.mcmaster.ca/grades/",
+      },
+    ],
+    howItWorks: [
+      "Enter your McMaster 12-point GPA (0–12) from your transcript or degree audit.",
+      "We look up McMaster's published 12-point → US 4.0 equivalent table.",
+      "Read the US 4.0 planning value — confirm with McMaster or the receiving graduate program before submitting.",
+    ],
+    formula: "US 4.0 = McMaster official lookup (not 12-point GPA ÷ 3)",
+    workedExample: "McMaster 11 → 3.9 US 4.0 (not 11 ÷ 3 = 3.67).",
+    faqs: [
+      {
+        question: "Why is dividing McMaster GPA by 3 wrong?",
+        answer:
+          "McMaster's own conversion table maps 11 to 3.9 and 10 to 3.7. Simple division by 3 overstates or misstates those values and is not McMaster's published method.",
+      },
+      {
+        question: "Is this the same as converting Canadian percentage to US GPA?",
+        answer:
+          "No. This tool is only for McMaster's 12-point GPA scale. Other Canadian universities use different scales.",
+      },
+    ],
+  },
+  "uk-degree-to-us-gpa-reference": {
+    primarySources: [
+      {
+        label: "QAA — UK higher education",
+        href: "https://www.qaa.ac.uk/",
+      },
+      {
+        label: "WES — credential evaluation (illustrative only)",
+        href: "https://www.wes.org/",
+      },
+    ],
+    howItWorks: [
+      "Pick your UK degree class or enter a UK percentage mark.",
+      "We map it to the standard UK classification bands (First, 2:1, 2:2, Third).",
+      "See an illustrative US 4.0 comparison — not a value to self-report unless the application requires conversion.",
+    ],
+    formula: "Illustrative US 4.0 ≈ planning comparison only (varies by evaluator)",
+    workedExample:
+      "Upper Second (2:1) is sometimes cited near 3.7 on informal WES-style charts — do not report 3.7 unless the form tells you to convert.",
+    faqs: [
+      {
+        question: "Should I enter 3.7 on my US application for a 2:1?",
+        answer:
+          "Usually no. Report your classification and marks as on your transcript. Stanford Graduate Admissions explicitly says not to convert to a 4.0 scale when the transcript does not include GPA.",
+      },
+      {
+        question: "Is this the same as a WES evaluation?",
+        answer:
+          "No. WES and other credential evaluators apply their own methodologies. This page shows commonly cited planning numbers only.",
       },
     ],
   },

@@ -6,7 +6,7 @@ import { createPageMetadata } from "@/lib/seo/metadata";
 const hub = countryHubByPath["/au"];
 
 export const metadata = createPageMetadata({
-  title: "Australia Grade Calculator — 7.0 GPA Scale",
+  title: "Australia Grade Calculator — Institution GPA Presets & ATAR",
   description: hub.description,
   path: "/au",
   keywords: hub.keywords,
