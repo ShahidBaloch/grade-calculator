@@ -1,20 +1,24 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ArrowRight } from "lucide-react";
-import { getCalculatorPath } from "@/config/calculators";
 import type { CalculatorSlug } from "@/types/calculator";
 import type { EngagementFlow } from "@/config/engagement-flows";
+import { resolveCalculatorPath } from "@/lib/utils/country-path";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
-function resolveHref(to: EngagementFlow["to"]): string {
+function resolveHref(to: EngagementFlow["to"], pathname: string | null): string {
   if (to === "grading-scales") return "/grading-scales";
   if (to.startsWith("guide:")) {
     return `/guides/${to.slice("guide:".length)}`;
   }
-  return getCalculatorPath(to as CalculatorSlug);
+  return resolveCalculatorPath(to as CalculatorSlug, pathname);
 }
 
 export function NextStepCard({ flow }: { flow: EngagementFlow }) {
-  const href = resolveHref(flow.to);
+  const pathname = usePathname();
+  const href = resolveHref(flow.to, pathname);
 
   return (
     <Card className="no-print hover:shadow-md transition-shadow">

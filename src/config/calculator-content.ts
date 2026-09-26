@@ -32,7 +32,7 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
       {
         question: "What grading scale is used?",
         answer:
-          "We default to the US Standard 4.0 scale. Your region may be detected automatically, or you can pick a different scale in the calculator settings.",
+          "We default to the common US 4.0 GPA scale. Your region may be detected automatically, or you can pick a different scale in the calculator settings.",
       },
     ],
   },
@@ -259,11 +259,11 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
       "See the letter grade and GPA equivalent.",
     ],
     formula: "Letter = band matching percentage on selected scale",
-    workedExample: "85% on US Standard scale → B (83–86%).",
+    workedExample: "85% on the common US 4.0 scale → B (83–86%).",
     faqs: [
       {
         question: "What percentage is a B?",
-        answer: "On the US Standard scale, B is typically 83–86%. Exact ranges vary by school.",
+        answer: "On the common US 4.0 scale, B is typically 83–86%. Exact ranges vary by school.",
       },
       {
         question: "Does 85% always become a B?",
@@ -279,11 +279,11 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
       "Useful for understanding what a letter grade means numerically.",
     ],
     formula: "Percentage = midpoint of letter grade band on selected scale",
-    workedExample: "B+ on US Standard → approximately 89.5% (87–89% range).",
+    workedExample: "B+ on the common US 4.0 scale → approximately 89.5% (87–89% range).",
     faqs: [
       {
         question: "What percentage is an A?",
-        answer: "On US Standard, A is 93–96% and A+ is 97–100%. Select your scale for exact ranges.",
+        answer: "On the common US 4.0 scale, A is 93–96% and A+ is 97–100%. Select your scale for exact ranges.",
       },
       {
         question: "Why do you show a midpoint instead of a range only?",

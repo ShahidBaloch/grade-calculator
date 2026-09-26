@@ -69,7 +69,7 @@ export function CalculatorRoute({
         description={config.description}
         breadcrumbs={breadcrumbs}
         calculator={calculator}
-        content={aside ?? <CalculatorPageSections slug={slug} />}
+        content={aside ?? <CalculatorPageSections slug={slug} pagePath={pagePath} />}
         below={below}
       />
     </>

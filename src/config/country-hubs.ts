@@ -27,10 +27,10 @@ export const countryHubs: CountryHubConfig[] = [
     flag: "🇺🇸",
     scaleId: "us-standard",
     description:
-      "Free grade and GPA calculators for US students and teachers. US Standard 4.0 grading scale.",
+      "Free grade and GPA calculators for US students and teachers. Common US 4.0 GPA scale preset.",
     details: [
       "US high schools often report both unweighted 4.0 GPA and weighted GPA with Honors, AP, or IB bonuses. Colleges usually recast that onto their own scale.",
-      "State End-of-Course exams in places such as Florida and Texas can count 20–30% of a course grade — use the EOC calculator for that, not the classroom final tool.",
+      "Florida law can require End-of-Course (EOC) exams to count up to 30% of the course grade for specified courses. Texas uses statewide EOC assessments, but course-weight rules vary by district — check your district policy before using the EOC calculator.",
     ],
     faqs: [
       {
@@ -77,7 +77,7 @@ export const countryHubs: CountryHubConfig[] = [
       {
         question: "Which Canadian scale should I use?",
         answer:
-          "This hub locks tools to Canada Standard (4.0 max, A+ = 4.0). If your transcript uses A+ = 4.33, open the grading scales page for Canada 4.33 or ask your registrar which table matches your record.",
+          "This hub locks tools to the Common Canadian 4.0 preset (A+ = 4.0). If your transcript uses A+ = 4.33, open the grading scales page for Canada 4.33 or ask your registrar which table matches your record.",
       },
     ],
     gradingScalePath: "/grading-scales/canada",
@@ -92,7 +92,7 @@ export const countryHubs: CountryHubConfig[] = [
     keywords: ["canada gpa calculator", "canadian grading scale", "grade calculator canada"],
     hreflang: "en-CA",
     scaleLockNote:
-      "Tools on this hub lock to Canada Standard 4.0. Many universities record A+ as 4.33 — see /grading-scales/canada-433 for that preset.",
+      "Tools on this hub lock to the Common Canadian 4.0 preset. Many universities record A+ as 4.33 — see /grading-scales/canada-433 for that option.",
   },
   {
     code: "uk",
@@ -138,7 +138,7 @@ export const countryHubs: CountryHubConfig[] = [
     flag: "🇦🇺",
     scaleId: "au-seven-point",
     description:
-      "Australian grade tools on the 7.0 GPA scale with HD, D, C, P, and F bands.",
+      "Australian grade tools using a common 7-point example scale (HD, D, C, P, F). Institution tables vary.",
     details: [
       "Most Australian universities report High Distinction, Distinction, Credit, Pass, and Fail, often mapped to a 7-point GPA. ATAR is a separate rank used for school-leaver admissions — it is not a course GPA.",
       "Use the ATAR calculator for a planning estimate from scaled Year 12 scores. After you enrol, switch to the 7-point GPA tools.",

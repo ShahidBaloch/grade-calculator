@@ -12,7 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { calculateAtar } from "@/lib/calculators/atar";
-import type { AtarSubject } from "@/lib/calculators/atar";
+import type { AtarAuthority, AtarSubject } from "@/lib/calculators/atar";
 import { useCalculatorPersistence } from "@/hooks/useCalculatorPersistence";
 
 const AUTHORITIES = [
@@ -39,7 +39,9 @@ export function AtarCalculator() {
     authority: "generic",
   });
   const { subjects, targetAtar } = state;
-  const authority = state.authority || "generic";
+  const authority = (
+    AUTHORITIES.some((item) => item.id === state.authority) ? state.authority : "generic"
+  ) as AtarAuthority;
   const authorityMeta = AUTHORITIES.find((item) => item.id === authority) ?? AUTHORITIES[0];
   const examples = calculatorBySlug["atar-calculator"].examples;
 
@@ -48,8 +50,9 @@ export function AtarCalculator() {
       calculateAtar({
         subjects,
         targetAtar: targetAtar === "" ? undefined : targetAtar,
+        authority,
       }),
-    [subjects, targetAtar],
+    [subjects, targetAtar, authority],
   );
 
   const updateSubjects = (next: AtarSubject[]) => setState({ ...state, subjects: next });
@@ -83,11 +86,12 @@ export function AtarCalculator() {
         (after state scaling), not raw school marks. Raw marks will overestimate or underestimate ATAR.
       </p>
       <p className="text-sm text-[var(--color-text-muted)]">
-        Enter scaled subject scores from 0–100. We average the best four and count a fifth at 10%.
-        This is an estimate only — official {authorityMeta.name} ATARs use state scaling we cannot republish.
+        Select your state admission centre, then enter <strong className="font-medium text-[var(--color-text)]">scaled</strong>{" "}
+        subject scores (0–100). Each authority uses different aggregation rules — we apply a simplified
+        planning model for the option you choose, not an official {authorityMeta.name} calculation.
       </p>
       <div className="space-y-2">
-        <Label htmlFor="atar-authority">State authority (disclaimer only)</Label>
+        <Label htmlFor="atar-authority">State admission centre (changes the planning formula)</Label>
         <Select
           value={authority}
           onValueChange={(value) => setState({ ...state, authority: value })}

@@ -10,16 +10,26 @@ import { ScaleSelector } from "@/components/calculators/shared/ScaleSelector";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { convertLetterToPercent } from "@/lib/calculators/grade-converter";
+import { defaultLetterForScale, letterPlaceholderForScale } from "@/lib/calculators/gpa-defaults";
 import { useCalculatorPersistence } from "@/hooks/useCalculatorPersistence";
 import { useGradingScale } from "@/hooks/useGradingScale";
 
 export function LetterGradeCalculator() {
   const { scaleId } = useGradingScale();
-  const { state, setState, resetState, shareUrl, copied } = useCalculatorPersistence(
+  const { state, setState, resetState, shareUrl, copied, hydrated } = useCalculatorPersistence(
     "letter-grade-calculator",
-    { letter: "B+" },
+    { letter: defaultLetterForScale(scaleId) },
   );
   const examples = calculatorBySlug["letter-grade-calculator"].examples;
+
+  React.useEffect(() => {
+    if (!hydrated) return;
+    const check = convertLetterToPercent(state.letter, scaleId);
+    if (check.status === "error") {
+      setState({ letter: defaultLetterForScale(scaleId) });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hydrated, scaleId]);
 
   const result = React.useMemo(
     () => convertLetterToPercent(state.letter, scaleId),
@@ -44,7 +54,7 @@ export function LetterGradeCalculator() {
         <Label htmlFor="letter-grade-input">Letter grade</Label>
         <Input
           id="letter-grade-input"
-          placeholder="e.g. A-, B+, C"
+          placeholder={letterPlaceholderForScale(scaleId)}
           value={state.letter}
           onChange={(e) => setState({ letter: e.target.value })}
         />
@@ -55,7 +65,10 @@ export function LetterGradeCalculator() {
           <Label>Equivalent percentage</Label>
           <p className="text-5xl font-bold">{result.data.midpointPercent.toFixed(1)}%</p>
           <p className="mt-2 text-sm text-[var(--color-text-muted)]">
-            {result.data.letter} · Range {result.data.rangeLabel} · GPA {result.data.gpa.toFixed(1)}
+            {result.data.letter} · Range {result.data.rangeLabel}
+            {scaleId === "uk-degree"
+              ? " · Not an official UK GPA conversion"
+              : ` · GPA ${result.data.gpa.toFixed(1)}`}
           </p>
         </div>
       )}

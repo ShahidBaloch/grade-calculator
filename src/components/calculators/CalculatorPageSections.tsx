@@ -8,7 +8,13 @@ import { RelatedCalculators } from "@/components/content/RelatedCalculators";
 import { FormulaBreakdown } from "@/components/calculators/shared/FormulaBreakdown";
 import type { CalculatorSlug } from "@/types/calculator";
 
-export function CalculatorPageSections({ slug }: { slug: CalculatorSlug }) {
+export function CalculatorPageSections({
+  slug,
+  pagePath,
+}: {
+  slug: CalculatorSlug;
+  pagePath?: string;
+}) {
   const content = calculatorContent[slug];
   const relatedSlugs = calculatorBySlug[slug].relatedSlugs;
 
@@ -37,7 +43,7 @@ export function CalculatorPageSections({ slug }: { slug: CalculatorSlug }) {
       <section>
         <h2 className="text-xl font-semibold">Related calculators</h2>
         <div className="mt-4">
-          <RelatedCalculators slugs={relatedSlugs} />
+          <RelatedCalculators slugs={relatedSlugs} pagePath={pagePath} />
         </div>
       </section>
     </div>

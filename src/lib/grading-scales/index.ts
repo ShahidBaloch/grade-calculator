@@ -65,9 +65,15 @@ export function percentToLetter(percent: number, scaleId: ScaleId = DEFAULT_SCAL
 export function letterToPercent(letter: string, scaleId: ScaleId = DEFAULT_SCALE_ID): number | null {
   const scale = getScale(scaleId);
   const normalized = letter.trim().toUpperCase();
-  const band = scale.bands.find((b) => b.letter.toUpperCase() === normalized);
-  if (!band) return null;
-  return (band.min + band.max) / 2;
+  if (!normalized) return null;
+
+  const exact = scale.bands.find((b) => b.letter.toUpperCase() === normalized);
+  if (exact) return (exact.min + exact.max) / 2;
+
+  const bySubstring = scale.bands.find((b) => b.letter.toUpperCase().includes(normalized));
+  if (bySubstring) return (bySubstring.min + bySubstring.max) / 2;
+
+  return null;
 }
 
 export function getGradeBandClass(letter: string): "a" | "b" | "c" | "d" | "f" {

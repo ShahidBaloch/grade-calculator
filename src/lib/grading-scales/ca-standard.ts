@@ -2,7 +2,7 @@ import type { GradingScale } from "@/types/grading-scale";
 
 export const caStandardScale: GradingScale = {
   id: "ca-standard",
-  name: "Canada Standard",
+  name: "Common Canadian 4.0 preset",
   country: "CA",
   gpaMax: 4.0,
   passPercent: 50,

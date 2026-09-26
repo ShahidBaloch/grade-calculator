@@ -11,12 +11,14 @@ import {
 } from "@/lib/utils/calculator-state";
 import { getCalculatorPath } from "@/config/calculators";
 import { serializeRecentCalculator } from "@/lib/utils/recent-calculator";
+import { calculatorStorageScope } from "@/lib/utils/country-path";
 import { getStorageItem, setStorageItem } from "@/lib/utils/storage";
 import { isCalculatorSlug } from "@/types/calculator";
 
 export function useCalculatorPersistence<T>(slug: string, initialState: T) {
   const pathname = usePathname();
-  const storageKey = STORAGE_KEYS.calculatorState(slug);
+  const storageScope = calculatorStorageScope(pathname);
+  const storageKey = `${STORAGE_KEYS.calculatorState(slug)}:${storageScope}`;
   const [state, setState] = React.useState<T>(initialState);
   const [hydrated, setHydrated] = React.useState(false);
   const [copied, setCopied] = React.useState(false);

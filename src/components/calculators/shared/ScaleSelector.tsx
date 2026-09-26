@@ -45,7 +45,7 @@ export function ScaleSelector() {
             </SelectContent>
           </Select>
           <p className="text-xs text-[var(--color-text-muted)]">
-            US Standard is default. Change only if your school uses a different scale.
+            US 4.0 preset is the default. Change only if your school uses a different scale.
           </p>
         </div>
       )}

@@ -8,7 +8,11 @@ export interface AtarSubject {
 export interface AtarInput {
   subjects: AtarSubject[];
   targetAtar?: number;
+  /** Planning model — states use different aggregation rules. */
+  authority?: AtarAuthority;
 }
+
+export type AtarAuthority = "generic" | "uac" | "vtac" | "qtac" | "tisc" | "satac";
 
 export interface AtarResult {
   estimatedAtar: number;
@@ -37,7 +41,81 @@ const AVERAGE_TO_ATAR: Array<[number, number]> = [
 ];
 
 const DISCLAIMER =
-  "This is an educational estimate, not an official ATAR. Real ATARs use state scaling (UAC, VTAC, QTAC, TISC, SATAC) and change each year.";
+  "This is an educational estimate, not an official ATAR. Real ATARs use state scaling (UAC, VTAC, QTAC, TISC, SATAC) and change each year. One formula cannot model every state.";
+
+function authorityLabel(authority: AtarAuthority): string {
+  switch (authority) {
+    case "uac":
+      return "NSW/ACT (UAC-style planning average)";
+    case "qtac":
+      return "Queensland (QTAC-style best-five average)";
+    case "vtac":
+      return "Victoria (VTAC-style aggregate estimate)";
+    case "tisc":
+      return "Western Australia (TISC-style planning estimate)";
+    case "satac":
+      return "SA/NT (SATAC-style planning estimate)";
+    default:
+      return "Generic multi-state planning estimate";
+  }
+}
+
+function countedSet(
+  subjects: AtarSubject[],
+  authority: AtarAuthority,
+): { scores: number[]; average: number; methodNote: string } {
+  const scores = subjects
+    .map((s) => s.scaledScore)
+    .filter((score) => Number.isFinite(score))
+    .sort((a, b) => b - a);
+
+  if (scores.length === 0) {
+    return { scores: [], average: 0, methodNote: "No scaled scores entered." };
+  }
+
+  if (authority === "qtac") {
+    const top = scores.slice(0, 5);
+    const average = top.reduce((sum, n) => sum + n, 0) / top.length;
+    return {
+      scores: top,
+      average,
+      methodNote:
+        "Queensland/QTAC commonly builds an aggregate from the best five eligible scaled inputs — modeled here as the average of your five highest scores.",
+    };
+  }
+
+  if (authority === "uac") {
+    const top = scores.slice(0, 5);
+    const average = top.reduce((sum, n) => sum + n, 0) / top.length;
+    return {
+      scores: top,
+      average,
+      methodNote:
+        "NSW/ACT (UAC) uses English plus other scaled units in a specific ruleset we cannot reproduce. This planning view averages your five highest scaled scores and ignores compulsory English rules.",
+    };
+  }
+
+  if (scores.length <= 4) {
+    const average = scores.reduce((sum, n) => sum + n, 0) / scores.length;
+    return {
+      scores,
+      average,
+      methodNote: "Average of the scaled scores you entered.",
+    };
+  }
+
+  const top4 = scores.slice(0, 4);
+  const fifthContribution = scores[4] * 0.1;
+  const aggregate = top4.reduce((sum, n) => sum + n, 0) + fifthContribution;
+  const methodNote =
+    authority === "vtac"
+      ? "Victoria/VTAC is closer to a primary-four structure with additional increments — modeled here as best four in full plus 10% of a fifth score."
+      : authority === "generic"
+        ? "Several states (including Victoria) use variants of a primary-four aggregate. This generic view uses best four in full plus 10% of a fifth score — not a national rule."
+        : "Planning estimate: best four scaled scores in full plus 10% of a fifth score.";
+
+  return { scores: [...top4, fifthContribution], average: aggregate / 4.1, methodNote };
+}
 
 function interpolate(table: Array<[number, number]>, x: number): number {
   const clamped = Math.min(table[table.length - 1][0], Math.max(table[0][0], x));
@@ -62,24 +140,6 @@ export function requiredAverageForAtar(targetAtar: number): number {
   return interpolate(inverse, targetAtar);
 }
 
-function countedSet(subjects: AtarSubject[]): { scores: number[]; average: number } {
-  const scores = subjects
-    .map((s) => s.scaledScore)
-    .filter((score) => Number.isFinite(score))
-    .sort((a, b) => b - a);
-
-  if (scores.length === 0) return { scores: [], average: 0 };
-  if (scores.length <= 4) {
-    const average = scores.reduce((sum, n) => sum + n, 0) / scores.length;
-    return { scores, average };
-  }
-
-  const top4 = scores.slice(0, 4);
-  const fifthContribution = scores[4] * 0.1;
-  const aggregate = top4.reduce((sum, n) => sum + n, 0) + fifthContribution;
-  return { scores: [...top4, fifthContribution], average: aggregate / 4.1 };
-}
-
 export function calculateAtar(input: AtarInput): CalculatorResult<AtarResult> {
   const errors: string[] = [];
 
@@ -101,7 +161,8 @@ export function calculateAtar(input: AtarInput): CalculatorResult<AtarResult> {
     return { status: "error", errors };
   }
 
-  const counted = countedSet(input.subjects);
+  const authority: AtarAuthority = input.authority ?? "generic";
+  const counted = countedSet(input.subjects, authority);
   const countedAverage = counted.average;
   const countedScores = counted.scores;
   const estimatedAtar = estimateAtarFromAverage(countedAverage);
@@ -109,9 +170,8 @@ export function calculateAtar(input: AtarInput): CalculatorResult<AtarResult> {
     input.targetAtar != null && input.targetAtar > 0 ? requiredAverageForAtar(input.targetAtar) : null;
 
   const formulaSteps = [
-    countedScores.length > 4
-      ? "Best four scaled scores count in full; a fifth subject contributes 10% (planning estimate — not an official state ATAR calculation)."
-      : "Average of the scaled scores you entered.",
+    authorityLabel(authority),
+    counted.methodNote,
     `Counted scores: ${countedScores.map((n) => n.toFixed(1)).join(", ")}`,
     `Counted average: ${countedAverage.toFixed(2)}`,
     `Estimated ATAR (lookup curve): ${estimatedAtar.toFixed(2)}`,

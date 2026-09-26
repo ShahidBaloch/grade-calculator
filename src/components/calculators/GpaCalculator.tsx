@@ -12,6 +12,7 @@ import { Input } from "@/components/ui/input";
 import { calculateSemesterGpa } from "@/lib/calculators/gpa";
 import {
   defaultCoursesForScale,
+  defaultGradeForScale,
   gradePlaceholderForScale,
   semesterResultLabel,
 } from "@/lib/calculators/gpa-defaults";
@@ -21,7 +22,7 @@ import { useGradingScale } from "@/hooks/useGradingScale";
 
 export function GpaCalculator() {
   const { scaleId } = useGradingScale();
-  const { state, setState, resetState, shareUrl, copied } = useCalculatorPersistence("gpa-calculator", {
+  const { state, setState, resetState, shareUrl, copied, hydrated } = useCalculatorPersistence("gpa-calculator", {
     courses: defaultCoursesForScale(scaleId),
   });
   const { courses } = state;
@@ -29,12 +30,13 @@ export function GpaCalculator() {
   const examples = calculatorBySlug["gpa-calculator"].examples;
 
   React.useEffect(() => {
+    if (!hydrated) return;
     const check = calculateSemesterGpa({ courses }, scaleId);
     if (check.errors?.some((e) => e.toLowerCase().includes("invalid"))) {
       setCourses(defaultCoursesForScale(scaleId));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [scaleId]);
+  }, [hydrated, scaleId]);
 
   const result = React.useMemo(
     () => calculateSemesterGpa({ courses }, scaleId),
@@ -71,7 +73,7 @@ export function GpaCalculator() {
       </div>
       <DynamicRowList
         items={courses}
-        onAdd={() => setCourses([...courses, { name: "", grade: "B", credits: 3 }])}
+        onAdd={() => setCourses([...courses, { name: "", grade: defaultGradeForScale(scaleId), credits: 3 }])}
         onRemove={(index) => setCourses(courses.filter((_, i) => i !== index))}
         addLabel="Add course"
         renderRow={(course, index) => (

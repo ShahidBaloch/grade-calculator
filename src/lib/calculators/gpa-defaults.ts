@@ -1,33 +1,47 @@
+import { getScale } from "@/lib/grading-scales";
 import type { ScaleId } from "@/types/grading-scale";
 
 export type GpaCourseDefault = { name: string; grade: string; credits: number };
 
+const DEFAULT_COURSE_NAMES = ["English", "Mathematics", "History"] as const;
+
+export function defaultGradeForScale(scaleId: ScaleId): string {
+  const bands = getScale(scaleId).bands;
+  const band = bands[Math.min(1, bands.length - 1)] ?? bands[0];
+  return band?.letter ?? "B";
+}
+
+export function defaultLetterForScale(scaleId: ScaleId): string {
+  return defaultGradeForScale(scaleId);
+}
+
 export function defaultCoursesForScale(scaleId: ScaleId): GpaCourseDefault[] {
-  if (scaleId === "in-ten-point") {
-    return [
-      { name: "Physics", grade: "O", credits: 4 },
-      { name: "Mathematics", grade: "A+", credits: 4 },
-      { name: "Chemistry", grade: "A", credits: 3 },
-    ];
-  }
-  if (scaleId === "pk-hec") {
-    return [
-      { name: "English", grade: "A", credits: 3 },
-      { name: "Mathematics", grade: "B+", credits: 3 },
-      { name: "Physics", grade: "A-", credits: 3 },
-    ];
-  }
-  return [
-    { name: "English", grade: "A", credits: 3 },
-    { name: "Math", grade: "B+", credits: 3 },
-    { name: "History", grade: "A-", credits: 3 },
-  ];
+  const bands = getScale(scaleId).bands;
+  const picks = [bands[0], bands[Math.min(1, bands.length - 1)], bands[Math.min(2, bands.length - 1)]].filter(
+    Boolean,
+  );
+
+  return picks.map((band, index) => ({
+    name: DEFAULT_COURSE_NAMES[index] ?? `Course ${index + 1}`,
+    grade: band.letter,
+    credits: scaleId === "in-ten-point" ? 4 - (index === 2 ? 1 : 0) : 3,
+  }));
 }
 
 export function gradePlaceholderForScale(scaleId: ScaleId): string {
-  if (scaleId === "in-ten-point") return "Grade (O, A+, 85)";
-  if (scaleId === "pk-hec") return "Grade (A, B+, 82)";
-  return "Grade (A, B+, 92)";
+  const samples = getScale(scaleId)
+    .bands.slice(0, 3)
+    .map((band) => band.letter)
+    .join(", ");
+  return samples ? `Grade (${samples})` : "Grade";
+}
+
+export function letterPlaceholderForScale(scaleId: ScaleId): string {
+  const samples = getScale(scaleId)
+    .bands.slice(0, 3)
+    .map((band) => band.letter)
+    .join(", ");
+  return samples ? `e.g. ${samples}` : "Enter grade on this scale";
 }
 
 export function semesterResultLabel(scaleId: ScaleId): string {

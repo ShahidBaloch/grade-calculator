@@ -20,7 +20,7 @@ import { useGradingScale } from "@/hooks/useGradingScale";
 export function CumulativeGpaCalculator() {
   const { scaleId } = useGradingScale();
   const gpaMax = getScaleMaxGpa(scaleId);
-  const { state, setState, resetState, shareUrl, copied } = useCalculatorPersistence(
+  const { state, setState, resetState, shareUrl, copied, hydrated } = useCalculatorPersistence(
     "cumulative-gpa-calculator",
     {
       previousGpa: 3.5 as number | "",
@@ -32,6 +32,7 @@ export function CumulativeGpaCalculator() {
   const examples = calculatorBySlug["cumulative-gpa-calculator"].examples;
 
   React.useEffect(() => {
+    if (!hydrated) return;
     const check = calculateCumulativeGpa(
       {
         previousGpa: previousGpa === "" ? 0 : previousGpa,
@@ -44,7 +45,7 @@ export function CumulativeGpaCalculator() {
       setState({ ...state, courses: defaultCoursesForScale(scaleId) });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [scaleId]);
+  }, [hydrated, scaleId]);
 
   const result = React.useMemo(
     () =>

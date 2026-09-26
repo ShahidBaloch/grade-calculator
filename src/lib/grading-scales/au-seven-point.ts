@@ -2,7 +2,7 @@ import type { GradingScale } from "@/types/grading-scale";
 
 export const auSevenPointScale: GradingScale = {
   id: "au-seven-point",
-  name: "Australia 7.0 GPA",
+  name: "Common Australian 7-point example scale",
   country: "AU",
   gpaMax: 7.0,
   passPercent: 50,
