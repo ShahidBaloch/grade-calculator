@@ -6,11 +6,11 @@ import { createPageMetadata } from "@/lib/seo/metadata";
 const hub = countryHubByPath["/uk"];
 
 export const metadata = createPageMetadata({
-  title: "UK Grade Calculator — Degree Classification Tools",
+  title: "United Kingdom Grading Tools — Degree Class and GCSE",
   description: hub.description,
   path: "/uk",
   keywords: hub.keywords,
-  languages: countryHubHreflangLanguages(),
+  languages: countryHubHreflangLanguages("/uk"),
 });
 
 export default function UkHubPage() {

@@ -1,8 +1,10 @@
 import type { MetadataRoute } from "next";
-import { calculators } from "@/config/calculators";
-import { countryCalculatorPaths, countryHubs } from "@/config/country-hubs";
+import { calculators, getCalculatorPath } from "@/config/calculators";
+import { countryHubs } from "@/config/country-hubs";
 import { gradingScalePages } from "@/config/grading-scale-pages";
 import { guides } from "@/config/guides";
+import { isRedirectOnlyPath } from "@/lib/seo/canonical";
+import { indexableGeoCalculatorPaths } from "@/lib/seo/intent-urls";
 import { siteConfig } from "@/config/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -23,11 +25,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...calculators
       .filter((c) => c.slug !== "ez-grader")
       .map((c) => ({
-        path: c.path,
+        path: getCalculatorPath(c.slug),
         priority: 0.9,
         changeFrequency: "monthly" as const,
       })),
-    ...countryCalculatorPaths.map((path) => ({
+    ...indexableGeoCalculatorPaths().map((path) => ({
       path,
       priority: 0.8,
       changeFrequency: "monthly" as const,
@@ -54,10 +56,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const all = [...staticPages, ...calculatorPages, ...guidePages, ...scalePages, ...hubPages];
 
-  return all.map(({ path, priority, changeFrequency }) => ({
-    url: `${siteConfig.url}${path === "/" ? "" : path}`,
-    lastModified: new Date(),
-    changeFrequency,
-    priority,
-  }));
+  const seen = new Set<string>();
+  const entries: MetadataRoute.Sitemap = [];
+
+  for (const { path, priority, changeFrequency } of all) {
+    const pathname = path === "/" ? "/" : path;
+    if (isRedirectOnlyPath(pathname)) {
+      continue;
+    }
+    const url = `${siteConfig.url}${path === "/" ? "" : path}`;
+    if (seen.has(url)) continue;
+    seen.add(url);
+    entries.push({
+      url,
+      lastModified: new Date(),
+      changeFrequency,
+      priority,
+    });
+  }
+
+  return entries;
 }

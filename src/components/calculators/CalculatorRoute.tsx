@@ -6,6 +6,7 @@ import { calculatorBySlug, getCalculatorPath } from "@/config/calculators";
 import { countryHubByPath } from "@/config/country-hubs";
 import { webApplicationJsonLd, faqPageJsonLd, howToJsonLd } from "@/lib/seo/jsonld";
 import { calculatorContent } from "@/config/calculator-content";
+import { pageDescription, pageTitle } from "@/lib/seo/page-copy";
 import type { CalculatorSlug } from "@/types/calculator";
 
 interface CalculatorRouteProps {
@@ -16,6 +17,7 @@ interface CalculatorRouteProps {
   breadcrumbHome?: boolean;
   aside?: React.ReactNode;
   below?: React.ReactNode;
+  focus?: boolean;
 }
 
 export function CalculatorRoute({
@@ -25,16 +27,15 @@ export function CalculatorRoute({
   breadcrumbHome = false,
   aside,
   below,
+  focus = false,
 }: CalculatorRouteProps) {
   const config = calculatorBySlug[slug];
   const content = calculatorContent[slug];
   const pagePath = path ?? getCalculatorPath(slug);
   const geoSegment = pagePath.split("/").filter(Boolean)[0];
   const geoHub = geoSegment ? countryHubByPath[`/${geoSegment}`] : undefined;
-  const pageDescription = geoHub
-    ? `${config.description} This page uses the ${geoHub.name} hub — open ${geoHub.gradingScalePath} if you need the reference chart.`
-    : config.description;
-
+  const description = pageDescription(pagePath, config.description);
+  const title = pageTitle(pagePath, config.name);
   const breadcrumbs = breadcrumbHome
     ? [{ name: "Home", href: "/" }]
     : geoHub
@@ -54,13 +55,13 @@ export function CalculatorRoute({
       <JsonLd
         data={[
           webApplicationJsonLd({
-            name: config.name,
-            description: config.description,
+            name: title,
+            description,
             path: pagePath,
           }),
           howToJsonLd({
-            name: `How to use the ${config.name}`,
-            description: config.description,
+            name: `How to use the ${title}`,
+            description,
             steps: content.howItWorks,
           }),
           faqPageJsonLd(content.faqs),
@@ -68,12 +69,10 @@ export function CalculatorRoute({
       />
       <BreadcrumbJsonLd items={breadcrumbs} />
       <CalculatorLayout
-        title={config.name}
-        description={pageDescription}
+        title={title}
+        description={description}
         breadcrumbs={breadcrumbs}
-        pagePath={pagePath}
-        showIntentNav={slug !== "ez-grader" || pagePath !== "/"}
-        calculator={calculator}
+        focus={focus}
         content={aside ?? <CalculatorPageSections slug={slug} pagePath={pagePath} />}
         below={below}
       />

@@ -6,11 +6,11 @@ import { createPageMetadata } from "@/lib/seo/metadata";
 const hub = countryHubByPath["/pk"];
 
 export const metadata = createPageMetadata({
-  title: "Pakistan Grade Calculator — HEC GPA & CGPA Tools",
+  title: "Pakistan Grading Tools — HEC GPA and CGPA",
   description: hub.description,
   path: "/pk",
   keywords: hub.keywords,
-  languages: countryHubHreflangLanguages(),
+  languages: countryHubHreflangLanguages("/pk"),
 });
 
 export default function PkHubPage() {

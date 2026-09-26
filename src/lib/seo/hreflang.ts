@@ -1,33 +1,18 @@
 import { getCalculatorPath } from "@/config/calculators";
-import { countryHubs } from "@/config/country-hubs";
 import { absoluteUrl } from "@/config/site";
 import type { CalculatorSlug } from "@/types/calculator";
 
+/**
+ * Hreflang is only for the same page in another language or region.
+ * Country GPA pages are different grading systems, so each URL stands alone.
+ * Cross-linking them as alternates makes Google swap the wrong country into results.
+ */
 export function calculatorHreflangLanguages(slug: CalculatorSlug): Record<string, string> {
-  const worldwide = absoluteUrl(getCalculatorPath(slug));
-  const languages: Record<string, string> = {
-    "x-default": worldwide,
-    en: worldwide,
-  };
-
-  for (const hub of countryHubs) {
-    if (hub.featuredCalculators.includes(slug)) {
-      languages[hub.hreflang] = absoluteUrl(`${hub.path}/${slug}`);
-    }
-  }
-
-  return languages;
+  const url = absoluteUrl(getCalculatorPath(slug));
+  return { "x-default": url, en: url };
 }
 
-export function countryHubHreflangLanguages(): Record<string, string> {
-  const languages: Record<string, string> = {
-    "x-default": absoluteUrl("/"),
-    en: absoluteUrl("/"),
-  };
-
-  for (const hub of countryHubs) {
-    languages[hub.hreflang] = absoluteUrl(hub.path);
-  }
-
-  return languages;
+export function countryHubHreflangLanguages(path: string): Record<string, string> {
+  const url = absoluteUrl(path);
+  return { "x-default": url, en: url };
 }

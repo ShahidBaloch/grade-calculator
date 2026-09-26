@@ -38,7 +38,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 Skip to content
               </a>
               <Header />
-              <div className="border-b border-[var(--color-border)] bg-[var(--color-bg-subtle)] px-4 py-2">
+              <div className="px-4 py-1.5">
                 <div className="mx-auto max-w-7xl">
                   <GradeInputPrivacyNotice />
                 </div>

@@ -6,11 +6,11 @@ import { createPageMetadata } from "@/lib/seo/metadata";
 const hub = countryHubByPath["/nz"];
 
 export const metadata = createPageMetadata({
-  title: "New Zealand Grade Calculator — NZ GPA Tools",
+  title: "New Zealand Grading Tools — 9-Point GPA",
   description: hub.description,
   path: "/nz",
   keywords: hub.keywords,
-  languages: countryHubHreflangLanguages(),
+  languages: countryHubHreflangLanguages("/nz"),
 });
 
 export default function NzHubPage() {

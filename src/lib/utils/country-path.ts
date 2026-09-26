@@ -2,6 +2,7 @@ import { calculators, getCalculatorPath } from "@/config/calculators";
 import { countryHubs } from "@/config/country-hubs";
 import type { CalculatorSlug } from "@/types/calculator";
 import { isCalculatorSlug } from "@/types/calculator";
+import { canonicalPathForSlug } from "@/lib/seo/intent-urls";
 
 const SLUG_BY_WORLD_PATH = new Map(
   calculators.map((calculator) => [getCalculatorPath(calculator.slug), calculator.slug]),
@@ -18,60 +19,15 @@ export function getCountryPrefixFromPath(pathname: string | null | undefined): s
   return null;
 }
 
-const GEO_SLUG_ALIASES: Partial<
-  Record<string, Partial<Record<CalculatorSlug, CalculatorSlug>>>
-> = {
-  "/uk": {
-    "percentage-to-letter-grade": "degree-classification-calculator",
-    "gpa-calculator": "degree-classification-calculator",
-    "cumulative-gpa-calculator": "degree-classification-calculator",
-    "weighted-gpa-calculator": "uk-degree-to-us-gpa-reference",
-    "high-school-gpa-calculator": "uk-degree-to-us-gpa-reference",
-    "college-gpa-calculator": "degree-classification-calculator",
-    "raise-gpa-calculator": "degree-classification-calculator",
-    "letter-grade-calculator": "degree-classification-calculator",
-    "weighted-grade-calculator": "degree-classification-calculator",
-  },
-  "/au": {
-    "percentage-to-letter-grade": "letter-grade-calculator",
-  },
-  "/ca": {
-    "percentage-to-letter-grade": "letter-grade-calculator",
-    "high-school-gpa-calculator": "gpa-calculator",
-    "weighted-gpa-calculator": "gpa-calculator",
-    "raise-gpa-calculator": "gpa-calculator",
-  },
-  "/nz": {
-    "percentage-to-letter-grade": "letter-grade-calculator",
-  },
-};
-
 /**
- * Keep users on country hub routes when navigating between related tools.
+ * One public URL per tool. Country context only changes the URL when that
+ * country has its own grading system (see canonicalPathForSlug).
  */
 export function resolveCalculatorPath(
   slug: CalculatorSlug,
   pathname?: string | null,
 ): string {
-  const prefix = getCountryPrefixFromPath(pathname);
-  if (!prefix) {
-    return getCalculatorPath(slug);
-  }
-
-  const hub = countryHubs.find((item) => item.path === prefix);
-  if (!hub) return getCalculatorPath(slug);
-
-  const resolvedSlug = GEO_SLUG_ALIASES[prefix]?.[slug] ?? slug;
-
-  if (slug === "ez-grader") {
-    return hub.featuredCalculators.includes("ez-grader") ? `${prefix}/ez-grader` : "/";
-  }
-
-  if (hub.featuredCalculators.includes(resolvedSlug)) {
-    return `${prefix}/${resolvedSlug}`;
-  }
-
-  return getCalculatorPath(resolvedSlug);
+  return canonicalPathForSlug(slug, getCountryPrefixFromPath(pathname));
 }
 
 /** Scope localStorage so US saved grades do not hydrate on /au/... pages. */

@@ -1,16 +1,15 @@
 import { CalculatorRoute } from "@/components/calculators/CalculatorRoute";
 import { AtarCalculator } from "@/components/calculators/AtarCalculator";
-import { calculatorBySlug } from "@/config/calculators";
 import { calculatorHreflangLanguages } from "@/lib/seo/hreflang";
 import { calculatorKeywords } from "@/lib/seo/keywords";
 import { createPageMetadata } from "@/lib/seo/metadata";
+import { DISTINCT_PAGE_COPY } from "@/lib/seo/page-copy";
 
-const config = calculatorBySlug["atar-calculator"];
 const auPath = "/au/atar-calculator";
 
 export const metadata = createPageMetadata({
-  title: "ATAR Calculator — Estimate Your Australian ATAR",
-  description: config.description,
+  title: DISTINCT_PAGE_COPY[auPath].title,
+  description: DISTINCT_PAGE_COPY[auPath].description,
   path: auPath,
   keywords: calculatorKeywords["atar-calculator"],
   languages: calculatorHreflangLanguages("atar-calculator"),

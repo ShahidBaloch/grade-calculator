@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { absoluteUrl, siteConfig } from "@/config/site";
+import { siteConfig } from "@/config/site";
+import { canonicalUrlForPath } from "@/lib/seo/canonical";
 import type { PageMetadataInput } from "@/types/seo";
 
 export function createPageMetadata({
@@ -10,7 +11,7 @@ export function createPageMetadata({
   noIndex = false,
   languages,
 }: PageMetadataInput): Metadata {
-  const url = absoluteUrl(path);
+  const url = canonicalUrlForPath(path);
   const fullTitle = title.includes(siteConfig.name) ? title : `${title} | ${siteConfig.name}`;
 
   return {

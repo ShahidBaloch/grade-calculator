@@ -2,7 +2,7 @@ import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 import { calculators } from "@/config/calculators";
-import { countryCalculatorPaths } from "@/config/country-hubs";
+import { indexableGeoCalculatorPaths, seoRedirects } from "@/lib/seo/intent-urls";
 import { calculatorContent } from "@/config/calculator-content";
 import { calculatorKeywords } from "@/lib/seo/keywords";
 import { countryHubs } from "@/config/country-hubs";
@@ -23,6 +23,8 @@ import { footerNav, mainNav } from "@/config/navigation";
 import { calculatorHreflangLanguages, countryHubHreflangLanguages } from "@/lib/seo/hreflang";
 import { siteConfig } from "@/config/site";
 import { siteFaqs } from "@/config/site-faq";
+import { assertSameOrigin, canonicalUrlForPath, isRedirectOnlyPath } from "@/lib/seo/canonical";
+import { createPageMetadata } from "@/lib/seo/metadata";
 import { isLowValueProgrammaticPath } from "@/lib/seo/programmatic-pages";
 
 describe("SEO audit", () => {
@@ -32,9 +34,8 @@ describe("SEO audit", () => {
     expect(urls).not.toContain(`${siteConfig.url}/ez-grader`);
     for (const calculator of calculators) {
       if (calculator.slug === "ez-grader") continue;
-      expect(urls.some((url) => url.endsWith(calculator.path) || url.endsWith(`${calculator.path}/`))).toBe(
-        true,
-      );
+      const path = getCalculatorPath(calculator.slug);
+      expect(urls.some((url) => new URL(url).pathname === path)).toBe(true);
     }
   });
 
@@ -42,21 +43,25 @@ describe("SEO audit", () => {
     expect(getCalculatorPath("ez-grader")).toBe("/");
   });
 
-  it("worldwide GPA hreflang lists geo copies", () => {
+  it("each calculator hreflang points only at its own canonical URL", () => {
     const languages = calculatorHreflangLanguages("gpa-calculator");
     expect(languages["x-default"]).toBe(`${siteConfig.url}/gpa-calculator`);
-    expect(languages["en-US"]).toBe(`${siteConfig.url}/us/gpa-calculator`);
-    expect(languages["en-CA"]).toBe(`${siteConfig.url}/ca/gpa-calculator`);
-    expect(languages["en-AU"]).toBe(`${siteConfig.url}/au/gpa-calculator`);
-    expect(languages["en-NZ"]).toBe(`${siteConfig.url}/nz/gpa-calculator`);
-    expect(languages["en-GB"]).toBeUndefined();
+    expect(languages.en).toBe(`${siteConfig.url}/gpa-calculator`);
+    expect(languages["en-US"]).toBeUndefined();
+    expect(languages["en-AU"]).toBeUndefined();
+    expect(calculatorHreflangLanguages("atar-calculator")["x-default"]).toBe(
+      `${siteConfig.url}/au/atar-calculator`,
+    );
+    expect(calculatorHreflangLanguages("degree-classification-calculator")["x-default"]).toBe(
+      `${siteConfig.url}/uk/degree-classification-calculator`,
+    );
   });
 
-  it("country hubs share a reciprocal hreflang cluster", () => {
-    const languages = countryHubHreflangLanguages();
-    expect(languages["x-default"]).toBe(siteConfig.url);
-    expect(languages["en-GB"]).toBe(`${siteConfig.url}/uk`);
-    expect(languages["en-US"]).toBe(`${siteConfig.url}/us`);
+  it("country hubs do not claim to be alternates of the homepage or each other", () => {
+    const languages = countryHubHreflangLanguages("/uk");
+    expect(languages["x-default"]).toBe(`${siteConfig.url}/uk`);
+    expect(languages.en).toBe(`${siteConfig.url}/uk`);
+    expect(Object.values(languages).some((url) => url === siteConfig.url)).toBe(false);
   });
 
   it("emits Organization and WebSite JSON-LD", () => {
@@ -64,11 +69,19 @@ describe("SEO audit", () => {
     expect(webSiteJsonLd()["@type"]).toBe("WebSite");
   });
 
-  it("sitemap includes geo copies of worldwide tools", () => {
-    const urls = sitemap().map((entry) => entry.url);
-    for (const path of countryCalculatorPaths) {
-      expect(urls.some((url) => url.endsWith(path))).toBe(true);
+  it("sitemap lists country-specific tools and omits duplicate copies", () => {
+    const paths = sitemap().map((entry) => new URL(entry.url).pathname);
+    for (const path of indexableGeoCalculatorPaths()) {
+      expect(paths).toContain(path);
     }
+    for (const redirect of seoRedirects()) {
+      expect(paths, redirect.source).not.toContain(redirect.source);
+    }
+    expect(paths).not.toContain("/us/gpa-calculator");
+    expect(paths).not.toContain("/atar-calculator");
+    expect(paths).toContain("/au/atar-calculator");
+    expect(paths).toContain("/au/gpa-calculator");
+    expect(paths).toContain("/ca/gpa-calculator");
   });
 
   it("does not use the competitor domain as the default site URL", async () => {
@@ -214,6 +227,42 @@ describe("SEO audit", () => {
     expect(cookies).toContain("gc-scale");
     const faq = siteFaqs.find((item) => item.question.includes("private"));
     expect(faq?.answer).toMatch(/last inputs/i);
+  });
+
+  it("sitemap URLs are unique and omit redirect-only paths", () => {
+    const urls = sitemap().map((entry) => entry.url);
+    expect(new Set(urls).size).toBe(urls.length);
+    expect(urls.some((url) => url.endsWith("/ez-grader"))).toBe(false);
+    expect(urls.some((url) => url.endsWith("/us/ez-grader"))).toBe(false);
+    expect(isRedirectOnlyPath("/ez-grader")).toBe(true);
+  });
+
+  it("createPageMetadata aligns canonical, openGraph.url, and hreflang origins", () => {
+    const meta = createPageMetadata({
+      title: "GPA Calculator",
+      description: "Test",
+      path: "/gpa-calculator",
+      languages: calculatorHreflangLanguages("gpa-calculator"),
+    });
+    const canonical = meta.alternates?.canonical;
+    expect(canonical).toBe(canonicalUrlForPath("/gpa-calculator"));
+    expect(meta.openGraph?.url).toBe(canonical);
+    for (const href of Object.values(meta.alternates?.languages ?? {})) {
+      expect(assertSameOrigin(href)).toBe(true);
+    }
+  });
+
+  it("EZ Grader hreflang does not emit geo duplicate URLs", () => {
+    const languages = calculatorHreflangLanguages("ez-grader");
+    expect(Object.keys(languages)).toEqual(["x-default", "en"]);
+    expect(languages["x-default"]).toBe(siteConfig.url);
+    expect(Object.values(languages).some((url) => url.includes("/us/"))).toBe(false);
+  });
+
+  it("a country calculator hreflang stays on that country URL", () => {
+    const languages = countryHubHreflangLanguages("/au/gpa-calculator");
+    expect(languages["x-default"]).toBe(`${siteConfig.url}/au/gpa-calculator`);
+    expect(languages.en).toBe(`${siteConfig.url}/au/gpa-calculator`);
   });
 
   it("sitemap excludes low-value programmatic URL patterns", () => {

@@ -1,4 +1,4 @@
-const DEFAULT_SITE_URL = "https://ezgradecalc.com";
+const DEFAULT_SITE_URL = "https://www.gradcalc.com";
 
 function resolveSiteOrigin(): string {
   const fromPublic = process.env.NEXT_PUBLIC_SITE_URL?.trim();
@@ -20,13 +20,13 @@ function resolveSiteOrigin(): string {
 function resolveContactEmail(): string {
   const fromEnv = process.env.NEXT_PUBLIC_CONTACT_EMAIL?.trim();
   if (fromEnv) return fromEnv;
-  return "hello@ezgradecalc.com";
+  return "hello@gradcalc.com";
 }
 
 export const siteConfig = {
   name: "GradeCalculator",
   description:
-    "Free grade calculators for students and teachers — EZ grader, weighted grades, finals, and GPA. Country hubs for US, Canada, UK, Australia, and more.",
+    "Free grade calculators for students and teachers. EZ grader, weighted grades, finals, and GPA. Grading scale follows your location.",
   /** Canonical site origin — the homepage. Override with NEXT_PUBLIC_SITE_URL. */
   url: resolveSiteOrigin(),
   email: resolveContactEmail(),

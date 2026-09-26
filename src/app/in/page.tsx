@@ -6,11 +6,11 @@ import { createPageMetadata } from "@/lib/seo/metadata";
 const hub = countryHubByPath["/in"];
 
 export const metadata = createPageMetadata({
-  title: "India Grade Calculator — CGPA & 10-Point Tools",
+  title: "India Grading Tools — CGPA and 10-Point GPA",
   description: hub.description,
   path: "/in",
   keywords: hub.keywords,
-  languages: countryHubHreflangLanguages(),
+  languages: countryHubHreflangLanguages("/in"),
 });
 
 export default function InHubPage() {

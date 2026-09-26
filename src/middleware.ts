@@ -15,6 +15,15 @@ function readGeoCountry(request: NextRequest): string | null {
 }
 
 export function middleware(request: NextRequest) {
+  const host = request.headers.get("host")?.replace(/:\d+$/, "").toLowerCase();
+  if (host === "gradcalc.com") {
+    const url = request.nextUrl.clone();
+    url.hostname = "www.gradcalc.com";
+    url.protocol = "https:";
+    url.port = "";
+    return NextResponse.redirect(url, 308);
+  }
+
   const pathname = request.nextUrl.pathname;
   if (isLowValueProgrammaticPath(pathname)) {
     return new NextResponse("Not Found", {

@@ -46,7 +46,6 @@ export const countryHubs: CountryHubConfig[] = [
     ],
     gradingScalePath: "/grading-scales/us",
     featuredCalculators: [
-      "ez-grader",
       "gpa-calculator",
       "weighted-gpa-calculator",
       "final-grade-calculator",

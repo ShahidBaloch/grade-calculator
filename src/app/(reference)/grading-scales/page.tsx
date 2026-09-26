@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
-import { CountryRegionShortcuts } from "@/components/engagement/CountryRegionShortcuts";
 import { gradingScalePages } from "@/config/grading-scale-pages";
 import { createPageMetadata } from "@/lib/seo/metadata";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -27,16 +26,8 @@ export default function GradingScalesHubPage() {
         <Breadcrumbs items={breadcrumbs} />
         <h1 className="mt-4 text-3xl font-bold">Grading Scales by Country</h1>
         <p className="mt-2 text-[var(--color-text-muted)]">
-          Reference charts for letter grades, percentages, and GPA points. Many countries have more
-          than one official scale (for example UQ vs Monash in Australia) — open the chart that
-          matches your transcript, then use the matching calculator preset.
-        </p>
-        <div className="mt-6">
-          <CountryRegionShortcuts />
-        </div>
-        <p className="mt-4 text-sm text-[var(--color-text-muted)]">
-          Calculators can auto-detect region when your host sends a country header; you can always
-          override the scale in the dropdown.
+          Letter grades and GPA points by country. Calculators use your location automatically — open
+          a chart here when you need the reference.
         </p>
         <div className="mt-8 grid gap-4 sm:grid-cols-2">
           {gradingScalePages.map((page) => (

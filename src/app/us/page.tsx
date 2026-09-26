@@ -6,7 +6,7 @@ import { createPageMetadata } from "@/lib/seo/metadata";
 const hub = countryHubByPath["/us"];
 
 export const metadata = createPageMetadata({
-  title: "US Grade Calculator — Free GPA & EZ Grader",
+  title: "United States Grading Tools — GPA, Finals, and EOC",
   description: hub.description,
   path: "/us",
   keywords: hub.keywords,

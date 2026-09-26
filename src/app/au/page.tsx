@@ -6,11 +6,11 @@ import { createPageMetadata } from "@/lib/seo/metadata";
 const hub = countryHubByPath["/au"];
 
 export const metadata = createPageMetadata({
-  title: "Australia Grade Calculator — Institution GPA Presets & ATAR",
+  title: "Australia Grading Tools — University GPA and ATAR",
   description: hub.description,
   path: "/au",
   keywords: hub.keywords,
-  languages: countryHubHreflangLanguages(),
+  languages: countryHubHreflangLanguages("/au"),
 });
 
 export default function AuHubPage() {

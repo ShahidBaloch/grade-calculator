@@ -25,7 +25,7 @@ function scaleOptionsForPath(pathname: string | null) {
 
 export function ScaleSelector() {
   const pathname = usePathname();
-  const { scaleId, setScaleId, isScaleLocked } = useGradingScale();
+  const { scaleId, setScaleId, isScaleLocked, geoScaleId } = useGradingScale();
   const scale = gradingScales[scaleId];
   const options = scaleOptionsForPath(pathname);
   const onAustralianHub = Boolean(pathname?.startsWith("/au"));
@@ -58,8 +58,10 @@ export function ScaleSelector() {
           </Select>
           <p className="text-xs text-[var(--color-text-muted)]">
             {onAustralianHub
-              ? "Australian grade points are not universal — pick your university preset (or the generic example). UNSW and others may use WAM instead of GPA; follow your handbook."
-              : "US 4.0 preset is the default. Change only if your school uses a different scale."}
+              ? "Pick your university. Grade points are not the same at every Australian campus."
+              : geoScaleId === scaleId
+                ? "Matched to your location. Change it if your school uses a different scale."
+                : "Change this if your school uses a different scale."}
           </p>
         </div>
       )}

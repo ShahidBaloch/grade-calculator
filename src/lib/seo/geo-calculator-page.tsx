@@ -4,8 +4,9 @@ import { getCalculatorElement } from "@/components/calculators/calculator-map";
 import { calculatorBySlug } from "@/config/calculators";
 import { countryHubs } from "@/config/country-hubs";
 import { calculatorKeywords } from "@/lib/seo/keywords";
-import { calculatorHreflangLanguages } from "@/lib/seo/hreflang";
+import { countryHubHreflangLanguages } from "@/lib/seo/hreflang";
 import { createPageMetadata } from "@/lib/seo/metadata";
+import { DISTINCT_PAGE_COPY } from "@/lib/seo/page-copy";
 import type { CalculatorSlug } from "@/types/calculator";
 import { isCalculatorSlug } from "@/types/calculator";
 
@@ -33,12 +34,13 @@ export function createGeoCalculatorMetadata(code: string, slug: string) {
   if (!config || !hub.featuredCalculators.includes(slug)) return {};
 
   const path = `${hub.path}/${slug}`;
+  const distinct = DISTINCT_PAGE_COPY[path];
   return createPageMetadata({
-    title: `${config.name} — ${hub.name}`,
-    description: `${config.description} Locked to the ${hub.name} grading scale on this page.`,
+    title: distinct?.title ?? `${config.name} — ${hub.name}`,
+    description: distinct?.description ?? config.description,
     path,
     keywords: [...calculatorKeywords[slug], ...hub.keywords],
-    languages: calculatorHreflangLanguages(slug),
+    languages: countryHubHreflangLanguages(path),
   });
 }
 

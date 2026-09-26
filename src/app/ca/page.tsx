@@ -6,11 +6,11 @@ import { createPageMetadata } from "@/lib/seo/metadata";
 const hub = countryHubByPath["/ca"];
 
 export const metadata = createPageMetadata({
-  title: "Canada Grade Calculator — Canadian GPA Tools",
+  title: "Canada Grading Tools — University GPA",
   description: hub.description,
   path: "/ca",
   keywords: hub.keywords,
-  languages: countryHubHreflangLanguages(),
+  languages: countryHubHreflangLanguages("/ca"),
 });
 
 export default function CaHubPage() {

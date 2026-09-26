@@ -9,7 +9,7 @@ describe("siteConfig.url", () => {
   it("defaults when NEXT_PUBLIC_SITE_URL is empty", async () => {
     vi.stubEnv("NEXT_PUBLIC_SITE_URL", "");
     const { siteConfig } = await import("@/config/site");
-    expect(siteConfig.url).toBe("https://ezgradecalc.com");
+    expect(siteConfig.url).toBe("https://www.gradcalc.com");
   });
 
   it("adds https when the env value has no protocol", async () => {
@@ -22,12 +22,12 @@ describe("siteConfig.url", () => {
     vi.stubEnv("NEXT_PUBLIC_SITE_URL", "not a valid url");
     vi.stubEnv("VERCEL_URL", "my-app.vercel.app");
     const { siteConfig } = await import("@/config/site");
-    expect(siteConfig.url).toBe("https://ezgradecalc.com");
+    expect(siteConfig.url).toBe("https://www.gradcalc.com");
   });
 
   it("uses default contact email when env is empty", async () => {
     vi.stubEnv("NEXT_PUBLIC_CONTACT_EMAIL", "   ");
     const { siteConfig } = await import("@/config/site");
-    expect(siteConfig.email).toBe("hello@ezgradecalc.com");
+    expect(siteConfig.email).toBe("hello@gradcalc.com");
   });
 });
