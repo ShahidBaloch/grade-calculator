@@ -12,7 +12,10 @@ export const auMonashFourPointScale: GradingScale = {
     { letter: "D", min: 70, max: 79, gpa: 3.0 },
     { letter: "C", min: 60, max: 69, gpa: 2.0 },
     { letter: "P", min: 50, max: 59, gpa: 1.0 },
-    { letter: "N", min: 0, max: 49, gpa: 0.0 },
+    { letter: "NP", min: 45, max: 49, gpa: 0.7 },
+    { letter: "F", min: 1, max: 44, gpa: 0.3 },
+    { letter: "HF", min: 1, max: 44, gpa: 0.3 },
+    { letter: "WF", min: 0, max: 0, gpa: 0.0 },
   ],
   sources: [
     "https://www.monash.edu/students/academic-progress/grades-and-results/grade-point-average",

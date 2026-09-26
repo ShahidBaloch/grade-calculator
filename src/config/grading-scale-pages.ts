@@ -71,14 +71,14 @@ export const gradingScalePages: GradingScalePageConfig[] = [
     scaleId: "au-uq-seven-point",
     title: "University of Queensland (UQ) — 7-Point GPA",
     description:
-      "UQ HD/D/C/P/F percentage bands and 7-point GPA values. Other universities may use different GPA methodologies.",
+      "UQ numeric grades 1–7 (HD through marginal fail) with illustrative percentage planning bands. Course cut-offs can vary — confirm my.UQ.",
     keywords: ["uq gpa scale", "uq grading scale", "7 point gpa uq"],
     intro:
       "The University of Queensland publishes a 7-point GPA scale for coursework grades. UQ notes that other institutions use different grading scales and GPA calculation methods — always read your own handbook.",
     notes: [
-      "Confirm current bands on UQ's official grading systems page before official use.",
+      "UQ GPA uses the numeric course grade (1–7). Grades 3, 2, and 1 are fails/marginal fails — not GPA 0.",
+      "Illustrative percentage bands are for planning only; subject cut-offs can differ.",
       "Monash and other universities are not on this 7-point table.",
-      "This is a reference for planning — not a national Australian standard.",
     ],
   },
   {
@@ -87,13 +87,13 @@ export const gradingScalePages: GradingScalePageConfig[] = [
     scaleId: "au-monash-four-point",
     title: "Monash University — 4-Point GPA",
     description:
-      "Monash HD/D/C/P/N bands on a 4-point GPA scale (maximum 4.0), per Monash's published GPA policy.",
+      "Monash HD/D/C/P/NP/F/HF/WF grade points on a 4-point GPA scale (maximum 4.0), per Monash's published GPA methodology.",
     keywords: ["monash gpa scale", "monash grading scale", "monash 4 point gpa"],
     intro:
       "Monash University calculates GPA on a 4-point grading scale with 4.0 as the maximum. This is not the same as the 7-point model used at universities such as UQ.",
     notes: [
-      "Monash uses N (not F) for fail grades on transcripts in many contexts.",
-      "Do not map Monash GPA to US 4.0 with a simple ×1 formula without the receiving institution's guidance.",
+      "Near Pass = 0.7, Fail and Hurdle Fail = 0.3, Withdrawn Fail = 0.0 — enter the transcript code (NP, F, HF, WF).",
+      "Monash weights grade points by unit credit points in official GPA calculations.",
       "Select this preset in /au GPA calculators when estimating Monash coursework.",
     ],
   },

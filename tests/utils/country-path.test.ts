@@ -17,6 +17,10 @@ describe("country-path", () => {
     expect(resolveCalculatorPath("percentage-to-letter-grade", "/uk/letter-grade-calculator")).toBe(
       "/uk/degree-classification-calculator",
     );
+    expect(resolveCalculatorPath("gpa-calculator", "/uk/degree-classification-calculator")).toBe(
+      "/uk/degree-classification-calculator",
+    );
+    expect(resolveSiteHref("/gpa-calculator", "/uk")).toBe("/uk/degree-classification-calculator");
   });
 
   it("rewrites footer calculator links on country pages", () => {

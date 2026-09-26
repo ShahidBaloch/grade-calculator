@@ -68,7 +68,7 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
       "Use percentage weights (should total 100%) or point weights.",
       "See your weighted course average and letter grade.",
     ],
-    formula: "Weighted avg = Σ(Score × Weight) ÷ Σ(Weight)",
+    formula: "Weighted avg = Σ(Score × Weight) ÷ Σ(Weight) — always normalized by the sum of weights you enter (100% total not required)",
     workedExample: "Homework 92% (20%), Midterm 85% (30%), Final 88% (50%) → 87.9%.",
     faqs: [
       {
@@ -78,7 +78,8 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
       },
       {
         question: "My weights don't add to 100%. Is that OK?",
-        answer: "We still calculate the average but show a warning. Ask your teacher how weights are defined.",
+        answer:
+          "We divide by the total weight you entered (normalized average), not by 100. If your syllabus says weights must total 100%, fix the rows until they do — we show the running total and a warning when percent mode ≠ 100%.",
       },
     ],
   },
@@ -327,7 +328,7 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
   "eoc-grade-calculator": {
     howItWorks: [
       "Enter your course average before the state End-of-Course exam (not a teacher-written final).",
-      "Enter the district weight for the EOC — often 20–30% in Florida, Texas, and similar states.",
+      "Enter the EOC weight required by your state or district. Florida law can require 30% for specified courses; Texas no longer has a statewide 15% rule — local policies vary.",
       "Set the report-card grade you need. We solve for the EOC score that gets you there.",
     ],
     formula: "Required EOC % = (report-card target − class average × (1 − EOC weight)) ÷ EOC weight",
@@ -347,7 +348,7 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
       {
         question: "How much is the EOC worth?",
         answer:
-          "Many Florida and Texas courses use about 20–30%. Always confirm the current district policy — weights change by year and subject.",
+          "Florida can require 30% for certain EOC courses under current statute. Texas STAAR EOC results are not mandated statewide as a fixed course percentage — confirm your district policy. Other states set their own rules.",
       },
     ],
   },

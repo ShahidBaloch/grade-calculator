@@ -275,12 +275,25 @@ export function AtarCalculator() {
       ))}
       {result.data && (
         <div aria-live="polite" className="rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-6">
-          <Label>Estimated ATAR</Label>
-          <p className="text-5xl font-bold">{result.data.estimatedAtar.toFixed(2)}</p>
+          <Label>Counted average (planning)</Label>
+          <p className="text-5xl font-bold">{result.data.countedAverage.toFixed(1)}</p>
           <p className="mt-2 text-sm text-[var(--color-text-muted)]">
-            Counted average {result.data.countedAverage.toFixed(2)}
+            {result.data.planningAtarRounded != null ? (
+              <>
+                Approximate planning ATAR: about{" "}
+                <strong className="font-medium text-[var(--color-text)]">
+                  {result.data.planningAtarRounded}
+                </strong>{" "}
+                (rounded — not an official {authorityMeta.name} ATAR)
+              </>
+            ) : (
+              <>
+                SATAC advises against predicting ATAR from simplified online models. Use this counted
+                average for planning only.
+              </>
+            )}
             {result.data.requiredAverage != null &&
-              ` · Need about ${result.data.requiredAverage.toFixed(1)} average for your target`}
+              ` · Need about ${result.data.requiredAverage.toFixed(1)} counted average for your target`}
           </p>
           <FormulaBreakdown steps={result.data.formulaSteps} />
         </div>

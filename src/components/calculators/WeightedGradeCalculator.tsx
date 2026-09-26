@@ -221,9 +221,9 @@ export function WeightedGradeCalculator() {
       />
       {result.data && (
         <p className="text-sm text-[var(--color-text-muted)]">
-          Weighted average = (score × weight) for each row, divided by total weight{" "}
-          {result.data.totalWeight}
-          {weightMode === "percent" ? "%" : ""}.
+          Formula: Σ(score × weight) ÷ Σ(weight) = Σ(score × weight) ÷ {result.data.totalWeight}
+          {weightMode === "percent" ? "%" : ""}. We normalize by the weights you enter; percent mode does
+          not have to total 100% unless your syllabus requires it.
         </p>
       )}
 

@@ -175,7 +175,7 @@ export const guides: GuideConfig[] = [
       {
         heading: "EOC and other high-stakes tests",
         body:
-          "A state End-of-Course exam is not a teacher-written final. Use the EOC calculator when the district publishes a 20–30% EOC weight. Use this guide’s tool for classroom finals, including reverse and drop-lowest modes.",
+          "A state End-of-Course exam is not a teacher-written final. Use the EOC calculator when your district publishes a specific EOC weight (Florida can require 30% for certain courses; Texas rules vary by district). Use this guide’s tool for classroom finals, including reverse and drop-lowest modes.",
       },
       {
         heading: "A second worked example",

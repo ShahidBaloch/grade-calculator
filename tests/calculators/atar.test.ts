@@ -57,6 +57,12 @@ describe("calculateAtar authority models", () => {
     const result = calculateAtar({ subjects, authority: "satac" });
     expect(result.data?.countedAverage).toBeCloseTo(84.33, 1);
     expect(result.data?.formulaSteps[1]).toMatch(/90 credits/i);
+    expect(result.data?.planningAtarRounded).toBeNull();
+  });
+
+  it("rounds planning ATAR to a whole number for non-SATAC authorities", () => {
+    const result = calculateAtar({ subjects: [{ scaledScore: 80 }], authority: "generic" });
+    expect(result.data?.planningAtarRounded).toBe(Math.round(result.data!.estimatedAtar));
   });
 
   it("adds TISC WACE bonuses for LOTE, Methods, and Specialist", () => {

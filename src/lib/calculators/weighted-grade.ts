@@ -71,7 +71,9 @@ export function calculateWeightedGrade(
   }
 
   if (weightMode === "percent" && Math.abs(totalWeight - 100) > 0.01) {
-    warnings.push(`Weights total ${totalWeight}%, not 100%`);
+    warnings.push(
+      `Weights total ${totalWeight}% (not 100%). Result uses Σ(score × weight) ÷ ${totalWeight} — confirm whether your syllabus requires weights to sum to 100%.`,
+    );
   }
 
   const weightedAverage = weightedSum / totalWeight;

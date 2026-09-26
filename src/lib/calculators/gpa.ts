@@ -1,5 +1,5 @@
-import { percentToLetter } from "@/lib/grading-scales";
-import { gradeToGpaPoints, scoreToPercent } from "./grade-utils";
+import { resolveGradeToGpaPoints } from "@/lib/grading-scales/grade-points";
+import { gradeToGpaPoints } from "./grade-utils";
 import type { ScaleId } from "@/types/grading-scale";
 import type { CalculatorResult } from "./types";
 import {
@@ -64,14 +64,10 @@ export function calculateSemesterGpa(
       continue;
     }
 
-    let basePoints: number | null = null;
-    if (typeof course.grade === "number") {
-      basePoints = percentToLetter(course.grade, scaleId).gpa;
-    } else {
-      const percent = scoreToPercent(course.grade, scaleId);
-      basePoints =
-        percent != null ? percentToLetter(percent, scaleId).gpa : gradeToGpaPoints(course.grade, scaleId);
-    }
+    const basePoints =
+      typeof course.grade === "number"
+        ? resolveGradeToGpaPoints(course.grade, scaleId)
+        : gradeToGpaPoints(course.grade, scaleId);
     if (basePoints == null) {
       errors.push(`Course ${index + 1}: invalid grade`);
       continue;

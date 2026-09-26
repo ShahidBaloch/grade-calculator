@@ -129,6 +129,11 @@ export const countryHubs: CountryHubConfig[] = [
           "Usually no. Report your degree class and marks as shown on your transcript unless the form explicitly asks for a US-style GPA. Harvard GSAS and Stanford Graduate Admissions both instruct applicants not to invent a 4.0 GPA when the transcript does not include one.",
       },
       {
+        question: "Where is the US-style GPA calculator on this UK hub?",
+        answer:
+          "UK undergraduate results use degree classifications, not US 4.0 GPA. Use the degree classification calculator for First / 2:1 / 2:2 / Third. For an illustrative US comparison only, open UK Degree Class to US GPA — Approximate Reference (not for self-reporting). Site navigation from /uk keeps you on UK tools instead of the worldwide US GPA calculator.",
+      },
+      {
         question: "Where is the degree classification calculator?",
         answer:
           "Use the worldwide default at /degree-classification-calculator, or the UK page at /uk/degree-classification-calculator (UK scale locked). Enter module marks, credits, and Year 2 / Year 3 weights from your handbook.",

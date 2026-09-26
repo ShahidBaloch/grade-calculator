@@ -127,7 +127,7 @@ export function calculateDegreeClassification(
 
   if (borderline && nextBand) {
     warnings.push(
-      `Within ${BORDERLINE_WINDOW} marks of a ${nextBand.name}. Many boards review borderlines — check your university regulations.`,
+      `Within ${BORDERLINE_WINDOW} marks of a ${nextBand.name}. Borderline rules are university- and programme-specific (for example UCL 69.50/68.50 policies) — this calculator does not apply them unless you configure your own scheme.`,
     );
   }
 

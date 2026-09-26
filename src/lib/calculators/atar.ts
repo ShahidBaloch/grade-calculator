@@ -21,7 +21,10 @@ export interface AtarInput {
 export type AtarAuthority = "generic" | "uac" | "vtac" | "qtac" | "tisc" | "satac";
 
 export interface AtarResult {
+  /** Internal curve output — prefer planningAtarRounded for display. */
   estimatedAtar: number;
+  /** Whole-number planning ATAR; omitted when the authority discourages ATAR prediction (SATAC). */
+  planningAtarRounded: number | null;
   countedAverage: number;
   countedScores: number[];
   requiredAverage: number | null;
@@ -369,12 +372,16 @@ export function calculateAtar(input: AtarInput): CalculatorResult<AtarResult> {
   const requiredAverage =
     input.targetAtar != null && input.targetAtar > 0 ? requiredAverageForAtar(input.targetAtar) : null;
 
+  const planningAtarRounded = authority === "satac" ? null : Math.round(estimatedAtar);
+
   const formulaSteps = [
     authorityLabel(authority),
     counted.methodNote,
     `Counted scores: ${countedScores.map((n) => n.toFixed(1)).join(", ")}`,
     `Counted average: ${countedAverage.toFixed(2)}`,
-    `Estimated ATAR (lookup curve): ${estimatedAtar.toFixed(2)}`,
+    planningAtarRounded != null
+      ? `Planning ATAR (rounded to nearest whole number, not official): about ${planningAtarRounded}`
+      : "SATAC does not recommend predicting ATAR from simplified inputs — use the counted average only.",
   ];
 
   if (requiredAverage != null && input.targetAtar != null) {
@@ -388,6 +395,7 @@ export function calculateAtar(input: AtarInput): CalculatorResult<AtarResult> {
     warnings: [DISCLAIMER, ATAR_CROSS_SYSTEM_DISCLAIMER],
     data: {
       estimatedAtar,
+      planningAtarRounded,
       countedAverage,
       countedScores,
       requiredAverage,

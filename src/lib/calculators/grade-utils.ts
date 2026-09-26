@@ -1,4 +1,5 @@
 import { letterToPercent, percentToLetter } from "@/lib/grading-scales";
+import { resolveGradeToGpaPoints } from "@/lib/grading-scales/grade-points";
 import type { ScaleId } from "@/types/grading-scale";
 
 export function normalizeLetter(letter: string): string {
@@ -32,6 +33,14 @@ export function scoreToPercent(
 
   const asNumber = Number.parseFloat(trimmed);
   if (Number.isFinite(asNumber) && !trimmed.match(/[a-z]/i)) {
+    if (
+      scaleId === "au-uq-seven-point" &&
+      asNumber >= 0 &&
+      asNumber <= 7 &&
+      Math.abs(asNumber - Math.round(asNumber)) < 0.001
+    ) {
+      return null;
+    }
     return asNumber;
   }
 
@@ -39,7 +48,5 @@ export function scoreToPercent(
 }
 
 export function gradeToGpaPoints(letter: string, scaleId: ScaleId): number | null {
-  const percent = scoreToPercent(letter, scaleId);
-  if (percent == null) return null;
-  return percentToLetter(percent, scaleId).gpa;
+  return resolveGradeToGpaPoints(letter, scaleId);
 }

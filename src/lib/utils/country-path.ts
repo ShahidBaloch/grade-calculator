@@ -23,6 +23,12 @@ const GEO_SLUG_ALIASES: Partial<
 > = {
   "/uk": {
     "percentage-to-letter-grade": "degree-classification-calculator",
+    "gpa-calculator": "degree-classification-calculator",
+    "cumulative-gpa-calculator": "degree-classification-calculator",
+    "weighted-gpa-calculator": "uk-degree-to-us-gpa-reference",
+    "high-school-gpa-calculator": "uk-degree-to-us-gpa-reference",
+    "college-gpa-calculator": "degree-classification-calculator",
+    "raise-gpa-calculator": "degree-classification-calculator",
   },
   "/au": {
     "percentage-to-letter-grade": "letter-grade-calculator",
