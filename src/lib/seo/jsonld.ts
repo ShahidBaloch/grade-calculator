@@ -64,6 +64,7 @@ export function breadcrumbJsonLd(items: BreadcrumbItem[]) {
   };
 }
 
+/** Kept for tests; not emitted on pages — Google dropped FAQ rich results for most sites (2026). */
 export function faqPageJsonLd(faqs: FaqItem[]) {
   return {
     "@context": "https://schema.org",

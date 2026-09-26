@@ -34,7 +34,7 @@ export const siteFaqs: FaqItem[] = [
   {
     question: "How do I convert CGPA to percentage in Pakistan?",
     answer:
-      "A common HEC-style estimate on a 4.0 scale is Percentage = CGPA × 25. Use the CGPA to Percentage calculator with the Pakistan HEC formula and confirm your university table.",
+      "HEC §13.1 maps CGPA to percentage bands (for example 3.00 → 71%). Some schools also use the shortcut Percentage = CGPA × 25. Use the CGPA to Percentage calculator, pick the formula your handbook follows, and confirm your marksheet.",
   },
   {
     question: "Where do I find a specific calculator?",

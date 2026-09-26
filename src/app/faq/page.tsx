@@ -1,10 +1,8 @@
 import { ContentPageLayout } from "@/components/content/ContentPageLayout";
 import { FaqAccordion } from "@/components/content/FaqAccordion";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
-import { JsonLd } from "@/components/seo/JsonLd";
 import { siteFaqs } from "@/config/site-faq";
 import { createPageMetadata } from "@/lib/seo/metadata";
-import { faqPageJsonLd } from "@/lib/seo/jsonld";
 
 export const metadata = createPageMetadata({
   title: "Frequently Asked Questions",
@@ -19,7 +17,6 @@ export default function FaqPage() {
 
   return (
     <>
-      <JsonLd data={faqPageJsonLd(siteFaqs)} />
       <BreadcrumbJsonLd items={breadcrumbs} />
       <ContentPageLayout
         title="Frequently Asked Questions"

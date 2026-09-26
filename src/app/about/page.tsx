@@ -36,7 +36,7 @@ export default function AboutPage() {
               Privacy Policy
             </Link>
             . Your grading scale is detected automatically from your location, with support for US, UK,
-            Canadian, Australian, and New Zealand systems.
+            Canadian, Australian, New Zealand, India (10-point CGPA), and Pakistan (HEC 4.0) systems.
           </p>
           <h2 className="text-xl font-semibold text-[var(--color-text)]">How results are checked</h2>
           <ul className="list-disc space-y-2 pl-5">
@@ -51,7 +51,12 @@ export default function AboutPage() {
             <li>Weighted grade and final exam calculators for course planning</li>
             <li>Semester, cumulative, high school, college, and raise-GPA tools</li>
             <li>UK degree classification, GCSE 9–1 bands, and an educational Australian ATAR estimate</li>
-            <li>Country hubs for the US, UK, Canada, Australia, and New Zealand</li>
+            <li>
+              Country hubs for the US, UK, Canada, Australia, New Zealand,{" "}
+              <Link href="/in" className="text-[var(--color-primary)] hover:underline">India</Link>, and{" "}
+              <Link href="/pk" className="text-[var(--color-primary)] hover:underline">Pakistan</Link>{" "}
+              (CGPA, SGPA, and local scale presets)
+            </li>
             <li>Grading scale reference charts and educational guides</li>
           </ul>
           <p>

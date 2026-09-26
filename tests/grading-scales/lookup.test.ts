@@ -45,4 +45,13 @@ describe("grading scale lookup", () => {
     const result = percentToLetter(65, "uk-degree");
     expect(result.letter).toBe("Upper Second (2:1)");
   });
+
+  it("maps Pakistan HEC §13.1 percentage bands", () => {
+    expect(percentToLetter(85, "pk-hec").letter).toBe("A");
+    expect(percentToLetter(72, "pk-hec").letter).toBe("B");
+    expect(percentToLetter(70, "pk-hec").letter).toBe("B-");
+    expect(percentToLetter(55, "pk-hec").letter).toBe("D+");
+    expect(percentToLetter(52, "pk-hec").letter).toBe("D");
+    expect(percentToLetter(49, "pk-hec").letter).toBe("F");
+  });
 });

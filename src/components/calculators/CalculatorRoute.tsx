@@ -4,7 +4,7 @@ import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { calculatorBySlug, getCalculatorPath } from "@/config/calculators";
 import { countryHubByPath } from "@/config/country-hubs";
-import { webApplicationJsonLd, faqPageJsonLd, howToJsonLd } from "@/lib/seo/jsonld";
+import { webApplicationJsonLd, howToJsonLd } from "@/lib/seo/jsonld";
 import { calculatorContent } from "@/config/calculator-content";
 import { pageDescription, pageTitle } from "@/lib/seo/page-copy";
 import type { CalculatorSlug } from "@/types/calculator";
@@ -64,7 +64,6 @@ export function CalculatorRoute({
             description,
             steps: content.howItWorks,
           }),
-          faqPageJsonLd(content.faqs),
         ]}
       />
       <BreadcrumbJsonLd items={breadcrumbs} />

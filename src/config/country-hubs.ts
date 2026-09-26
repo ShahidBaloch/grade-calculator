@@ -260,16 +260,22 @@ export const countryHubs: CountryHubConfig[] = [
     flag: "🇮🇳",
     scaleId: "in-ten-point",
     description:
-      "India grade and CGPA tools on the common 10-point university scale, plus CGPA to percentage converters (CBSE ×9.5 and more).",
+      "India CGPA and grade tools with an illustrative 10-point university preset — boards and campuses publish their own tables.",
     details: [
-      "Most Indian universities report a 10-point CGPA (O = 10). CBSE and many UGC colleges convert with Percentage ≈ CGPA × 9.5; Anna University and some IITs/NITs use ×10.",
-      "Use the CGPA to Percentage calculator for conversion formulas, then GPA tools with the India 10-point scale locked on this hub.",
+      "Many universities use a 10-point CGPA (O = 10), but letter cutoffs and quality points differ by IIT, NIT, state university, and affiliated college.",
+      "CBSE board marks and university CGPA are separate systems. CBSE/UGC often uses Percentage ≈ CGPA × 9.5; Anna University and some campuses use ×10 or (CGPA − 0.75) × 10.",
+      "Pick your conversion in the CGPA to Percentage calculator, then use GPA tools on this hub with the India 10-point preset locked for planning.",
     ],
     faqs: [
       {
         question: "How do I convert CGPA to percentage in India?",
         answer:
           "CBSE/UGC commonly uses Percentage = CGPA × 9.5. Some universities use ×10 or (CGPA − 0.75) × 10. Pick your formula in the CGPA to Percentage calculator and confirm your handbook.",
+      },
+      {
+        question: "Is this the official CBSE or university table?",
+        answer:
+          "No. This hub uses an illustrative 10-point letter preset for calculators. Your marksheet, board circular, or university ordinance is the source of truth.",
       },
       {
         question: "Is India CGPA the same as US GPA?",
@@ -295,6 +301,8 @@ export const countryHubs: CountryHubConfig[] = [
       "sgpa to cgpa",
     ],
     hreflang: "en-IN",
+    scaleLockNote:
+      "GPA tools on this hub use an illustrative India 10-point preset (O–F). Board percentages and your campus transcript may differ — check the grading scale reference and your handbook before official use.",
   },
   {
     code: "pk",
@@ -305,9 +313,10 @@ export const countryHubs: CountryHubConfig[] = [
     description:
       "Pakistan grade and GPA tools on the common HEC 4.0 letter scale, with CGPA-to-percentage converters and planning estimates.",
     details: [
-      "HEC’s Uniform Semester System policy publishes GPA/CGPA bands mapped to percentage ranges (for example, B = 2.67–3.00 and about 71–74%) — not one universal linear formula.",
-      "Some universities also quote Percentage ≈ CGPA × 25 on a 4.0 scale as a quick estimate. Treat that as a shortcut unless your handbook says otherwise.",
-      "Always match your campus transcript table — letter points for A− / B+ can differ by institution.",
+      "HEC’s Uniform Semester System policy (§13.1) maps fractional GPA/CGPA bands to percentage ranges — for example B = 2.67–3.00 and 71–74%, with D+ at 54–57% and D at 50–53% as the usual pass floor.",
+      "For CGPA-to-percentage planning, HEC assigns the minimum percentage of the band your CGPA falls into (3.00 CGPA → 71%, not a flat ×25).",
+      "Some students still use Percentage ≈ CGPA × 25 on a 4.0 scale as a quick estimate. Treat that as a shortcut unless your handbook says otherwise.",
+      "Campus marks-to-grade cutoffs within these bands can differ — match your transcript legend.",
     ],
     faqs: [
       {

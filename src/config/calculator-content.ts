@@ -646,7 +646,8 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
       },
       {
         question: "Which scale should Pakistan students use?",
-        answer: "Select Pakistan HEC 4.0 (or open the Pakistan hub) so letter bands match HEC Absolute grading.",
+        answer:
+          "Select Pakistan HEC 4.0 (or open the Pakistan hub) so letter bands match HEC §13.1 fractionalized grading.",
       },
     ],
   },

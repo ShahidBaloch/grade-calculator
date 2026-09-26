@@ -3,12 +3,10 @@ import { CalculatorCard } from "@/components/calculators/shared/CalculatorCard";
 import { FaqAccordion } from "@/components/content/FaqAccordion";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
-import { JsonLd } from "@/components/seo/JsonLd";
 import { calculatorBySlug } from "@/config/calculators";
 import { canonicalPathForSlug } from "@/lib/seo/intent-urls";
 import type { CountryHubConfig } from "@/config/country-hubs";
 import { getScale } from "@/lib/grading-scales";
-import { faqPageJsonLd } from "@/lib/seo/jsonld";
 
 interface CountryHubContentProps {
   hub: CountryHubConfig;
@@ -26,7 +24,6 @@ export function CountryHubContent({ hub }: CountryHubContentProps) {
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8">
-      {hub.faqs && hub.faqs.length > 0 && <JsonLd data={faqPageJsonLd(hub.faqs)} />}
       <BreadcrumbJsonLd items={breadcrumbs} />
       <Breadcrumbs items={breadcrumbs} />
       <h1 className="mt-4 text-3xl font-bold">{hub.name} grading tools</h1>

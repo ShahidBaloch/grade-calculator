@@ -171,7 +171,7 @@ export const gradingScalePages: GradingScalePageConfig[] = [
       "India university 10-point CGPA letter bands (O–F) with percentage ranges used in our calculators.",
     keywords: ["india cgpa scale", "10 point cgpa", "ugc grading scale", "cbse cgpa"],
     intro:
-      "Many Indian universities use a 10-point CGPA with letter bands such as O, A+, A, and B+. Percentage conversion is separate — CBSE/UGC often uses ×9.5.",
+      "This chart is an illustrative 10-point university preset (O–F) for planning. Letter cutoffs vary by campus; CBSE board marks and university CGPA use different rules. Percentage conversion is separate — CBSE/UGC often uses ×9.5.",
     notes: [
       "Board marksheets and university CGPA tables are not identical — check your institution.",
       "Use the CGPA to Percentage calculator for ×9.5, ×10, and SPPU-style formulas.",
@@ -184,13 +184,13 @@ export const gradingScalePages: GradingScalePageConfig[] = [
     scaleId: "pk-hec",
     title: "Pakistan HEC 4.0 Grading Scale",
     description:
-      "Pakistan HEC Absolute grading bands on a 4.0 GPA scale with common percentage ranges.",
-    keywords: ["hec grading scale", "pakistan gpa scale", "hec absolute grading"],
+      "HEC Uniform Semester System fractionalized grading (§13.1) on a 4.0 GPA scale with official percentage bands.",
+    keywords: ["hec grading scale", "pakistan gpa scale", "hec fractionalized grading"],
     intro:
-      "Pakistani universities commonly follow HEC Absolute grading on a 4.0 scale (A typically 85–100%). HEC’s semester-system policy maps GPA/CGPA bands to percentage ranges rather than one universal linear rule.",
+      "HEC’s Uniform Semester System policy (§13.1) lists fractional grade points and percentage bands — A at 85%+, B at 71–74%, D+ at 54–57%, D at 50–53%, F below 50%. CGPA-to-percentage uses the minimum % of your band (e.g. 3.00 CGPA → 71%), not a single ×25 rule.",
     notes: [
-      "Some campuses publish slightly different A− / B+ quality points — verify your handbook.",
-      "The CGPA to Percentage calculator includes a linear ×25 shortcut for planning; match your official equivalence table when it differs.",
+      "Quality points within each HEC band can differ slightly by campus — verify your transcript legend.",
+      "The CGPA to Percentage calculator includes a linear ×25 shortcut for quick estimates; prefer band lookup when your handbook follows HEC §13.1.",
     ],
   },
 ];

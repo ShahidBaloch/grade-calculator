@@ -5,7 +5,7 @@ import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { guideBySlug, guides } from "@/config/guides";
 import { createPageMetadata } from "@/lib/seo/metadata";
-import { faqPageJsonLd, howToJsonLd } from "@/lib/seo/jsonld";
+import { howToJsonLd } from "@/lib/seo/jsonld";
 import { getEmbeddedCalculator } from "@/lib/seo/guide-components";
 
 interface PageProps {
@@ -48,7 +48,6 @@ export default async function GuidePage({ params }: PageProps) {
             description: guide.description,
             steps: guide.sections.map((s) => s.heading),
           }),
-          faqPageJsonLd(guide.faqs),
         ]}
       />
       <BreadcrumbJsonLd items={breadcrumbs} />
