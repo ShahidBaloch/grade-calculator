@@ -21,9 +21,10 @@ export const gradingScalePages: GradingScalePageConfig[] = [
       "Complete US letter grade to percentage and 4.0 GPA conversion chart. A+, A, A- through F with percentage ranges.",
     keywords: ["grading scale", "us grading scale", "4.0 gpa scale", "letter grade to percentage"],
     intro:
-      "The common US 4.0 GPA scale is widely used in American high schools and colleges. Letter grades map to percentage ranges, and each letter converts to GPA points for semester calculations.",
+      "The common US 4.0 GPA scale is widely used in American high schools and colleges. Letter grades map to percentage ranges, and each letter converts to GPA points for semester calculations. Percentage cutoffs vary by school, district, college, and instructor — verify your institution's grading policy.",
     notes: [
       "Many schools use plus/minus modifiers (A-, B+, etc.) with the ranges shown below.",
+      "NCES standardizes transcript study with A=4, B=3, C=2, D=1, and F=0 on a four-point framework; it does not define one national plus/minus percentage table.",
       "Some high schools use a 10-point scale (90–100 = A) — see US 10-point letter bands in our calculator settings.",
       "Weighted GPA (honors/AP) may add extra points beyond this table.",
     ],

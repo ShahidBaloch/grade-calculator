@@ -21,5 +21,8 @@ export const usStandardScale: GradingScale = {
     { letter: "D-", min: 60, max: 62, gpa: 0.7 },
     { letter: "F", min: 0, max: 59, gpa: 0.0 },
   ],
-  sources: ["Common US collegiate scale", "Calculator.net reference"],
+  sources: [
+    "Common US collegiate example (percentage bands vary by institution)",
+    "NCES four-point framework (A=4…F=0) — not a single national percent-to-letter table",
+  ],
 };
