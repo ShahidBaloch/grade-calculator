@@ -39,22 +39,22 @@ export function CalculatorPageSections({
 
   return (
     <div className="space-y-10">
-      <section>
-        <h2 className="text-xl font-semibold">How it works</h2>
+      <section aria-labelledby="calc-how-heading">
+        <h2 id="calc-how-heading" className="text-xl font-semibold">How it works</h2>
         <div className="mt-3">
           <HowItWorks steps={howItWorks} />
         </div>
       </section>
-      <section>
-        <h2 className="text-xl font-semibold">Formula</h2>
+      <section aria-labelledby="calc-formula-heading">
+        <h2 id="calc-formula-heading" className="text-xl font-semibold">Formula</h2>
         <p className="mt-2 text-sm text-[var(--color-text-muted)]">{content.formula}</p>
         <p className="mt-2 text-sm text-[var(--color-text-muted)]">
           Example: {content.workedExample} Letter cut-offs use the unrounded result.
         </p>
       </section>
       {content.primarySources && content.primarySources.length > 0 && (
-        <section>
-          <h2 className="text-xl font-semibold">Primary sources</h2>
+        <section aria-labelledby="calc-sources-heading">
+          <h2 id="calc-sources-heading" className="text-xl font-semibold">Primary sources</h2>
           <p className="mt-2 text-sm text-[var(--color-text-muted)]">
             Confirm rules with the authority or institution — our models are planning aids only.
           </p>
@@ -74,15 +74,15 @@ export function CalculatorPageSections({
           </ul>
         </section>
       )}
-      <section>
-        <h2 className="text-xl font-semibold">FAQ</h2>
+      <section aria-labelledby="calc-faq-heading">
+        <h2 id="calc-faq-heading" className="text-xl font-semibold">FAQ</h2>
         <div className="mt-3">
           <FaqAccordion faqs={content.faqs} />
         </div>
       </section>
       <ResourceLinks links={localizedResources} />
-      <section>
-        <h2 className="text-xl font-semibold">Related calculators</h2>
+      <section aria-labelledby="calc-related-heading">
+        <h2 id="calc-related-heading" className="text-xl font-semibold">Related calculators</h2>
         <div className="mt-4">
           <RelatedCalculators slugs={relatedSlugs} pagePath={pagePath} />
         </div>

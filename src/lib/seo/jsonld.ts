@@ -80,6 +80,7 @@ export function faqPageJsonLd(faqs: FaqItem[]) {
   };
 }
 
+/** Valid schema.org; Google no longer shows HowTo rich results (deprecated 2023). Steps must match visible on-page copy. */
 export function howToJsonLd({
   name,
   description,

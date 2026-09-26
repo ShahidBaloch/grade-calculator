@@ -4,6 +4,9 @@ export const calculatorKeywords: Record<CalculatorSlug, string[]> = {
   "ez-grader": [
     "easy grader",
     "ez grader",
+    "easy grade calculator",
+    "easy grader online",
+    "free easy grader",
     "grader",
     "quick grade",
     "grade calculator",
@@ -36,6 +39,11 @@ export const calculatorKeywords: Record<CalculatorSlug, string[]> = {
     "total grade calculator",
     "grade calculator with percentages",
     "grade book calculator",
+    "what if grade calculator",
+    "calculate my grade",
+    "calculating grades by weight",
+    "grade calculator with weights",
+    "grade weight calculator",
   ],
   "final-grade-calculator": [
     "final grade calculator",
@@ -47,6 +55,8 @@ export const calculatorKeywords: Record<CalculatorSlug, string[]> = {
     "grade calculator final",
     "final grade calculator college",
     "rogerhub final grade",
+    "midterm grade calculator",
+    "what grade do i need",
   ],
   "gpa-calculator": [
     "gpa calculator",
@@ -56,6 +66,9 @@ export const calculatorKeywords: Record<CalculatorSlug, string[]> = {
     "unweighted gpa calculator",
     "calculate semester gpa",
     "term gpa",
+    "unweighted gpa calculator",
+    "gpa calculator no credits",
+    "gpa calculator without credit hours",
   ],
   "cumulative-gpa-calculator": [
     "cumulative gpa calculator",
@@ -75,6 +88,7 @@ export const calculatorKeywords: Record<CalculatorSlug, string[]> = {
   ],
   "high-school-gpa-calculator": [
     "high school gpa calculator",
+    "gpa calculator high school",
     "hs gpa calculator",
     "semester gpa high school",
   ],
@@ -161,5 +175,20 @@ export const calculatorKeywords: Record<CalculatorSlug, string[]> = {
     "uk degree to us gpa",
     "2:1 to gpa",
     "uk classification to 4.0",
+  ],
+  "uc-gpa-calculator": [
+    "uc gpa calculator",
+    "csu gpa calculator",
+    "california gpa calculator",
+    "calculate uc gpa",
+    "uc capped gpa",
+    "a-g gpa calculator",
+  ],
+  "middle-school-gpa-calculator": [
+    "middle school gpa calculator",
+    "gpa calculator middle school",
+    "gpa calculator jr high",
+    "jr high gpa calculator",
+    "junior high gpa calculator",
   ],
 };

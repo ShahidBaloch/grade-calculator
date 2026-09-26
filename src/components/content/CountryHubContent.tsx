@@ -26,11 +26,13 @@ export function CountryHubContent({ hub }: CountryHubContentProps) {
     <div className="mx-auto max-w-7xl px-4 py-8">
       <BreadcrumbJsonLd items={breadcrumbs} />
       <Breadcrumbs items={breadcrumbs} />
-      <h1 className="mt-4 text-3xl font-bold">{hub.name} grading tools</h1>
-      <p className="mt-2 max-w-2xl text-[var(--color-text-muted)]">{hub.description}</p>
+      <header className="mt-4 max-w-2xl">
+        <h1 className="text-3xl font-bold">{hub.name} grading tools</h1>
+        <p className="mt-2 text-[var(--color-text-muted)]">{hub.description}</p>
+      </header>
 
-      <section className="mt-8">
-        <h2 className="text-xl font-semibold">Calculators</h2>
+      <section className="mt-8" aria-labelledby="hub-calculators-heading">
+        <h2 id="hub-calculators-heading" className="text-xl font-semibold">Calculators</h2>
         <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {calculators.map((calculator) => (
             <CalculatorCard
@@ -60,8 +62,8 @@ export function CountryHubContent({ hub }: CountryHubContentProps) {
       ))}
 
       {hub.relatedGuides && hub.relatedGuides.length > 0 && (
-        <section className="mt-8 max-w-2xl">
-          <h2 className="text-xl font-semibold">Guides</h2>
+        <section className="mt-8 max-w-2xl" aria-labelledby="hub-guides-heading">
+          <h2 id="hub-guides-heading" className="text-xl font-semibold">Guides</h2>
           <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-[var(--color-text-muted)]">
             {hub.relatedGuides.map((guide) => (
               <li key={guide.path}>
@@ -75,8 +77,8 @@ export function CountryHubContent({ hub }: CountryHubContentProps) {
       )}
 
       {hub.faqs && hub.faqs.length > 0 && (
-        <section className="mt-10 max-w-3xl">
-          <h2 className="text-xl font-semibold">FAQ for {hub.name}</h2>
+        <section className="mt-10 max-w-3xl" aria-labelledby="hub-faq-heading">
+          <h2 id="hub-faq-heading" className="text-xl font-semibold">FAQ for {hub.name}</h2>
           <div className="mt-3">
             <FaqAccordion faqs={hub.faqs} />
           </div>

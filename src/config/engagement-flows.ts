@@ -157,7 +157,7 @@ export const engagementFlows: EngagementFlow[] = [
     from: "sgpa-to-cgpa",
     to: "cgpa-to-percentage",
     title: "Convert CGPA to percentage",
-    description: "Apply CBSE ×9.5, ×10, SPPU, or Pakistan linear ×25 estimate.",
+    description: "Apply CBSE ×9.5, ×10, SPPU, or the unofficial Pakistan ×25 estimate.",
   },
   {
     from: "cgpa-calculator",

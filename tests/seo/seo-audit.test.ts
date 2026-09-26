@@ -265,6 +265,12 @@ describe("SEO audit", () => {
     expect(languages.en).toBe(`${siteConfig.url}/au/gpa-calculator`);
   });
 
+  it("sitemap omits inaccurate lastModified stamps", () => {
+    for (const entry of sitemap()) {
+      expect(entry.lastModified).toBeUndefined();
+    }
+  });
+
   it("sitemap excludes low-value programmatic URL patterns", () => {
     const paths = sitemap().map((entry) => new URL(entry.url).pathname);
     for (const path of paths) {

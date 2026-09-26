@@ -163,7 +163,12 @@ export const calculators: CalculatorConfig[] = [
     icon: "School",
     category: "gpa",
     mvp: false,
-    relatedSlugs: ["weighted-gpa-calculator", "gpa-calculator", "raise-gpa-calculator"],
+    relatedSlugs: [
+      "middle-school-gpa-calculator",
+      "uc-gpa-calculator",
+      "weighted-gpa-calculator",
+      "gpa-calculator",
+    ],
     examples: [
       {
         label: "Two semesters",
@@ -345,7 +350,7 @@ export const calculators: CalculatorConfig[] = [
     name: "CGPA to Percentage Calculator",
     shortName: "CGPA %",
     description:
-      "Convert CGPA to percentage (and back) for India CBSE/UGC and Pakistan HEC formulas.",
+      "Convert CGPA to percentage with CBSE ×9.5, campus formulas, or the unofficial Pakistan ×25 estimate.",
     path: "/cgpa-to-percentage",
     icon: "Percent",
     category: "conversion",
@@ -353,7 +358,7 @@ export const calculators: CalculatorConfig[] = [
     relatedSlugs: ["percentage-to-cgpa", "sgpa-to-cgpa", "cgpa-calculator"],
     examples: [
       { label: "India 8.2 CGPA", values: { mode: "cgpa-to-percent", formulaId: "india-cbse-9.5", value: 8.2 } },
-      { label: "Pakistan 3.4 CGPA", values: { mode: "cgpa-to-percent", formulaId: "pakistan-hec-25", value: 3.4 } },
+      { label: "Pakistan ×25 estimate", values: { mode: "cgpa-to-percent", formulaId: "pakistan-hec-25", value: 3.4 } },
       { label: "76% → CGPA", values: { mode: "percent-to-cgpa", formulaId: "india-cbse-9.5", value: 76 } },
     ],
   },
@@ -362,7 +367,7 @@ export const calculators: CalculatorConfig[] = [
     name: "Percentage to CGPA Calculator",
     shortName: "% → CGPA",
     description:
-      "Convert percentage marks to CGPA using India CBSE/UGC or Pakistan HEC formulas.",
+      "Convert percentage marks to CGPA with CBSE ×9.5, campus formulas, or the unofficial Pakistan ×25 estimate.",
     path: "/percentage-to-cgpa",
     icon: "Percent",
     category: "conversion",
@@ -370,7 +375,7 @@ export const calculators: CalculatorConfig[] = [
     relatedSlugs: ["cgpa-to-percentage", "cgpa-calculator", "sgpa-to-cgpa"],
     examples: [
       { label: "76% CBSE", values: { mode: "percent-to-cgpa", formulaId: "india-cbse-9.5", value: 76 } },
-      { label: "85% HEC", values: { mode: "percent-to-cgpa", formulaId: "pakistan-hec-25", value: 85 } },
+      { label: "85% ×25 estimate", values: { mode: "percent-to-cgpa", formulaId: "pakistan-hec-25", value: 85 } },
     ],
   },
   {
@@ -467,6 +472,58 @@ export const calculators: CalculatorConfig[] = [
     examples: [
       { label: "2:1 reference", values: { mode: "classification", classification: "Upper Second (2:1)" } },
       { label: "65% → class", values: { mode: "percent", percent: 65 } },
+    ],
+  },
+  {
+    slug: "uc-gpa-calculator",
+    name: "UC & CSU GPA Calculator",
+    shortName: "UC/CSU",
+    description:
+      "Estimate a University of California or Cal State a-g GPA, including the honors-point cap. This is a planning estimate, not the official application GPA.",
+    path: "/uc-gpa-calculator",
+    icon: "Landmark",
+    category: "gpa",
+    mvp: false,
+    relatedSlugs: ["high-school-gpa-calculator", "weighted-gpa-calculator", "gpa-calculator"],
+    examples: [
+      {
+        label: "UC sample",
+        values: {
+          system: "uc",
+          residency: "resident",
+          courses: [
+            { name: "English", grade: "A", year: "10", kind: "regular" },
+            { name: "Honors Chemistry", grade: "A", year: "10", kind: "honors" },
+            { name: "AP US History", grade: "B+", year: "11", kind: "ap-ib" },
+            { name: "Math", grade: "B", year: "11", kind: "regular" },
+          ],
+        },
+      },
+    ],
+  },
+  {
+    slug: "middle-school-gpa-calculator",
+    name: "Middle School GPA Calculator",
+    shortName: "MS GPA",
+    description:
+      "Calculate a middle school or junior high GPA. Every class counts equally. No credit hours and no Honors or AP bonus.",
+    path: "/middle-school-gpa-calculator",
+    icon: "School",
+    category: "gpa",
+    mvp: false,
+    relatedSlugs: ["high-school-gpa-calculator", "gpa-calculator", "weighted-gpa-calculator"],
+    examples: [
+      {
+        label: "Four classes",
+        values: {
+          classes: [
+            { name: "English", grade: "A" },
+            { name: "Math", grade: "B" },
+            { name: "Science", grade: "A" },
+            { name: "History", grade: "C" },
+          ],
+        },
+      },
     ],
   },
 ];

@@ -18,5 +18,11 @@ export const nzNinePointScale: GradingScale = {
     { letter: "C-", min: 50, max: 54, gpa: 1.0 },
     { letter: "F", min: 0, max: 49, gpa: 0.0 },
   ],
-  sources: ["NZ university common scale"],
+  sources: [
+    {
+      label: "University of Auckland calendar — GPA is a 0–9 average",
+      href: "https://www.auckland.ac.nz/en/about-us/about-the-university/the-university/official-publications/university-calendar/current-calendar/general-information/glossary-of-terms.html",
+    },
+    "Other New Zealand universities publish their own 9-point tables. Confirm the legend on your transcript.",
+  ],
 };

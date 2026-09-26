@@ -18,6 +18,9 @@ export const auMonashFourPointScale: GradingScale = {
     { letter: "WF (Withdrawn Fail)", min: -1, max: -1, gpa: 0.0 },
   ],
   sources: [
-    "https://www.monash.edu/students/academic-progress/grades-and-results/grade-point-average",
+    {
+      label: "Monash University grade point average",
+      href: "https://www.monash.edu/students/academic-progress/grades-and-results/grade-point-average",
+    },
   ],
 };

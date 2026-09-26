@@ -11,7 +11,7 @@ export function GradingScaleTable({ scale }: { scale: GradingScale }) {
             <th scope="col" className="px-3 py-3 text-left font-semibold sm:px-4">Letter / Grade</th>
             <th scope="col" className="px-3 py-3 text-left font-semibold sm:px-4">Percentage</th>
             {showGpaColumn && (
-              <th scope="col" className="px-3 py-3 text-left font-semibold sm:px-4">GPA Points</th>
+              <th scope="col" className="px-3 py-3 text-left font-semibold sm:px-4">Grade points</th>
             )}
           </tr>
         </thead>
@@ -21,7 +21,7 @@ export function GradingScaleTable({ scale }: { scale: GradingScale }) {
               <td className="px-3 py-2 font-medium sm:px-4">{band.letter}</td>
               <td className="px-3 py-2 sm:px-4">{getBandRangeLabel(band)}</td>
               {showGpaColumn && (
-                <td className="px-3 py-2 sm:px-4">{band.gpa ?? "—"}</td>
+                <td className="px-3 py-2 sm:px-4">{band.gpaLabel ?? band.gpa ?? "—"}</td>
               )}
             </tr>
           ))}

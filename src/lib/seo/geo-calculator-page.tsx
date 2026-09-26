@@ -6,6 +6,7 @@ import { countryHubs } from "@/config/country-hubs";
 import { calculatorKeywords } from "@/lib/seo/keywords";
 import { countryHubHreflangLanguages } from "@/lib/seo/hreflang";
 import { createPageMetadata } from "@/lib/seo/metadata";
+import { isCountrySpecificSlug } from "@/lib/seo/intent-urls";
 import { DISTINCT_PAGE_COPY } from "@/lib/seo/page-copy";
 import type { CalculatorSlug } from "@/types/calculator";
 import { isCalculatorSlug } from "@/types/calculator";
@@ -24,7 +25,10 @@ export function generateGeoStaticParams(code: string) {
   const hub = getHubByCode(code);
   if (!hub) return [];
   const skip = new Set(DEDICATED_GEO_PAGES[code] ?? []);
-  return hub.featuredCalculators.filter((slug) => !skip.has(slug)).map((slug) => ({ slug }));
+  return hub.featuredCalculators
+    .filter((slug) => !skip.has(slug))
+    .filter((slug) => isCountrySpecificSlug(hub.path, slug))
+    .map((slug) => ({ slug }));
 }
 
 export function createGeoCalculatorMetadata(code: string, slug: string) {

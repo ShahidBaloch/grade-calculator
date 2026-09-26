@@ -829,9 +829,9 @@ export const guides: GuideConfig[] = [
           "Many Indian and Pakistani universities report a Cumulative Grade Point Average (CGPA) on a points scale. Percentage is a 0–100 mark. Conversion is a policy choice, not a universal law — always prefer the formula on your marksheet or handbook.",
       },
       {
-        heading: "India: CBSE / UGC ×9.5",
+        heading: "India: CBSE ×9.5, not a UGC rule",
         body:
-          "A widely used estimate is Percentage = CGPA × 9.5 on a 10-point scale. Example: 8.2 × 9.5 = 77.9%. This appears often for CBSE and many UGC-affiliated colleges.",
+          "CBSE historically converted some certificate CGPAs with Percentage = CGPA × 9.5. Example: 8.2 × 9.5 = 77.9%. UGC’s credit-system guidelines describe a 10-point letter scale; they do not set one national ×9.5 multiplier. Use ×9.5 only when your board or university prints it.",
       },
       {
         heading: "India: ×10 and SPPU variants",
@@ -841,7 +841,7 @@ export const guides: GuideConfig[] = [
       {
         heading: "Pakistan: HEC bands vs ×25 shortcut",
         body:
-          "HEC’s semester-system policy maps GPA/CGPA bands to percentage ranges — not one universal linear formula. Many students still see Percentage ≈ CGPA × 25 on a 4.0 scale as a quick estimate (3.4 × 25 = 85%). Use your official equivalence table before transcripts or admissions.",
+          "HEC §13.1 maps a grade-point range to a percentage band and assigns the minimum percentage of that band. HEC’s own example is 3.00 CGPA → 71%, not 75%. HEC has also notified that it stopped converting CGPA into percentage. Percentage ≈ CGPA × 25 (3.4 × 25 = 85%) is an unofficial shortcut. Use the percentage on your transcript for applications.",
       },
       {
         heading: "SGPA vs CGPA",
@@ -858,7 +858,7 @@ export const guides: GuideConfig[] = [
       {
         question: "Which India formula should I use?",
         answer:
-          "Start with what your transcript or handbook prints. If it is silent, CBSE/UGC ×9.5 is the most common public estimate, then confirm with your controller of examinations.",
+          "Start with what your transcript or handbook prints. CBSE ×9.5 applies only where that board used it. It is not a universal UGC rule. If the document is silent, ask your controller of examinations before using a multiplier.",
       },
       {
         question: "Can I convert percentage back to CGPA?",

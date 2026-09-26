@@ -13,8 +13,10 @@ export const ukDegreeScale: GradingScale = {
     { letter: "Fail", min: 0, max: 39, gpa: null },
   ],
   sources: [
-    "UK higher education classification bands",
-    "QAA guidelines",
-    "Not a US 4.0 GPA scale — see /uk-degree-to-us-gpa-reference for illustrative US comparisons only",
+    {
+      label: "QAA — The Frameworks for Higher Education Qualifications",
+      href: "https://www.qaa.ac.uk/the-quality-code/qualifications-frameworks",
+    },
+    "Classification percentages (70 / 60 / 50 / 40) are the common UK pattern. Your programme handbook can differ.",
   ],
 };

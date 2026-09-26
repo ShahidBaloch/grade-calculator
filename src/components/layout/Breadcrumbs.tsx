@@ -16,7 +16,10 @@ export function Breadcrumbs({ items }: BreadcrumbsProps) {
             <li key={item.href} className="flex items-center gap-1">
               {index > 0 && <ChevronRight className="h-4 w-4" aria-hidden />}
               {isLast ? (
-                <span className="font-medium text-[var(--color-text)] truncate max-w-[12rem] sm:max-w-none">
+                <span
+                  aria-current="page"
+                  className="font-medium text-[var(--color-text)] truncate max-w-[12rem] sm:max-w-none"
+                >
                   {item.name}
                 </span>
               ) : (

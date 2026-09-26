@@ -63,6 +63,8 @@ export const countryHubs: CountryHubConfig[] = [
       "final-grade-calculator",
       "canvas-grade-calculator",
       "eoc-grade-calculator",
+      "uc-gpa-calculator",
+      "middle-school-gpa-calculator",
     ],
     relatedGuides: [
       {
@@ -76,6 +78,8 @@ export const countryHubs: CountryHubConfig[] = [
       "easy grader",
       "canvas grade calculator",
       "blackboard grade calculator",
+      "uc gpa calculator",
+      "middle school gpa calculator",
     ],
     hreflang: "en-US",
   },
@@ -263,14 +267,14 @@ export const countryHubs: CountryHubConfig[] = [
       "India CGPA and grade tools with an illustrative 10-point university preset — boards and campuses publish their own tables.",
     details: [
       "Many universities use a 10-point CGPA (O = 10), but letter cutoffs and quality points differ by IIT, NIT, state university, and affiliated college.",
-      "CBSE board marks and university CGPA are separate systems. CBSE/UGC often uses Percentage ≈ CGPA × 9.5; Anna University and some campuses use ×10 or (CGPA − 0.75) × 10.",
+      "CBSE board marks and university CGPA are separate systems. CBSE historically used Percentage ≈ CGPA × 9.5 on some certificates. UGC does not set one national multiplier. Anna University and some campuses use ×10 or (CGPA − 0.75) × 10.",
       "Pick your conversion in the CGPA to Percentage calculator, then use GPA tools on this hub with the India 10-point preset locked for planning.",
     ],
     faqs: [
       {
         question: "How do I convert CGPA to percentage in India?",
         answer:
-          "CBSE/UGC commonly uses Percentage = CGPA × 9.5. Some universities use ×10 or (CGPA − 0.75) × 10. Pick your formula in the CGPA to Percentage calculator and confirm your handbook.",
+          "Use the formula printed by your board or university. CBSE historically used Percentage = CGPA × 9.5 on some certificates. UGC does not publish one national ×9.5 rule. Some universities use ×10 or (CGPA − 0.75) × 10.",
       },
       {
         question: "Is this the official CBSE or university table?",
@@ -315,14 +319,14 @@ export const countryHubs: CountryHubConfig[] = [
     details: [
       "HEC’s Uniform Semester System policy (§13.1) maps fractional GPA/CGPA bands to percentage ranges — for example B = 2.67–3.00 and 71–74%, with D+ at 54–57% and D at 50–53% as the usual pass floor.",
       "For CGPA-to-percentage planning, HEC assigns the minimum percentage of the band your CGPA falls into (3.00 CGPA → 71%, not a flat ×25).",
-      "Some students still use Percentage ≈ CGPA × 25 on a 4.0 scale as a quick estimate. Treat that as a shortcut unless your handbook says otherwise.",
+      "Percentage ≈ CGPA × 25 is an unofficial shortcut. HEC has notified that it stopped converting CGPA into percentage, so the figure on your transcript is the one to use.",
       "Campus marks-to-grade cutoffs within these bands can differ — match your transcript legend.",
     ],
     faqs: [
       {
         question: "How do I convert CGPA to percentage in Pakistan?",
         answer:
-          "Start with your university’s published equivalence table. HEC recommends fractional GPA-to-percentage bands in its semester-system guidelines. A linear ×25 estimate on a 4.0 scale is only a shortcut — use our CGPA to Percentage tool and confirm against your marksheet.",
+          "HEC §13.1 gives the minimum percentage of your grade-point band (3.00 CGPA → 71%). HEC later notified that it stopped converting CGPA into percentage. The ×25 shortcut is not that rule. Use the percentage printed on your transcript.",
       },
       {
         question: "Is Pakistan GPA the same as US GPA?",

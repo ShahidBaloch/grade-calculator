@@ -171,7 +171,7 @@ export const gradingScalePages: GradingScalePageConfig[] = [
       "India university 10-point CGPA letter bands (O–F) with percentage ranges used in our calculators.",
     keywords: ["india cgpa scale", "10 point cgpa", "ugc grading scale", "cbse cgpa"],
     intro:
-      "This chart is an illustrative 10-point university preset (O–F) for planning. Letter cutoffs vary by campus; CBSE board marks and university CGPA use different rules. Percentage conversion is separate — CBSE/UGC often uses ×9.5.",
+      "This chart is an illustrative 10-point university preset (O–F) for planning. Letter cutoffs vary by campus. CBSE board marks and university CGPA are different systems. CBSE historically used ×9.5 on some certificates; UGC does not publish one national ×9.5 rule.",
     notes: [
       "Board marksheets and university CGPA tables are not identical — check your institution.",
       "Use the CGPA to Percentage calculator for ×9.5, ×10, and SPPU-style formulas.",
@@ -187,10 +187,10 @@ export const gradingScalePages: GradingScalePageConfig[] = [
       "HEC Uniform Semester System fractionalized grading (§13.1) on a 4.0 GPA scale with official percentage bands.",
     keywords: ["hec grading scale", "pakistan gpa scale", "hec fractionalized grading"],
     intro:
-      "HEC’s Uniform Semester System policy (§13.1) lists fractional grade points and percentage bands — A at 85%+, B at 71–74%, D+ at 54–57%, D at 50–53%, F below 50%. CGPA-to-percentage uses the minimum % of your band (e.g. 3.00 CGPA → 71%), not a single ×25 rule.",
+      "HEC’s Uniform Semester System policy (§13.1) publishes a grade-point range for each percentage band — for example A is 3.67–4.00 at 85% and above, and B is 2.67–3.00 at 71–74%. A CGPA is given the minimum percentage of its band (3.00 → 71%).",
     notes: [
-      "Quality points within each HEC band can differ slightly by campus — verify your transcript legend.",
-      "The CGPA to Percentage calculator includes a linear ×25 shortcut for quick estimates; prefer band lookup when your handbook follows HEC §13.1.",
+      "The grade-point column is HEC’s published range, not a single quality point. A calculator that needs one number uses the top of that range as a planning figure.",
+      "HEC notified that it stopped converting CGPA into percentage. The ×25 shortcut (CGPA × 25) is not the §13.1 rule. Use the percentage on your transcript for applications.",
     ],
   },
 ];

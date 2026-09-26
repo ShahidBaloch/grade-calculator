@@ -24,7 +24,7 @@ export const siteFaqs: FaqItem[] = [
   {
     question: "How do I convert CGPA to percentage in India?",
     answer:
-      "CBSE and many UGC colleges use Percentage = CGPA × 9.5. Some universities use ×10 or (CGPA − 0.75) × 10. Open the CGPA to Percentage calculator and pick your formula.",
+      "Use the formula your board or university prints. CBSE historically used Percentage = CGPA × 9.5 on some certificates. UGC does not set one national ×9.5 rule. Some universities use ×10 or (CGPA − 0.75) × 10.",
   },
   {
     question: "What is the difference between SGPA and CGPA?",
@@ -34,7 +34,7 @@ export const siteFaqs: FaqItem[] = [
   {
     question: "How do I convert CGPA to percentage in Pakistan?",
     answer:
-      "HEC §13.1 maps CGPA to percentage bands (for example 3.00 → 71%). Some schools also use the shortcut Percentage = CGPA × 25. Use the CGPA to Percentage calculator, pick the formula your handbook follows, and confirm your marksheet.",
+      "HEC §13.1 assigns the minimum percentage of your grade-point band (3.00 CGPA → 71%). HEC has notified that it stopped converting CGPA into percentage. Percentage = CGPA × 25 is an unofficial shortcut, not that notice or the §13.1 table.",
   },
   {
     question: "Where do I find a specific calculator?",

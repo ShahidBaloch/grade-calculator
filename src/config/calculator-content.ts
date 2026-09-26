@@ -111,6 +111,11 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
         answer:
           "That is a weighted average, not a simple mean. Enter each weighted row from your syllabus; the total is your class grade before the final if the final is listed separately.",
       },
+      {
+        question: "Can I use this as a what-if grade calculator?",
+        answer:
+          "Yes. Change one score or weight and the course average updates. That shows what your grade would be if a quiz or exam came back higher or lower.",
+      },
     ],
   },
   "final-grade-calculator": {
@@ -147,6 +152,11 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
         answer:
           "Use Required = (Target − Current × (1 − w)) ÷ w, where w is the final as a decimal (40% → 0.4). The calculator applies the same formula and flags targets above 100%.",
       },
+      {
+        question: "Can I use this for a midterm?",
+        answer:
+          "Yes. Enter the grade you have before the midterm, the percent the midterm is worth, and the course grade you want. The formula is the same as a final.",
+      },
     ],
   },
   "gpa-calculator": {
@@ -182,6 +192,11 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
         question: "What is an unweighted GPA?",
         answer:
           "Unweighted GPA treats every course the same — an A is 4.0 whether it is PE or AP. This semester calculator uses that model; use Weighted GPA if your school adds Honors or AP points.",
+      },
+      {
+        question: "What if my classes have no credit hours?",
+        answer:
+          "Set every credit to 1. Each class then counts the same. For middle school or junior high, use the middle school GPA calculator, which has no credit column.",
       },
       {
         question: "How do you calculate GPA from letter grades?",
@@ -286,6 +301,11 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
         question: "Does my school use the same Honors and AP bonuses?",
         answer:
           "Policies vary. We use common US defaults. If your school uses +1.0 for Honors or a 6.0 scale, treat this as an estimate.",
+      },
+      {
+        question: "Is this the UC or CSU GPA?",
+        answer:
+          "No. School GPA often uses different bonuses. The UC and CSU calculator uses the a-g rules and honors caps those systems publish.",
       },
     ],
   },
@@ -560,24 +580,38 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
     ],
   },
   "cgpa-to-percentage": {
+    primarySources: [
+      {
+        label: "HEC Policy Guidelines §13.1 (fractionalized grading)",
+        href: "https://www.hec.gov.pk/english/services/universities/Documents/Final%20Examination%20Policy%20Guidelines.pdf",
+      },
+      {
+        label: "HEC downloads — Stopping of Conversion of CGPA into Percentage",
+        href: "https://www.hec.gov.pk/english/services/students/DES/Pages/Downloads.aspx",
+      },
+      {
+        label: "UGC Choice Based Credit System guidelines",
+        href: "https://www.ugc.gov.in/pdfnews/8023719_Guidelines-for-CBCS.pdf",
+      },
+    ],
     howItWorks: [
       "Choose CGPA → percentage or percentage → CGPA.",
-      "Pick the formula that matches your board or university (India ×9.5 / ×10 / SPPU, or Pakistan linear ×25 estimate).",
+      "Pick the formula your board or university prints (CBSE ×9.5, ×10, SPPU, or the unofficial Pakistan ×25 estimate).",
       "Enter your value and read the converted result instantly.",
     ],
-    formula: "India CBSE: % = CGPA × 9.5 · Pakistan shortcut: % = CGPA × 25 on a 4.0 scale",
+    formula: "India CBSE historical: % = CGPA × 9.5 · Pakistan unofficial shortcut: % = CGPA × 25 on a 4.0 scale",
     workedExample:
-      "An 8.2 CGPA on the CBSE ×9.5 rule becomes 77.9%. A 3.4 CGPA on the ×25 shortcut becomes 85% — verify against your campus table.",
+      "An 8.2 CGPA on the CBSE ×9.5 rule becomes 77.9%. A 3.4 CGPA on the unofficial ×25 shortcut becomes 85%. HEC’s own example maps 3.00 CGPA to 71%, not 75%.",
     faqs: [
       {
         question: "Which India formula should I use?",
         answer:
-          "CBSE and many UGC colleges use ×9.5. Anna University, VIT, and some IITs/NITs use ×10. SPPU/Mumbai often use (CGPA − 0.75) × 10. Check your handbook.",
+          "Use the formula on your marksheet. CBSE historically used ×9.5 on some certificates. UGC does not set one national ×9.5 rule. Anna University, VIT, and some IITs/NITs use ×10. SPPU/Mumbai often use (CGPA − 0.75) × 10.",
       },
       {
         question: "What is the Pakistan HEC conversion?",
         answer:
-          "HEC publishes banded GPA-to-percentage equivalence in its semester-system guidelines. Some schools also use the linear shortcut Percentage = CGPA × 25 on a 4.0 scale. Use your official table before admissions or transcripts.",
+          "HEC §13.1 assigns the minimum percentage of your grade-point band (3.00 CGPA → 71%). HEC later notified that it stopped converting CGPA into percentage. Percentage = CGPA × 25 is an unofficial shortcut, not that notice.",
       },
       {
         question: "Is this official for admissions?",
@@ -587,12 +621,22 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
     ],
   },
   "percentage-to-cgpa": {
+    primarySources: [
+      {
+        label: "HEC Policy Guidelines §13.1 (fractionalized grading)",
+        href: "https://www.hec.gov.pk/english/services/universities/Documents/Final%20Examination%20Policy%20Guidelines.pdf",
+      },
+      {
+        label: "HEC downloads — Stopping of Conversion of CGPA into Percentage",
+        href: "https://www.hec.gov.pk/english/services/students/DES/Pages/Downloads.aspx",
+      },
+    ],
     howItWorks: [
       "Enter your percentage marks (0–100).",
       "Choose the India or Pakistan formula your institution uses.",
       "Read the estimated CGPA on that scale.",
     ],
-    formula: "India CBSE: CGPA = % ÷ 9.5 · Pakistan shortcut: CGPA = % ÷ 25",
+    formula: "India CBSE historical: CGPA = % ÷ 9.5 · Pakistan unofficial shortcut: CGPA = % ÷ 25",
     workedExample: "76% on CBSE ×9.5 ≈ 8.00 CGPA. 85% on the ×25 shortcut ≈ 3.40 CGPA.",
     faqs: [
       {
@@ -603,7 +647,7 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
       {
         question: "Can I use this for CBSE Class 10?",
         answer:
-          "CBSE historically published CGPA with ×9.5 for some certificates. Newer marksheets may show percentages directly — follow what your board printed.",
+          "CBSE historically published CGPA with ×9.5 on some certificates. That multiplier is not a UGC national rule. Newer marksheets may show percentages directly — follow what your board printed.",
       },
     ],
   },
@@ -728,6 +772,75 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
         question: "Is this the same as a WES evaluation?",
         answer:
           "No. WES and other credential evaluators apply their own methodologies. This page shows commonly cited planning numbers only.",
+      },
+    ],
+  },
+  "uc-gpa-calculator": {
+    primarySources: [
+      {
+        label: "UC Admissions — GPA requirement",
+        href: "https://admission.universityofcalifornia.edu/admission-requirements/first-year-requirements/gpa-requirement.html",
+      },
+      {
+        label: "CSU — freshman admission requirements",
+        href: "https://www.calstate.edu/apply/freshman/getting_into_the_csu/pages/admission-requirements.aspx",
+      },
+    ],
+    howItWorks: [
+      "Choose UC or CSU. For UC, choose California resident or nonresident.",
+      "Add one row per semester of an a-g course. A year-long class is two rows.",
+      "Mark approved honors, AP/IB, or a college course. The result shows capped honors points and the GPA.",
+    ],
+    formula:
+      "GPA = (letter points + capped honors points) ÷ semester grades. A=4, B=3, C=2, D=1, F=0. Plus and minus are ignored.",
+    workedExample:
+      "Four UC semesters: A regular, A honors, B+ AP, B regular. Letter points are 4+4+3+3 = 14. Two honors points apply. GPA = 16 ÷ 4 = 4.00. Without honors points it is 3.50.",
+    faqs: [
+      {
+        question: "How do you calculate UC GPA?",
+        answer:
+          "Use a-g letter grades from the summer after 9th grade through the summer after 11th. A=4, B=3, C=2, D=1, F=0, and plus/minus do not change those points. Add one honors point per semester of an approved honors, AP, IB, or transferable college course with a C or better, up to 8 points and no more than 4 from 10th grade.",
+      },
+      {
+        question: "How is CSU GPA different?",
+        answer:
+          "CSU also uses a-g grades after 9th grade, including 12th grade. The honors cap is still 8 semesters, but only 2 of those points can come from 10th grade. A C- can earn the extra CSU point. A C- does not earn the extra UC point.",
+      },
+      {
+        question: "Does 9th grade count?",
+        answer:
+          "No. Ninth-grade a-g courses can meet subject requirements, but they are not in the UC or CSU GPA. Summer after 9th grade counts as 10th grade.",
+      },
+      {
+        question: "Is this my official UC or CSU GPA?",
+        answer:
+          "No. This is a planning estimate. Only courses on your school's a-g list count, and UC or CSU calculates the GPA when you apply. Do not include pass/credit grades.",
+      },
+    ],
+  },
+  "middle-school-gpa-calculator": {
+    howItWorks: [
+      "Add each class and the letter grade you earned.",
+      "Every class counts once. There is no credit-hour column.",
+      "The GPA is the average of those grade points on the US 4.0 scale.",
+    ],
+    formula: "GPA = (sum of grade points) ÷ (number of classes). A=4.0, B=3.0, C=2.0, D=1.0, F=0.",
+    workedExample: "A, B, A, and C is 4 + 3 + 4 + 2 = 13. Divide by 4 classes. GPA = 3.25.",
+    faqs: [
+      {
+        question: "How do you calculate middle school GPA?",
+        answer:
+          "Turn each letter into points (A=4, B=3, C=2, D=1, F=0), add them, and divide by the number of classes. Middle school and junior high usually do not use credit hours or Honors bonuses.",
+      },
+      {
+        question: "Is junior high GPA the same as high school GPA?",
+        answer:
+          "The letters often use the same 4.0 scale, but high school may weight Honors and AP and may use credit hours. Use the high school GPA calculator for that.",
+      },
+      {
+        question: "Do plus and minus grades count?",
+        answer:
+          "On the common US scale, A- is 3.7 and B+ is 3.3. If your school ignores plus and minus, enter A, B, C, D, or F only.",
       },
     ],
   },

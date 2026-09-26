@@ -22,7 +22,10 @@ export const usStandardScale: GradingScale = {
     { letter: "F", min: 0, max: 59, gpa: 0.0 },
   ],
   sources: [
-    "Common US collegiate example (percentage bands vary by institution)",
-    "NCES four-point framework (A=4…F=0) — not a single national percent-to-letter table",
+    {
+      label: "NCES Condition of Education — GPA is reported by schools, not one national letter table",
+      href: "https://nces.ed.gov/programs/coe/",
+    },
+    "Percentage bands below are a common collegiate example. Your syllabus controls the cutoffs.",
   ],
 };

@@ -16,5 +16,11 @@ export const ukGcseScale: GradingScale = {
     { letter: "2", min: 20, max: 29, gpa: null },
     { letter: "1", min: 0, max: 19, gpa: null },
   ],
-  sources: ["Ofqual GCSE grading", "England 9-1 scale"],
+  sources: [
+    {
+      label: "Ofqual — GCSE 9 to 1 grade scale",
+      href: "https://www.gov.uk/government/publications/gcse-9-to-1-grade-scale-explained",
+    },
+    "The percentage bands on this page are an educational default. Live boundaries are set by the awarding body for each paper.",
+  ],
 };

@@ -18,7 +18,10 @@ export const auUqSevenPointScale: GradingScale = {
     { letter: "N (non-graded fail)", min: -1, max: -1, gpa: 2.0 },
   ],
   sources: [
-    "https://my.uq.edu.au/information-and-services/manage-my-program/exams-and-assessment/grading-systems",
+    {
+      label: "University of Queensland grading systems",
+      href: "https://my.uq.edu.au/information-and-services/manage-my-program/exams-and-assessment/grading-systems",
+    },
     "Study (UQ notes other institutions use different GPA scales)",
   ],
 };

@@ -102,4 +102,12 @@ export const calculatorResourceLinks: Record<CalculatorSlug, CalculatorResourceL
     guide: { path: "/guides/gpa-scale-explained", title: "GPA scale explained" },
     gradingScale: { path: "/grading-scales/uk", title: "UK degree classification scale" },
   },
+  "uc-gpa-calculator": {
+    guide: { path: "/guides/how-to-calculate-gpa", title: "How to calculate GPA" },
+    gradingScale: { path: "/grading-scales/us", title: "US grading scale" },
+  },
+  "middle-school-gpa-calculator": {
+    guide: { path: "/guides/how-to-calculate-gpa", title: "How to calculate GPA" },
+    gradingScale: { path: "/grading-scales/us", title: "US grading scale" },
+  },
 };

@@ -22,6 +22,9 @@ export const caFourThreeThreeScale: GradingScale = {
   ],
   sources: [
     "Illustrative preset — percentage cutoffs and A+ handling vary by campus",
-    "https://students.ubc.ca/enrolment/academic-records/grading-scale-gpa",
+    {
+      label: "UBC grading scale and GPA",
+      href: "https://students.ubc.ca/enrolment/academic-records/grading-scale-gpa",
+    },
   ],
 };

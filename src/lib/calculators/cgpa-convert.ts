@@ -17,10 +17,11 @@ export interface CgpaFormula {
 export const cgpaFormulas: CgpaFormula[] = [
   {
     id: "india-cbse-9.5",
-    label: "India CBSE / UGC (×9.5)",
+    label: "India CBSE historical (×9.5)",
     region: "IN",
     scaleMax: 10,
-    description: "Percentage ≈ CGPA × 9.5 — common CBSE and many UGC institutions.",
+    description:
+      "Percentage ≈ CGPA × 9.5. CBSE printed this on some older certificates. UGC does not set one national ×9.5 rule — use it only when your board or university says so.",
     toPercent: (cgpa) => cgpa * 9.5,
     toCgpa: (percent) => percent / 9.5,
   },
@@ -48,7 +49,7 @@ export const cgpaFormulas: CgpaFormula[] = [
     region: "PK",
     scaleMax: 4,
     description:
-      "Quick estimate: Percentage ≈ CGPA × 25 (same as CGPA ÷ 4 × 100). HEC’s official guidance uses banded GPA-to-percentage equivalence — confirm with your university table.",
+      "Unofficial shortcut only: Percentage ≈ CGPA × 25. HEC §13.1 does not use this multiplier — it assigns the minimum percentage of your grade-point band (3.00 CGPA → 71%). HEC has also notified that it stopped converting CGPA into percentage. Use the percentage printed on your transcript.",
     toPercent: (cgpa) => cgpa * 25,
     toCgpa: (percent) => percent / 25,
   },

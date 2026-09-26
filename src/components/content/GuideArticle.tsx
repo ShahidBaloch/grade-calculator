@@ -11,7 +11,7 @@ interface GuideArticleProps {
 
 export function GuideArticle({ guide, embeddedCalculator }: GuideArticleProps) {
   return (
-    <article className="space-y-8 text-[var(--color-text)]">
+    <div className="space-y-8 text-[var(--color-text)]">
       <p className="text-sm text-[var(--color-text-muted)]">{guide.readTime}</p>
 
       {guide.sections.map((section) => (
@@ -62,6 +62,6 @@ export function GuideArticle({ guide, embeddedCalculator }: GuideArticleProps) {
           <RelatedCalculators slugs={guide.relatedCalculators} />
         </div>
       </section>
-    </article>
+    </div>
   );
 }

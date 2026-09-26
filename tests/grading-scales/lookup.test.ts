@@ -53,5 +53,8 @@ describe("grading scale lookup", () => {
     expect(percentToLetter(55, "pk-hec").letter).toBe("D+");
     expect(percentToLetter(52, "pk-hec").letter).toBe("D");
     expect(percentToLetter(49, "pk-hec").letter).toBe("F");
+    expect(percentToLetter(80, "pk-hec").band.gpaLabel).toBe("3.34–3.66");
+    expect(percentToLetter(72, "pk-hec").band.gpaLabel).toBe("2.67–3.00");
+    expect(percentToLetter(50, "pk-hec").band.gpaLabel).toBe("0.10–1.00");
   });
 });

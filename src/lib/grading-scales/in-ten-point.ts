@@ -17,5 +17,11 @@ export const inTenPointScale: GradingScale = {
     { letter: "P", min: 40, max: 49, gpa: 4 },
     { letter: "F", min: 0, max: 39, gpa: 0 },
   ],
-  sources: ["Common UGC/CBCS 10-point university bands", "Institution tables may vary"],
+  sources: [
+    {
+      label: "UGC Choice Based Credit System guidelines (10-point letters; campuses set their own cutoffs)",
+      href: "https://www.ugc.gov.in/pdfnews/8023719_Guidelines-for-CBCS.pdf",
+    },
+    "Letter cutoffs and any CGPA-to-percentage formula come from your university, not from one national UGC multiplier",
+  ],
 };

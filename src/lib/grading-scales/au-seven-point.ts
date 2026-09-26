@@ -16,6 +16,9 @@ export const auSevenPointScale: GradingScale = {
   sources: [
     "Illustrative planning bands only — not UQ, Monash, or any national standard",
     "Monash University uses a separate 4.0 GPA scale — select the Monash preset or /grading-scales/australia-monash",
-    "TEQSA (Australian higher education quality framework)",
+    {
+      label: "TEQSA — Australian higher education quality framework",
+      href: "https://www.teqsa.gov.au/",
+    },
   ],
 };

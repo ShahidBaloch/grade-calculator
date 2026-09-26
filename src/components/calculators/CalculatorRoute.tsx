@@ -6,6 +6,7 @@ import { calculatorBySlug, getCalculatorPath } from "@/config/calculators";
 import { countryHubByPath } from "@/config/country-hubs";
 import { webApplicationJsonLd, howToJsonLd } from "@/lib/seo/jsonld";
 import { calculatorContent } from "@/config/calculator-content";
+import { getCalculatorHowItWorks } from "@/lib/content/calculator-how-it-works";
 import { pageDescription, pageTitle } from "@/lib/seo/page-copy";
 import type { CalculatorSlug } from "@/types/calculator";
 
@@ -36,6 +37,7 @@ export function CalculatorRoute({
   const geoHub = geoSegment ? countryHubByPath[`/${geoSegment}`] : undefined;
   const description = pageDescription(pagePath, config.description);
   const title = pageTitle(pagePath, config.name);
+  const howItWorksSteps = getCalculatorHowItWorks(slug, pagePath);
   const breadcrumbs = breadcrumbHome
     ? [{ name: "Home", href: "/" }]
     : geoHub
@@ -62,7 +64,7 @@ export function CalculatorRoute({
           howToJsonLd({
             name: `How to use the ${title}`,
             description,
-            steps: content.howItWorks,
+            steps: howItWorksSteps,
           }),
         ]}
       />

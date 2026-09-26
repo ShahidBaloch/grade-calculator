@@ -23,22 +23,31 @@ export function GradingScalePageContent({ config }: { config: GradingScalePageCo
         <section>
           <h2 className="text-xl font-semibold">Sources</h2>
           <ul className="mt-3 list-disc space-y-2 pl-5 text-[var(--color-text-muted)]">
-            {scale.sources.map((source) => (
-              <li key={source}>
-                {/^https?:\/\//i.test(source) ? (
-                  <a
-                    href={source}
-                    className="text-[var(--color-primary)] hover:underline"
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    {source}
-                  </a>
-                ) : (
-                  source
-                )}
-              </li>
-            ))}
+            {scale.sources.map((source) => {
+              const label = typeof source === "string" ? source : source.label;
+              const href =
+                typeof source === "string"
+                  ? /^https?:\/\//i.test(source)
+                    ? source
+                    : undefined
+                  : source.href;
+              return (
+                <li key={href ?? label}>
+                  {href ? (
+                    <a
+                      href={href}
+                      className="text-[var(--color-primary)] hover:underline"
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      {label}
+                    </a>
+                  ) : (
+                    label
+                  )}
+                </li>
+              );
+            })}
           </ul>
         </section>
       )}

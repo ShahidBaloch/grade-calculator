@@ -8,7 +8,7 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
   "/weighted-grade-calculator": {
     title: "Weighted Grade Calculator — Course & Class Average",
     description:
-      "Free weighted grade calculator for class and course averages. Enter assignment scores and weights for homework, exams, and your gradebook total.",
+      "Free weighted grade calculator for class, course, and gradebook averages. Change a score to see what your grade would be.",
   },
   "/test-grade-calculator": {
     title: "Test & Exam Grade Calculator",
@@ -23,7 +23,17 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
   "/final-grade-calculator": {
     title: "Final Grade Calculator — Exam Score Needed",
     description:
-      "Find what you need on your final exam to hit your target course grade. Enter current grade, final weight, and goal — for high school and college finals.",
+      "Find the score you need on a final or midterm. Enter your current grade, how much the exam is worth, and the grade you want.",
+  },
+  "/uc-gpa-calculator": {
+    title: "UC & CSU GPA Calculator — Capped A–G Average",
+    description:
+      "Estimate a UC or Cal State a-g GPA. UC uses 10th–11th grade with up to 8 honors points. CSU includes 12th grade and allows only 2 honors points from 10th. Not the official application GPA.",
+  },
+  "/middle-school-gpa-calculator": {
+    title: "Middle School GPA Calculator — Junior High",
+    description:
+      "Free middle school and junior high GPA calculator. Enter each class letter grade. Every class counts the same — no credit hours and no Honors or AP bonus.",
   },
   "/au/gpa-calculator": {
     title: "Australia GPA Calculator — UQ 7-Point and Monash 4-Point",

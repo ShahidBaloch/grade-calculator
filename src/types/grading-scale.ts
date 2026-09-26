@@ -19,7 +19,11 @@ export interface GradeBand {
   min: number;
   max: number;
   gpa: number | null;
+  /** Shown in the reference table when a scale publishes a range instead of one point. */
+  gpaLabel?: string;
 }
+
+export type ScaleSource = string | { label: string; href: string };
 
 export interface GradingScale {
   id: ScaleId;
@@ -28,7 +32,7 @@ export interface GradingScale {
   gpaMax?: number;
   passPercent: number;
   bands: GradeBand[];
-  sources: string[];
+  sources: ScaleSource[];
 }
 
 export interface ScaleLookupResult {

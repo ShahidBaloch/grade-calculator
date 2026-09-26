@@ -82,6 +82,10 @@ const STATIC_REDIRECTS: Array<{ source: string; destination: string }> = [
   { source: "/blackboard-grade-calculator", destination: "/weighted-grade-calculator" },
   { source: "/moodle-grade-calculator", destination: "/weighted-grade-calculator" },
   { source: "/google-classroom-grade-calculator", destination: "/weighted-grade-calculator" },
+  { source: "/csu-gpa-calculator", destination: "/uc-gpa-calculator" },
+  { source: "/california-gpa-calculator", destination: "/uc-gpa-calculator" },
+  { source: "/jr-high-gpa-calculator", destination: "/middle-school-gpa-calculator" },
+  { source: "/junior-high-gpa-calculator", destination: "/middle-school-gpa-calculator" },
 ];
 
 /** 301 map. Sources must not be indexed. */
