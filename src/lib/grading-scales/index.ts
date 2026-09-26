@@ -62,15 +62,15 @@ function bandsForPercentLookup(scale: GradingScale): GradingScale["bands"] {
 
 export function percentToLetter(percent: number, scaleId: ScaleId = DEFAULT_SCALE_ID): ScaleLookupResult {
   const scale = getScale(scaleId);
-  const clamped = Math.min(100, Math.max(0, percent));
-  // Bands use integer cutoffs; treat each band as "this grade or higher until the next tier".
-  // Avoids mis-mapping values in gaps (e.g. 89.2% between B+ 87–89 and A- 90–92 on US standard).
   const percentBands = bandsForPercentLookup(scale);
   const sortedByMin = [...percentBands].sort((a, b) => b.min - a.min);
-  const band =
-    sortedByMin.find((b) => clamped >= b.min) ??
-    sortedByMin[sortedByMin.length - 1] ??
-    scale.bands[scale.bands.length - 1];
+  const fallback = sortedByMin[sortedByMin.length - 1] ?? scale.bands[scale.bands.length - 1];
+  // Compare the raw number. Do not round 89.99 to 90 before choosing the band.
+  if (!Number.isFinite(percent)) {
+    return { letter: fallback.letter, gpa: fallback.gpa, band: fallback };
+  }
+  const clamped = Math.min(100, Math.max(0, percent));
+  const band = sortedByMin.find((b) => clamped >= b.min) ?? fallback;
 
   return { letter: band.letter, gpa: band.gpa, band };
 }

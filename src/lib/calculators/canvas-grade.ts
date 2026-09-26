@@ -36,6 +36,9 @@ export function calculateCanvasGrade(
   const totalWeight = groups.reduce((sum, g) => sum + g.weight, 0);
   const weightedSum = groups.reduce((sum, g) => sum + g.score * g.weight, 0);
   const courseGrade = weightedSum / totalWeight;
+  if (!Number.isFinite(courseGrade)) {
+    return { status: "error", errors: ["Could not calculate a grade from these weights"] };
+  }
   const lookup = percentToLetter(courseGrade, scaleId);
 
   const weightWarning =

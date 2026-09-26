@@ -6,6 +6,9 @@ import { calculateFinalGradeDroppedLowest } from "@/lib/calculators/final-grade-
 import { convertLetterToPercent, convertPercentToLetter } from "@/lib/calculators/grade-converter";
 import { calculateRaiseGpa } from "@/lib/calculators/raise-gpa";
 import { calculateWeightedGrade } from "@/lib/calculators/weighted-grade";
+import { percentToLetter } from "@/lib/grading-scales";
+import { calculateSemesterGpa } from "@/lib/calculators/gpa";
+import { calculateEocGrade } from "@/lib/calculators/eoc-grade";
 
 describe("calculator edge cases", () => {
   it("ez grader rejects zero questions", () => {
@@ -41,6 +44,37 @@ describe("calculator edge cases", () => {
       groups: [{ name: "Test", score: 90, weight: 0 }],
     });
     expect(result.status).toBe("idle");
+  });
+
+  it("maps US letter boundaries from the raw percentage", () => {
+    expect(percentToLetter(89.99).letter).toBe("B+");
+    expect(percentToLetter(90).letter).toBe("A-");
+    expect(percentToLetter(92.99).letter).toBe("A-");
+    expect(percentToLetter(93).letter).toBe("A");
+    expect(percentToLetter(Number.NaN).letter).toBe("F");
+  });
+
+  it("rejects zero weight, zero credits, and zero exam weight", () => {
+    const weighted = calculateWeightedGrade({
+      globalMode: "percentage",
+      weightMode: "percent",
+      items: [{ score: 90, weight: 0 }],
+    });
+    expect(weighted.status).toBe("error");
+    expect(JSON.stringify(weighted)).not.toMatch(/NaN|Infinity/);
+
+    const gpa = calculateSemesterGpa({ courses: [{ grade: "A", credits: 0 }] });
+    expect(gpa.data?.gpa).toBeUndefined();
+    expect(JSON.stringify(gpa)).not.toMatch(/NaN|Infinity/);
+
+    expect(calculateEocGrade({ currentGrade: 80, eocWeight: 0, targetGrade: 90 }).status).toBe("error");
+    const impossible = calculateFinalGradeRequired({
+      currentGrade: 70,
+      desiredGrade: 95,
+      finalWeight: 10,
+    });
+    expect(impossible.data?.status).toBe("impossible");
+    expect(Number.isFinite(impossible.data?.requiredPercent)).toBe(true);
   });
 
   it("weighted grade errors on invalid input", () => {

@@ -66,7 +66,7 @@ export function calculateWeightedGrade(
     return { status: "error", errors };
   }
 
-  if (totalWeight <= 0) {
+  if (totalWeight <= 0 || !Number.isFinite(weightedSum)) {
     return { status: "error", errors: ["Enter at least one item with weight greater than 0"] };
   }
 
@@ -77,6 +77,9 @@ export function calculateWeightedGrade(
   }
 
   const weightedAverage = weightedSum / totalWeight;
+  if (!Number.isFinite(weightedAverage)) {
+    return { status: "error", errors: ["Could not calculate a grade from these weights"] };
+  }
   const lookup = percentToLetter(weightedAverage, scaleId);
 
   return {

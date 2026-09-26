@@ -8,7 +8,6 @@ import { ResourceLinks } from "@/components/content/ResourceLinks";
 import { FaqAccordion } from "@/components/content/FaqAccordion";
 import { HowItWorks } from "@/components/content/HowItWorks";
 import { RelatedCalculators } from "@/components/content/RelatedCalculators";
-import { FormulaBreakdown } from "@/components/calculators/shared/FormulaBreakdown";
 import type { CalculatorSlug } from "@/types/calculator";
 
 export function CalculatorPageSections({
@@ -49,9 +48,9 @@ export function CalculatorPageSections({
       <section>
         <h2 className="text-xl font-semibold">Formula</h2>
         <p className="mt-2 text-sm text-[var(--color-text-muted)]">{content.formula}</p>
-        <div className="mt-3">
-          <FormulaBreakdown steps={[content.workedExample]} />
-        </div>
+        <p className="mt-2 text-sm text-[var(--color-text-muted)]">
+          Example: {content.workedExample} Letter cut-offs use the unrounded result.
+        </p>
       </section>
       {content.primarySources && content.primarySources.length > 0 && (
         <section>

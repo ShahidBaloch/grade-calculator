@@ -281,7 +281,11 @@ export function FinalGradeCalculator() {
         />
       )}
 
-      {result.errors?.[0] && <p className="text-sm text-[var(--color-error)]">{result.errors[0]}</p>}
+      {result.errors?.[0] && (
+        <p className="text-sm text-[var(--color-error)]" role="alert">
+          {result.errors[0]}
+        </p>
+      )}
 
       {requiredData && state.mode === "required" && (
         <>
@@ -297,7 +301,9 @@ export function FinalGradeCalculator() {
             percent={requiredData.requiredPercent}
             placeholder="—"
           />
-          <p className="text-sm text-[var(--color-text-muted)]">{requiredData.message}</p>
+          <p className="text-sm text-[var(--color-text-muted)]" role="status">
+            {requiredData.message}
+          </p>
           <FormulaBreakdown steps={requiredData.formulaSteps} />
         </>
       )}

@@ -23,7 +23,13 @@ export function CalculatorToolbar({ onShare, onReset, copied }: CalculatorToolba
         </Button>
       )}
       {onReset && (
-        <Button type="button" variant="ghost" size="sm" onClick={onReset}>
+        <Button
+          type="button"
+          variant="ghost"
+          size="sm"
+          onClick={onReset}
+          title="Clears this calculator. Saved inputs for this tool are removed from this browser."
+        >
           <RotateCcw className="mr-1.5 h-4 w-4" />
           Reset
         </Button>

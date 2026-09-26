@@ -96,14 +96,19 @@ export function calculateSemesterGpa(
     return { status: "error", errors };
   }
 
-  if (totalCredits <= 0) {
+  if (totalCredits <= 0 || !Number.isFinite(totalQualityPoints)) {
     return { status: "idle" };
+  }
+
+  const gpa = totalQualityPoints / totalCredits;
+  if (!Number.isFinite(gpa)) {
+    return { status: "error", errors: ["Could not calculate a GPA from these credits"] };
   }
 
   return {
     status: "valid",
     data: {
-      gpa: totalQualityPoints / totalCredits,
+      gpa,
       totalCredits,
       totalQualityPoints,
       courses,

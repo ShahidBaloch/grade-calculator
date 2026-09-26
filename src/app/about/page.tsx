@@ -38,6 +38,13 @@ export default function AboutPage() {
             . Your grading scale is detected automatically from your location, with support for US, UK,
             Canadian, Australian, and New Zealand systems.
           </p>
+          <h2 className="text-xl font-semibold text-[var(--color-text)]">How results are checked</h2>
+          <ul className="list-disc space-y-2 pl-5">
+            <li>Letter grades use the raw percentage. 89.99 stays a B+ when the A− cut-off is 90.</li>
+            <li>A total weight or credit load of zero is rejected. The calculator does not divide by zero.</li>
+            <li>University tables follow the institution’s published points. Monash and UQ are not the same scale.</li>
+            <li>ATAR and UK-to-US figures are planning estimates. They are not official results or application GPAs.</li>
+          </ul>
           <h2 className="text-xl font-semibold text-[var(--color-text)]">What we offer</h2>
           <ul className="list-disc space-y-2 pl-5">
             <li>EZ Grader, test grade, Canvas, and EOC calculators for classroom scoring</li>

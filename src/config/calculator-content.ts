@@ -139,6 +139,12 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
           "There is no official linear map (for example GPA ÷ 7 × 4). Pick your university preset on /au and follow the receiving institution or credential evaluator — do not treat this calculator as a WES-equivalent conversion.",
       },
     ],
+    primarySources: [
+      {
+        label: "NCES — grade point average in US education statistics",
+        href: "https://nces.ed.gov/programs/coe/indicator/ctr",
+      },
+    ],
   },
   "cumulative-gpa-calculator": {
     howItWorks: [
@@ -349,6 +355,16 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
         question: "How much is the EOC worth?",
         answer:
           "Florida can require 30% for certain EOC courses under current statute. Texas STAAR EOC results are not mandated statewide as a fixed course percentage — confirm your district policy. Other states set their own rules.",
+      },
+    ],
+    primarySources: [
+      {
+        label: "Florida Legislature — statewide assessment statute",
+        href: "https://www.flsenate.gov/Laws/Statutes/2024/1008.22",
+      },
+      {
+        label: "Texas Education Agency — STAAR resources",
+        href: "https://tea.texas.gov/student-assessment/testing/staar/staar-resources",
       },
     ],
   },
