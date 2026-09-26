@@ -13,6 +13,9 @@ const criticalPages = [
   "/contact",
   "/canvas-grade-calculator",
   "/eoc-grade-calculator",
+  "/grading-scales/pakistan",
+  "/pk",
+  "/in",
 ];
 
 for (const path of criticalPages) {

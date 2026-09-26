@@ -22,6 +22,7 @@ import {
   type CgpaFormulaId,
 } from "@/lib/calculators/cgpa-convert";
 import { useCalculatorPersistence } from "@/hooks/useCalculatorPersistence";
+import { useGradingScale } from "@/hooks/useGradingScale";
 
 interface CgpaState {
   mode: CgpaConvertMode;
@@ -34,17 +35,38 @@ type CgpaConvertSlug = "cgpa-to-percentage" | "percentage-to-cgpa";
 export function CgpaToPercentageCalculator({
   storageKey = "cgpa-to-percentage",
   defaultMode = "cgpa-to-percent",
+  defaultFormulaId,
 }: {
   storageKey?: CgpaConvertSlug;
   defaultMode?: CgpaConvertMode;
+  defaultFormulaId?: CgpaFormulaId;
 } = {}) {
+  const { scaleId, isScaleLocked } = useGradingScale();
+  const regionFormulaId: CgpaFormulaId =
+    isScaleLocked && scaleId === "pk-hec"
+      ? "pakistan-hec-13.1"
+      : isScaleLocked && scaleId === "in-ten-point"
+        ? "india-cbse-9.5"
+        : "india-cbse-9.5";
+  const formulaId = defaultFormulaId ?? regionFormulaId;
+  const initialState = React.useMemo<CgpaState>(
+    () => ({
+      mode: defaultMode,
+      formulaId,
+      value:
+        formulaId === "pakistan-hec-13.1" || formulaId === "pakistan-hec-25"
+          ? defaultMode === "percent-to-cgpa"
+            ? 71
+            : 3
+          : defaultMode === "percent-to-cgpa"
+            ? 76
+            : 8.2,
+    }),
+    [defaultMode, formulaId],
+  );
   const { state, setState, resetState, shareUrl, copied } = useCalculatorPersistence<CgpaState>(
     storageKey,
-    {
-      mode: defaultMode,
-      formulaId: "india-cbse-9.5",
-      value: defaultMode === "percent-to-cgpa" ? 76 : 8.2,
-    },
+    initialState,
   );
   const examples = calculatorBySlug[storageKey].examples;
   const formula = cgpaFormulas.find((f) => f.id === state.formulaId) ?? cgpaFormulas[0];

@@ -130,6 +130,24 @@ test.describe("Core calculator flows", () => {
     await expect(page.getByRole("heading", { level: 1, name: /weighted grade/i })).toBeVisible();
   });
 
+  test("Pakistan grading scale reference shows D+ and HEC source link", async ({ page }) => {
+    await page.goto("/grading-scales/pakistan");
+    await expect(page.getByRole("heading", { level: 1 })).toContainText(/pakistan/i);
+    await expect(page.getByRole("cell", { name: "D+" })).toBeVisible();
+    await expect(
+      page.getByRole("link", { name: /HEC Policy Guidelines.*§13\.1/i }),
+    ).toHaveAttribute("href", /hec\.gov\.pk/i);
+    await expect(page.getByRole("cell", { name: "3.34–3.66" })).toBeVisible();
+  });
+
+  test("Pakistan hub CGPA converter uses HEC §13.1 by default", async ({ page }) => {
+    await page.goto("/pk/cgpa-to-percentage");
+    await page.getByRole("combobox", { name: "Formula" }).click();
+    await expect(page.getByRole("option", { name: /HEC §13\.1/i })).toBeVisible();
+    await page.getByRole("spinbutton", { name: /CGPA/i }).fill("3");
+    await expect(page.getByText(/71%/).first()).toBeVisible();
+  });
+
   const smokePages: Array<[string, RegExp]> = [
     ["/test-grade-calculator", /test grade/i],
     ["/cumulative-gpa-calculator", /cumulative gpa/i],

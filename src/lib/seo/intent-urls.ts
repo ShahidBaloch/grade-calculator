@@ -17,7 +17,14 @@ export const COUNTRY_SPECIFIC_SLUGS: Record<string, readonly CalculatorSlug[]> =
   "/nz": ["gpa-calculator", "cumulative-gpa-calculator", "letter-grade-calculator"],
   "/uk": ["degree-classification-calculator"],
   "/in": ["gpa-calculator"],
-  "/pk": ["gpa-calculator"],
+  "/pk": [
+    "gpa-calculator",
+    "cumulative-gpa-calculator",
+    "cgpa-to-percentage",
+    "percentage-to-cgpa",
+    "cgpa-calculator",
+    "sgpa-to-cgpa",
+  ],
   "/us": [],
 };
 

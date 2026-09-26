@@ -350,7 +350,7 @@ export const calculators: CalculatorConfig[] = [
     name: "CGPA to Percentage Calculator",
     shortName: "CGPA %",
     description:
-      "Convert CGPA to percentage with CBSE ×9.5, campus formulas, or the unofficial Pakistan ×25 estimate.",
+      "Convert CGPA to percentage with CBSE ×9.5, campus formulas, HEC §13.1 band minimums, or the unofficial Pakistan ×25 shortcut.",
     path: "/cgpa-to-percentage",
     icon: "Percent",
     category: "conversion",
@@ -358,7 +358,14 @@ export const calculators: CalculatorConfig[] = [
     relatedSlugs: ["percentage-to-cgpa", "sgpa-to-cgpa", "cgpa-calculator"],
     examples: [
       { label: "India 8.2 CGPA", values: { mode: "cgpa-to-percent", formulaId: "india-cbse-9.5", value: 8.2 } },
-      { label: "Pakistan ×25 estimate", values: { mode: "cgpa-to-percent", formulaId: "pakistan-hec-25", value: 3.4 } },
+      {
+        label: "Pakistan HEC 3.00 → 71%",
+        values: { mode: "cgpa-to-percent", formulaId: "pakistan-hec-13.1", value: 3 },
+      },
+      {
+        label: "Pakistan ×25 shortcut",
+        values: { mode: "cgpa-to-percent", formulaId: "pakistan-hec-25", value: 3.4 },
+      },
       { label: "76% → CGPA", values: { mode: "percent-to-cgpa", formulaId: "india-cbse-9.5", value: 76 } },
     ],
   },
@@ -367,7 +374,7 @@ export const calculators: CalculatorConfig[] = [
     name: "Percentage to CGPA Calculator",
     shortName: "% → CGPA",
     description:
-      "Convert percentage marks to CGPA with CBSE ×9.5, campus formulas, or the unofficial Pakistan ×25 estimate.",
+      "Convert percentage marks to CGPA with CBSE ×9.5, campus formulas, HEC §13.1 planning bands, or the unofficial Pakistan ×25 shortcut.",
     path: "/percentage-to-cgpa",
     icon: "Percent",
     category: "conversion",
@@ -375,7 +382,14 @@ export const calculators: CalculatorConfig[] = [
     relatedSlugs: ["cgpa-to-percentage", "cgpa-calculator", "sgpa-to-cgpa"],
     examples: [
       { label: "76% CBSE", values: { mode: "percent-to-cgpa", formulaId: "india-cbse-9.5", value: 76 } },
-      { label: "85% ×25 estimate", values: { mode: "percent-to-cgpa", formulaId: "pakistan-hec-25", value: 85 } },
+      {
+        label: "71% HEC §13.1",
+        values: { mode: "percent-to-cgpa", formulaId: "pakistan-hec-13.1", value: 71 },
+      },
+      {
+        label: "85% ×25 shortcut",
+        values: { mode: "percent-to-cgpa", formulaId: "pakistan-hec-25", value: 85 },
+      },
     ],
   },
   {

@@ -350,6 +350,8 @@ export const countryHubs: CountryHubConfig[] = [
       "grade calculator pakistan",
     ],
     hreflang: "en-PK",
+    scaleLockNote:
+      "GPA tools on this hub use the HEC 4.0 letter scale (§13.1 bands, including D+). CGPA-to-percentage uses band minimums — not the unofficial ×25 shortcut unless you choose it in the converter.",
   },
 ];
 

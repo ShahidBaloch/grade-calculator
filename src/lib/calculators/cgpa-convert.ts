@@ -1,7 +1,16 @@
+import {
+  findHecBandByCgpa,
+  findHecBandByPercent,
+  hecCgpaToBandMinimumPercent,
+  hecPercentToPlanningCgpa,
+  parseHecGpaRange,
+} from "@/lib/calculators/pakistan-hec-bands";
+
 export type CgpaFormulaId =
   | "india-cbse-9.5"
   | "india-x10"
   | "india-sppu"
+  | "pakistan-hec-13.1"
   | "pakistan-hec-25";
 
 export interface CgpaFormula {
@@ -44,12 +53,22 @@ export const cgpaFormulas: CgpaFormula[] = [
     toCgpa: (percent) => percent / 10 + 0.75,
   },
   {
-    id: "pakistan-hec-25",
-    label: "Pakistan linear estimate (×25 on 4.0)",
+    id: "pakistan-hec-13.1",
+    label: "Pakistan HEC §13.1 (band minimum %)",
     region: "PK",
     scaleMax: 4,
     description:
-      "Unofficial shortcut only: Percentage ≈ CGPA × 25. HEC §13.1 does not use this multiplier — it assigns the minimum percentage of your grade-point band (3.00 CGPA → 71%). HEC has also notified that it stopped converting CGPA into percentage. Use the percentage printed on your transcript.",
+      "HEC §13.1 assigns the minimum percentage of your grade-point band — for example 3.00 CGPA → 71% (B band). HEC later notified that it stopped converting CGPA into percentage; use the percentage on your transcript for applications.",
+    toPercent: (cgpa) => hecCgpaToBandMinimumPercent(cgpa),
+    toCgpa: (percent) => hecPercentToPlanningCgpa(percent),
+  },
+  {
+    id: "pakistan-hec-25",
+    label: "Pakistan unofficial shortcut (×25 on 4.0)",
+    region: "PK",
+    scaleMax: 4,
+    description:
+      "Unofficial shortcut only: Percentage ≈ CGPA × 25. Not HEC §13.1 and not universal across Pakistani universities. HEC assigns band minimum percentages instead (3.00 CGPA → 71%).",
     toPercent: (cgpa) => cgpa * 25,
     toCgpa: (percent) => percent / 25,
   },
@@ -99,6 +118,12 @@ export function convertCgpa(input: CgpaConvertInput): {
       };
     }
     const percent = Math.min(100, Math.max(0, formula.toPercent(value)));
+    const hecBand =
+      input.formulaId === "pakistan-hec-13.1" ? findHecBandByCgpa(value) : undefined;
+    const message =
+      hecBand != null
+        ? `${value.toFixed(2)} CGPA → ${percent.toFixed(0)}% (HEC §13.1 minimum for ${hecBand.letter}, ${hecBand.min}–${hecBand.max}%)`
+        : `${value.toFixed(2)} CGPA → ${percent.toFixed(2)}% using ${formula.label}`;
     return {
       status: "valid",
       data: {
@@ -107,7 +132,7 @@ export function convertCgpa(input: CgpaConvertInput): {
         output: percent,
         inputLabel: "CGPA",
         outputLabel: "Percentage",
-        message: `${value.toFixed(2)} CGPA → ${percent.toFixed(2)}% using ${formula.label}`,
+        message,
       },
     };
   }
@@ -116,6 +141,13 @@ export function convertCgpa(input: CgpaConvertInput): {
     return { status: "error", errors: ["Percentage must be between 0 and 100"] };
   }
   const cgpa = Math.min(formula.scaleMax, Math.max(0, formula.toCgpa(value)));
+  const hecBand =
+    input.formulaId === "pakistan-hec-13.1" ? findHecBandByPercent(value) : undefined;
+  const hecRange = hecBand != null ? parseHecGpaRange(hecBand) : undefined;
+  const message =
+    hecBand != null && hecRange != null
+      ? `${value.toFixed(0)}% → up to ${cgpa.toFixed(2)} CGPA (top of HEC ${hecBand.letter} band ${hecRange.min.toFixed(2)}–${hecRange.max.toFixed(2)}; planning estimate only)`
+      : `${value.toFixed(2)}% → ${cgpa.toFixed(2)} CGPA using ${formula.label}`;
   return {
     status: "valid",
     data: {
@@ -124,7 +156,7 @@ export function convertCgpa(input: CgpaConvertInput): {
       output: cgpa,
       inputLabel: "Percentage",
       outputLabel: "CGPA",
-      message: `${value.toFixed(2)}% → ${cgpa.toFixed(2)} CGPA using ${formula.label}`,
+      message,
     },
   };
 }

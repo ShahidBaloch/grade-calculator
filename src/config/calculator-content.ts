@@ -85,7 +85,7 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
   "weighted-grade-calculator": {
     howItWorks: [
       "Add each assignment, quiz, or exam with its score and weight.",
-      "Use percentage weights (should total 100%) or point weights.",
+      "Use percentage weights or point weights — weights are normalized by their sum (100% total only if your syllabus requires it).",
       "See your weighted course average and letter grade.",
     ],
     formula: "Weighted avg = Σ(Score × Weight) ÷ Σ(Weight) — always normalized by the sum of weights you enter (100% total not required)",
@@ -596,12 +596,13 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
     ],
     howItWorks: [
       "Choose CGPA → percentage or percentage → CGPA.",
-      "Pick the formula your board or university prints (CBSE ×9.5, ×10, SPPU, or the unofficial Pakistan ×25 estimate).",
+      "Pick the formula your board or university prints (CBSE ×9.5, ×10, SPPU, HEC §13.1 band minimum, or the unofficial Pakistan ×25 shortcut).",
       "Enter your value and read the converted result instantly.",
     ],
-    formula: "India CBSE historical: % = CGPA × 9.5 · Pakistan unofficial shortcut: % = CGPA × 25 on a 4.0 scale",
+    formula:
+      "India CBSE historical: % = CGPA × 9.5 · Pakistan HEC §13.1: band minimum % · Unofficial shortcut: % = CGPA × 25",
     workedExample:
-      "An 8.2 CGPA on the CBSE ×9.5 rule becomes 77.9%. A 3.4 CGPA on the unofficial ×25 shortcut becomes 85%. HEC’s own example maps 3.00 CGPA to 71%, not 75%.",
+      "An 8.2 CGPA on the CBSE ×9.5 rule becomes 77.9%. HEC §13.1 maps 3.00 CGPA to 71% (B band minimum). The ×25 shortcut would show 75% for 3.00 — that is not the §13.1 table.",
     faqs: [
       {
         question: "Which India formula should I use?",
@@ -636,8 +637,10 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
       "Choose the India or Pakistan formula your institution uses.",
       "Read the estimated CGPA on that scale.",
     ],
-    formula: "India CBSE historical: CGPA = % ÷ 9.5 · Pakistan unofficial shortcut: CGPA = % ÷ 25",
-    workedExample: "76% on CBSE ×9.5 ≈ 8.00 CGPA. 85% on the ×25 shortcut ≈ 3.40 CGPA.",
+    formula:
+      "India CBSE historical: CGPA = % ÷ 9.5 · Pakistan HEC §13.1: planning top of band · Unofficial shortcut: CGPA = % ÷ 25",
+    workedExample:
+      "76% on CBSE ×9.5 ≈ 8.00 CGPA. 71% on HEC §13.1 planning maps to up to 3.00 CGPA in the B band.",
     faqs: [
       {
         question: "Is percentage to CGPA the reverse of CGPA to percentage?",

@@ -22,7 +22,17 @@ describe("convertCgpa", () => {
     expect(result.data?.output).toBeCloseTo(8, 5);
   });
 
-  it("converts Pakistan HEC CGPA with ×25", () => {
+  it("maps Pakistan HEC §13.1 CGPA to band minimum percentage", () => {
+    const result = convertCgpa({
+      mode: "cgpa-to-percent",
+      formulaId: "pakistan-hec-13.1",
+      value: 3,
+    });
+    expect(result.status).toBe("valid");
+    expect(result.data?.output).toBe(71);
+  });
+
+  it("converts Pakistan HEC CGPA with ×25 shortcut", () => {
     const result = convertCgpa({
       mode: "cgpa-to-percent",
       formulaId: "pakistan-hec-25",
