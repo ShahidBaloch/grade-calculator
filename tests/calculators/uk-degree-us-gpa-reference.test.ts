@@ -9,7 +9,7 @@ describe("uk-degree-us-gpa-reference", () => {
     const result = lookupUkDegreeUsGpaReference("Upper Second (2:1)");
     expect(result.status).toBe("valid");
     expect(result.data?.illustrativeUsGpa).toBe(3.7);
-    expect(result.data?.message).toMatch(/do not report/i);
+    expect(result.data?.message).toMatch(/do not enter/i);
   });
 
   it("maps 65% to 2:1 illustrative reference", () => {

@@ -14,7 +14,8 @@ export const auSevenPointScale: GradingScale = {
     { letter: "F", min: 0, max: 49, gpa: 0.0 },
   ],
   sources: [
-    "Illustrative planning bands only — confirm your university handbook",
+    "Illustrative planning bands only — not UQ, Monash, or any national standard",
+    "Monash University uses a separate 4.0 GPA scale — select the Monash preset or /grading-scales/australia-monash",
     "TEQSA (Australian higher education quality framework)",
   ],
 };

@@ -4,9 +4,12 @@
  */
 const LOW_VALUE_PATH_PATTERNS: RegExp[] = [
   /^\/\d+\/\d+(?:\/|-|$)/,
-  /^\/\d+-out-of-\d+/,
-  /^\/what-is-\d+-percent-of-\d+/,
-  /^\/percent-of-\d+/,
+  /^\/\d+-out-of-\d+/i,
+  /-out-of-\d+(?:-|$)/i,
+  /as-a-percent/i,
+  /^\/what-is-\d+-percent-of-\d+/i,
+  /^\/percent-of-\d+/i,
+  /^\/\d+-percent-of-\d+/i,
 ];
 
 export function isLowValueProgrammaticPath(pathname: string): boolean {

@@ -153,7 +153,7 @@ export const countryHubs: CountryHubConfig[] = [
     path: "/au",
     name: "Australia",
     flag: "🇦🇺",
-    scaleId: "au-seven-point",
+    scaleId: "au-uq-seven-point",
     description:
       "Australian grade tools with institution-specific GPA presets — not one national scale.",
     details: [
@@ -183,7 +183,7 @@ export const countryHubs: CountryHubConfig[] = [
           "No. We do not provide ATAR → US GPA, ATAR → university GPA, or ATAR → UK degree class conversions because there is no valid direct equivalency.",
       },
     ],
-    gradingScalePath: "/grading-scales/australia",
+    gradingScalePath: "/grading-scales/australia-uq",
     scaleLockNote:
       "GPA tools on this hub let you choose an Australian preset (generic example, UQ 7-point, or Monash 4-point). ATAR uses scaled scores, not GPA points.",
     featuredCalculators: [
@@ -193,7 +193,7 @@ export const countryHubs: CountryHubConfig[] = [
       "weighted-grade-calculator",
       "letter-grade-calculator",
     ],
-    keywords: ["australian gpa calculator", "7 point gpa scale", "grade calculator australia"],
+    keywords: ["australian gpa calculator", "uq gpa scale", "monash gpa", "grade calculator australia"],
     hreflang: "en-AU",
   },
   {

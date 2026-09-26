@@ -92,7 +92,7 @@ describe("resolve-scale", () => {
         geoScaleId: null,
         useLocaleHint: false,
       }),
-    ).toBe("au-seven-point");
+    ).toBe("au-uq-seven-point");
   });
 
   it("locks institution-specific Australian grading scale reference pages", () => {
@@ -107,6 +107,7 @@ describe("resolve-scale", () => {
         hint === "us-standard" ||
         hint === "ca-standard" ||
         hint === "uk-degree" ||
+        hint === "au-uq-seven-point" ||
         hint === "au-seven-point",
     ).toBe(true);
   });

@@ -63,13 +63,13 @@ export function getLockedScaleFromPath(pathname: string): ScaleId | null {
 
 /** Default scale when visiting a regional hub without a hard lock (e.g. /au GPA tools). */
 export function getPathDefaultScaleId(pathname: string): ScaleId | null {
-  if (pathname.startsWith("/au")) return "au-seven-point";
+  if (pathname.startsWith("/au")) return "au-uq-seven-point";
   return null;
 }
 
 export function normalizeScaleForPath(pathname: string, scaleId: ScaleId): ScaleId {
   if (pathname.startsWith("/au") && !isAustralianScaleId(scaleId)) {
-    return "au-seven-point";
+    return "au-uq-seven-point";
   }
   return scaleId;
 }

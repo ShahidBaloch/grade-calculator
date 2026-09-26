@@ -68,7 +68,7 @@ export const calculatorResourceLinks: Record<CalculatorSlug, CalculatorResourceL
   },
   "atar-calculator": {
     guide: { path: "/guides/gpa-scale-explained", title: "GPA and rank scales" },
-    gradingScale: { path: "/grading-scales/australia", title: "Australian grading scale" },
+    gradingScale: { path: "/grading-scales/australia-uq", title: "UQ 7-point GPA (example)" },
   },
   "gcse-grade-calculator": {
     guide: { path: "/guides/gcse-9-1-grades", title: "How GCSE 9–1 grades work" },

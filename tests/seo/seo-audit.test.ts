@@ -222,5 +222,6 @@ describe("SEO audit", () => {
       expect(isLowValueProgrammaticPath(path), `low-value path in sitemap: ${path}`).toBe(false);
     }
     expect(isLowValueProgrammaticPath("/3/4-as-a-percent")).toBe(true);
+    expect(isLowValueProgrammaticPath("/80-out-of-20-as-a-percent")).toBe(true);
   });
 });

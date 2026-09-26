@@ -18,7 +18,7 @@ export const countryDefaults: Record<CountryCode, ScaleId> = {
   US: "us-standard",
   UK: "uk-degree",
   CA: "ca-standard",
-  AU: "au-seven-point",
+  AU: "au-uq-seven-point",
   NZ: "nz-nine-point",
   IN: "in-ten-point",
   PK: "pk-hec",

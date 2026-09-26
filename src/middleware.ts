@@ -1,6 +1,7 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { getAutoScaleIdFromGeoCountry } from "@/lib/grading-scales/geo-scale";
+import { isLowValueProgrammaticPath } from "@/lib/seo/programmatic-pages";
 
 const GEO_SCALE_COOKIE = "gc-geo-scale";
 const GEO_COUNTRY_COOKIE = "gc-geo-country";
@@ -14,6 +15,16 @@ function readGeoCountry(request: NextRequest): string | null {
 }
 
 export function middleware(request: NextRequest) {
+  const pathname = request.nextUrl.pathname;
+  if (isLowValueProgrammaticPath(pathname)) {
+    return new NextResponse("Not Found", {
+      status: 404,
+      headers: {
+        "X-Robots-Tag": "noindex, nofollow",
+      },
+    });
+  }
+
   const response = NextResponse.next();
   const isoCountry = readGeoCountry(request);
 

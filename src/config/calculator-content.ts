@@ -132,6 +132,11 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
         question: "Can I enter a percentage instead of a letter?",
         answer: "Yes. Type 92 or B+ — we map both through your selected grading scale.",
       },
+      {
+        question: "How do I convert Australian GPA to US 4.0?",
+        answer:
+          "There is no official linear map (for example GPA ÷ 7 × 4). Pick your university preset on /au and follow the receiving institution or credential evaluator — do not treat this calculator as a WES-equivalent conversion.",
+      },
     ],
   },
   "cumulative-gpa-calculator": {
@@ -394,7 +399,7 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
       "Optionally set a target ATAR to see the counted average this curve associates with that rank.",
     ],
     formula:
-      "Counted average → educational ATAR lookup curve (VTAC: primary 4 + up to two 10% increments; not official UAC/VTAC/QTAC tables)",
+      "Authority-specific counted average → educational ATAR lookup curve (not official UAC/VTAC/QTAC/TISC/SATAC tables; generic mode ≠ any one state)",
     workedExample:
       "VTAC planning: four scaled scores of 80 plus fifth 70 (10% → 7) and sixth 60 (10% → 6) → aggregate 333 on divisor 4.2 ≈ 79.29 counted average before the ATAR curve.",
     faqs: [
@@ -624,22 +629,22 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
   "uk-degree-to-us-gpa-reference": {
     primarySources: [
       {
-        label: "QAA — UK higher education",
-        href: "https://www.qaa.ac.uk/",
+        label: "Stanford Graduate Admissions — enter GPA as on transcript",
+        href: "https://gradadmissions.stanford.edu/apply/application-overview",
       },
       {
-        label: "WES — credential evaluation (illustrative only)",
-        href: "https://www.wes.org/",
+        label: "QAA — UK higher education",
+        href: "https://www.qaa.ac.uk/",
       },
     ],
     howItWorks: [
       "Pick your UK degree class or enter a UK percentage mark.",
       "We map it to the standard UK classification bands (First, 2:1, 2:2, Third).",
-      "See an illustrative US 4.0 comparison — not a value to self-report unless the application requires conversion.",
+      "See an illustrative US 4.0 comparison only — not a number to enter on US applications that request transcript-format grades.",
     ],
     formula: "Illustrative US 4.0 ≈ planning comparison only (varies by evaluator)",
     workedExample:
-      "Upper Second (2:1) is sometimes cited near 3.7 on informal WES-style charts — do not report 3.7 unless the form tells you to convert.",
+      "Upper Second (2:1) may appear near 3.7 on informal charts — Stanford and many US schools want the classification or transcript GPA, not a self-converted 4.0.",
     faqs: [
       {
         question: "Should I enter 3.7 on my US application for a 2:1?",

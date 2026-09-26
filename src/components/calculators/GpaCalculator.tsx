@@ -8,6 +8,7 @@ import { ExampleScenarios } from "@/components/engagement/ExampleScenarios";
 import { CalculatorToolbar } from "@/components/calculators/shared/CalculatorToolbar";
 import { DynamicRowList } from "@/components/calculators/shared/DynamicRowList";
 import { ScaleSelector } from "@/components/calculators/shared/ScaleSelector";
+import { AustralianGpaNotice } from "@/components/calculators/shared/AustralianGpaNotice";
 import { Input } from "@/components/ui/input";
 import { calculateSemesterGpa } from "@/lib/calculators/gpa";
 import {
@@ -66,6 +67,7 @@ export function GpaCalculator() {
         />
       )}
       <ScaleSelector />
+      <AustralianGpaNotice />
       <div className="hidden gap-2 text-xs text-[var(--color-text-muted)] sm:grid sm:grid-cols-3">
         <span>Course</span>
         <span>Grade</span>

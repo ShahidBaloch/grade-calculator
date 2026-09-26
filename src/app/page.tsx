@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import { CalculatorRoute } from "@/components/calculators/CalculatorRoute";
 import { CalculatorPageSections } from "@/components/calculators/CalculatorPageSections";
 import { EzGrader } from "@/components/calculators/EzGrader";
+import { GradeInputPrivacyNotice } from "@/components/content/GradeInputPrivacyNotice";
 import { HomepageIntentLinks } from "@/components/engagement/HomepageIntentLinks";
 import { PopularToolsGrid } from "@/components/engagement/PopularToolsGrid";
 import { RecentlyUsed } from "@/components/engagement/RecentlyUsed";
@@ -29,6 +30,7 @@ export default function HomePage() {
         <Suspense fallback={null}>
           <div className="space-y-6">
             <HomepageIntentLinks activeHref="/" />
+            <GradeInputPrivacyNotice className="rounded-md border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-3" />
             <EzGrader slug="ez-grader" />
           </div>
         </Suspense>
@@ -39,12 +41,7 @@ export default function HomePage() {
           <section>
             <h2 className="text-xl font-semibold">Popular calculators</h2>
             <p className="mt-2 text-sm text-[var(--color-text-muted)]">
-              Free grade and GPA tools — instant results, no sign-up. Grades stay in your browser; see
-              our{" "}
-              <a href="/privacy-policy" className="text-[var(--color-primary)] hover:underline">
-                Privacy Policy
-              </a>{" "}
-              for cookies, analytics, and ads.
+              Free grade and GPA tools — instant results, no sign-up.
             </p>
             <div className="mt-4">
               <PopularToolsGrid />

@@ -86,9 +86,17 @@ export function AtarCalculator() {
         (after state scaling), not raw school marks. Raw marks will overestimate or underestimate ATAR.
       </p>
       <p className="text-sm text-[var(--color-text-muted)]">
-        Select your state admission centre, then enter <strong className="font-medium text-[var(--color-text)]">scaled</strong>{" "}
-        subject scores (0–100). Each authority uses different aggregation rules — we apply a simplified
-        planning model for the option you choose, not an official {authorityMeta.name} calculation.
+        Select your state admission centre, then enter{" "}
+        <strong className="font-medium text-[var(--color-text)]">scaled</strong> subject scores (0–100).
+        Each authority uses different aggregation rules — we apply a simplified planning model for the
+        option you choose, not an official {authorityMeta.name} calculation.
+        {authority === "generic" && (
+          <>
+            {" "}
+            Generic mode uses best four in full plus 10% of a fifth only — not VTAC’s two-increment rule
+            and not other states’ English, QCE, SATAC, or WACE rules. Pick your state for the right model.
+          </>
+        )}
         {authority === "vtac" && (
           <>
             {" "}

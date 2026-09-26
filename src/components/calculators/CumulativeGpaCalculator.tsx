@@ -8,6 +8,7 @@ import { ExampleScenarios } from "@/components/engagement/ExampleScenarios";
 import { CalculatorToolbar } from "@/components/calculators/shared/CalculatorToolbar";
 import { DynamicRowList } from "@/components/calculators/shared/DynamicRowList";
 import { ScaleSelector } from "@/components/calculators/shared/ScaleSelector";
+import { AustralianGpaNotice } from "@/components/calculators/shared/AustralianGpaNotice";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { calculateCumulativeGpa } from "@/lib/calculators/cumulative-gpa";
@@ -77,6 +78,7 @@ export function CumulativeGpaCalculator() {
         />
       )}
       <ScaleSelector />
+      <AustralianGpaNotice />
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="space-y-2">
           <Label htmlFor="previous-gpa">Previous cumulative GPA / CGPA (optional)</Label>

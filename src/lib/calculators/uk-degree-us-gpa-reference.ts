@@ -33,7 +33,7 @@ export function lookupUkDegreeUsGpaReference(
       classification,
       illustrativeUsGpa: row.midpoint,
       rangeNote: row.rangeNote,
-      message: `${classification} → about ${row.midpoint.toFixed(1)} on a US 4.0 scale (illustrative comparison only — do not report unless instructed)`,
+      message: `${classification} → about ${row.midpoint.toFixed(1)} on a US 4.0 scale in some informal comparison charts only — do not enter this on applications that ask for transcript format (Stanford: enter GPA exactly as on the transcript)`,
     },
   };
 }

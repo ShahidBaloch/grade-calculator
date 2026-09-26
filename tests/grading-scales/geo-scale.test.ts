@@ -16,8 +16,8 @@ describe("geo-scale", () => {
     expect(getMarketFromGeoCountry("GB")).toBe("UK");
   });
 
-  it("maps AU to au-seven-point", () => {
-    expect(getScaleIdFromGeoCountry("AU")).toBe("au-seven-point");
+  it("maps AU to au-uq-seven-point", () => {
+    expect(getScaleIdFromGeoCountry("AU")).toBe("au-uq-seven-point");
   });
 
   it("maps IN to in-ten-point and PK to pk-hec", () => {
@@ -39,7 +39,7 @@ describe("geo-scale", () => {
     expect(getAutoScaleIdFromGeoCountry("US")).toBe("us-standard");
     expect(getAutoScaleIdFromGeoCountry("CA")).toBe("ca-standard");
     expect(getAutoScaleIdFromGeoCountry("GB")).toBe("uk-degree");
-    expect(getAutoScaleIdFromGeoCountry("AU")).toBe("au-seven-point");
+    expect(getAutoScaleIdFromGeoCountry("AU")).toBe("au-uq-seven-point");
     expect(getAutoScaleIdFromGeoCountry("IN")).toBeNull();
     expect(getAutoScaleIdFromGeoCountry("PK")).toBeNull();
     expect(getAutoScaleIdFromGeoCountry("NZ")).toBeNull();
