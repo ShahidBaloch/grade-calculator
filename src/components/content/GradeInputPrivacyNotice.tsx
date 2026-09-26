@@ -5,11 +5,11 @@ export function GradeInputPrivacyNotice({ className = "" }: { className?: string
   return (
     <p className={`text-xs text-[var(--color-text-muted)] ${className}`.trim()}>
       Grades stay in your browser. Cookies, analytics, and ads are covered in our{" "}
-      <Link href="/privacy-policy" className="text-[var(--color-primary)] hover:underline">
+      <Link href="/privacy-policy" className="font-medium text-[var(--color-primary)] underline underline-offset-2">
         Privacy Policy
       </Link>{" "}
       and{" "}
-      <Link href="/cookie-policy" className="text-[var(--color-primary)] hover:underline">
+      <Link href="/cookie-policy" className="font-medium text-[var(--color-primary)] underline underline-offset-2">
         Cookie Policy
       </Link>
       .

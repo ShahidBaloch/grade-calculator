@@ -90,6 +90,12 @@ body {
   font-family: var(--font-sans);
 }
 
+/* Links inside sentences need an underline, not color alone. */
+p a {
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
