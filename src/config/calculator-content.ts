@@ -13,6 +13,8 @@ export interface CalculatorContent {
   faqs: FaqItem[];
   /** Official or primary references — not a substitute for reading the authority's rules. */
   primarySources?: PrimarySourceLink[];
+  /** Visible assumptions shown above FAQ — keeps expectations clear for users and reviewers. */
+  assumptions?: string[];
 }
 
 export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
@@ -118,6 +120,17 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
           "Yes. Change one score or weight and the course average updates. That shows what your grade would be if a quiz or exam came back higher or lower.",
       },
     ],
+    assumptions: [
+      "Each row is one category (homework, tests, etc.) with an average score and a syllabus weight.",
+      "We divide by the sum of weights you enter, not by 100 unless your weights add to 100%.",
+      "Letter grades use your selected scale on the unrounded weighted average.",
+    ],
+    primarySources: [
+      {
+        label: "Edutopia — weighted grading overview for teachers",
+        href: "https://www.edutopia.org/article/weighted-grading-pros-and-cons",
+      },
+    ],
   },
   "final-grade-calculator": {
     howItWorks: [
@@ -157,6 +170,17 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
         question: "Can I use this for a midterm?",
         answer:
           "Yes. Enter the grade you have before the midterm, the percent the midterm is worth, and the course grade you want. The formula is the same as a final.",
+      },
+    ],
+    assumptions: [
+      "Current and target grades are course percentages on the same scale as your syllabus.",
+      "Final weight is the share of the course grade the exam counts for (40 means 40%, not 0.4 typed as 40).",
+      "If the required score exceeds 100%, we label the target as impossible instead of showing a misleading number.",
+    ],
+    primarySources: [
+      {
+        label: "Khan Academy — weighted average (same structure as final-grade algebra)",
+        href: "https://www.khanacademy.org/math/pre-algebra/pre-algebra-rates-and-ratios/pre-algebra-rates/a/rates-intro",
       },
     ],
   },
@@ -210,6 +234,11 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
         label: "NCES — grade point average in US education statistics",
         href: "https://nces.ed.gov/programs/coe/indicator/ctr",
       },
+    ],
+    assumptions: [
+      "One term only — past semesters belong in the cumulative GPA calculator.",
+      "Unweighted quality points unless you use the weighted GPA tool.",
+      "Starter course rows are examples; replace them with your transcript data.",
     ],
   },
   "cumulative-gpa-calculator": {

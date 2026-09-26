@@ -32,6 +32,11 @@ export const siteConfig = {
   email: resolveContactEmail(),
   ogImage: "/opengraph-image",
   locale: "en_US",
+  editorial: {
+    author: "GradeCalculator Editorial Team",
+    /** ISO date — update when formulas, sources, or legal copy are reviewed. */
+    lastReviewed: "2026-09-01",
+  },
 };
 
 export function absoluteUrl(path: string): string {

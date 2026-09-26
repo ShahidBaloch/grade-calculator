@@ -39,6 +39,11 @@ export function CalculatorLayout({
             {description}
           </p>
           <GeoPageHint />
+          <p className="mt-3 rounded-md border border-[var(--color-border)] bg-[var(--color-bg-subtle)] px-3 py-2 text-sm text-[var(--color-text-muted)]">
+            <span className="font-medium text-[var(--color-text)]">Sample data:</span> calculators may
+            start with example numbers so you can see how results work. Replace them with your grades,
+            pick an example scenario, or use Reset to clear this tool on your device.
+          </p>
           <p className="mt-1 hidden text-xs text-[var(--color-text-muted)] print:block">
             {siteConfig.name} · {siteConfig.url}
           </p>

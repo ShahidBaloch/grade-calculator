@@ -18,6 +18,7 @@ import {
 import { useCalculatorPersistence } from "@/hooks/useCalculatorPersistence";
 import { useGradingScale } from "@/hooks/useGradingScale";
 import type { WeightedGradeInput } from "@/lib/calculators/schemas/weighted-grade.schema";
+import { WeightTotalIndicator } from "@/components/calculators/shared/WeightTotalIndicator";
 import { StatusBadge } from "@/components/calculators/shared/StatusBadge";
 import { WeightInput } from "@/components/calculators/shared/WeightInput";
 
@@ -102,6 +103,11 @@ export function WeightedGradeCalculator() {
   }, [result.data, remainingWeight, desiredOverall]);
 
   const updateItems = (next: WeightedRow[]) => setState({ ...state, items: next });
+
+  const weightSum = React.useMemo(
+    () => items.reduce((sum, item) => sum + (item.weight > 0 ? item.weight : 0), 0),
+    [items],
+  );
 
   return (
     <div className="calculator-print-area space-y-6">
@@ -207,6 +213,12 @@ export function WeightedGradeCalculator() {
           </div>
         )}
       />
+      {weightMode === "percent" && weightSum > 0 && (
+        <WeightTotalIndicator total={weightSum} expectedTotal={100} />
+      )}
+      {weightMode === "points" && weightSum > 0 && (
+        <WeightTotalIndicator total={weightSum} suffix="" label="Point weight total" />
+      )}
       {result.errors?.map((e) => (
         <p key={e} className="text-sm text-[var(--color-error)]">{e}</p>
       ))}

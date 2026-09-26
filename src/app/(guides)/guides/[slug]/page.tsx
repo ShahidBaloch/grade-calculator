@@ -5,7 +5,8 @@ import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { guideBySlug, guides } from "@/config/guides";
 import { createPageMetadata } from "@/lib/seo/metadata";
-import { howToJsonLd } from "@/lib/seo/jsonld";
+import { howToJsonLd, articleJsonLd } from "@/lib/seo/jsonld";
+import { siteConfig } from "@/config/site";
 import { getEmbeddedCalculator } from "@/lib/seo/guide-components";
 
 interface PageProps {
@@ -43,6 +44,12 @@ export default async function GuidePage({ params }: PageProps) {
     <>
       <JsonLd
         data={[
+          articleJsonLd({
+            headline: guide.title,
+            description: guide.description,
+            path: guide.path,
+            dateModified: siteConfig.editorial.lastReviewed,
+          }),
           howToJsonLd({
             name: guide.title,
             description: guide.description,

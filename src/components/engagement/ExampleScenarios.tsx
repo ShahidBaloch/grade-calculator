@@ -26,8 +26,16 @@ function valuesMatch(
 }
 
 export function ExampleScenarios({ examples, onSelect, activeValues }: ExampleScenariosProps) {
+  if (examples.length === 0) return null;
+
   return (
-    <div className="no-print flex gap-2 overflow-x-auto pb-2">
+    <fieldset className="no-print space-y-2">
+      <legend className="text-sm font-medium text-[var(--color-text)]">Try an example scenario</legend>
+      <p className="text-xs text-[var(--color-text-muted)]">
+        Optional — loads sample inputs so you can explore the calculator. Your grades are not sent to our
+        servers.
+      </p>
+      <div className="flex gap-2 overflow-x-auto pb-2">
       {examples.map((example) => {
         const selected = valuesMatch(example.values, activeValues);
         return (
@@ -47,6 +55,7 @@ export function ExampleScenarios({ examples, onSelect, activeValues }: ExampleSc
           </Button>
         );
       })}
-    </div>
+      </div>
+    </fieldset>
   );
 }

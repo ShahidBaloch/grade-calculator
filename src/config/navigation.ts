@@ -38,6 +38,7 @@ export const footerNav = {
   countries: countryLinks,
   company: [
     { label: "About", href: "/about" },
+    { label: "Methodology", href: "/methodology" },
     { label: "Contact", href: "/contact" },
     { label: "FAQ", href: "/faq" },
     { label: "Privacy Policy", href: "/privacy-policy" },

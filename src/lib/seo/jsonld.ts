@@ -80,6 +80,37 @@ export function faqPageJsonLd(faqs: FaqItem[]) {
   };
 }
 
+/** Article schema for guides — complements visible headings and FAQ on the page. */
+export function articleJsonLd({
+  headline,
+  description,
+  path,
+  dateModified,
+}: {
+  headline: string;
+  description: string;
+  path: string;
+  dateModified: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline,
+    description,
+    url: absoluteUrl(path),
+    dateModified,
+    author: {
+      "@type": "Organization",
+      name: siteConfig.editorial.author,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: siteConfig.name,
+      url: siteConfig.url,
+    },
+  };
+}
+
 /** Valid schema.org; Google no longer shows HowTo rich results (deprecated 2023). Steps must match visible on-page copy. */
 export function howToJsonLd({
   name,

@@ -9,6 +9,7 @@ import { countryHubs } from "@/config/country-hubs";
 import { gradingScalePages } from "@/config/grading-scale-pages";
 import { guides } from "@/config/guides";
 import {
+  articleJsonLd,
   breadcrumbJsonLd,
   faqPageJsonLd,
   howToJsonLd,
@@ -96,6 +97,7 @@ describe("SEO audit", () => {
 
   it("sitemap includes country hubs and guides", () => {
     const urls = sitemap().map((entry) => entry.url);
+    expect(urls.some((url) => url.endsWith("/methodology"))).toBe(true);
     for (const hub of countryHubs) {
       expect(urls.some((url) => url.endsWith(hub.path))).toBe(true);
     }
@@ -145,6 +147,15 @@ describe("SEO audit", () => {
     });
     expect(howTo["@type"]).toBe("HowTo");
     expect(howTo.step).toHaveLength(2);
+
+    const article = articleJsonLd({
+      headline: "Guide title",
+      description: "Desc",
+      path: "/guides/example",
+      dateModified: "2026-09-01",
+    });
+    expect(article["@type"]).toBe("Article");
+    expect(article.author.name).toBeTruthy();
   });
 
   it("nav and footer list every calculator", () => {

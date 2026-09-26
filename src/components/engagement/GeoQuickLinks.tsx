@@ -23,6 +23,7 @@ export function GeoQuickLinks() {
           <li key={link.href}>
             <Link
               href={link.href}
+              prefetch={false}
               className="inline-flex min-h-11 items-center rounded-md border border-[var(--color-border)] px-3 text-sm font-medium hover:bg-[var(--color-bg-subtle)]"
             >
               {link.label}
@@ -32,6 +33,7 @@ export function GeoQuickLinks() {
         <li>
           <Link
             href="/calculators"
+            prefetch={false}
             className="inline-flex min-h-11 items-center px-2 text-sm text-[var(--color-primary)] hover:underline"
           >
             All tools

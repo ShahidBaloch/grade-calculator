@@ -45,6 +45,13 @@ export default function AboutPage() {
             <li>University tables follow the institution’s published points. Monash and UQ are not the same scale.</li>
             <li>ATAR and UK-to-US figures are planning estimates. They are not official results or application GPAs.</li>
           </ul>
+          <p>
+            Full details:{" "}
+            <Link href="/methodology" className="text-[var(--color-primary)] hover:underline">
+              Methodology & editorial policy
+            </Link>
+            .
+          </p>
           <h2 className="text-xl font-semibold text-[var(--color-text)]">What we offer</h2>
           <ul className="list-disc space-y-2 pl-5">
             <li>EZ Grader, test grade, Canvas, and EOC calculators for classroom scoring</li>

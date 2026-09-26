@@ -45,6 +45,18 @@ export function CalculatorPageSections({
           <HowItWorks steps={howItWorks} />
         </div>
       </section>
+      <section aria-labelledby="calc-assumptions-heading">
+        <h2 id="calc-assumptions-heading" className="text-xl font-semibold">Assumptions</h2>
+        <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-[var(--color-text-muted)]">
+          {(content.assumptions ?? [
+            "Letter grades follow the grading scale selected in the calculator.",
+            "Zero total weight or credits returns an error — we never divide by zero.",
+            "Sample numbers on first load are examples only; replace them with your data.",
+          ]).map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+      </section>
       <section aria-labelledby="calc-formula-heading">
         <h2 id="calc-formula-heading" className="text-xl font-semibold">Formula</h2>
         <p className="mt-2 text-sm text-[var(--color-text-muted)]">{content.formula}</p>

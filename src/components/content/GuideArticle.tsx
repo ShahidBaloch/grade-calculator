@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { EditorialByline } from "@/components/content/EditorialByline";
 import { FaqAccordion } from "@/components/content/FaqAccordion";
 import { RelatedCalculators } from "@/components/content/RelatedCalculators";
 import type { GuideConfig } from "@/config/guides";
@@ -12,6 +13,7 @@ interface GuideArticleProps {
 export function GuideArticle({ guide, embeddedCalculator }: GuideArticleProps) {
   return (
     <div className="space-y-8 text-[var(--color-text)]">
+      <EditorialByline />
       <p className="text-sm text-[var(--color-text-muted)]">{guide.readTime}</p>
 
       {guide.sections.map((section) => (

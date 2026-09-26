@@ -30,6 +30,7 @@ export function ToolSwitcher() {
             <li key={tool.href}>
               <CountryAwareLink
                 href={tool.href}
+                prefetch={false}
                 className={cn(
                   "flex h-full flex-col items-center justify-center gap-0.5 text-xs",
                   active ? "text-[var(--color-primary)]" : "text-[var(--color-text-muted)]",

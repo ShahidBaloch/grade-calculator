@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import { CalculatorRoute } from "@/components/calculators/CalculatorRoute";
 import { CalculatorPageSections } from "@/components/calculators/CalculatorPageSections";
 import { EzGrader } from "@/components/calculators/EzGrader";
@@ -27,12 +26,10 @@ export default function HomePage() {
       breadcrumbHome
       focus
       calculator={
-        <Suspense fallback={null}>
-          <div className="space-y-8">
-            <EzGrader slug="ez-grader" />
-            <GeoQuickLinks />
-          </div>
-        </Suspense>
+        <div className="space-y-8">
+          <EzGrader slug="ez-grader" />
+          <GeoQuickLinks />
+        </div>
       }
       below={<CalculatorPageSections slug="ez-grader" />}
     />

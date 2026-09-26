@@ -48,13 +48,15 @@ export function GradeChart({ rows, highlightWrong }: GradeChartProps) {
           {rows.map((row, index) => {
             const highlighted = highlightWrong === row.wrong;
             const inWindow = index >= start && index < start + visibleCount;
+            if (!expanded && canCollapse && !inWindow) {
+              return null;
+            }
             return (
               <tr
                 key={row.wrong}
-                className={[
-                  highlighted ? "bg-[var(--color-primary-subtle)] font-medium" : "odd:bg-[var(--color-bg-subtle)]",
-                  inWindow ? "" : "hidden print:table-row",
-                ].join(" ")}
+                className={
+                  highlighted ? "bg-[var(--color-primary-subtle)] font-medium" : "odd:bg-[var(--color-bg-subtle)]"
+                }
               >
                 <td className="px-3 py-2">{row.wrong}</td>
                 <td className="px-3 py-2">{row.correct}</td>

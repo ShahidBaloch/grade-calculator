@@ -7,6 +7,7 @@ import { NextStepCard } from "@/components/engagement/NextStepCard";
 import { ExampleScenarios } from "@/components/engagement/ExampleScenarios";
 import { CalculatorToolbar } from "@/components/calculators/shared/CalculatorToolbar";
 import { DynamicRowList } from "@/components/calculators/shared/DynamicRowList";
+import { WeightTotalIndicator } from "@/components/calculators/shared/WeightTotalIndicator";
 import { ResultDisplay } from "@/components/calculators/shared/ResultDisplay";
 import { ScaleSelector } from "@/components/calculators/shared/ScaleSelector";
 import { Input } from "@/components/ui/input";
@@ -41,6 +42,11 @@ export function CanvasGradeCalculator() {
   );
 
   const updateGroups = (next: GroupRow[]) => setState({ groups: next });
+
+  const weightSum = React.useMemo(
+    () => groups.reduce((sum, group) => sum + (group.weight > 0 ? group.weight : 0), 0),
+    [groups],
+  );
 
   return (
     <div className="calculator-print-area space-y-6">
@@ -109,6 +115,7 @@ export function CanvasGradeCalculator() {
           </div>
         )}
       />
+      {weightSum > 0 && <WeightTotalIndicator total={weightSum} expectedTotal={100} label="Group weight total" />}
       {result.warnings?.map((w) => (
         <p key={w} className="text-sm text-[var(--color-warning)]">{w}</p>
       ))}
