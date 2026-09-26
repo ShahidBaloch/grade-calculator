@@ -159,6 +159,7 @@ export const countryHubs: CountryHubConfig[] = [
     featuredCalculators: [
       "atar-calculator",
       "gpa-calculator",
+      "cumulative-gpa-calculator",
       "weighted-grade-calculator",
       "letter-grade-calculator",
     ],

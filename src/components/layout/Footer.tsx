@@ -1,6 +1,8 @@
-import Link from "next/link";
+"use client";
+
 import { footerNav } from "@/config/navigation";
 import { siteConfig } from "@/config/site";
+import { CountryAwareLink } from "@/components/navigation/CountryAwareLink";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -13,9 +15,9 @@ export function Footer() {
           <ul className="space-y-2 text-sm text-[var(--color-text-muted)]">
             {footerNav.calculators.map((link) => (
               <li key={link.href}>
-                <Link href={link.href} className="hover:text-[var(--color-primary)]">
+                <CountryAwareLink href={link.href} className="hover:text-[var(--color-primary)]">
                   {link.label}
-                </Link>
+                </CountryAwareLink>
               </li>
             ))}
           </ul>
@@ -25,9 +27,9 @@ export function Footer() {
           <ul className="space-y-2 text-sm text-[var(--color-text-muted)]">
             {footerNav.guides.map((link) => (
               <li key={link.href}>
-                <Link href={link.href} className="hover:text-[var(--color-primary)]">
+                <CountryAwareLink href={link.href} className="hover:text-[var(--color-primary)]">
                   {link.label}
-                </Link>
+                </CountryAwareLink>
               </li>
             ))}
           </ul>
@@ -37,9 +39,9 @@ export function Footer() {
           <ul className="space-y-2 text-sm text-[var(--color-text-muted)]">
             {footerNav.countries.map((link) => (
               <li key={link.href}>
-                <Link href={link.href} className="hover:text-[var(--color-primary)]">
+                <CountryAwareLink href={link.href} className="hover:text-[var(--color-primary)]">
                   {link.label}
-                </Link>
+                </CountryAwareLink>
               </li>
             ))}
           </ul>
@@ -49,9 +51,9 @@ export function Footer() {
           <ul className="space-y-2 text-sm text-[var(--color-text-muted)]">
             {footerNav.reference.map((link) => (
               <li key={link.href}>
-                <Link href={link.href} className="hover:text-[var(--color-primary)]">
+                <CountryAwareLink href={link.href} className="hover:text-[var(--color-primary)]">
                   {link.label}
-                </Link>
+                </CountryAwareLink>
               </li>
             ))}
           </ul>
@@ -61,9 +63,9 @@ export function Footer() {
           <ul className="space-y-2 text-sm text-[var(--color-text-muted)]">
             {footerNav.company.map((link) => (
               <li key={link.href}>
-                <Link href={link.href} className="hover:text-[var(--color-primary)]">
+                <CountryAwareLink href={link.href} className="hover:text-[var(--color-primary)]">
                   {link.label}
-                </Link>
+                </CountryAwareLink>
               </li>
             ))}
           </ul>

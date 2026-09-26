@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { getCountryPrefixFromPath, resolveCalculatorPath } from "@/lib/utils/country-path";
+import { getCountryPrefixFromPath, resolveCalculatorPath, resolveSiteHref } from "@/lib/utils/country-path";
 
 describe("country-path", () => {
   it("detects country hub prefixes", () => {
@@ -11,8 +11,20 @@ describe("country-path", () => {
     expect(resolveCalculatorPath("gpa-calculator", "/au/weighted-grade-calculator")).toBe(
       "/au/gpa-calculator",
     );
+    expect(resolveCalculatorPath("cumulative-gpa-calculator", "/au/gpa-calculator")).toBe(
+      "/au/cumulative-gpa-calculator",
+    );
     expect(resolveCalculatorPath("percentage-to-letter-grade", "/uk/letter-grade-calculator")).toBe(
       "/uk/degree-classification-calculator",
+    );
+  });
+
+  it("rewrites footer calculator links on country pages", () => {
+    expect(resolveSiteHref("/percentage-to-letter-grade", "/au/gpa-calculator")).toBe(
+      "/au/letter-grade-calculator",
+    );
+    expect(resolveSiteHref("/cumulative-gpa-calculator", "/au/gpa-calculator")).toBe(
+      "/au/cumulative-gpa-calculator",
     );
   });
 });

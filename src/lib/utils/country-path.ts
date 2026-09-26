@@ -1,6 +1,11 @@
-import { getCalculatorPath } from "@/config/calculators";
+import { calculators, getCalculatorPath } from "@/config/calculators";
 import { countryHubs } from "@/config/country-hubs";
 import type { CalculatorSlug } from "@/types/calculator";
+import { isCalculatorSlug } from "@/types/calculator";
+
+const SLUG_BY_WORLD_PATH = new Map(
+  calculators.map((calculator) => [getCalculatorPath(calculator.slug), calculator.slug]),
+);
 
 /** e.g. `/au/gpa-calculator` → `/au` */
 export function getCountryPrefixFromPath(pathname: string | null | undefined): string | null {
@@ -23,6 +28,9 @@ const GEO_SLUG_ALIASES: Partial<
     "percentage-to-letter-grade": "letter-grade-calculator",
   },
   "/ca": {
+    "percentage-to-letter-grade": "letter-grade-calculator",
+  },
+  "/nz": {
     "percentage-to-letter-grade": "letter-grade-calculator",
   },
 };
@@ -58,4 +66,29 @@ export function resolveCalculatorPath(
 /** Scope localStorage so US saved grades do not hydrate on /au/... pages. */
 export function calculatorStorageScope(pathname: string | null | undefined): string {
   return getCountryPrefixFromPath(pathname) ?? "world";
+}
+
+/** Rewrite worldwide calculator hrefs to the active country hub where a geo route exists. */
+export function resolveSiteHref(href: string, pathname?: string | null): string {
+  const slug = SLUG_BY_WORLD_PATH.get(href);
+  if (slug) {
+    return resolveCalculatorPath(slug, pathname);
+  }
+
+  const prefix = getCountryPrefixFromPath(pathname);
+  if (!prefix) return href;
+
+  const hub = countryHubs.find((item) => item.path === prefix);
+  if (!hub) return href;
+
+  if (href === hub.gradingScalePath || href.startsWith(`${hub.gradingScalePath}/`)) {
+    return href;
+  }
+
+  return href;
+}
+
+export function slugFromWorldPath(path: string): CalculatorSlug | null {
+  const slug = SLUG_BY_WORLD_PATH.get(path);
+  return slug && isCalculatorSlug(slug) ? slug : null;
 }

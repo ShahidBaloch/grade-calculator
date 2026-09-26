@@ -14,7 +14,7 @@ export const siteFaqs: FaqItem[] = [
   {
     question: "What grading scale do you use?",
     answer:
-      "The worldwide default is US Standard 4.0. Location may switch the scale to UK, Canadian, Australian, New Zealand, India (10-point), or Pakistan (HEC 4.0). You can change it in any calculator that has a scale selector.",
+      "The worldwide default is the common US 4.0 GPA scale. Location may switch the scale to UK, Canadian, Australian, New Zealand, India (10-point), or Pakistan (HEC 4.0). You can change it in any calculator that has a scale selector.",
   },
   {
     question: "Do you have country-specific tools?",

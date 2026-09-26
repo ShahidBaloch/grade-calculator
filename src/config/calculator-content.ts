@@ -104,7 +104,7 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
   "gpa-calculator": {
     howItWorks: [
       "List this term's courses with the letter or percent you earned and the credit hours.",
-      "Each grade is converted to quality points on the scale you pick (US 4.0 worldwide default; India/Pakistan hubs lock local scales).",
+      "Each grade is converted to quality points using the grading scale shown in the calculator (change the scale on worldwide pages; country hub pages lock to a regional preset).",
       "Semester GPA (SGPA on India 10-point) is quality points divided by credit hours — it does not include past terms.",
     ],
     formula: "Semester GPA = quality points this term ÷ credit hours this term",
@@ -274,7 +274,7 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
   },
   "letter-grade-calculator": {
     howItWorks: [
-      "Enter a letter grade (A, B+, C-, etc.).",
+      "Enter the grade label for your selected scale (letters, classifications, or HD/D/C-style bands).",
       "We show the percentage range and midpoint on your scale.",
       "Useful for understanding what a letter grade means numerically.",
     ],

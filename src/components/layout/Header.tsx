@@ -1,9 +1,11 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu } from "lucide-react";
 import { mainNav } from "@/config/navigation";
 import { siteConfig } from "@/config/site";
+import { resolveSiteHref } from "@/lib/utils/country-path";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -15,6 +17,8 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/co
 import { ThemeToggle } from "./ThemeToggle";
 
 export function Header() {
+  const pathname = usePathname();
+
   return (
     <header className="sticky top-0 z-50 border-b border-[var(--color-border)] bg-[var(--color-bg)]/95 backdrop-blur supports-[backdrop-filter]:bg-[var(--color-bg)]/80">
       <div className="mx-auto flex h-14 max-w-7xl items-center justify-between gap-4 px-4 md:h-16">
@@ -34,7 +38,7 @@ export function Header() {
                 <DropdownMenuContent align="start" className="max-h-[70vh] overflow-y-auto">
                   {item.children.map((child) => (
                     <DropdownMenuItem key={child.href} asChild>
-                      <Link href={child.href}>{child.label}</Link>
+                      <Link href={resolveSiteHref(child.href, pathname)}>{child.label}</Link>
                     </DropdownMenuItem>
                   ))}
                 </DropdownMenuContent>
@@ -73,7 +77,7 @@ export function Header() {
                       {item.children.map((child) => (
                         <Link
                           key={`${child.href}-${child.label}`}
-                          href={child.href}
+                          href={resolveSiteHref(child.href, pathname)}
                           className="rounded-md px-3 py-3 text-sm font-medium hover:bg-[var(--color-bg-subtle)]"
                         >
                           {child.label}

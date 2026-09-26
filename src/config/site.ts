@@ -17,13 +17,19 @@ function resolveSiteOrigin(): string {
   return DEFAULT_SITE_URL;
 }
 
+function resolveContactEmail(): string {
+  const fromEnv = process.env.NEXT_PUBLIC_CONTACT_EMAIL?.trim();
+  if (fromEnv) return fromEnv;
+  return "hello@ezgradecalc.com";
+}
+
 export const siteConfig = {
   name: "GradeCalculator",
   description:
     "Free grade calculators for US, Canada, UK, and Australian students and teachers. EZ grader, GPA, finals, GCSE, ATAR, and degree tools.",
   /** Canonical site origin — the homepage. Override with NEXT_PUBLIC_SITE_URL. */
   url: resolveSiteOrigin(),
-  email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "hello@ezgradecalc.com",
+  email: resolveContactEmail(),
   ogImage: "/opengraph-image",
   locale: "en_US",
 };

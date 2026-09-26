@@ -24,4 +24,10 @@ describe("siteConfig.url", () => {
     const { siteConfig } = await import("@/config/site");
     expect(siteConfig.url).toBe("https://ezgradecalc.com");
   });
+
+  it("uses default contact email when env is empty", async () => {
+    vi.stubEnv("NEXT_PUBLIC_CONTACT_EMAIL", "   ");
+    const { siteConfig } = await import("@/config/site");
+    expect(siteConfig.email).toBe("hello@ezgradecalc.com");
+  });
 });

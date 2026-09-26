@@ -16,12 +16,12 @@ export const gradingScalePages: GradingScalePageConfig[] = [
     slug: "us",
     path: "/grading-scales/us",
     scaleId: "us-standard",
-    title: "US Grading Scale (4.0 GPA)",
+    title: "Common US 4.0 GPA Scale",
     description:
       "Complete US letter grade to percentage and 4.0 GPA conversion chart. A+, A, A- through F with percentage ranges.",
     keywords: ["grading scale", "us grading scale", "4.0 gpa scale", "letter grade to percentage"],
     intro:
-      "The US Standard 4.0 scale is the most common grading system in American high schools and colleges. Letter grades map to percentage ranges, and each letter converts to GPA points for semester calculations.",
+      "The common US 4.0 GPA scale is widely used in American high schools and colleges. Letter grades map to percentage ranges, and each letter converts to GPA points for semester calculations.",
     notes: [
       "Many schools use plus/minus modifiers (A-, B+, etc.) with the ranges shown below.",
       "Some high schools use a 10-point scale (90–100 = A) — see US 10-point letter bands in our calculator settings.",
@@ -48,12 +48,12 @@ export const gradingScalePages: GradingScalePageConfig[] = [
     slug: "australia",
     path: "/grading-scales/australia",
     scaleId: "au-seven-point",
-    title: "Australian GPA Scale (7.0)",
+    title: "Common Australian 7-Point Example Scale",
     description:
       "Australian university grading: HD, D, C, P, F bands with percentage ranges and 7.0 GPA points.",
     keywords: ["australian gpa calculator", "australia grading scale", "hd grade", "7.0 gpa scale"],
     intro:
-      "Australian universities commonly use a 7.0 GPA scale with High Distinction (HD), Distinction (D), Credit (C), and Pass (P) bands. The pass mark is typically 50%.",
+      "Many Australian universities use HD, D, C, P, and F bands, often mapped to a 7-point GPA for planning. Boundaries vary by institution — treat this table as a common example, not a national standard.",
     notes: [
       "Exact boundaries can vary slightly between universities.",
       "Some institutions use a 4.0 scale — check your transcript.",
@@ -64,16 +64,16 @@ export const gradingScalePages: GradingScalePageConfig[] = [
     slug: "canada",
     path: "/grading-scales/canada",
     scaleId: "ca-standard",
-    title: "Canadian Grading Scale (4.0)",
+    title: "Common Canadian 4.0 Preset",
     description:
       "Canadian letter grade to percentage and 4.0 GPA conversion chart for universities and colleges.",
     keywords: ["canadian grading scale", "canada gpa scale", "letter grade canada"],
     intro:
-      "Canadian universities typically use a 4.0 GPA scale with letter grades. Some provinces and institutions use a 4.33 scale for A+ grades.",
+      "Many Canadian universities use a 4.0-style letter scale, but A+ may be 4.0 or 4.33 and percentage cutoffs differ by province and campus. This page shows one common 4.0 preset.",
     notes: [
       "Provincial standards vary — always confirm with your institution.",
       "Quebec CEGEP and some programs may use different scales.",
-      "Our calculators support the Canadian Standard 4.0 preset.",
+      "Our calculators include a Common Canadian 4.0 preset.",
       "If your transcript awards A+ = 4.33 quality points, open the Canada 4.33 GPA reference page.",
     ],
   },
@@ -86,11 +86,11 @@ export const gradingScalePages: GradingScalePageConfig[] = [
       "Canadian letter grade chart where A+ = 4.33 GPA points — common at several universities.",
     keywords: ["canada 4.33 gpa", "canadian a+ 4.33", "ubc grading scale"],
     intro:
-      "Many Canadian universities cap quality points at 4.33 and assign A+ = 4.33, A = 4.0, and so on. Percentage cutoffs often match the Canada Standard table; the difference is how A+ converts to GPA points on your transcript.",
+      "Many Canadian universities cap quality points at 4.33 and assign A+ = 4.33, A = 4.0, and so on. Percentage cutoffs often match the common Canadian 4.0 preset; the difference is how A+ converts to GPA points on your transcript.",
     notes: [
       "Use this preset when your faculty calendar lists A+ = 4.33.",
-      "Ontario and other provinces may still use A+ = 4.0 on a 4.0 scale — use Canada Standard instead.",
-      "Canada hub calculators lock to Canada Standard; compare both tables before official submissions.",
+      "Ontario and other provinces may still use A+ = 4.0 on a 4.0 scale — use the common Canadian 4.0 preset instead.",
+      "Canada hub calculators lock to the Common Canadian 4.0 preset; compare both tables before official submissions.",
     ],
   },
   {
