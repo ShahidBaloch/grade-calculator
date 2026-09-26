@@ -1,6 +1,6 @@
-import { calculators, getCalculatorPath } from "@/config/calculators";
-import { countryHubs } from "@/config/country-hubs";
-import type { CalculatorSlug } from "@/types/calculator";
+import { calculators, getCalculatorPath } from "../../config/calculators";
+import { countryHubs } from "../../config/country-hubs";
+import type { CalculatorSlug } from "../../types/calculator";
 
 /**
  * Geo URLs that are a different grading system, so they earn their own page.

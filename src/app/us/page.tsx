@@ -10,7 +10,7 @@ export const metadata = createPageMetadata({
   description: hub.description,
   path: "/us",
   keywords: hub.keywords,
-  languages: countryHubHreflangLanguages(),
+  languages: countryHubHreflangLanguages("/us"),
 });
 
 export default function UsHubPage() {

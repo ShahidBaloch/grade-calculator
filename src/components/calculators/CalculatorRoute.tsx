@@ -73,6 +73,7 @@ export function CalculatorRoute({
         description={description}
         breadcrumbs={breadcrumbs}
         focus={focus}
+        calculator={calculator}
         content={aside ?? <CalculatorPageSections slug={slug} pagePath={pagePath} />}
         below={below}
       />

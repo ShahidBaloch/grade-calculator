@@ -97,9 +97,9 @@ export function quickToolsForCountry(isoCountry: string | null | undefined): Arr
   const gpaSlug: CalculatorSlug = market === "UK" ? "degree-classification-calculator" : "gpa-calculator";
   const gpaLabel = market === "UK" ? "Degree class" : "GPA";
 
-  const links = [
-    { slug: "weighted-grade-calculator" as const, label: "Course average" },
-    { slug: "final-grade-calculator" as const, label: "Final exam" },
+  const links: Array<{ slug: CalculatorSlug; label: string }> = [
+    { slug: "weighted-grade-calculator", label: "Course average" },
+    { slug: "final-grade-calculator", label: "Final exam" },
     { slug: gpaSlug, label: gpaLabel },
   ];
 

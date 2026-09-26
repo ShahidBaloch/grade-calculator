@@ -10,9 +10,8 @@ interface CalculatorLayoutProps {
   calculator: React.ReactNode;
   content?: React.ReactNode;
   below?: React.ReactNode;
-  /** Show quick tool switcher under the description (default true). */
-  showIntentNav?: boolean;
-  pagePath?: string;
+  /** Homepage: calculator only, no side column. */
+  focus?: boolean;
 }
 
 export function CalculatorLayout({
@@ -21,6 +20,7 @@ export function CalculatorLayout({
   breadcrumbs,
   calculator,
   content,
+  below,
   focus = false,
 }: CalculatorLayoutProps) {
   const shell = focus ? "mx-auto max-w-3xl px-4 py-6 md:py-8" : "mx-auto max-w-7xl px-4 py-6 md:py-8";
@@ -44,7 +44,6 @@ export function CalculatorLayout({
         </section>
         {content && !focus && (
           <aside className="no-print mt-10 lg:mt-14">{content}</aside>
-          <aside className="no-print mt-8 lg:sticky lg:top-20 lg:mt-4 lg:self-start">{content}</aside>
         )}
       </div>
       {below && <div className="no-print mt-12">{below}</div>}
