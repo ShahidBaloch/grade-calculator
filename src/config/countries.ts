@@ -17,18 +17,18 @@ export const countries: CountryConfig[] = [
     hubPath: "/us",
   },
   {
-    code: "UK",
-    name: "United Kingdom",
-    flag: "🇬🇧",
-    defaultScaleId: "uk-degree",
-    hubPath: "/uk",
-  },
-  {
     code: "CA",
     name: "Canada",
     flag: "🇨🇦",
     defaultScaleId: "ca-standard",
     hubPath: "/ca",
+  },
+  {
+    code: "UK",
+    name: "United Kingdom",
+    flag: "🇬🇧",
+    defaultScaleId: "uk-degree",
+    hubPath: "/uk",
   },
   {
     code: "AU",

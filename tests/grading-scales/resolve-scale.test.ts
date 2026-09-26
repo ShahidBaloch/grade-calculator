@@ -23,10 +23,25 @@ describe("resolve-scale", () => {
     expect(getLockedScaleFromPath("/grading-scales/canada")).toBe("ca-standard");
   });
 
-  it("returns null for root calculator paths", () => {
-    expect(getLockedScaleFromPath("/gpa-calculator")).toBeNull();
-    expect(getLockedScaleFromPath("/degree-classification-calculator")).toBeNull();
+  it("locks US recording scales on core North American calculator paths", () => {
+    expect(getLockedScaleFromPath("/")).toBe("us-standard");
+    expect(getLockedScaleFromPath("/gpa-calculator")).toBe("us-standard");
+    expect(getLockedScaleFromPath("/weighted-grade-calculator")).toBe("us-standard");
+    expect(getLockedScaleFromPath("/college-gpa-calculator")).toBe("us-standard");
+  });
+
+  it("locks UK recording scales on degree and GCSE paths", () => {
+    expect(getLockedScaleFromPath("/degree-classification-calculator")).toBe("uk-degree");
+    expect(getLockedScaleFromPath("/gcse-grade-calculator")).toBe("uk-gcse");
+  });
+
+  it("does not lock South Asian or ATAR-only paths to US standard", () => {
     expect(getLockedScaleFromPath("/atar-calculator")).toBeNull();
+    expect(getLockedScaleFromPath("/cgpa-calculator")).toBeNull();
+  });
+
+  it("locks US standard on the Canvas grade calculator", () => {
+    expect(getLockedScaleFromPath("/canvas-grade-calculator")).toBe("us-standard");
   });
 
   it("locks Canadian and GCSE scales on their geo paths", () => {
@@ -46,23 +61,23 @@ describe("resolve-scale", () => {
     ).toBe("us-standard");
   });
 
-  it("uses geo scale before locale hint", () => {
+  it("uses geo scale before locale hint on unlocked paths", () => {
     expect(
       resolveDefaultScaleId({
-        pathname: "/",
+        pathname: "/cgpa-calculator",
         userScaleId: null,
-        geoScaleId: "uk-degree",
+        geoScaleId: "ca-standard",
         useLocaleHint: true,
       }),
-    ).toBe("uk-degree");
+    ).toBe("ca-standard");
   });
 
-  it("user preference overrides geo", () => {
+  it("user preference overrides geo on unlocked paths", () => {
     expect(
       resolveDefaultScaleId({
-        pathname: "/",
+        pathname: "/cgpa-calculator",
         userScaleId: "us-lenient",
-        geoScaleId: "uk-degree",
+        geoScaleId: "ca-standard",
         useLocaleHint: false,
       }),
     ).toBe("us-lenient");
@@ -79,7 +94,14 @@ describe("resolve-scale", () => {
     ).toBe("au-seven-point");
   });
 
-  it("returns null locale hint in node test env", () => {
-    expect(getScaleHintFromLocale()).toBeNull();
+  it("hints primary market scales from browser locale when available", () => {
+    const hint = getScaleHintFromLocale();
+    expect(
+      hint === null ||
+        hint === "us-standard" ||
+        hint === "ca-standard" ||
+        hint === "uk-degree" ||
+        hint === "au-seven-point",
+    ).toBe(true);
   });
 });

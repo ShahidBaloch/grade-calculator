@@ -57,6 +57,44 @@ export const countryHubs: CountryHubConfig[] = [
     hreflang: "en-US",
   },
   {
+    code: "ca",
+    path: "/ca",
+    name: "Canada",
+    flag: "🇨🇦",
+    scaleId: "ca-standard",
+    description:
+      "Canadian grade and GPA tools with the 4.0 / 4.33 letter scale used by many universities.",
+    details: [
+      "Canadian institutions mix percentage marks, 4.0 GPA, and 4.33 scales (A+ = 4.33). Ontario high schools also report a 100-point average that is not a GPA.",
+      "Always check your faculty calendar. McGill, U of T, and UBC do not share one conversion table.",
+    ],
+    faqs: [
+      {
+        question: "Is Canadian GPA the same as US GPA?",
+        answer:
+          "The 4.0 idea is similar, but A+ may be 4.0 or 4.33 and percentage cutoffs differ by province and university.",
+      },
+      {
+        question: "Which Canadian scale should I use?",
+        answer:
+          "This hub locks tools to Canada Standard (4.0 max, A+ = 4.0). If your transcript uses A+ = 4.33, open the grading scales page for Canada 4.33 or ask your registrar which table matches your record.",
+      },
+    ],
+    gradingScalePath: "/grading-scales/canada",
+    featuredCalculators: [
+      "gpa-calculator",
+      "college-gpa-calculator",
+      "weighted-grade-calculator",
+      "cumulative-gpa-calculator",
+      "final-grade-calculator",
+      "letter-grade-calculator",
+    ],
+    keywords: ["canada gpa calculator", "canadian grading scale", "grade calculator canada"],
+    hreflang: "en-CA",
+    scaleLockNote:
+      "Tools on this hub lock to Canada Standard 4.0. Many universities record A+ as 4.33 — see /grading-scales/canada-433 for that preset.",
+  },
+  {
     code: "uk",
     path: "/uk",
     name: "United Kingdom",
@@ -91,36 +129,7 @@ export const countryHubs: CountryHubConfig[] = [
     keywords: ["uk grade calculator", "degree classification calculator", "uk grading scale"],
     hreflang: "en-GB",
     scaleLockNote:
-      "Most featured tools on this hub lock to the UK Degree scale. The GCSE calculator locks to the 9–1 scale. Worldwide default pages keep a scale selector.",
-  },
-  {
-    code: "ca",
-    path: "/ca",
-    name: "Canada",
-    flag: "🇨🇦",
-    scaleId: "ca-standard",
-    description:
-      "Canadian grade and GPA tools with the 4.0 / 4.33 letter scale used by many universities.",
-    details: [
-      "Canadian institutions mix percentage marks, 4.0 GPA, and 4.33 scales (A+ = 4.33). Ontario high schools also report a 100-point average that is not a GPA.",
-      "Always check your faculty calendar. McGill, U of T, and UBC do not share one conversion table.",
-    ],
-    faqs: [
-      {
-        question: "Is Canadian GPA the same as US GPA?",
-        answer:
-          "The 4.0 idea is similar, but A+ may be 4.0 or 4.33 and percentage cutoffs differ by province and university.",
-      },
-    ],
-    gradingScalePath: "/grading-scales/canada",
-    featuredCalculators: [
-      "gpa-calculator",
-      "college-gpa-calculator",
-      "weighted-grade-calculator",
-      "cumulative-gpa-calculator",
-    ],
-    keywords: ["canada gpa calculator", "canadian grading scale", "grade calculator canada"],
-    hreflang: "en-CA",
+      "Tools on this hub lock to the UK Degree scale. The GCSE calculator locks to the 9–1 scale. Worldwide /degree-classification-calculator and /gcse-grade-calculator pages use the same UK presets.",
   },
   {
     code: "au",
@@ -235,16 +244,17 @@ export const countryHubs: CountryHubConfig[] = [
     flag: "🇵🇰",
     scaleId: "pk-hec",
     description:
-      "Pakistan grade and GPA tools on the HEC 4.0 scale, with CGPA to percentage (×25) conversion.",
+      "Pakistan grade and GPA tools on the common HEC 4.0 letter scale, with CGPA-to-percentage converters and planning estimates.",
     details: [
-      "HEC Absolute grading is commonly A = 85–100 (4.0). Percentage is often estimated as CGPA × 25 on a 4.0 scale.",
-      "Always match your university’s published table — campus variants exist for A− / B+ points.",
+      "HEC’s Uniform Semester System policy publishes GPA/CGPA bands mapped to percentage ranges (for example, B = 2.67–3.00 and about 71–74%) — not one universal linear formula.",
+      "Some universities also quote Percentage ≈ CGPA × 25 on a 4.0 scale as a quick estimate. Treat that as a shortcut unless your handbook says otherwise.",
+      "Always match your campus transcript table — letter points for A− / B+ can differ by institution.",
     ],
     faqs: [
       {
         question: "How do I convert CGPA to percentage in Pakistan?",
         answer:
-          "A common HEC-style estimate is Percentage = CGPA × 25 (for a 4.0 maximum). Use the CGPA to Percentage calculator with the Pakistan HEC formula and verify against your transcript.",
+          "Start with your university’s published equivalence table. HEC recommends fractional GPA-to-percentage bands in its semester-system guidelines. A linear ×25 estimate on a 4.0 scale is only a shortcut — use our CGPA to Percentage tool and confirm against your marksheet.",
       },
       {
         question: "Is Pakistan GPA the same as US GPA?",

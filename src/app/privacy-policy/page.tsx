@@ -62,7 +62,10 @@ export default function PrivacyPolicyPage() {
           <section>
             <h2 className="text-lg font-semibold text-[var(--color-text)]">Contact</h2>
             <p className="mt-2">
-              Privacy questions: {siteConfig.email}
+              Privacy questions:{" "}
+              <a href={`mailto:${siteConfig.email}`} className="text-[var(--color-primary)] hover:underline">
+                {siteConfig.email}
+              </a>
             </p>
           </section>
         </div>

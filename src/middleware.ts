@@ -1,6 +1,6 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
-import { getScaleIdFromGeoCountry } from "@/lib/grading-scales/geo-scale";
+import { getAutoScaleIdFromGeoCountry } from "@/lib/grading-scales/geo-scale";
 
 const GEO_SCALE_COOKIE = "gc-geo-scale";
 const GEO_COUNTRY_COOKIE = "gc-geo-country";
@@ -21,7 +21,7 @@ export function middleware(request: NextRequest) {
     return response;
   }
 
-  const scaleId = getScaleIdFromGeoCountry(isoCountry);
+  const scaleId = getAutoScaleIdFromGeoCountry(isoCountry);
   if (!scaleId) {
     return response;
   }

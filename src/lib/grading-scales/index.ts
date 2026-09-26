@@ -1,4 +1,5 @@
 import { auSevenPointScale } from "./au-seven-point";
+import { caFourThreeThreeScale } from "./ca-four-three-three";
 import { caStandardScale } from "./ca-standard";
 import { inTenPointScale } from "./in-ten-point";
 import { nzNinePointScale } from "./nz-nine-point";
@@ -27,6 +28,7 @@ export const gradingScales: Record<ScaleId, GradingScale> = {
   "uk-degree": ukDegreeScale,
   "uk-gcse": ukGcseScale,
   "ca-standard": caStandardScale,
+  "ca-four-three-three": caFourThreeThreeScale,
   "au-seven-point": auSevenPointScale,
   "nz-nine-point": nzNinePointScale,
   "in-ten-point": inTenPointScale,
@@ -52,9 +54,10 @@ export function getScaleForCountry(country: CountryCode): GradingScale {
 export function percentToLetter(percent: number, scaleId: ScaleId = DEFAULT_SCALE_ID): ScaleLookupResult {
   const scale = getScale(scaleId);
   const clamped = Math.min(100, Math.max(0, percent));
-  const band =
-    scale.bands.find((b) => clamped >= b.min && clamped <= b.max) ??
-    scale.bands[scale.bands.length - 1];
+  // Bands use integer cutoffs; treat each band as "this grade or higher until the next tier".
+  // Avoids mis-mapping values in gaps (e.g. 89.2% between B+ 87–89 and A- 90–92 on US standard).
+  const sortedByMin = [...scale.bands].sort((a, b) => b.min - a.min);
+  const band = sortedByMin.find((b) => clamped >= b.min) ?? sortedByMin[sortedByMin.length - 1];
 
   return { letter: band.letter, gpa: band.gpa, band };
 }

@@ -4,11 +4,13 @@ const INTENTS = [
   { href: "/", label: "Grade a test", description: "EZ Grader for quizzes" },
   { href: "/weighted-grade-calculator", label: "Course grade", description: "Weighted average" },
   { href: "/final-grade-calculator", label: "What I need on final", description: "Final exam target" },
-  { href: "/gpa-calculator", label: "GPA", description: "Semester GPA" },
-  { href: "/cgpa-calculator", label: "CGPA / SGPA", description: "India & Pakistan" },
-  { href: "/cgpa-to-percentage", label: "CGPA ↔ %", description: "×9.5 / HEC ×25" },
-  { href: "/in", label: "India hub", description: "10-point tools" },
-  { href: "/pk", label: "Pakistan hub", description: "HEC 4.0 tools" },
+  { href: "/gpa-calculator", label: "GPA", description: "US & Canada 4.0 scale" },
+  { href: "/us", label: "United States", description: "US grading tools" },
+  { href: "/ca", label: "Canada", description: "Canadian letter & GPA" },
+  { href: "/uk", label: "United Kingdom", description: "Degree class & GCSE" },
+  { href: "/au", label: "Australia", description: "7-point GPA & ATAR" },
+  { href: "/degree-classification-calculator", label: "UK degree class", description: "First / 2:1 / 2:2" },
+  { href: "/atar-calculator", label: "ATAR estimate", description: "Year 12 planning tool" },
 ] as const;
 
 export function HomepageIntentLinks({ activeHref = "/" }: { activeHref?: string }) {

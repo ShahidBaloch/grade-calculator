@@ -53,6 +53,12 @@ export function calculateSemesterGpa(
   const errors: string[] = [];
 
   for (const [index, course] of parsed.data.courses.entries()) {
+    const gradeText =
+      typeof course.grade === "string" ? course.grade.trim() : String(course.grade ?? "").trim();
+    if (typeof course.grade === "string" && gradeText === "") {
+      continue;
+    }
+
     if (course.credits <= 0) {
       errors.push(`Course ${index + 1}: credits must be greater than 0`);
       continue;
@@ -95,7 +101,7 @@ export function calculateSemesterGpa(
   }
 
   if (totalCredits <= 0) {
-    return { status: "idle", errors: ["Add at least one course with credits"] };
+    return { status: "idle" };
   }
 
   return {

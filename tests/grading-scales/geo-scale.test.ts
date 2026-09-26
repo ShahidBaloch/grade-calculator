@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import {
+  getAutoScaleIdFromGeoCountry,
   getMarketFromGeoCountry,
   getScaleIdFromGeoCountry,
   getScaleIdFromGeoCountryOrDefault,
@@ -32,5 +33,15 @@ describe("geo-scale", () => {
 
   it("falls back to US default", () => {
     expect(getScaleIdFromGeoCountryOrDefault("FR")).toBe("us-standard");
+  });
+
+  it("auto geo applies to US, Canada, UK, and Australia only", () => {
+    expect(getAutoScaleIdFromGeoCountry("US")).toBe("us-standard");
+    expect(getAutoScaleIdFromGeoCountry("CA")).toBe("ca-standard");
+    expect(getAutoScaleIdFromGeoCountry("GB")).toBe("uk-degree");
+    expect(getAutoScaleIdFromGeoCountry("AU")).toBe("au-seven-point");
+    expect(getAutoScaleIdFromGeoCountry("IN")).toBeNull();
+    expect(getAutoScaleIdFromGeoCountry("PK")).toBeNull();
+    expect(getAutoScaleIdFromGeoCountry("NZ")).toBeNull();
   });
 });

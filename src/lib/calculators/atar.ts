@@ -110,7 +110,7 @@ export function calculateAtar(input: AtarInput): CalculatorResult<AtarResult> {
 
   const formulaSteps = [
     countedScores.length > 4
-      ? "Best four scaled scores count in full; a fifth subject contributes 10% (simplified model)."
+      ? "Best four scaled scores count in full; a fifth subject contributes 10% (planning estimate — not an official state ATAR calculation)."
       : "Average of the scaled scores you entered.",
     `Counted scores: ${countedScores.map((n) => n.toFixed(1)).join(", ")}`,
     `Counted average: ${countedAverage.toFixed(2)}`,

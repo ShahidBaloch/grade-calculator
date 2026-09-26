@@ -1,8 +1,28 @@
 import { countryDefaults, DEFAULT_SCALE_ID, gradingScales } from "./index";
 import type { CountryCode, ScaleId } from "@/types/grading-scale";
 
+/** Worldwide calculator routes that follow US letter/GPA recording (root paths). */
+const US_RECORDING_CALCULATOR_PATHS = new Set([
+  "/ez-grader",
+  "/test-grade-calculator",
+  "/weighted-grade-calculator",
+  "/final-grade-calculator",
+  "/gpa-calculator",
+  "/cumulative-gpa-calculator",
+  "/weighted-gpa-calculator",
+  "/raise-gpa-calculator",
+  "/high-school-gpa-calculator",
+  "/college-gpa-calculator",
+  "/percentage-to-letter-grade",
+  "/letter-grade-calculator",
+  "/eoc-grade-calculator",
+]);
+
 /** Map URL prefixes to locked scale (geo landing pages). */
 const PATH_SCALE_LOCKS: Array<{ prefix: string; scaleId: ScaleId }> = [
+  { prefix: "/canvas-grade-calculator", scaleId: "us-standard" },
+  { prefix: "/degree-classification-calculator", scaleId: "uk-degree" },
+  { prefix: "/gcse-grade-calculator", scaleId: "uk-gcse" },
   { prefix: "/uk/gcse-grade-calculator", scaleId: "uk-gcse" },
   { prefix: "/grading-scales/gcse", scaleId: "uk-gcse" },
   { prefix: "/us", scaleId: "us-standard" },
@@ -14,6 +34,7 @@ const PATH_SCALE_LOCKS: Array<{ prefix: string; scaleId: ScaleId }> = [
   { prefix: "/pk", scaleId: "pk-hec" },
   { prefix: "/grading-scales/us", scaleId: "us-standard" },
   { prefix: "/grading-scales/uk", scaleId: "uk-degree" },
+  { prefix: "/grading-scales/canada-433", scaleId: "ca-four-three-three" },
   { prefix: "/grading-scales/canada", scaleId: "ca-standard" },
   { prefix: "/grading-scales/australia", scaleId: "au-seven-point" },
   { prefix: "/grading-scales/new-zealand", scaleId: "nz-nine-point" },
@@ -29,7 +50,13 @@ export function isValidScaleId(value: string | null | undefined): value is Scale
 
 export function getLockedScaleFromPath(pathname: string): ScaleId | null {
   const match = PATH_SCALE_LOCKS.find(({ prefix }) => pathname.startsWith(prefix));
-  return match?.scaleId ?? null;
+  if (match) return match.scaleId;
+
+  if (pathname === "/" || US_RECORDING_CALCULATOR_PATHS.has(pathname)) {
+    return "us-standard";
+  }
+
+  return null;
 }
 
 /** Soft hint from browser locale — fallback after geo cookie. */
@@ -37,16 +64,10 @@ export function getScaleHintFromLocale(): ScaleId | null {
   if (typeof navigator === "undefined") return null;
 
   const locale = navigator.language.toLowerCase();
+  if (locale === "en-ca" || locale.endsWith("-ca")) return countryDefaults.CA;
+  if (locale === "en-us" || locale.endsWith("-us")) return countryDefaults.US;
   if (locale === "en-gb" || locale.endsWith("-gb")) return countryDefaults.UK;
   if (locale === "en-au" || locale.endsWith("-au")) return countryDefaults.AU;
-  if (locale === "en-ca" || locale.endsWith("-ca")) return countryDefaults.CA;
-  if (locale === "en-nz" || locale.endsWith("-nz")) return countryDefaults.NZ;
-  if (locale === "en-in" || locale.endsWith("-in") || locale.startsWith("hi")) {
-    return countryDefaults.IN;
-  }
-  if (locale === "en-pk" || locale.endsWith("-pk") || locale.startsWith("ur")) {
-    return countryDefaults.PK;
-  }
 
   return null;
 }

@@ -31,6 +31,17 @@ describe("calculateSemesterGpa", () => {
     const result = calculateSemesterGpa({ courses: [] });
     expect(result.status).toBe("error");
   });
+
+  it("ignores blank grade rows instead of showing invalid grade", () => {
+    const result = calculateSemesterGpa({
+      courses: [
+        { name: "Course 1", grade: "", credits: 3 },
+        { grade: "A", credits: 3 },
+      ],
+    });
+    expect(result.status).toBe("valid");
+    expect(result.data?.totalCredits).toBe(3);
+  });
 });
 
 describe("calculateCollegeTermGpa", () => {

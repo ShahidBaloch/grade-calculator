@@ -2,8 +2,7 @@ const DEFAULT_SITE_URL = "https://ezgradecalc.com";
 
 function resolveSiteOrigin(): string {
   const fromPublic = process.env.NEXT_PUBLIC_SITE_URL?.trim();
-  const fromVercel = process.env.VERCEL_URL?.trim();
-  const candidates = [fromPublic, fromVercel ? `https://${fromVercel}` : undefined, DEFAULT_SITE_URL];
+  const candidates = [fromPublic, DEFAULT_SITE_URL];
 
   for (const candidate of candidates) {
     if (!candidate) continue;
@@ -21,7 +20,7 @@ function resolveSiteOrigin(): string {
 export const siteConfig = {
   name: "GradeCalculator",
   description:
-    "Free online grade calculators for students and teachers. EZ grader, weighted grades, final exam, and GPA tools.",
+    "Free grade calculators for US, Canada, UK, and Australian students and teachers. EZ grader, GPA, finals, GCSE, ATAR, and degree tools.",
   /** Canonical site origin — the homepage. Override with NEXT_PUBLIC_SITE_URL. */
   url: resolveSiteOrigin(),
   email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "hello@ezgradecalc.com",

@@ -24,6 +24,22 @@ export function getScaleIdFromGeoCountry(isoCountry: string | null | undefined):
   return countryDefaults[market];
 }
 
+/** Auto-detect grading scale from IP geo for primary English-speaking markets (not IN/PK). */
+const AUTO_GEO_MARKETS: Partial<Record<string, CountryCode>> = {
+  US: "US",
+  CA: "CA",
+  GB: "UK",
+  UK: "UK",
+  AU: "AU",
+};
+
+export function getAutoScaleIdFromGeoCountry(isoCountry: string | null | undefined): ScaleId | null {
+  if (!isoCountry) return null;
+  const market = AUTO_GEO_MARKETS[isoCountry.toUpperCase()];
+  if (!market) return null;
+  return countryDefaults[market];
+}
+
 export function getScaleIdFromGeoCountryOrDefault(
   isoCountry: string | null | undefined,
 ): ScaleId {

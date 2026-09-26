@@ -13,6 +13,30 @@ describe("grading scale lookup", () => {
     expect(result.letter).toBe("B-");
   });
 
+  it("maps 89.2% to B+ on US standard (no gap between integer bands)", () => {
+    const result = percentToLetter(89.2, "us-standard");
+    expect(result.letter).toBe("B+");
+    expect(result.gpa).toBe(3.3);
+  });
+
+  it("maps 89.2% to A+ on India 10-point (not F)", () => {
+    const result = percentToLetter(89.2, "in-ten-point");
+    expect(result.letter).toBe("A+");
+    expect(result.gpa).toBe(9);
+  });
+
+  it("maps 89.2% to A on Canada Standard", () => {
+    const result = percentToLetter(89.2, "ca-standard");
+    expect(result.letter).toBe("A");
+    expect(result.gpa).toBe(4);
+  });
+
+  it("maps 92% to A+ with 4.33 on Canada 4.33 scale", () => {
+    const result = percentToLetter(92, "ca-four-three-three");
+    expect(result.letter).toBe("A+");
+    expect(result.gpa).toBe(4.33);
+  });
+
   it("converts letter to midpoint percent", () => {
     expect(letterToPercent("A", "us-standard")).toBe(94.5);
   });

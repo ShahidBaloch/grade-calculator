@@ -125,7 +125,7 @@ export const calculators: CalculatorConfig[] = [
     path: "/weighted-gpa-calculator",
     icon: "Award",
     category: "gpa",
-    mvp: false,
+    mvp: true,
     relatedSlugs: ["gpa-calculator", "high-school-gpa-calculator", "raise-gpa-calculator"],
     examples: [
       {
@@ -348,7 +348,7 @@ export const calculators: CalculatorConfig[] = [
     path: "/cgpa-to-percentage",
     icon: "Percent",
     category: "conversion",
-    mvp: true,
+    mvp: false,
     relatedSlugs: ["percentage-to-cgpa", "sgpa-to-cgpa", "cgpa-calculator"],
     examples: [
       { label: "India 8.2 CGPA", values: { mode: "cgpa-to-percent", formulaId: "india-cbse-9.5", value: 8.2 } },
@@ -381,7 +381,7 @@ export const calculators: CalculatorConfig[] = [
     path: "/sgpa-to-cgpa",
     icon: "Layers",
     category: "gpa",
-    mvp: true,
+    mvp: false,
     relatedSlugs: ["cgpa-calculator", "cgpa-to-percentage", "cumulative-gpa-calculator"],
     examples: [
       {

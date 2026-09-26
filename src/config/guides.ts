@@ -623,7 +623,7 @@ export const guides: GuideConfig[] = [
     path: "/guides/cgpa-to-percentage",
     title: "How to Convert CGPA to Percentage (India & Pakistan)",
     description:
-      "Learn CBSE ×9.5, ×10, SPPU, and Pakistan HEC ×25 formulas, plus how SGPA rolls into CGPA.",
+      "Learn CBSE ×9.5, ×10, SPPU, and Pakistan planning estimates, plus how SGPA rolls into CGPA.",
     keywords: [
       "cgpa to percentage",
       "how to convert cgpa to percentage",
@@ -652,9 +652,9 @@ export const guides: GuideConfig[] = [
           "Anna University, VIT, and some IIT/NIT policies use Percentage ≈ CGPA × 10. SPPU Pune and some Mumbai University rules use Percentage ≈ (CGPA − 0.75) × 10. Pick the matching option in our converter.",
       },
       {
-        heading: "Pakistan: HEC ×25",
+        heading: "Pakistan: HEC bands vs ×25 shortcut",
         body:
-          "On a common HEC Absolute 4.0 table, Percentage ≈ CGPA × 25 (the same idea as CGPA ÷ 4 × 100). Example: 3.4 × 25 = 85%. Campus letter cutoffs can still differ — check your university.",
+          "HEC’s semester-system policy maps GPA/CGPA bands to percentage ranges — not one universal linear formula. Many students still see Percentage ≈ CGPA × 25 on a 4.0 scale as a quick estimate (3.4 × 25 = 85%). Use your official equivalence table before transcripts or admissions.",
       },
       {
         heading: "SGPA vs CGPA",

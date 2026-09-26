@@ -370,7 +370,7 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
   "atar-calculator": {
     howItWorks: [
       "Enter scaled subject scores from 0–100 (not raw school marks).",
-      "We average the best four scores and count a fifth at 10% — a simplified national model.",
+      "We use a planning-only curve: best four scaled scores in full, with a fifth at 10% when you enter five subjects. This does not mirror UAC, VTAC, QTAC, TISC, or SATAC rules.",
       "Optionally set a target ATAR to see the counted average this curve associates with that rank.",
     ],
     formula: "Counted average → educational ATAR lookup curve (not UAC/VTAC/QTAC official tables)",
@@ -429,12 +429,12 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
   "cgpa-to-percentage": {
     howItWorks: [
       "Choose CGPA → percentage or percentage → CGPA.",
-      "Pick the formula that matches your board or university (India ×9.5 / ×10 / SPPU, or Pakistan HEC ×25).",
+      "Pick the formula that matches your board or university (India ×9.5 / ×10 / SPPU, or Pakistan linear ×25 estimate).",
       "Enter your value and read the converted result instantly.",
     ],
-    formula: "India CBSE: % = CGPA × 9.5 · Pakistan HEC: % = CGPA × 25",
+    formula: "India CBSE: % = CGPA × 9.5 · Pakistan shortcut: % = CGPA × 25 on a 4.0 scale",
     workedExample:
-      "An 8.2 CGPA on the CBSE ×9.5 rule becomes 77.9%. A 3.4 CGPA on HEC ×25 becomes 85%.",
+      "An 8.2 CGPA on the CBSE ×9.5 rule becomes 77.9%. A 3.4 CGPA on the ×25 shortcut becomes 85% — verify against your campus table.",
     faqs: [
       {
         question: "Which India formula should I use?",
@@ -444,7 +444,7 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
       {
         question: "What is the Pakistan HEC conversion?",
         answer:
-          "A common estimate on a 4.0 scale is Percentage = CGPA × 25. Confirm with your university before official use.",
+          "HEC publishes banded GPA-to-percentage equivalence in its semester-system guidelines. Some schools also use the linear shortcut Percentage = CGPA × 25 on a 4.0 scale. Use your official table before admissions or transcripts.",
       },
       {
         question: "Is this official for admissions?",
@@ -459,8 +459,8 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
       "Choose the India or Pakistan formula your institution uses.",
       "Read the estimated CGPA on that scale.",
     ],
-    formula: "India CBSE: CGPA = % ÷ 9.5 · Pakistan HEC: CGPA = % ÷ 25",
-    workedExample: "76% on CBSE ×9.5 ≈ 8.00 CGPA. 85% on HEC ×25 ≈ 3.40 CGPA.",
+    formula: "India CBSE: CGPA = % ÷ 9.5 · Pakistan shortcut: CGPA = % ÷ 25",
+    workedExample: "76% on CBSE ×9.5 ≈ 8.00 CGPA. 85% on the ×25 shortcut ≈ 3.40 CGPA.",
     faqs: [
       {
         question: "Is percentage to CGPA the reverse of CGPA to percentage?",

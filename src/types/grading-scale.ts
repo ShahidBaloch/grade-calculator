@@ -6,6 +6,7 @@ export type ScaleId =
   | "uk-degree"
   | "uk-gcse"
   | "ca-standard"
+  | "ca-four-three-three"
   | "au-seven-point"
   | "nz-nine-point"
   | "in-ten-point"

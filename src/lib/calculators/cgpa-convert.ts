@@ -44,10 +44,11 @@ export const cgpaFormulas: CgpaFormula[] = [
   },
   {
     id: "pakistan-hec-25",
-    label: "Pakistan HEC (×25)",
+    label: "Pakistan linear estimate (×25 on 4.0)",
     region: "PK",
     scaleMax: 4,
-    description: "Percentage ≈ CGPA × 25 on the HEC 4.0 scale (same as CGPA ÷ 4 × 100).",
+    description:
+      "Quick estimate: Percentage ≈ CGPA × 25 (same as CGPA ÷ 4 × 100). HEC’s official guidance uses banded GPA-to-percentage equivalence — confirm with your university table.",
     toPercent: (cgpa) => cgpa * 25,
     toCgpa: (percent) => percent / 25,
   },

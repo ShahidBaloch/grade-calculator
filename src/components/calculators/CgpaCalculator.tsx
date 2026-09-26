@@ -118,11 +118,12 @@ export function CgpaCalculator() {
           </div>
         )}
       />
-      {result.errors?.map((e) => (
-        <p key={e} className="text-sm text-[var(--color-error)]">
-          {e}
-        </p>
-      ))}
+      {result.status === "error" &&
+        result.errors?.map((e) => (
+          <p key={e} className="text-sm text-[var(--color-error)]">
+            {e}
+          </p>
+        ))}
       <div
         aria-live="polite"
         className="rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-6"

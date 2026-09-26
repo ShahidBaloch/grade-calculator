@@ -18,10 +18,10 @@ describe("siteConfig.url", () => {
     expect(siteConfig.url).toBe("https://grade-calculator.vercel.app");
   });
 
-  it("falls back to VERCEL_URL when public URL is invalid", async () => {
+  it("falls back to the default origin when public URL is invalid", async () => {
     vi.stubEnv("NEXT_PUBLIC_SITE_URL", "not a valid url");
     vi.stubEnv("VERCEL_URL", "my-app.vercel.app");
     const { siteConfig } = await import("@/config/site");
-    expect(siteConfig.url).toBe("https://my-app.vercel.app");
+    expect(siteConfig.url).toBe("https://ezgradecalc.com");
   });
 });

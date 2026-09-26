@@ -74,6 +74,23 @@ export const gradingScalePages: GradingScalePageConfig[] = [
       "Provincial standards vary — always confirm with your institution.",
       "Quebec CEGEP and some programs may use different scales.",
       "Our calculators support the Canadian Standard 4.0 preset.",
+      "If your transcript awards A+ = 4.33 quality points, open the Canada 4.33 GPA reference page.",
+    ],
+  },
+  {
+    slug: "canada-433",
+    path: "/grading-scales/canada-433",
+    scaleId: "ca-four-three-three",
+    title: "Canadian Grading Scale (4.33 GPA)",
+    description:
+      "Canadian letter grade chart where A+ = 4.33 GPA points — common at several universities.",
+    keywords: ["canada 4.33 gpa", "canadian a+ 4.33", "ubc grading scale"],
+    intro:
+      "Many Canadian universities cap quality points at 4.33 and assign A+ = 4.33, A = 4.0, and so on. Percentage cutoffs often match the Canada Standard table; the difference is how A+ converts to GPA points on your transcript.",
+    notes: [
+      "Use this preset when your faculty calendar lists A+ = 4.33.",
+      "Ontario and other provinces may still use A+ = 4.0 on a 4.0 scale — use Canada Standard instead.",
+      "Canada hub calculators lock to Canada Standard; compare both tables before official submissions.",
     ],
   },
   {
@@ -133,10 +150,10 @@ export const gradingScalePages: GradingScalePageConfig[] = [
       "Pakistan HEC Absolute grading bands on a 4.0 GPA scale with common percentage ranges.",
     keywords: ["hec grading scale", "pakistan gpa scale", "hec absolute grading"],
     intro:
-      "Pakistani universities commonly follow HEC Absolute grading on a 4.0 scale (A typically 85–100%). Percentage is often estimated as CGPA × 25.",
+      "Pakistani universities commonly follow HEC Absolute grading on a 4.0 scale (A typically 85–100%). HEC’s semester-system policy maps GPA/CGPA bands to percentage ranges rather than one universal linear rule.",
     notes: [
       "Some campuses publish slightly different A− / B+ quality points — verify your handbook.",
-      "Use the CGPA to Percentage calculator with the Pakistan HEC (×25) formula for quick estimates.",
+      "The CGPA to Percentage calculator includes a linear ×25 shortcut for planning; match your official equivalence table when it differs.",
     ],
   },
 ];
