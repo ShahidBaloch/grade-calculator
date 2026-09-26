@@ -6,6 +6,7 @@ const UQ_LETTER_TO_GPA: Record<string, number> = {
   D: 6,
   C: 5,
   P: 4,
+  N: 2,
 };
 
 const MONASH_LETTER_TO_GPA: Record<string, number> = {
@@ -21,7 +22,6 @@ const MONASH_LETTER_TO_GPA: Record<string, number> = {
   "HURDLE FAIL": 0.3,
   WF: 0,
   "WITHDRAWN FAIL": 0,
-  N: 0.3,
 };
 
 function findBandByLetter(letter: string, scale: GradingScale) {

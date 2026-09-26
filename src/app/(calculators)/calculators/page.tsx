@@ -1,5 +1,7 @@
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { CalculatorCard } from "@/components/calculators/shared/CalculatorCard";
+import { CountryRegionShortcuts } from "@/components/engagement/CountryRegionShortcuts";
+import { UserIntentNav } from "@/components/engagement/UserIntentNav";
 import { extendedCalculators, mvpCalculators } from "@/config/calculators";
 import { createPageMetadata } from "@/lib/seo/metadata";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
@@ -26,8 +28,13 @@ export default function CalculatorsHubPage() {
         <Breadcrumbs items={breadcrumbs} />
         <h1 className="mt-4 text-3xl font-bold">All Grade & GPA Calculators</h1>
         <p className="mt-2 max-w-2xl text-[var(--color-text-muted)]">
-          Free tools for students and teachers. Instant results, no sign-up required.
+          Free tools for students and teachers — instant results, no sign-up. Choose a country hub
+          first if you need UK degree classes, Australian ATAR, or institution-specific GPA presets.
         </p>
+        <div className="mt-6 space-y-4">
+          <CountryRegionShortcuts />
+          <UserIntentNav variant="compact" activeHref="/calculators" />
+        </div>
 
         <section id="grade" className="mt-10">
           <h2 className="text-xl font-semibold">Grade Calculators</h2>

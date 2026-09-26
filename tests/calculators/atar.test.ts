@@ -20,6 +20,26 @@ describe("calculateAtar authority models", () => {
     expect(result.data?.countedAverage).toBeCloseTo(83.6, 1);
   });
 
+  it("warns when QTAC English eligibility is missing or below minimum C", () => {
+    const withoutEnglish = calculateAtar({
+      authority: "qtac",
+      subjects: [{ name: "Chemistry", scaledScore: 80, qceType: "general" }],
+    });
+    expect(withoutEnglish.warnings?.some((w) => w.includes("eligible English"))).toBe(true);
+
+    const ineligibleEnglish = calculateAtar({
+      authority: "qtac",
+      subjects: [
+        { name: "English", scaledScore: 70, qceType: "general", qceEnglishEligible: false },
+        { scaledScore: 80, qceType: "general" },
+        { scaledScore: 78, qceType: "general" },
+        { scaledScore: 76, qceType: "general" },
+        { scaledScore: 74, qceType: "general" },
+      ],
+    });
+    expect(ineligibleEnglish.warnings?.some((w) => w.includes("minimum C eligibility"))).toBe(true);
+  });
+
   it("prefers four General plus one Applied for QTAC when it raises the aggregate", () => {
     const result = calculateAtar({
       authority: "qtac",

@@ -21,6 +21,10 @@ describe("UQ 7-point grade points", () => {
     );
     expect(result.data?.gpa).toBe(5);
   });
+
+  it("maps UQ non-graded fail N to GPA 2 per policy", () => {
+    expect(resolveGradeToGpaPoints("N", "au-uq-seven-point")).toBe(2);
+  });
 });
 
 describe("Monash 4-point grade points", () => {

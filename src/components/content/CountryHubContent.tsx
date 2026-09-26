@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { CountryRegionShortcuts } from "@/components/engagement/CountryRegionShortcuts";
 import { CalculatorCard } from "@/components/calculators/shared/CalculatorCard";
 import { FaqAccordion } from "@/components/content/FaqAccordion";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
@@ -32,7 +33,15 @@ export function CountryHubContent({ hub }: CountryHubContentProps) {
         {hub.flag}
       </p>
       <h1 className="mt-2 text-3xl font-bold">Grade Calculator — {hub.name}</h1>
-      <p className="mt-2 max-w-2xl text-[var(--color-text-muted)]">{hub.description}</p>
+      <p className="mt-2 max-w-2xl text-lg text-[var(--color-text-muted)]">{hub.description}</p>
+      <p className="mt-3 max-w-2xl text-sm text-[var(--color-text-muted)]">
+        Tools below open on <strong className="font-medium text-[var(--color-text)]">{hub.name}</strong>{" "}
+        routes with the grading scale this hub describes. Wrong country? Switch region — your grade
+        inputs still stay in the browser.
+      </p>
+      <div className="mt-4">
+        <CountryRegionShortcuts activePath={hub.path} />
+      </div>
       {hub.details?.map((paragraph) => (
         <p key={paragraph.slice(0, 40)} className="mt-3 max-w-2xl text-[var(--color-text-muted)]">
           {paragraph}

@@ -76,7 +76,7 @@ export const gradingScalePages: GradingScalePageConfig[] = [
     intro:
       "The University of Queensland publishes a 7-point GPA scale for coursework grades. UQ notes that other institutions use different grading scales and GPA calculation methods — always read your own handbook.",
     notes: [
-      "UQ GPA uses the numeric course grade (1–7). Grades 3, 2, and 1 are fails/marginal fails — not GPA 0.",
+      "UQ GPA uses the numeric course grade (1–7). Grades 3, 2, and 1 are fails/marginal fails — not GPA 0. Non-graded fail (N) is treated as grade 2 when a GPA must be calculated.",
       "Illustrative percentage bands are for planning only; subject cut-offs can differ.",
       "Monash and other universities are not on this 7-point table.",
     ],

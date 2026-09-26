@@ -55,13 +55,22 @@ export function getScaleForCountry(country: CountryCode): GradingScale {
   return getScale(countryDefaults[country]);
 }
 
+function bandsForPercentLookup(scale: GradingScale): GradingScale["bands"] {
+  // Transcript-only rows (negative min/max) are not used for percentage → grade mapping.
+  return scale.bands.filter((band) => band.min >= 0 && band.max > 0);
+}
+
 export function percentToLetter(percent: number, scaleId: ScaleId = DEFAULT_SCALE_ID): ScaleLookupResult {
   const scale = getScale(scaleId);
   const clamped = Math.min(100, Math.max(0, percent));
   // Bands use integer cutoffs; treat each band as "this grade or higher until the next tier".
   // Avoids mis-mapping values in gaps (e.g. 89.2% between B+ 87–89 and A- 90–92 on US standard).
-  const sortedByMin = [...scale.bands].sort((a, b) => b.min - a.min);
-  const band = sortedByMin.find((b) => clamped >= b.min) ?? sortedByMin[sortedByMin.length - 1];
+  const percentBands = bandsForPercentLookup(scale);
+  const sortedByMin = [...percentBands].sort((a, b) => b.min - a.min);
+  const band =
+    sortedByMin.find((b) => clamped >= b.min) ??
+    sortedByMin[sortedByMin.length - 1] ??
+    scale.bands[scale.bands.length - 1];
 
   return { letter: band.letter, gpa: band.gpa, band };
 }
@@ -90,5 +99,11 @@ export function getGradeBandClass(letter: string): "a" | "b" | "c" | "d" | "f" {
 }
 
 export function getBandRangeLabel(band: GradingScale["bands"][number]): string {
+  if (band.min < 0 || band.max < 0) {
+    return "Transcript code (no percentage band)";
+  }
+  if (band.min === band.max) {
+    return `${band.min}%`;
+  }
   return `${band.min}–${band.max}%`;
 }

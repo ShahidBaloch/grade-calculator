@@ -21,6 +21,12 @@ describe("country-path", () => {
       "/uk/degree-classification-calculator",
     );
     expect(resolveSiteHref("/gpa-calculator", "/uk")).toBe("/uk/degree-classification-calculator");
+    expect(resolveCalculatorPath("letter-grade-calculator", "/uk/gcse-grade-calculator")).toBe(
+      "/uk/degree-classification-calculator",
+    );
+    expect(resolveCalculatorPath("high-school-gpa-calculator", "/ca/gpa-calculator")).toBe(
+      "/ca/gpa-calculator",
+    );
   });
 
   it("rewrites footer calculator links on country pages", () => {

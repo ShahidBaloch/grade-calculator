@@ -108,7 +108,9 @@ export function AtarCalculator() {
           <>
             {" "}
             For QCE, mark Applied or VET subjects — QTAC eligible aggregates can be five General subjects,
-            four General plus one Applied, or four General plus Certificate III+ VET.
+            four General plus one Applied, or four General plus Certificate III+ VET. QTAC also requires
+            satisfactory completion of an eligible English subject (minimum C) — tag English rows and confirm
+            eligibility below.
           </>
         )}
         {authority === "uac" && (
@@ -200,28 +202,48 @@ export function AtarCalculator() {
               />
             </div>
             {authority === "qtac" && (
-              <div className="space-y-1">
-                <Label className="text-xs text-[var(--color-text-muted)]">QCE subject type</Label>
-                <Select
-                  value={subject.qceType ?? "general"}
-                  onValueChange={(value) => {
-                    const next = [...subjects];
-                    next[index] = {
-                      ...subject,
-                      qceType: value as AtarSubject["qceType"],
-                    };
-                    updateSubjects(next);
-                  }}
-                >
-                  <SelectTrigger aria-label={`Subject ${index + 1} QCE type`}>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="general">General (Senior)</SelectItem>
-                    <SelectItem value="applied">Applied</SelectItem>
-                    <SelectItem value="vet">VET (Cert III+)</SelectItem>
-                  </SelectContent>
-                </Select>
+              <div className="space-y-2">
+                <div className="space-y-1">
+                  <Label className="text-xs text-[var(--color-text-muted)]">QCE subject type</Label>
+                  <Select
+                    value={subject.qceType ?? "general"}
+                    onValueChange={(value) => {
+                      const next = [...subjects];
+                      next[index] = {
+                        ...subject,
+                        qceType: value as AtarSubject["qceType"],
+                      };
+                      updateSubjects(next);
+                    }}
+                  >
+                    <SelectTrigger aria-label={`Subject ${index + 1} QCE type`}>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="general">General (Senior)</SelectItem>
+                      <SelectItem value="applied">Applied</SelectItem>
+                      <SelectItem value="vet">VET (Cert III+)</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                {(subject.qceEnglish ?? /english/i.test(subject.name ?? "")) && (
+                  <label className="flex items-center gap-2 text-sm text-[var(--color-text-muted)]">
+                    <input
+                      type="checkbox"
+                      checked={subject.qceEnglishEligible ?? true}
+                      onChange={(e) => {
+                        const next = [...subjects];
+                        next[index] = {
+                          ...subject,
+                          qceEnglish: true,
+                          qceEnglishEligible: e.target.checked,
+                        };
+                        updateSubjects(next);
+                      }}
+                    />
+                    English meets QTAC eligibility (minimum C / satisfactory)
+                  </label>
+                )}
               </div>
             )}
             {authority === "uac" && (

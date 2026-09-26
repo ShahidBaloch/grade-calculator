@@ -31,6 +31,9 @@ export function CalculatorRoute({
   const pagePath = path ?? getCalculatorPath(slug);
   const geoSegment = pagePath.split("/").filter(Boolean)[0];
   const geoHub = geoSegment ? countryHubByPath[`/${geoSegment}`] : undefined;
+  const pageDescription = geoHub
+    ? `${config.description} This page uses the ${geoHub.name} hub — open ${geoHub.gradingScalePath} if you need the reference chart.`
+    : config.description;
 
   const breadcrumbs = breadcrumbHome
     ? [{ name: "Home", href: "/" }]
@@ -66,8 +69,10 @@ export function CalculatorRoute({
       <BreadcrumbJsonLd items={breadcrumbs} />
       <CalculatorLayout
         title={config.name}
-        description={config.description}
+        description={pageDescription}
         breadcrumbs={breadcrumbs}
+        pagePath={pagePath}
+        showIntentNav={slug !== "ez-grader" || pagePath !== "/"}
         calculator={calculator}
         content={aside ?? <CalculatorPageSections slug={slug} pagePath={pagePath} />}
         below={below}

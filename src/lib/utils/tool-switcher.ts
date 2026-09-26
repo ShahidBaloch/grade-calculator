@@ -1,9 +1,12 @@
 export function isQuickToolActive(pathname: string, href: string): boolean {
-  if (href === "/") {
-    return pathname === "/" || pathname.endsWith("/ez-grader");
+  const normalized = pathname.replace(/\/$/, "") || "/";
+  const target = href.replace(/\/$/, "") || "/";
+
+  if (target === "/") {
+    return normalized === "/" || normalized.endsWith("/ez-grader");
   }
-  if (href === "/calculators") {
-    return pathname === "/calculators";
+  if (target === "/calculators") {
+    return normalized === "/calculators" || normalized.endsWith("/calculators");
   }
-  return pathname === href || pathname.endsWith(href);
+  return normalized === target || normalized.endsWith(target);
 }

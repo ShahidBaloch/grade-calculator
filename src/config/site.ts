@@ -26,7 +26,7 @@ function resolveContactEmail(): string {
 export const siteConfig = {
   name: "GradeCalculator",
   description:
-    "Free grade calculators for US, Canada, UK, and Australian students and teachers. EZ grader, GPA, finals, GCSE, ATAR, and degree tools.",
+    "Free grade calculators for students and teachers — EZ grader, weighted grades, finals, and GPA. Country hubs for US, Canada, UK, Australia, and more.",
   /** Canonical site origin — the homepage. Override with NEXT_PUBLIC_SITE_URL. */
   url: resolveSiteOrigin(),
   email: resolveContactEmail(),

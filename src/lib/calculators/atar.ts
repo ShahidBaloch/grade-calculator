@@ -7,6 +7,10 @@ export interface AtarSubject {
   qceType?: "general" | "applied" | "vet";
   /** HSC English study for UAC (best two English units). */
   hscEnglish?: boolean;
+  /** QCE English row for QTAC eligibility (satisfactory completion, minimum C). */
+  qceEnglish?: boolean;
+  /** When false, English does not meet QTAC's minimum C eligibility. */
+  qceEnglishEligible?: boolean;
   /** WACE bonus category for TISC (Methods / Specialist / LOTE). */
   waceBonus?: "none" | "lote" | "maths-methods" | "maths-specialist";
 }
@@ -153,6 +157,27 @@ function qtacCountedSet(subjects: AtarSubject[]): {
 function isHscEnglishSubject(subject: AtarSubject): boolean {
   if (subject.hscEnglish) return true;
   return /english/i.test(subject.name ?? "");
+}
+
+function isQceEnglishSubject(subject: AtarSubject): boolean {
+  if (subject.qceEnglish) return true;
+  return /english/i.test(subject.name ?? "");
+}
+
+function qtacEnglishEligibilityWarnings(subjects: AtarSubject[]): string[] {
+  const englishRows = subjects.filter(isQceEnglishSubject);
+  if (englishRows.length === 0) {
+    return [
+      "Queensland (QTAC): ATAR eligibility requires satisfactory completion of an eligible English subject (minimum C). Tag an English row or include “English” in the subject name, then confirm eligibility.",
+    ];
+  }
+  const ineligible = englishRows.filter((row) => row.qceEnglishEligible === false);
+  if (ineligible.length > 0) {
+    return [
+      "Queensland (QTAC): one or more English subjects are marked below the minimum C eligibility requirement — you may be ATAR-ineligible even if scaled scores look strong.",
+    ];
+  }
+  return [];
 }
 
 function uacCountedSet(subjects: AtarSubject[]): {
@@ -390,9 +415,14 @@ export function calculateAtar(input: AtarInput): CalculatorResult<AtarResult> {
     );
   }
 
+  const warnings = [DISCLAIMER, ATAR_CROSS_SYSTEM_DISCLAIMER];
+  if (authority === "qtac") {
+    warnings.push(...qtacEnglishEligibilityWarnings(input.subjects));
+  }
+
   return {
     status: "warning",
-    warnings: [DISCLAIMER, ATAR_CROSS_SYSTEM_DISCLAIMER],
+    warnings,
     data: {
       estimatedAtar,
       planningAtarRounded,

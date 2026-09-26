@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
+import { CountryRegionShortcuts } from "@/components/engagement/CountryRegionShortcuts";
 import { guides } from "@/config/guides";
 import { createPageMetadata } from "@/lib/seo/metadata";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -23,9 +24,14 @@ export default function GuidesHubPage() {
         <Breadcrumbs items={breadcrumbs} />
         <h1 className="mt-4 text-3xl font-bold">Guides & How-To Articles</h1>
         <p className="mt-2 text-[var(--color-text-muted)]">
-          Learn how grades and GPA work. {guides.filter((guide) => guide.embeddedCalculator).length}{" "}
-          guides include a live calculator; the rest link to the matching tools.
+          Step-by-step help for the questions behind our calculators — GPA, weighted averages,
+          finals, and country-specific grading.{" "}
+          {guides.filter((guide) => guide.embeddedCalculator).length} guides include a live
+          calculator; the rest link straight to the matching tool.
         </p>
+        <div className="mt-6">
+          <CountryRegionShortcuts />
+        </div>
         <div className="mt-8 grid gap-4 sm:grid-cols-2">
           {guides.map((guide) => (
             <Link

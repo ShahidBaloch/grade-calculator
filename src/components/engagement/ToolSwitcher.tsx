@@ -1,8 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { CheckSquare, GraduationCap, LayoutGrid, Scale, Target } from "lucide-react";
+import { CountryAwareLink } from "@/components/navigation/CountryAwareLink";
 import { cn } from "@/lib/utils";
 import { isQuickToolActive } from "@/lib/utils/tool-switcher";
 
@@ -28,16 +28,17 @@ export function ToolSwitcher() {
           const Icon = tool.icon;
           return (
             <li key={tool.href}>
-              <Link
+              <CountryAwareLink
                 href={tool.href}
                 className={cn(
                   "flex h-full flex-col items-center justify-center gap-0.5 text-xs",
                   active ? "text-[var(--color-primary)]" : "text-[var(--color-text-muted)]",
                 )}
+                aria-current={active ? "page" : undefined}
               >
-                <Icon className="h-5 w-5" />
+                <Icon className="h-5 w-5" aria-hidden />
                 {tool.label}
-              </Link>
+              </CountryAwareLink>
             </li>
           );
         })}

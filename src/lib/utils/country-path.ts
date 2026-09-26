@@ -29,12 +29,17 @@ const GEO_SLUG_ALIASES: Partial<
     "high-school-gpa-calculator": "uk-degree-to-us-gpa-reference",
     "college-gpa-calculator": "degree-classification-calculator",
     "raise-gpa-calculator": "degree-classification-calculator",
+    "letter-grade-calculator": "degree-classification-calculator",
+    "weighted-grade-calculator": "degree-classification-calculator",
   },
   "/au": {
     "percentage-to-letter-grade": "letter-grade-calculator",
   },
   "/ca": {
     "percentage-to-letter-grade": "letter-grade-calculator",
+    "high-school-gpa-calculator": "gpa-calculator",
+    "weighted-gpa-calculator": "gpa-calculator",
+    "raise-gpa-calculator": "gpa-calculator",
   },
   "/nz": {
     "percentage-to-letter-grade": "letter-grade-calculator",
