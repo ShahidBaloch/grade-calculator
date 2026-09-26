@@ -423,7 +423,7 @@ export const guides: GuideConfig[] = [
       {
         heading: "Percent weights vs point weights",
         body:
-          "Percent weights should add to 100 (homework 20, midterm 30, final 50). Point weights are raw totals (homework 200 points, tests 300). Both use the same formula: sum of score times weight, divided by total weight. Switch the weight-format toggle so the labels match your syllabus language.",
+          "Percent weights often add to 100 (homework 20, midterm 30, final 50) when the syllabus is written that way. Point weights are raw totals (homework 200 points, tests 300). Both use the same formula: sum of score times weight, divided by total weight. Switch the weight-format toggle so the labels match your syllabus language."
       },
       {
         heading: "When weights do not add to 100%",

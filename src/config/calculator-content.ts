@@ -85,10 +85,11 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
   "weighted-grade-calculator": {
     howItWorks: [
       "Add each assignment, quiz, or exam with its score and weight.",
-      "Use percentage weights or point weights — weights are normalized by their sum (100% total only if your syllabus requires it).",
+      "Use percentage or point weights. We divide by the sum of those weights, not by 100. Match 100% when your syllabus requires it; we warn if percent mode is not 100%.",
       "See your weighted course average and letter grade.",
     ],
-    formula: "Weighted avg = Σ(Score × Weight) ÷ Σ(Weight) — always normalized by the sum of weights you enter (100% total not required)",
+    formula:
+      "Weighted avg = Σ(Score × Weight) ÷ Σ(Weight). We divide by the sum of weights you entered, not by 100. Match 100% when your syllabus requires it.",
     workedExample: "Homework 92% (20%), Midterm 85% (30%), Final 88% (50%) → 87.9%.",
     faqs: [
       {
@@ -99,7 +100,7 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
       {
         question: "My weights don't add to 100%. Is that OK?",
         answer:
-          "We divide by the total weight you entered (normalized average), not by 100. If your syllabus says weights must total 100%, fix the rows until they do — we show the running total and a warning when percent mode ≠ 100%.",
+          "Yes for the math: we divide by the total weight you entered, not by 100. If your syllabus requires 100%, match that — we show the running total and a warning when percent mode is not 100%.",
       },
       {
         question: "How do I calculate my course grade?",

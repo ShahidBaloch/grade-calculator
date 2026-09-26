@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 import { calculators } from "@/config/calculators";
@@ -278,5 +278,31 @@ describe("SEO audit", () => {
     }
     expect(isLowValueProgrammaticPath("/3/4-as-a-percent")).toBe(true);
     expect(isLowValueProgrammaticPath("/80-out-of-20-as-a-percent")).toBe(true);
+  });
+
+  it("does not ship a crawler-visible loading fallback", () => {
+    expect(existsSync(resolve("src/app/loading.tsx"))).toBe(false);
+    expect(existsSync(resolve("src/app/(calculators)/layout.tsx"))).toBe(false);
+    const appSource = readFileSync(resolve("src/app/layout.tsx"), "utf8");
+    expect(appSource).not.toMatch(/Loading calculator/i);
+    expect(appSource).not.toMatch(/sr-only">Loading/);
+  });
+
+  it("weighted-grade copy is consistent about 100% weights", () => {
+    const content = calculatorContent["weighted-grade-calculator"];
+    const blobs = [
+      content.formula,
+      ...content.howItWorks,
+      ...content.faqs.map((faq) => `${faq.question} ${faq.answer}`),
+    ].join("\n");
+    expect(blobs).not.toMatch(/does(?:n't| not) have to total 100%/i);
+    expect(blobs).not.toMatch(/should total 100%/i);
+    expect(blobs).not.toMatch(/100% total not required/i);
+    expect(blobs).toMatch(/not by 100/);
+    expect(blobs).toMatch(/syllabus requires it/);
+    const guide = guides.find((item) => item.slug === "how-to-calculate-weighted-grades");
+    const guideBody = guide?.sections.map((section) => section.body).join("\n") ?? "";
+    expect(guideBody).not.toMatch(/Percent weights should add to 100/);
+    expect(guideBody).toMatch(/Percent weights often add to 100/);
   });
 });

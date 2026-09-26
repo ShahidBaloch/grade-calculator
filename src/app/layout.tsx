@@ -33,7 +33,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <JsonLd data={[organizationJsonLd(), webSiteJsonLd()]} />
               <a
                 href="#main-content"
-                className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-[var(--color-primary)] focus:px-4 focus:py-2 focus:text-white"
+                className="sr-only left-4 top-4 z-[100] rounded-md bg-[var(--color-primary)] text-white focus:not-sr-only"
               >
                 Skip to content
               </a>
@@ -43,7 +43,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   <GradeInputPrivacyNotice />
                 </div>
               </div>
-              <main id="main-content">{children}</main>
+              <main id="main-content" tabIndex={-1}>
+                {children}
+              </main>
               <Footer />
               <ToolSwitcher />
             </TooltipProvider>

@@ -170,6 +170,17 @@ test.describe("Core calculator flows", () => {
     });
   }
 
+  test("weighted grade HTML is not a loading shell", async ({ page }) => {
+    const response = await page.goto("/weighted-grade-calculator");
+    expect(response?.ok()).toBe(true);
+    const html = await page.content();
+    expect(html).not.toMatch(/Loading calculator/i);
+    expect(html).not.toMatch(/sr-only">Loading</);
+    expect(html).not.toMatch(/<main[^>]*>[\s\S]{0,400}aria-busy="true"/);
+    await expect(page.getByRole("heading", { level: 1 })).toContainText(/weighted grade/i);
+    await expect(page.getByRole("button", { name: /add row/i })).toBeVisible();
+  });
+
   test("navigation header links work", async ({ page, isMobile }) => {
     await page.goto("/");
     if (isMobile) {

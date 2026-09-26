@@ -222,8 +222,8 @@ export function WeightedGradeCalculator() {
       {result.data && (
         <p className="text-sm text-[var(--color-text-muted)]">
           Formula: Σ(score × weight) ÷ Σ(weight) = Σ(score × weight) ÷ {result.data.totalWeight}
-          {weightMode === "percent" ? "%" : ""}. We normalize by the weights you enter; percent mode does
-          not have to total 100% unless your syllabus requires it.
+          {weightMode === "percent" ? "%" : ""}. We divide by the weights you entered, not by 100. Match
+          100% when your syllabus requires it — we warn if percent mode is not 100%.
         </p>
       )}
 

@@ -108,6 +108,19 @@ p a {
   border-width: 0;
 }
 
+.sr-only:focus,
+.sr-only:focus-visible {
+  width: auto;
+  height: auto;
+  padding: 0.5rem 1rem;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  clip-path: none;
+  white-space: normal;
+  min-height: 2.75rem;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
