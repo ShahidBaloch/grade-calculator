@@ -16,7 +16,8 @@
     "test:a11y": "playwright test e2e/accessibility.spec.ts --project=chromium",
     "test:mobile": "playwright test e2e/mobile.spec.ts --project=mobile-chrome --project=mobile-safari",
     "test:lighthouse": "npm run build && lhci autorun",
-    "test:qa": "npm run build && npm run test:coverage && npm run test:e2e:chromium"
+    "test:qa": "npm run build && npm run test:coverage && npm run test:e2e:chromium",
+    "verify:contact-smtp": "node --env-file=.env.local scripts/verify-contact-smtp.mjs"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.20",
