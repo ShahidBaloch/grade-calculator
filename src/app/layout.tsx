@@ -26,11 +26,12 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en-US" suppressHydrationWarning>
       <body className={`${inter.variable} min-h-screen antialiased pb-14 md:pb-0`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem storageKey="gc-theme">
           <GradingScaleProvider>
-            <JsonLd data={[organizationJsonLd(), webSiteJsonLd()]} />
+            <JsonLd data={organizationJsonLd()} />
+            <JsonLd data={webSiteJsonLd()} />
             <a
               href="#main-content"
               className="sr-only left-4 top-4 z-[100] rounded-md bg-[var(--color-primary)] text-white focus:not-sr-only"

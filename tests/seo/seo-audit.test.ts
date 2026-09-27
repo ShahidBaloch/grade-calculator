@@ -66,8 +66,12 @@ describe("SEO audit", () => {
   });
 
   it("emits Organization and WebSite JSON-LD", () => {
-    expect(organizationJsonLd()["@type"]).toBe("Organization");
+    const org = organizationJsonLd();
+    expect(org["@type"]).toBe("Organization");
+    expect(org.contactPoint?.[0]?.email).toBe(siteConfig.email);
+    expect(org.contactPoint?.[0]?.url).toBe(`${siteConfig.url}/contact`);
     expect(webSiteJsonLd()["@type"]).toBe("WebSite");
+    expect(webSiteJsonLd().inLanguage).toBe("en-US");
   });
 
   it("sitemap lists country-specific tools and omits duplicate copies", () => {
@@ -95,9 +99,14 @@ describe("SEO audit", () => {
     expect(guides.some((guide) => guide.path === "/guides/gcse-9-1-grades")).toBe(true);
   });
 
+  it("includes the GPA glossary guide", () => {
+    expect(guides.some((guide) => guide.path === "/guides/gpa-glossary")).toBe(true);
+  });
+
   it("sitemap includes country hubs and guides", () => {
     const urls = sitemap().map((entry) => entry.url);
     expect(urls.some((url) => url.endsWith("/methodology"))).toBe(true);
+    expect(urls.some((url) => url.endsWith("/disclaimer"))).toBe(true);
     for (const hub of countryHubs) {
       expect(urls.some((url) => url.endsWith(hub.path))).toBe(true);
     }

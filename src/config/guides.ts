@@ -25,7 +25,7 @@ export const guides: GuideConfig[] = [
     keywords: ["how to calculate gpa", "gpa formula", "semester gpa", "college gpa"],
     readTime: "12 min read",
     embeddedCalculator: "gpa-calculator",
-    relatedGuides: ["how-to-calculate-weighted-grades", "what-grade-do-i-need-on-my-final", "how-to-raise-your-gpa"],
+    relatedGuides: ["how-to-calculate-weighted-grades", "what-grade-do-i-need-on-my-final", "how-to-raise-your-gpa", "gpa-glossary"],
     relatedCalculators: ["gpa-calculator", "cumulative-gpa-calculator"],
     sections: [
       {
@@ -472,7 +472,7 @@ export const guides: GuideConfig[] = [
       "How 4.0, 4.33, 5.0, and 7.0 GPA scales differ, and how to read letter grades on each one.",
     keywords: ["gpa scale", "4.0 scale", "gpa explained", "letter grade gpa"],
     readTime: "11 min read",
-    relatedGuides: ["weighted-vs-unweighted-gpa", "how-to-calculate-gpa"],
+    relatedGuides: ["weighted-vs-unweighted-gpa", "how-to-calculate-gpa", "gpa-glossary"],
     relatedCalculators: ["gpa-calculator", "percentage-to-letter-grade", "degree-classification-calculator", "atar-calculator"],
     sections: [
       {
@@ -864,6 +864,77 @@ export const guides: GuideConfig[] = [
         question: "Can I convert percentage back to CGPA?",
         answer:
           "Yes — reverse the same formula (for ×9.5, CGPA = % ÷ 9.5). Use the Percentage to CGPA calculator.",
+      },
+    ],
+  },
+  {
+    slug: "gpa-glossary",
+    path: "/guides/gpa-glossary",
+    title: "GPA & Grading Glossary",
+    description:
+      "Plain-language definitions of GPA, CGPA, SGPA, quality points, weighted GPA, and other terms used on GradeCalculator (gradcalc.com).",
+    keywords: [
+      "gpa glossary",
+      "what is cgpa",
+      "quality points",
+      "weighted gpa meaning",
+      "semester gpa definition",
+    ],
+    readTime: "8 min read",
+    relatedGuides: ["how-to-calculate-gpa", "weighted-vs-unweighted-gpa", "gpa-scale-explained"],
+    relatedCalculators: ["gpa-calculator", "cumulative-gpa-calculator", "weighted-gpa-calculator"],
+    sections: [
+      {
+        heading: "GPA (Grade Point Average)",
+        body:
+          "A numeric summary of course performance. In the US 4.0 system, each letter grade maps to points (often A = 4.0, B = 3.0). Semester GPA averages those points weighted by credit hours. It is a planning figure until your registrar posts an official GPA.",
+      },
+      {
+        heading: "Semester vs cumulative GPA",
+        body:
+          "Semester GPA covers one term. Cumulative GPA combines all completed terms. Use the semester GPA calculator for the current term only; use the cumulative GPA calculator when you already have prior credits and GPA on your transcript.",
+      },
+      {
+        heading: "Quality points",
+        body:
+          "Letter grade points multiplied by credit hours for one course. Example: B+ (3.3) × 3 credits = 9.9 quality points. Semester GPA = sum of quality points ÷ sum of credits.",
+      },
+      {
+        heading: "Weighted vs unweighted GPA",
+        body:
+          "Unweighted GPA treats all courses on the same 4.0 table. Weighted GPA adds bonus points for Honors, AP, or IB courses at schools that use them. Bonuses are policy-specific — see our weighted vs unweighted guide and high school GPA calculator.",
+      },
+      {
+        heading: "CGPA, SGPA, and credit hours (India / Pakistan)",
+        body:
+          "CGPA (Cumulative Grade Point Average) is an overall average on a 10-point or 4.0 HEC scale. SGPA is the semester equivalent. Credit hours (or credits) weight each course. Converting CGPA to percentage depends on your board or university formula — not one national rule.",
+      },
+      {
+        heading: "Letter grade vs percentage",
+        body:
+          "Percentage is raw score out of 100. Letter grades are bands (A, B+, etc.) mapped from percentage using your school's scale. GradeCalculator lets you pick a scale preset; cut-offs can differ from your syllabus.",
+      },
+      {
+        heading: "Weighted course grade (assignments)",
+        body:
+          "Distinct from weighted GPA: a course average where exams and homework count different percentages (e.g. finals 40%). Use the weighted grade calculator — not the GPA calculator — for that math.",
+      },
+      {
+        heading: "Terms we label as estimates",
+        body:
+          "ATAR estimates, UK degree class predictions, UC/CSU planning GPAs, and cross-country GPA conversions are educational models. They help you plan; they are not official rankings or transcript values. See our disclaimer and methodology pages.",
+      },
+    ],
+    faqs: [
+      {
+        question: "Is GPA the same as average percentage?",
+        answer:
+          "No. GPA uses grade points on a scale (often 4.0). Two students with the same percentage can differ on GPA if plus/minus cut-offs or credit weights differ.",
+      },
+      {
+        question: "Which calculator should I use first?",
+        answer:
+          "Quiz score → EZ Grader or test grade. Course average → weighted grade. One final exam target → final grade calculator. Transcript-style term average → GPA calculator.",
       },
     ],
   },

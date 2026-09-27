@@ -34,6 +34,15 @@ export function organizationJsonLd() {
     url: siteConfig.url,
     email: siteConfig.email,
     logo: absoluteUrl("/icon"),
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        contactType: "customer support",
+        email: siteConfig.email,
+        url: absoluteUrl("/contact"),
+        availableLanguage: ["English"],
+      },
+    ],
   };
 }
 
@@ -44,9 +53,59 @@ export function webSiteJsonLd() {
     name: siteConfig.name,
     url: siteConfig.url,
     description: siteConfig.description,
+    inLanguage: "en-US",
     publisher: {
       "@type": "Organization",
       name: siteConfig.name,
+    },
+  };
+}
+
+/** Generic WebPage schema for trust/legal content — not for rich-result spam. */
+export function webPageJsonLd({
+  name,
+  description,
+  path,
+}: {
+  name: string;
+  description: string;
+  path: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name,
+    description,
+    url: absoluteUrl(path),
+    inLanguage: "en-US",
+    isPartOf: {
+      "@type": "WebSite",
+      name: siteConfig.name,
+      url: siteConfig.url,
+    },
+  };
+}
+
+/** Contact page — supports trust signals; not used for rich-result spam. */
+export function contactPageJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    name: `Contact ${siteConfig.name}`,
+    url: absoluteUrl("/contact"),
+    description:
+      "Contact GradeCalculator for calculator questions, formula corrections, and site feedback.",
+    inLanguage: "en-US",
+    isPartOf: {
+      "@type": "WebSite",
+      name: siteConfig.name,
+      url: siteConfig.url,
+    },
+    mainEntity: {
+      "@type": "Organization",
+      name: siteConfig.name,
+      url: siteConfig.url,
+      email: siteConfig.email,
     },
   };
 }

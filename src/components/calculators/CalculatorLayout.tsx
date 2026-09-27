@@ -1,4 +1,5 @@
 import { GeoPageHint } from "@/components/engagement/GeoPageHint";
+import { EditorialByline } from "@/components/content/EditorialByline";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { siteConfig } from "@/config/site";
 import type { BreadcrumbItem } from "@/types/seo";
@@ -38,6 +39,7 @@ export function CalculatorLayout({
           <p className="mt-2 max-w-2xl text-[var(--color-text-muted)] print:mt-1 print:text-sm">
             {description}
           </p>
+          <EditorialByline className="mt-3 max-w-2xl" />
           <GeoPageHint />
           <p className="mt-3 rounded-md border border-[var(--color-border)] bg-[var(--color-bg-subtle)] px-3 py-2 text-sm text-[var(--color-text-muted)]">
             <span className="font-medium text-[var(--color-text)]">Sample data:</span> calculators may

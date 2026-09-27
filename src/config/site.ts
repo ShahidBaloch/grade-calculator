@@ -25,6 +25,8 @@ function resolveContactEmail(): string {
 
 export const siteConfig = {
   name: "GradeCalculator",
+  /** Matches the public domain — shown in header for brand clarity. */
+  domainLabel: "gradcalc.com",
   description:
     "Free grade calculators for students and teachers. EZ grader, weighted grades, finals, and GPA. Grading scale follows your location.",
   /** Canonical site origin — the homepage. Override with NEXT_PUBLIC_SITE_URL. */

@@ -23,6 +23,17 @@ export default function TermsPage() {
         <p className="text-sm text-[var(--color-text-muted)]">Last updated: {updated}</p>
         <div className="mt-6 space-y-6 text-[var(--color-text-muted)]">
           <section>
+            <h2 className="text-lg font-semibold text-[var(--color-text)]">Publisher</h2>
+            <p className="mt-2">
+              These terms apply to {siteConfig.name}, published at {siteConfig.domainLabel} (
+              {siteConfig.url}). Calculator results are planning estimates only — see our{" "}
+              <a href="/disclaimer" className="text-[var(--color-primary)] hover:underline">
+                Educational Disclaimer
+              </a>
+              .
+            </p>
+          </section>
+          <section>
             <h2 className="text-lg font-semibold text-[var(--color-text)]">Use of service</h2>
             <p className="mt-2">
               {siteConfig.name} provides free educational calculators and reference content. By using

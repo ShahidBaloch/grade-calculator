@@ -29,6 +29,15 @@ export default function AboutPage() {
             are often slow, ad-heavy, and missing the tools students actually search for.
           </p>
           <p>
+            {siteConfig.name} is published at{" "}
+            <strong className="text-[var(--color-text)]">{siteConfig.domainLabel}</strong> (
+            {siteConfig.url}). For questions or to report a calculation error, email{" "}
+            <a href={`mailto:${siteConfig.email}`} className="text-[var(--color-primary)] hover:underline">
+              {siteConfig.email}
+            </a>
+            .
+          </p>
+          <p>
             Our calculators run entirely in your browser. We don&apos;t store your grades on our servers,
             and we don&apos;t require sign-up. Geo cookies, CDN security, optional analytics, and
             advertising (if enabled) are described in our{" "}

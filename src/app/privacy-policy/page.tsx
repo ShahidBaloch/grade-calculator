@@ -75,6 +75,18 @@ export default function PrivacyPolicyPage() {
             </p>
           </section>
           <section>
+            <h2 className="text-lg font-semibold text-[var(--color-text)]">Contact form</h2>
+            <p className="mt-2">
+              If you use the contact form at{" "}
+              <a href="/contact" className="text-[var(--color-primary)] hover:underline">
+                gradcalc.com/contact
+              </a>
+              ,               we receive your name, email address, and message so we can reply. We do not ask for
+              grades or student records on that form. Messages are delivered to our team inbox through
+              our email provider (SMTP or transactional email) when configured on the server.
+            </p>
+          </section>
+          <section>
             <h2 className="text-lg font-semibold text-[var(--color-text)]">Contact</h2>
             <p className="mt-2">
               Privacy questions:{" "}

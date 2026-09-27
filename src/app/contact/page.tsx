@@ -1,12 +1,15 @@
 import { ContactForm } from "@/components/content/ContactForm";
 import { ContentPageLayout } from "@/components/content/ContentPageLayout";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { siteConfig } from "@/config/site";
+import { contactPageJsonLd } from "@/lib/seo/jsonld";
 import { createPageMetadata } from "@/lib/seo/metadata";
 
 export const metadata = createPageMetadata({
   title: "Contact Us",
-  description: "Get in touch with the GradeCalculator team for questions, feedback, or corrections.",
+  description:
+    "Contact GradeCalculator at gradcalc.com for calculator questions, formula corrections, and feedback. Email hello@gradcalc.com or use our form.",
   path: "/contact",
 });
 
@@ -15,6 +18,7 @@ export default function ContactPage() {
 
   return (
     <>
+      <JsonLd data={contactPageJsonLd()} />
       <BreadcrumbJsonLd items={breadcrumbs} />
       <ContentPageLayout
         title="Contact Us"

@@ -5,6 +5,7 @@ import { getPrimaryFlow } from "@/config/engagement-flows";
 import { calculatorBySlug } from "@/config/calculators";
 import { NextStepCard } from "@/components/engagement/NextStepCard";
 import { ExampleScenarios } from "@/components/engagement/ExampleScenarios";
+import { ExampleDataNotice, useExampleDataNotice } from "@/components/engagement/ExampleDataNotice";
 import { GradeChart } from "@/components/calculators/shared/GradeChart";
 import { NumberStepper } from "@/components/calculators/shared/NumberStepper";
 import { ResultDisplay } from "@/components/calculators/shared/ResultDisplay";
@@ -17,11 +18,24 @@ import type { CalculatorSlug } from "@/types/calculator";
 
 export function EzGrader({ slug = "ez-grader" }: { slug?: CalculatorSlug }) {
   const { scaleId } = useGradingScale();
-  const { state, setState, resetState, shareUrl, copied } = useCalculatorPersistence(slug, {
+  const { state, setState, resetState, shareUrl, copied, hydrated } = useCalculatorPersistence(slug, {
     totalQuestions: 10,
     wrongAnswers: 0,
   });
   const { totalQuestions, wrongAnswers } = state;
+  const { showExampleNotice, markUserEdited, showAgain } = useExampleDataNotice();
+
+  React.useEffect(() => {
+    if (!hydrated) return;
+    if (totalQuestions !== 10 || wrongAnswers !== 0) {
+      markUserEdited();
+    }
+  }, [hydrated, totalQuestions, wrongAnswers, markUserEdited]);
+
+  const handleReset = React.useCallback(() => {
+    resetState();
+    showAgain();
+  }, [resetState, showAgain]);
 
   const result = React.useMemo(
     () => calculateEzGrader({ totalQuestions, wrongAnswers }, scaleId),
@@ -33,27 +47,32 @@ export function EzGrader({ slug = "ez-grader" }: { slug?: CalculatorSlug }) {
 
   return (
     <div className="calculator-print-area space-y-6">
-      <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
+      <CalculatorToolbar onShare={shareUrl} onReset={handleReset} copied={copied} />
+      <ExampleDataNotice visible={showExampleNotice} />
       <div className="grid gap-4 sm:grid-cols-2">
         <NumberStepper
           label="Total questions"
           value={totalQuestions}
           min={1}
           max={999}
-          onChange={(v) =>
+          onChange={(v) => {
+            markUserEdited();
             setState({
               ...state,
               totalQuestions: v,
               wrongAnswers: Math.min(wrongAnswers, Math.max(0, v)),
-            })
-          }
+            });
+          }}
         />
         <NumberStepper
           label="Wrong answers"
           value={wrongAnswers}
           min={0}
           max={Math.max(totalQuestions, wrongAnswers)}
-          onChange={(v) => setState({ ...state, wrongAnswers: v })}
+          onChange={(v) => {
+            markUserEdited();
+            setState({ ...state, wrongAnswers: v });
+          }}
           error={
             wrongAnswers > totalQuestions
               ? `Wrong answers can't exceed total questions (${totalQuestions})`
@@ -73,6 +92,7 @@ export function EzGrader({ slug = "ez-grader" }: { slug?: CalculatorSlug }) {
       <ExampleScenarios
         examples={examples}
         onSelect={(values) => {
+          markUserEdited();
           setState({
             totalQuestions:
               typeof values.totalQuestions === "number" ? values.totalQuestions : totalQuestions,

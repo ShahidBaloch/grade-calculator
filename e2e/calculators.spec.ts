@@ -71,10 +71,11 @@ test.describe("Core calculator flows", () => {
     await expect(page.getByText(/dean's-list|good academic standing|good-standing/i).first()).toBeVisible();
   });
 
-  test("UK hub 404s a tool that is not featured", async ({ page }) => {
+  test("UK hub redirects US-style GPA URLs to degree classification", async ({ page }) => {
     const response = await page.goto("/uk/gpa-calculator");
-    expect(response?.status()).toBe(404);
-    await expect(page.getByRole("heading", { level: 1, name: /page not found/i })).toBeVisible();
+    expect(response?.status()).toBeLessThan(400);
+    await expect(page).toHaveURL(/\/uk\/degree-classification-calculator$/);
+    await expect(page.getByRole("heading", { level: 1, name: /degree classification/i })).toBeVisible();
   });
 
   test("Canada hub 404s a tool that is not featured", async ({ page }) => {
@@ -83,9 +84,9 @@ test.describe("Core calculator flows", () => {
     await expect(page.getByRole("heading", { level: 1, name: /page not found/i })).toBeVisible();
   });
 
-  test("UK weighted grade geo copy loads", async ({ page }) => {
+  test("UK hub redirects shared tools to the worldwide calculator URL", async ({ page }) => {
     await page.goto("/uk/weighted-grade-calculator");
-    await expect(page).toHaveURL(/\/uk\/weighted-grade-calculator/);
+    await expect(page).toHaveURL(/\/weighted-grade-calculator$/);
     await expect(page.getByRole("heading", { level: 1, name: /weighted grade/i })).toBeVisible();
   });
 

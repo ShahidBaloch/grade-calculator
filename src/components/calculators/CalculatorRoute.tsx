@@ -55,18 +55,18 @@ export function CalculatorRoute({
   return (
     <>
       <JsonLd
-        data={[
-          webApplicationJsonLd({
-            name: title,
-            description,
-            path: pagePath,
-          }),
-          howToJsonLd({
-            name: `How to use the ${title}`,
-            description,
-            steps: howItWorksSteps,
-          }),
-        ]}
+        data={webApplicationJsonLd({
+          name: title,
+          description,
+          path: pagePath,
+        })}
+      />
+      <JsonLd
+        data={howToJsonLd({
+          name: `How to use the ${title}`,
+          description,
+          steps: howItWorksSteps,
+        })}
       />
       <BreadcrumbJsonLd items={breadcrumbs} />
       <CalculatorLayout
