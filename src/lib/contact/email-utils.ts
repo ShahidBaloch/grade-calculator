@@ -23,7 +23,7 @@ export function sanitizeSubjectFragment(value: string): string {
 
 /** Google shows App Passwords with spaces; SMTP auth needs the 16 characters only. */
 export function normalizeSmtpPassword(value: string): string {
-  return value.replace(/\s+/g, "");
+  return value.trim().replace(/^["']|["']$/g, "").replace(/\s+/g, "");
 }
 
 export function formatMailboxFrom(raw: string): string {

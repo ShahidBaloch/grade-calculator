@@ -20,8 +20,9 @@ describe("email-utils", () => {
     expect(sanitizeSubjectFragment("Alex\r\n")).toBe("Alex");
   });
 
-  it("strips spaces from a Google App Password", () => {
+  it("strips spaces and wrapping quotes from a Google App Password", () => {
     expect(normalizeSmtpPassword("abcd efgh ijkl mnop")).toBe("abcdefghijklmnop");
+    expect(normalizeSmtpPassword('"abcd efgh ijkl mnop"')).toBe("abcdefghijklmnop");
   });
 
   it("does not double-wrap a From address", () => {

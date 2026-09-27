@@ -11,7 +11,7 @@ export async function deliverContactMessage(values: ContactFormValues): Promise<
     const smtp = await sendContactViaSmtp(values);
     if (smtp.ok) return { ok: true };
     if (smtp.reason === "provider_error") {
-      return { ok: false, error: "Something went wrong sending your message.", httpStatus: 500 };
+      return { ok: false, error: smtp.error, httpStatus: 500 };
     }
   }
 
