@@ -4,19 +4,14 @@ import Link from "next/link";
 export function GradeInputPrivacyNotice({ className = "" }: { className?: string }) {
   return (
     <p className={`text-xs text-[var(--color-text-muted)] ${className}`.trim()}>
-      Grades stay in your browser. Results are planning estimates — see our{" "}
-      <Link href="/disclaimer" className="font-medium text-[var(--color-primary)] underline underline-offset-2">
+      Your grades stay on this device — we do not store them on our servers.{" "}
+      <Link href="/privacy-policy" className="text-[var(--color-primary)] hover:underline">
+        Privacy
+      </Link>
+      {" · "}
+      <Link href="/disclaimer" className="text-[var(--color-primary)] hover:underline">
         Disclaimer
       </Link>
-      . Cookies, analytics, and ads are covered in our{" "}
-      <Link href="/privacy-policy" className="font-medium text-[var(--color-primary)] underline underline-offset-2">
-        Privacy Policy
-      </Link>{" "}
-      and{" "}
-      <Link href="/cookie-policy" className="font-medium text-[var(--color-primary)] underline underline-offset-2">
-        Cookie Policy
-      </Link>
-      .
     </p>
   );
 }

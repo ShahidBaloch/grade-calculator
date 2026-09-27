@@ -33,31 +33,30 @@ export function CalculatorLayout({
       </div>
       <div className={focus ? "mt-4" : "mt-4 lg:grid lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:gap-10"}>
         <article aria-labelledby="calculator-page-title">
-          <h1 id="calculator-page-title" className="text-3xl font-bold tracking-tight print:text-xl">
+          <h1 id="calculator-page-title" className="text-2xl font-bold tracking-tight text-[var(--color-text)] sm:text-3xl print:text-xl">
             {title}
           </h1>
-          <p className="mt-2 max-w-2xl text-[var(--color-text-muted)] print:mt-1 print:text-sm">
+          <p className="mt-2 max-w-2xl text-base leading-relaxed text-[var(--color-text-muted)] print:mt-1 print:text-sm">
             {description}
           </p>
-          <EditorialByline className="mt-3 max-w-2xl" />
           <GeoPageHint />
-          <p className="mt-3 rounded-md border border-[var(--color-border)] bg-[var(--color-bg-subtle)] px-3 py-2 text-sm text-[var(--color-text-muted)]">
-            <span className="font-medium text-[var(--color-text)]">Sample data:</span> calculators may
-            start with example numbers so you can see how results work. Replace them with your grades,
-            pick an example scenario, or use Reset to clear this tool on your device.
-          </p>
+          <EditorialByline compact className="mt-3 max-w-2xl" />
           <p className="mt-1 hidden text-xs text-[var(--color-text-muted)] print:block">
             {siteConfig.name} · {siteConfig.url}
           </p>
           <div className="mt-6 print:mt-3">{calculator}</div>
         </article>
         {content && !focus && (
-          <aside className="no-print mt-10 lg:mt-14" aria-label="How to use this calculator">
+          <aside className="no-print mt-10 lg:mt-0 lg:sticky lg:top-20 lg:self-start" aria-label="Help and FAQ">
             {content}
           </aside>
         )}
       </div>
-      {below && <div className="no-print mt-12">{below}</div>}
+      {below && (
+        <div className="no-print mt-12 max-w-3xl border-t border-[var(--color-border)] pt-10">
+          {below}
+        </div>
+      )}
     </div>
   );
 }

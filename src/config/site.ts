@@ -23,6 +23,9 @@ function resolveContactEmail(): string {
   return "hello@gradcalc.com";
 }
 
+/** Other names users search for — used in WebSite/Organization schema only. */
+export const siteAlternateNames = ["GradCalc", "gradcalc.com"];
+
 export const siteConfig = {
   name: "GradeCalculator",
   /** Matches the public domain — shown in header for brand clarity. */

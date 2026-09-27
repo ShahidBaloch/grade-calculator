@@ -72,6 +72,7 @@ describe("SEO audit", () => {
     expect(org.contactPoint?.[0]?.url).toBe(`${siteConfig.url}/contact`);
     expect(webSiteJsonLd()["@type"]).toBe("WebSite");
     expect(webSiteJsonLd().inLanguage).toBe("en-US");
+    expect(webSiteJsonLd().alternateName).toContain("GradCalc");
   });
 
   it("sitemap lists country-specific tools and omits duplicate copies", () => {

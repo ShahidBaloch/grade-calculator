@@ -1,5 +1,6 @@
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { CalculatorCard } from "@/components/calculators/shared/CalculatorCard";
+import { CalculatorIntentGuide } from "@/components/engagement/CalculatorIntentGuide";
 import { extendedCalculators, mvpCalculators } from "@/config/calculators";
 import { createPageMetadata } from "@/lib/seo/metadata";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
@@ -26,9 +27,12 @@ export default function CalculatorsHubPage() {
         <Breadcrumbs items={breadcrumbs} />
         <h1 className="mt-4 text-3xl font-bold">All Grade & GPA Calculators</h1>
         <p className="mt-2 max-w-2xl text-[var(--color-text-muted)]">
-          Pick a calculator. On the homepage, links follow your location. Open a country page when you
-          need that country’s scale.
+          Free tools for tests, class averages, finals, and GPA. Not sure which one? Start below.
         </p>
+
+        <div className="mt-8 max-w-2xl">
+          <CalculatorIntentGuide />
+        </div>
 
         <section id="grade" className="mt-10">
           <h2 className="text-xl font-semibold">Grade Calculators</h2>

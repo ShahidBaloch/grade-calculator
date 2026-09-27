@@ -4,6 +4,7 @@ import { calculatorContent } from "@/config/calculator-content";
 import { countryHubByPath } from "@/config/country-hubs";
 import { getCalculatorHowItWorks } from "@/lib/content/calculator-how-it-works";
 import { getCountryPrefixFromPath } from "@/lib/utils/country-path";
+import { CalculatorDetailsAccordion } from "@/components/content/CalculatorDetailsAccordion";
 import { ResourceLinks } from "@/components/content/ResourceLinks";
 import { FaqAccordion } from "@/components/content/FaqAccordion";
 import { HowItWorks } from "@/components/content/HowItWorks";
@@ -37,65 +38,41 @@ export function CalculatorPageSections({
       }
     : resourceLinks;
 
+  const assumptions =
+    content.assumptions ?? [
+      "Letter grades follow the grading scale selected in the calculator.",
+      "Zero total weight or credits returns an error — we never divide by zero.",
+      "Sample numbers on first load are examples only; replace them with your data.",
+    ];
+
   return (
-    <div className="space-y-10">
+    <div className="space-y-8">
       <section aria-labelledby="calc-how-heading">
-        <h2 id="calc-how-heading" className="text-xl font-semibold">How it works</h2>
+        <h2 id="calc-how-heading" className="text-lg font-semibold">Quick steps</h2>
+        <p className="mt-1 text-sm text-[var(--color-text-muted)]">Enter your numbers — results update as you type.</p>
         <div className="mt-3">
           <HowItWorks steps={howItWorks} />
         </div>
       </section>
-      <section aria-labelledby="calc-assumptions-heading">
-        <h2 id="calc-assumptions-heading" className="text-xl font-semibold">Assumptions</h2>
-        <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-[var(--color-text-muted)]">
-          {(content.assumptions ?? [
-            "Letter grades follow the grading scale selected in the calculator.",
-            "Zero total weight or credits returns an error — we never divide by zero.",
-            "Sample numbers on first load are examples only; replace them with your data.",
-          ]).map((item) => (
-            <li key={item}>{item}</li>
-          ))}
-        </ul>
+      <section aria-labelledby="calc-details-heading">
+        <h2 id="calc-details-heading" className="sr-only">Formula and assumptions</h2>
+        <CalculatorDetailsAccordion
+          assumptions={assumptions}
+          formula={content.formula}
+          workedExample={content.workedExample}
+          primarySources={content.primarySources}
+        />
       </section>
-      <section aria-labelledby="calc-formula-heading">
-        <h2 id="calc-formula-heading" className="text-xl font-semibold">Formula</h2>
-        <p className="mt-2 text-sm text-[var(--color-text-muted)]">{content.formula}</p>
-        <p className="mt-2 text-sm text-[var(--color-text-muted)]">
-          Example: {content.workedExample} Letter cut-offs use the unrounded result.
-        </p>
-      </section>
-      {content.primarySources && content.primarySources.length > 0 && (
-        <section aria-labelledby="calc-sources-heading">
-          <h2 id="calc-sources-heading" className="text-xl font-semibold">Primary sources</h2>
-          <p className="mt-2 text-sm text-[var(--color-text-muted)]">
-            Confirm rules with the authority or institution — our models are planning aids only.
-          </p>
-          <ul className="mt-3 list-disc space-y-2 pl-5 text-sm">
-            {content.primarySources.map((source) => (
-              <li key={source.href}>
-                <a
-                  href={source.href}
-                  className="text-[var(--color-primary)] hover:underline"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  {source.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
+      <ResourceLinks links={localizedResources} />
       <section aria-labelledby="calc-faq-heading">
-        <h2 id="calc-faq-heading" className="text-xl font-semibold">FAQ</h2>
-        <div className="mt-3">
+        <h2 id="calc-faq-heading" className="text-lg font-semibold">Common questions</h2>
+        <div className="mt-2">
           <FaqAccordion faqs={content.faqs} />
         </div>
       </section>
-      <ResourceLinks links={localizedResources} />
       <section aria-labelledby="calc-related-heading">
-        <h2 id="calc-related-heading" className="text-xl font-semibold">Related calculators</h2>
-        <div className="mt-4">
+        <h2 id="calc-related-heading" className="text-lg font-semibold">Related tools</h2>
+        <div className="mt-3">
           <RelatedCalculators slugs={relatedSlugs} pagePath={pagePath} />
         </div>
       </section>

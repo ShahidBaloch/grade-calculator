@@ -26,9 +26,9 @@ export function ResultDisplay({
   return (
     <div
       aria-live="polite"
-      className="print-result rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-6"
+      className="print-result rounded-lg border border-[var(--color-border)] border-l-4 border-l-[var(--color-result-accent)] bg-[var(--color-bg-subtle)] p-6 shadow-sm"
     >
-      <p className="text-sm text-[var(--color-text-muted)]">{label}</p>
+      <p className="text-sm font-medium text-[var(--color-text-muted)]">{label}</p>
       {showLetterHero ? (
         <p
           className={cn(
@@ -44,7 +44,7 @@ export function ResultDisplay({
           {letterGrade}
         </p>
       ) : (
-        <p className="mt-1 text-5xl font-bold tracking-tight">
+        <p className="mt-1 text-5xl font-bold tracking-tight tabular-nums text-[var(--color-text)]">
           {percent != null ? formatPercent(percent) : placeholder}
         </p>
       )}

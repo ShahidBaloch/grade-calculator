@@ -17,7 +17,7 @@ export function GeoQuickLinks() {
 
   return (
     <nav aria-label="Other calculators" className="no-print">
-      <p className="text-sm font-medium text-[var(--color-text)]">Also calculate</p>
+      <p className="text-sm font-medium text-[var(--color-text)]">Popular next steps</p>
       <ul className="mt-2 flex flex-wrap gap-2">
         {links.map((link) => (
           <li key={link.href}>

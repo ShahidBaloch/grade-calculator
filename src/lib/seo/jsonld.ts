@@ -1,4 +1,4 @@
-import { absoluteUrl, siteConfig } from "@/config/site";
+import { absoluteUrl, siteAlternateNames, siteConfig } from "@/config/site";
 import type { BreadcrumbItem, FaqItem } from "@/types/seo";
 
 export function webApplicationJsonLd({
@@ -31,6 +31,7 @@ export function organizationJsonLd() {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: siteConfig.name,
+    alternateName: siteAlternateNames,
     url: siteConfig.url,
     email: siteConfig.email,
     logo: absoluteUrl("/icon"),
@@ -51,6 +52,7 @@ export function webSiteJsonLd() {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: siteConfig.name,
+    alternateName: siteAlternateNames,
     url: siteConfig.url,
     description: siteConfig.description,
     inLanguage: "en-US",
