@@ -158,6 +158,7 @@ p a {
   nav,
   aside,
   .no-print,
+  [data-print-chrome],
   nextjs-portal,
   [data-nextjs-toast] {
     display: none !important;

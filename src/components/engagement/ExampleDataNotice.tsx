@@ -13,7 +13,7 @@ export function ExampleDataNotice({ visible }: ExampleDataNoticeProps) {
   return (
     <div
       role="note"
-      className="rounded-md border border-[var(--color-notice-border)] bg-[var(--color-notice-bg)] px-3 py-2 text-sm text-[var(--color-notice-text)]"
+      className="no-print rounded-md border border-[var(--color-notice-border)] bg-[var(--color-notice-bg)] px-3 py-2 text-sm text-[var(--color-notice-text)]"
     >
       <span className="font-medium">Example numbers</span> — replace with yours, or tap{" "}
       <strong>Reset</strong> to start fresh.

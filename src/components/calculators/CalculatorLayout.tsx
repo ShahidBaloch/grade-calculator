@@ -40,7 +40,9 @@ export function CalculatorLayout({
             {description}
           </p>
           <GeoPageHint />
-          <EditorialByline compact className="mt-3 max-w-2xl" />
+          <div className="no-print">
+            <EditorialByline compact className="mt-3 max-w-2xl" />
+          </div>
           <p className="mt-1 hidden text-xs text-[var(--color-text-muted)] print:block">
             {siteConfig.name} · {siteConfig.url}
           </p>

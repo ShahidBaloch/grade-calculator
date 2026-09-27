@@ -34,12 +34,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <JsonLd data={webSiteJsonLd()} />
             <a
               href="#main-content"
-              className="sr-only left-4 top-4 z-[100] rounded-md bg-[var(--color-primary)] text-white focus:not-sr-only"
+              className="no-print sr-only left-4 top-4 z-[100] rounded-md bg-[var(--color-primary)] text-white focus:not-sr-only"
             >
               Skip to content
             </a>
             <Header />
-            <div className="no-print px-4 py-1.5">
+            <div className="no-print px-4 py-1.5" data-print-chrome>
               <div className="mx-auto max-w-7xl">
                 <GradeInputPrivacyNotice />
               </div>

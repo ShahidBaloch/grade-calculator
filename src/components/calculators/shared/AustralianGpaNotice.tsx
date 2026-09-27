@@ -11,7 +11,7 @@ export function AustralianGpaNotice() {
   if (!onAu) return null;
 
   return (
-    <p className="rounded-md border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-3 text-sm text-[var(--color-text-muted)]">
+    <p className="no-print rounded-md border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-3 text-sm text-[var(--color-text-muted)]">
       Australian universities use different GPA or WAM systems — grade points are{" "}
       <strong className="font-medium text-[var(--color-text)]">not</strong> universal. Monash uses a{" "}
       <strong className="font-medium text-[var(--color-text)]">4.0</strong> GPA scale; UQ publishes a{" "}
