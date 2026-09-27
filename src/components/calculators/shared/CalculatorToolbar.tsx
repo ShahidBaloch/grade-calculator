@@ -2,6 +2,7 @@
 
 import { Printer, RotateCcw, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { printCalculatorPage } from "@/lib/utils/print-document";
 
 interface CalculatorToolbarProps {
   onShare?: () => void;
@@ -12,7 +13,7 @@ interface CalculatorToolbarProps {
 export function CalculatorToolbar({ onShare, onReset, copied }: CalculatorToolbarProps) {
   return (
     <div className="no-print flex flex-wrap gap-2">
-      <Button type="button" variant="outline" size="sm" onClick={() => window.print()}>
+      <Button type="button" variant="outline" size="sm" onClick={() => printCalculatorPage()}>
         <Printer className="mr-1.5 h-4 w-4" />
         Print
       </Button>
