@@ -1,4 +1,5 @@
-import { getCalculatorPath, type CalculatorSlug } from "@/config/calculators";
+import { getCalculatorPath } from "@/config/calculators";
+import type { CalculatorSlug } from "@/types/calculator";
 
 /** Plain-language goals → the right tool (hub / “which calculator?”). */
 export const calculatorIntents: { goal: string; slug: CalculatorSlug; action: string }[] = [
