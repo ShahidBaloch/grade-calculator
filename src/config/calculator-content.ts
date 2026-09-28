@@ -41,7 +41,22 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
       {
         question: "What grading scale is used?",
         answer:
-          "We default to the common US 4.0 GPA scale. Your region may be detected automatically, or you can pick a different scale in the calculator settings.",
+          "We default to the common US 4.0 GPA scale. Visitors in some countries may see a local preset automatically; everyone can pick another scale (including New Zealand 9-point) in the calculator settings.",
+      },
+      {
+        question: "Is there a free online EZ grader?",
+        answer:
+          "Yes. This page is an online EZ grader: enter total questions and wrong answers for an instant percentage, letter grade, and a full wrong-count chart. No login required; use Print for a paper chart.",
+      },
+      {
+        question: "How much is each question worth on a test?",
+        answer:
+          "On a test with equal-weight questions, each question is worth 100 ÷ total questions percent. Example: 20 questions → 5% each; one wrong answer usually drops the score by about 5%. The chart below shows your grade for every wrong-count.",
+      },
+      {
+        question: "What grade is 8 out of 13 or 12 out of 20?",
+        answer:
+          "Divide correct by total and multiply by 100. Eight out of 13 is 8 ÷ 13 ≈ 61.5%; twelve out of 20 is 60%. Enter total 13 and wrong 5 here (8 correct), or open the test grade calculator and enter correct answers directly.",
       },
       {
         question: "What is my grade on this test?",
@@ -52,6 +67,16 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
         question: "How do I get a percentage from wrong answers?",
         answer:
           "Percentage = (Total − Wrong) ÷ Total × 100. The EZ grader does that math for you and maps the result to a letter on your selected scale.",
+      },
+      {
+        question: "Can I grade by number correct instead of wrong?",
+        answer:
+          "This EZ grader uses wrong answers because many teachers count misses while grading. If you only know how many you got right, use the test grade calculator and switch to correct-answer mode.",
+      },
+      {
+        question: "Is there an easy grader for teachers online?",
+        answer:
+          "Yes. Teachers use this page as a free easy grader: set question total, enter wrong count, print the chart, and reuse it for the next quiz. No account or gradebook upload required.",
       },
     ],
   },
@@ -81,6 +106,21 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
         question: "Can I use this for a quiz score out of 10 or 20?",
         answer:
           "Yes. Set total questions to 10, 20, or any number your teacher used. Bonus points work the same way for quizzes and tests.",
+      },
+      {
+        question: "What grade is 8 out of 13?",
+        answer:
+          "Set total questions to 13, choose correct answers, and enter 8. That is 8 ÷ 13 ≈ 61.5%. The letter grade follows the scale you selected (US, New Zealand 9-point, etc.).",
+      },
+      {
+        question: "What grade is 12 out of 20?",
+        answer:
+          "Twelve correct out of 20 is 12 ÷ 20 = 60%. Enter total 20 and correct 12 to see the percentage and letter grade on your chosen scale.",
+      },
+      {
+        question: "How do I calculate my grade on a test?",
+        answer:
+          "Score % = (correct ÷ total questions) × 100, then compare to your school’s letter bands. Use this calculator for one test; for a whole course average with weighted assignments, use the weighted grade calculator.",
       },
     ],
   },
@@ -118,6 +158,16 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
         question: "Can I use this as a what-if grade calculator?",
         answer:
           "Yes. Change one score or weight and the course average updates. That shows what your grade would be if a quiz or exam came back higher or lower.",
+      },
+      {
+        question: "What is an overall grade calculator?",
+        answer:
+          "An overall (course) grade is usually a weighted average of homework, quizzes, and exams — not a single test score. Enter each category with its syllabus weight here to get your class average.",
+      },
+      {
+        question: "How much will my grade go up or drop?",
+        answer:
+          "Change one assignment score and watch the weighted average move. A low-weight quiz moves the total a little; a heavy exam moves it more. The shift equals that score’s weight share of the course.",
       },
     ],
     assumptions: [
@@ -170,6 +220,16 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
         question: "Can I use this for a midterm?",
         answer:
           "Yes. Enter the grade you have before the midterm, the percent the midterm is worth, and the course grade you want. The formula is the same as a final.",
+      },
+      {
+        question: "What is a what grade do I need calculator?",
+        answer:
+          "It is the same idea as a final grade calculator: you enter your current course percentage, how much the final counts, and your target grade. We solve for the minimum final exam score you need.",
+      },
+      {
+        question: "Does this work as a final grade calculator with percentages?",
+        answer:
+          "Yes. Enter current grade, target grade, and final weight as percentages (for example 85, 90, and 40). All three must use the same scale your syllabus uses.",
       },
     ],
     assumptions: [
@@ -227,6 +287,16 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
         question: "How do you calculate GPA from letter grades?",
         answer:
           "Convert each letter to points on your scale, multiply by credit hours for quality points, add them up, and divide by total credit hours for the term. Enter courses above and we do each step.",
+      },
+      {
+        question: "How do I calculate GPA from percentage grades?",
+        answer:
+          "Turn each course percentage into a letter (or quality points) using your school’s scale, then average by credit hours. Enter 92 or B+ in a row — we map percentages through the scale you selected.",
+      },
+      {
+        question: "How do I convert GPA to a percentage?",
+        answer:
+          "There is no single national formula — schools map GPA points back to percentage bands differently. Use the percentage to letter grade tool with your scale, or check your transcript legend.",
       },
     ],
     primarySources: [
