@@ -6,7 +6,7 @@ const GPA_SCALE_STEP =
   "Each grade converts to quality points on the scale shown above (on /au pages, choose UQ, Monash, or the generic example preset).";
 
 const LETTER_INPUT_STEP =
-  "Enter a grade label from the scale shown above (for example HD/D/C on Australian pages or First/2:1 on UK pages).";
+  "Enter a grade label from the scale shown above (for example HD, D, or C on Australian pages, or First/2:1 on UK pages).";
 
 export function getCalculatorHowItWorks(slug: CalculatorSlug, pagePath?: string): string[] {
   const base = calculatorContent[slug].howItWorks;

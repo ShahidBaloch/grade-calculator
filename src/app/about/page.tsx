@@ -45,11 +45,11 @@ export default function AboutPage() {
               Privacy Policy
             </Link>
             . Your grading scale is detected automatically from your location, with support for US, UK,
-            Canadian, Australian, New Zealand, India (10-point CGPA), and Pakistan (HEC 4.0) systems.
+            Canada, Australia, New Zealand, India (10-point CGPA), and Pakistan (HEC 4.0) systems.
           </p>
           <h2 className="text-xl font-semibold text-[var(--color-text)]">How results are checked</h2>
           <ul className="list-disc space-y-2 pl-5">
-            <li>Letter grades use the raw percentage. 89.99 stays a B+ when the A− cut-off is 90.</li>
+            <li>Letter grades use the raw percentage. 89.99 stays a B+ when the A− cutoff is 90.</li>
             <li>A total weight or credit load of zero is rejected. The calculator does not divide by zero.</li>
             <li>University tables follow the institution’s published points. Monash and UQ are not the same scale.</li>
             <li>ATAR and UK-to-US figures are planning estimates. They are not official results or application GPAs.</li>

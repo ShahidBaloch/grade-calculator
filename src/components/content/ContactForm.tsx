@@ -127,7 +127,7 @@ export function ContactForm() {
 
       {status === "error" ? (
         <p className="text-sm text-[var(--color-error)]" role="alert">
-          {error} Or email{" "}
+          {error}. Or email{" "}
           <a href={`mailto:${contactConfig.email}`} className="font-medium underline">
             {contactConfig.email}
           </a>{" "}

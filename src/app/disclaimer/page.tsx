@@ -50,7 +50,7 @@ export default function DisclaimerPage() {
           <section>
             <h2 className="text-lg font-semibold text-[var(--color-text)]">Policies differ by school and country</h2>
             <p className="mt-2">
-              Letter cut-offs, weighting rules, rounding, dropped scores, honors points, and degree
+              Letter cutoffs, weighting rules, rounding, dropped scores, honors points, and degree
               classifications vary. A calculator cannot know your syllabus, exam board, or registrar
               rules. Always confirm with your instructor, handbook, or official transcript before
               making decisions.
@@ -85,7 +85,7 @@ export default function DisclaimerPage() {
             <p className="mt-2">
               We map letter grades from the{" "}
               <strong className="text-[var(--color-text)]">unrounded percentage</strong> where noted
-              (for example, 89.99% stays B+ when the A− cut-off is 90). Your school may round
+              (for example, 89.99% stays B+ when the A− cutoff is 90). Your school may round
               differently or use plus/minus rules not shown on your scale preset.
             </p>
           </section>

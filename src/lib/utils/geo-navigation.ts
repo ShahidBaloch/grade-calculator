@@ -62,7 +62,7 @@ export function geoPageHint(
     return {
       message: "Australian universities use their own GPA scales.",
       href: "/au/gpa-calculator",
-      linkLabel: "Open the Australia GPA calculator",
+      linkLabel: "Open the Australian GPA calculator",
     };
   }
 
@@ -70,7 +70,7 @@ export function geoPageHint(
     return {
       message: "Canadian GPA tables differ by university.",
       href: "/ca/gpa-calculator",
-      linkLabel: "Open the Canada GPA calculator",
+      linkLabel: "Open the Canadian GPA calculator",
     };
   }
 
@@ -78,7 +78,7 @@ export function geoPageHint(
     return {
       message: "ATAR rules depend on your state.",
       href: "/au/atar-calculator",
-      linkLabel: "Open the Australia ATAR calculator",
+      linkLabel: "Open the Australian ATAR calculator",
     };
   }
 

@@ -3,7 +3,7 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
   "/": {
     title: "Grade Calculator & Easy Grader",
     description:
-      "Free grade calculator and easy grader for quizzes and tests. Score by questions wrong, then open weighted course grades, finals, and GPA tools. Grading scale follows your location.",
+      "Free grade calculator and easy grader for quizzes and tests. Score by number of questions wrong, then open weighted course grades, finals, and GPA tools. Grading scale follows your location.",
   },
   "/weighted-grade-calculator": {
     title: "Weighted Grade Calculator — Course & Class Average",
@@ -28,7 +28,7 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
   "/uc-gpa-calculator": {
     title: "UC & CSU GPA Calculator — Capped A–G Average",
     description:
-      "Estimate a UC or Cal State a-g GPA. UC uses 10th–11th grade with up to 8 honors points. CSU includes 12th grade and allows only 2 honors points from 10th. Not the official application GPA.",
+      "Estimate a UC or Cal State A–G GPA. UC uses 10th–11th grade with up to 8 honors points. CSU includes 12th grade and allows only 2 honors points from 10th. Not the official application GPA.",
   },
   "/middle-school-gpa-calculator": {
     title: "Middle School GPA Calculator — Junior High",

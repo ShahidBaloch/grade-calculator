@@ -45,7 +45,7 @@ export default function MethodologyPage() {
               </li>
               <li>
                 Letter grades map through selectable grading scales. Boundaries use the raw percentage
-                (89.99 stays below a 90 cut-off).
+                (89.99 stays below a 90 cutoff).
               </li>
               <li>
                 Regional models (ATAR planning curves, UK degree classification, UC A–G, McMaster 12-point
@@ -59,14 +59,14 @@ export default function MethodologyPage() {
             <p className="mt-2">
               Calculator logic is covered by automated regression tests, including edge cases (zero
               weights, impossible final targets, grade boundaries, and invalid inputs). SEO and legal
-              copy is checked so privacy statements match client-side storage keys and CDN behavior.
+              copy are checked so privacy statements match client-side storage keys and CDN behavior.
             </p>
           </section>
           <section>
             <h2 className="text-xl font-semibold text-[var(--color-text)]">Sample data in the UI</h2>
             <p className="mt-2">
               Calculators may open with example numbers so you can see a result immediately. Those
-              values are not your grades. Replace them, tap an example scenario, or use Reset to clear
+              values are not your grades. Replace them, click an example scenario, or use Reset to clear
               saved inputs on this device.
             </p>
           </section>

@@ -24,7 +24,7 @@ export const gradingScalePages: GradingScalePageConfig[] = [
       "The common US 4.0 GPA scale is widely used in American high schools and colleges. Letter grades map to percentage ranges, and each letter converts to GPA points for semester calculations. Percentage cutoffs vary by school, district, college, and instructor — verify your institution's grading policy.",
     notes: [
       "Many schools use plus/minus modifiers (A-, B+, etc.) with the ranges shown below.",
-      "NCES standardizes transcript study with A=4, B=3, C=2, D=1, and F=0 on a four-point framework; it does not define one national plus/minus percentage table.",
+      "For federal statistics, NCES uses a four-point framework (A=4, B=3, C=2, D=1, F=0); it does not define one national plus/minus percentage table.",
       "Some high schools use a 10-point scale (90–100 = A) — see US 10-point letter bands in our calculator settings.",
       "Weighted GPA (honors/AP) may add extra points beyond this table.",
     ],
@@ -71,7 +71,7 @@ export const gradingScalePages: GradingScalePageConfig[] = [
     scaleId: "au-uq-seven-point",
     title: "University of Queensland (UQ) — 7-Point GPA",
     description:
-      "UQ numeric grades 1–7 (HD through marginal fail) with illustrative percentage planning bands. Course cut-offs can vary — confirm my.UQ.",
+      "UQ numeric grades 1–7 (HD through marginal fail) with illustrative percentage planning bands. Course cut-offs can vary — confirm on my.UQ.",
     keywords: ["uq gpa scale", "uq grading scale", "7 point gpa uq"],
     intro:
       "The University of Queensland publishes a 7-point GPA scale for coursework grades. UQ notes that other institutions use different grading scales and GPA calculation methods — always read your own handbook.",
@@ -94,7 +94,7 @@ export const gradingScalePages: GradingScalePageConfig[] = [
     notes: [
       "Near Pass = 0.7, Fail and Hurdle Fail = 0.3, Withdrawn Fail = 0.0 — enter the transcript code (NP, F, HF, WF).",
       "Monash weights grade points by unit credit points in official GPA calculations.",
-      "Select this preset in /au GPA calculators when estimating Monash coursework.",
+      "Select this preset on the /au GPA calculator pages when estimating Monash coursework.",
     ],
   },
   {
@@ -108,7 +108,7 @@ export const gradingScalePages: GradingScalePageConfig[] = [
     intro:
       "This chart shows one illustrative way to map percentage marks to letter grades and 4.0 GPA points. Canadian universities do not share one official percentage-to-GPA conversion — UBC tells students to use the evaluating body's scale when converting for admissions, and Waterloo, Guelph, McGill, and others publish their own tables.",
     notes: [
-      "Label this as a planning preset, not a “standard Canadian conversion.”",
+      "Treat this chart as a planning preset, not a “standard Canadian conversion.”",
       "Quebec CEGEP and some programs may use different scales.",
       "McMaster uses a separate 12-point GPA — use /mcmaster-gpa-to-us-gpa with McMaster's lookup, not 12 ÷ 3.",
       "If your transcript awards A+ = 4.33 quality points, open the Canada 4.33 reference page.",
@@ -155,7 +155,7 @@ export const gradingScalePages: GradingScalePageConfig[] = [
       "England GCSE 9–1 percentage bands used in our educational converter, plus how they relate to the old A*–G letters.",
     keywords: ["gcse grading scale", "gcse 9-1", "gcse grade boundaries"],
     intro:
-      "England’s GCSE 9–1 scale replaced A*–G. Grade 9 is the highest. Grade 4 is commonly a standard pass and grade 5 a strong pass. Official boundaries move every series.",
+      "England’s GCSE 9–1 scale replaced A*–G. Grade 9 is the highest. Grade 4 is commonly a standard pass and grade 5 is a strong pass. Official boundaries move every series.",
     notes: [
       "This table is an educational default for planning, not a live awarding-body boundary set.",
       "Wales and Northern Ireland may still use different letter systems.",

@@ -211,6 +211,23 @@ describe("SEO audit", () => {
     }
   });
 
+  it("resource link titles match guide and grading scale page titles", () => {
+    const guideTitleByPath = new Map(guides.map((guide) => [guide.path, guide.title]));
+    const scaleTitleByPath = new Map<string, string>([
+      ...gradingScalePages.map((page) => [page.path, page.title]),
+      ["/grading-scales", "Grading Scales by Country"],
+    ]);
+    for (const calculator of calculators) {
+      const links = calculatorResourceLinks[calculator.slug];
+      if (links.guide) {
+        expect(links.guide.title).toBe(guideTitleByPath.get(links.guide.path));
+      }
+      if (links.gradingScale) {
+        expect(links.gradingScale.title).toBe(scaleTitleByPath.get(links.gradingScale.path));
+      }
+    }
+  });
+
   it("every guide embed points at a real calculator", () => {
     const slugs = new Set(calculators.map((calculator) => calculator.slug));
     for (const guide of guides) {

@@ -1,113 +1,127 @@
 import type { CalculatorSlug } from "@/types/calculator";
+import { guideBySlug } from "@/config/guides";
+import { gradingScaleBySlug } from "@/config/grading-scale-pages";
 
 export interface CalculatorResourceLinks {
   guide?: { path: string; title: string };
   gradingScale?: { path: string; title: string };
 }
 
+function guide(slug: keyof typeof guideBySlug) {
+  const g = guideBySlug[slug];
+  return { path: g.path, title: g.title };
+}
+
+function scale(slug: keyof typeof gradingScaleBySlug) {
+  const p = gradingScaleBySlug[slug];
+  return { path: p.path, title: p.title };
+}
+
+const gradingScalesHub = { path: "/grading-scales", title: "Grading Scales by Country" };
+
 export const calculatorResourceLinks: Record<CalculatorSlug, CalculatorResourceLinks> = {
   "ez-grader": {
-    guide: { path: "/guides/understanding-letter-grades", title: "Understanding letter grades" },
-    gradingScale: { path: "/grading-scales", title: "Grading scales" },
+    guide: guide("understanding-letter-grades"),
+    gradingScale: gradingScalesHub,
   },
   "test-grade-calculator": {
-    guide: { path: "/guides/understanding-letter-grades", title: "Understanding letter grades" },
-    gradingScale: { path: "/grading-scales", title: "Letter grade charts" },
+    guide: guide("understanding-letter-grades"),
+    gradingScale: gradingScalesHub,
   },
   "weighted-grade-calculator": {
-    guide: { path: "/guides/how-to-calculate-weighted-grades", title: "How to calculate weighted grades" },
-    gradingScale: { path: "/grading-scales", title: "Grading scales" },
+    guide: guide("how-to-calculate-weighted-grades"),
+    gradingScale: gradingScalesHub,
   },
   "final-grade-calculator": {
-    guide: { path: "/guides/what-grade-do-i-need-on-my-final", title: "What grade do I need on my final?" },
-    gradingScale: { path: "/grading-scales", title: "Grading scales" },
+    guide: guide("what-grade-do-i-need-on-my-final"),
+    gradingScale: gradingScalesHub,
   },
   "gpa-calculator": {
-    guide: { path: "/guides/how-to-calculate-gpa", title: "How to calculate GPA" },
-    gradingScale: { path: "/grading-scales", title: "GPA scales" },
+    guide: guide("how-to-calculate-gpa"),
+    gradingScale: gradingScalesHub,
   },
   "cumulative-gpa-calculator": {
-    guide: { path: "/guides/how-to-calculate-gpa", title: "How to calculate GPA" },
-    gradingScale: { path: "/grading-scales", title: "GPA scales" },
+    guide: guide("how-to-calculate-gpa"),
+    gradingScale: gradingScalesHub,
   },
   "weighted-gpa-calculator": {
-    guide: { path: "/guides/weighted-vs-unweighted-gpa", title: "Weighted vs unweighted GPA" },
-    gradingScale: { path: "/grading-scales", title: "GPA scales" },
+    guide: guide("weighted-vs-unweighted-gpa"),
+    gradingScale: gradingScalesHub,
   },
   "raise-gpa-calculator": {
-    guide: { path: "/guides/how-to-raise-your-gpa", title: "How to raise your GPA" },
-    gradingScale: { path: "/grading-scales", title: "GPA scales" },
+    guide: guide("how-to-raise-your-gpa"),
+    gradingScale: gradingScalesHub,
   },
   "high-school-gpa-calculator": {
-    guide: { path: "/guides/how-to-calculate-gpa", title: "How to calculate GPA" },
-    gradingScale: { path: "/grading-scales/us", title: "US grading scale" },
+    guide: guide("how-to-calculate-gpa"),
+    gradingScale: scale("us"),
   },
   "college-gpa-calculator": {
-    guide: { path: "/guides/how-to-calculate-gpa", title: "How to calculate GPA" },
-    gradingScale: { path: "/grading-scales", title: "GPA scales" },
+    guide: guide("how-to-calculate-gpa"),
+    gradingScale: gradingScalesHub,
   },
   "percentage-to-letter-grade": {
-    guide: { path: "/guides/understanding-letter-grades", title: "Understanding letter grades" },
-    gradingScale: { path: "/grading-scales", title: "Letter grade charts" },
+    guide: guide("understanding-letter-grades"),
+    gradingScale: gradingScalesHub,
   },
   "letter-grade-calculator": {
-    guide: { path: "/guides/understanding-letter-grades", title: "Understanding letter grades" },
-    gradingScale: { path: "/grading-scales", title: "Letter grade charts" },
+    guide: guide("understanding-letter-grades"),
+    gradingScale: gradingScalesHub,
   },
   "canvas-grade-calculator": {
-    guide: { path: "/guides/lms-course-grades-explained", title: "LMS course grades explained" },
-    gradingScale: { path: "/grading-scales", title: "Grading scales" },
+    guide: guide("lms-course-grades-explained"),
+    gradingScale: gradingScalesHub,
   },
   "eoc-grade-calculator": {
-    guide: { path: "/guides/what-grade-do-i-need-on-my-final", title: "Final exam planning" },
-    gradingScale: { path: "/grading-scales/us", title: "US grading scale" },
+    guide: guide("what-grade-do-i-need-on-my-final"),
+    gradingScale: scale("us"),
   },
   "degree-classification-calculator": {
-    guide: { path: "/guides/gpa-scale-explained", title: "GPA scale explained" },
-    gradingScale: { path: "/grading-scales/uk", title: "UK degree classification scale" },
+    guide: guide("gpa-scale-explained"),
+    gradingScale: scale("uk"),
   },
   "atar-calculator": {
-    guide: { path: "/guides/gpa-scale-explained", title: "GPA and rank scales" },
-    gradingScale: { path: "/grading-scales/australia-uq", title: "UQ 7-point GPA (example)" },
+    guide: guide("gpa-scale-explained"),
+    gradingScale: scale("australia-uq"),
   },
   "gcse-grade-calculator": {
-    guide: { path: "/guides/gcse-9-1-grades", title: "How GCSE 9–1 grades work" },
-    gradingScale: { path: "/grading-scales/gcse", title: "UK GCSE 9–1 scale" },
+    guide: guide("gcse-9-1-grades"),
+    gradingScale: scale("gcse"),
   },
   "cgpa-to-percentage": {
-    guide: { path: "/guides/cgpa-to-percentage", title: "How to convert CGPA to percentage" },
-    gradingScale: { path: "/grading-scales/india", title: "India 10-point CGPA scale" },
+    guide: guide("cgpa-to-percentage"),
+    gradingScale: scale("india"),
   },
   "percentage-to-cgpa": {
-    guide: { path: "/guides/cgpa-to-percentage", title: "How to convert CGPA to percentage" },
-    gradingScale: { path: "/grading-scales/india", title: "India 10-point CGPA scale" },
+    guide: guide("cgpa-to-percentage"),
+    gradingScale: scale("india"),
   },
   "sgpa-to-cgpa": {
-    guide: { path: "/guides/cgpa-to-percentage", title: "How to convert CGPA to percentage" },
-    gradingScale: { path: "/grading-scales/india", title: "India 10-point CGPA scale" },
+    guide: guide("cgpa-to-percentage"),
+    gradingScale: scale("india"),
   },
   "cgpa-calculator": {
-    guide: { path: "/guides/cgpa-to-percentage", title: "How to convert CGPA to percentage" },
-    gradingScale: { path: "/grading-scales/india", title: "India 10-point CGPA scale" },
+    guide: guide("cgpa-to-percentage"),
+    gradingScale: scale("india"),
   },
   "cgpa-to-gpa": {
-    guide: { path: "/guides/cgpa-to-percentage", title: "How to convert CGPA to percentage" },
-    gradingScale: { path: "/grading-scales/india", title: "India 10-point CGPA scale" },
+    guide: guide("cgpa-to-percentage"),
+    gradingScale: scale("india"),
   },
   "mcmaster-gpa-to-us-gpa": {
-    guide: { path: "/guides/gpa-scale-explained", title: "GPA scale explained" },
-    gradingScale: { path: "/grading-scales/canada", title: "Canadian grading scales" },
+    guide: guide("gpa-scale-explained"),
+    gradingScale: scale("canada"),
   },
   "uk-degree-to-us-gpa-reference": {
-    guide: { path: "/guides/gpa-scale-explained", title: "GPA scale explained" },
-    gradingScale: { path: "/grading-scales/uk", title: "UK degree classification scale" },
+    guide: guide("gpa-scale-explained"),
+    gradingScale: scale("uk"),
   },
   "uc-gpa-calculator": {
-    guide: { path: "/guides/how-to-calculate-gpa", title: "How to calculate GPA" },
-    gradingScale: { path: "/grading-scales/us", title: "US grading scale" },
+    guide: guide("how-to-calculate-gpa"),
+    gradingScale: scale("us"),
   },
   "middle-school-gpa-calculator": {
-    guide: { path: "/guides/how-to-calculate-gpa", title: "How to calculate GPA" },
-    gradingScale: { path: "/grading-scales/us", title: "US grading scale" },
+    guide: guide("how-to-calculate-gpa"),
+    gradingScale: scale("us"),
   },
 };

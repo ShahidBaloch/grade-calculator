@@ -41,7 +41,7 @@ export function CalculatorPageSections({
   const assumptions =
     content.assumptions ?? [
       "Letter grades follow the grading scale selected in the calculator.",
-      "Zero total weight or credits returns an error — we never divide by zero.",
+      "A zero total weight or credit load returns an error — we never divide by zero.",
       "Sample numbers on first load are examples only; replace them with your data.",
     ];
 

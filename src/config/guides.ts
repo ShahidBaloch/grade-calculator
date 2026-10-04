@@ -91,7 +91,7 @@ export const guides: GuideConfig[] = [
       {
         heading: "Worked example with mixed percents and letters",
         body:
-          "You can type 92 instead of A− if that is what the portal shows. We convert 92 through the selected scale (US Standard A− = 3.7) then multiply by credits. Mixing “A” in one row and “88” in another is fine as long as both rows use the same scale. Do not mix a UK 68 (2:1) with a US B+ on the same 4.0 table.",
+          "You can type 92 instead of A− if that is what the portal shows. We convert 92 using the selected scale (US Standard A− = 3.7), then multiply by credits. Mixing “A” in one row and “88” in another is fine as long as both rows use the same scale. Do not mix a UK 68 (2:1) with a US B+ on the same 4.0 table.",
       },
       {
         heading: "When to open a different GPA tool",
@@ -116,7 +116,7 @@ export const guides: GuideConfig[] = [
     path: "/guides/what-grade-do-i-need-on-my-final",
     title: "What Grade Do I Need on My Final?",
     description:
-      "Find out what score you need on your final exam to reach your target course grade, with formula and examples.",
+      "Find out what score you need on your final exam to reach your target course grade, with the formula and examples.",
     keywords: [
       "what grade do i need on my final",
       "final exam calculator",
@@ -164,12 +164,12 @@ export const guides: GuideConfig[] = [
       {
         heading: "How weight is defined",
         body:
-          "If the syllabus says “the final is 40% of the course,” use 40. If it says “the final is 200 points out of 500,” that is also 40%. Do not enter 200 as the weight unless you are in points mode. Mixing a percent current grade with a point weight will invent a nonsense required score.",
+          "If the syllabus says “the final is 40% of the course,” use 40. If it says “the final is 200 points out of 500,” that is also 40%. Do not enter 200 as the weight unless you are in points mode. Mixing a percent current grade with a point weight will produce a nonsensical required score.",
       },
       {
         heading: "Already-met and impossible results",
         body:
-          "Already met means even a zero (or a very low score) keeps the letter — still check for a minimum-final rule. Impossible means a 100% cannot reach the target. The honest move is to lower the letter goal or ask about remaining assignments, not to assume the calculator is “wrong.”",
+          "An “Already met” result means even a zero (or a very low score) keeps the letter — still check for a minimum-final rule. An “Impossible” result means even 100% cannot reach the target. The honest move is to lower the letter goal or ask about remaining assignments, not to assume the calculator is “wrong.”",
       },
       {
         heading: "Multiple finals or a practical plus a written paper",
@@ -293,7 +293,7 @@ export const guides: GuideConfig[] = [
     path: "/guides/lms-course-grades-explained",
     title: "LMS Course Grades Explained",
     description:
-      "How Canvas, Blackboard, Moodle, and Google Classroom turn assignments into a course grade — and which free calculator to use on GradeCalculator.",
+      "How Canvas, Blackboard, Moodle, and Google Classroom turn assignments into a course grade — and which free calculator to use on GradeCalculator (gradcalc.com).",
     keywords: [
       "canvas grade calculator",
       "blackboard grade calculator",
@@ -423,7 +423,7 @@ export const guides: GuideConfig[] = [
       {
         heading: "Percent weights vs point weights",
         body:
-          "Percent weights often add to 100 (homework 20, midterm 30, final 50) when the syllabus is written that way. Point weights are raw totals (homework 200 points, tests 300). Both use the same formula: sum of score times weight, divided by total weight. Switch the weight-format toggle so the labels match your syllabus language."
+          "Percent weights often add to 100 (homework 20, midterm 30, final 50) when the syllabus is written that way. Point weights are raw totals (homework 200 points, tests 300). Both use the same formula: sum of score times weight, divided by total weight. Switch the weight-format toggle so the labels match your syllabus language.",
       },
       {
         heading: "When weights do not add to 100%",
@@ -493,7 +493,7 @@ export const guides: GuideConfig[] = [
       {
         heading: "UK classifications are not GPA",
         body:
-          "UK degrees are labelled First, 2:1, 2:2, and Third from percentage averages. There is no official conversion to US 4.0 for self-reporting. Harvard GSAS and Stanford Graduate Admissions tell applicants to use transcript format — do not invent a GPA. Our /uk-degree-to-us-gpa-reference page shows illustrative comparisons only when you need rough planning.",
+          "UK degrees are labelled First, 2:1, 2:2, and Third from percentage averages. There is no official conversion to US 4.0 for self-reporting. Harvard GSAS and Stanford Graduate Admissions tell applicants to report grades in their transcript’s format — do not invent a GPA. Our /uk-degree-to-us-gpa-reference page shows illustrative comparisons only when you need rough planning.",
       },
       {
         heading: "Canada, Australia, and New Zealand",
@@ -503,7 +503,7 @@ export const guides: GuideConfig[] = [
       {
         heading: "How to pick a scale in our tools",
         body:
-          "Every calculator has a scale selector. Change it before you trust the letter or GPA output. Geo detection only applies when the host sends a country header; locally it stays on US Standard until you change it.",
+          "Every calculator has a scale selector. Change it before you trust the letter or GPA output. Geo detection only applies when the host sends a country header; on your device it stays on US Standard until you change it.",
       },
       {
         heading: "ATAR is a rank, not a GPA",
@@ -548,7 +548,7 @@ export const guides: GuideConfig[] = [
       {
         heading: "Weighted GPA rewards difficulty",
         body:
-          "Honors often adds 0.5 and AP/IB adds 1.0 before averaging. A B in AP Chemistry (3.0 + 1.0 = 4.0 weighted) can match an unweighted A in a regular class. That is why counselors report both numbers.",
+          "Honors courses often add 0.5, and AP/IB courses add 1.0, before averaging. A B in AP Chemistry (3.0 + 1.0 = 4.0 weighted) can match an unweighted A in a regular class. That is why counselors report both numbers.",
       },
       {
         heading: "Worked comparison",
@@ -619,7 +619,7 @@ export const guides: GuideConfig[] = [
       {
         heading: "Pair this with finals planning",
         body:
-          "Raising GPA starts with finishing the current term well. Use the final grade calculator for each course, then feed the resulting letters into raise-GPA to see whether the semester is enough.",
+          "Raising GPA starts with finishing the current term well. Use the final grade calculator for each course, then feed the resulting letters into the raise GPA calculator to see whether the semester is enough.",
       },
     ],
     faqs: [
@@ -654,7 +654,7 @@ export const guides: GuideConfig[] = [
       {
         heading: "Convert both directions",
         body:
-          "Percentage → letter answers “what did I earn?” Letter → percentage answers “what number should I use in a weighted average?” Use both converters with the same scale selected.",
+          "Percentage-to-letter conversion answers “what did I earn?” Letter-to-percentage conversion answers “what number should I use in a weighted average?” Use both converters with the same scale selected.",
       },
       {
         heading: "International letters are not US letters",
@@ -703,12 +703,12 @@ export const guides: GuideConfig[] = [
       {
         heading: "If you need 90% or higher",
         body:
-          "Treat the exam like a syllabus: list units by weight, drill the heaviest ones first, and time a practice test. Small homework points will not save a 40% final if you are already at 85% and want a 90%.",
+          "Treat the exam like a syllabus: list units by weight, drill the heaviest ones first, and time a practice test. A few extra homework points will not save you if the final is worth 40%, you are already at 85%, and you want a 90%.",
       },
       {
         heading: "If you need under 70%",
         body:
-          "Do not coast into a zero. Many syllabi fail the course below a minimum exam score. Confirm that rule, then study enough to clear it with a buffer.",
+          "Do not coast into a zero. Many syllabi fail students who score below a minimum on the exam. Confirm that rule, then study enough to clear it with a buffer.",
       },
       {
         heading: "When the result is impossible",
@@ -723,7 +723,7 @@ export const guides: GuideConfig[] = [
       {
         heading: "Plan the week backward from the number",
         body:
-          "If you need an 88% on a 40% final, write three timed practice blocks and one sleep-in-place review. If you need a 60%, one mixed practice set plus the formula sheet may be enough. Match effort to the required score.",
+          "If you need an 88% on a 40% final, write three timed practice blocks and one lighter review session before the exam. If you need a 60%, one mixed practice set plus the formula sheet may be enough. Match effort to the required score.",
       },
       {
         heading: "After the exam, update GPA",
@@ -769,7 +769,7 @@ export const guides: GuideConfig[] = [
       {
         heading: "Percentage bands are not official",
         body:
-          "Exam boards set new grade boundaries every series and every subject. A 70% might be a 7 on one paper and a 6 on another. Our GCSE calculator uses a simplified educational map so you can plan. It is not Ofqual, AQA, Edexcel, OCR, or WJEC.",
+          "Exam boards set new grade boundaries every series and every subject. A 70% might be a 7 on one paper and a 6 on another. Our GCSE calculator uses a simplified educational map so you can plan. It is not an official Ofqual, AQA, Edexcel, OCR, or WJEC tool.",
       },
       {
         heading: "How to use the GCSE calculator",
@@ -810,7 +810,7 @@ export const guides: GuideConfig[] = [
     path: "/guides/cgpa-to-percentage",
     title: "How to Convert CGPA to Percentage (India & Pakistan)",
     description:
-      "Learn CBSE ×9.5, ×10, SPPU, and Pakistan planning estimates, plus how SGPA rolls into CGPA.",
+      "Learn CBSE ×9.5, ×10, and SPPU formulas, plus Pakistan planning estimates and how SGPA rolls into CGPA.",
     keywords: [
       "cgpa to percentage",
       "how to convert cgpa to percentage",

@@ -60,7 +60,7 @@ export const engagementFlows: EngagementFlow[] = [
     from: "gpa-calculator",
     to: "weighted-grade-calculator",
     title: "Calculate course average first",
-    description: "Build your GPA from individual assignment scores.",
+    description: "Start from course grades — often after a weighted course average.",
   },
   {
     from: "cumulative-gpa-calculator",

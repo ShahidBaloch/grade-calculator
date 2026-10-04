@@ -68,7 +68,7 @@ export function UcCsuGpaCalculator() {
     <div className="calculator-print-area space-y-6">
       <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
       <p className="rounded-md border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-3 text-sm text-[var(--color-text-muted)]">
-        Planning estimate for California a-g GPA. One row is one semester. A year-long class is two
+        Planning estimate for California A–G GPA. One row is one semester. A year-long class is two
         rows. Pluses and minuses do not change the points. UC and CSU calculate the official GPA on
         the application.
       </p>
@@ -195,7 +195,7 @@ export function UcCsuGpaCalculator() {
                 value={course.kind}
                 onChange={(event) => patch({ kind: event.target.value as AgCourseKind })}
               >
-                <option value="regular">Regular a-g</option>
+                <option value="regular">Regular A–G</option>
                 <option value="honors">Approved honors</option>
                 <option value="ap-ib">AP or IB</option>
                 <option value="college">College course</option>
@@ -222,7 +222,7 @@ export function UcCsuGpaCalculator() {
           className="rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-6"
         >
           <p className="text-sm text-[var(--color-text-muted)]">
-            {system === "uc" ? "UC capped GPA" : "CSU a-g GPA"}
+            {system === "uc" ? "UC capped GPA" : "CSU A–G GPA"}
           </p>
           <p className="text-5xl font-bold">{formatExact(result.data.gpa)}</p>
           <p className="mt-3 text-sm text-[var(--color-text)]">

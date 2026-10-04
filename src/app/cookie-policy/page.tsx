@@ -77,8 +77,8 @@ export default function CookiePolicyPage() {
           <section>
             <h2 className="text-lg font-semibold text-[var(--color-text)]">Managing cookies</h2>
             <p className="mt-2">
-              You can clear cookies in your browser settings. The site will still work with US default
-              grading scales. See our{" "}
+              You can clear cookies in your browser settings. The site will still work with the US
+              default grading scale. See our{" "}
               <Link href="/privacy-policy" className="text-[var(--color-primary)] hover:underline">
                 Privacy Policy
               </Link>{" "}

@@ -34,7 +34,7 @@ export default function TermsPage() {
             </p>
           </section>
           <section>
-            <h2 className="text-lg font-semibold text-[var(--color-text)]">Use of service</h2>
+            <h2 className="text-lg font-semibold text-[var(--color-text)]">Use of the service</h2>
             <p className="mt-2">
               {siteConfig.name} provides free educational calculators and reference content. By using
               this site, you agree to use the tools for lawful purposes only.
@@ -58,7 +58,8 @@ export default function TermsPage() {
           <section>
             <h2 className="text-lg font-semibold text-[var(--color-text)]">Changes</h2>
             <p className="mt-2">
-              We may update these terms. Continued use after changes constitutes acceptance.
+              We may update these terms. Continued use after changes constitutes acceptance of the
+              updated terms.
             </p>
           </section>
         </div>

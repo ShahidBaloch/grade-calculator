@@ -49,7 +49,7 @@ export function CalculatorDetailsAccordion({
         <AccordionContent>
           <p>{formula}</p>
           <p className="mt-2">
-            Example: {workedExample} Letter cut-offs use the unrounded result.
+            Example: {workedExample}. Letter cutoffs use the unrounded result.
           </p>
         </AccordionContent>
       </AccordionItem>

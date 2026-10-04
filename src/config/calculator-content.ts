@@ -224,7 +224,7 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
       {
         question: "What is a what grade do I need calculator?",
         answer:
-          "It is the same idea as a final grade calculator: you enter your current course percentage, how much the final counts, and your target grade. We solve for the minimum final exam score you need.",
+          "It works like a final grade calculator: enter your current course percentage, how much the final counts, and your target grade. We solve for the minimum final exam score you need.",
       },
       {
         question: "Does this work as a final grade calculator with percentages?",
@@ -262,7 +262,7 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
       {
         question: "Is this the same as weighted or cumulative GPA?",
         answer:
-          "No. This tool is one term, unweighted. Use Weighted GPA for Honors/AP bonuses, or Cumulative GPA / SGPA to CGPA to fold in previous semesters.",
+          "No. This tool is one term, unweighted. Use the weighted GPA calculator for Honors and AP bonuses, or use the cumulative GPA or SGPA-to-CGPA calculator to include previous semesters.",
       },
       {
         question: "Can I enter a percentage instead of a letter?",
@@ -468,7 +468,7 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
       "Useful for understanding what a letter grade means numerically.",
     ],
     formula: "Percentage = midpoint of letter grade band on selected scale",
-    workedExample: "B+ on the common US 4.0 scale → approximately 89.5% (87–89% range).",
+    workedExample: "B+ on the common US 4.0 scale → approximately 88% (87–89% range).",
     faqs: [
       {
         question: "What percentage is an A?",
@@ -587,7 +587,8 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
     ],
     howItWorks: [
       "Enter scaled subject scores from 0–100 (not raw school marks).",
-      "Choose your state admission centre. Queensland (QTAC/QCE) allows five General, four General plus Applied, or four General plus VET — not General-only. NSW (UAC) uses best two English plus best eight others. Victoria (VTAC) uses primary four plus up to two 10% increments. WA (TISC) adds LOTE, Methods, and Specialist bonuses. SA/NT (SATAC) models 90 credits (three TAS blocks plus flexible 30).",
+      "Choose your state admission centre (UAC, VTAC, QTAC, TISC, or SATAC). Each counts subjects differently.",
+      "Tag English, Applied or VET, and WACE bonus subjects when they apply. State-specific rules are in the FAQs below.",
       "Optionally set a target ATAR to see the counted average this curve associates with that rank.",
     ],
     formula:

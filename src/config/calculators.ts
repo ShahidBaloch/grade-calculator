@@ -493,7 +493,7 @@ export const calculators: CalculatorConfig[] = [
     name: "UC & CSU GPA Calculator",
     shortName: "UC/CSU",
     description:
-      "Estimate a University of California or Cal State a-g GPA, including the honors-point cap. This is a planning estimate, not the official application GPA.",
+      "Estimate a University of California or Cal State A–G GPA, including the honors-point cap. This is a planning estimate, not the official application GPA.",
     path: "/uc-gpa-calculator",
     icon: "Landmark",
     category: "gpa",

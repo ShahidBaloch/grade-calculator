@@ -81,7 +81,7 @@ export default function PrivacyPolicyPage() {
               <a href="/contact" className="text-[var(--color-primary)] hover:underline">
                 gradcalc.com/contact
               </a>
-              ,               we receive your name, email address, and message so we can reply. We do not ask for
+              , we receive your name, email address, and message so we can reply. We do not ask for
               grades or student records on that form. Messages are delivered to our team inbox through
               our email provider (SMTP or transactional email) when configured on the server.
             </p>

@@ -69,7 +69,7 @@ export const countryHubs: CountryHubConfig[] = [
     relatedGuides: [
       {
         path: "/guides/lms-course-grades-explained",
-        title: "LMS course grades — Canvas, Blackboard, Moodle & Google Classroom",
+        title: "LMS Course Grades Explained",
       },
     ],
     keywords: [
@@ -158,7 +158,7 @@ export const countryHubs: CountryHubConfig[] = [
       {
         question: "Where is the US-style GPA calculator on this UK hub?",
         answer:
-          "UK undergraduate results use degree classifications, not US 4.0 GPA. Use the degree classification calculator for First / 2:1 / 2:2 / Third. For an illustrative US comparison only, open UK Degree Class to US GPA — Approximate Reference (not for self-reporting). Site navigation from /uk keeps you on UK tools instead of the worldwide US GPA calculator.",
+          "UK undergraduate results use degree classifications, not US 4.0 GPA. Use the degree classification calculator for First / 2:1 / 2:2 / Third. For an illustrative US comparison only, open UK Degree Class to US GPA — Approximate Reference (not for self-reporting). Navigation from /uk keeps you on UK tools instead of the worldwide US GPA calculator.",
       },
       {
         question: "Where is the degree classification calculator?",
@@ -191,7 +191,7 @@ export const countryHubs: CountryHubConfig[] = [
     details: [
       "Australian universities use different GPA methodologies. UQ publishes a 7-point scale; Monash uses a 4-point GPA (maximum 4.0). UNSW and others may report WAM (Weighted Average Mark) instead of GPA. Grade points are not universal across institutions.",
       "Pick your university preset in the GPA calculators on this hub, or use the generic 7-point example for illustration only. ATAR is a separate school-leaver rank — it is not a course GPA.",
-      "There is no official linear Australian-to-US GPA conversion (for example AU GPA × 4/7). Use each institution's handbook or the receiving admissions office.",
+      "There is no official linear Australian-to-US GPA conversion (for example AU GPA × 4/7). Use each institution's handbook or the receiving institution's admissions instructions.",
     ],
     faqs: [
       {
