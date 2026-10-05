@@ -35,6 +35,101 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
     description:
       "Free middle school and junior high GPA calculator. Enter each class letter grade. Every class counts the same — no credit hours and no Honors or AP bonus.",
   },
+  "/cumulative-gpa-calculator": {
+    title: "Cumulative GPA Calculator — Overall GPA from Multiple Semesters",
+    description:
+      "Combine grades from two or more semesters into one overall GPA. Enter each term's GPA and credit hours, or add courses directly. Works on any 4.0 scale.",
+  },
+  "/weighted-gpa-calculator": {
+    title: "Weighted GPA Calculator — Honors, AP & IB Bonus Points",
+    description:
+      "Calculate a weighted GPA that adds Honors (+0.5) and AP or IB (+1.0) bonus points. See both weighted and unweighted results side by side on a 5.0 scale.",
+  },
+  "/raise-gpa-calculator": {
+    title: "Raise GPA Calculator — Credits Needed to Hit Your Target",
+    description:
+      "Find out how many credit hours of what grade you need to reach your target GPA. Enter your current GPA and credits, set your goal, and see a semester-by-semester plan.",
+  },
+  "/high-school-gpa-calculator": {
+    title: "High School GPA Calculator — Weighted & Unweighted",
+    description:
+      "Calculate a high school GPA by semester or quarter with optional Honors and AP/IB bonus points. Tracks cumulative GPA across all four years on the standard US 4.0 or 5.0 scale.",
+  },
+  "/college-gpa-calculator": {
+    title: "College GPA Calculator — Semester GPA by Credit Hours",
+    description:
+      "Calculate a college semester GPA weighted by credit hours. Excludes pass/fail and audited courses. Shows dean's list and good-standing thresholds on a standard 4.0 scale.",
+  },
+  "/percentage-to-letter-grade": {
+    title: "Percentage to Letter Grade Converter — A–F Scale",
+    description:
+      "Convert any percentage score to a letter grade and GPA points instantly. Supports US, Canadian, and other grading scales. See where your mark falls on the A–F table.",
+  },
+  "/letter-grade-calculator": {
+    title: "Letter Grade Calculator — Letter to Percentage & GPA Points",
+    description:
+      "Look up the percentage range and GPA quality points for any letter grade. Covers A+/A/A−, B+/B/B−, and below on standard and plus/minus grading scales.",
+  },
+  "/canvas-grade-calculator": {
+    title: "Canvas Grade Calculator — Weighted Assignment Groups",
+    description:
+      "Calculate your Canvas LMS course grade from weighted assignment groups. Enter each group's weight and your current score to find your overall grade and what you need to pass.",
+  },
+  "/eoc-grade-calculator": {
+    title: "EOC Grade Calculator — End-of-Course Exam Score Needed",
+    description:
+      "Find the End-of-Course exam score you need to hit your target report-card grade. Enter your class average, the EOC weight your state requires, and your goal grade.",
+  },
+  "/degree-classification-calculator": {
+    title: "UK Degree Classification Calculator — First, 2:1, 2:2, Third",
+    description:
+      "Predict your UK degree classification from credit-weighted module marks. Supports Year 2 and Year 3 weighting (e.g. 40/60). Covers First, Upper Second, Lower Second, and Third.",
+  },
+  "/atar-calculator": {
+    title: "ATAR Calculator — Australian Year 12 Planning Estimate",
+    description:
+      "Estimate an ATAR from scaled subject scores for NSW, Victoria, Queensland, Western Australia, or SA/NT. Covers English requirements, bonus subjects, and VET inclusions. Educational model only.",
+  },
+  "/gcse-grade-calculator": {
+    title: "GCSE Grade Calculator — Percentage to 9–1 England Grade",
+    description:
+      "Convert a percentage mark to the England 9–1 GCSE numeric grade. See the old A*–G letter equivalent, whether it counts as a standard pass (4+), and the strong pass threshold (5+).",
+  },
+  "/cgpa-to-percentage": {
+    title: "CGPA to Percentage Calculator — India & Pakistan Formulas",
+    description:
+      "Convert CGPA to percentage using CBSE ×9.5, Anna University ×10, SPPU formula, or Pakistan HEC §13.1 band minimum. Includes the unofficial ×25 shortcut for comparison.",
+  },
+  "/percentage-to-cgpa": {
+    title: "Percentage to CGPA Calculator — Reverse Conversion",
+    description:
+      "Reverse-convert a percentage mark to an estimated CGPA on India or Pakistan grading scales. Choose CBSE ×9.5, ×10, SPPU, or HEC §13.1 planning band method.",
+  },
+  "/sgpa-to-cgpa": {
+    title: "SGPA to CGPA Calculator — Credit-Weighted Semester Average",
+    description:
+      "Combine semester GPAs (SGPA) and their credit totals into an overall CGPA. Credit-weighted formula works for Indian 10-point and Pakistan HEC 4.0 scales.",
+  },
+  "/cgpa-calculator": {
+    title: "CGPA Calculator — Semester SGPA from Courses & Credits",
+    description:
+      "Calculate one semester's SGPA from individual course grades and credit hours on a 10-point Indian or HEC 4.0 Pakistan scale. Add all semesters with the SGPA to CGPA tool.",
+  },
+  "/cgpa-to-gpa": {
+    title: "CGPA to GPA Converter — India 10-Point to US 4.0",
+    description:
+      "Convert an Indian 10-point CGPA to an approximate US 4.0 GPA for graduate school planning. Shows WEF formula and linear-scale methods. Educational estimate — not a credential evaluation.",
+  },
+  "/mcmaster-gpa-to-us-gpa": {
+    title: "McMaster GPA to US 4.0 Converter — 12-Point Scale",
+    description:
+      "Convert a McMaster University 12-point GPA to a US 4.0 equivalent using McMaster's published letter-grade table. Planning estimate for graduate school applications.",
+  },
+  "/uk-degree-to-us-gpa-reference": {
+    title: "UK Degree Class to US GPA — Approximate Reference Table",
+    description:
+      "See how a UK First, 2:1, 2:2, or Third maps to a US 4.0 GPA for planning purposes. Includes WES context and graduate-school admission guidance. Not an official conversion.",
+  },
   "/au/gpa-calculator": {
     title: "Australia GPA Calculator — UQ 7-Point and Monash 4-Point",
     description:

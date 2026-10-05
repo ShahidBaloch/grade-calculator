@@ -470,6 +470,11 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
         answer:
           "No. School GPA often uses different bonuses. The UC and CSU calculator uses the a-g rules and honors caps those systems publish.",
       },
+      {
+        question: "Does high school GPA affect college admissions?",
+        answer:
+          "Yes, it is one of the most important factors. Most four-year colleges review both unweighted and weighted GPA, and selective schools contextualize it against course rigor. A higher weighted GPA from challenging courses can strengthen an application even if the unweighted figure is similar to peers. Check each college's Common Data Set (Section C) for the GPA profile of admitted students.",
+      },
     ],
   },
   "college-gpa-calculator": {
@@ -501,6 +506,11 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
         question: "What does dean's list or good standing mean here?",
         answer:
           "We show a typical range (about 3.5+ / 2.0+ on a 4.0 scale). Your college catalog is the official rule.",
+      },
+      {
+        question: "How does college GPA affect graduate school admissions?",
+        answer:
+          "Most master's and PhD programs publish a minimum GPA requirement of 3.0 on a 4.0 scale, though competitive programmes average 3.5–3.8 among admitted students. A strong upward GPA trend in upper-division courses can offset a lower overall figure. Graduate admissions also weigh GRE/GMAT, research experience, and letters of recommendation alongside GPA — check each programme's admissions statistics for the full picture.",
       },
     ],
   },
@@ -1212,6 +1222,11 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
         question: "Is this my official UC or CSU GPA?",
         answer:
           "No. This is a planning estimate. Only courses on your school's a-g list count, and UC or CSU calculates the GPA when you apply. Do not include pass/credit grades.",
+      },
+      {
+        question: "What UC GPA do I need to be admitted?",
+        answer:
+          "UC campuses are test-blind and use a holistic review, but published data shows that most admitted UC Berkeley and UCLA students have a weighted UC GPA above 4.15, while less selective UC campuses typically admit students around 3.8–4.0. You can research each campus's Common Data Set for the middle 50% GPA range of admitted freshmen. A strong UC GPA is necessary but not sufficient — UC also evaluates 13 comprehensive review criteria.",
       },
     ],
   },

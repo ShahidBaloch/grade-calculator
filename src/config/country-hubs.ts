@@ -301,6 +301,16 @@ export const countryHubs: CountryHubConfig[] = [
         answer:
           "No. India often uses a 10-point CGPA. US applications usually need a 4.0 GPA estimate — convert carefully and follow each university’s evaluation service.",
       },
+      {
+        question: "What is a good CGPA in Indian universities for placements and higher studies?",
+        answer:
+          "Most Indian companies set a minimum eligibility CGPA of 6.0–7.0 out of 10 for campus placements; competitive tech firms often require 7.5+. For postgraduate admissions abroad, universities typically ask for a 60–70% academic record or a roughly equivalent US 3.0–3.5 GPA estimate. The CGPA-to-GPA converter on this hub can help you plan — confirm the result with your target institution’s credential-evaluation policy.",
+      },
+      {
+        question: "Which grading scale should I use for an IIT, NIT, or state university?",
+        answer:
+          "Each institution publishes its own letter-to-points table. IITs commonly use a 10-point scale with O (Outstanding) = 10, A+ = 9, A = 8, and so on, but cutoffs and quality points vary by campus and programme. NITs and state-affiliated universities may use different band widths. Always use the grade table from your official university academic regulations or mark-sheet — do not assume the illustrative preset on this hub matches your institution exactly.",
+      },
     ],
     gradingScalePath: "/grading-scales/india",
     featuredCalculators: [
