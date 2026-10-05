@@ -38,6 +38,18 @@ export function createPageMetadata({
       description,
       images: [siteConfig.ogImage],
     },
-    robots: noIndex ? { index: false, follow: false } : { index: true, follow: true },
+    robots: noIndex
+      ? { index: false, follow: false }
+      : {
+          index: true,
+          follow: true,
+          googleBot: {
+            index: true,
+            follow: true,
+            "max-snippet": -1,
+            "max-image-preview": "large" as const,
+            "max-video-preview": -1,
+          },
+        },
   };
 }

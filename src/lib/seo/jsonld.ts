@@ -147,11 +147,13 @@ export function articleJsonLd({
   description,
   path,
   dateModified,
+  datePublished,
 }: {
   headline: string;
   description: string;
   path: string;
   dateModified: string;
+  datePublished?: string;
 }) {
   return {
     "@context": "https://schema.org",
@@ -159,6 +161,7 @@ export function articleJsonLd({
     headline,
     description,
     url: absoluteUrl(path),
+    datePublished: datePublished ?? dateModified,
     dateModified,
     author: {
       "@type": "Organization",
