@@ -176,9 +176,9 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
       "Combine New Zealand university terms on the 9-point GPA scale. Use the same grade-point table for every term.",
   },
   "/nz/letter-grade-calculator": {
-    title: "New Zealand Letter Grade Calculator",
+    title: "New Zealand Letter Grade Calculator — 9-Point University Scale",
     description:
-      "Look up a New Zealand university letter grade on the 9-point scale. This is not an NCEA result.",
+      "Look up a New Zealand university letter grade on the 9-point scale (A+ = 9). See the percentage band and GPA equivalent. This is a university grade, not an NCEA result.",
   },
   "/uk/degree-classification-calculator": {
     title: "UK Degree Classification Calculator — First, 2:1, 2:2",
