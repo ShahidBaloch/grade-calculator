@@ -37,6 +37,8 @@ export function CalculatorRoute({
   const geoHub = geoSegment ? countryHubByPath[`/${geoSegment}`] : undefined;
   const description = pageDescription(pagePath, config.description);
   const title = pageTitle(pagePath, config.name);
+  // H1 = pure keyword only (no tagline). Geo pages prefix the country name.
+  const heading = geoHub ? `${geoHub.name} ${config.name}` : config.name;
   const howItWorksSteps = getCalculatorHowItWorks(slug, pagePath);
   const breadcrumbs = breadcrumbHome
     ? [{ name: "Home", href: "/" }]
@@ -70,7 +72,7 @@ export function CalculatorRoute({
       />
       <BreadcrumbJsonLd items={breadcrumbs} />
       <CalculatorLayout
-        title={title}
+        title={heading}
         description={description}
         breadcrumbs={breadcrumbs}
         focus={focus}
