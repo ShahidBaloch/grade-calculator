@@ -324,7 +324,7 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
       {
         question: "What is cumulative GPA?",
         answer:
-          "It is the credit-weighted average of every completed course on your record, not just the current semester.",
+          "It is the credit-weighted average of every completed course on your record, not just the current semester. Each course contributes proportionally to the total based on its credit hours.",
       },
       {
         question: "What if I am a first-semester student?",
@@ -336,6 +336,31 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
         answer:
           "Those numbers are a demo only. Replace them with your transcript totals, or delete them for a first-term calculation.",
       },
+      {
+        question: "How do I calculate cumulative GPA manually?",
+        answer:
+          "Multiply your prior GPA by prior credits to get past quality points. Add this term's quality points (grade points × credits per course, then summed). Divide the total quality points by the total credits. This calculator does every step automatically when you fill in the fields.",
+      },
+      {
+        question: "What cumulative GPA do I need for graduate school?",
+        answer:
+          "Most graduate programs set a minimum between 3.0 and 3.5, but selective programs often have higher medians in practice. Check each program's stated minimum and the average GPA of admitted students in their latest data release, since the floor and the competitive average can differ by 0.3 or more.",
+      },
+      {
+        question: "Does retaking a course change my cumulative GPA?",
+        answer:
+          "Only if your school applies grade replacement or academic renewal. Without that policy, the original grade stays in the calculation and the retake adds new credits and quality points on top. With grade replacement, the old grade is removed from the GPA. Enter your situation under whichever assumption matches your registrar's rules.",
+      },
+      {
+        question: "Is cumulative GPA the same as overall GPA?",
+        answer:
+          "Yes — they refer to the same number: the credit-weighted average of all graded coursework across every term on your record. Some transcripts label it CGPA, others say Overall GPA or Cumulative Average; the calculation is the same.",
+      },
+    ],
+    assumptions: [
+      "Prior GPA and credits come from your official transcript — use those numbers, not estimates.",
+      "Pass/fail, audited, and transfer credits excluded from your institution's GPA should not be entered.",
+      "One term only is added each time; run the result forward through each new semester to keep it current.",
     ],
   },
   "weighted-gpa-calculator": {
@@ -355,6 +380,27 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
         question: "Does every school use the same bonuses?",
         answer: "No. We use common US defaults (+0.5 Honors, +1.0 AP/IB). Check your school's policy.",
       },
+      {
+        question: "Can a weighted GPA be above 4.0?",
+        answer: "Yes. Because AP and IB courses add 1.0 point to the base grade value, an A in an AP class is worth 5.0 on a weighted scale. A student earning all A's in AP/IB courses would have a weighted GPA of 5.0.",
+      },
+      {
+        question: "Do colleges look at weighted or unweighted GPA?",
+        answer: "Most US colleges recalculate your GPA on their own unweighted scale during admissions. They still see your weighted GPA on your transcript, but they compare applicants on a level scale. High course rigor (AP, IB) matters even after recalculation.",
+      },
+      {
+        question: "How do I know if my school uses weighted GPA?",
+        answer: "Check your transcript or school profile. If you see both a 4.0-scale GPA and a higher GPA (sometimes on a 5.0 scale), your school reports weighted GPA. If there is only one number and it does not go above 4.0, it is likely unweighted.",
+      },
+      {
+        question: "Should I use weighted or unweighted GPA for college applications?",
+        answer: "Report both when the form asks — many Common App questions distinguish between the two. If only one is requested, most schools want unweighted, but include your course rigor details (AP/IB counts) in the profile section so admissions officers can see context.",
+      },
+    ],
+    assumptions: [
+      "Honors bonus is +0.5 and AP/IB bonus is +1.0 by default — adjust if your school uses different amounts.",
+      "Bonuses cap the quality points per course at 5.0 on a standard weighted scale.",
+      "Pass/fail or audited courses should not be entered as they do not carry letter-grade points.",
     ],
   },
   "raise-gpa-calculator": {
@@ -369,12 +415,29 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
     faqs: [
       {
         question: "How do I raise my GPA?",
-        answer: "Earn higher grades in remaining courses. This calculator shows exactly what GPA you need.",
+        answer: "Earn higher grades in remaining courses. This calculator shows exactly what GPA you need in those future terms to reach your target. More remaining credits give you more leverage because each new grade carries more weight.",
       },
       {
         question: "What if it says impossible?",
-        answer: "Even straight A's won't reach your target. Try a lower goal or more credit hours.",
+        answer: "Even straight A's won't reach your target with the credits you entered. Lower your target GPA, plan more future credit hours, or explore grade replacement policies at your school. Some institutions allow retaking courses and replacing the old grade.",
       },
+      {
+        question: "How many credits do I need to significantly raise my GPA?",
+        answer: "The more credits already on your transcript, the harder a single term can move the needle. At 30 credits completed, one 15-credit semester at 4.0 can shift a 2.5 GPA to roughly 2.83. At 90 credits, the same semester moves it by less than 0.2. Use the calculator to plan ahead — the answer is unique to your current total.",
+      },
+      {
+        question: "Does retaking a course improve my GPA?",
+        answer: "It depends on your school's policy. Some institutions replace the original grade in the GPA calculation (grade forgiveness). Others average both attempts. Check your registrar's academic renewal or grade replacement rules before retaking a course solely to improve GPA.",
+      },
+      {
+        question: "How long does it take to raise a GPA from 2.5 to 3.0?",
+        answer: "Enter your current credits and target in this calculator for a precise answer. As a rough guide, going from 2.5 to 3.0 with 60 credits already completed requires earning about a 3.5 in 40 additional credit hours — roughly 3 full-time semesters of strong performance.",
+      },
+    ],
+    assumptions: [
+      "GPA is on a 4.0 scale — enter 4.0 as the maximum possible future GPA.",
+      "Grade replacement or academic renewal policies are not modeled here; check your registrar.",
+      "Future credits are letter-graded credits that count toward your GPA.",
     ],
   },
   "high-school-gpa-calculator": {
@@ -459,6 +522,31 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
         answer:
           "Not on every scale. US 10-point letter bands may call 85% a B+, and UK or Australian tables use different cutoffs. Change the scale before you convert.",
       },
+      {
+        question: "What percentage is an A?",
+        answer:
+          "On the common US 4.0 scale, A is 93–96% and A+ is 97–100%. A− is typically 90–92%. Your school may draw the line slightly differently — a 92% could be an A− or an A depending on the exact cutoff.",
+      },
+      {
+        question: "What percentage is a passing grade?",
+        answer:
+          "In most US high schools and colleges, 60% is the minimum passing grade (D or D−). Some institutions require 70% for a passing grade in certain programs. Professional or graduate courses may set higher minimums — check your syllabus or catalog.",
+      },
+      {
+        question: "What is a 70% letter grade?",
+        answer:
+          "On the standard US scale, 70–72% is typically a C− and 73–76% is a C. On a 10-point scale (some colleges), 70–79% is a C. The converter shows the letter and GPA equivalent for the scale you select.",
+      },
+      {
+        question: "How is percentage different from a letter grade?",
+        answer:
+          "A percentage is an exact numerical score out of 100. A letter grade is a band that covers a range of percentages — B covers several percentage points, not just one number. Converting from percentage to letter collapses that range into a single label and loses precision, which is why exact percentage matters for grade point calculations.",
+      },
+    ],
+    assumptions: [
+      "Scores are expressed as a percentage out of 100, not raw points on a different scale.",
+      "Band boundaries are from the selected grading scale — switch scales for non-US systems.",
+      "Plus and minus grades are included on scales that use them; plain A/B/C scales group more scores into each band.",
     ],
   },
   "letter-grade-calculator": {
@@ -479,6 +567,31 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
         answer:
           "Weighted averages need a single number. We use the midpoint of the letter band, then still display the full range underneath.",
       },
+      {
+        question: "What is a passing letter grade?",
+        answer:
+          "In most US schools, D (60–66%) is the lowest passing grade for general credit. However, many majors, programs, and prerequisite courses require a C (73%) or C− (70%) to count toward the degree. Check your degree requirements before assuming a D passes.",
+      },
+      {
+        question: "Does a D count as passing in college?",
+        answer:
+          "A D earns credit toward graduation at many US colleges but usually does not satisfy a core requirement or major prerequisite. A grade of F fails the course entirely. Some graduate schools require a B− or better in every course. Confirm with your registrar or academic advisor.",
+      },
+      {
+        question: "How do plus and minus grades affect GPA?",
+        answer:
+          "On the common US scale, a B+ is 3.3 quality points, a B is 3.0, and a B− is 2.7. The plus or minus shifts the GPA value by about 0.3 per notch. Over a full semester, trading a B for a B+ in a 3-credit course raises the semester GPA by 0.1 points.",
+      },
+      {
+        question: "What letter grade is a 2.0 GPA?",
+        answer:
+          "A 2.0 GPA corresponds to a C grade on the standard US 4.0 scale, which typically covers the 73–76% range. Many schools require at least a 2.0 cumulative GPA to remain in good academic standing.",
+      },
+    ],
+    assumptions: [
+      "Grade labels entered match those on the selected scale (A, B+, HD, First, etc.).",
+      "Midpoint values are averages of each band's boundaries — useful for estimation, not for official transcript calculations.",
+      "Scales with no plus/minus collapse A−, A, A+ into a single A band.",
     ],
   },
   "canvas-grade-calculator": {
@@ -768,13 +881,33 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
       {
         question: "What is the difference between SGPA and CGPA?",
         answer:
-          "SGPA is one semester. CGPA is the credit-weighted average of all semester SGPAs completed so far.",
+          "SGPA is one semester's grade point average on your institution's scale. CGPA is the credit-weighted average of all semester SGPAs across every term you have completed so far.",
       },
       {
         question: "Do all semesters need the same credits?",
         answer:
-          "No. Enter the real credit total from each semester marksheet so heavier terms count more.",
+          "No. Enter the real credit total from each semester marksheet so heavier terms count more. A semester with 24 credits influences the CGPA more than one with 18.",
       },
+      {
+        question: "Why is simply averaging all SGPAs wrong?",
+        answer:
+          "A simple mean treats all semesters equally regardless of how many credits they carried. Credit-weighting gives heavier semesters their correct share. If semesters differ by even a few credits, the simple average and the credit-weighted CGPA will diverge.",
+      },
+      {
+        question: "What is a good CGPA in Indian universities?",
+        answer:
+          "On a 10-point scale, most IITs and NITs consider 8.0+ (roughly equivalent to 76–80%+) a strong performance. A CGPA above 7.5 is generally competitive for campus placements; many PSU (public sector unit) recruitment drives set a 6.5 or 7.0 CGPA cutoff. Your campus placement cell's data will be the most relevant benchmark.",
+      },
+      {
+        question: "How do I include a failed or backlogs semester in CGPA?",
+        answer:
+          "Enter that semester's SGPA as reported on your marksheet — most universities print an SGPA even for terms with arrears, using 0 quality points for the failed course. If your university excludes failed courses from the semester average and recalculates once you pass, use the revised SGPA from the updated marksheet.",
+      },
+    ],
+    assumptions: [
+      "SGPA values come from official marksheets, not re-estimated from individual course grades.",
+      "Credits entered are the full term credit load, including any failed courses unless your university explicitly excludes them from SGPA.",
+      "All semesters are on the same grading scale — do not mix a 10-point SGPA with a 4-point semester.",
     ],
   },
   "cgpa-calculator": {
@@ -797,6 +930,26 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
         answer:
           "Select Pakistan HEC 4.0 (or open the Pakistan hub) so letter bands match HEC §13.1 fractionalized grading.",
       },
+      {
+        question: "What happens to my CGPA if I fail a course?",
+        answer:
+          "A failed course typically earns 0 quality points. Those credits are still in the denominator (or removed, depending on your university’s policy), so the SGPA drops sharply. Once you pass the course on retake, the new grade replaces — or averages with — the fail, depending on your institution’s rules.",
+      },
+      {
+        question: "How do I calculate CGPA for multiple semesters?",
+        answer:
+          "Calculate the SGPA for each semester here, then take all SGPAs and their credit totals to the SGPA to CGPA calculator. It weights each semester by its credit load to give you the overall CGPA.",
+      },
+      {
+        question: "What does O grade mean on the India 10-point scale?",
+        answer:
+          "O stands for Outstanding and corresponds to 10 quality points — the highest grade on the India 10-point CGPA scale used by many IITs, NITs, and state universities. A+ is 9 points and A is 8 points in the most common variant, though exact labels and cutoffs can differ by institution.",
+      },
+    ],
+    assumptions: [
+      "One semester at a time — enter all courses in the current term before reading SGPA.",
+      "Grade points per letter follow the India 10-point or HEC 4.0 scale selected.",
+      "Credits are the full load for each course; enter the value printed on your timetable or marksheet.",
     ],
   },
   "cgpa-to-gpa": {
@@ -811,13 +964,33 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
       {
         question: "Is there an official 10-point to 4.0 conversion?",
         answer:
-          "No single official table. Universities and evaluation services use their own. Treat this as a planning estimate.",
+          "No single official table exists. US universities and credential evaluators (WES, ECE, Span Tran) each apply their own method. Treat this tool's output as a rough planning figure, not a number to enter on applications unless the form says to self-convert.",
       },
       {
         question: "Should I use this for Pakistan HEC CGPA?",
         answer:
-          "HEC is already on a 4.0 idea. This converter is for Indian 10-point CGPA mapping to US 4.0.",
+          "HEC CGPA is already on a 4.0-style scale, not a 10-point scale. This converter targets Indian 10-point CGPA to US 4.0. For Pakistan HEC CGPA, compare your GPA directly to the US 4.0 standard, keeping in mind that band cutoffs differ slightly.",
       },
+      {
+        question: "Does US graduate school use Indian CGPA directly or convert it?",
+        answer:
+          "Most US graduate programs ask you to report your GPA as it appears on your transcript. They then evaluate it in context — the institution, scale, and class rank all matter. If the program requests a 4.0-scale equivalent, use the credential evaluator service they specify rather than a self-computed conversion.",
+      },
+      {
+        question: "How does WES evaluate Indian CGPA?",
+        answer:
+          "WES uses its own institution-specific grade conversion tables rather than a blanket ×0.4 formula. The result depends on your specific university's grading norms. The estimate from this calculator is for personal planning only and will not match a WES evaluation for the same CGPA.",
+      },
+      {
+        question: "Is CGPA the same as cumulative GPA in the US?",
+        answer:
+          "The abbreviation overlaps but the scales differ. Indian CGPA is on a 10-point scale. US cumulative GPA is on a 4.0 scale. They measure the same concept — a running weighted average — but the numbers are not interchangeable without conversion.",
+      },
+    ],
+    assumptions: [
+      "Your CGPA is on a 10-point Indian-style scale — Pakistan HEC CGPA is already 4.0-based and should not be entered here.",
+      "The ×0.4 linear method and the percentage bridge are planning estimates, not official evaluation results.",
+      "For WES or other credential evaluations, contact the service directly.",
     ],
   },
   "mcmaster-gpa-to-us-gpa": {

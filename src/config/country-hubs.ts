@@ -246,6 +246,21 @@ export const countryHubs: CountryHubConfig[] = [
         answer:
           "No. NCEA credits and endorsements are for secondary school. University GPA on this hub uses letter grades and a 9-point scale.",
       },
+      {
+        question: "What percentage is an A on the New Zealand university scale?",
+        answer:
+          "On most New Zealand universities' 9-point GPA scale, an A+ (9 points) corresponds to 90–100%, A (8 points) to 85–89%, and A− (7 points) to 80–84%. Exact percentage bands can differ by institution — check your faculty handbook for the cutoffs your registrar uses.",
+      },
+      {
+        question: "Is the NZ 9-point GPA different from the Australian 7-point GPA?",
+        answer:
+          "Yes. New Zealand universities often use a 9-point scale where A+ equals 9. Australian universities such as UQ use a 7-point scale where 7 is the highest. The two systems are not interchangeable; a 7.0 New Zealand GPA is not the same performance band as a 7.0 UQ GPA.",
+      },
+      {
+        question: "How do I convert my NZ GPA to a US 4.0 equivalent for applications?",
+        answer:
+          "There is no official national conversion. Some US graduate programs ask you to report your GPA as it appears on your NZ transcript and evaluate it in context. If a program requires a 4.0-scale equivalent, use the credential evaluator service they name rather than a self-computed estimate.",
+      },
     ],
     gradingScalePath: "/grading-scales/new-zealand",
     featuredCalculators: [
@@ -331,7 +346,22 @@ export const countryHubs: CountryHubConfig[] = [
       {
         question: "Is Pakistan GPA the same as US GPA?",
         answer:
-          "Both often use a 4.0 idea, but percentage cutoffs and letter bands differ. Prefer your university’s official conversion for applications abroad.",
+          "Both often use a 4.0 idea, but percentage cutoffs and letter bands differ. For example, HEC’s B band (2.67–3.00) maps to 71–74%, while many US schools place B at 83–86%. Prefer your university’s official conversion for applications abroad.",
+      },
+      {
+        question: "What is a good CGPA in Pakistan for employment?",
+        answer:
+          "Many Pakistani employers and PSU (public sector) job advertisements set a minimum CGPA of 2.5 on a 4.0 scale. Competitive private-sector roles and graduate program admissions typically look for 3.0 or higher. Check the specific organisation’s eligibility criteria, as cutoffs vary.",
+      },
+      {
+        question: "How is HEC 4.0 scale different from the US 4.0 scale?",
+        answer:
+          "Both scales top out at 4.0, but the letter-to-percentage bands differ. HEC §13.1 places B at 71–74%, while common US scales place B at 83–86%. Do not compare raw GPA numbers between the two systems without acknowledging this difference in percentage cutoffs.",
+      },
+      {
+        question: "Do I need to convert CGPA to percentage for a Pakistan visa or job application?",
+        answer:
+          "HEC has notified that it stopped converting CGPA into percentage, so the figure on your official transcript or degree is what you should report. If an employer or consulate specifically asks for a percentage, use the band minimum from HEC §13.1 as a reference, not the ×25 shortcut, and note that it is an approximation.",
       },
     ],
     gradingScalePath: "/grading-scales/pakistan",

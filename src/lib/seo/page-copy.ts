@@ -100,6 +100,31 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
     description:
       "Calculate a semester GPA on the Pakistan HEC-style scale. Confirm the grade-point table in your university prospectus.",
   },
+  "/pk/cumulative-gpa-calculator": {
+    title: "Pakistan Cumulative GPA Calculator — HEC 4.0 Scale",
+    description:
+      "Combine Pakistani university semesters into an overall CGPA on the HEC 4.0 letter scale. Enter prior CGPA and credits, then add this term's courses.",
+  },
+  "/pk/cgpa-to-percentage": {
+    title: "Pakistan CGPA to Percentage Calculator — HEC §13.1",
+    description:
+      "Convert HEC CGPA to percentage using the §13.1 band minimum table. Includes the ×25 shortcut for comparison. HEC has notified it stopped converting CGPA into percentage — use your transcript value for applications.",
+  },
+  "/pk/percentage-to-cgpa": {
+    title: "Pakistan Percentage to CGPA Calculator — HEC Scale",
+    description:
+      "Reverse-convert a percentage mark to an estimated HEC CGPA band. Choose the §13.1 band planning method or the unofficial ×25 shortcut. Your transcript percentage is the authoritative figure.",
+  },
+  "/pk/cgpa-calculator": {
+    title: "Pakistan Semester CGPA Calculator — HEC Grading",
+    description:
+      "Calculate one semester's SGPA on the Pakistan HEC 4.0 letter scale (A+ through F). Enter each course with its letter grade and credit hours, then roll semesters into overall CGPA with the SGPA to CGPA tool.",
+  },
+  "/pk/sgpa-to-cgpa": {
+    title: "Pakistan SGPA to CGPA Calculator — HEC Semester Formula",
+    description:
+      "Combine HEC semester GPAs (SGPA) into an overall CGPA. Enter each semester's SGPA and credit total. The credit-weighted result is your Pakistan CGPA.",
+  },
 };
 
 export function pageTitle(path: string, fallback: string): string {
