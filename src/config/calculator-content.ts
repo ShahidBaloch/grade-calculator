@@ -605,18 +605,38 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
     faqs: [
       {
         question: "How does Canvas calculate grades?",
-        answer: "Canvas weights assignment groups. Each group's average is multiplied by its weight percentage.",
+        answer: "Canvas weights assignment groups. Each group's average is multiplied by its weight percentage, then those products are summed. If groups do not total 100%, Canvas normalizes relative to the entered weights.",
       },
       {
         question: "Canvas says my groups do not add to 100%.",
         answer:
-          "Canvas can hide unused groups or drop unposted assignments. We still compute a weighted mean and warn if your entered weights are not 100%, so you can match what the LMS is actually using.",
+          "Canvas can hide unused groups or drop unposted assignments, making visible weights appear under 100%. We still compute a weighted mean using the weights you enter and warn when they are not 100%, so you can match what the LMS is actually counting.",
       },
       {
         question: "What about Blackboard, Moodle, or Google Classroom?",
         answer:
           "Blackboard and Moodle usually use weighted categories too — enter them like assignment groups, or use the weighted grade calculator. Google Classroom is often points-based; see our LMS course grades guide for which tool fits each platform.",
       },
+      {
+        question: "How do I find my Canvas assignment group weights?",
+        answer:
+          "In Canvas, go to the course Grades page and look for the group weights listed under each category header, or ask your instructor to share the syllabus breakdown. Alternatively, your instructor may publish them on the syllabus page or in the course settings under Assignment Groups.",
+      },
+      {
+        question: "Why does my Canvas total differ from what this calculator shows?",
+        answer:
+          "Canvas may apply rules this tool cannot see: dropping the lowest score, excluding unposted or excused assignments, or using a grading scheme that rounds differently. Enter the group averages Canvas already shows (not individual assignment scores) to get the closest match.",
+      },
+      {
+        question: "Can I use this to calculate my Canvas grade before the final exam?",
+        answer:
+          "Yes. Enter all completed group averages with their weights, then set the final exam group to the score you expect to earn. The overall grade updates to show your projected course total, which is the same calculation Canvas will perform once the final is graded.",
+      },
+    ],
+    assumptions: [
+      "Enter the group average score for each assignment group, not individual assignment scores.",
+      "Weights are the percentages published in Canvas — if they do not add to 100%, a warning appears.",
+      "Drop-lowest, late penalties, and excused assignments are not modeled here — use Canvas for the official figure.",
     ],
   },
   "eoc-grade-calculator": {
@@ -643,6 +663,16 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
         question: "How much is the EOC worth?",
         answer:
           "Florida can require 30% for certain EOC courses under current statute. Texas STAAR EOC results are not mandated statewide as a fixed course percentage — confirm your district policy. Other states set their own rules.",
+      },
+      {
+        question: "Does the EOC count toward my final course grade or just GPA?",
+        answer:
+          "The EOC is factored into the course grade itself — it replaces a portion of what your classwork average would otherwise contribute. Once the course grade is set, that letter maps to GPA quality points just like any other course. So an EOC can move both your report-card grade and your GPA.",
+      },
+      {
+        question: "Can I retake an EOC exam to improve my course grade?",
+        answer:
+          "Retake policies are set by each state and district. In Florida, students who do not pass required EOC exams may have retake opportunities; the retake score then re-enters the course grade formula. Check with your school counselor for the specific retake schedule and whether an improved score replaces or averages with the original.",
       },
     ],
     primarySources: [
@@ -687,6 +717,16 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
         question: "Is this an official classification?",
         answer:
           "No. Boards apply discretion, condonement, and credit rules we cannot see. Use this to plan, then confirm with your exam board.",
+      },
+      {
+        question: "What is a borderline degree class and how are borderline cases treated?",
+        answer:
+          "A borderline case is typically within 2–3 marks of the next class boundary — for example, 68–69% near the First threshold. Most institutions convene exam boards that can apply discretion, consider module-level profiles, or award borderline candidates the higher class if a majority of credits already sit in it. Rules vary, so check your faculty handbook.",
+      },
+      {
+        question: "Does a UK degree classification convert to a US GPA?",
+        answer:
+          "There is no universally agreed conversion. A common informal mapping is First = 4.0, 2:1 = 3.3–3.7, 2:2 = 3.0–3.3, but US graduate schools and employers often evaluate UK transcripts contextually. WES and other credential evaluators produce their own equivalency letters — use those for official applications.",
       },
     ],
   },
@@ -791,6 +831,16 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
         answer:
           "GCSEs are secondary qualifications. University results use First / 2:1 / 2:2 / Third. Open the degree classification calculator for those marks.",
       },
+      {
+        question: "What percentage is each GCSE grade 1–9?",
+        answer:
+          "Official boundaries vary by subject and exam series, but indicative planning bands are: Grade 9 ≈ 90%+, Grade 8 ≈ 80–89%, Grade 7 ≈ 70–79%, Grade 6 ≈ 60–69%, Grade 5 ≈ 50–59%, Grade 4 ≈ 40–49%, Grade 3 ≈ 30–39%, Grade 2 ≈ 20–29%, Grade 1 ≈ below 20%. Always confirm with the awarding body's published boundaries for your actual papers.",
+      },
+      {
+        question: "Do GCSE grades affect university or A-level admissions?",
+        answer:
+          "Yes. Many sixth-form colleges require at least grade 4 (sometimes 5) in English Language and Maths for entry to A-level courses. Universities rarely set GCSE conditions directly for undergraduate places, but competitive courses such as Medicine, Dentistry, and Law at some institutions specify minimum grades 6 or 7 in relevant subjects. Check each institution's entry requirements.",
+      },
     ],
   },
   "cgpa-to-percentage": {
@@ -833,6 +883,16 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
         answer:
           "No. These are educational estimates for planning. Applications abroad may require WES or school-specific evaluation.",
       },
+      {
+        question: "Why do different Indian universities use different CGPA-to-percentage multipliers?",
+        answer:
+          "India has no single national formula. Each university or board sets its own grading scale and conversion rule. CBSE historically used ×9.5 on its class X certificates; VIT, some IITs, and NITs use ×10; SPPU Mumbai commonly uses (CGPA − 0.75) × 10. The correct multiplier is whichever appears on your marksheet or in your institution's academic regulations — using the wrong one can misrepresent your academic record.",
+      },
+      {
+        question: "Can I use a calculated percentage in place of my transcript percentage?",
+        answer:
+          "No. A calculated estimate is for planning only. Official applications — job portals, university admissions, visa documents — require the percentage that appears on your marksheet or transcript, or a credential evaluation letter from a body such as WES. Self-calculated conversions are not accepted as official documentation.",
+      },
     ],
   },
   "percentage-to-cgpa": {
@@ -866,6 +926,26 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
         answer:
           "CBSE historically published CGPA with ×9.5 on some certificates. That multiplier is not a UGC national rule. Newer marksheets may show percentages directly — follow what your board printed.",
       },
+      {
+        question: "What percentage converts to 8.0 CGPA on the India ×9.5 rule?",
+        answer:
+          "Using the CBSE ×9.5 formula: CGPA = 76 ÷ 9.5 = 8.0. So 76% maps to approximately 8.0 CGPA on that scale. For a ×10 institution, 76 ÷ 10 = 7.6 CGPA. Always use the multiplier your university or board publishes, not a generic estimate.",
+      },
+      {
+        question: "What percentage equals 3.0 CGPA in Pakistan?",
+        answer:
+          "Under HEC §13.1, the B grade band (2.67–3.00 CGPA) maps to 71–74%. A 3.00 CGPA corresponds to the minimum of that band, which is 71%. The ×25 shortcut would give 75%, which is higher than the §13.1 table value for 3.00.",
+      },
+      {
+        question: "Is there a single formula for converting percentage to CGPA for all Indian universities?",
+        answer:
+          "No. CBSE, UGC, Anna University, VIT, IITs, NITs, and SPPU Pune each use different multipliers or formulas. CBSE used ×9.5 on some certificates; Anna University and some IITs/NITs use ×10; SPPU uses (CGPA − 0.75) × 10. The only reliable source is the document your board or university issued with your marks.",
+      },
+    ],
+    assumptions: [
+      "Percentage must be the final exam or transcript percentage out of 100.",
+      "Select the formula that matches your specific institution — mixing formulas gives incorrect CGPA.",
+      "Pakistan HEC §13.1 planning values are the band top; the exact CGPA within a band depends on individual course grades.",
     ],
   },
   "sgpa-to-cgpa": {
@@ -1016,8 +1096,28 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
       {
         question: "Is this the same as converting Canadian percentage to US GPA?",
         answer:
-          "No. This tool is only for McMaster's 12-point GPA scale. Other Canadian universities use different scales.",
+          "No. This tool is only for McMaster's 12-point GPA scale. Other Canadian universities use different scales — UBC, Waterloo, and U of T each publish their own letter-to-GPA tables. Use the general Canada GPA calculator for other institutions.",
       },
+      {
+        question: "What is a McMaster 12-point GPA equivalent to on a US 4.0 scale?",
+        answer:
+          "Based on McMaster's published lookup, a 12.0 maps to 4.0, an 11 maps to approximately 3.9, a 10 maps to 3.7, a 9 maps to 3.5, and so on. The table is non-linear, so even closely spaced McMaster values can differ meaningfully in the US equivalent. Confirm directly with McMaster Registrar for the most current mapping.",
+      },
+      {
+        question: "Should I report my McMaster GPA as-is on US graduate applications?",
+        answer:
+          "Most US programs ask you to enter the GPA as it appears on your transcript. If the form asks for a 4.0-scale equivalent, use McMaster's published table rather than a self-computed conversion, and note the scale (12-point) in any supporting documents or notes field.",
+      },
+      {
+        question: "Can I use this tool for any other Canadian university?",
+        answer:
+          "No. McMaster uses a unique 12-point scale. Most other Canadian universities use percentage grades or a 4.0/4.33 scale that requires different conversion logic. For a general Canada GPA estimate, use the Canada GPA calculator on the Canada hub.",
+      },
+    ],
+    assumptions: [
+      "GPA is McMaster's 12-point scale — do not enter a percentage or a different university's GPA.",
+      "The US 4.0 values are planning estimates based on McMaster's published equivalency table; the receiving institution makes the final evaluation.",
+      "Confirm the table with McMaster Registrar for official or application use, as the mapping can be updated.",
     ],
   },
   "uk-degree-to-us-gpa-reference": {
@@ -1043,13 +1143,33 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
       {
         question: "Should I enter 3.7 on my US application for a 2:1?",
         answer:
-          "Usually no. Report your classification and marks as on your transcript. Stanford Graduate Admissions explicitly says not to convert to a 4.0 scale when the transcript does not include GPA.",
+          "Usually no. Report your classification and marks as on your transcript. Stanford Graduate Admissions explicitly says not to convert to a 4.0 scale when the transcript does not include GPA. If a form requires a 4.0 entry and your degree does not use GPA, write the classification and percentage, or contact the admissions office for guidance.",
       },
       {
         question: "Is this the same as a WES evaluation?",
         answer:
-          "No. WES and other credential evaluators apply their own methodologies. This page shows commonly cited planning numbers only.",
+          "No. WES and other credential evaluators apply their own institution-specific methodologies that consider the year-level distribution of marks, not just the final classification. This page shows commonly cited planning comparisons only.",
       },
+      {
+        question: "What is a First class degree equivalent to in the US?",
+        answer:
+          "Informally, a UK First (70%+) is often compared to a high US GPA (roughly 3.7–4.0 range on informal charts). However, this comparison is not officially endorsed. Most US graduate programs evaluate UK applicants on the degree classification, module marks, and the institution's reputation rather than converting to a 4.0 GPA.",
+      },
+      {
+        question: "Does a 2:2 disqualify me from US master's programs?",
+        answer:
+          "Not automatically. A Lower Second (2:2) is the minimum UK honours degree and is considered a completed undergraduate degree. US programs assess the full application — research experience, statement of purpose, references, and GRE/test scores often matter as much as the degree class. Some programmes set a 2:1 minimum, but others accept strong 2:2 candidates with compensating strengths.",
+      },
+      {
+        question: "How do US schools read UK percentage marks vs degree class?",
+        answer:
+          "Many US admissions offices are familiar with UK classifications but less so with raw percentage marks (e.g., knowing that 68% is a high 2:1 context). Including your transcript marks alongside the classification helps reviewers who may not know that a UK 70% is not comparable to a US 70%.",
+      },
+    ],
+    assumptions: [
+      "UK degree classifications follow standard QAA bands: First 70%+, 2:1 60–69%, 2:2 50–59%, Third 40–49%.",
+      "Illustrative US 4.0 comparisons are for planning reference only — not for self-reporting on applications.",
+      "Individual universities may apply borderline decisions, condonement, or credit-weighted averages that change the final classification from a simple percentage average.",
     ],
   },
   "uc-gpa-calculator": {
@@ -1117,8 +1237,28 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
       {
         question: "Do plus and minus grades count?",
         answer:
-          "On the common US scale, A- is 3.7 and B+ is 3.3. If your school ignores plus and minus, enter A, B, C, D, or F only.",
+          "On the common US scale, A− is 3.7 and B+ is 3.3. If your school ignores plus and minus, enter A, B, C, D, or F only.",
       },
+      {
+        question: "Does middle school GPA matter for high school admissions?",
+        answer:
+          "For most public high schools, middle school GPA has little formal role in placement. However, some competitive magnet programs, honors tracks, and selective private high schools do look at 7th and 8th grade GPAs and grades. It is also the foundation for habits that carry into high school, where GPA affects college admissions.",
+      },
+      {
+        question: "What is a good GPA in middle school?",
+        answer:
+          "A 3.0 or higher (B average) is generally considered solid. A 3.5 or above (between B+ and A−) puts a student on track for honors or advanced classes in high school. The most important factor is whether grades reflect genuine understanding, since middle school content builds directly into high school courses.",
+      },
+      {
+        question: "How is middle school GPA different from high school GPA?",
+        answer:
+          "Middle school GPA typically treats all classes equally with no credit hours and no Honors or AP bonuses. High school GPA often uses credit hours (a 4-credit class counts more than a 1-credit elective) and may add weighted bonus points for advanced courses. This calculator uses the simpler equal-weight model appropriate for middle school.",
+      },
+    ],
+    assumptions: [
+      "All classes count equally — there is no credit-hour weighting in middle school GPA.",
+      "Electives, PE, and study hall are included only if your school counts them in the GPA; omit them otherwise.",
+      "Plus and minus grades use the US 4.0 scale sub-divisions (A− = 3.7, B+ = 3.3); toggle them off if your school uses only whole letters.",
     ],
   },
 };
