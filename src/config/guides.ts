@@ -582,6 +582,16 @@ export const guides: GuideConfig[] = [
         answer:
           "Admissions readers usually prefer a B in AP to an easy A, but it depends on the rest of the schedule. Run both GPAs before you drop a course.",
       },
+      {
+        question: "Do colleges see both weighted and unweighted GPA?",
+        answer:
+          "Yes. Most colleges recalculate your GPA on their own scale when they evaluate your application, which is why a strong course schedule matters as much as the GPA number itself. They compare you to other applicants from your school, so context — class rank, school rigor, and grade distribution — is as important as the weighted or unweighted figure.",
+      },
+      {
+        question: "Does unweighted GPA cap at 4.0 for every school?",
+        answer:
+          "For most US high schools, yes — 4.0 is the ceiling for an unweighted scale. However, some districts use a 4.33 scale where A+ earns 4.33 quality points, and a few Canadian universities also use 4.33 caps. Check your school's grading policy to confirm the maximum quality points assigned to an A+.",
+      },
     ],
   },
   {
@@ -627,6 +637,16 @@ export const guides: GuideConfig[] = [
         question: "Can I raise a 3.2 to a 3.5 in one semester?",
         answer:
           "Only if you have few prior credits or a large remaining load. Plug your numbers into the raise GPA calculator instead of guessing.",
+      },
+      {
+        question: "Does grade replacement help raise GPA?",
+        answer:
+          "Yes, if your school offers it. Grade replacement policies let you retake a course and have the new grade replace the old one in the GPA calculation, so the failed or low grade no longer drags the average down. Policies vary widely: some schools average the two attempts, others only replace up to a certain number of credits, and many graduate programmes do not offer it at all. Check your academic regulations before repeating a course for this purpose.",
+      },
+      {
+        question: "What GPA do I need for academic probation or dismissal?",
+        answer:
+          "Most US universities place students on academic probation when their cumulative GPA falls below 2.0, and may dismiss after a second consecutive semester below that threshold. Some programmes (nursing, engineering, education) set a higher minimum — often 2.5 or 3.0 — for continuation. Check your school's academic standards policy in the student handbook for the exact terms.",
       },
     ],
   },
@@ -677,6 +697,16 @@ export const guides: GuideConfig[] = [
         question: "What percentage is a B?",
         answer:
           "On US Standard, B is typically 83–86%. Your school may start B at 80% or 84%.",
+      },
+      {
+        question: "Why does the same letter grade mean different percentages at different schools?",
+        answer:
+          "There is no single national standard for letter-grade cutoffs in the US. Each school, district, or college sets its own policy. One school might award an A for scores from 90–100%, while another starts A at 93%. This is why two students with the same GPA may have earned quite different percentage averages, and why colleges recalculate GPA on their own scale rather than accepting the transcript number at face value.",
+      },
+      {
+        question: "Is a D a passing grade in college?",
+        answer:
+          "In most US colleges, a D (60–69%) is technically passing and earns credit toward graduation, but many majors and programmes require a C or better in core courses. Graduate programmes almost always require B or better. A D may also put you on academic probation if it pulls your cumulative GPA below the minimum required for good standing.",
       },
     ],
   },
@@ -736,6 +766,16 @@ export const guides: GuideConfig[] = [
         question: "Should I study if I already have an A locked?",
         answer:
           "Check whether the syllabus has a minimum final or a curve. If both are safe, a light review is enough.",
+      },
+      {
+        question: "How much can a final exam raise or lower my grade?",
+        answer:
+          "It depends entirely on how much the final is worth. A final worth 40% of the course grade can shift your overall grade by up to 40 percentage points — but only if you score 0% or 100%. A more realistic swing is 10–20 points. Use the final grade calculator to find the exact score you need based on your current average and the final's weight.",
+      },
+      {
+        question: "What if I need a score above 100% to pass?",
+        answer:
+          "If the calculator shows you need more than 100% on the final to reach your target grade, the target is mathematically out of reach given the remaining weight. Your options are to lower the target (aim for the next grade down), speak to your instructor about extra credit or an incomplete, or accept the outcome and plan to retake the course if necessary.",
       },
     ],
   },

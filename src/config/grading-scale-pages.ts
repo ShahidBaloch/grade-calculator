@@ -136,7 +136,7 @@ export const gradingScalePages: GradingScalePageConfig[] = [
     scaleId: "nz-nine-point",
     title: "New Zealand GPA Scale (9.0)",
     description:
-      "New Zealand university grading bands with percentage ranges and 9-point GPA conversion.",
+      "New Zealand university letter grades with percentage ranges and 9-point GPA values. A+ equals 9.0. Not an NCEA secondary-school result.",
     keywords: ["nz grading scale", "new zealand gpa", "9 point gpa scale"],
     intro:
       "New Zealand universities commonly use a 9-point GPA scale. Letter grades map to percentage bands similar to other Commonwealth systems.",
@@ -168,7 +168,7 @@ export const gradingScalePages: GradingScalePageConfig[] = [
     scaleId: "in-ten-point",
     title: "India 10-Point CGPA Scale",
     description:
-      "India university 10-point CGPA letter bands (O–F) with percentage ranges used in our calculators.",
+      "Illustrative India university 10-point CGPA letter bands (O through F) with percentage ranges. IIT, NIT, and state university cutoffs vary — verify against your institution's table.",
     keywords: ["india cgpa scale", "10 point cgpa", "ugc grading scale", "cbse cgpa"],
     intro:
       "This chart is an illustrative 10-point university preset (O–F) for planning. Letter cutoffs vary by campus. CBSE board marks and university CGPA are different systems. CBSE historically used ×9.5 on some certificates; UGC does not publish one national ×9.5 rule.",
@@ -191,6 +191,7 @@ export const gradingScalePages: GradingScalePageConfig[] = [
     notes: [
       "The grade-point column is HEC’s published range, not a single quality point. A calculator that needs one number uses the top of that range as a planning figure.",
       "HEC notified that it stopped converting CGPA into percentage. The ×25 shortcut (CGPA × 25) is not the §13.1 rule. Use the percentage on your transcript for applications.",
+      "Different Pakistani universities may map percentages to letter grades slightly differently — always cross-check with your institution’s official academic regulations or results portal.",
     ],
   },
 ];

@@ -95,7 +95,7 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
       },
       {
         question: "What if bonus pushes me over 100%?",
-        answer: "We cap the displayed score at 100% and note that bonus points were included.",
+        answer: "We cap the displayed score at 100% and show a note that bonus points were included. Your teacher may record the raw score above 100% or apply their own cap — check your course syllabus for the exact policy.",
       },
       {
         question: "How do I calculate my exam grade?",
@@ -266,7 +266,7 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
       },
       {
         question: "Can I enter a percentage instead of a letter?",
-        answer: "Yes. Type 92 or B+ — we map both through your selected grading scale.",
+        answer: "Yes. Type a number like 92 or a letter like B+ — the calculator maps both to GPA points through whichever grading scale you have selected (US standard, Australian, NZ, etc.).",
       },
       {
         question: "How do I convert Australian GPA to US 4.0?",
@@ -525,7 +525,7 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
     faqs: [
       {
         question: "What percentage is a B?",
-        answer: "On the common US 4.0 scale, B is typically 83–86%. Exact ranges vary by school.",
+        answer: "On the common US 4.0 scale, B is typically 83–86%, B+ is 87–89%, and B− is 80–82%. Exact cutoffs vary by school and instructor, so check your syllabus for the official grading policy.",
       },
       {
         question: "Does 85% always become a B?",
