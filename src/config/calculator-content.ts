@@ -61,7 +61,7 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
       {
         question: "What is my grade on this test?",
         answer:
-          "Enter how many questions were on the test and how many you missed. The grader shows correct count, percentage, and letter grade for that score.",
+          "Enter the total number of questions and how many you got wrong. The EZ grader shows your score, percentage, and letter grade immediately. For example: 20 questions with 3 wrong = 17 correct = 85% = B. If you need your overall class grade rather than a single test score, use the weighted grade calculator.",
       },
       {
         question: "How do I get a percentage from wrong answers?",
@@ -78,6 +78,16 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
         answer:
           "Yes. Teachers use this page as a free easy grader: set question total, enter wrong count, print the chart, and reuse it for the next quiz. No account or gradebook upload required.",
       },
+      {
+        question: "What is a grading chart?",
+        answer:
+          "A grading chart shows the percentage and letter grade for every possible score on a quiz or test. For example, on a 20-question test, missing 2 questions gives 90% (A−), missing 4 gives 80% (B−), and missing 8 gives 60% (D−). The EZ grader below automatically generates a full grading chart once you set the total number of questions.",
+      },
+      {
+        question: "What does the grade scale selector do?",
+        answer:
+          "The grade scale selector switches the letter grades shown in the chart and throughout the site. The default is the US 4.0 standard scale (A 93%+, B 83%, C 73%, D 63%). You can switch to the US 10-point scale, UK degree classifications, Australian HD/D/C/P bands, New Zealand 9-point university scale, or others. All calculators on the site update together when you change the scale.",
+      },
     ],
   },
   "test-grade-calculator": {
@@ -91,7 +101,8 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
     faqs: [
       {
         question: "How is a test grade calculated?",
-        answer: "Divide correct answers by total questions and multiply by 100. Add bonus points if applicable.",
+        answer:
+          "Divide correct answers by total questions and multiply by 100 to get the percentage: Score % = (Correct ÷ Total) × 100. Then compare the percentage to your school's grading scale to find the letter grade. For example, 17 correct out of 20 = 85% = a B on the standard US scale. If your teacher adds bonus points, those are added after the percentage is calculated, and the score can exceed 100%.",
       },
       {
         question: "What if bonus pushes me over 100%?",
@@ -118,6 +129,46 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
           "Twelve correct out of 20 is 12 ÷ 20 = 60%. Enter total 20 and correct 12 to see the percentage and letter grade on your chosen scale.",
       },
       {
+        question: "What is 11 out of 15 as a percentage?",
+        answer:
+          "11 out of 15 is 11 ÷ 15 ≈ 73.3%, which is a C on the standard US scale. Enter total 15 and correct 11 in the calculator above for the exact letter grade on your scale.",
+      },
+      {
+        question: "What percentage is 12 out of 15?",
+        answer:
+          "12 out of 15 is 12 ÷ 15 = 80%, which is a B− on the standard US plus/minus scale (or a B on the 10-point scale). Enter total 15 and correct 12 to confirm the letter grade for your grading scale.",
+      },
+      {
+        question: "What grade is 13 out of 15?",
+        answer:
+          "13 out of 15 is 13 ÷ 15 ≈ 86.7%, which is a B on the US standard scale (B+ under some cutoffs). Enter total 15 and correct 13 to see the result on whichever grading scale you have selected.",
+      },
+      {
+        question: "What is 18 out of 20 as a grade?",
+        answer:
+          "18 out of 20 is 18 ÷ 20 = 90%, which is an A− on the standard US plus/minus scale (or an A on a 10-point scale). Enter total 20 and correct 18 in the calculator above for the letter grade on your scale.",
+      },
+      {
+        question: "What is 15 out of 20 as a grade?",
+        answer:
+          "15 out of 20 is 15 ÷ 20 = 75%, which is a C on the US standard scale (C+ under some cutoffs, C on a 10-point scale). Enter total 20 and correct 15 to see your percentage and letter grade.",
+      },
+      {
+        question: "What grade is 16 out of 20?",
+        answer:
+          "16 out of 20 is 16 ÷ 20 = 80%, which is a B− on the US standard plus/minus scale (or a B on a 10-point scale). Enter total 20 and correct 16 to confirm the letter grade for your selected scale.",
+      },
+      {
+        question: "What grade is 17 out of 20?",
+        answer:
+          "17 out of 20 is 17 ÷ 20 = 85%, which is a B on the US standard scale (B+ on a 10-point scale). Enter total 20 and correct 17 for the exact letter on your grading scale.",
+      },
+      {
+        question: "What is 13 out of 20 as a percentage?",
+        answer:
+          "13 out of 20 is 13 ÷ 20 = 65%, which is a D on the US standard scale (70 is the C cutoff). Enter total 20 and correct 13 above to see your percentage and letter grade.",
+      },
+      {
         question: "How do I calculate my grade on a test?",
         answer:
           "Score % = (correct ÷ total questions) × 100, then compare to your school’s letter bands. Use this calculator for one test; for a whole course average with weighted assignments, use the weighted grade calculator.",
@@ -137,7 +188,7 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
       {
         question: "What is a weighted grade?",
         answer:
-          "A weighted grade gives different categories different importance. A final exam might count more than homework.",
+          "A weighted grade is a course average where different assignment categories count for different portions of the final grade. For example, if homework counts 20%, quizzes 30%, and the final exam 50%, a score in the final exam has 2.5× the impact of the same score in homework. This reflects the emphasis your instructor places on each type of work. Weighted grading is standard in most US high school and college courses.",
       },
       {
         question: "My weights don't add to 100%. Is that OK?",
@@ -169,6 +220,21 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
         answer:
           "Change one assignment score and watch the weighted average move. A low-weight quiz moves the total a little; a heavy exam moves it more. The shift equals that score’s weight share of the course.",
       },
+      {
+        question: "Can I use this as a gradebook calculator?",
+        answer:
+          "Yes. Enter each assignment category from your syllabus (homework, quizzes, exams) with its average score and weight. The calculator works like an online gradebook — it shows your running course average and updates every time you change a score. For a single test score instead of a category average, use the test grade calculator.",
+      },
+      {
+        question: "How do I track my grades across a semester?",
+        answer:
+          "Add a row for each graded category in your course. As scores come in, update each row’s average. The weighted total always reflects your current standing. You can also test future scenarios by entering a score you haven’t received yet to see how it would affect your final grade.",
+      },
+      {
+        question: "How do I calculate my grade across quarterly grading periods?",
+        answer:
+          "In systems that use multiple grading periods — such as 1st grading, 2nd grading, 3rd grading, and 4th grading quarters — add each period as a separate row. If all quarters count equally, set each weight to 25. If the final quarter or exam counts more, adjust the weights to match your school’s grading formula. The calculator shows your running weighted average as you fill in each period.",
+      },
     ],
     assumptions: [
       "Each row is one category (homework, tests, etc.) with an average score and a syllabus weight.",
@@ -194,17 +260,17 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
       {
         question: "What grade do I need on my final?",
         answer:
-          "Enter your current grade, target grade, and final weight. The calculator solves for the required final exam score.",
+          "Enter your current course grade, the percentage your final exam is worth, and the grade you want to finish with. The calculator applies Required = (Target − Current × (1 − w)) ÷ w and shows the minimum final exam score you need. For example: current 85%, final worth 40%, target 90% → you need 97.5% on the final. If the required score exceeds 100%, the calculator flags it as impossible.",
       },
       {
         question: "What if it says impossible?",
         answer:
-          "That means even a perfect final cannot reach your target. Consider adjusting your goal or improving other assignments.",
+          "It means even a perfect score on the final (100%) cannot raise your course grade to the target you entered. This happens when the final carries too little weight to overcome the gap, or when the target grade is too far above your current standing. Your options are: lower your target grade to something achievable, check whether extra credit is available, or review whether any earlier assignments can be revised. The formula makes the ceiling clear before the exam, so you can plan realistically.",
       },
       {
         question: "Does this support RogerHub-style modes?",
         answer:
-          "Yes. Switch modes to predict your overall grade, use point-based grading, or drop your lowest test score.",
+          "Yes. The default mode solves for the final exam score you need, which is the original RogerHub function. Additional modes let you predict your overall grade from a final score you already know, calculate using raw points instead of percentages, or drop your lowest assignment score before the final calculation. Switch modes with the button above the inputs.",
       },
       {
         question: "How are final grades calculated in a class?",
@@ -217,9 +283,14 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
           "Use Required = (Target − Current × (1 − w)) ÷ w, where w is the final as a decimal (40% → 0.4). The calculator applies the same formula and flags targets above 100%.",
       },
       {
-        question: "Can I use this for a midterm?",
+        question: "Can I use this as a midterm calculator?",
         answer:
-          "Yes. Enter the grade you have before the midterm, the percent the midterm is worth, and the course grade you want. The formula is the same as a final.",
+          "Yes — this tool works as a midterm calculator. Enter your current grade before the midterm, the percentage the midterm counts for in your course, and the grade you want to end up with. The formula is identical: Required = (Target − Current × (1 − w)) ÷ w. The only difference from a final is the weight you type.",
+      },
+      {
+        question: "How do I calculate my midterm grade?",
+        answer:
+          "To find the score you need on a midterm, enter your pre-midterm course average as the current grade, the midterm weight (for example 25 for 25%), and the course grade you want. The calculator solves for the minimum midterm score that reaches your target. If you already know your midterm score, use the weighted grade calculator to see how it affects your course average.",
       },
       {
         question: "What is a what grade do I need calculator?",
@@ -374,7 +445,8 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
     faqs: [
       {
         question: "What is weighted GPA?",
-        answer: "Weighted GPA gives extra points for advanced courses like Honors, AP, and IB. Many high schools use a 5.0 scale.",
+        answer:
+          "Weighted GPA adds bonus quality points to grades earned in advanced courses such as Honors, AP, and IB, making it possible to score above 4.0. The most common US default adds +0.5 for Honors and +1.0 for AP or IB — so an A in an AP course is worth 5.0 instead of 4.0. Weighted GPA is used by many high schools to reflect course difficulty. Colleges typically recalculate an unweighted GPA during admissions, but they still see the weighted figure on your transcript.",
       },
       {
         question: "Does every school use the same bonuses?",
@@ -524,6 +596,11 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
     workedExample: "85% on the common US 4.0 scale → B (83–86%).",
     faqs: [
       {
+        question: "How do I find a grade from a percentage?",
+        answer:
+          "Enter the percentage in the calculator above and it shows the letter grade and GPA points for your selected grading scale. For a quick reference: 90–100% = A, 80–89% = B, 70–79% = C, 60–69% = D, below 60% = F on the standard US scale. Your school may use slightly different cutoffs, so check your syllabus.",
+      },
+      {
         question: "What percentage is a B?",
         answer: "On the common US 4.0 scale, B is typically 83–86%, B+ is 87–89%, and B− is 80–82%. Exact cutoffs vary by school and instructor, so check your syllabus for the official grading policy.",
       },
@@ -546,6 +623,31 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
         question: "What is a 70% letter grade?",
         answer:
           "On the standard US scale, 70–72% is typically a C− and 73–76% is a C. On a 10-point scale (some colleges), 70–79% is a C. The converter shows the letter and GPA equivalent for the scale you select.",
+      },
+      {
+        question: "What percentage is a B grade?",
+        answer:
+          "On the standard US grading scale, a B is 83–86%, B+ is 87–89%, and B− is 80–82%. The full B range (B− through B+) runs from 80% to 89%. Some schools use a 10-point scale where 80–89% is a straight B with no plus/minus. Check your syllabus for the exact cutoffs your instructor uses.",
+      },
+      {
+        question: "What percentage is a C grade?",
+        answer:
+          "On the standard US grading scale, C is 73–76%, C+ is 77–79%, and C− is 70–72%. The full C range covers 70–79%. On a 10-point scale, 70–79% is a straight C. A C typically earns 2.0 GPA quality points.",
+      },
+      {
+        question: "What letter grade is a 70%?",
+        answer:
+          "On the standard US scale, 70–72% is a C− (2.0 GPA points on most scales) or a C (2.0) on a 10-point scale. Enter 70 in the converter above to see the exact letter for your selected grading scale.",
+      },
+      {
+        question: "What grade is a 75%?",
+        answer:
+          "On the standard US plus/minus scale, 75% is a C (73–76%). On a 10-point scale, 70–79% is a straight C. A 75% earns 2.0 GPA quality points as a C.",
+      },
+      {
+        question: "What grade is a 76%?",
+        answer:
+          "On the standard US plus/minus scale, 76% is a C (73–76%). On some school variations, 77–79% starts C+. Enter 76 in the converter to check the exact letter on your selected grading scale.",
       },
       {
         question: "How is percentage different from a letter grade?",
@@ -597,6 +699,16 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
         answer:
           "A 2.0 GPA corresponds to a C grade on the standard US 4.0 scale, which typically covers the 73–76% range. Many schools require at least a 2.0 cumulative GPA to remain in good academic standing.",
       },
+      {
+        question: "What is the value of each letter grade?",
+        answer:
+          "On the standard US 4.0 scale, the GPA quality points for each letter are: A+ = 4.0, A = 4.0, A− = 3.7, B+ = 3.3, B = 3.0, B− = 2.7, C+ = 2.3, C = 2.0, C− = 1.7, D+ = 1.3, D = 1.0, D− = 0.7, F = 0.0. Some schools assign A+ = 4.33. These quality points are multiplied by credit hours to calculate GPA.",
+      },
+      {
+        question: "How do I convert a letter grade to a percentage?",
+        answer:
+          "Use the midpoint of each letter's percentage band. On the US standard scale: A = ~95%, B = ~85%, C = ~75%, D = ~65%. For plus/minus: B+ ≈ 88%, B ≈ 85%, B− ≈ 81%. Enter the letter above and we show the full band and midpoint for the scale you have selected.",
+      },
     ],
     assumptions: [
       "Grade labels entered match those on the selected scale (A, B+, HD, First, etc.).",
@@ -641,6 +753,11 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
         question: "Can I use this to calculate my Canvas grade before the final exam?",
         answer:
           "Yes. Enter all completed group averages with their weights, then set the final exam group to the score you expect to earn. The overall grade updates to show your projected course total, which is the same calculation Canvas will perform once the final is graded.",
+      },
+      {
+        question: "Is there a free online Canvas grade calculator?",
+        answer:
+          "Yes — this page is a free Canvas grade calculator. Enter your Canvas assignment group names, weights, and current averages, and your overall course grade updates instantly. No Canvas login or course access is needed. It works with any Canvas LMS course that uses weighted assignment groups.",
       },
     ],
     assumptions: [
