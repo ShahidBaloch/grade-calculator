@@ -14,7 +14,6 @@ export const metadata = createPageMetadata({
   keywords: calculatorKeywords["canvas-grade-calculator"],
   languages: calculatorHreflangLanguages("canvas-grade-calculator"),
 });
-
 export default function CanvasGradeCalculatorPage() {
   return <CalculatorRoute slug="canvas-grade-calculator" calculator={<CanvasGradeCalculator />} />;
 }
