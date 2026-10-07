@@ -129,6 +129,10 @@ export const countryHubs: CountryHubConfig[] = [
     ],
     keywords: ["canada gpa calculator", "canadian grading scale", "grade calculator canada"],
     hreflang: "en-CA",
+    relatedGuides: [
+      { path: "/guides/gpa-glossary", title: "GPA & grading glossary" },
+      { path: "/guides/how-to-calculate-gpa", title: "How to calculate GPA" },
+    ],
     scaleLockNote:
       "GPA tools on this hub default to an illustrative Canadian 4.0-cap preset — not a national standard. Use /mcmaster-gpa-to-us-gpa for McMaster 12-point GPA and /grading-scales/canada-433 when A+ = 4.33 on your transcript.",
   },
@@ -271,6 +275,10 @@ export const countryHubs: CountryHubConfig[] = [
     ],
     keywords: ["nz gpa calculator", "new zealand grading scale", "grade calculator nz"],
     hreflang: "en-NZ",
+    relatedGuides: [
+      { path: "/guides/gpa-glossary", title: "GPA & grading glossary" },
+      { path: "/guides/gpa-scale-explained", title: "GPA scales explained" },
+    ],
   },
   {
     code: "in",
@@ -390,6 +398,10 @@ export const countryHubs: CountryHubConfig[] = [
       "grade calculator pakistan",
     ],
     hreflang: "en-PK",
+    relatedGuides: [
+      { path: "/guides/gpa-glossary", title: "GPA & grading glossary" },
+      { path: "/guides/final-exam-tips", title: "Final exam study tips" },
+    ],
     scaleLockNote:
       "GPA tools on this hub use the HEC 4.0 letter scale (§13.1 bands, including D+). CGPA-to-percentage uses band minimums — not the unofficial ×25 shortcut unless you choose it in the converter.",
   },

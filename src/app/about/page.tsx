@@ -3,11 +3,14 @@ import { ContentPageLayout } from "@/components/content/ContentPageLayout";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 import { siteConfig } from "@/config/site";
 import { createPageMetadata } from "@/lib/seo/metadata";
+import { pageDescription, pageTitle } from "@/lib/seo/page-copy";
 
 export const metadata = createPageMetadata({
-  title: "About Us",
-  description:
+  title: pageTitle("/about", "About Us"),
+  description: pageDescription(
+    "/about",
     "GradeCalculator provides free, fast, and private grade and GPA calculators for students and teachers worldwide.",
+  ),
   path: "/about",
 });
 

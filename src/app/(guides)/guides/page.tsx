@@ -2,13 +2,16 @@ import Link from "next/link";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { guides } from "@/config/guides";
 import { createPageMetadata } from "@/lib/seo/metadata";
+import { pageDescription, pageTitle } from "@/lib/seo/page-copy";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbJsonLd } from "@/lib/seo/jsonld";
 
 export const metadata = createPageMetadata({
-  title: "Grade & GPA Guides",
-  description:
+  title: pageTitle("/guides", "Grade & GPA Guides"),
+  description: pageDescription(
+    "/guides",
     "Free guides on calculating GPA, weighted grades, final exam targets, and understanding grading scales.",
+  ),
   path: "/guides",
   keywords: [
     "how to calculate gpa",

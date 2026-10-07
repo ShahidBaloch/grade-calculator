@@ -8,7 +8,7 @@ import { indexableGeoCalculatorPaths } from "@/lib/seo/intent-urls";
 import { siteConfig } from "@/config/site";
 
 // Last content update — bump this date whenever calculator content, guides, or scales are edited.
-const CONTENT_UPDATED = "2026-10-05";
+const CONTENT_UPDATED = "2026-10-07";
 // Trust pages rarely change; set once at creation.
 const TRUST_PAGE_DATE = "2025-09-01";
 
@@ -19,12 +19,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/guides", priority: 0.7, changeFrequency: "monthly" as const, lastModified: CONTENT_UPDATED },
     { path: "/grading-scales", priority: 0.8, changeFrequency: "monthly" as const, lastModified: CONTENT_UPDATED },
     { path: "/faq", priority: 0.7, changeFrequency: "monthly" as const, lastModified: CONTENT_UPDATED },
-    { path: "/about", priority: 0.3, changeFrequency: "yearly" as const, lastModified: TRUST_PAGE_DATE },
+    { path: "/about", priority: 0.4, changeFrequency: "yearly" as const, lastModified: CONTENT_UPDATED },
     { path: "/methodology", priority: 0.4, changeFrequency: "yearly" as const, lastModified: TRUST_PAGE_DATE },
     { path: "/contact", priority: 0.3, changeFrequency: "yearly" as const, lastModified: TRUST_PAGE_DATE },
     { path: "/privacy-policy", priority: 0.3, changeFrequency: "yearly" as const, lastModified: TRUST_PAGE_DATE },
     { path: "/terms-of-service", priority: 0.3, changeFrequency: "yearly" as const, lastModified: TRUST_PAGE_DATE },
-    { path: "/disclaimer", priority: 0.3, changeFrequency: "yearly" as const, lastModified: TRUST_PAGE_DATE },
+    { path: "/disclaimer", priority: 0.4, changeFrequency: "yearly" as const, lastModified: CONTENT_UPDATED },
     { path: "/cookie-policy", priority: 0.3, changeFrequency: "yearly" as const, lastModified: TRUST_PAGE_DATE },
   ];
 

@@ -6,11 +6,14 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { siteConfig } from "@/config/site";
 import { webPageJsonLd } from "@/lib/seo/jsonld";
 import { createPageMetadata } from "@/lib/seo/metadata";
+import { pageDescription, pageTitle } from "@/lib/seo/page-copy";
 
 export const metadata = createPageMetadata({
-  title: "Educational Disclaimer",
-  description:
+  title: pageTitle("/disclaimer", "Educational Disclaimer"),
+  description: pageDescription(
+    "/disclaimer",
     "GradeCalculator (gradcalc.com) provides planning calculators only. Results are not official grades, GPAs, ATARs, or transcript values — always confirm with your school.",
+  ),
   path: "/disclaimer",
 });
 

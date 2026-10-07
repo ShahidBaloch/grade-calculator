@@ -3,7 +3,7 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
   "/": {
     title: "Grade Calculator & Easy Grader",
     description:
-      "Free grade calculator and easy grader for quizzes and tests. Score by number of questions wrong, then open weighted course grades, finals, and GPA tools. Grading scale follows your location.",
+      "Free grade calculator and easy grader for quizzes and tests. Score by wrong answers, then open weighted grades, final exam score needed, and GPA. Scale follows your location.",
   },
   "/weighted-grade-calculator": {
     title: "Weighted Grade Calculator — Course & Class Average",
@@ -28,7 +28,7 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
   "/uc-gpa-calculator": {
     title: "UC & CSU GPA Calculator — Capped A–G Average",
     description:
-      "Estimate a UC or Cal State A–G GPA. UC uses 10th–11th grade with up to 8 honors points. CSU includes 12th grade and allows only 2 honors points from 10th. Not the official application GPA.",
+      "Estimate a UC or CSU A–G GPA. UC caps at 8 honors points using grades 10–11 only; CSU includes grade 12 with only 2 honors points. Not an official application GPA.",
   },
   "/middle-school-gpa-calculator": {
     title: "Middle School GPA Calculator — Junior High",
@@ -36,7 +36,7 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
       "Free middle school and junior high GPA calculator. Enter each class letter grade. Every class counts the same — no credit hours and no Honors or AP bonus.",
   },
   "/cumulative-gpa-calculator": {
-    title: "Cumulative GPA Calculator — Overall GPA from Multiple Semesters",
+    title: "Cumulative GPA Calculator — Multiple Semester GPA",
     description:
       "Combine grades from two or more semesters into one overall GPA. Enter each term's GPA and credit hours, or add courses directly. Works on any 4.0 scale.",
   },
@@ -48,12 +48,12 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
   "/raise-gpa-calculator": {
     title: "Raise GPA Calculator — Credits Needed to Hit Your Target",
     description:
-      "Find out how many credit hours of what grade you need to reach your target GPA. Enter your current GPA and credits, set your goal, and see a semester-by-semester plan.",
+      "Find how many credit hours and what grade you need to reach your target GPA. Enter current GPA and credits, set a goal, and plan semester by semester.",
   },
   "/high-school-gpa-calculator": {
     title: "High School GPA Calculator — Weighted & Unweighted",
     description:
-      "Calculate a high school GPA by semester or quarter with optional Honors and AP/IB bonus points. Tracks cumulative GPA across all four years on the standard US 4.0 or 5.0 scale.",
+      "Calculate a high school GPA by semester with optional Honors and AP/IB bonus points. Tracks cumulative GPA across all four years on the standard 4.0 or 5.0 scale.",
   },
   "/college-gpa-calculator": {
     title: "College GPA Calculator — Semester GPA by Credit Hours",
@@ -219,6 +219,31 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
     title: "Pakistan SGPA to CGPA Calculator — HEC Semester Formula",
     description:
       "Combine HEC semester GPAs (SGPA) into an overall CGPA. Enter each semester's SGPA and credit total. The credit-weighted result is your Pakistan CGPA.",
+  },
+  "/about": {
+    title: "About GradeCalculator — Free Grade & GPA Tools",
+    description:
+      "Who builds GradeCalculator (gradcalc.com), why the tools are free, how we handle privacy, and how to report a formula error.",
+  },
+  "/disclaimer": {
+    title: "Educational Disclaimer — Planning Estimates Only",
+    description:
+      "GradeCalculator results are for planning only. They are not official grades, GPAs, ATARs, or transcript values — always confirm with your school or registrar.",
+  },
+  "/guides": {
+    title: "Grade & GPA Guides — How-To Articles",
+    description:
+      "Free guides on GPA, weighted grades, final exam targets, LMS gradebooks, and grading scales. Many articles include an embedded calculator.",
+  },
+  "/guides/final-exam-tips": {
+    title: "Final Exam Study Tips — Hit Your Target Score",
+    description:
+      "Turn the score you need on a final into a study plan. Learn when the target is already locked in and when to use the final grade calculator.",
+  },
+  "/guides/gpa-glossary": {
+    title: "GPA & Grading Glossary — CGPA, SGPA, Quality Points",
+    description:
+      "Plain-language definitions of GPA, CGPA, SGPA, weighted GPA, quality points, and other terms used across GradeCalculator tools.",
   },
 };
 

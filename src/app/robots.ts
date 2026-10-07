@@ -10,6 +10,7 @@ export default function robots(): MetadataRoute.Robots {
         "/*out-of-*",
         "/*as-a-percent*",
         "/3/4*",
+        "/icon",
       ],
     },
     sitemap: `${siteConfig.url}/sitemap.xml`,
