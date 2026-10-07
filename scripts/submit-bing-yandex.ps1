@@ -21,13 +21,13 @@ $PriorityUrls = @(
   "$SiteOrigin/calculators"
 )
 
-Write-Host "=== Bing sitemap ping ==="
-$bingPing = "https://www.bing.com/ping?sitemap=$([uri]::EscapeDataString($Sitemap))"
+Write-Host "=== Yandex sitemap ping ==="
+$yandexPing = "https://webmaster.yandex.com/ping?sitemap=$([uri]::EscapeDataString($Sitemap))"
 try {
-  $r = Invoke-WebRequest -Uri $bingPing -Method GET -UseBasicParsing -TimeoutSec 60
-  Write-Host "Bing ping status: $($r.StatusCode)"
+  $r = Invoke-WebRequest -Uri $yandexPing -Method GET -UseBasicParsing -TimeoutSec 60
+  Write-Host "Yandex ping status: $($r.StatusCode) body: $($r.Content.Trim())"
 } catch {
-  Write-Warning "Bing ping: $($_.Exception.Message)"
+  Write-Warning "Yandex ping: $($_.Exception.Message)"
 }
 
 Write-Host "`n=== Verify IndexNow key on site ==="
