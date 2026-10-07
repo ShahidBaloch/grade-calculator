@@ -1,18 +1,44 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/config/site";
+import {
+  blockedCrawlerUserAgents,
+  bingSearchUserAgents,
+  generalCrawlerCrawlDelaySeconds,
+  googleSearchUserAgents,
+  otherSearchUserAgents,
+  robotsDisallowPaths,
+  yandexSearchUserAgents,
+} from "@/lib/seo/robots-policy";
+
+function searchCrawlerRule(userAgents: readonly string[]) {
+  return {
+    userAgent: [...userAgents],
+    allow: "/",
+    disallow: [...robotsDisallowPaths],
+  };
+}
 
 export default function robots(): MetadataRoute.Robots {
+  const disallow = [...robotsDisallowPaths];
+
   return {
-    rules: {
-      userAgent: "*",
-      allow: "/",
-      disallow: [
-        "/*out-of-*",
-        "/*as-a-percent*",
-        "/3/4*",
-        "/icon",
-      ],
-    },
+    rules: [
+      searchCrawlerRule(googleSearchUserAgents),
+      searchCrawlerRule(bingSearchUserAgents),
+      searchCrawlerRule(yandexSearchUserAgents),
+      searchCrawlerRule(otherSearchUserAgents),
+      {
+        userAgent: [...blockedCrawlerUserAgents],
+        disallow: "/",
+      },
+      {
+        userAgent: "*",
+        allow: "/",
+        disallow,
+        crawlDelay: generalCrawlerCrawlDelaySeconds,
+      },
+    ],
     sitemap: `${siteConfig.url}/sitemap.xml`,
+    host: new URL(siteConfig.url).host,
   };
 }

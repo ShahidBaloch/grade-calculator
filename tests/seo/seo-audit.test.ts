@@ -17,6 +17,7 @@ import {
   webApplicationJsonLd,
   webSiteJsonLd,
 } from "@/lib/seo/jsonld";
+import robots from "@/app/robots";
 import sitemap from "@/app/sitemap";
 import { getCalculatorPath } from "@/config/calculators";
 import { calculatorResourceLinks } from "@/config/calculator-links";
@@ -307,6 +308,52 @@ describe("SEO audit", () => {
     for (const entry of sitemap()) {
       expect(entry.lastModified).toBeUndefined();
     }
+  });
+
+  it("robots.txt allows Google, Bing, and Yandex; delays other bots; blocks SEO scrapers", () => {
+    const config = robots();
+    expect(config.sitemap).toBe(`${siteConfig.url}/sitemap.xml`);
+    expect(config.host).toBe(new URL(siteConfig.url).host);
+
+    const rules = Array.isArray(config.rules) ? config.rules : [config.rules];
+    const agentsOnly = (rule: (typeof rules)[number]) =>
+      Array.isArray(rule.userAgent) ? rule.userAgent : [rule.userAgent];
+
+    const googleRule = rules.find((rule) => {
+      const agents = agentsOnly(rule);
+      return agents.includes("Googlebot") && !agents.includes("Bingbot");
+    });
+    expect(googleRule?.allow).toContain("/");
+    expect(googleRule?.disallow).toContain("/*as-a-percent*");
+    expect(googleRule?.crawlDelay).toBeUndefined();
+
+    const bingRule = rules.find((rule) => {
+      const agents = agentsOnly(rule);
+      return agents.includes("Bingbot") && agents.length <= 4;
+    });
+    expect(bingRule?.allow).toContain("/");
+    expect(bingRule?.crawlDelay).toBeUndefined();
+
+    const yandexRule = rules.find((rule) => agentsOnly(rule).includes("YandexBot"));
+    expect(yandexRule?.allow).toContain("/");
+    expect(yandexRule?.crawlDelay).toBeUndefined();
+
+    const blockedRule = rules.find((rule) => {
+      const agents = agentsOnly(rule);
+      return agents.includes("AhrefsBot") && agents.includes("SemrushBot");
+    });
+    expect(blockedRule?.disallow).toContain("/");
+    expect(blockedRule?.allow).toBeUndefined();
+
+    const adsRule = rules.find((rule) => {
+      const agents = agentsOnly(rule);
+      return agents.includes("AdsBot-Google") && agents.includes("Mediapartners-Google");
+    });
+    expect(adsRule?.allow).toContain("/");
+
+    const wildcardRule = rules.find((rule) => agentsOnly(rule).includes("*"));
+    expect(wildcardRule?.crawlDelay).toBeGreaterThan(0);
+    expect(wildcardRule?.allow).toContain("/");
   });
 
   it("sitemap excludes low-value programmatic URL patterns", () => {

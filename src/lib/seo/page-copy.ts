@@ -3,7 +3,7 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
   "/": {
     title: "Grade Calculator — Easy Grader & Grading Chart",
     description:
-      "Free online grading calculator and easy grader. Score a test by wrong answers to get a percentage and letter grade instantly. Includes a full grading chart, grade scale selector, weighted grades, final exam score needed, and GPA tools.",
+      "Free online grading calculator and easy grader. Score a test by wrong answers to get a percentage and letter grade instantly. Includes a full grading scale and grade chart, scale selector, weighted grades, final exam score needed, and GPA tools.",
   },
   "/weighted-grade-calculator": {
     title: "Weighted Grade Calculator — Gradebook & Class Average",

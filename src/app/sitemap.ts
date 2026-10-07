@@ -7,25 +7,20 @@ import { isRedirectOnlyPath } from "@/lib/seo/canonical";
 import { indexableGeoCalculatorPaths } from "@/lib/seo/intent-urls";
 import { siteConfig } from "@/config/site";
 
-// Last content update — bump this date whenever calculator content, guides, or scales are edited.
-const CONTENT_UPDATED = "2026-10-07";
-// Trust pages rarely change; set once at creation.
-const TRUST_PAGE_DATE = "2025-09-01";
-
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages = [
-    { path: "/", priority: 1.0, changeFrequency: "weekly" as const, lastModified: CONTENT_UPDATED },
-    { path: "/calculators", priority: 0.9, changeFrequency: "weekly" as const, lastModified: CONTENT_UPDATED },
-    { path: "/guides", priority: 0.7, changeFrequency: "monthly" as const, lastModified: CONTENT_UPDATED },
-    { path: "/grading-scales", priority: 0.8, changeFrequency: "monthly" as const, lastModified: CONTENT_UPDATED },
-    { path: "/faq", priority: 0.7, changeFrequency: "monthly" as const, lastModified: CONTENT_UPDATED },
-    { path: "/about", priority: 0.4, changeFrequency: "yearly" as const, lastModified: CONTENT_UPDATED },
-    { path: "/methodology", priority: 0.4, changeFrequency: "yearly" as const, lastModified: TRUST_PAGE_DATE },
-    { path: "/contact", priority: 0.3, changeFrequency: "yearly" as const, lastModified: TRUST_PAGE_DATE },
-    { path: "/privacy-policy", priority: 0.3, changeFrequency: "yearly" as const, lastModified: TRUST_PAGE_DATE },
-    { path: "/terms-of-service", priority: 0.3, changeFrequency: "yearly" as const, lastModified: TRUST_PAGE_DATE },
-    { path: "/disclaimer", priority: 0.4, changeFrequency: "yearly" as const, lastModified: CONTENT_UPDATED },
-    { path: "/cookie-policy", priority: 0.3, changeFrequency: "yearly" as const, lastModified: TRUST_PAGE_DATE },
+    { path: "/", priority: 1.0, changeFrequency: "weekly" as const },
+    { path: "/calculators", priority: 0.9, changeFrequency: "weekly" as const },
+    { path: "/guides", priority: 0.7, changeFrequency: "monthly" as const },
+    { path: "/grading-scales", priority: 0.8, changeFrequency: "monthly" as const },
+    { path: "/faq", priority: 0.7, changeFrequency: "monthly" as const },
+    { path: "/about", priority: 0.4, changeFrequency: "yearly" as const },
+    { path: "/methodology", priority: 0.4, changeFrequency: "yearly" as const },
+    { path: "/contact", priority: 0.3, changeFrequency: "yearly" as const },
+    { path: "/privacy-policy", priority: 0.3, changeFrequency: "yearly" as const },
+    { path: "/terms-of-service", priority: 0.3, changeFrequency: "yearly" as const },
+    { path: "/disclaimer", priority: 0.4, changeFrequency: "yearly" as const },
+    { path: "/cookie-policy", priority: 0.3, changeFrequency: "yearly" as const },
   ];
 
   const calculatorPages = [
@@ -35,13 +30,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
         path: getCalculatorPath(c.slug),
         priority: 0.9,
         changeFrequency: "monthly" as const,
-        lastModified: CONTENT_UPDATED,
       })),
     ...indexableGeoCalculatorPaths().map((path) => ({
       path,
       priority: 0.8,
       changeFrequency: "monthly" as const,
-      lastModified: CONTENT_UPDATED,
     })),
   ];
 
@@ -49,21 +42,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     path: g.path,
     priority: 0.7,
     changeFrequency: "monthly" as const,
-    lastModified: CONTENT_UPDATED,
   }));
 
   const scalePages = gradingScalePages.map((p) => ({
     path: p.path,
     priority: 0.8,
     changeFrequency: "monthly" as const,
-    lastModified: CONTENT_UPDATED,
   }));
 
   const hubPages = countryHubs.map((hub) => ({
     path: hub.path,
     priority: 0.85,
     changeFrequency: "monthly" as const,
-    lastModified: CONTENT_UPDATED,
   }));
 
   const all = [...staticPages, ...calculatorPages, ...guidePages, ...scalePages, ...hubPages];
@@ -73,7 +63,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const seen = new Set<string>();
   const entries: MetadataRoute.Sitemap = [];
 
-  for (const { path, priority, changeFrequency, lastModified } of all) {
+  for (const { path, priority, changeFrequency } of all) {
     const pathname = path === "/" ? "/" : path;
     if (isRedirectOnlyPath(pathname)) {
       continue;
@@ -83,7 +73,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     seen.add(url);
     entries.push({
       url,
-      lastModified,
       changeFrequency,
       priority,
       images: [ogImageUrl],

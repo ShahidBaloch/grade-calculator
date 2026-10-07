@@ -33,6 +33,9 @@ export const gradingScalePages: GradingScalePageConfig[] = [
       "c grade percentage",
       "grade percentages",
       "10 point grading scale with + and -",
+      "grading scale and",
+      "7 point grading scale",
+      "grade scale",
     ],
     intro:
       "The common US 4.0 GPA scale is the standard grading scale for American high schools and colleges. Each letter grade covers a percentage range: A is 93–100%, B is 83–92%, C is 73–82%, D is 63–72%, and F is below 60%. Letter grades also convert to GPA quality points used in semester calculations. Percentage cutoffs can vary slightly by school, district, or instructor — always verify your institution's official grading policy.",
