@@ -17,4 +17,4 @@ export const metadata = createPageMetadata({
 
 export default function CanvasGradeCalculatorPage() {
   return <CalculatorRoute slug="canvas-grade-calculator" calculator={<CanvasGradeCalculator />} />;
-}
+}//test
