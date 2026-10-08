@@ -1,5 +1,7 @@
 import { siteConfig } from "@/config/site";
 
+export const dynamic = "force-dynamic";
+
 /** Lightweight uptime probe — no auth secrets. Safe for monitors; not a sitemap substitute. */
 export function GET() {
   return Response.json(

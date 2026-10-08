@@ -10,6 +10,8 @@ import {
   yandexSearchUserAgents,
 } from "@/lib/seo/robots-policy";
 
+export const dynamic = "force-static";
+
 function searchCrawlerRule(userAgents: readonly string[]) {
   return {
     userAgent: [...userAgents],
