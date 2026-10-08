@@ -18,6 +18,9 @@ const nextConfig: NextConfig = {
     ],
   },
   async headers() {
+    const cacheableMeta =
+      "public, max-age=86400, stale-while-revalidate=604800";
+
     const securityHeaders = [
       { key: "X-Content-Type-Options", value: "nosniff" },
       { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
@@ -32,6 +35,14 @@ const nextConfig: NextConfig = {
       {
         source: "/:path*",
         headers: securityHeaders,
+      },
+      {
+        source: "/sitemap.xml",
+        headers: [{ key: "Cache-Control", value: cacheableMeta }],
+      },
+      {
+        source: "/robots.txt",
+        headers: [{ key: "Cache-Control", value: cacheableMeta }],
       },
       {
         source: "/:path*\\.(svg|jpg|jpeg|png|gif|webp|ico|woff2)",

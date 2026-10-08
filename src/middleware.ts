@@ -25,6 +25,11 @@ export function middleware(request: NextRequest) {
   }
 
   const pathname = request.nextUrl.pathname;
+
+  if (pathname.startsWith("/api")) {
+    return NextResponse.next();
+  }
+
   if (isLowValueProgrammaticPath(pathname)) {
     return new NextResponse("Not Found", {
       status: 404,
@@ -46,6 +51,13 @@ export function middleware(request: NextRequest) {
     return response;
   }
 
+  const countryUpper = isoCountry.toUpperCase();
+  const existingScale = request.cookies.get(GEO_SCALE_COOKIE)?.value;
+  const existingCountry = request.cookies.get(GEO_COUNTRY_COOKIE)?.value;
+  if (existingScale === scaleId && existingCountry === countryUpper) {
+    return response;
+  }
+
   response.cookies.set(GEO_SCALE_COOKIE, scaleId, {
     maxAge: 60 * 60 * 24 * 30,
     path: "/",
@@ -53,7 +65,7 @@ export function middleware(request: NextRequest) {
     secure: process.env.NODE_ENV === "production",
   });
 
-  response.cookies.set(GEO_COUNTRY_COOKIE, isoCountry.toUpperCase(), {
+  response.cookies.set(GEO_COUNTRY_COOKIE, countryUpper, {
     maxAge: 60 * 60 * 24 * 30,
     path: "/",
     sameSite: "lax",
@@ -64,5 +76,7 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)"],
+  matcher: [
+    "/((?!_next/static|_next/image|favicon.ico|robots\\.txt|sitemap\\.xml|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|txt|xml|webmanifest)$).*)",
+  ],
 };

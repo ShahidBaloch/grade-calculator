@@ -3,13 +3,14 @@ import { LetterGradeCalculator } from "@/components/calculators/LetterGradeCalcu
 import { calculatorHreflangLanguages } from "@/lib/seo/hreflang";
 import { createPageMetadata } from "@/lib/seo/metadata";
 import { calculatorKeywords } from "@/lib/seo/keywords";
+import { pageDescription, pageTitle } from "@/lib/seo/page-copy";
 import { calculatorBySlug } from "@/config/calculators";
 
 const config = calculatorBySlug["letter-grade-calculator"];
 
 export const metadata = createPageMetadata({
-  title: "Letter Grade Calculator — Letter to Percentage",
-  description: config.description,
+  title: pageTitle("/letter-grade-calculator", config.name),
+  description: pageDescription("/letter-grade-calculator", config.description),
   path: "/letter-grade-calculator",
   keywords: calculatorKeywords["letter-grade-calculator"],
   languages: calculatorHreflangLanguages("letter-grade-calculator"),
