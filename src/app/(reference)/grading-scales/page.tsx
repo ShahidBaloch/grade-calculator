@@ -37,7 +37,8 @@ export default function GradingScalesHubPage() {
         <h1 className="mt-4 text-3xl font-bold">Grading Scales &amp; Grade Charts by Country</h1>
         <p className="mt-2 text-[var(--color-text-muted)]">
           Letter grades, grade percentages, and GPA points by country. On the standard US grading
-          scale, an A is 93–100%, a B is 83–92%, a C is 73–82%, and a D is 63–72%. High school and
+          scale, an A (including A− and A+) is 90–100%, a B is 80–89%, a C is 70–79%, a D is 60–69%, and an F is
+          below 60%. High school and
           university grading scales vary — pick your country below for the exact chart.
         </p>
         <div className="mt-8 grid gap-4 sm:grid-cols-2">
