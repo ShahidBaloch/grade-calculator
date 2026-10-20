@@ -8,6 +8,8 @@ import { calculatorHreflangLanguages } from "@/lib/seo/hreflang";
 import { createPageMetadata } from "@/lib/seo/metadata";
 import { isCountrySpecificSlug } from "@/lib/seo/intent-urls";
 import { DISTINCT_PAGE_COPY } from "@/lib/seo/page-copy";
+import { GeoLinkList } from "@/components/content/GeoProgrammaticPage";
+import { caUniversityLinkGroup } from "@/lib/seo/geo-programmatic";
 import type { CalculatorSlug } from "@/types/calculator";
 import { isCalculatorSlug } from "@/types/calculator";
 
@@ -59,6 +61,9 @@ export function GeoCalculatorPage({ country, slug }: { country: string; slug: st
       slug={slug}
       path={`${hub.path}/${slug}`}
       calculator={getCalculatorElement(slug)}
+      below={
+        country === "ca" && slug === "gpa-calculator" ? <GeoLinkList group={caUniversityLinkGroup()} /> : undefined
+      }
     />
   );
 }

@@ -24,6 +24,7 @@ const US_RECORDING_CALCULATOR_PATHS = new Set([
 /** Map URL prefixes to locked scale (geo landing pages). */
 const PATH_SCALE_LOCKS: Array<{ prefix: string; scaleId: ScaleId }> = [
   { prefix: "/canvas-grade-calculator", scaleId: "us-standard" },
+  { prefix: "/eoc-grade-calculator/", scaleId: "us-standard" },
   { prefix: "/degree-classification-calculator", scaleId: "uk-degree" },
   { prefix: "/gcse-grade-calculator", scaleId: "uk-gcse" },
   { prefix: "/uk/gcse-grade-calculator", scaleId: "uk-gcse" },

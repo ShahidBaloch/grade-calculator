@@ -16,14 +16,19 @@ import { calculateEocGrade } from "@/lib/calculators/eoc-grade";
 import { useCalculatorPersistence } from "@/hooks/useCalculatorPersistence";
 import { useGradingScale } from "@/hooks/useGradingScale";
 
-export function EocGradeCalculator() {
+interface EocGradeCalculatorProps {
+  /** State page preset: opens at the weight the state rule names, saved separately from the main tool. */
+  preset?: { storageKey: string; eocWeight: number; weightHint: string };
+}
+
+export function EocGradeCalculator({ preset }: EocGradeCalculatorProps = {}) {
   const { scaleId } = useGradingScale();
-  const { state, setState, resetState, shareUrl, copied } = useCalculatorPersistence("eoc-grade-calculator", {
+  const { state, setState, resetState, shareUrl, copied } = useCalculatorPersistence(preset?.storageKey ?? "eoc-grade-calculator", {
     currentGrade: 82,
-    eocWeight: 25,
+    eocWeight: preset?.eocWeight ?? 25,
     targetGrade: 85,
   });
-  const examples = calculatorBySlug["eoc-grade-calculator"].examples;
+  const examples = preset ? [] : calculatorBySlug["eoc-grade-calculator"].examples;
 
   const result = React.useMemo(
     () =>
@@ -84,6 +89,7 @@ export function EocGradeCalculator() {
         value={state.eocWeight}
         onChange={(v) => setState({ ...state, eocWeight: v })}
       />
+      {preset && <p className="text-xs text-[var(--color-text-muted)]">{preset.weightHint}</p>}
       {result.errors?.[0] && <p className="text-sm text-[var(--color-error)]">{result.errors[0]}</p>}
       {data && (
         <>

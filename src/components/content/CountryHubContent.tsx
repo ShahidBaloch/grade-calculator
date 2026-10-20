@@ -7,6 +7,8 @@ import { calculatorBySlug } from "@/config/calculators";
 import { canonicalPathForSlug } from "@/lib/seo/intent-urls";
 import type { CountryHubConfig } from "@/config/country-hubs";
 import { getScale } from "@/lib/grading-scales";
+import { GeoLinkList } from "@/components/content/GeoProgrammaticPage";
+import { hubGeoLinkGroups } from "@/lib/seo/geo-programmatic";
 
 interface CountryHubContentProps {
   hub: CountryHubConfig;
@@ -43,6 +45,12 @@ export function CountryHubContent({ hub }: CountryHubContentProps) {
           ))}
         </div>
       </section>
+
+      {hubGeoLinkGroups(hub.path).map((group) => (
+        <div key={group.heading} className="mt-10 max-w-3xl">
+          <GeoLinkList group={group} />
+        </div>
+      ))}
 
       <p className="mt-6 max-w-2xl text-sm text-[var(--color-text-muted)]">
         {hub.scaleLockNote ?? (

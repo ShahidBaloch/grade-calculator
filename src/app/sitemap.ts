@@ -5,6 +5,7 @@ import { gradingScalePages } from "@/config/grading-scale-pages";
 import { guides } from "@/config/guides";
 import { isRedirectOnlyPath } from "@/lib/seo/canonical";
 import { indexableGeoCalculatorPaths } from "@/lib/seo/intent-urls";
+import { geoProgrammaticPaths } from "@/lib/seo/geo-programmatic";
 import { siteConfig } from "@/config/site";
 
 export const dynamic = "force-static";
@@ -39,7 +40,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         changeFrequency: "monthly" as const,
         lastModified: CONTENT_UPDATED,
       })),
-    ...indexableGeoCalculatorPaths().map((path) => ({
+    ...[...indexableGeoCalculatorPaths(), ...geoProgrammaticPaths()].map((path) => ({
       path,
       priority: 0.8,
       changeFrequency: "monthly" as const,

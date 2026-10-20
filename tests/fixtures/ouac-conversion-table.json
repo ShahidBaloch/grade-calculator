@@ -1,0 +1,570 @@
+{
+ "_source": "Transcribed from https://www.ouac.on.ca/guide/undergraduate-grade-conversion-table/ (Last updated: September 15, 2025; Internet Archive capture 2026-02-19). Columns are scales 1-9.",
+ "rows": [
+  {
+   "ouacValue": "4.00",
+   "scales": [
+    "9",
+    "8",
+    "90–100",
+    "93–100",
+    "94–100",
+    "94–100",
+    "A+",
+    "A",
+    "A+"
+   ]
+  },
+  {
+   "ouacValue": "3.90",
+   "scales": [
+    "",
+    "",
+    "85–89",
+    "84–92",
+    "87–93",
+    "85–93",
+    "A",
+    "",
+    ""
+   ]
+  },
+  {
+   "ouacValue": "3.80",
+   "scales": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "A"
+   ]
+  },
+  {
+   "ouacValue": "3.70",
+   "scales": [
+    "8",
+    "7",
+    "80–84",
+    "75–83",
+    "80–86",
+    "80–84",
+    "A-",
+    "A-",
+    ""
+   ]
+  },
+  {
+   "ouacValue": "3.30",
+   "scales": [
+    "7",
+    "6",
+    "77–79",
+    "72–74",
+    "75–79",
+    "75–79",
+    "B+",
+    "B+",
+    "B+"
+   ]
+  },
+  {
+   "ouacValue": "3.00",
+   "scales": [
+    "",
+    "",
+    "73–76",
+    "69–71",
+    "70–74",
+    "70–74",
+    "B",
+    "B",
+    "B"
+   ]
+  },
+  {
+   "ouacValue": "2.70",
+   "scales": [
+    "6",
+    "5",
+    "70–72",
+    "66–68",
+    "65–69",
+    "65–69",
+    "B-",
+    "B-",
+    ""
+   ]
+  },
+  {
+   "ouacValue": "2.30",
+   "scales": [
+    "5",
+    "4",
+    "67–69",
+    "64–65",
+    "60–64",
+    "60–64",
+    "C+",
+    "C+",
+    "C+"
+   ]
+  },
+  {
+   "ouacValue": "2.00",
+   "scales": [
+    "",
+    "",
+    "63–66",
+    "62–63",
+    "55–59",
+    "55–59",
+    "C",
+    "C",
+    "C"
+   ]
+  },
+  {
+   "ouacValue": "1.70",
+   "scales": [
+    "4",
+    "3",
+    "60–62",
+    "60–61",
+    "50–54",
+    "",
+    "C-",
+    "C-",
+    ""
+   ]
+  },
+  {
+   "ouacValue": "1.30",
+   "scales": [
+    "",
+    "2",
+    "57–59",
+    "56–59",
+    "",
+    "",
+    "D+",
+    "D+",
+    "D+"
+   ]
+  },
+  {
+   "ouacValue": "1.00",
+   "scales": [
+    "",
+    "",
+    "53–56",
+    "53–55",
+    "",
+    "50–54",
+    "D",
+    "D",
+    "D"
+   ]
+  },
+  {
+   "ouacValue": "0.70",
+   "scales": [
+    "",
+    "",
+    "50–52",
+    "50–52",
+    "",
+    "",
+    "D-",
+    "D-",
+    ""
+   ]
+  },
+  {
+   "ouacValue": "0.00",
+   "scales": [
+    "3",
+    "1",
+    "≤ 49",
+    "≤ 49",
+    "≤ 49",
+    "≤ 49",
+    "E/F",
+    "E/F",
+    "E/F"
+   ]
+  }
+ ],
+ "universities": [
+  {
+   "name": "Acadia",
+   "scales": [
+    7
+   ]
+  },
+  {
+   "name": "Alberta",
+   "scales": [
+    7
+   ]
+  },
+  {
+   "name": "Algoma",
+   "scales": [
+    3
+   ]
+  },
+  {
+   "name": "Athabasca",
+   "scales": [
+    7
+   ]
+  },
+  {
+   "name": "Bishop’s",
+   "scales": [
+    3
+   ]
+  },
+  {
+   "name": "Brandon",
+   "scales": [
+    7
+   ]
+  },
+  {
+   "name": "Brock",
+   "scales": [
+    3
+   ]
+  },
+  {
+   "name": "Calgary",
+   "scales": [
+    7
+   ]
+  },
+  {
+   "name": "Cape Breton",
+   "scales": [
+    3
+   ]
+  },
+  {
+   "name": "Carleton",
+   "scales": [
+    7
+   ]
+  },
+  {
+   "name": "Capilano",
+   "scales": [
+    7
+   ]
+  },
+  {
+   "name": "Concordia",
+   "scales": [
+    7
+   ]
+  },
+  {
+   "name": "Dalhousie",
+   "scales": [
+    3,
+    7
+   ]
+  },
+  {
+   "name": "Guelph",
+   "scales": [
+    3
+   ]
+  },
+  {
+   "name": "Lakehead",
+   "scales": [
+    3
+   ]
+  },
+  {
+   "name": "Laurentian",
+   "scales": [
+    7
+   ]
+  },
+  {
+   "name": "Laval",
+   "scales": [
+    7
+   ]
+  },
+  {
+   "name": "Lethbridge",
+   "scales": [
+    7
+   ]
+  },
+  {
+   "name": "Manitoba",
+   "scales": [
+    9
+   ]
+  },
+  {
+   "name": "McGill",
+   "scales": [
+    8
+   ]
+  },
+  {
+   "name": "McMaster",
+   "scales": [
+    7
+   ]
+  },
+  {
+   "name": "Memorial",
+   "scales": [
+    6
+   ]
+  },
+  {
+   "name": "Moncton",
+   "scales": [
+    7
+   ]
+  },
+  {
+   "name": "Montreal",
+   "scales": [
+    7
+   ]
+  },
+  {
+   "name": "Mt. Allison",
+   "scales": [
+    7
+   ]
+  },
+  {
+   "name": "Mt. Royal",
+   "scales": [
+    7
+   ]
+  },
+  {
+   "name": "Mt. St. Vincent",
+   "scales": [
+    7
+   ]
+  },
+  {
+   "name": "New Brunswick",
+   "scales": [
+    7
+   ]
+  },
+  {
+   "name": "Nipissing",
+   "scales": [
+    3
+   ]
+  },
+  {
+   "name": "OCAD",
+   "scales": [
+    3
+   ]
+  },
+  {
+   "name": "Ontario Tech",
+   "scales": [
+    7
+   ]
+  },
+  {
+   "name": "Ottawa",
+   "scales": [
+    7
+   ]
+  },
+  {
+   "name": "Prince Edward Island",
+   "scales": [
+    3
+   ]
+  },
+  {
+   "name": "Quebec",
+   "scales": [
+    7
+   ]
+  },
+  {
+   "name": "Queen’s",
+   "scales": [
+    3,
+    7
+   ]
+  },
+  {
+   "name": "Quest",
+   "scales": [
+    8
+   ]
+  },
+  {
+   "name": "Regina",
+   "scales": [
+    3
+   ]
+  },
+  {
+   "name": "RMC",
+   "scales": [
+    4,
+    7
+   ]
+  },
+  {
+   "name": "Royal Roads",
+   "scales": [
+    7
+   ]
+  },
+  {
+   "name": "Saskatchewan",
+   "scales": [
+    3
+   ]
+  },
+  {
+   "name": "Sherbrooke",
+   "scales": [
+    7
+   ]
+  },
+  {
+   "name": "Simon Fraser",
+   "scales": [
+    7
+   ]
+  },
+  {
+   "name": "St. Francis Xavier",
+   "scales": [
+    3
+   ]
+  },
+  {
+   "name": "St. Mary’s",
+   "scales": [
+    7
+   ]
+  },
+  {
+   "name": "St. Thomas",
+   "scales": [
+    7
+   ]
+  },
+  {
+   "name": "Ste-Anne",
+   "scales": [
+    7
+   ]
+  },
+  {
+   "name": "Thompson Rivers",
+   "scales": [
+    7
+   ]
+  },
+  {
+   "name": "Toronto",
+   "scales": [
+    3,
+    7
+   ]
+  },
+  {
+   "name": "Toronto Met",
+   "scales": [
+    7
+   ]
+  },
+  {
+   "name": "Trent",
+   "scales": [
+    3
+   ]
+  },
+  {
+   "name": "Trinity Western",
+   "scales": [
+    7
+   ]
+  },
+  {
+   "name": "UBC",
+   "scales": [
+    7
+   ]
+  },
+  {
+   "name": "UNBC",
+   "scales": [
+    7
+   ]
+  },
+  {
+   "name": "Victoria",
+   "scales": [
+    3,
+    7
+   ]
+  },
+  {
+   "name": "Waterloo",
+   "scales": [
+    3,
+    7
+   ]
+  },
+  {
+   "name": "Western",
+   "scales": [
+    3
+   ]
+  },
+  {
+   "name": "Wilfrid Laurier",
+   "scales": [
+    7
+   ]
+  },
+  {
+   "name": "Windsor",
+   "scales": [
+    3,
+    7
+   ]
+  },
+  {
+   "name": "Winnipeg",
+   "scales": [
+    7
+   ]
+  },
+  {
+   "name": "York",
+   "scales": [
+    9
+   ]
+  }
+ ]
+}

@@ -5,6 +5,8 @@ import { createPageMetadata } from "@/lib/seo/metadata";
 import { pageDescription, pageTitle } from "@/lib/seo/page-copy";
 import { calculatorKeywords } from "@/lib/seo/keywords";
 import { calculatorBySlug } from "@/config/calculators";
+import { GeoLinkList } from "@/components/content/GeoProgrammaticPage";
+import { usEocStateLinkGroup } from "@/lib/seo/geo-programmatic";
 
 const config = calculatorBySlug["eoc-grade-calculator"];
 
@@ -17,5 +19,11 @@ export const metadata = createPageMetadata({
 });
 
 export default function EocGradeCalculatorPage() {
-  return <CalculatorRoute slug="eoc-grade-calculator" calculator={<EocGradeCalculator />} />;
+  return (
+    <CalculatorRoute
+      slug="eoc-grade-calculator"
+      calculator={<EocGradeCalculator />}
+      below={<GeoLinkList group={usEocStateLinkGroup()} />}
+    />
+  );
 }
