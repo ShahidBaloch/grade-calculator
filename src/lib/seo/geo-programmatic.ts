@@ -1,6 +1,10 @@
+import { calculatorBySlug, getCalculatorPath } from "@/config/calculators";
 import { absoluteUrl } from "@/config/site";
 import { caUniversityProfiles, type CaUniversityProfile } from "@/data/geo-sources/ca-universities";
 import { usEocStateRules, type UsEocStateRule } from "@/data/geo-sources/us-eoc-states";
+import { getScale } from "@/lib/grading-scales";
+import { calculatorRegionalVersions } from "@/lib/seo/hreflang";
+import type { CalculatorSlug } from "@/types/calculator";
 
 /**
  * Geo pages built from verified source data (src/data/geo-sources).
@@ -83,4 +87,32 @@ export function hubGeoLinkGroups(hubPath: string): GeoLinkGroup[] {
   if (hubPath === "/ca") return [caUniversityLinkGroup()];
   if (hubPath === "/us") return [usEocStateLinkGroup()];
   return [];
+}
+
+/**
+ * Every version of a tool in its hreflang group, minus the page being viewed.
+ * Links the worldwide page to its country twins and each twin to its siblings.
+ */
+export function calculatorCountryVersionsGroup(slug: CalculatorSlug, pagePath: string): GeoLinkGroup | null {
+  const regional = calculatorRegionalVersions(slug);
+  if (regional.length === 0) return null;
+  const name = calculatorBySlug[slug].name;
+  const links = [
+    {
+      href: getCalculatorPath(slug),
+      title: name,
+      description: "The worldwide version of this calculator.",
+    },
+    ...regional.map(({ hub, path }) => ({
+      href: path,
+      title: `${hub.name} ${name}`,
+      description: `Uses the ${getScale(hub.scaleId).name}.`,
+    })),
+  ].filter((link) => link.href !== pagePath);
+
+  return {
+    heading: `${name} for other countries`,
+    intro: "Same calculator, set up for each country's grading scale.",
+    links,
+  };
 }

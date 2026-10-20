@@ -72,7 +72,7 @@ export function GeoLinkList({ group }: { group: GeoLinkGroup }) {
       <ul className="space-y-2 text-sm">
         {group.links.map((link) => (
           <li key={link.href}>
-            <Link href={link.href} className="font-medium text-[var(--color-primary)] hover:underline">
+            <Link href={link.href} className="inline-flex min-h-6 items-center font-medium text-[var(--color-primary)] hover:underline">
               {link.title}
             </Link>
             <span className="block text-[var(--color-text-muted)]">{link.description}</span>

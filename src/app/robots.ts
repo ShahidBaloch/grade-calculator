@@ -3,7 +3,6 @@ import { siteConfig } from "@/config/site";
 import {
   blockedCrawlerUserAgents,
   bingSearchUserAgents,
-  generalCrawlerCrawlDelaySeconds,
   googleSearchUserAgents,
   otherSearchUserAgents,
   robotsDisallowPaths,
@@ -37,7 +36,6 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: "*",
         allow: "/",
         disallow,
-        crawlDelay: generalCrawlerCrawlDelaySeconds,
       },
     ],
     sitemap: `${siteConfig.url}/sitemap.xml`,

@@ -29,7 +29,7 @@ const SCALE_TOOLS: Partial<Record<ScaleId, CalculatorSlug[]>> = {
   "ca-four-three-three": [],
   "nz-nine-point": ["gpa-calculator", "letter-grade-calculator", "cumulative-gpa-calculator"],
   "in-ten-point": ["gpa-calculator", "cgpa-calculator", "cgpa-to-percentage", "sgpa-to-cgpa", "cgpa-to-gpa"],
-  "pk-hec": ["gpa-calculator", "cumulative-gpa-calculator", "cgpa-calculator", "cgpa-to-percentage", "sgpa-to-cgpa"],
+  "pk-hec": ["gpa-calculator", "cumulative-gpa-calculator", "cgpa-calculator", "cgpa-to-percentage", "percentage-to-cgpa", "sgpa-to-cgpa"],
 };
 
 /** Tools outside the calculator registry (geo university pages) that use a given scale. */
@@ -54,7 +54,7 @@ function formatGpa(gpa: number | null, max: number | undefined) {
 export function GradingScaleGuide({ scale }: { scale: GradingScale }) {
   const hubPath = HUB_PATH[scale.country];
   const hub = countryHubs.find((h) => h.path === hubPath);
-  const toolSlugs = (SCALE_TOOLS[scale.id] ?? hub?.featuredCalculators ?? []).slice(0, 5);
+  const toolSlugs = SCALE_TOOLS[scale.id] ?? hub?.featuredCalculators.slice(0, 5) ?? [];
   const tools = [
     ...toolSlugs.map((slug) => ({
       href: canonicalPathForSlug(slug, hubPath),
@@ -131,7 +131,7 @@ export function GradingScaleGuide({ scale }: { scale: GradingScale }) {
           <ul className="mt-3 space-y-3">
             {tools.map((tool) => (
               <li key={tool.href}>
-                <Link href={tool.href} className="font-medium text-[var(--color-primary)] hover:underline">
+                <Link href={tool.href} className="inline-flex min-h-6 items-center font-medium text-[var(--color-primary)] hover:underline">
                   {tool.label}
                 </Link>
                 <span className="text-[var(--color-text-muted)]"> — {tool.description}</span>

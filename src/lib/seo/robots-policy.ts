@@ -56,12 +56,6 @@ export const yandexSearchUserAgents = ["YandexBot", "YandexImages", "YandexMobil
 /** Other major search crawlers — full allow, no delay. */
 export const otherSearchUserAgents = ["Applebot", "DuckDuckBot", "Slurp"] as const;
 
-/**
- * Polite throttle for unknown bots hitting User-agent: *.
- * Google and Bingbot ignore Crawl-delay; Yandex may use it for non-YandexBot agents.
- */
-export const generalCrawlerCrawlDelaySeconds = 5;
-
 /** @deprecated Use split lists above; kept for tests that expect one combined allow-list. */
 export const preferredSearchUserAgents = [
   ...googleSearchUserAgents,
