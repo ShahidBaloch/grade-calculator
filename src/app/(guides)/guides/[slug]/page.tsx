@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: PageProps) {
     keywords: guide.keywords,
   });
 }
-// just checking
+
 export default async function GuidePage({ params }: PageProps) {
   const { slug } = await params;
   const guide = guideBySlug[slug];
