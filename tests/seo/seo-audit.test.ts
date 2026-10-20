@@ -223,7 +223,7 @@ describe("SEO audit", () => {
   it("resource link titles match guide and grading scale page titles", () => {
     const guideTitleByPath = new Map(guides.map((guide) => [guide.path, guide.title]));
     const scaleTitleByPath = new Map<string, string>([
-      ...gradingScalePages.map((page) => [page.path, page.title]),
+      ...gradingScalePages.map((page): [string, string] => [page.path, page.title]),
       ["/grading-scales", "Grading Scales by Country"],
     ]);
     for (const calculator of calculators) {
@@ -295,7 +295,8 @@ describe("SEO audit", () => {
     expect(canonical).toBe(canonicalUrlForPath("/gpa-calculator"));
     expect(meta.openGraph?.url).toBe(canonical);
     for (const href of Object.values(meta.alternates?.languages ?? {})) {
-      expect(assertSameOrigin(href)).toBe(true);
+      expect(typeof href).toBe("string");
+      expect(assertSameOrigin(href as string)).toBe(true);
     }
   });
 
