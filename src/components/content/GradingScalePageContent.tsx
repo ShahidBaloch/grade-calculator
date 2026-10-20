@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { GradingScaleGuide } from "@/components/content/GradingScaleGuide";
 import { GradingScaleTable } from "@/components/content/GradingScaleTable";
 import { gradingScalePages } from "@/config/grading-scale-pages";
 import { getScale } from "@/lib/grading-scales";
@@ -11,6 +12,7 @@ export function GradingScalePageContent({ config }: { config: GradingScalePageCo
     <div className="space-y-8">
       <p className="leading-relaxed text-[var(--color-text-muted)]">{config.intro}</p>
       <GradingScaleTable scale={scale} />
+      <GradingScaleGuide scale={scale} />
       <section>
         <h2 className="text-xl font-semibold">Important notes</h2>
         <ul className="mt-3 list-disc space-y-2 pl-5 text-[var(--color-text-muted)]">

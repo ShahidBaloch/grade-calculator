@@ -4,12 +4,13 @@ import { calculatorBySlug } from "@/config/calculators";
 import { calculatorHreflangLanguages } from "@/lib/seo/hreflang";
 import { calculatorKeywords } from "@/lib/seo/keywords";
 import { createPageMetadata } from "@/lib/seo/metadata";
+import { pageDescription, pageTitle } from "@/lib/seo/page-copy";
 
 const config = calculatorBySlug["gcse-grade-calculator"];
 
 export const metadata = createPageMetadata({
-  title: "GCSE Grade Calculator — Percentage to 9–1",
-  description: config.description,
+  title: pageTitle(config.path, "GCSE Grade Calculator — Percentage to 9–1"),
+  description: pageDescription(config.path, config.description),
   path: config.path,
   keywords: calculatorKeywords["gcse-grade-calculator"],
   languages: calculatorHreflangLanguages("gcse-grade-calculator"),

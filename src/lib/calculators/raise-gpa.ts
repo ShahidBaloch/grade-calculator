@@ -20,6 +20,12 @@ export function calculateRaiseGpa(input: RaiseGpaInput): CalculatorResult<RaiseG
   if (futureCredits <= 0) {
     return { status: "error", errors: ["Future credits must be greater than 0"] };
   }
+  if (currentGpa > ceiling) {
+    return { status: "error", errors: [`Current GPA can't be above ${ceiling.toFixed(1)} on this scale`] };
+  }
+  if (targetGpa > ceiling) {
+    return { status: "error", errors: [`Target GPA can't be above ${ceiling.toFixed(1)} on this scale`] };
+  }
 
   const totalCredits = currentCredits + futureCredits;
   const requiredGpa =

@@ -56,6 +56,6 @@ describe("print DOM helpers", () => {
 
   it("buildPrintDocumentTitle matches homepage heading", () => {
     const title = buildPrintDocumentTitle("Grade Calculator & Easy Grader", new Date(2026, 8, 27));
-    expect(title).toBe("Grade Calculator & Easy Grader - GradeCalculator - 2026-09-27");
+    expect(title).toBe("Grade Calculator & Easy Grader - GradCalc - 2026-09-27");
   });
 });

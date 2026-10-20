@@ -23,7 +23,7 @@ export async function sendContactEmail(values: ContactFormValues): Promise<SendC
     return { ok: false, reason: "invalid_from" };
   }
 
-  const subject = `GradeCalculator contact from ${values.name}`;
+  const subject = `GradCalc contact from ${values.name}`;
   const text = [
     `Name: ${values.name}`,
     `Email: ${values.email}`,

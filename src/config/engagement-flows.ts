@@ -9,6 +9,24 @@ export interface EngagementFlow {
 
 export const engagementFlows: EngagementFlow[] = [
   {
+    from: "grade-chart",
+    to: "average-grade-calculator",
+    title: "Average the whole class",
+    description: "Paste every student's score to get the class average, median, high, and low.",
+  },
+  {
+    from: "average-grade-calculator",
+    to: "weighted-grade-calculator",
+    title: "Do categories count differently?",
+    description: "Use the weighted grade calculator when homework, quizzes, and exams have different weights.",
+  },
+  {
+    from: "average-grade-calculator",
+    to: "final-grade-calculator",
+    title: "What do you need on your final?",
+    description: "Use your current average to plan your final exam target.",
+  },
+  {
     from: "ez-grader",
     to: "weighted-grade-calculator",
     title: "Add this score to your course average",

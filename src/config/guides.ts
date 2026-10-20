@@ -119,7 +119,6 @@ export const guides: GuideConfig[] = [
       "Find out what score you need on your final exam to reach your target course grade, with the formula and examples.",
     keywords: [
       "what grade do i need on my final",
-      "final exam calculator",
       "what do i need on my final",
     ],
     readTime: "11 min read",
@@ -291,16 +290,17 @@ export const guides: GuideConfig[] = [
   {
     slug: "lms-course-grades-explained",
     path: "/guides/lms-course-grades-explained",
-    title: "LMS Course Grades Explained",
+    title: "What Does LMS Graded Mean? LMS Grades Explained",
     description:
-      "How Canvas, Blackboard, Moodle, and Google Classroom turn assignments into a course grade — and which free calculator to use on GradeCalculator (gradcalc.com).",
+      "LMS graded means a score was recorded in your learning management system (Canvas, Blackboard, Moodle). See how LMS grades become your course grade.",
     keywords: [
-      "canvas grade calculator",
+      "what does lms graded mean",
+      "lms graded meaning",
+      "lms grading system",
       "blackboard grade calculator",
       "moodle grade calculator",
       "google classroom grade calculator",
       "lms grade calculator",
-      "canvas assignment groups",
     ],
     readTime: "11 min read",
     embeddedCalculator: "canvas-grade-calculator",
@@ -315,6 +315,11 @@ export const guides: GuideConfig[] = [
       "final-grade-calculator",
     ],
     sections: [
+      {
+        heading: "What does “LMS graded” mean?",
+        body:
+          "“LMS graded” means the score was entered or calculated inside your school’s learning management system (LMS) — Canvas, Blackboard, Moodle, D2L Brightspace, or Google Classroom — rather than recorded only on paper or in a separate records system. An LMS-graded item counts toward the running course total your portal shows. That total is usually still a working grade: the final grade is posted to your transcript by the registrar, often after the teacher reviews it.",
+      },
       {
         heading: "Every LMS is a weighted average",
         body:
@@ -341,7 +346,7 @@ export const guides: GuideConfig[] = [
           "Classroom lists assignments with points but may not expose full category weights. If your teacher publishes category weights, use the weighted calculator. If everything is total points, add earned points and divide by possible points, or score each assignment in the test grade tool.",
       },
       {
-        heading: "Which GradeCalculator tool should I use?",
+        heading: "Which GradCalc tool should I use?",
         body:
           "Canvas-style group weights → Canvas grade calculator. Paper syllabus or Blackboard/Moodle categories → weighted grade calculator. Planning a final exam target after you know your LMS average → final grade calculator.",
       },
@@ -357,6 +362,11 @@ export const guides: GuideConfig[] = [
       },
     ],
     faqs: [
+      {
+        question: "What does LMS graded mean?",
+        answer:
+          "It means the assignment or course was scored in a learning management system such as Canvas, Blackboard, or Moodle. The LMS total is a working grade; your official final grade is the one your school posts to your transcript.",
+      },
       {
         question: "Is there a Blackboard grade calculator?",
         answer:
@@ -382,7 +392,6 @@ export const guides: GuideConfig[] = [
       "Learn how weighted averages work for course grades, with a step-by-step formula and free weighted grade calculator.",
     keywords: [
       "how to calculate weighted grades",
-      "weighted grade calculator",
       "weighted average grade",
     ],
     readTime: "11 min read",
@@ -467,10 +476,10 @@ export const guides: GuideConfig[] = [
   {
     slug: "gpa-scale-explained",
     path: "/guides/gpa-scale-explained",
-    title: "GPA Scale Explained",
+    title: "4.0 vs 5.0 vs 7.0: Different GPA Scales Explained",
     description:
       "How 4.0, 4.33, 5.0, and 7.0 GPA scales differ, and how to read letter grades on each one.",
-    keywords: ["gpa scale", "4.0 scale", "gpa explained", "letter grade gpa"],
+    keywords: ["4.0 vs 5.0 gpa scale", "different gpa scales", "gpa scales explained", "4.33 gpa scale", "7 point gpa scale"],
     readTime: "11 min read",
     relatedGuides: ["weighted-vs-unweighted-gpa", "how-to-calculate-gpa", "gpa-glossary"],
     relatedCalculators: ["gpa-calculator", "percentage-to-letter-grade", "degree-classification-calculator", "atar-calculator"],
@@ -600,7 +609,7 @@ export const guides: GuideConfig[] = [
     title: "How to Raise Your GPA",
     description:
       "See why leftover credits matter more than motivation, and calculate the GPA you still need.",
-    keywords: ["how to raise gpa", "raise gpa calculator", "improve gpa"],
+    keywords: ["how to raise gpa", "improve gpa"],
     readTime: "8 min read",
     embeddedCalculator: "raise-gpa-calculator",
     relatedGuides: ["how-to-calculate-gpa", "what-grade-do-i-need-on-my-final"],
@@ -912,7 +921,7 @@ export const guides: GuideConfig[] = [
     path: "/guides/gpa-glossary",
     title: "GPA & Grading Glossary",
     description:
-      "Plain-language definitions of GPA, CGPA, SGPA, quality points, weighted GPA, and other terms used on GradeCalculator (gradcalc.com).",
+      "Plain-language definitions of GPA, CGPA, SGPA, quality points, weighted GPA, and other terms used on GradCalc (gradcalc.com).",
     keywords: [
       "gpa glossary",
       "what is cgpa",
@@ -952,7 +961,7 @@ export const guides: GuideConfig[] = [
       {
         heading: "Letter grade vs percentage",
         body:
-          "Percentage is raw score out of 100. Letter grades are bands (A, B+, etc.) mapped from percentage using your school's scale. GradeCalculator lets you pick a scale preset; cut-offs can differ from your syllabus.",
+          "Percentage is raw score out of 100. Letter grades are bands (A, B+, etc.) mapped from percentage using your school's scale. GradCalc lets you pick a scale preset; cut-offs can differ from your syllabus.",
       },
       {
         heading: "Weighted course grade (assignments)",

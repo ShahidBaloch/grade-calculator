@@ -29,7 +29,7 @@ export function ExampleScenarios({ examples, onSelect, activeValues }: ExampleSc
   if (examples.length === 0) return null;
 
   return (
-    <fieldset className="no-print space-y-2">
+    <fieldset className="no-print min-w-0 space-y-2">
       <legend className="text-sm font-medium text-[var(--color-text)]">Try an example scenario</legend>
       <p className="text-xs text-[var(--color-text-muted)]">
         Optional — loads sample inputs so you can explore the calculator. Your grades are not sent to our

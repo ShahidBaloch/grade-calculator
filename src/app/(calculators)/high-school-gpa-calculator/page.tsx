@@ -2,14 +2,15 @@ import { CalculatorRoute } from "@/components/calculators/CalculatorRoute";
 import { HighSchoolGpaCalculator } from "@/components/calculators/HighSchoolGpaCalculator";
 import { calculatorHreflangLanguages } from "@/lib/seo/hreflang";
 import { createPageMetadata } from "@/lib/seo/metadata";
+import { pageDescription, pageTitle } from "@/lib/seo/page-copy";
 import { calculatorKeywords } from "@/lib/seo/keywords";
 import { calculatorBySlug } from "@/config/calculators";
 
 const config = calculatorBySlug["high-school-gpa-calculator"];
 
 export const metadata = createPageMetadata({
-  title: "High School GPA Calculator",
-  description: config.description,
+  title: pageTitle("/high-school-gpa-calculator", "High School GPA Calculator"),
+  description: pageDescription("/high-school-gpa-calculator", config.description),
   path: "/high-school-gpa-calculator",
   keywords: calculatorKeywords["high-school-gpa-calculator"],
   languages: calculatorHreflangLanguages("high-school-gpa-calculator"),

@@ -32,6 +32,14 @@ export const calculatorResourceLinks: Record<CalculatorSlug, CalculatorResourceL
     guide: guide("how-to-calculate-weighted-grades"),
     gradingScale: gradingScalesHub,
   },
+  "average-grade-calculator": {
+    guide: guide("how-to-calculate-weighted-grades"),
+    gradingScale: scale("us"),
+  },
+  "grade-chart": {
+    guide: guide("understanding-letter-grades"),
+    gradingScale: scale("us"),
+  },
   "final-grade-calculator": {
     guide: guide("what-grade-do-i-need-on-my-final"),
     gradingScale: gradingScalesHub,

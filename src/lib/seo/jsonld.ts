@@ -96,7 +96,7 @@ export function contactPageJsonLd() {
     name: `Contact ${siteConfig.name}`,
     url: absoluteUrl("/contact"),
     description:
-      "Contact GradeCalculator for calculator questions, formula corrections, and site feedback.",
+      "Contact GradCalc for calculator questions, formula corrections, and site feedback.",
     inLanguage: "en-US",
     isPartOf: {
       "@type": "WebSite",

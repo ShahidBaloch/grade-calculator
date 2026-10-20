@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "GradeCalculator — free grade and GPA tools";
+export const alt = "GradCalc — free grade and GPA tools";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -19,7 +19,7 @@ export default function OpenGraphImage() {
           color: "white",
         }}
       >
-        <div style={{ fontSize: 28, color: "#5eead4", marginBottom: 16 }}>GradeCalculator</div>
+        <div style={{ fontSize: 28, color: "#5eead4", marginBottom: 16 }}>GradCalc</div>
         <div style={{ fontSize: 64, fontWeight: 700, lineHeight: 1.1, maxWidth: 900 }}>
           Free grade and GPA calculators
         </div>

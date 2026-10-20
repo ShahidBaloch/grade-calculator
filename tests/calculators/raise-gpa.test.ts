@@ -46,4 +46,10 @@ describe("calculateRaiseGpa", () => {
     expect(result.data?.requiredGpa).toBeCloseTo(4.7, 5);
     expect(result.data?.status).toBe("impossible");
   });
+
+  it("rejects a current or target GPA above the scale maximum", () => {
+    const base = { currentGpa: 3.0, currentCredits: 60, targetGpa: 3.5, futureCredits: 30 };
+    expect(calculateRaiseGpa({ ...base, currentGpa: 4.2 }).status).toBe("error");
+    expect(calculateRaiseGpa({ ...base, targetGpa: 4.4 }).status).toBe("error");
+  });
 });

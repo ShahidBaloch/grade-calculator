@@ -20,7 +20,7 @@ export default function FaqPage() {
       <BreadcrumbJsonLd items={breadcrumbs} />
       <ContentPageLayout
         title="Frequently Asked Questions"
-        description="Everything you need to know about using GradeCalculator."
+        description="Everything you need to know about using GradCalc."
         breadcrumbs={breadcrumbs}
       >
         <FaqAccordion faqs={siteFaqs} />

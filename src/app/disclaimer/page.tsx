@@ -12,7 +12,7 @@ export const metadata = createPageMetadata({
   title: pageTitle("/disclaimer", "Educational Disclaimer"),
   description: pageDescription(
     "/disclaimer",
-    "GradeCalculator (gradcalc.com) provides planning calculators only. Results are not official grades, GPAs, ATARs, or transcript values — always confirm with your school.",
+    "GradCalc (gradcalc.com) provides planning calculators only. Results are not official grades, GPAs, ATARs, or transcript values — always confirm with your school.",
   ),
   path: "/disclaimer",
 });

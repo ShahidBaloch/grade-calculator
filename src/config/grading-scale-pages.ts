@@ -16,10 +16,10 @@ export const gradingScalePages: GradingScalePageConfig[] = [
     slug: "us",
     path: "/grading-scales/us",
     scaleId: "us-standard",
-    title: "Common US 4.0 GPA Scale",
+    title: "GPA Scale — US 4.0 Letter Grade & Percentage Chart",
     description:
-      "Complete US letter grade to percentage and 4.0 GPA conversion chart. A+, A, A- through F with percentage ranges.",
-    keywords: ["grading scale", "us grading scale", "4.0 gpa scale", "letter grade to percentage"],
+      "US 4.0 GPA scale chart: every letter grade from A+ to F with its percentage range and grade points. Free reference table plus a GPA calculator.",
+    keywords: ["gpa scale", "4.0 gpa scale", "grading scale", "us grading scale", "gpa scale chart"],
     intro:
       "The common US 4.0 GPA scale is widely used in American high schools and colleges. Letter grades map to percentage ranges, and each letter converts to GPA points for semester calculations. Percentage cutoffs vary by school, district, college, and instructor — verify your institution's grading policy.",
     notes: [
@@ -101,7 +101,7 @@ export const gradingScalePages: GradingScalePageConfig[] = [
     slug: "canada",
     path: "/grading-scales/canada",
     scaleId: "ca-standard",
-    title: "Illustrative Canadian Percentage-to-GPA Preset (4.0 cap)",
+    title: "Canada Grading Scale — Percentage to 4.0 GPA (Example)",
     description:
       "Example Canadian letter bands and 4.0 GPA points for planning — not a single national standard used at every university.",
     keywords: ["canadian grading scale", "canada gpa scale", "letter grade canada"],
@@ -134,13 +134,14 @@ export const gradingScalePages: GradingScalePageConfig[] = [
     slug: "new-zealand",
     path: "/grading-scales/new-zealand",
     scaleId: "nz-nine-point",
-    title: "New Zealand GPA Scale (9.0)",
+    title: "NZ University Grading Scale — UC & Auckland 9-Point",
     description:
-      "New Zealand university letter grades with percentage ranges and 9-point GPA values. A+ equals 9.0. Not an NCEA secondary-school result.",
-    keywords: ["nz grading scale", "new zealand gpa", "9 point gpa scale"],
+      "New Zealand university grade scale used at UC (University of Canterbury) and Auckland: A+ to C- with percentage ranges and 9-point GPA values. A+ = 9.0.",
+    keywords: ["uc grading scale", "uc grade scale", "nz grading scale", "new zealand gpa", "9 point gpa scale"],
     intro:
       "New Zealand universities commonly use a 9-point GPA scale. Letter grades map to percentage bands similar to other Commonwealth systems.",
     notes: [
+      "University of Canterbury (UC) and the University of Auckland use these A+ to C- passing bands and 9-point values. Failing grades differ (UC uses D and E; Auckland uses D+, D, and D-) — check your university calendar.",
       "NCEA uses a separate standards-based system for secondary school.",
       "University boundaries may vary slightly by institution.",
       "Our calculators use the NZ 9-point preset for university-style grading.",
@@ -168,7 +169,7 @@ export const gradingScalePages: GradingScalePageConfig[] = [
     scaleId: "in-ten-point",
     title: "India 10-Point CGPA Scale",
     description:
-      "Illustrative India university 10-point CGPA letter bands (O through F) with percentage ranges. IIT, NIT, and state university cutoffs vary — verify against your institution's table.",
+      "Illustrative Indian 10-point CGPA bands (O to F) with percentage ranges. IIT, NIT, and state university cut-offs vary — check your institution's table.",
     keywords: ["india cgpa scale", "10 point cgpa", "ugc grading scale", "cbse cgpa"],
     intro:
       "This chart is an illustrative 10-point university preset (O–F) for planning. Letter cutoffs vary by campus. CBSE board marks and university CGPA are different systems. CBSE historically used ×9.5 on some certificates; UGC does not publish one national ×9.5 rule.",

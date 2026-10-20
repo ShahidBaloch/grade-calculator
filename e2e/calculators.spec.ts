@@ -125,10 +125,13 @@ test.describe("Core calculator flows", () => {
     await expect(page.getByRole("heading", { level: 1, name: /ez grader/i })).toBeVisible();
   });
 
-  test("legacy average-grade URL redirects", async ({ page }) => {
-    await page.goto("/average-grade-calculator");
-    await expect(page).toHaveURL(/\/weighted-grade-calculator$/);
-    await expect(page.getByRole("heading", { level: 1, name: /weighted grade/i })).toBeVisible();
+  test("average grade calculator averages scores and class-average alias redirects", async ({ page }) => {
+    await page.goto("/class-average-calculator");
+    await expect(page).toHaveURL(/\/average-grade-calculator$/);
+    await expect(page.getByRole("heading", { level: 1, name: /average grade/i })).toBeVisible();
+    await page.getByLabel("Paste a class list of scores").fill("90, 80, 70");
+    await page.getByRole("button", { name: "Use these scores" }).click();
+    await expect(page.getByText("80.0%").first()).toBeVisible();
   });
 
   test("Pakistan grading scale reference shows D+ and HEC source link", async ({ page }) => {

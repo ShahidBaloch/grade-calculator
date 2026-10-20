@@ -3,7 +3,7 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
   "/": {
     title: "Grade Calculator & Easy Grader",
     description:
-      "Free grade calculator and easy grader for quizzes and tests. Score by wrong answers, then open weighted grades, final exam score needed, and GPA. Scale follows your location.",
+      "Free grade calculator and easy grader for quizzes and tests. Score by wrong answers, then check weighted grades, final exam scores, and GPA.",
   },
   "/weighted-grade-calculator": {
     title: "Weighted Grade Calculator — Course & Class Average",
@@ -20,6 +20,16 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
     description:
       "Free GPA calculator for semester and term GPA. Add courses with letter grades or percentages and credit hours on your grading scale.",
   },
+  "/average-grade-calculator": {
+    title: "Average Grade Calculator — Test & Class Average",
+    description:
+      "Free average grade calculator: average test scores, marks, or a whole class list. Paste scores to get the mean, median, high, low, and letter grade.",
+  },
+  "/grade-chart": {
+    title: "Grade Chart — Score to Percentage & Letter Grade",
+    description:
+      "Free printable grade chart: every score out of 10, 20, 50, 100, 150, 200, or any total, with its percentage, letter grade, and points needed per grade.",
+  },
   "/final-grade-calculator": {
     title: "Final Grade Calculator — Exam Score Needed",
     description:
@@ -28,7 +38,7 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
   "/uc-gpa-calculator": {
     title: "UC & CSU GPA Calculator — Capped A–G Average",
     description:
-      "Estimate a UC or CSU A–G GPA. UC caps at 8 honors points using grades 10–11 only; CSU includes grade 12 with only 2 honors points. Not an official application GPA.",
+      "Estimate a UC or CSU A–G GPA. UC caps at 8 honors points using grades 10–11 only; CSU includes grade 12 with only 2 honors points.",
   },
   "/middle-school-gpa-calculator": {
     title: "Middle School GPA Calculator — Junior High",
@@ -46,39 +56,39 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
       "Calculate a weighted GPA that adds Honors (+0.5) and AP or IB (+1.0) bonus points. See both weighted and unweighted results side by side on a 5.0 scale.",
   },
   "/raise-gpa-calculator": {
-    title: "Raise GPA Calculator — Credits Needed to Hit Your Target",
+    title: "Raise GPA Calculator — Credits to Hit Your Target",
     description:
       "Find how many credit hours and what grade you need to reach your target GPA. Enter current GPA and credits, set a goal, and plan semester by semester.",
   },
   "/high-school-gpa-calculator": {
     title: "High School GPA Calculator — Weighted & Unweighted",
     description:
-      "Calculate a high school GPA by semester with optional Honors and AP/IB bonus points. Tracks cumulative GPA across all four years on the standard 4.0 or 5.0 scale.",
+      "Calculate high school GPA by semester with optional Honors and AP/IB bonus points. Tracks cumulative GPA over four years on a 4.0 or 5.0 scale.",
   },
   "/college-gpa-calculator": {
     title: "College GPA Calculator — Semester GPA by Credit Hours",
     description:
-      "Calculate a college semester GPA weighted by credit hours. Excludes pass/fail and audited courses. Shows dean's list and good-standing thresholds on a standard 4.0 scale.",
+      "Calculate college semester GPA weighted by credit hours. Excludes pass/fail and audited courses, and shows dean's list and good-standing thresholds.",
   },
   "/percentage-to-letter-grade": {
     title: "Percentage to Letter Grade Converter — A–F Scale",
     description:
-      "Convert any percentage score to a letter grade and GPA points instantly. Supports US, Canadian, and other grading scales. See where your mark falls on the A–F table.",
+      "Convert any percentage to a letter grade and GPA points instantly. Supports US, Canadian, and other grading scales, with the full A–F table.",
   },
   "/letter-grade-calculator": {
-    title: "Letter Grade Calculator — Letter to Percentage & GPA Points",
+    title: "Letter Grade Calculator — Percentage & GPA Points",
     description:
       "Look up the percentage range and GPA quality points for any letter grade. Covers A+/A/A−, B+/B/B−, and below on standard and plus/minus grading scales.",
   },
   "/canvas-grade-calculator": {
     title: "Canvas Grade Calculator — Weighted Assignment Groups",
     description:
-      "Calculate your Canvas LMS course grade from weighted assignment groups. Enter each group's weight and your current score to find your overall grade and what you need to pass.",
+      "Calculate your Canvas course grade from weighted assignment groups. Enter each group's weight and score to see your overall grade and what you need.",
   },
   "/eoc-grade-calculator": {
-    title: "EOC Grade Calculator — End-of-Course Exam Score Needed",
+    title: "EOC Calculator — End-of-Course Exam Score Needed",
     description:
-      "Find the End-of-Course exam score you need to hit your target report-card grade. Enter your class average, the EOC weight your state requires, and your goal grade.",
+      "Free EOC calculator: enter your class average, your state's EOC weight (e.g. 30% in Florida), and your goal grade to see the End-of-Course exam score you need.",
   },
   "/degree-classification-calculator": {
     title: "UK Degree Classification Calculator — First, 2:1, 2:2, Third",
@@ -91,14 +101,14 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
       "Estimate an ATAR from scaled subject scores for NSW, Victoria, Queensland, Western Australia, or SA/NT. Covers English requirements, bonus subjects, and VET inclusions. Educational model only.",
   },
   "/gcse-grade-calculator": {
-    title: "GCSE Grade Calculator — Percentage to 9–1 England Grade",
+    title: "GCSE Grade Calculator — Percentage to 9–1 Grade",
     description:
-      "Convert a percentage mark to the England 9–1 GCSE numeric grade. See the old A*–G letter equivalent, whether it counts as a standard pass (4+), and the strong pass threshold (5+).",
+      "Convert a percentage mark to an England 9–1 GCSE grade. See the old A*–G equivalent and whether it is a standard pass (4+) or strong pass (5+).",
   },
   "/cgpa-to-percentage": {
-    title: "CGPA to Percentage Calculator — India & Pakistan Formulas",
+    title: "CGPA to Percentage Calculator — India & Pakistan",
     description:
-      "Convert CGPA to percentage using CBSE ×9.5, Anna University ×10, SPPU formula, or Pakistan HEC §13.1 band minimum. Includes the unofficial ×25 shortcut for comparison.",
+      "Convert CGPA to percentage with CBSE ×9.5, Anna University ×10, SPPU, or Pakistan HEC §13.1 formulas, plus the unofficial ×25 shortcut to compare.",
   },
   "/percentage-to-cgpa": {
     title: "Percentage to CGPA Calculator — Reverse Conversion",
@@ -106,32 +116,32 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
       "Reverse-convert a percentage mark to an estimated CGPA on India or Pakistan grading scales. Choose CBSE ×9.5, ×10, SPPU, or HEC §13.1 planning band method.",
   },
   "/sgpa-to-cgpa": {
-    title: "SGPA to CGPA Calculator — Credit-Weighted Semester Average",
+    title: "SGPA to CGPA Calculator — Credit-Weighted Average",
     description:
       "Combine semester GPAs (SGPA) and their credit totals into an overall CGPA. Credit-weighted formula works for Indian 10-point and Pakistan HEC 4.0 scales.",
   },
   "/cgpa-calculator": {
     title: "CGPA Calculator — Semester SGPA from Courses & Credits",
     description:
-      "Calculate one semester's SGPA from individual course grades and credit hours on a 10-point Indian or HEC 4.0 Pakistan scale. Add all semesters with the SGPA to CGPA tool.",
+      "Calculate one semester's SGPA from course grades and credit hours on the Indian 10-point or Pakistan HEC 4.0 scale, then combine semesters into CGPA.",
   },
   "/cgpa-to-gpa": {
     title: "CGPA to GPA Converter — India 10-Point to US 4.0",
     description:
-      "Convert an Indian 10-point CGPA to an approximate US 4.0 GPA for graduate school planning. Shows WEF formula and linear-scale methods. Educational estimate — not a credential evaluation.",
+      "Convert an Indian 10-point CGPA to an approximate US 4.0 GPA for grad school planning with linear-scale methods. An estimate, not a credential evaluation.",
   },
   "/mcmaster-gpa-to-us-gpa": {
-    title: "McMaster GPA to US 4.0 Converter — 12-Point Scale",
+    title: "McMaster GPA Calculator — 12-Point to US 4.0 GPA",
     description:
-      "Convert a McMaster University 12-point GPA to a US 4.0 equivalent using McMaster's published letter-grade table. Planning estimate for graduate school applications.",
+      "Free McMaster GPA calculator: convert a McMaster 12-point GPA to a US 4.0 equivalent using McMaster's published letter-grade table.",
   },
   "/uk-degree-to-us-gpa-reference": {
-    title: "UK Degree Class to US GPA — Approximate Reference Table",
+    title: "UK Degree Class to US GPA — Reference Table",
     description:
-      "See how a UK First, 2:1, 2:2, or Third maps to a US 4.0 GPA for planning purposes. Includes WES context and graduate-school admission guidance. Not an official conversion.",
+      "See how a UK First, 2:1, 2:2, or Third compares to a US 4.0 GPA for planning, with WES context and grad-school guidance. Not an official conversion.",
   },
   "/au/gpa-calculator": {
-    title: "Australia GPA Calculator — UQ 7-Point and Monash 4-Point",
+    title: "Australia GPA Calculator — UQ 7-Point, Monash 4-Point",
     description:
       "Work out an Australian university GPA. UQ uses numeric grades 1–7. Monash uses a 4-point scale, with a fail at 0.3. This is not a US 4.0 calculator.",
   },
@@ -146,9 +156,9 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
       "Estimate an ATAR from scaled subject scores for your state. This is a planning model, not an official UAC, VTAC, QTAC, SATAC, or TISC result.",
   },
   "/ca/gpa-calculator": {
-    title: "Canada GPA Calculator — University Preset",
+    title: "Canada GPA Calculator — Percentage to 4.0 GPA",
     description:
-      "Calculate a Canadian semester GPA on an illustrative 4.0-cap preset. Universities publish their own tables. McMaster’s 12-point scale uses a separate lookup.",
+      "Free Canadian GPA calculator: enter percentages or letter grades with credits to get your 4.0 GPA. McMaster 12-point and A+ = 4.33 scales have separate tools.",
   },
   "/ca/college-gpa-calculator": {
     title: "Canada College GPA Calculator",
@@ -176,9 +186,9 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
       "Combine New Zealand university terms on the 9-point GPA scale. Use the same grade-point table for every term.",
   },
   "/nz/letter-grade-calculator": {
-    title: "New Zealand Letter Grade Calculator — 9-Point University Scale",
+    title: "NZ Letter Grade Calculator — 9-Point University Scale",
     description:
-      "Look up a New Zealand university letter grade on the 9-point scale (A+ = 9). See the percentage band and GPA equivalent. This is a university grade, not an NCEA result.",
+      "Look up a New Zealand university letter grade on the 9-point scale (A+ = 9), with its percentage band and GPA. University grades, not NCEA.",
   },
   "/uk/degree-classification-calculator": {
     title: "UK Degree Classification Calculator — First, 2:1, 2:2",
@@ -203,32 +213,32 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
   "/pk/cgpa-to-percentage": {
     title: "Pakistan CGPA to Percentage Calculator — HEC §13.1",
     description:
-      "Convert HEC CGPA to percentage using the §13.1 band minimum table. Includes the ×25 shortcut for comparison. HEC has notified it stopped converting CGPA into percentage — use your transcript value for applications.",
+      "Convert HEC CGPA to percentage with the §13.1 band table, plus the ×25 shortcut to compare. HEC no longer converts CGPA — use your transcript value.",
   },
   "/pk/percentage-to-cgpa": {
     title: "Pakistan Percentage to CGPA Calculator — HEC Scale",
     description:
-      "Reverse-convert a percentage mark to an estimated HEC CGPA band. Choose the §13.1 band planning method or the unofficial ×25 shortcut. Your transcript percentage is the authoritative figure.",
+      "Convert a percentage to an estimated HEC CGPA using the §13.1 bands or the unofficial ×25 shortcut. Your transcript figure is the official one.",
   },
   "/pk/cgpa-calculator": {
     title: "Pakistan Semester CGPA Calculator — HEC Grading",
     description:
-      "Calculate one semester's SGPA on the Pakistan HEC 4.0 letter scale (A+ through F). Enter each course with its letter grade and credit hours, then roll semesters into overall CGPA with the SGPA to CGPA tool.",
+      "Calculate one semester's SGPA on the Pakistan HEC 4.0 scale (A+ to F) from course grades and credit hours, then combine semesters into CGPA.",
   },
   "/pk/sgpa-to-cgpa": {
-    title: "Pakistan SGPA to CGPA Calculator — HEC Semester Formula",
+    title: "Pakistan SGPA to CGPA Calculator — HEC Formula",
     description:
       "Combine HEC semester GPAs (SGPA) into an overall CGPA. Enter each semester's SGPA and credit total. The credit-weighted result is your Pakistan CGPA.",
   },
   "/about": {
-    title: "About GradeCalculator — Free Grade & GPA Tools",
+    title: "About GradCalc — Free Grade & GPA Tools",
     description:
-      "Who builds GradeCalculator (gradcalc.com), why the tools are free, how we handle privacy, and how to report a formula error.",
+      "Who builds GradCalc (gradcalc.com), why the tools are free, how we handle privacy, and how to report a formula error.",
   },
   "/disclaimer": {
     title: "Educational Disclaimer — Planning Estimates Only",
     description:
-      "GradeCalculator results are for planning only. They are not official grades, GPAs, ATARs, or transcript values — always confirm with your school or registrar.",
+      "GradCalc results are for planning only. They are not official grades, GPAs, ATARs, or transcript values — always confirm with your school or registrar.",
   },
   "/guides": {
     title: "Grade & GPA Guides — How-To Articles",
@@ -243,7 +253,7 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
   "/guides/gpa-glossary": {
     title: "GPA & Grading Glossary — CGPA, SGPA, Quality Points",
     description:
-      "Plain-language definitions of GPA, CGPA, SGPA, weighted GPA, quality points, and other terms used across GradeCalculator tools.",
+      "Plain-language definitions of GPA, CGPA, SGPA, weighted GPA, quality points, and other terms used across GradCalc tools.",
   },
 };
 

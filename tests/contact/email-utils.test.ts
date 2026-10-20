@@ -27,10 +27,10 @@ describe("email-utils", () => {
 
   it("does not double-wrap a From address", () => {
     expect(formatMailboxFrom("hello@gradcalc.com")).toBe(
-      '"GradeCalculator Contact" <hello@gradcalc.com>',
+      '"GradCalc Contact" <hello@gradcalc.com>',
     );
-    expect(formatMailboxFrom('"GradeCalculator" <hello@gradcalc.com>')).toBe(
-      '"GradeCalculator" <hello@gradcalc.com>',
+    expect(formatMailboxFrom('"GradCalc" <hello@gradcalc.com>')).toBe(
+      '"GradCalc" <hello@gradcalc.com>',
     );
   });
 

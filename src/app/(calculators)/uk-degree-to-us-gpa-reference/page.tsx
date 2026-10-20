@@ -3,13 +3,14 @@ import { UkDegreeToUsGpaReferenceCalculator } from "@/components/calculators/UkD
 import { calculatorBySlug } from "@/config/calculators";
 import { calculatorKeywords } from "@/lib/seo/keywords";
 import { createPageMetadata } from "@/lib/seo/metadata";
+import { pageDescription, pageTitle } from "@/lib/seo/page-copy";
 import { calculatorHreflangLanguages } from "@/lib/seo/hreflang";
 
 const config = calculatorBySlug["uk-degree-to-us-gpa-reference"];
 
 export const metadata = createPageMetadata({
-  title: "UK Degree Class to US GPA — Approximate Reference",
-  description: config.description,
+  title: pageTitle("/uk-degree-to-us-gpa-reference", "UK Degree Class to US GPA — Approximate Reference"),
+  description: pageDescription("/uk-degree-to-us-gpa-reference", config.description),
   path: "/uk-degree-to-us-gpa-reference",
   keywords: calculatorKeywords["uk-degree-to-us-gpa-reference"],
   languages: calculatorHreflangLanguages("uk-degree-to-us-gpa-reference"),

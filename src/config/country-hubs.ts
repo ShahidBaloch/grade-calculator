@@ -69,7 +69,7 @@ export const countryHubs: CountryHubConfig[] = [
     relatedGuides: [
       {
         path: "/guides/lms-course-grades-explained",
-        title: "LMS Course Grades Explained",
+        title: "What Does LMS Graded Mean? LMS Grades Explained",
       },
     ],
     keywords: [
@@ -277,7 +277,7 @@ export const countryHubs: CountryHubConfig[] = [
     hreflang: "en-NZ",
     relatedGuides: [
       { path: "/guides/gpa-glossary", title: "GPA & grading glossary" },
-      { path: "/guides/gpa-scale-explained", title: "GPA scales explained" },
+      { path: "/guides/gpa-scale-explained", title: "4.0 vs 5.0 vs 7.0 GPA scales explained" },
     ],
   },
   {

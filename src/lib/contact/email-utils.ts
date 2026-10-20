@@ -29,7 +29,7 @@ export function normalizeSmtpPassword(value: string): string {
 export function formatMailboxFrom(raw: string): string {
   const value = raw.trim();
   if (value.includes("<") && value.includes(">")) return value;
-  return `"GradeCalculator Contact" <${value}>`;
+  return `"GradCalc Contact" <${value}>`;
 }
 
 /**

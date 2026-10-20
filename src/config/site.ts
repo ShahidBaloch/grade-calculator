@@ -24,10 +24,10 @@ function resolveContactEmail(): string {
 }
 
 /** Other names users search for — used in WebSite/Organization schema only. */
-export const siteAlternateNames = ["GradCalc", "gradcalc.com"];
+export const siteAlternateNames = ["gradcalc.com", "Grad Calc"];
 
 export const siteConfig = {
-  name: "GradeCalculator",
+  name: "GradCalc",
   /** Matches the public domain — shown in header for brand clarity. */
   domainLabel: "gradcalc.com",
   description:
@@ -38,7 +38,7 @@ export const siteConfig = {
   ogImage: "/opengraph-image",
   locale: "en_US",
   editorial: {
-    author: "GradeCalculator Editorial Team",
+    author: "GradCalc Editorial Team",
     /** ISO date — update when formulas, sources, or legal copy are reviewed. */
     lastReviewed: "2026-09-01",
   },

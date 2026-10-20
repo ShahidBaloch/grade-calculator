@@ -7,8 +7,8 @@ import {
 
 describe("sanitizePrintDocumentTitle", () => {
   it("replaces pipes and em dashes for filesystem-friendly names", () => {
-    expect(sanitizePrintDocumentTitle("GPA Calculator — Semester & Term GPA | GradeCalculator")).toBe(
-      "GPA Calculator - Semester & Term GPA - GradeCalculator",
+    expect(sanitizePrintDocumentTitle("GPA Calculator — Semester & Term GPA | GradCalc")).toBe(
+      "GPA Calculator - Semester & Term GPA - GradCalc",
     );
   });
 
@@ -23,7 +23,7 @@ describe("buildPrintDocumentTitle", () => {
       "GPA Calculator — Semester & Term GPA",
       new Date(2026, 8, 27),
     );
-    expect(title).toBe("GPA Calculator - Semester & Term GPA - GradeCalculator - 2026-09-27");
+    expect(title).toBe("GPA Calculator - Semester & Term GPA - GradCalc - 2026-09-27");
   });
 });
 

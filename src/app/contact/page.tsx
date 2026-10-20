@@ -9,7 +9,7 @@ import { createPageMetadata } from "@/lib/seo/metadata";
 export const metadata = createPageMetadata({
   title: "Contact Us",
   description:
-    "Contact GradeCalculator at gradcalc.com for calculator questions, formula corrections, and feedback. Email hello@gradcalc.com or use our form.",
+    "Contact GradCalc at gradcalc.com for calculator questions, formula corrections, and feedback. Email hello@gradcalc.com or use our form.",
   path: "/contact",
 });
 

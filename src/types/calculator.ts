@@ -13,6 +13,8 @@ export type CalculatorSlug =
   | "ez-grader"
   | "test-grade-calculator"
   | "weighted-grade-calculator"
+  | "average-grade-calculator"
+  | "grade-chart"
   | "final-grade-calculator"
   | "gpa-calculator"
   | "cumulative-gpa-calculator"
@@ -41,6 +43,8 @@ const CALCULATOR_SLUGS: CalculatorSlug[] = [
   "ez-grader",
   "test-grade-calculator",
   "weighted-grade-calculator",
+  "average-grade-calculator",
+  "grade-chart",
   "final-grade-calculator",
   "gpa-calculator",
   "cumulative-gpa-calculator",

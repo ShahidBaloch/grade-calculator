@@ -17,6 +17,8 @@ const US_RECORDING_CALCULATOR_PATHS = new Set([
   "/percentage-to-letter-grade",
   "/letter-grade-calculator",
   "/eoc-grade-calculator",
+  "/average-grade-calculator",
+  "/grade-chart",
 ]);
 
 /** Map URL prefixes to locked scale (geo landing pages). */

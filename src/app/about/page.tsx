@@ -9,7 +9,7 @@ export const metadata = createPageMetadata({
   title: pageTitle("/about", "About Us"),
   description: pageDescription(
     "/about",
-    "GradeCalculator provides free, fast, and private grade and GPA calculators for students and teachers worldwide.",
+    "GradCalc provides free, fast, and private grade and GPA calculators for students and teachers worldwide.",
   ),
   path: "/about",
 });
@@ -21,7 +21,7 @@ export default function AboutPage() {
     <>
       <BreadcrumbJsonLd items={breadcrumbs} />
       <ContentPageLayout
-        title="About GradeCalculator"
+        title="About GradCalc"
         description="Free tools for students and teachers — built for speed, accuracy, and privacy."
         breadcrumbs={breadcrumbs}
       >

@@ -8,7 +8,7 @@ import { createPageMetadata } from "@/lib/seo/metadata";
 export const metadata = createPageMetadata({
   title: "Methodology & Editorial Policy",
   description:
-    "How GradeCalculator builds, tests, and updates free grade and GPA tools — formulas, sources, privacy, and SEO quality standards.",
+    "How GradCalc builds, tests, and updates free grade and GPA tools — formulas, sources, privacy, and SEO quality standards.",
   path: "/methodology",
 });
 

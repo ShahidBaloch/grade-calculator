@@ -44,12 +44,18 @@ describe("SEO audit", () => {
     expect(getCalculatorPath("ez-grader")).toBe("/");
   });
 
-  it("each calculator hreflang points only at its own canonical URL", () => {
+  it("calculators with country versions share one reciprocal hreflang group", () => {
     const languages = calculatorHreflangLanguages("gpa-calculator");
     expect(languages["x-default"]).toBe(`${siteConfig.url}/gpa-calculator`);
     expect(languages.en).toBe(`${siteConfig.url}/gpa-calculator`);
-    expect(languages["en-US"]).toBeUndefined();
-    expect(languages["en-AU"]).toBeUndefined();
+    expect(languages["en-US"]).toBe(`${siteConfig.url}/gpa-calculator`);
+    expect(languages["en-CA"]).toBe(`${siteConfig.url}/ca/gpa-calculator`);
+    expect(languages["en-AU"]).toBe(`${siteConfig.url}/au/gpa-calculator`);
+    // Every alternate must be an indexable page in the sitemap.
+    const sitemapUrls = new Set(sitemap().map((entry) => entry.url));
+    for (const url of Object.values(languages)) expect(sitemapUrls.has(url)).toBe(true);
+    // Tools without country versions stay self-referencing.
+    expect(Object.keys(calculatorHreflangLanguages("grade-chart"))).toEqual(["x-default", "en"]);
     expect(calculatorHreflangLanguages("atar-calculator")["x-default"]).toBe(
       `${siteConfig.url}/au/atar-calculator`,
     );
@@ -72,7 +78,8 @@ describe("SEO audit", () => {
     expect(org.contactPoint?.[0]?.url).toBe(`${siteConfig.url}/contact`);
     expect(webSiteJsonLd()["@type"]).toBe("WebSite");
     expect(webSiteJsonLd().inLanguage).toBe("en-US");
-    expect(webSiteJsonLd().alternateName).toContain("GradCalc");
+    expect(webSiteJsonLd().name).toBe("GradCalc");
+    expect(webSiteJsonLd().alternateName).toContain("gradcalc.com");
   });
 
   it("sitemap lists country-specific tools and omits duplicate copies", () => {
@@ -297,15 +304,21 @@ describe("SEO audit", () => {
     expect(Object.values(languages).some((url) => url.includes("/us/"))).toBe(false);
   });
 
-  it("a country calculator hreflang stays on that country URL", () => {
-    const languages = countryHubHreflangLanguages("/au/gpa-calculator");
-    expect(languages["x-default"]).toBe(`${siteConfig.url}/au/gpa-calculator`);
-    expect(languages.en).toBe(`${siteConfig.url}/au/gpa-calculator`);
+  it("country calculator pages join their tool's hreflang group", () => {
+    expect(calculatorHreflangLanguages("cumulative-gpa-calculator")["en-CA"]).toBe(
+      `${siteConfig.url}/ca/cumulative-gpa-calculator`,
+    );
+    expect(calculatorHreflangLanguages("sgpa-to-cgpa")["en-PK"]).toBe(`${siteConfig.url}/pk/sgpa-to-cgpa`);
+    expect(calculatorHreflangLanguages("sgpa-to-cgpa")["en-IN"]).toBe(`${siteConfig.url}/sgpa-to-cgpa`);
+    expect(calculatorHreflangLanguages("sgpa-to-cgpa")["en-US"]).toBeUndefined();
   });
 
-  it("sitemap omits inaccurate lastModified stamps", () => {
+  it("sitemap lastModified stamps are real dates, not in the future", () => {
     for (const entry of sitemap()) {
-      expect(entry.lastModified).toBeUndefined();
+      if (entry.lastModified === undefined) continue;
+      const time = new Date(entry.lastModified).getTime();
+      expect(Number.isNaN(time)).toBe(false);
+      expect(time).toBeLessThanOrEqual(Date.now());
     }
   });
 

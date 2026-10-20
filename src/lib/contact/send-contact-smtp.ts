@@ -64,7 +64,7 @@ export async function sendContactViaSmtp(values: ContactFormValues): Promise<Sen
   });
 
   const textBody = [
-    "New GradeCalculator Contact Form Submission",
+    "New GradCalc Contact Form Submission",
     "",
     `Name: ${values.name}`,
     `Email: ${values.email}`,
@@ -76,7 +76,7 @@ export async function sendContactViaSmtp(values: ContactFormValues): Promise<Sen
   ].join("\n");
 
   const html = `
-        <h2>New GradeCalculator Contact Form Submission</h2>
+        <h2>New GradCalc Contact Form Submission</h2>
         <p><strong>Name:</strong> ${escapeHtml(values.name)}</p>
         <p><strong>Email:</strong> ${escapeHtml(values.email)}</p>
         <p><strong>Message:</strong></p>
@@ -95,14 +95,14 @@ export async function sendContactViaSmtp(values: ContactFormValues): Promise<Sen
         envelope: { from: user, to },
         replyTo: values.email,
         to,
-        subject: `New GradeCalculator message from ${subjectName}`,
+        subject: `New GradCalc message from ${subjectName}`,
         text: textBody,
         html,
       });
       return { ok: true };
     } catch (error) {
       lastError = error;
-      console.error("GradeCalculator contact SMTP failed:", error);
+      console.error("GradCalc contact SMTP failed:", error);
     }
   }
 

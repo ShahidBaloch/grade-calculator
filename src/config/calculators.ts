@@ -23,7 +23,7 @@ export const calculators: CalculatorConfig[] = [
     icon: "CheckSquare",
     category: "grade",
     mvp: true,
-    relatedSlugs: ["test-grade-calculator", "weighted-grade-calculator"],
+    relatedSlugs: ["test-grade-calculator", "weighted-grade-calculator", "grade-chart"],
     examples: [
       { label: "Perfect score", values: { totalQuestions: 20, wrongAnswers: 0 } },
       { label: "Typical quiz", values: { totalQuestions: 10, wrongAnswers: 2 } },
@@ -39,7 +39,7 @@ export const calculators: CalculatorConfig[] = [
     icon: "FileText",
     category: "grade",
     mvp: true,
-    relatedSlugs: ["ez-grader", "weighted-grade-calculator"],
+    relatedSlugs: ["ez-grader", "weighted-grade-calculator", "average-grade-calculator", "grade-chart"],
     examples: [
       { label: "15/20 correct", values: { totalQuestions: 20, correctAnswers: 15 } },
       { label: "With bonus", values: { totalQuestions: 10, correctAnswers: 9, bonusPoints: 5 } },
@@ -54,13 +54,56 @@ export const calculators: CalculatorConfig[] = [
     icon: "Scale",
     category: "grade",
     mvp: true,
-    relatedSlugs: ["final-grade-calculator", "gpa-calculator"],
+    relatedSlugs: ["final-grade-calculator", "gpa-calculator", "average-grade-calculator"],
     examples: [
       {
         label: "3 assignments",
         values: { items: [{ score: 90, weight: 30 }, { score: 85, weight: 30 }, { score: 88, weight: 40 }] },
       },
     ],
+  },
+  {
+    slug: "average-grade-calculator",
+    name: "Average Grade Calculator",
+    shortName: "Average",
+    description: "Find the average of test scores, marks, or a whole class — with median, high, and low.",
+    path: "/average-grade-calculator",
+    icon: "Hash",
+    category: "grade",
+    mvp: false,
+    relatedSlugs: ["weighted-grade-calculator", "test-grade-calculator", "percentage-to-letter-grade"],
+    examples: [
+      {
+        label: "Class of 6",
+        values: {
+          scoreMode: "percentage",
+          items: [{ score: 92 }, { score: 85 }, { score: 78 }, { score: 66 }, { score: 88 }, { score: 71 }],
+        },
+      },
+      {
+        label: "Tests out of different totals",
+        values: {
+          scoreMode: "points",
+          items: [
+            { score: 18, maxPoints: 20 },
+            { score: 41, maxPoints: 50 },
+            { score: 72, maxPoints: 100 },
+          ],
+        },
+      },
+    ],
+  },
+  {
+    slug: "grade-chart",
+    name: "Grade Chart",
+    shortName: "Chart",
+    description: "Printable grade chart: every score out of 10, 20, 50, 100, 150, 200, or any total, with percentage and letter grade.",
+    path: "/grade-chart",
+    icon: "LayoutGrid",
+    category: "grade",
+    mvp: false,
+    relatedSlugs: ["ez-grader", "test-grade-calculator", "percentage-to-letter-grade"],
+    examples: [],
   },
   {
     slug: "final-grade-calculator",
@@ -85,7 +128,7 @@ export const calculators: CalculatorConfig[] = [
     icon: "GraduationCap",
     category: "gpa",
     mvp: true,
-    relatedSlugs: ["cumulative-gpa-calculator", "weighted-grade-calculator"],
+    relatedSlugs: ["cumulative-gpa-calculator", "college-gpa-calculator", "weighted-grade-calculator"],
     examples: [
       {
         label: "4 courses",
@@ -109,7 +152,7 @@ export const calculators: CalculatorConfig[] = [
     icon: "Layers",
     category: "gpa",
     mvp: true,
-    relatedSlugs: ["gpa-calculator"],
+    relatedSlugs: ["gpa-calculator", "college-gpa-calculator", "raise-gpa-calculator"],
     examples: [
       {
         label: "With prior GPA",
@@ -287,7 +330,7 @@ export const calculators: CalculatorConfig[] = [
     icon: "Award",
     category: "gpa",
     mvp: false,
-    relatedSlugs: ["weighted-grade-calculator", "letter-grade-calculator", "gpa-calculator"],
+    relatedSlugs: ["weighted-grade-calculator", "uk-degree-to-us-gpa-reference", "gpa-calculator"],
     examples: [
       {
         label: "Typical law mix",
@@ -450,7 +493,7 @@ export const calculators: CalculatorConfig[] = [
     icon: "ArrowLeftRight",
     category: "conversion",
     mvp: false,
-    relatedSlugs: ["cgpa-to-percentage", "cgpa-calculator", "gpa-calculator"],
+    relatedSlugs: ["cgpa-to-percentage", "cgpa-calculator", "gpa-calculator", "mcmaster-gpa-to-us-gpa"],
     examples: [
       { label: "8.2 → 4.0", values: { cgpa: 8.2, methodId: "linear-0.4" } },
       { label: "Via % bridge", values: { cgpa: 8.2, methodId: "percent-bridge" } },

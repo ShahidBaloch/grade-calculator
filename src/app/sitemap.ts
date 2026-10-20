@@ -8,9 +8,9 @@ import { indexableGeoCalculatorPaths } from "@/lib/seo/intent-urls";
 import { siteConfig } from "@/config/site";
 
 // Last content update — bump this date whenever calculator content, guides, or scales are edited.
-const CONTENT_UPDATED = "2026-10-07";
-// Trust pages rarely change; set once at creation.
-const TRUST_PAGE_DATE = "2025-09-01";
+const CONTENT_UPDATED = "2026-10-20";
+// Trust pages rarely change; bump when their copy or the brand name changes.
+const TRUST_PAGE_DATE = "2026-10-20";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages = [

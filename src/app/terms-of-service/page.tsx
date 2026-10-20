@@ -5,7 +5,7 @@ import { createPageMetadata } from "@/lib/seo/metadata";
 
 export const metadata = createPageMetadata({
   title: "Terms of Service",
-  description: `Terms of service for using ${siteConfig.name} calculators and content.`,
+  description: `Terms of service for ${siteConfig.name}'s free grade and GPA calculators: acceptable use, no warranty on results, intellectual property, and how these terms change.`,
   path: "/terms-of-service",
 });
 

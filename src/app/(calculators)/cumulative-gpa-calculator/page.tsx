@@ -2,14 +2,15 @@ import { CalculatorRoute } from "@/components/calculators/CalculatorRoute";
 import { CumulativeGpaCalculator } from "@/components/calculators/CumulativeGpaCalculator";
 import { calculatorHreflangLanguages } from "@/lib/seo/hreflang";
 import { createPageMetadata } from "@/lib/seo/metadata";
+import { pageDescription, pageTitle } from "@/lib/seo/page-copy";
 import { calculatorKeywords } from "@/lib/seo/keywords";
 import { calculatorBySlug } from "@/config/calculators";
 
 const config = calculatorBySlug["cumulative-gpa-calculator"];
 
 export const metadata = createPageMetadata({
-  title: "Cumulative GPA Calculator",
-  description: config.description,
+  title: pageTitle("/cumulative-gpa-calculator", "Cumulative GPA Calculator"),
+  description: pageDescription("/cumulative-gpa-calculator", config.description),
   path: "/cumulative-gpa-calculator",
   keywords: calculatorKeywords["cumulative-gpa-calculator"],
   languages: calculatorHreflangLanguages("cumulative-gpa-calculator"),

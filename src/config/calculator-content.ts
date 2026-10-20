@@ -604,6 +604,100 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
       "Scales with no plus/minus collapse A−, A, A+ into a single A band.",
     ],
   },
+  "grade-chart": {
+    howItWorks: [
+      "Choose how many points or questions the test is out of — tap a common total or type any number up to 500.",
+      "Read the chart: every possible score with its percentage and letter grade, plus the points needed for each grade.",
+      "Optionally type a student's score to highlight it, or print the chart for grading a stack of tests.",
+    ],
+    formula: "Percentage = points earned ÷ total points × 100, then match the percentage to the letter-grade band",
+    workedExample:
+      "118 out of 150 → 118 ÷ 150 × 100 = 78.7% → C+ on the common US scale. Out of 150, a C+ takes 116 to 119 points.",
+    faqs: [
+      {
+        question: "How do I read a grade chart?",
+        answer:
+          "Find the score in the first column. The same row shows the percentage and the letter grade. The smaller table shows the lowest and highest score that earns each letter for the total you picked.",
+      },
+      {
+        question: "What is 118 out of 150 as a grade?",
+        answer:
+          "118 ÷ 150 = 78.7%, which is a C+ on the common US scale (77–79%). Pick 150 as the total to see every score out of 150.",
+      },
+      {
+        question: "What is 176 out of 200 as a grade?",
+        answer:
+          "176 ÷ 200 = 88%, a B+ on the common US scale (87–89%). Pick 200 as the total to see the full chart.",
+      },
+      {
+        question: "What percentage is an A, B, C, D, or F?",
+        answer:
+          "On the common US scale an A is 93–96% (A+ 97–100, A− 90–92), a B is 83–86%, a C is 73–76%, a D is 63–66%, and an F is below 60%. Schools set their own cut-offs, so switch the grading scale or check your syllabus.",
+      },
+      {
+        question: "Why do some grades show a dash?",
+        answer:
+          "With small totals, some letter bands contain no whole-number score. Out of 10, for example, 9 is 90% (A−) and 10 is 100% (A+), so nothing lands in the 93–96% A band.",
+      },
+      {
+        question: "Can I print the grade chart?",
+        answer:
+          "Yes. Use the Print button above the chart. The printed version shows every row, so you can keep it next to a stack of tests while grading.",
+      },
+    ],
+    assumptions: [
+      "Scores are whole points. Half-point scores fall between rows — type them into the score lookup instead.",
+      "Letter grades use the scale you select. Many schools use different cut-offs, such as 90–100 = A.",
+      "Percentages are not rounded before choosing the letter, so 89.9% stays a B+.",
+    ],
+  },
+  "average-grade-calculator": {
+    howItWorks: [
+      "Pick a score format: percentages, points earned out of a total, or letter grades.",
+      "Enter each score on its own row, or paste a whole class list copied from a spreadsheet.",
+      "See the average with its letter grade, plus the median, highest, and lowest score.",
+    ],
+    formula: "Average = (score₁ + score₂ + … + scoreₙ) ÷ n",
+    workedExample:
+      "Scores 92, 85, 78, 66, 88, and 71 add up to 480. Divide by 6 scores → 80% average, a B− on the common US scale. The median is 81.5%.",
+    faqs: [
+      {
+        question: "How do I calculate my average grade?",
+        answer:
+          "Add all your scores and divide by how many scores you have. Three tests of 90%, 80%, and 70% add up to 240, and 240 ÷ 3 = 80%. If your teacher weights categories differently, use the weighted grade calculator instead.",
+      },
+      {
+        question: "How do I find the class average?",
+        answer:
+          "Add every student's score and divide by the number of students. Paste the score column from your gradebook into the calculator to get the class average, median, highest, and lowest score in one step.",
+      },
+      {
+        question: "Should I average percentages or total points?",
+        answer:
+          "It depends on your gradebook. Averaging percentages counts every test equally. Total points (all points earned ÷ all points possible) lets bigger tests count more. In points mode the calculator shows both, so you can match how your class is graded.",
+      },
+      {
+        question: "What is the difference between average and median?",
+        answer:
+          "The average (mean) adds every score and divides by the count, so one very low or very high score pulls it. The median is the middle score when they are sorted. Teachers often check both to see whether a few outliers are skewing the class average.",
+      },
+      {
+        question: "How do I calculate average marks in percentage?",
+        answer:
+          "Convert each mark to a percentage first (marks ÷ maximum marks × 100), then average the percentages. Or choose Points earned mode, enter each mark with its maximum, and the calculator does the conversion for you.",
+      },
+      {
+        question: "Can I average letter grades?",
+        answer:
+          "Yes. Choose Letter grade mode and enter grades like A, B+, or C. Each letter is converted to a percentage on the grading scale you select, averaged, and turned back into a letter.",
+      },
+    ],
+    assumptions: [
+      "Every score counts equally in the main average. Use the weighted grade calculator when categories have different weights.",
+      "Letter grades convert to percentages using the scale you select. Your school's cut-offs may differ.",
+      "Blank rows are ignored. Scores above 100% are allowed for extra credit but trigger a warning.",
+    ],
+  },
   "canvas-grade-calculator": {
     howItWorks: [
       "Enter each Canvas assignment group (Assignments, Quizzes, Exams, etc.).",

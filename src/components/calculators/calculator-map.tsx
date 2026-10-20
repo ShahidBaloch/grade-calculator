@@ -1,4 +1,5 @@
 import { AtarCalculator } from "@/components/calculators/AtarCalculator";
+import { AverageGradeCalculator } from "@/components/calculators/AverageGradeCalculator";
 import { CanvasGradeCalculator } from "@/components/calculators/CanvasGradeCalculator";
 import { CgpaCalculator } from "@/components/calculators/CgpaCalculator";
 import { CgpaToGpaCalculator } from "@/components/calculators/CgpaToGpaCalculator";
@@ -10,6 +11,7 @@ import { EocGradeCalculator } from "@/components/calculators/EocGradeCalculator"
 import { EzGrader } from "@/components/calculators/EzGrader";
 import { FinalGradeCalculator } from "@/components/calculators/FinalGradeCalculator";
 import { GcseGradeCalculator } from "@/components/calculators/GcseGradeCalculator";
+import { GradeChartCalculator } from "@/components/calculators/GradeChartCalculator";
 import { GpaCalculator } from "@/components/calculators/GpaCalculator";
 import { HighSchoolGpaCalculator } from "@/components/calculators/HighSchoolGpaCalculator";
 import { LetterGradeCalculator } from "@/components/calculators/LetterGradeCalculator";
@@ -40,6 +42,8 @@ export const calculatorComponentBySlug: Record<CalculatorSlug, React.ComponentTy
   "percentage-to-letter-grade": PercentageToLetterCalculator,
   "letter-grade-calculator": LetterGradeCalculator,
   "canvas-grade-calculator": CanvasGradeCalculator,
+  "average-grade-calculator": AverageGradeCalculator,
+  "grade-chart": GradeChartCalculator,
   "eoc-grade-calculator": EocGradeCalculator,
   "degree-classification-calculator": DegreeClassificationCalculator,
   "atar-calculator": AtarCalculator,
