@@ -19,7 +19,7 @@ export const siteFaqs: FaqItem[] = [
   {
     question: "What grading scale do you use?",
     answer:
-      "The worldwide default is the common US 4.0 GPA scale. On this scale, A is 93–100%, B is 83–92%, C is 73–82%, D is 63–72%, and F is below 60%. Location may switch the scale to UK, Canadian, Australian, New Zealand, India (10-point), or Pakistan (HEC 4.0). You can change it in any calculator that has a scale selector.",
+      "The worldwide default is the common US 4.0 GPA scale. On this scale, A (including A− and A+) is 90–100%, B is 80–89%, C is 70–79%, D is 60–69%, and F is below 60%. Location may switch the scale to UK, Canadian, Australian, New Zealand, India (10-point), or Pakistan (HEC 4.0). You can change it in any calculator that has a scale selector.",
   },
   {
     question: "What percentage is a B grade?",

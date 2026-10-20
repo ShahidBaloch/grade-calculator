@@ -637,7 +637,7 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
       {
         question: "What letter grade is a 70%?",
         answer:
-          "On the standard US scale, 70–72% is a C− (2.0 GPA points on most scales) or a C (2.0) on a 10-point scale. Enter 70 in the converter above to see the exact letter for your selected grading scale.",
+          "On the standard US scale, 70–72% is a C− (1.7 GPA points) or a C (2.0) on a 10-point scale. Enter 70 in the converter above to see the exact letter for your selected grading scale.",
       },
       {
         question: "What grade is a 75%?",
