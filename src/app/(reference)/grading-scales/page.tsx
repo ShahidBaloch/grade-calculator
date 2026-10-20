@@ -8,7 +8,7 @@ import { breadcrumbJsonLd } from "@/lib/seo/jsonld";
 export const metadata = createPageMetadata({
   title: "Grading Scales & Grade Charts by Country",
   description:
-    "Free grade charts and grading scales for US, UK, Canadian, Australian, New Zealand, India, and Pakistan systems. See what percentage is an A, B, or C on each scale, including high school and university grading.",
+    "Free grade charts and grading scales for the US, UK, Canada, Australia, New Zealand, India, and Pakistan. See what percentage is an A, B, or C on each scale.",
   path: "/grading-scales",
   keywords: [
     "grading scale",

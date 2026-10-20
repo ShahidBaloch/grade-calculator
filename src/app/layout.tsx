@@ -37,7 +37,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <JsonLd data={webSiteJsonLd()} />
             <a
               href="#main-content"
-              className="no-print sr-only left-4 top-4 z-[100] rounded-md bg-[var(--color-primary)] text-white focus:not-sr-only"
+              className="no-print sr-only left-4 top-4 z-[100] rounded-md bg-[var(--color-primary)] text-white focus:not-sr-only focus:fixed focus:inline-flex focus:min-h-11 focus:items-center focus:px-4"
             >
               Skip to content
             </a>

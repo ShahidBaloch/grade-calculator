@@ -23,7 +23,7 @@ export function Breadcrumbs({ items }: BreadcrumbsProps) {
                   {item.name}
                 </span>
               ) : (
-                <Link href={item.href} className="hover:text-[var(--color-primary)] truncate max-w-[8rem] sm:max-w-none">
+                <Link href={item.href} className="inline-flex min-h-6 items-center py-1 hover:text-[var(--color-primary)] truncate max-w-[8rem] sm:max-w-none">
                   {item.name}
                 </Link>
               )}

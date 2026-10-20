@@ -5,9 +5,9 @@ import { siteFaqs } from "@/config/site-faq";
 import { createPageMetadata } from "@/lib/seo/metadata";
 
 export const metadata = createPageMetadata({
-  title: "Grade Calculator FAQ — Grading Scales, GPA & Percentages",
+  title: "Grade Calculator FAQ — Grading Scales & GPA",
   description:
-    "Answers to common questions about grading scales, grade percentages (A, B, C), GPA tools, final exam calculators, and privacy. Includes what percentage is each letter grade.",
+    "Answers to common questions about grading scales, what percentage each letter grade is, GPA tools, final exam calculators, and privacy.",
   path: "/faq",
   keywords: [
     "grade calculator faq",
@@ -31,7 +31,7 @@ export default function FaqPage() {
         description="Everything you need to know about using GradCalc."
         breadcrumbs={breadcrumbs}
       >
-        <FaqAccordion faqs={siteFaqs} />
+        <FaqAccordion faqs={siteFaqs} headingLevel={2} />
       </ContentPageLayout>
     </>
   );

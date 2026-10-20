@@ -35,7 +35,7 @@ export default function AboutPage() {
             {siteConfig.name} is published at{" "}
             <strong className="text-[var(--color-text)]">{siteConfig.domainLabel}</strong> (
             {siteConfig.url}). For questions or to report a calculation error, email{" "}
-            <a href={`mailto:${siteConfig.email}`} className="text-[var(--color-primary)] hover:underline">
+            <a href={`mailto:${siteConfig.email}`} className="text-[var(--color-primary)] underline underline-offset-2">
               {siteConfig.email}
             </a>
             .
@@ -44,7 +44,7 @@ export default function AboutPage() {
             Our calculators run entirely in your browser. We don&apos;t store your grades on our servers,
             and we don&apos;t require sign-up. Geo cookies, CDN security, optional analytics, and
             advertising (if enabled) are described in our{" "}
-            <Link href="/privacy-policy" className="text-[var(--color-primary)] hover:underline">
+            <Link href="/privacy-policy" className="text-[var(--color-primary)] underline underline-offset-2">
               Privacy Policy
             </Link>
             . Your grading scale is detected automatically from your location, with support for US, UK,
@@ -59,7 +59,7 @@ export default function AboutPage() {
           </ul>
           <p>
             Full details:{" "}
-            <Link href="/methodology" className="text-[var(--color-primary)] hover:underline">
+            <Link href="/methodology" className="text-[var(--color-primary)] underline underline-offset-2">
               Methodology & editorial policy
             </Link>
             .
@@ -72,15 +72,15 @@ export default function AboutPage() {
             <li>UK degree classification, GCSE 9–1 bands, and an educational Australian ATAR estimate</li>
             <li>
               Country hubs for the US, UK, Canada, Australia, New Zealand,{" "}
-              <Link href="/in" className="text-[var(--color-primary)] hover:underline">India</Link>, and{" "}
-              <Link href="/pk" className="text-[var(--color-primary)] hover:underline">Pakistan</Link>{" "}
+              <Link href="/in" className="text-[var(--color-primary)] underline underline-offset-2">India</Link>, and{" "}
+              <Link href="/pk" className="text-[var(--color-primary)] underline underline-offset-2">Pakistan</Link>{" "}
               (CGPA, SGPA, and local scale presets)
             </li>
             <li>Grading scale reference charts and educational guides</li>
           </ul>
           <p>
             Questions or feedback?{" "}
-            <Link href="/contact" className="text-[var(--color-primary)] hover:underline">
+            <Link href="/contact" className="text-[var(--color-primary)] underline underline-offset-2">
               Contact us
             </Link>
             .

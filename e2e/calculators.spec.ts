@@ -200,7 +200,7 @@ test.describe("Core calculator flows", () => {
     await page.goto("/");
     if (isMobile) {
       await page.getByRole("button", { name: "Open menu" }).click();
-      await page.getByRole("link", { name: "GPA Calculator" }).click();
+      await page.getByRole("dialog").getByRole("link", { name: "GPA Calculator", exact: true }).click();
     } else {
       await page.getByRole("button", { name: "Calculators" }).click();
       await page.getByRole("menuitem", { name: "GPA Calculator", exact: true }).click();

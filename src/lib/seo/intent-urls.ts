@@ -71,6 +71,7 @@ export function indexableGeoCalculatorPaths(): string[] {
 }
 
 const STATIC_REDIRECTS: Array<{ source: string; destination: string }> = [
+  { source: "/index", destination: "/" },
   { source: "/letter-grade-to-percentage", destination: "/letter-grade-calculator" },
   { source: "/ez-grader", destination: "/" },
   { source: "/us/ez-grader", destination: "/" },

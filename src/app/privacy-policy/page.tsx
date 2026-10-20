@@ -60,7 +60,7 @@ export default function PrivacyPolicyPage() {
               <li>
                 <strong>Advertising:</strong> If we enable Google AdSense or similar programs, ad
                 partners may set cookies or use similar technologies to show and measure ads. See our{" "}
-                <a href="/cookie-policy" className="text-[var(--color-primary)] hover:underline">
+                <a href="/cookie-policy" className="text-[var(--color-primary)] underline underline-offset-2">
                   Cookie Policy
                 </a>{" "}
                 for details and how to manage preferences.
@@ -78,7 +78,7 @@ export default function PrivacyPolicyPage() {
             <h2 className="text-lg font-semibold text-[var(--color-text)]">Contact form</h2>
             <p className="mt-2">
               If you use the contact form at{" "}
-              <a href="/contact" className="text-[var(--color-primary)] hover:underline">
+              <a href="/contact" className="text-[var(--color-primary)] underline underline-offset-2">
                 gradcalc.com/contact
               </a>
               , we receive your name, email address, and message so we can reply. We do not ask for
@@ -90,7 +90,7 @@ export default function PrivacyPolicyPage() {
             <h2 className="text-lg font-semibold text-[var(--color-text)]">Contact</h2>
             <p className="mt-2">
               Privacy questions:{" "}
-              <a href={`mailto:${siteConfig.email}`} className="text-[var(--color-primary)] hover:underline">
+              <a href={`mailto:${siteConfig.email}`} className="text-[var(--color-primary)] underline underline-offset-2">
                 {siteConfig.email}
               </a>
             </p>

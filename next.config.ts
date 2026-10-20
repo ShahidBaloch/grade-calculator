@@ -5,6 +5,8 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   experimental: {
+    // Inline the (small, ~36 KB) Tailwind CSS so first paint does not wait on a separate request.
+    inlineCss: true,
     optimizePackageImports: [
       "lucide-react",
       "@radix-ui/react-accordion",

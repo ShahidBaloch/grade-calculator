@@ -512,7 +512,7 @@ export function buildUsEocStateCopy(rule: UsEocStateRule): GeoPageCopy {
   return {
     title: titles[rule.slug],
     h1: `${rule.state} EOC Grade Calculator`,
-    description: `${rule.state} EOC calculator: the EOC counts for ${weightPhrase}. Enter your class average and target grade to see the EOC score you need.`,
+    description: `${rule.state} EOC calculator: the EOC counts for ${weightPhrase}. Enter your average and goal to see the score you need.`,
     keywords: [
       `${rule.state.toLowerCase()} eoc calculator`,
       `${rule.state.toLowerCase()} eoc grade calculator`,

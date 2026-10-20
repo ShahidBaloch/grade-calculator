@@ -140,9 +140,14 @@ export function WeightedGpaCalculator() {
         <Label>Weighted GPA</Label>
         <p className="text-5xl font-bold">{result.data ? formatGpa(result.data.gpa) : "—"}</p>
         {result.data && (
-          <p className="mt-2 text-sm text-[var(--color-text-muted)]">
-            {result.data.totalCredits} credit hours
-          </p>
+          <>
+            <p className="mt-2 text-sm text-[var(--color-text-muted)]">
+              Unweighted GPA:{" "}
+              <strong className="text-[var(--color-text)]">{formatGpa(result.data.unweightedGpa)}</strong>{" "}
+              (same grades with no Honors or AP/IB bonus)
+            </p>
+            <p className="mt-1 text-sm text-[var(--color-text-muted)]">{result.data.totalCredits} credit hours</p>
+          </>
         )}
       </div>
       {getPrimaryFlow("weighted-gpa-calculator") && result.status === "valid" && (
