@@ -65,7 +65,7 @@ export function CalculatorDetailsAccordion({
                 <li key={source.href}>
                   <a
                     href={source.href}
-                    className="text-[var(--color-primary)] hover:underline"
+                    className="inline-block py-1 text-[var(--color-primary)] hover:underline"
                     rel="noopener noreferrer"
                     target="_blank"
                   >

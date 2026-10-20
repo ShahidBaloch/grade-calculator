@@ -19,11 +19,11 @@ export function EditorialByline({
     return (
       <p className={`text-xs text-[var(--color-text-muted)] ${className}`.trim()}>
         Estimates only — confirm with your school.{" "}
-        <Link href="/methodology" className="font-medium text-[var(--color-primary)] hover:underline">
+        <Link href="/methodology" prefetch={false} className="font-medium text-[var(--color-primary)] hover:underline">
           How we calculate
         </Link>
         {" · "}
-        <Link href="/contact" className="font-medium text-[var(--color-primary)] hover:underline">
+        <Link href="/contact" prefetch={false} className="font-medium text-[var(--color-primary)] hover:underline">
           Report an error
         </Link>
       </p>
@@ -33,7 +33,7 @@ export function EditorialByline({
   return (
     <p className={`text-sm text-[var(--color-text-muted)] ${className}`.trim()}>
       Written by {author}. Last reviewed {formatReviewDate(lastReviewed)}. See our{" "}
-      <Link href="/methodology" className="font-medium text-[var(--color-primary)] hover:underline">
+      <Link href="/methodology" prefetch={false} className="font-medium text-[var(--color-primary)] hover:underline">
         methodology
       </Link>{" "}
       for how we test formulas and cite sources.

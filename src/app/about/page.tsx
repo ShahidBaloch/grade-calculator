@@ -72,8 +72,8 @@ export default function AboutPage() {
             <li>UK degree classification, GCSE 9–1 bands, and an educational Australian ATAR estimate</li>
             <li>
               Country hubs for the US, UK, Canada, Australia, New Zealand,{" "}
-              <Link href="/in" className="text-[var(--color-primary)] underline underline-offset-2">India</Link>, and{" "}
-              <Link href="/pk" className="text-[var(--color-primary)] underline underline-offset-2">Pakistan</Link>{" "}
+              <Link href="/in" className="inline-block py-0.5 text-[var(--color-primary)] underline underline-offset-2">India</Link>, and{" "}
+              <Link href="/pk" className="inline-block py-0.5 text-[var(--color-primary)] underline underline-offset-2">Pakistan</Link>{" "}
               (CGPA, SGPA, and local scale presets)
             </li>
             <li>Grading scale reference charts and educational guides</li>

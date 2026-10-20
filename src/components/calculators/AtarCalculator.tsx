@@ -227,9 +227,10 @@ export function AtarCalculator() {
                   </Select>
                 </div>
                 {(subject.qceEnglish ?? /english/i.test(subject.name ?? "")) && (
-                  <label className="flex items-center gap-2 text-sm text-[var(--color-text-muted)]">
+                  <label className="flex min-h-11 items-center gap-2 text-sm text-[var(--color-text-muted)]">
                     <input
                       type="checkbox"
+                      className="h-6 w-6 shrink-0"
                       checked={subject.qceEnglishEligible ?? true}
                       onChange={(e) => {
                         const next = [...subjects];
@@ -247,9 +248,10 @@ export function AtarCalculator() {
               </div>
             )}
             {authority === "uac" && (
-              <label className="flex items-center gap-2 text-sm text-[var(--color-text-muted)]">
+              <label className="flex min-h-11 items-center gap-2 text-sm text-[var(--color-text-muted)]">
                 <input
                   type="checkbox"
+                  className="h-6 w-6 shrink-0"
                   checked={subject.hscEnglish ?? /english/i.test(subject.name ?? "")}
                   onChange={(e) => {
                     const next = [...subjects];

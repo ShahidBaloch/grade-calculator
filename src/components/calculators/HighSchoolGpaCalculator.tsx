@@ -105,9 +105,10 @@ export function HighSchoolGpaCalculator() {
         />
       )}
       <ScaleSelector />
-      <label className="flex items-center gap-2 text-sm">
+      <label className="flex min-h-11 items-center gap-2 text-sm">
         <input
           type="checkbox"
+          className="h-6 w-6 shrink-0"
           checked={weighted}
           onChange={(e) => setState({ periods, weighted: e.target.checked })}
         />

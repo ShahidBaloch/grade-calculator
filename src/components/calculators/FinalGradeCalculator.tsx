@@ -232,9 +232,10 @@ export function FinalGradeCalculator() {
 
       {state.mode === "dropped-lowest" && (
         <>
-          <label className="flex items-center gap-2 text-sm">
+          <label className="flex min-h-11 items-center gap-2 text-sm">
             <input
               type="checkbox"
+              className="h-6 w-6 shrink-0"
               checked={state.dropLowest}
               onChange={(e) => setState({ ...state, dropLowest: e.target.checked })}
             />

@@ -127,9 +127,10 @@ export function CollegeGpaCalculator() {
                 updateCourses(next);
               }}
             />
-            <label className="flex items-center gap-2 text-sm">
+            <label className="flex min-h-11 items-center gap-2 text-sm">
               <input
                 type="checkbox"
+                className="h-6 w-6 shrink-0"
                 checked={course.countsTowardGpa !== false}
                 onChange={(e) => {
                   const next = [...courses];

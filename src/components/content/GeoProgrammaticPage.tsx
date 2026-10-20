@@ -111,7 +111,7 @@ export function GeoProgrammaticPage({
         <ul className="space-y-3 text-sm">
           {copy.sources.map((source) => (
             <li key={source.href}>
-              <a href={source.href} rel="noopener" className="font-medium text-[var(--color-primary)] hover:underline">
+              <a href={source.href} rel="noopener" className="inline-block py-1 font-medium text-[var(--color-primary)] hover:underline">
                 {source.title}
               </a>
               <span className="block text-[var(--color-text-muted)]">
