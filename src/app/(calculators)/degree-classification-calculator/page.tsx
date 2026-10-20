@@ -1,6 +1,6 @@
 import { CalculatorRoute } from "@/components/calculators/CalculatorRoute";
 import { DegreeClassificationCalculator } from "@/components/calculators/DegreeClassificationCalculator";
-import { calculatorBySlug } from "@/config/calculators";
+import { calculatorBySlug, getCalculatorPath } from "@/config/calculators";
 import { calculatorHreflangLanguages } from "@/lib/seo/hreflang";
 import { calculatorKeywords } from "@/lib/seo/keywords";
 import { createPageMetadata } from "@/lib/seo/metadata";
@@ -11,7 +11,7 @@ const config = calculatorBySlug["degree-classification-calculator"];
 export const metadata = createPageMetadata({
   title: pageTitle(config.path, "UK Degree Classification Calculator — First, 2:1, 2:2"),
   description: pageDescription(config.path, config.description),
-  path: config.path,
+  path: getCalculatorPath("degree-classification-calculator"),
   keywords: calculatorKeywords["degree-classification-calculator"],
   languages: calculatorHreflangLanguages("degree-classification-calculator"),
 });

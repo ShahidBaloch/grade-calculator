@@ -1,19 +1,19 @@
 /** Visible copy that makes each indexable URL a different search intent. */
 export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: string }> = {
   "/": {
-    title: "Grade Calculator & Easy Grader",
+    title: "Grade Calculator — Easy Grader & Grading Chart",
     description:
       "Free grade calculator and easy grader for quizzes and tests. Score by wrong answers, then check weighted grades, final exam scores, and GPA.",
   },
   "/weighted-grade-calculator": {
-    title: "Weighted Grade Calculator — Course & Class Average",
+    title: "Weighted Grade Calculator — Gradebook & Class Average",
     description:
-      "Free weighted grade calculator for class, course, and gradebook averages. Change a score to see what your grade would be.",
+      "Free weighted grade calculator and online gradebook. Calculate your class, course, or quarterly grading-period average by weight. Add each category or grading period and see your overall grade update instantly.",
   },
   "/test-grade-calculator": {
-    title: "Test & Exam Grade Calculator",
+    title: "Test & Exam Grade Calculator — Score Any Quiz",
     description:
-      "Calculate test or exam grades from correct answers, wrong answers, or bonus points. See your percentage and letter grade instantly.",
+      "Calculate test or exam grades from correct or wrong answers. Find what 11 out of 15, 12 out of 20, or any score is as a percentage and letter grade. Supports bonus points too.",
   },
   "/gpa-calculator": {
     title: "GPA Calculator — Semester & Term GPA",
@@ -31,9 +31,9 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
       "Free printable grade chart: every score out of 10, 20, 50, 100, 150, 200, or any total, with its percentage, letter grade, and points needed per grade.",
   },
   "/final-grade-calculator": {
-    title: "Final Grade Calculator — Exam Score Needed",
+    title: "Final Grade Calculator — Midterm & Exam Score Needed",
     description:
-      "Find the score you need on a final or midterm. Enter your current grade, how much the exam is worth, and the grade you want.",
+      "Find the score you need on your final exam or midterm. Enter your current course grade, the exam weight, and your target grade. Works as a midterm calculator too — same formula, same result.",
   },
   "/uc-gpa-calculator": {
     title: "UC & CSU GPA Calculator — Capped A–G Average",
@@ -71,17 +71,17 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
       "Calculate college semester GPA weighted by credit hours. Excludes pass/fail and audited courses, and shows dean's list and good-standing thresholds.",
   },
   "/percentage-to-letter-grade": {
-    title: "Percentage to Letter Grade Converter — A–F Scale",
+    title: "Percentage to Letter Grade — Grades from Percentages",
     description:
       "Convert any percentage to a letter grade and GPA points instantly. Supports US, Canadian, and other grading scales, with the full A–F table.",
   },
   "/letter-grade-calculator": {
     title: "Letter Grade Calculator — Percentage & GPA Points",
     description:
-      "Look up the percentage range and GPA quality points for any letter grade. Covers A+/A/A−, B+/B/B−, and below on standard and plus/minus grading scales.",
+      "Look up the percentage range for any letter grade — A, B, C, D, or F. See the GPA quality points on standard and plus/minus scales. Convert letter grading to percentage and understand the value of each grade.",
   },
   "/canvas-grade-calculator": {
-    title: "Canvas Grade Calculator — Weighted Assignment Groups",
+    title: "Canvas Grade Calculator — Assignment Groups & Course Grade",
     description:
       "Calculate your Canvas course grade from weighted assignment groups. Enter each group's weight and score to see your overall grade and what you need.",
   },

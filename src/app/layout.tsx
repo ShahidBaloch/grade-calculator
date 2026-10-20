@@ -11,6 +11,9 @@ import { siteConfig } from "@/config/site";
 import { organizationJsonLd, webSiteJsonLd } from "@/lib/seo/jsonld";
 import "./globals.css";
 
+/** Deploy-time static pages — lower Vercel ISR usage (API routes stay dynamic). */
+export const dynamic = "force-static";
+
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",

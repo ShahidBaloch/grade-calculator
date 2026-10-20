@@ -2,6 +2,8 @@ import { contactFormSchema } from "@/lib/contact/schema";
 import { deliverContactMessage } from "@/lib/contact/deliver-contact-message";
 import { checkContactRateLimit, resolveClientIp } from "@/lib/contact/rate-limit";
 
+export const dynamic = "force-dynamic";
+
 type ContactBody = {
   name?: string;
   email?: string;

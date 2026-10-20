@@ -7,6 +7,8 @@ import { isRedirectOnlyPath } from "@/lib/seo/canonical";
 import { indexableGeoCalculatorPaths } from "@/lib/seo/intent-urls";
 import { siteConfig } from "@/config/site";
 
+export const dynamic = "force-static";
+
 // Last content update — bump this date whenever calculator content, guides, or scales are edited.
 const CONTENT_UPDATED = "2026-10-20";
 // Trust pages rarely change; bump when their copy or the brand name changes.

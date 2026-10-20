@@ -5,11 +5,19 @@ import { siteFaqs } from "@/config/site-faq";
 import { createPageMetadata } from "@/lib/seo/metadata";
 
 export const metadata = createPageMetadata({
-  title: "Frequently Asked Questions",
+  title: "Grade Calculator FAQ — Grading Scales, GPA & Percentages",
   description:
-    "Answers to common questions about our free grade calculators, GPA tools, grading scales, and privacy.",
+    "Answers to common questions about grading scales, grade percentages (A, B, C), GPA tools, final exam calculators, and privacy. Includes what percentage is each letter grade.",
   path: "/faq",
-  keywords: ["grade calculator faq", "gpa calculator help", "grading scale questions"],
+  keywords: [
+    "grade calculator faq",
+    "gpa calculator help",
+    "grading scale questions",
+    "b grade percentage",
+    "c grade percentage",
+    "what percentage is an a",
+    "grade percentages",
+  ],
 });
 
 export default function FaqPage() {
