@@ -19,8 +19,8 @@ export const auUqSevenPointScale: GradingScale = {
   ],
   sources: [
     {
-      label: "University of Queensland grading systems",
-      href: "https://my.uq.edu.au/information-and-services/manage-my-program/exams-and-assessment/grading-systems",
+      label: "University of Queensland — Assessment Procedure (Part H grading system, Appendix 2 GPA)",
+      href: "https://policies.uq.edu.au/document/view-current.php?id=184",
     },
     "UQ notes that other institutions use different GPA scales.",
   ],

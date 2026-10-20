@@ -13,7 +13,7 @@ export function ResourceLinks({ links }: { links: CalculatorResourceLinks }) {
           <li>
             <Link
               href={links.guide.path}
-              className="inline-flex items-center gap-1 text-sm text-[var(--color-primary)] hover:underline"
+              className="inline-flex min-h-6 items-center gap-1 text-sm text-[var(--color-primary)] hover:underline"
             >
               {links.guide.title}
               <ArrowRight className="h-3.5 w-3.5" />
@@ -24,7 +24,7 @@ export function ResourceLinks({ links }: { links: CalculatorResourceLinks }) {
           <li>
             <Link
               href={links.gradingScale.path}
-              className="inline-flex items-center gap-1 text-sm text-[var(--color-primary)] hover:underline"
+              className="inline-flex min-h-6 items-center gap-1 text-sm text-[var(--color-primary)] hover:underline"
             >
               {links.gradingScale.title}
               <ArrowRight className="h-3.5 w-3.5" />

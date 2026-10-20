@@ -241,12 +241,6 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
       "We divide by the sum of weights you enter, not by 100 unless your weights add to 100%.",
       "Letter grades use your selected scale on the unrounded weighted average.",
     ],
-    primarySources: [
-      {
-        label: "Edutopia — weighted grading overview for teachers",
-        href: "https://www.edutopia.org/article/weighted-grading-pros-and-cons",
-      },
-    ],
   },
   "final-grade-calculator": {
     howItWorks: [
@@ -900,10 +894,6 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
       {
         label: "Florida Legislature — statewide assessment statute",
         href: "https://www.flsenate.gov/Laws/Statutes/2024/1008.22",
-      },
-      {
-        label: "Texas Education Agency — STAAR resources",
-        href: "https://tea.texas.gov/student-assessment/testing/staar/staar-resources",
       },
     ],
   },

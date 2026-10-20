@@ -49,6 +49,13 @@ export function calculateWeightedGrade(
       errors.push(`Row ${index + 1}: invalid score or grade`);
       continue;
     }
+    if (percent < 0) {
+      errors.push(`Row ${index + 1}: score can't be negative`);
+      continue;
+    }
+    if (percent > 100) {
+      warnings.push(`Row ${index + 1} is above 100% — extra credit or a typo?`);
+    }
 
     const contribution = percent * item.weight;
     totalWeight += item.weight;

@@ -89,4 +89,29 @@ describe("calculateRemainingWorkRequired", () => {
     expect(result.data?.status).toBe("impossible");
     expect(result.data!.requiredPercent).toBeGreaterThan(100);
   });
+
+  it("rejects negative scores instead of returning a lower average", () => {
+    const result = calculateWeightedGrade({
+      globalMode: "percentage",
+      weightMode: "percent",
+      items: [
+        { score: 92, weight: 20 },
+        { score: -10, weight: 30 },
+        { score: 88, weight: 50 },
+      ],
+    });
+    expect(result.status).toBe("error");
+    expect(result.errors?.[0]).toContain("Row 2");
+    expect(result.data).toBeUndefined();
+  });
+
+  it("warns on a score above 100%", () => {
+    const result = calculateWeightedGrade({
+      globalMode: "points",
+      weightMode: "percent",
+      items: [{ score: 105, maxPoints: 100, weight: 100 }],
+    });
+    expect(result.status).toBe("warning");
+    expect(result.data?.weightedAverage).toBe(105);
+  });
 });

@@ -241,7 +241,7 @@ export function WeightedGradeCalculator() {
 
       <div className="space-y-4 rounded-lg border border-[var(--color-border)] p-4">
         <div>
-          <h3 className="text-sm font-semibold">What do I need on remaining work?</h3>
+          <h2 className="text-sm font-semibold">What do I need on remaining work?</h2>
           <p className="mt-1 text-sm text-[var(--color-text-muted)]">
             Enter unfinished course weight and your target overall. Rows above are treated as completed.
           </p>

@@ -23,8 +23,8 @@ export const caFourThreeThreeScale: GradingScale = {
   sources: [
     "Illustrative preset — percentage cutoffs and A+ handling vary by campus",
     {
-      label: "UBC grading scale and GPA",
-      href: "https://students.ubc.ca/enrolment/academic-records/grading-scale-gpa",
+      label: "UBC Arts — percentage equivalencies on a 4.33 GPA scale",
+      href: "https://www.arts.ubc.ca/degree-planning/academic-performance/promotion-continuation-grading/",
     },
   ],
 };

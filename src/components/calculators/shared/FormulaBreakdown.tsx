@@ -17,7 +17,7 @@ export function FormulaBreakdown({ steps }: FormulaBreakdownProps) {
   return (
     <Accordion type="single" collapsible>
       <AccordionItem value="steps">
-        <AccordionTrigger>Show calculation steps</AccordionTrigger>
+        <AccordionTrigger headingLevel={2}>Show calculation steps</AccordionTrigger>
         <AccordionContent>
           <ol className="list-decimal space-y-2 pl-5 font-mono text-sm">
             {steps.map((step) => (

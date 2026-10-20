@@ -15,4 +15,15 @@ describe("calculateWeightedGpa", () => {
     });
     expect(result.data?.gpa).toBe(3.5);
   });
+
+  it("reports the unweighted GPA alongside the weighted one", () => {
+    const result = calculateWeightedGpa({
+      courses: [
+        { grade: "A", credits: 1, courseType: "ap" },
+        { grade: "B", credits: 1, courseType: "regular" },
+      ],
+    });
+    expect(result.data?.gpa).toBe(4.0);
+    expect(result.data?.unweightedGpa).toBe(3.5);
+  });
 });

@@ -128,7 +128,7 @@ export const calculators: CalculatorConfig[] = [
     icon: "GraduationCap",
     category: "gpa",
     mvp: true,
-    relatedSlugs: ["cumulative-gpa-calculator", "college-gpa-calculator", "weighted-grade-calculator"],
+    relatedSlugs: ["cumulative-gpa-calculator", "college-gpa-calculator", "letter-grade-calculator", "weighted-grade-calculator"],
     examples: [
       {
         label: "4 courses",

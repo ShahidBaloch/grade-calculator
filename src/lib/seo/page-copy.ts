@@ -8,12 +8,12 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
   "/weighted-grade-calculator": {
     title: "Weighted Grade Calculator — Gradebook & Class Average",
     description:
-      "Free weighted grade calculator and online gradebook. Calculate your class, course, or quarterly grading-period average by weight. Add each category or grading period and see your overall grade update instantly.",
+      "Free weighted grade calculator and gradebook. Add each category or grading period with its weight to see your class or course average update instantly.",
   },
   "/test-grade-calculator": {
     title: "Test & Exam Grade Calculator — Score Any Quiz",
     description:
-      "Calculate test or exam grades from correct or wrong answers. Find what 11 out of 15, 12 out of 20, or any score is as a percentage and letter grade. Supports bonus points too.",
+      "Calculate test or exam grades from correct or wrong answers. See what 11 out of 15 or 12 out of 20 is as a percentage and letter grade, with bonus points.",
   },
   "/gpa-calculator": {
     title: "GPA Calculator — Semester & Term GPA",
@@ -33,7 +33,7 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
   "/final-grade-calculator": {
     title: "Final Grade Calculator — Midterm & Exam Score Needed",
     description:
-      "Find the score you need on your final exam or midterm. Enter your current course grade, the exam weight, and your target grade. Works as a midterm calculator too — same formula, same result.",
+      "Find the score you need on your final exam or midterm. Enter your current grade, the exam weight, and your target grade to see the score you need.",
   },
   "/uc-gpa-calculator": {
     title: "UC & CSU GPA Calculator — Capped A–G Average",
@@ -78,10 +78,10 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
   "/letter-grade-calculator": {
     title: "Letter Grade Calculator — Percentage & GPA Points",
     description:
-      "Look up the percentage range for any letter grade — A, B, C, D, or F. See the GPA quality points on standard and plus/minus scales. Convert letter grading to percentage and understand the value of each grade.",
+      "Look up the percentage range for any letter grade, A to F, with its GPA quality points on standard and plus/minus scales.",
   },
   "/canvas-grade-calculator": {
-    title: "Canvas Grade Calculator — Assignment Groups & Course Grade",
+    title: "Canvas Grade Calculator — Weighted Assignment Groups",
     description:
       "Calculate your Canvas course grade from weighted assignment groups. Enter each group's weight and score to see your overall grade and what you need.",
   },

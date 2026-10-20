@@ -24,6 +24,23 @@ const SCALE_TOOLS: Partial<Record<ScaleId, CalculatorSlug[]>> = {
   "au-seven-point": ["gpa-calculator", "cumulative-gpa-calculator"],
   "au-uq-seven-point": ["gpa-calculator", "cumulative-gpa-calculator"],
   "au-monash-four-point": ["gpa-calculator", "cumulative-gpa-calculator"],
+  "ca-standard": ["gpa-calculator", "letter-grade-calculator", "cumulative-gpa-calculator", "college-gpa-calculator"],
+  // The Canada calculators are locked to the 4.0-cap preset, so the 4.33 page links the UBC tool below instead.
+  "ca-four-three-three": [],
+  "nz-nine-point": ["gpa-calculator", "letter-grade-calculator", "cumulative-gpa-calculator"],
+  "in-ten-point": ["gpa-calculator", "cgpa-calculator", "cgpa-to-percentage", "sgpa-to-cgpa", "cgpa-to-gpa"],
+  "pk-hec": ["gpa-calculator", "cumulative-gpa-calculator", "cgpa-calculator", "cgpa-to-percentage", "sgpa-to-cgpa"],
+};
+
+/** Tools outside the calculator registry (geo university pages) that use a given scale. */
+const SCALE_EXTRA_TOOLS: Partial<Record<ScaleId, Array<{ href: string; label: string; description: string }>>> = {
+  "ca-four-three-three": [
+    {
+      href: "/ca/university/ubc-gpa-calculator",
+      label: "UBC GPA Calculator",
+      description: "Convert UBC percentages with UBC Arts' published 4.33-scale equivalencies.",
+    },
+  ],
 };
 
 const SAMPLE_PERCENTS = [95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 30];
@@ -38,11 +55,14 @@ export function GradingScaleGuide({ scale }: { scale: GradingScale }) {
   const hubPath = HUB_PATH[scale.country];
   const hub = countryHubs.find((h) => h.path === hubPath);
   const toolSlugs = (SCALE_TOOLS[scale.id] ?? hub?.featuredCalculators ?? []).slice(0, 5);
-  const tools = toolSlugs.map((slug) => ({
-    href: canonicalPathForSlug(slug, hubPath),
-    label: calculatorBySlug[slug].name,
-    description: calculatorBySlug[slug].description,
-  }));
+  const tools = [
+    ...toolSlugs.map((slug) => ({
+      href: canonicalPathForSlug(slug, hubPath),
+      label: calculatorBySlug[slug].name,
+      description: calculatorBySlug[slug].description,
+    })),
+    ...(SCALE_EXTRA_TOOLS[scale.id] ?? []),
+  ];
   const hasGpa = scale.bands.some((band) => band.gpa != null) && scale.id !== "uk-degree";
   const rows = SAMPLE_PERCENTS.map((percent) => ({ percent, ...percentToLetter(percent, scale.id) }));
   const example = percentToLetter(EXAMPLE_PERCENT, scale.id);
