@@ -38,9 +38,11 @@ test.describe("Core calculator flows", () => {
     await expect(page.getByText("Upper Second (2:1)").first()).toBeVisible();
   });
 
-  test("UK hub GCSE page locks a country path", async ({ page }) => {
-    await page.goto("/uk/gcse-grade-calculator");
-    await expect(page).toHaveURL(/\/uk\/gcse-grade-calculator/);
+  test("UK hub GCSE URL redirects to the single worldwide GCSE page", async ({ page }) => {
+    const response = await page.goto("/uk/gcse-grade-calculator");
+    expect(response?.status()).toBeLessThan(400);
+    await expect(page).toHaveURL(/\/gcse-grade-calculator$/);
+    await expect(page).not.toHaveURL(/\/uk\//);
     await expect(page.getByRole("heading", { level: 1, name: /gcse/i })).toBeVisible();
   });
 
@@ -52,9 +54,11 @@ test.describe("Core calculator flows", () => {
 
   test("ATAR default page shows an estimate", async ({ page }) => {
     await page.goto("/atar-calculator");
+    await expect(page).toHaveURL(/\/au\/atar-calculator$/);
     await expect(page.getByRole("heading", { level: 1, name: /atar/i })).toBeVisible();
-    await expect(page.getByText("Estimated ATAR").first()).toBeVisible();
-    await expect(page.locator(".text-5xl").first()).not.toHaveText("—");
+    await expect(page.getByText("Counted average (planning)").first()).toBeVisible();
+    await expect(page.locator(".text-5xl").first()).toHaveText(/^\d+(\.\d)?$/);
+    await expect(page.getByText(/Approximate planning ATAR: about\s*\d+/).first()).toBeVisible();
   });
 
   test("Raise GPA calculator shows a required GPA", async ({ page }) => {
@@ -137,17 +141,24 @@ test.describe("Core calculator flows", () => {
   test("Pakistan grading scale reference shows D+ and HEC source link", async ({ page }) => {
     await page.goto("/grading-scales/pakistan");
     await expect(page.getByRole("heading", { level: 1 })).toContainText(/pakistan/i);
-    await expect(page.getByRole("cell", { name: "D+" })).toBeVisible();
+    const scaleTable = page
+      .getByRole("table")
+      .filter({ has: page.getByRole("columnheader", { name: "Letter / Grade" }) });
+    await expect(scaleTable.getByRole("cell", { name: "D+", exact: true })).toBeVisible();
     await expect(
       page.getByRole("link", { name: /HEC Policy Guidelines.*§13\.1/i }),
     ).toHaveAttribute("href", /hec\.gov\.pk/i);
-    await expect(page.getByRole("cell", { name: "3.34–3.66" })).toBeVisible();
+    await expect(scaleTable.getByRole("cell", { name: "3.34–3.66" })).toBeVisible();
   });
 
   test("Pakistan hub CGPA converter uses HEC §13.1 by default", async ({ page }) => {
     await page.goto("/pk/cgpa-to-percentage");
-    await page.getByRole("combobox", { name: "Formula" }).click();
-    await expect(page.getByRole("option", { name: /HEC §13\.1/i })).toBeVisible();
+    const formula = page.getByRole("combobox", { name: "Formula" });
+    await expect(formula).toContainText(/HEC §13\.1/i);
+    await formula.click();
+    await expect(page.getByRole("option", { name: /HEC §13\.1/i, selected: true })).toBeVisible();
+    await page.keyboard.press("Escape");
+    await expect(formula).toHaveAttribute("aria-expanded", "false");
     await page.getByRole("spinbutton", { name: /CGPA/i }).fill("3");
     await expect(page.getByText(/71%/).first()).toBeVisible();
   });
