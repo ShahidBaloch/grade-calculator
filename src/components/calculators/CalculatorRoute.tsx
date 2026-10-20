@@ -3,8 +3,10 @@ import { CalculatorPageSections } from "@/components/calculators/CalculatorPageS
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { calculatorBySlug, getCalculatorPath } from "@/config/calculators";
+import { GeoLinkList } from "@/components/content/GeoProgrammaticPage";
 import { countryHubByPath } from "@/config/country-hubs";
 import { webApplicationJsonLd, howToJsonLd } from "@/lib/seo/jsonld";
+import { calculatorCountryVersionsGroup } from "@/lib/seo/geo-programmatic";
 import { calculatorContent } from "@/config/calculator-content";
 import { getCalculatorHowItWorks } from "@/lib/content/calculator-how-it-works";
 import { pageDescription, pageTitle } from "@/lib/seo/page-copy";
@@ -40,6 +42,7 @@ export function CalculatorRoute({
   // H1 = pure keyword only (no tagline). Geo pages prefix the country name.
   const heading = geoHub ? `${geoHub.name} ${config.name}` : config.name;
   const howItWorksSteps = getCalculatorHowItWorks(slug, pagePath);
+  const countryVersions = calculatorCountryVersionsGroup(slug, pagePath);
   const breadcrumbs = breadcrumbHome
     ? [{ name: "Home", href: "/" }]
     : geoHub
@@ -78,7 +81,14 @@ export function CalculatorRoute({
         focus={focus}
         calculator={calculator}
         content={aside ?? <CalculatorPageSections slug={slug} pagePath={pagePath} />}
-        below={below}
+        below={
+          below || countryVersions ? (
+            <div className="space-y-10">
+              {below}
+              {countryVersions && <GeoLinkList group={countryVersions} />}
+            </div>
+          ) : undefined
+        }
       />
     </>
   );

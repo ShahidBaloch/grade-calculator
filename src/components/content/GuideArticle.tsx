@@ -48,7 +48,7 @@ export function GuideArticle({ guide, embeddedCalculator }: GuideArticleProps) {
               const related = guideBySlug[slug];
               return (
                 <li key={slug}>
-                  <Link href={related.path} className="text-[var(--color-primary)] hover:underline">
+                  <Link href={related.path} className="inline-flex min-h-6 items-center text-[var(--color-primary)] hover:underline">
                     {related.title}
                   </Link>
                 </li>

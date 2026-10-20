@@ -28,4 +28,26 @@ describe("calculateCumulativeGpa", () => {
     const result = calculateCumulativeGpa({ courses: [] });
     expect(result.status).toBe("error");
   });
+
+  it("rejects a previous GPA above the scale maximum", () => {
+    const result = calculateCumulativeGpa({
+      previousGpa: 5.5,
+      previousCredits: 30,
+      courses: [{ grade: "A", credits: 3 }],
+    });
+    expect(result.status).toBe("error");
+    expect(result.errors).toEqual(["Previous GPA can't be above 4.0 on this scale"]);
+  });
+
+  it("allows a previous CGPA up to 10 on the India 10-point scale", () => {
+    const result = calculateCumulativeGpa(
+      {
+        previousGpa: 8.5,
+        previousCredits: 20,
+        courses: [{ grade: "O", credits: 4 }],
+      },
+      "in-ten-point",
+    );
+    expect(result.status).toBe("valid");
+  });
 });

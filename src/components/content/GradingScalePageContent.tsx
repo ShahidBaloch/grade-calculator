@@ -60,7 +60,7 @@ export function GradingScalePageContent({ config }: { config: GradingScalePageCo
             .filter((p) => p.slug !== config.slug)
             .map((p) => (
               <li key={p.slug}>
-                <Link href={p.path} className="text-[var(--color-primary)] hover:underline">
+                <Link href={p.path} className="inline-flex min-h-6 items-center text-[var(--color-primary)] hover:underline">
                   {p.title}
                 </Link>
               </li>

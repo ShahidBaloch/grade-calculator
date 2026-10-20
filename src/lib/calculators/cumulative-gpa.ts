@@ -1,3 +1,4 @@
+import { getScaleMaxGpa } from "@/lib/grading-scales";
 import type { ScaleId } from "@/types/grading-scale";
 import { calculateSemesterGpa } from "./gpa";
 import type { CalculatorResult } from "./types";
@@ -25,6 +26,11 @@ export function calculateCumulativeGpa(
   }
 
   const { previousGpa = 0, previousCredits = 0, courses } = parsed.data;
+  const scaleMax = getScaleMaxGpa(scaleId);
+  if (previousGpa > scaleMax) {
+    const shown = Number.isInteger(scaleMax) ? scaleMax.toFixed(1) : String(scaleMax);
+    return { status: "error", errors: [`Previous GPA can't be above ${shown} on this scale`] };
+  }
   const semesterResult = calculateSemesterGpa({ courses }, scaleId);
 
   if (semesterResult.status === "error") {

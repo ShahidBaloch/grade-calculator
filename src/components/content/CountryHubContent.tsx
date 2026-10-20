@@ -75,7 +75,7 @@ export function CountryHubContent({ hub }: CountryHubContentProps) {
           <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-[var(--color-text-muted)]">
             {hub.relatedGuides.map((guide) => (
               <li key={guide.path}>
-                <Link href={guide.path} className="text-[var(--color-primary)] hover:underline">
+                <Link href={guide.path} className="inline-flex min-h-6 items-center text-[var(--color-primary)] hover:underline">
                   {guide.title}
                 </Link>
               </li>

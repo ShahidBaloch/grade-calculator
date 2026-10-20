@@ -20,13 +20,18 @@ const ROOT_REGION: Partial<Record<CalculatorSlug, string>> = {
   "cgpa-calculator": "en-IN",
 };
 
-export function calculatorHreflangLanguages(slug: CalculatorSlug): Record<string, string> {
+/** Country pages that are regional versions of this tool (excludes the worldwide URL). */
+export function calculatorRegionalVersions(slug: CalculatorSlug) {
   const rootPath = getCalculatorPath(slug);
-  const rootUrl = absoluteUrl(rootPath);
-  const regional = countryHubs
+  return countryHubs
     .filter((hub) => hub.featuredCalculators.includes(slug) && isCountrySpecificSlug(hub.path, slug))
-    .map((hub) => ({ hreflang: hub.hreflang, path: `${hub.path}/${slug}` }))
+    .map((hub) => ({ hub, hreflang: hub.hreflang, path: `${hub.path}/${slug}` }))
     .filter(({ path }) => path !== rootPath);
+}
+
+export function calculatorHreflangLanguages(slug: CalculatorSlug): Record<string, string> {
+  const rootUrl = absoluteUrl(getCalculatorPath(slug));
+  const regional = calculatorRegionalVersions(slug);
 
   if (regional.length === 0) {
     return { "x-default": rootUrl, en: rootUrl };

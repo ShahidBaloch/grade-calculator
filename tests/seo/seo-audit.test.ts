@@ -23,6 +23,7 @@ import { getCalculatorPath } from "@/config/calculators";
 import { calculatorResourceLinks } from "@/config/calculator-links";
 import { footerNav, mainNav } from "@/config/navigation";
 import { calculatorHreflangLanguages, countryHubHreflangLanguages } from "@/lib/seo/hreflang";
+import { pageUpdated } from "@/config/page-updated";
 import { siteConfig } from "@/config/site";
 import { siteFaqs } from "@/config/site-faq";
 import { assertSameOrigin, canonicalUrlForPath, isRedirectOnlyPath } from "@/lib/seo/canonical";
@@ -323,7 +324,17 @@ describe("SEO audit", () => {
     }
   });
 
-  it("robots.txt allows Google, Bing, and Yandex; delays other bots; blocks SEO scrapers", () => {
+  it("every sitemap URL has its own lastmod entry, and pages don't all share one date", () => {
+    const paths = sitemap().map((entry) => new URL(entry.url).pathname);
+    for (const path of paths) {
+      expect(pageUpdated[path], `add ${path} to src/config/page-updated.ts`).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+    }
+    const stale = Object.keys(pageUpdated).filter((path) => !paths.includes(path));
+    expect(stale, "pageUpdated lists URLs that are not in the sitemap").toEqual([]);
+    expect(new Set(paths.map((path) => pageUpdated[path])).size).toBeGreaterThan(1);
+  });
+
+  it("robots.txt allows Google, Bing, and Yandex with no crawl delay; blocks SEO scrapers", () => {
     const config = robots();
     expect(config.sitemap).toBe(`${siteConfig.url}/sitemap.xml`);
     expect(config.host).toBe(new URL(siteConfig.url).host);
@@ -365,7 +376,7 @@ describe("SEO audit", () => {
     expect(adsRule?.allow).toContain("/");
 
     const wildcardRule = rules.find((rule) => agentsOnly(rule).includes("*"));
-    expect(wildcardRule?.crawlDelay).toBeGreaterThan(0);
+    expect(wildcardRule?.crawlDelay).toBeUndefined();
     expect(wildcardRule?.allow).toContain("/");
   });
 
