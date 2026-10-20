@@ -1,11 +1,11 @@
-import { z } from "zod";
+import { z } from "zod/mini";
 import { gpaCourseSchema } from "./gpa.schema";
 
 /** Max 10 covers India 10-point CGPA; US/PK 4.0 values stay well under this. */
 export const cumulativeGpaInputSchema = z.object({
-  previousGpa: z.number().min(0).max(10).optional(),
-  previousCredits: z.number().min(0).optional(),
-  courses: z.array(gpaCourseSchema).min(1),
+  previousGpa: z.optional(z.number().check(z.gte(0), z.lte(10))),
+  previousCredits: z.optional(z.number().check(z.gte(0))),
+  courses: z.array(gpaCourseSchema).check(z.minLength(1)),
 });
 
 export type CumulativeGpaInput = z.infer<typeof cumulativeGpaInputSchema>;

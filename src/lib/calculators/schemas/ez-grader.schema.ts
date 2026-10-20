@@ -1,8 +1,8 @@
-import { z } from "zod";
+import { z } from "zod/mini";
 
 export const ezGraderInputSchema = z.object({
-  totalQuestions: z.number().int().min(1).max(999),
-  wrongAnswers: z.number().int().min(0),
+  totalQuestions: z.int().check(z.gte(1), z.lte(999)),
+  wrongAnswers: z.int().check(z.gte(0)),
 });
 
 export type EzGraderInput = z.infer<typeof ezGraderInputSchema>;

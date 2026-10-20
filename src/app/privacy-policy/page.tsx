@@ -60,7 +60,7 @@ export default function PrivacyPolicyPage() {
               <li>
                 <strong>Advertising:</strong> If we enable Google AdSense or similar programs, ad
                 partners may set cookies or use similar technologies to show and measure ads. See our{" "}
-                <a href="/cookie-policy" className="text-[var(--color-primary)] underline underline-offset-2">
+                <a href="/cookie-policy" className="inline-block py-0.5 text-[var(--color-primary)] underline underline-offset-2">
                   Cookie Policy
                 </a>{" "}
                 for details and how to manage preferences.
