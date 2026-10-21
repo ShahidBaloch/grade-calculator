@@ -13,7 +13,13 @@ const countryLinks = countryHubs.map((hub) => ({
   href: hub.path,
 }));
 
-export const mainNav = [
+export interface NavItem {
+  label: string;
+  href: string;
+  children?: Array<{ label: string; href: string }>;
+}
+
+export const mainNav: NavItem[] = [
   {
     label: "Calculators",
     href: "/calculators",

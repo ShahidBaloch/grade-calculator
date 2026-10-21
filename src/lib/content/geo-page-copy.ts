@@ -307,7 +307,7 @@ export function buildCaUniversityCopy(profile: CaUniversityProfile): GeoPageCopy
       title: "OMSAS GPA Calculator — OUAC 4.0 Conversion Table",
       h1: "OMSAS GPA Calculator",
       description:
-        "Calculate your OMSAS GPA with the official OUAC conversion table: pick your university's scale, weight full-year and half-year courses, and see your 4.0 GPA.",
+        "Calculate your OMSAS GPA with the official OUAC conversion table: pick your university's scale, weight full- and half-year courses, and see your 4.0 GPA.",
       keywords: ["omsas gpa calculator", "ouac gpa conversion", "omsas gpa", "ontario medical school gpa", "convert percentage to gpa canada"],
     },
     ubc: {

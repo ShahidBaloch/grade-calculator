@@ -594,9 +594,4 @@ export const mvpCalculators = calculators.filter((c) => c.mvp);
 export const extendedCalculators = calculators.filter((c) => !c.mvp);
 
 /** Public href. One URL per intent so country copies do not compete in search. */
-export function getCalculatorPath(slug: CalculatorSlug): string {
-  if (slug === "ez-grader") return "/";
-  if (slug === "atar-calculator") return "/au/atar-calculator";
-  if (slug === "degree-classification-calculator") return "/uk/degree-classification-calculator";
-  return calculatorBySlug[slug].path;
-}
+export { getCalculatorPath } from "./calculator-paths";
