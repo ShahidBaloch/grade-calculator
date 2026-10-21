@@ -1,5 +1,3 @@
-"use client";
-
 import { footerNav } from "@/config/navigation";
 import { siteConfig } from "@/config/site";
 import { CountryAwareLink } from "@/components/navigation/CountryAwareLink";

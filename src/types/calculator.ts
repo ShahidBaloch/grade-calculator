@@ -39,7 +39,7 @@ export type CalculatorSlug =
   | "uc-gpa-calculator"
   | "middle-school-gpa-calculator";
 
-const CALCULATOR_SLUGS: CalculatorSlug[] = [
+export const CALCULATOR_SLUGS: CalculatorSlug[] = [
   "ez-grader",
   "test-grade-calculator",
   "weighted-grade-calculator",

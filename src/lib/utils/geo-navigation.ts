@@ -1,5 +1,5 @@
-import { countryHubs } from "@/config/country-hubs";
-import { getCalculatorPath } from "@/config/calculators";
+import { countryHubRoutes } from "@/config/country-hub-routes";
+import { getCalculatorPath } from "@/config/calculator-paths";
 import { getMarketFromGeoCountry } from "@/lib/grading-scales/geo-scale";
 import { resolveCalculatorPath } from "@/lib/utils/country-path";
 import type { CalculatorSlug } from "@/types/calculator";
@@ -17,7 +17,7 @@ const GPA_SLUGS = new Set<CalculatorSlug>([
 export function hubPathForCountry(isoCountry: string | null | undefined): string | null {
   const market = getMarketFromGeoCountry(isoCountry);
   if (!market) return null;
-  const hub = countryHubs.find((item) => item.code === market.toLowerCase());
+  const hub = countryHubRoutes.find((item) => item.code === market.toLowerCase());
   return hub?.path ?? null;
 }
 
@@ -46,7 +46,7 @@ export function geoPageHint(
   if (!market || !pathname) return null;
 
   const path = pathname.replace(/\/$/, "") || "/";
-  if (path === "/" || countryHubs.some((hub) => path === hub.path || path.startsWith(`${hub.path}/`))) {
+  if (path === "/" || countryHubRoutes.some((hub) => path === hub.path || path.startsWith(`${hub.path}/`))) {
     return null;
   }
 

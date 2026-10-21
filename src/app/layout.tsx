@@ -7,6 +7,7 @@ import { ToolSwitcher } from "@/components/engagement/ToolSwitcher";
 import { GradingScaleProvider } from "@/components/providers/grading-scale-provider";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { mainNav } from "@/config/navigation";
 import { siteConfig } from "@/config/site";
 import { organizationJsonLd, webSiteJsonLd } from "@/lib/seo/jsonld";
 import "./globals.css";
@@ -41,7 +42,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             >
               Skip to content
             </a>
-            <Header />
+            <Header nav={mainNav} />
             <div className="no-print px-4 py-1.5" data-print-chrome>
               <div className="mx-auto max-w-7xl">
                 <GradeInputPrivacyNotice />

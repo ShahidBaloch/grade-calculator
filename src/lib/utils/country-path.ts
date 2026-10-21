@@ -1,17 +1,15 @@
-import { calculators, getCalculatorPath } from "@/config/calculators";
-import { countryHubs } from "@/config/country-hubs";
+import { getCalculatorPath } from "@/config/calculator-paths";
+import { countryHubRoutes } from "@/config/country-hub-routes";
 import type { CalculatorSlug } from "@/types/calculator";
-import { isCalculatorSlug } from "@/types/calculator";
-import { canonicalPathForSlug } from "@/lib/seo/intent-urls";
+import { CALCULATOR_SLUGS, isCalculatorSlug } from "@/types/calculator";
+import { canonicalPathForSlug } from "@/lib/seo/canonical-path";
 
-const SLUG_BY_WORLD_PATH = new Map(
-  calculators.map((calculator) => [getCalculatorPath(calculator.slug), calculator.slug]),
-);
+const SLUG_BY_WORLD_PATH = new Map(CALCULATOR_SLUGS.map((slug) => [getCalculatorPath(slug), slug]));
 
 /** e.g. `/au/gpa-calculator` → `/au` */
 export function getCountryPrefixFromPath(pathname: string | null | undefined): string | null {
   if (!pathname) return null;
-  for (const hub of countryHubs) {
+  for (const hub of countryHubRoutes) {
     if (pathname === hub.path || pathname.startsWith(`${hub.path}/`)) {
       return hub.path;
     }
@@ -45,7 +43,7 @@ export function resolveSiteHref(href: string, pathname?: string | null): string 
   const prefix = getCountryPrefixFromPath(pathname);
   if (!prefix) return href;
 
-  const hub = countryHubs.find((item) => item.path === prefix);
+  const hub = countryHubRoutes.find((item) => item.path === prefix);
   if (!hub) return href;
 
   if (href === hub.gradingScalePath || href.startsWith(`${hub.gradingScalePath}/`)) {

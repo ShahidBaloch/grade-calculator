@@ -88,7 +88,7 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
   "/eoc-grade-calculator": {
     title: "EOC Calculator — End-of-Course Exam Score Needed",
     description:
-      "Free EOC calculator: enter your class average, your state's EOC weight (e.g. 30% in Florida), and your goal grade to see the End-of-Course exam score you need.",
+      "Free EOC calculator: enter your class average, your state's EOC weight (e.g. 30% in Florida) and goal grade to see the End-of-Course exam score you need.",
   },
   "/degree-classification-calculator": {
     title: "UK Degree Classification Calculator — First, 2:1, 2:2, Third",
