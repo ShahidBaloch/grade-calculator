@@ -10,6 +10,7 @@ import {
   questionChartSlug,
 } from "@/config/question-charts";
 import { calculateGradeChart } from "@/lib/calculators/grade-chart";
+import { questionChartScenario } from "@/lib/content/question-chart-copy";
 import { percentToLetter } from "@/lib/grading-scales";
 import { createPageMetadata } from "@/lib/seo/metadata";
 import { webPageJsonLd } from "@/lib/seo/jsonld";
@@ -35,7 +36,7 @@ function pct(value: number) {
 function copyFor(total: number) {
   const perQuestion = 100 / total;
   return {
-    title: `Grading Scale for ${total} Questions — Score & Percent Chart`,
+    title: `Grading Scale for ${total} Questions — Percent Chart`,
     description: `Free ${total}-question grading chart: every score from ${total} to 0 with wrong answers, percentage, letter grade, and half points. Each question is worth ${pct(perQuestion)}.`,
   };
 }
@@ -93,6 +94,9 @@ export default async function QuestionChartPage({ params }: PageProps) {
           60% needs <strong>{toPass} correct</strong>, and an A (90% or higher) needs <strong>{forA} correct</strong>.
           Letter grades below use the common US plus/minus scale; your teacher&apos;s syllabus sets the real cutoffs.
         </p>
+
+        <h2>What a {total}-question test looks like in practice</h2>
+        <p>{questionChartScenario(total, rows, bands, SCALE_ID)}</p>
 
         <h2>Popular scores out of {total}</h2>
         <ul>
@@ -188,14 +192,22 @@ export default async function QuestionChartPage({ params }: PageProps) {
           chart for any total with the <Link href="/grade-chart">grade chart</Link>.
         </p>
 
-        <h2>Other test lengths</h2>
-        <ul>
-          {neighbors.map((c) => (
-            <li key={c.total}>
-              <Link href={questionChartPath(c.total)}>Grading scale for {c.total} questions</Link>
-            </li>
-          ))}
-        </ul>
+        <section className="no-print">
+          <h2>Other test lengths</h2>
+          <ul className="not-prose mt-3 flex list-none flex-wrap gap-2 p-0">
+            {neighbors.map((c) => (
+              <li key={c.total}>
+                <Link
+                  href={questionChartPath(c.total)}
+                  prefetch={false}
+                  className="inline-flex min-h-11 items-center rounded-md border border-[var(--color-border)] px-3 text-sm font-medium hover:bg-[var(--color-bg-subtle)]"
+                >
+                  Grading scale for {c.total} questions
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
       </ContentPageLayout>
     </>
   );

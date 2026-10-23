@@ -352,7 +352,7 @@ export function buildCaUniversityCopy(profile: CaUniversityProfile): GeoPageCopy
       keywords: ["waterloo gpa calculator", "uwaterloo average calculator", "waterloo cumulative average", "waterloo to 4.0 gpa"],
     },
     guelph: {
-      title: "Guelph Grade Calculator — Average, Grading Scale & GPA",
+      title: "Guelph Grade Calculator — Average, Scale & GPA",
       h1: "University of Guelph Grade Calculator",
       description:
         "Calculate your University of Guelph credit-weighted average and letter grade with the official grading scale (A+ = 90–100%), then see the OMSAS 4.0 GPA.",
