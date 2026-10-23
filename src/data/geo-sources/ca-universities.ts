@@ -18,12 +18,12 @@ export interface CourseWeightOption {
 export type UniversityResultKind =
   /** Credit-weighted grade points (U of T, OMSAS). */
   | "gpa"
-  /** Credit-weighted percentage average (UBC, Waterloo). */
+  /** Credit-weighted percentage average (UBC, Waterloo, Guelph). */
   | "percent-average";
 
 export interface CaUniversityProfile {
   /** URL segment: /ca/university/{slug}-gpa-calculator */
-  slug: "omsas" | "ubc" | "uoft" | "waterloo";
+  slug: "omsas" | "ubc" | "uoft" | "waterloo" | "guelph";
   name: string;
   shortName: string;
   province: string;
@@ -90,6 +90,67 @@ const WATERLOO_SCIENCE: OfficialSource = {
   href: "https://uwaterloo.ca/science-undergraduate-office/academic-information/grades-and-academic-standings",
   checked: CHECKED,
 };
+
+const GUELPH_CHECKED = "2026-10-23";
+// calendar.uoguelph.ca did not resolve on 2026-10-23, so the pages were read from Internet Archive copies.
+const guelphReadVia = (capture: string) =>
+  `calendar.uoguelph.ca was unreachable; read from the Internet Archive capture of ${capture}`;
+
+const GUELPH_GRADES: OfficialSource = {
+  publisher: "University of Guelph",
+  title: "Undergraduate Calendar — VIII. Undergraduate Degree Regulations and Procedures: Grades",
+  href: "https://calendar.uoguelph.ca/undergraduate-calendar/undergraduate-degree-regulations-procedures/grades/",
+  checked: GUELPH_CHECKED,
+  edition: "2026-2027 Academic Calendar",
+  readVia: guelphReadVia("2026-06-09"),
+};
+
+const GUELPH_GLOSSARY: OfficialSource = {
+  publisher: "University of Guelph",
+  title: "Undergraduate Calendar — Glossary (Cumulative Average, Semester Average, Weighted Course Total)",
+  href: "https://calendar.uoguelph.ca/undergraduate-calendar/glossary/",
+  checked: GUELPH_CHECKED,
+  edition: "2026-2027 Academic Calendar",
+  readVia: guelphReadVia("2026-06-09"),
+};
+
+const GUELPH_FAILED_COURSES: OfficialSource = {
+  publisher: "University of Guelph",
+  title: "Undergraduate Calendar — Failed Courses (Repeating Failed Courses)",
+  href: "https://calendar.uoguelph.ca/undergraduate-calendar/undergraduate-degree-regulations-procedures/failed-courses/",
+  checked: GUELPH_CHECKED,
+  edition: "2026-2027 Academic Calendar",
+  readVia: guelphReadVia("2026-04-21"),
+};
+
+const GUELPH_DEANS_HONOURS: OfficialSource = {
+  publisher: "University of Guelph",
+  title: "Undergraduate Calendar — Dean's Honours List",
+  href: "https://calendar.uoguelph.ca/undergraduate-calendar/undergraduate-degree-regulations-procedures/deans-honours-list/",
+  checked: GUELPH_CHECKED,
+  edition: "2026-2027 Academic Calendar",
+  readVia: guelphReadVia("2026-04-21"),
+};
+
+/** Guelph undergraduate grading system (Senate, effective Spring 1992). No grade points are published. */
+export const GUELPH_BANDS: UniversityBand[] = [
+  { letter: "A+", min: 90, max: 100 },
+  { letter: "A", min: 85, max: 89 },
+  { letter: "A-", min: 80, max: 84 },
+  { letter: "B+", min: 77, max: 79 },
+  { letter: "B", min: 73, max: 76 },
+  { letter: "B-", min: 70, max: 72 },
+  { letter: "C+", min: 67, max: 69 },
+  { letter: "C", min: 63, max: 66 },
+  { letter: "C-", min: 60, max: 62 },
+  { letter: "D+", min: 57, max: 59 },
+  { letter: "D", min: 53, max: 56 },
+  { letter: "D-", min: 50, max: 52 },
+  { letter: "F", min: 0, max: 49 },
+];
+
+/** Guelph Dean's Honours List threshold (semester average, full-time). */
+export const GUELPH_DEANS_HONOURS_AVERAGE = 80;
 
 /** UBC Vancouver, "In most faculties, individual courses are normally graded as follows". */
 export const UBC_BANDS: UniversityBand[] = [
@@ -250,6 +311,33 @@ export const caUniversityProfiles: CaUniversityProfile[] = [
       "OUAC lists Waterloo under Scales 3 and 7, so OMSAS converts Waterloo percentages with percentage Scale 3.",
     ],
     sources: [WATERLOO_CALENDAR, WATERLOO_SCIENCE, OUAC_CONVERSION_SOURCE],
+  },
+  {
+    slug: "guelph",
+    name: "University of Guelph Average & GPA",
+    shortName: "Guelph",
+    province: "Ontario",
+    result: "percent-average",
+    gradeInput: "percent",
+    weightLabel: "Credit weight",
+    weightOptions: [
+      { label: "0.50 credits (one-semester course)", weight: 0.5 },
+      { label: "0.25 credits", weight: 0.25 },
+      { label: "0.75 credits", weight: 0.75 },
+      { label: "1.00 credits", weight: 1 },
+    ],
+    defaultWeight: 0.5,
+    bands: GUELPH_BANDS,
+    omsasScales: [3],
+    omsasWeightFactor: 2,
+    facts: [
+      "Guelph grades undergraduate courses in percentages with matching letter grades: A+ is 90–100%, A is 85–89% and A- is 80–84%, down to D- at 50–52% and F below 50%. The calendar publishes no grade points, so Guelph reports averages, not a GPA.",
+      "Your cumulative average is the weighted course total — each course's credit weight multiplied by its grade, added up — divided by your total credit attempts over all semesters. A semester average uses the same formula for one semester.",
+      "From Summer 2026, when you repeat a failed course every attempt still counts in that semester's average, but only the highest grade is used in your cumulative average. Courses taken before Summer 2026 are not recalculated this way.",
+      "Full-time students with a semester average of at least 80.0% are named to the Dean's Honours List.",
+      "OUAC lists Guelph under percentage Scale 3, so OMSAS converts Guelph percentages with Scale 3 (an 85–89% is 3.9).",
+    ],
+    sources: [GUELPH_GRADES, GUELPH_GLOSSARY, GUELPH_FAILED_COURSES, GUELPH_DEANS_HONOURS, OUAC_CONVERSION_SOURCE],
   },
 ];
 

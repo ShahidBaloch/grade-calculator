@@ -34,7 +34,7 @@ export function organizationJsonLd() {
     alternateName: siteAlternateNames,
     url: siteConfig.url,
     email: siteConfig.email,
-    logo: absoluteUrl("/icon"),
+    logo: absoluteUrl("/logo.png"),
     contactPoint: [
       {
         "@type": "ContactPoint",

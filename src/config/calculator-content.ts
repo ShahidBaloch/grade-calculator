@@ -19,6 +19,11 @@ export interface CalculatorContent {
 
 export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
   "ez-grader": {
+    assumptions: [
+      "Every question is worth the same number of points.",
+      "Letter grades follow the grading scale selected in the calculator.",
+      "Wrong answers cannot exceed the total number of questions.",
+    ],
     howItWorks: [
       "Enter the total number of questions on your quiz or test.",
       "Enter how many answers were wrong.",
@@ -91,6 +96,11 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
     ],
   },
   "test-grade-calculator": {
+    assumptions: [
+      "Every question is worth the same number of points.",
+      "Bonus points are added as percentage points after the raw score, and the result is capped at 100%.",
+      "Letter grades follow the grading scale selected in the calculator.",
+    ],
     howItWorks: [
       "Choose whether you count correct or wrong answers.",
       "Enter total questions and your count.",
@@ -1018,6 +1028,16 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
     ],
   },
   "gcse-grade-calculator": {
+    primarySources: [
+      {
+        label: "Department for Education — GCSE grades 9 to 1: an employer's guide (grade 4 standard pass, grade 5 strong pass)",
+        href: "https://www.gov.uk/government/publications/gcse-grades-9-to-1-an-employers-guide",
+      },
+      {
+        label: "Ofqual — GCSE 9 to 1 grades: a brief guide for parents",
+        href: "https://ofqual.blog.gov.uk/2018/03/02/gcse-9-to-1-grades-a-brief-guide-for-parents/",
+      },
+    ],
     howItWorks: [
       "Enter a percentage mark from 0–100.",
       "We map it to the England 9–1 GCSE table used in this tool.",
@@ -1160,6 +1180,12 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
     ],
   },
   "sgpa-to-cgpa": {
+    primarySources: [
+      {
+        label: "UGC Choice Based Credit System guidelines (SGPA and CGPA formulas)",
+        href: "https://www.ugc.gov.in/pdfnews/8023719_Guidelines-for-CBCS.pdf",
+      },
+    ],
     howItWorks: [
       "Add each completed semester with its SGPA and total credits for that term.",
       "We multiply SGPA × credits for every semester, then divide by total credits.",
@@ -1202,6 +1228,12 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
     ],
   },
   "cgpa-calculator": {
+    primarySources: [
+      {
+        label: "UGC Choice Based Credit System guidelines (SGPA and CGPA formulas)",
+        href: "https://www.ugc.gov.in/pdfnews/8023719_Guidelines-for-CBCS.pdf",
+      },
+    ],
     howItWorks: [
       "List this semester’s courses with letter/percent grades and credit hours.",
       "Use India 10-point (O–F) or Pakistan HEC bands — this page prefers those scales.",
