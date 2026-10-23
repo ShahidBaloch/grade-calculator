@@ -292,7 +292,7 @@ export const guides: GuideConfig[] = [
     path: "/guides/lms-course-grades-explained",
     title: "What Does LMS Graded Mean? LMS Grades Explained",
     description:
-      "LMS graded means a score was recorded in your learning management system (Canvas, Blackboard, Moodle). See how LMS grades become your course grade.",
+      "“LMS graded” means your teacher entered the score in Canvas, Blackboard, Moodle, or Schoology, so it now counts in your running course grade.",
     keywords: [
       "what does lms graded mean",
       "lms graded meaning",

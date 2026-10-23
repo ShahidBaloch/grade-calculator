@@ -16,16 +16,25 @@ export const gradingScalePages: GradingScalePageConfig[] = [
     slug: "us",
     path: "/grading-scales/us",
     scaleId: "us-standard",
-    title: "GPA Scale — US 4.0 Letter Grade & Percentage Chart",
+    title: "US Grading Scale & 4.0 GPA Scale — Letter Grade Chart",
     description:
-      "US 4.0 GPA scale chart: every letter grade from A+ to F with its percentage range and grade points. Free reference table plus a GPA calculator.",
-    keywords: ["gpa scale", "4.0 gpa scale", "grading scale", "us grading scale", "gpa scale chart"],
+      "US grading scale chart: every letter grade from A+ to F with its percentage range and 4.0 GPA points, plus the 10-point and 7-point scales schools use.",
+    keywords: [
+      "grading scale",
+      "gpa scale",
+      "grade scale",
+      "4.0 gpa scale",
+      "us grading scale",
+      "10 point grading scale",
+      "7 point grading scale",
+    ],
     intro:
       "The common US 4.0 GPA scale is the standard grading scale for American high schools and colleges. Each letter grade covers a percentage range: A (including A− and A+) is 90–100%, B is 80–89%, C is 70–79%, D is 60–69%, and F is below 60%. Letter grades also convert to GPA quality points used in semester calculations. Percentage cutoffs can vary slightly by school, district, or instructor — always verify your institution's official grading policy.",
     notes: [
       "Many schools use plus/minus modifiers (A−, B+, etc.). On this scale A+ is 97–100%, A is 93–96%, A− is 90–92%, B+ is 87–89%, B is 83–86%, and B− is 80–82%.",
       "For federal statistics, NCES uses a four-point framework (A=4, B=3, C=2, D=1, F=0); it does not define one national plus/minus percentage table.",
       "Some high schools use a 10-point grading scale where 90–100 = A, 80–89 = B, 70–79 = C, and 60–69 = D — see 10-point letter bands in our calculator settings.",
+      "Some districts use a 7-point grading scale instead. A common version is 93–100 = A, 85–92 = B, 77–84 = C, 70–76 = D, and below 70 = F, so the same percentage can earn a lower letter than on the 10-point scale. Check your district's policy for its exact cutoffs.",
       "Weighted GPA (Honors/AP) may add extra quality points beyond this table.",
     ],
   },
@@ -134,7 +143,7 @@ export const gradingScalePages: GradingScalePageConfig[] = [
     slug: "new-zealand",
     path: "/grading-scales/new-zealand",
     scaleId: "nz-nine-point",
-    title: "NZ University Grading Scale — UC & Auckland 9-Point",
+    title: "UC Grading Scale (Canterbury) & Auckland — NZ 9-Point",
     description:
       "New Zealand university grade scale used at UC (University of Canterbury) and Auckland: A+ to C- with percentage ranges and 9-point GPA values. A+ = 9.0.",
     keywords: ["uc grading scale", "uc grade scale", "nz grading scale", "new zealand gpa", "9 point gpa scale"],

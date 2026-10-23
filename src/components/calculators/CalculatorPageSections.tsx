@@ -9,6 +9,8 @@ import { ResourceLinks } from "@/components/content/ResourceLinks";
 import { FaqAccordion } from "@/components/content/FaqAccordion";
 import { HowItWorks } from "@/components/content/HowItWorks";
 import { RelatedCalculators } from "@/components/content/RelatedCalculators";
+import { SectionBlock } from "@/components/content/GeoProgrammaticPage";
+import { geoCalculatorLocal } from "@/lib/content/geo-calculator-local";
 import type { CalculatorSlug } from "@/types/calculator";
 
 export function CalculatorPageSections({
@@ -19,6 +21,8 @@ export function CalculatorPageSections({
   pagePath?: string;
 }) {
   const content = calculatorContent[slug];
+  // Country pages swap the US-centred copy for their own scale, example, FAQs and sources.
+  const local = geoCalculatorLocal(slug, pagePath);
   const relatedSlugs = calculatorBySlug[slug].relatedSlugs;
   const howItWorks = getCalculatorHowItWorks(slug, pagePath);
   const hub = getCountryPrefixFromPath(pagePath)
@@ -39,9 +43,8 @@ export function CalculatorPageSections({
     : resourceLinks;
 
   const assumptions =
-    content.assumptions ?? [
+    local?.assumptions ?? content.assumptions ?? [
       "Letter grades follow the grading scale selected in the calculator.",
-      "A zero total weight or credit load returns an error — we never divide by zero.",
       "Sample numbers on first load are examples only; replace them with your data.",
     ];
 
@@ -58,16 +61,19 @@ export function CalculatorPageSections({
         <h2 id="calc-details-heading" className="sr-only">Formula and assumptions</h2>
         <CalculatorDetailsAccordion
           assumptions={assumptions}
-          formula={content.formula}
-          workedExample={content.workedExample}
-          primarySources={content.primarySources}
+          formula={local?.formula ?? content.formula}
+          workedExample={local?.workedExample ?? content.workedExample}
+          primarySources={local?.primarySources ?? content.primarySources}
         />
       </section>
+      {local?.sections.map((section, index) => (
+        <SectionBlock key={section.heading} section={section} index={index} />
+      ))}
       <ResourceLinks links={localizedResources} />
       <section aria-labelledby="calc-faq-heading">
         <h2 id="calc-faq-heading" className="text-lg font-semibold">Common questions</h2>
         <div className="mt-2">
-          <FaqAccordion faqs={content.faqs} />
+          <FaqAccordion faqs={local?.faqs ?? content.faqs} />
         </div>
       </section>
       <section aria-labelledby="calc-related-heading">

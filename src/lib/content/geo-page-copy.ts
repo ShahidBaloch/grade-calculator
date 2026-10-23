@@ -7,6 +7,7 @@ import {
 } from "@/data/geo-sources/omsas";
 import {
   caUniversityBySlug,
+  GUELPH_DEANS_HONOURS_AVERAGE,
   UBC_ARTS_433_EQUIVALENCY,
   UOFT_STANDING,
   WATERLOO_AVERAGE_FLOOR,
@@ -96,6 +97,13 @@ export const CA_EXAMPLE_COURSES: Record<CaUniversityProfile["slug"], UniversityC
     { name: "Lecture 4", grade: "74", weight: 0.5 },
     { name: "Lecture 5", grade: "68", weight: 0.5 },
     { name: "Lab", grade: "75", weight: 0.25 },
+  ],
+  guelph: [
+    { name: "Biology", grade: "84", weight: 0.5 },
+    { name: "Chemistry", grade: "77", weight: 0.5 },
+    { name: "Calculus", grade: "91", weight: 0.5 },
+    { name: "Psychology", grade: "72", weight: 0.5 },
+    { name: "Seminar", grade: "88", weight: 0.25 },
   ],
 };
 
@@ -202,7 +210,9 @@ function nativeTableSection(profile: CaUniversityProfile): GeoPageSection | null
     paragraphs: [
       profile.slug === "ubc"
         ? "This is the percentage-to-letter table UBC Vancouver uses in most faculties. Some faculties and graduate programs set a higher pass mark (for example, F below 60% in Medicine, Nursing and graduate master's programs)."
-        : "This is the undergraduate Refined Letter Grade Scale from U of T's Grading Practices Policy. Each course grade carries the grade points shown; your GPA is the weighted average of those points.",
+        : profile.slug === "guelph"
+          ? "This is the undergraduate grading system Guelph's Senate approved for courses from Spring 1992 onward. Guelph publishes letters and percentages only; the OMSAS column is OUAC Scale 3 at the bottom of each band. Graduate courses use a different scale."
+          : "This is the undergraduate Refined Letter Grade Scale from U of T's Grading Practices Policy. Each course grade carries the grade points shown; your GPA is the weighted average of those points.",
     ],
     table: { caption: `${profile.shortName} letter grades, percentages and conversions`, head, rows },
   };
@@ -294,6 +304,16 @@ function caFaqs(profile: CaUniversityProfile): FaqItem[] {
       { question: "Why does a failing mark count as 32?", answer: `${profile.facts[2]} A 20% therefore counts as ${WATERLOO_AVERAGE_FLOOR} in those averages, while OMSAS converts it to 0.0.` },
     );
   }
+  if (profile.slug === "guelph") {
+    faqs.push(
+      { question: "Does Guelph use a GPA?", answer: `No. ${profile.facts[0].split(". ").slice(-1)[0]} If an application asks for a 4.0 GPA, use the scale that program publishes — for Ontario medical schools that is the OUAC Scale 3 conversion shown here.` },
+      { question: "How is my Guelph cumulative average calculated?", answer: `${profile.facts[1]} For example, four 0.50-credit courses (84, 77, 91, 72) and one 0.25-credit course (88) average 81.78%.` },
+      { question: "What percentage is an A at Guelph?", answer: "An A+ is 90–100%, an A is 85–89% and an A- is 80–84%. A B+ is 77–79%, a B is 73–76% and a B- is 70–72%. The calendar describes 80–100 as Excellent, 70–79 as Good, 60–69 as Acceptable and 50–59 as Minimally Acceptable." },
+      { question: "What is a passing grade at Guelph?", answer: "On the undergraduate scale a D- (50–52%) passes and anything below 50% is an F. Some programs limit how many times you can repeat a failed course." },
+      { question: "Do repeated courses count in my Guelph average?", answer: profile.facts[2] },
+      { question: "What average do I need for the Dean's Honours List?", answer: `A semester average of at least ${GUELPH_DEANS_HONOURS_AVERAGE.toFixed(1)}% as a full-time student. Part-time students need a cumulative average of ${GUELPH_DEANS_HONOURS_AVERAGE.toFixed(1)}% over at least 2.00 credits.` },
+    );
+  }
   faqs.push({
     question: `Is this an official ${profile.slug === "omsas" ? "OMSAS" : s} calculator?`,
     answer: `No — it is an independent tool built from the published tables listed under Sources, checked on ${profile.sources[0].checked}. Your official ${profile.slug === "omsas" ? "OMSAS GPA appears in your application's Document Tracking section" : "result is the one on your transcript"}.`,
@@ -330,6 +350,19 @@ export function buildCaUniversityCopy(profile: CaUniversityProfile): GeoPageCopy
       description:
         "Calculate your University of Waterloo unit-weighted average the way the calendar does (marks under 32 count as 32), then convert it to the OMSAS 4.0 scale.",
       keywords: ["waterloo gpa calculator", "uwaterloo average calculator", "waterloo cumulative average", "waterloo to 4.0 gpa"],
+    },
+    guelph: {
+      title: "Guelph Grade Calculator — Average, Grading Scale & GPA",
+      h1: "University of Guelph Grade Calculator",
+      description:
+        "Calculate your University of Guelph credit-weighted average and letter grade with the official grading scale (A+ = 90–100%), then see the OMSAS 4.0 GPA.",
+      keywords: [
+        "grade calculator guelph",
+        "university of guelph grade calculator",
+        "guelph average calculator",
+        "guelph grading scale",
+        "guelph gpa calculator",
+      ],
     },
   };
   const m = meta[profile.slug];

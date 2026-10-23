@@ -349,7 +349,9 @@ describe("SEO audit", () => {
       return agents.includes("Googlebot") && !agents.includes("Bingbot");
     });
     expect(googleRule?.allow).toContain("/");
-    expect(googleRule?.disallow).toContain("/*as-a-percent*");
+    // Junk URL patterns must stay crawlable so Google sees the middleware 404 + noindex.
+    expect(googleRule?.disallow).not.toContain("/*as-a-percent*");
+    expect(googleRule?.disallow).not.toContain("/*out-of-*");
     expect(googleRule?.crawlDelay).toBeUndefined();
 
     const bingRule = rules.find((rule) => {

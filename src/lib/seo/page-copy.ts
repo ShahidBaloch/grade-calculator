@@ -1,9 +1,9 @@
 /** Visible copy that makes each indexable URL a different search intent. */
 export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: string }> = {
   "/": {
-    title: "Grade Calculator — Easy Grader & Grading Chart",
+    title: "Grade Calculator & EZ Grader — Free Test Grading Chart",
     description:
-      "Free grade calculator and easy grader for quizzes and tests. Score by wrong answers, then check weighted grades, final exam scores, and GPA.",
+      "Free grade calculator and EZ grader for teachers and students. Enter questions and wrong answers to get the score, letter grade, and a full grading chart.",
   },
   "/weighted-grade-calculator": {
     title: "Weighted Grade Calculator — Gradebook & Class Average",
@@ -36,7 +36,7 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
       "Find the score you need on your final exam or midterm. Enter your current grade, the exam weight, and your target grade to see the score you need.",
   },
   "/uc-gpa-calculator": {
-    title: "UC & CSU GPA Calculator — Capped A–G Average",
+    title: "UC GPA Calculator & CSU GPA Calculator — Capped A–G",
     description:
       "Estimate a UC or CSU A–G GPA. UC caps at 8 honors points using grades 10–11 only; CSU includes grade 12 with only 2 honors points.",
   },

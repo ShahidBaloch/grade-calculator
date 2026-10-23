@@ -99,6 +99,39 @@ describe("Canadian university GPA", () => {
     expect(data.formulaSteps.some((step) => step.includes("below 32"))).toBe(true);
   });
 
+  it("Guelph credit-weighted average, letter and OMSAS Scale 3", () => {
+    const data = valid(
+      calculateUniversityGpa(
+        [
+          { grade: "84", weight: 0.5 },
+          { grade: "77", weight: 0.5 },
+          { grade: "91", weight: 0.5 },
+          { grade: "72", weight: 0.5 },
+          { grade: "88", weight: 0.25 },
+        ],
+        caUniversityBySlug.guelph,
+      ),
+    );
+    // (84 + 77 + 91 + 72) × 0.5 + 88 × 0.25 = 184 ÷ 2.25
+    expect(data.native).toEqual({ kind: "percent-average", value: expect.closeTo(81.78, 2), letter: "A-" });
+    // 3.7 + 3.3 + 4.0 + 2.7 at OMSAS weight 1, 3.9 at 0.5
+    expect(data.omsasGpa).toBeCloseTo(15.65 / 4.5, 5);
+  });
+
+  it("Guelph does not floor failing marks and rejects letters", () => {
+    const data = valid(
+      calculateUniversityGpa(
+        [
+          { grade: "20", weight: 0.5 },
+          { grade: "80", weight: 0.5 },
+        ],
+        caUniversityBySlug.guelph,
+      ),
+    );
+    expect(data.native.value).toBe(50);
+    expect(calculateUniversityGpa([{ grade: "A", weight: 0.5 }], caUniversityBySlug.guelph).status).toBe("error");
+  });
+
   it("OMSAS uses the university's scales", () => {
     const mcgill = omsasScalesForUniversity("McGill")!;
     const data = valid(

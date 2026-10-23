@@ -1,5 +1,6 @@
 import { getCountryPrefixFromPath } from "@/lib/utils/country-path";
 import { calculatorContent } from "@/config/calculator-content";
+import { geoCalculatorLocal } from "@/lib/content/geo-calculator-local";
 import type { CalculatorSlug } from "@/types/calculator";
 
 const GPA_SCALE_STEP =
@@ -11,6 +12,8 @@ const LETTER_INPUT_STEP =
 export function getCalculatorHowItWorks(slug: CalculatorSlug, pagePath?: string): string[] {
   const base = calculatorContent[slug].howItWorks;
   const onCountryHub = Boolean(getCountryPrefixFromPath(pagePath));
+  const local = geoCalculatorLocal(slug, pagePath);
+  if (local) return local.steps;
 
   if (slug === "gpa-calculator" && onCountryHub) {
     return [base[0], GPA_SCALE_STEP, base[2]];

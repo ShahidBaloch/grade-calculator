@@ -1,9 +1,10 @@
-/** Paths that should not be crawled (junk URL patterns + non-page endpoints). */
+/**
+ * Paths that should not be crawled (non-page endpoints only). The favicon (/icon.svg)
+ * stays crawlable: Google needs it for the site icon in search results.
+ * Legacy junk URL patterns (e.g. /3/4-as-a-percent) are NOT listed here: middleware
+ * answers them with 404 + noindex, and Google must be able to crawl them to see that.
+ */
 export const robotsDisallowPaths = [
-  "/*out-of-*",
-  "/*as-a-percent*",
-  "/3/4*",
-  "/icon",
   "/api/",
 ] as const;
 

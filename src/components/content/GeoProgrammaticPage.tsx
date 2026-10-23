@@ -8,7 +8,7 @@ import type { GeoLinkGroup } from "@/lib/seo/geo-programmatic";
 import { webApplicationJsonLd } from "@/lib/seo/jsonld";
 import type { BreadcrumbItem } from "@/types/seo";
 
-function SectionBlock({ section, index }: { section: GeoPageSection; index: number }) {
+export function SectionBlock({ section, index }: { section: GeoPageSection; index: number }) {
   const id = `geo-section-${index}`;
   return (
     <section aria-labelledby={id} className="space-y-3">

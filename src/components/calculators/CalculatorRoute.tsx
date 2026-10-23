@@ -21,6 +21,8 @@ interface CalculatorRouteProps {
   aside?: React.ReactNode;
   below?: React.ReactNode;
   focus?: boolean;
+  /** H1 override (e.g. the homepage targets "Grade Calculator", not the tool name). */
+  heading?: string;
 }
 
 export function CalculatorRoute({
@@ -31,6 +33,7 @@ export function CalculatorRoute({
   aside,
   below,
   focus = false,
+  heading: headingOverride,
 }: CalculatorRouteProps) {
   const config = calculatorBySlug[slug];
   const content = calculatorContent[slug];
@@ -40,7 +43,7 @@ export function CalculatorRoute({
   const description = pageDescription(pagePath, config.description);
   const title = pageTitle(pagePath, config.name);
   // H1 = pure keyword only (no tagline). Geo pages prefix the country name.
-  const heading = geoHub ? `${geoHub.name} ${config.name}` : config.name;
+  const heading = headingOverride ?? (geoHub ? `${geoHub.name} ${config.name}` : config.name);
   const howItWorksSteps = getCalculatorHowItWorks(slug, pagePath);
   const countryVersions = calculatorCountryVersionsGroup(slug, pagePath);
   const breadcrumbs = breadcrumbHome

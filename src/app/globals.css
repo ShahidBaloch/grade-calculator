@@ -185,6 +185,12 @@ p a {
     break-inside: auto;
   }
 
+  /* QA: hide add/remove, steps, and unselected mode toggles; keep aria-pressed mode visible */
+  .calculator-print-area button:not([aria-pressed="true"]),
+  .calculator-print-area [data-no-print] {
+    display: none !important;
+  }
+
   .calculator-print-area > * + * {
     margin-top: 0.5rem !important;
   }

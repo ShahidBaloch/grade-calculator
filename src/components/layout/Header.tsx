@@ -7,6 +7,7 @@ import { Menu } from "lucide-react";
 import type { NavItem } from "@/config/navigation";
 import { siteConfig } from "@/config/site";
 import { Button } from "@/components/ui/button";
+import { LogoMark } from "./LogoMark";
 import { ThemeToggle } from "./ThemeToggle";
 
 const loadMenus = () => import("./HeaderMenus");
@@ -59,9 +60,12 @@ export function Header({ nav }: { nav: NavItem[] }) {
   return (
     <header className="sticky top-0 z-50 border-b border-[var(--color-border)] bg-[var(--color-bg)] md:bg-[var(--color-bg)]/95 md:backdrop-blur md:supports-[backdrop-filter]:bg-[var(--color-bg)]/80">
       <div className="mx-auto flex h-14 max-w-7xl items-center justify-between gap-4 px-4 md:h-16">
-        <Link href="/" className="flex flex-col leading-tight text-[var(--color-text)] sm:flex-row sm:items-baseline sm:gap-2">
-          <span className="text-lg font-bold">{siteConfig.name}</span>
-          <span className="text-xs font-normal text-[var(--color-text-muted)]">{siteConfig.domainLabel}</span>
+        <Link href="/" className="flex items-center gap-2 text-[var(--color-text)]">
+          <LogoMark className="h-8 w-8 shrink-0" />
+          <span className="flex flex-col leading-tight sm:flex-row sm:items-baseline sm:gap-2">
+            <span className="text-lg font-bold">{siteConfig.name}</span>
+            <span className="text-xs font-normal text-[var(--color-text-muted)]">{siteConfig.domainLabel}</span>
+          </span>
         </Link>
 
         <nav className="hidden items-center gap-6 md:flex" aria-label="Main">

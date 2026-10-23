@@ -7,6 +7,7 @@ const caPages = [
   { path: "/ca/university/ubc-gpa-calculator", h1: /UBC GPA Calculator/, native: "80.00%", omsas: "3.34" },
   { path: "/ca/university/uoft-gpa-calculator", h1: /University of Toronto GPA Calculator/, native: "3.28", omsas: "3.26" },
   { path: "/ca/university/waterloo-gpa-calculator", h1: /Waterloo Average/, native: "78.82%", omsas: "3.27" },
+  { path: "/ca/university/guelph-gpa-calculator", h1: /University of Guelph Grade Calculator/, native: "81.78%", omsas: "3.48" },
 ];
 
 const usPages = [

@@ -7,6 +7,7 @@ import { isRedirectOnlyPath } from "@/lib/seo/canonical";
 import { indexableGeoCalculatorPaths } from "@/lib/seo/intent-urls";
 import { geoProgrammaticPaths } from "@/lib/seo/geo-programmatic";
 import { pageUpdated } from "@/config/page-updated";
+import { questionChartPath, questionCharts } from "@/config/question-charts";
 import { siteConfig } from "@/config/site";
 
 export const dynamic = "force-static";
@@ -45,6 +46,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
   ];
 
+  const questionChartPages = questionCharts.map((chart) => ({
+    path: questionChartPath(chart.total),
+    priority: 0.7,
+    changeFrequency: "monthly" as const,
+  }));
+
   const guidePages = guides.map((g) => ({
     path: g.path,
     priority: 0.7,
@@ -63,7 +70,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: "monthly" as const,
   }));
 
-  const all = [...staticPages, ...calculatorPages, ...guidePages, ...scalePages, ...hubPages];
+  const all = [...staticPages, ...calculatorPages, ...questionChartPages, ...guidePages, ...scalePages, ...hubPages];
 
   const ogImageUrl = `${siteConfig.url}/opengraph-image`;
 
