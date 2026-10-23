@@ -164,6 +164,11 @@ p a {
     display: none !important;
   }
 
+  /* Content pages keep their H1 on paper (the generic header rule above targets site chrome). */
+  header.print-title {
+    display: block !important;
+  }
+
   html,
   body {
     background: white !important;

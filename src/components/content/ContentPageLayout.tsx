@@ -17,7 +17,7 @@ export function ContentPageLayout({
   return (
     <article className="mx-auto max-w-4xl px-4 py-8">
       <Breadcrumbs items={breadcrumbs} />
-      <header className="mt-4">
+      <header className="print-title mt-4">
         <h1 className="text-3xl font-bold tracking-tight">{title}</h1>
         {description && (
           <p className="mt-2 text-lg text-[var(--color-text-muted)]">{description}</p>
