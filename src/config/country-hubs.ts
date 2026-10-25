@@ -64,6 +64,7 @@ export const countryHubs: CountryHubConfig[] = [
       "canvas-grade-calculator",
       "eoc-grade-calculator",
       "uc-gpa-calculator",
+      "csu-gpa-calculator",
       "middle-school-gpa-calculator",
     ],
     relatedGuides: [

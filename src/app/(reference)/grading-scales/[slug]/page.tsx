@@ -2,7 +2,9 @@ import { notFound } from "next/navigation";
 import { ContentPageLayout } from "@/components/content/ContentPageLayout";
 import { GradingScalePageContent } from "@/components/content/GradingScalePageContent";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { gradingScaleBySlug, gradingScalePages } from "@/config/grading-scale-pages";
+import { faqPageJsonLd } from "@/lib/seo/jsonld";
 import { createPageMetadata } from "@/lib/seo/metadata";
 
 interface PageProps {
@@ -42,6 +44,7 @@ export default async function GradingScalePage({ params }: PageProps) {
   return (
     <>
       <BreadcrumbJsonLd items={breadcrumbs} />
+      {config.faqs && config.faqs.length > 0 && <JsonLd data={faqPageJsonLd(config.faqs)} />}
       <ContentPageLayout title={config.title} description={config.description} breadcrumbs={breadcrumbs}>
         <GradingScalePageContent config={config} />
       </ContentPageLayout>

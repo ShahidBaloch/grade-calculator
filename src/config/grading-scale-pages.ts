@@ -1,4 +1,5 @@
 import type { ScaleId } from "@/types/grading-scale";
+import type { FaqItem } from "@/types/seo";
 
 export interface GradingScalePageConfig {
   slug: string;
@@ -9,6 +10,10 @@ export interface GradingScalePageConfig {
   keywords: string[];
   intro: string;
   notes: string[];
+  /** Other scales shown side by side with the main table (e.g. US 10-point vs plus/minus vs 7-point). */
+  compareScaleIds?: ScaleId[];
+  /** Visible FAQ list; also emitted as FAQPage JSON-LD. */
+  faqs?: FaqItem[];
 }
 
 export const gradingScalePages: GradingScalePageConfig[] = [
@@ -20,9 +25,8 @@ export const gradingScalePages: GradingScalePageConfig[] = [
     description:
       "US grading scale chart: every letter grade from A+ to F with its percentage range and 4.0 GPA points, plus the 10-point and 7-point scales schools use.",
     keywords: [
-      "grading scale",
+      "us grading scale chart",
       "gpa scale",
-      "grade scale",
       "4.0 gpa scale",
       "us grading scale",
       "10 point grading scale",
@@ -33,9 +37,42 @@ export const gradingScalePages: GradingScalePageConfig[] = [
     notes: [
       "Many schools use plus/minus modifiers (A−, B+, etc.). On this scale A+ is 97–100%, A is 93–96%, A− is 90–92%, B+ is 87–89%, B is 83–86%, and B− is 80–82%.",
       "For federal statistics, NCES uses a four-point framework (A=4, B=3, C=2, D=1, F=0); it does not define one national plus/minus percentage table.",
-      "Some high schools use a 10-point grading scale where 90–100 = A, 80–89 = B, 70–79 = C, and 60–69 = D — see 10-point letter bands in our calculator settings.",
+      "Some high schools use a 10-point grading scale where 90–100 = A, 80–89 = B, 70–79 = C, and 60–69 = D — pick the US 10-point scale in our calculator settings (it is the EZ grader's default).",
       "Some districts use a 7-point grading scale instead. A common version is 93–100 = A, 85–92 = B, 77–84 = C, 70–76 = D, and below 70 = F, so the same percentage can earn a lower letter than on the 10-point scale. Check your district's policy for its exact cutoffs.",
       "Weighted GPA (Honors/AP) may add extra quality points beyond this table.",
+    ],
+    compareScaleIds: ["us-lenient", "us-standard", "us-seven-point"],
+    faqs: [
+      {
+        question: "What is the grading scale for high school?",
+        answer:
+          "Most US high schools use a 10-point scale: A 90–100%, B 80–89%, C 70–79%, D 60–69%, F below 60%. Many add plus/minus steps inside each band (A− 90–92, B+ 87–89, and so on). Some districts, especially in the Southeast, still use a 7-point scale where an A starts at 93% and anything under 70% fails. Your student handbook or report card legend shows which one applies.",
+      },
+      {
+        question: "What is a 7-point grading scale?",
+        answer:
+          "A 7-point grading scale gives each letter a 7-percentage-point band: A 93–100, B 85–92, C 77–84, D 70–76, F below 70. It is stricter than the 10-point scale because a 92% is a B instead of an A (10-point) or A− (plus/minus), and a 69% fails instead of earning a D.",
+      },
+      {
+        question: "What is a 10-point grading scale?",
+        answer:
+          "A 10-point grading scale gives each letter a 10-point band: A 90–100, B 80–89, C 70–79, D 60–69, F below 60. It is the most common US high school and college scale and the one most online grade calculators default to.",
+      },
+      {
+        question: "What is the 4.0 GPA scale?",
+        answer:
+          "The 4.0 GPA scale converts letters to grade points: A = 4.0, B = 3.0, C = 2.0, D = 1.0, F = 0. With plus/minus, A− = 3.7, B+ = 3.3, B− = 2.7, C+ = 2.3, C− = 1.7, D+ = 1.3, D− = 0.7. Most schools cap an A+ at 4.0; a few award 4.3.",
+      },
+      {
+        question: "Is a 93 an A or an A−?",
+        answer:
+          "On the common plus/minus scale a 93% is an A (93–96%), while 90–92% is an A−. On a plain 10-point scale any score from 90% up is an A. On a 7-point scale 93% is the lowest A.",
+      },
+      {
+        question: "What percentage is a passing grade?",
+        answer:
+          "On the 10-point and plus/minus scales anything 60% or higher passes (a D− or better). On the 7-point scale the pass mark is 70%. Colleges often require a C or better for a course to count toward a major.",
+      },
     ],
   },
   {
@@ -163,7 +200,7 @@ export const gradingScalePages: GradingScalePageConfig[] = [
     title: "UK GCSE Grading Scale (9–1)",
     description:
       "England GCSE 9–1 percentage bands used in our educational converter, plus how they relate to the old A*–G letters.",
-    keywords: ["gcse grading scale", "gcse 9-1", "gcse grade boundaries"],
+    keywords: ["gcse 9-1", "gcse grading scale", "gcse 9-1 grading scale"],
     intro:
       "England’s GCSE 9–1 scale replaced A*–G. Grade 9 is the highest. Grade 4 is commonly a standard pass and grade 5 is a strong pass. Official boundaries move every series.",
     notes: [

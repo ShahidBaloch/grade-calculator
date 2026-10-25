@@ -10,6 +10,7 @@ import {
   questionChartSlug,
 } from "@/config/question-charts";
 import { calculateGradeChart } from "@/lib/calculators/grade-chart";
+import { scorePairBySlug, scorePath } from "@/config/score-pages";
 import { questionChartScenario } from "@/lib/content/question-chart-copy";
 import { percentToLetter } from "@/lib/grading-scales";
 import { createPageMetadata } from "@/lib/seo/metadata";
@@ -53,8 +54,6 @@ export async function generateMetadata({ params }: PageProps) {
     keywords: [
       `grading scale for ${chart.total} questions`,
       `out of ${chart.total} grade`,
-      `${chart.popularScores[0]} out of ${chart.total}`,
-      `${chart.popularScores[0]}/${chart.total} grade`,
       `${chart.total} question test grade`,
     ],
   });
@@ -106,7 +105,15 @@ export default async function QuestionChartPage({ params }: PageProps) {
             return (
               <li key={score}>
                 <strong>
-                  {score} out of {total}
+                  {scorePairBySlug[`${score}-out-of-${total}`] ? (
+                    <Link href={scorePath({ score, total })} prefetch={false}>
+                      {score} out of {total}
+                    </Link>
+                  ) : (
+                    <>
+                      {score} out of {total}
+                    </>
+                  )}
                 </strong>{" "}
                 = {pct(percent)}, letter grade {percentToLetter(percent, SCALE_ID).letter} ({parseFloat(wrong.toFixed(1))} wrong).
               </li>

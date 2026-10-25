@@ -177,25 +177,38 @@ describe("SEO audit", () => {
     expect(article.author.name).toBeTruthy();
   });
 
-  it("nav and footer list every calculator", () => {
+  it("nav lists every calculator; footer is a curated US-first subset that links the hubs", () => {
     const navHrefs = new Set(mainNav.flatMap((item) => item.children?.map((child) => child.href) ?? [item.href]));
-    const footerHrefs = new Set(footerNav.calculators.map((item) => item.href));
-    for (const calculator of calculators) {
-      const href = getCalculatorPath(calculator.slug);
-      expect(navHrefs.has(href), `nav missing ${calculator.slug}`).toBe(true);
-      expect(footerHrefs.has(href), `footer missing ${calculator.slug}`).toBe(true);
+    const calculatorHrefs = new Set(calculators.map((calculator) => getCalculatorPath(calculator.slug)));
+    for (const href of calculatorHrefs) {
+      expect(navHrefs.has(href), `nav missing ${href}`).toBe(true);
     }
+    const footerCalculatorHrefs = footerNav.calculators.map((item) => item.href);
+    for (const href of footerCalculatorHrefs) {
+      expect(calculatorHrefs.has(href) || href === "/calculators", `footer links unknown calculator ${href}`).toBe(true);
+    }
+    expect(footerCalculatorHrefs).toContain("/");
+    expect(footerCalculatorHrefs).toContain("/calculators");
+    expect(footerCalculatorHrefs).toContain("/eoc-grade-calculator");
+    // Keep the footer small: it is the only sitewide link block in the server HTML.
+    const total =
+      footerNav.calculators.length + footerNav.guides.length + footerNav.reference.length +
+      footerNav.countries.length + footerNav.company.length;
+    expect(total).toBeLessThanOrEqual(55);
   });
 
-  it("footer lists every guide, scale page, and country hub", () => {
-    const guideHrefs = new Set(footerNav.guides.map((item) => item.href));
-    const referenceHrefs = new Set(footerNav.reference.map((item) => item.href));
-    for (const guide of guides) {
-      expect(guideHrefs.has(guide.path), `footer missing guide ${guide.slug}`).toBe(true);
+  it("footer links resolve to real guides, scale pages, and every country hub", () => {
+    const guidePaths = new Set(guides.map((guide) => guide.path));
+    for (const link of footerNav.guides) {
+      expect(guidePaths.has(link.href) || link.href === "/guides", `footer links unknown guide ${link.href}`).toBe(true);
     }
-    for (const page of gradingScalePages) {
-      expect(referenceHrefs.has(page.path), `footer missing scale ${page.slug}`).toBe(true);
+    expect(footerNav.guides.some((link) => link.href === "/guides")).toBe(true);
+    const scalePaths = new Set([...gradingScalePages.map((page) => page.path), "/grading-scales", "/score"]);
+    for (const link of footerNav.reference) {
+      expect(scalePaths.has(link.href), `footer links unknown reference ${link.href}`).toBe(true);
     }
+    expect(footerNav.reference.some((link) => link.href === "/grading-scales/us")).toBe(true);
+    expect(footerNav.reference.some((link) => link.href === "/grading-scales")).toBe(true);
     for (const hub of countryHubs) {
       expect(footerNav.countries.some((l) => l.href === hub.path), `footer missing hub ${hub.code}`).toBe(
         true,

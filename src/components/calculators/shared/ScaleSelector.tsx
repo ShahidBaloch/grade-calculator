@@ -2,13 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { ChevronDown } from "lucide-react";
 import { gradingScales } from "@/lib/grading-scales";
 import { AU_INSTITUTION_SCALE_IDS } from "@/lib/grading-scales/au-presets";
 import { useGradingScale } from "@/hooks/useGradingScale";
@@ -44,18 +38,26 @@ export function ScaleSelector() {
       ) : (
         <div className="no-print space-y-2">
           <Label htmlFor="grading-scale-select">Grading scale</Label>
-          <Select value={scaleId} onValueChange={(value) => setScaleId(value as ScaleId)}>
-            <SelectTrigger id="grading-scale-select" aria-label="Grading scale">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
+          {/* Native select: same styling as the Radix trigger, ~65 KB less client JS, better mobile picker. */}
+          <div className="relative">
+            <select
+              id="grading-scale-select"
+              aria-label="Grading scale"
+              value={scaleId}
+              onChange={(event) => setScaleId(event.target.value as ScaleId)}
+              className="flex h-11 w-full appearance-none items-center rounded-md border border-[var(--color-border)] bg-[var(--color-bg)] px-3 py-2 pr-9 text-sm text-[var(--color-text)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] disabled:cursor-not-allowed disabled:opacity-50"
+            >
               {options.map((option) => (
-                <SelectItem key={option.id} value={option.id}>
+                <option key={option.id} value={option.id}>
                   {option.name}
-                </SelectItem>
+                </option>
               ))}
-            </SelectContent>
-          </Select>
+            </select>
+            <ChevronDown
+              aria-hidden="true"
+              className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 opacity-50"
+            />
+          </div>
           <p className="text-xs text-[var(--color-text-muted)]">
             {onAustralianHub
               ? "Pick your university. Grade points are not the same at every Australian campus."

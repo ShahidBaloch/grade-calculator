@@ -209,6 +209,7 @@ export const calculators: CalculatorConfig[] = [
     relatedSlugs: [
       "middle-school-gpa-calculator",
       "uc-gpa-calculator",
+      "csu-gpa-calculator",
       "weighted-gpa-calculator",
       "gpa-calculator",
     ],
@@ -533,15 +534,15 @@ export const calculators: CalculatorConfig[] = [
   },
   {
     slug: "uc-gpa-calculator",
-    name: "UC & CSU GPA Calculator",
-    shortName: "UC/CSU",
+    name: "UC GPA Calculator",
+    shortName: "UC",
     description:
-      "Estimate a University of California or Cal State A–G GPA, including the honors-point cap. This is a planning estimate, not the official application GPA.",
+      "Estimate a University of California A–G GPA, including the 8-point honors cap and the 10th-grade limit. This is a planning estimate, not the official application GPA.",
     path: "/uc-gpa-calculator",
     icon: "Landmark",
     category: "gpa",
     mvp: false,
-    relatedSlugs: ["high-school-gpa-calculator", "weighted-gpa-calculator", "gpa-calculator"],
+    relatedSlugs: ["csu-gpa-calculator", "high-school-gpa-calculator", "weighted-gpa-calculator", "gpa-calculator"],
     examples: [
       {
         label: "UC sample",
@@ -553,6 +554,35 @@ export const calculators: CalculatorConfig[] = [
             { name: "Honors Chemistry", grade: "A", year: "10", kind: "honors" },
             { name: "AP US History", grade: "B+", year: "11", kind: "ap-ib" },
             { name: "Math", grade: "B", year: "11", kind: "regular" },
+          ],
+        },
+      },
+    ],
+  },
+  {
+    slug: "csu-gpa-calculator",
+    name: "CSU GPA Calculator",
+    shortName: "CSU",
+    description:
+      "Estimate a Cal State (CSU) A–G GPA from 10th, 11th, and 12th grade courses, with the 8-point honors cap and the 2-point 10th-grade limit. A planning estimate, not the Cal State Apply GPA.",
+    path: "/csu-gpa-calculator",
+    icon: "Landmark",
+    category: "gpa",
+    mvp: false,
+    relatedSlugs: ["uc-gpa-calculator", "high-school-gpa-calculator", "weighted-gpa-calculator", "gpa-calculator"],
+    examples: [
+      {
+        label: "CSU sample",
+        values: {
+          system: "csu",
+          residency: "resident",
+          courses: [
+            { name: "English", grade: "B+", year: "10", kind: "regular" },
+            { name: "Honors Biology", grade: "A", year: "10", kind: "honors" },
+            { name: "AP World History", grade: "B", year: "11", kind: "ap-ib" },
+            { name: "Algebra II", grade: "A-", year: "11", kind: "regular" },
+            { name: "AP English Language", grade: "A", year: "12", kind: "ap-ib" },
+            { name: "Spanish 3", grade: "B", year: "12", kind: "regular" },
           ],
         },
       },
@@ -578,6 +608,44 @@ export const calculators: CalculatorConfig[] = [
             { name: "Math", grade: "B" },
             { name: "Science", grade: "A" },
             { name: "History", grade: "C" },
+          ],
+        },
+      },
+    ],
+  },
+  {
+    slug: "grade-percentage-calculator",
+    name: "Grade Percentage Calculator",
+    shortName: "Grade %",
+    description:
+      "Turn points earned into a grade percentage and US letter grade, or look up the percentage range for any letter from A+ to F.",
+    path: "/grade-percentage-calculator",
+    icon: "Percent",
+    category: "conversion",
+    mvp: false,
+    relatedSlugs: ["percentage-to-letter-grade", "letter-grade-calculator", "test-grade-calculator", "grade-chart"],
+    examples: [{ label: "85%", values: { percent: 85 } }],
+  },
+  {
+    slug: "college-grade-calculator",
+    name: "College Grade Calculator",
+    shortName: "College Grade",
+    description:
+      "Calculate your college class grade from the weighted categories on your syllabus — exams, homework, labs, and participation — and see what you need to finish the course.",
+    path: "/college-grade-calculator",
+    icon: "GraduationCap",
+    category: "grade",
+    mvp: false,
+    relatedSlugs: ["weighted-grade-calculator", "final-grade-calculator", "college-gpa-calculator", "canvas-grade-calculator"],
+    examples: [
+      {
+        label: "Typical syllabus",
+        values: {
+          items: [
+            { score: 84, weight: 40 },
+            { score: 92, weight: 20 },
+            { score: 88, weight: 15 },
+            { score: 95, weight: 10 },
           ],
         },
       },

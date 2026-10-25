@@ -6,7 +6,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { guideBySlug, guides } from "@/config/guides";
 import { createPageMetadata } from "@/lib/seo/metadata";
 import { pageDescription, pageTitle } from "@/lib/seo/page-copy";
-import { howToJsonLd, articleJsonLd } from "@/lib/seo/jsonld";
+import { howToJsonLd, articleJsonLd, faqPageJsonLd } from "@/lib/seo/jsonld";
 import { siteConfig } from "@/config/site";
 import { getEmbeddedCalculator } from "@/lib/seo/guide-components";
 
@@ -59,6 +59,8 @@ export default async function GuidePage({ params }: PageProps) {
             description: guide.description,
             steps: guide.sections.map((s) => s.heading),
           }),
+          // The visible FAQ accordion is the same list, so the markup matches the page.
+          ...(guide.faqs.length > 0 ? [faqPageJsonLd(guide.faqs)] : []),
         ]}
       />
       <BreadcrumbJsonLd items={breadcrumbs} />

@@ -53,3 +53,8 @@ next-env.d.ts
 
 # vitest
 vitest.config.ts.timestamp-*
+
+# local SEO reports and keyword exports (not part of the app)
+/*.md
+!/README.md
+/*.csv

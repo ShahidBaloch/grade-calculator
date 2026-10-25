@@ -57,17 +57,28 @@ export function getLockedScaleFromPath(pathname: string): ScaleId | null {
   const match = PATH_SCALE_LOCKS.find(({ prefix }) => pathname.startsWith(prefix));
   if (match) return match.scaleId;
 
-  if (pathname === "/" || US_RECORDING_CALCULATOR_PATHS.has(pathname)) {
+  // The homepage EZ grader is deliberately NOT locked: teachers in 7-point districts and
+  // plus/minus schools need to switch, and the default is the 10-point scale (see below).
+  if (US_RECORDING_CALCULATOR_PATHS.has(pathname)) {
     return "us-standard";
   }
 
   return null;
 }
 
-/** Default scale when visiting a regional hub without a hard lock (e.g. /au GPA tools). */
+/** Default scale when visiting a page without a hard lock (e.g. the EZ grader, /au GPA tools). */
 export function getPathDefaultScaleId(pathname: string): ScaleId | null {
+  // EZ graders are a teacher tool: every US competitor and the paper E-Z Grader use the
+  // 10-point scale (90 = A). Plus/minus made 1 wrong out of 10 an "A−", which teachers read as wrong.
+  if (pathname === "/") return "us-lenient";
   if (pathname.startsWith("/au")) return "au-uq-seven-point";
   return null;
+}
+
+/** Geo cookies pick a country's recording scale; on the EZ grader the US one is replaced by the 10-point default. */
+function geoOverridesPathDefault(pathname: string, geoScaleId: ScaleId): boolean {
+  if (pathname === "/" && geoScaleId === "us-standard") return false;
+  return true;
 }
 
 export function normalizeScaleForPath(pathname: string, scaleId: ScaleId): ScaleId {
@@ -104,7 +115,7 @@ export function resolveDefaultScaleId({
   const locked = getLockedScaleFromPath(pathname);
   if (locked) return locked;
   if (isValidScaleId(userScaleId)) return userScaleId;
-  if (isValidScaleId(geoScaleId)) return geoScaleId;
+  if (isValidScaleId(geoScaleId) && geoOverridesPathDefault(pathname, geoScaleId)) return geoScaleId;
   const pathDefault = getPathDefaultScaleId(pathname);
   if (pathDefault) return pathDefault;
   if (useLocaleHint) {

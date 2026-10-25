@@ -99,4 +99,32 @@ describe("calculateUcCsuGpa", () => {
     });
     expect(result.status).toBe("idle");
   });
+
+  it("counts a CSU college course twice", () => {
+    const r = calculateUcCsuGpa({ system: "csu", courses: [{ grade: "A", year: "11", kind: "college" }] });
+    expect(r.data?.gradePoints).toBe(8);
+    expect(r.data?.courseCount).toBe(2);
+    expect(r.data?.honorsPoints).toBe(1);
+    expect(r.data?.gpa).toBe(4.5);
+  });
+
+  it("mixes CSU college double-count with regular rows", () => {
+    const r = calculateUcCsuGpa({
+      system: "csu",
+      courses: [
+        { grade: "B", year: "11", kind: "college" },
+        { grade: "A", year: "11", kind: "regular" },
+      ],
+    });
+    expect(r.data?.gradePoints).toBe(10);
+    expect(r.data?.courseCount).toBe(3);
+    expect(r.data?.totalPoints).toBe(11);
+  });
+
+  it("does not double a UC college course", () => {
+    const r = calculateUcCsuGpa({ system: "uc", courses: [{ grade: "A", year: "11", kind: "college" }] });
+    expect(r.data?.gradePoints).toBe(4);
+    expect(r.data?.courseCount).toBe(1);
+    expect(r.data?.gpa).toBe(5);
+  });
 });

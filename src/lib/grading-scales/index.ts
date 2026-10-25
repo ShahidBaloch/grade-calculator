@@ -9,6 +9,7 @@ import { pkHecScale } from "./pk-hec";
 import { ukDegreeScale } from "./uk-degree";
 import { ukGcseScale } from "./uk-gcse";
 import { usLenientScale } from "./us-lenient";
+import { usSevenPointScale } from "./us-seven-point";
 import { usStandardScale } from "./us-standard";
 import type { CountryCode, GradingScale, ScaleId, ScaleLookupResult } from "@/types/grading-scale";
 
@@ -27,6 +28,7 @@ export const countryDefaults: Record<CountryCode, ScaleId> = {
 export const gradingScales: Record<ScaleId, GradingScale> = {
   "us-standard": usStandardScale,
   "us-lenient": usLenientScale,
+  "us-seven-point": usSevenPointScale,
   "uk-degree": ukDegreeScale,
   "uk-gcse": ukGcseScale,
   "ca-standard": caStandardScale,

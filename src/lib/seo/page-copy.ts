@@ -1,9 +1,9 @@
 /** Visible copy that makes each indexable URL a different search intent. */
 export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: string }> = {
   "/": {
-    title: "Grade Calculator & EZ Grader — Free Test Grading Chart",
+    title: "Grade Calculator — Free EZ Grader & Grading Calculator",
     description:
-      "Free grade calculator and EZ grader for teachers and students. Enter questions and wrong answers to get the score, letter grade, and a full grading chart.",
+      "Free grade calculator for US teachers and students. Enter questions and wrong answers to get the score, percentage, letter grade, and a full grading chart.",
   },
   "/weighted-grade-calculator": {
     title: "Weighted Grade Calculator — Gradebook & Class Average",
@@ -36,9 +36,14 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
       "Find the score you need on your final exam or midterm. Enter your current grade, the exam weight, and your target grade to see the score you need.",
   },
   "/uc-gpa-calculator": {
-    title: "UC GPA Calculator & CSU GPA Calculator — Capped A–G",
+    title: "UC GPA Calculator — Capped & Unweighted A–G GPA",
     description:
-      "Estimate a UC or CSU A–G GPA. UC caps at 8 honors points using grades 10–11 only; CSU includes grade 12 with only 2 honors points.",
+      "Free UC GPA calculator: enter 10th and 11th grade a-g semester grades to get your capped UC GPA (8 honors points max, 4 from 10th grade) and unweighted GPA.",
+  },
+  "/csu-gpa-calculator": {
+    title: "CSU GPA Calculator — Cal State A–G GPA with Honors Points",
+    description:
+      "Free CSU GPA calculator: enter 10th–12th grade a-g semester grades to get your Cal State GPA with up to 8 honors points (2 from 10th grade). Planning estimate.",
   },
   "/middle-school-gpa-calculator": {
     title: "Middle School GPA Calculator — Junior High",
@@ -81,9 +86,19 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
       "Look up the percentage range for any letter grade, A to F, with its GPA quality points on standard and plus/minus scales.",
   },
   "/canvas-grade-calculator": {
-    title: "Canvas Grade Calculator — Weighted Assignment Groups",
+    title: "Canvas Grade Calculator — Weighted Assignment Groups & What-If",
     description:
-      "Calculate your Canvas course grade from weighted assignment groups. Enter each group's weight and score to see your overall grade and what you need.",
+      "Free Canvas grade calculator for US students. Enter each assignment group's weight and score to check your Canvas course grade and what you need on the rest.",
+  },
+  "/grade-percentage-calculator": {
+    title: "Grade Percentage Calculator — Points to Percent & Letter",
+    description:
+      "Free grade percentage calculator: turn points earned out of points possible into a percentage and US letter grade, or convert any percentage to A–F.",
+  },
+  "/college-grade-calculator": {
+    title: "College Grade Calculator — Class Grade from Your Syllabus",
+    description:
+      "Calculate your college class grade from syllabus weights for exams, homework, labs, and participation. See your current grade and what you need to finish.",
   },
   "/eoc-grade-calculator": {
     title: "EOC Calculator — End-of-Course Exam Score Needed",

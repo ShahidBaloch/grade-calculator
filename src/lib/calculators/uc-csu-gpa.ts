@@ -87,7 +87,7 @@ export function calculateUcCsuGpa(input: UcCsuGpaInput): CalculatorResult<UcCsuG
   let invalid = 0;
   let blank = 0;
 
-  const counted: Array<{ year: AgYear; base: number; honors: boolean }> = [];
+  const counted: Array<{ year: AgYear; base: number; honors: boolean; weight: number }> = [];
 
   for (const course of input.courses) {
     const gradeText = course.grade?.trim() ?? "";
@@ -120,6 +120,8 @@ export function calculateUcCsuGpa(input: UcCsuGpaInput): CalculatorResult<UcCsuG
       year: course.year,
       base: parsed.base,
       honors: gradeAllows && kindAllows,
+      // CSU: a college semester grade counts twice (points + divisor); one honors slot per row.
+      weight: system === "csu" && course.kind === "college" ? 2 : 1,
     });
   }
 
@@ -140,9 +142,9 @@ export function calculateUcCsuGpa(input: UcCsuGpaInput): CalculatorResult<UcCsuG
   const honorsPoints = awarded10 + awardedLater;
   const honorsEligible = eligible10 + eligibleLater;
 
-  const gradePoints = counted.reduce((sum, course) => sum + course.base, 0);
+  const gradePoints = counted.reduce((sum, course) => sum + course.base * course.weight, 0);
   const totalPoints = gradePoints + honorsPoints;
-  const courseCount = counted.length;
+  const courseCount = counted.reduce((sum, course) => sum + course.weight, 0);
 
   if (skippedTwelfth > 0) {
     warnings.push(

@@ -1,5 +1,6 @@
 import type { CalculatorSlug } from "@/types/calculator";
 import type { FaqItem } from "@/types/seo";
+import { gapGuides } from "@/config/gap-guides";
 
 export interface GuideConfig {
   slug: string;
@@ -11,6 +12,8 @@ export interface GuideConfig {
   embeddedCalculator?: CalculatorSlug;
   relatedGuides: string[];
   relatedCalculators: CalculatorSlug[];
+  /** Grading-scale reference pages linked from the guide (always in server HTML). */
+  relatedReference?: Array<{ label: string; href: string }>;
   sections: Array<{ heading: string; body: string }>;
   faqs: FaqItem[];
 }
@@ -25,8 +28,8 @@ export const guides: GuideConfig[] = [
     keywords: ["how to calculate gpa", "gpa formula", "semester gpa", "college gpa"],
     readTime: "12 min read",
     embeddedCalculator: "gpa-calculator",
-    relatedGuides: ["how-to-calculate-weighted-grades", "what-grade-do-i-need-on-my-final", "how-to-raise-your-gpa", "gpa-glossary"],
-    relatedCalculators: ["gpa-calculator", "cumulative-gpa-calculator"],
+    relatedGuides: ["how-to-calculate-weighted-grades", "what-grade-do-i-need-on-my-final", "how-to-raise-your-gpa", "gpa-glossary", "what-is-a-good-gpa"],
+    relatedCalculators: ["gpa-calculator", "cumulative-gpa-calculator", "uc-gpa-calculator", "csu-gpa-calculator"],
     sections: [
       {
         heading: "What is GPA?",
@@ -118,8 +121,8 @@ export const guides: GuideConfig[] = [
     description:
       "Find out what score you need on your final exam to reach your target course grade, with the formula and examples.",
     keywords: [
-      "what grade do i need on my final",
-      "what do i need on my final",
+      "how to calculate what you need on a final",
+      "final exam grade formula",
     ],
     readTime: "11 min read",
     embeddedCalculator: "final-grade-calculator",
@@ -127,6 +130,7 @@ export const guides: GuideConfig[] = [
       "how-final-grades-are-calculated",
       "how-to-calculate-weighted-grades",
       "how-to-calculate-gpa",
+      "how-much-will-a-test-affect-my-grade",
     ],
     relatedCalculators: ["final-grade-calculator", "weighted-grade-calculator"],
     sections: [
@@ -308,6 +312,7 @@ export const guides: GuideConfig[] = [
       "how-to-calculate-weighted-grades",
       "how-final-grades-are-calculated",
       "what-grade-do-i-need-on-my-final",
+      "canvas-what-if-grades", "how-to-check-gpa-on-powerschool",
     ],
     relatedCalculators: [
       "canvas-grade-calculator",
@@ -401,6 +406,7 @@ export const guides: GuideConfig[] = [
       "how-final-grades-are-calculated",
       "what-grade-do-i-need-on-my-final",
       "how-to-calculate-gpa",
+      "how-much-will-a-test-affect-my-grade",
     ],
     relatedCalculators: ["weighted-grade-calculator", "final-grade-calculator"],
     sections: [
@@ -479,10 +485,11 @@ export const guides: GuideConfig[] = [
     title: "4.0 vs 5.0 vs 7.0: Different GPA Scales Explained",
     description:
       "How 4.0, 4.33, 5.0, and 7.0 GPA scales differ, and how to read letter grades on each one.",
-    keywords: ["4.0 vs 5.0 gpa scale", "different gpa scales", "gpa scales explained", "4.33 gpa scale", "7 point gpa scale"],
+    keywords: ["4.0 vs 5.0 gpa scale", "different gpa scales", "gpa scales explained", "4.33 gpa scale", "4.0 vs 7.0 gpa"],
     readTime: "11 min read",
-    relatedGuides: ["weighted-vs-unweighted-gpa", "how-to-calculate-gpa", "gpa-glossary"],
+    relatedGuides: ["weighted-vs-unweighted-gpa", "how-to-calculate-gpa", "gpa-glossary", "gpa-to-percentage"],
     relatedCalculators: ["gpa-calculator", "percentage-to-letter-grade", "degree-classification-calculator", "atar-calculator"],
+    relatedReference: [{ label: "US grading scale chart (10-point, plus/minus, 7-point)", href: "/grading-scales/us" }],
     sections: [
       {
         heading: "A scale is a translation table",
@@ -546,8 +553,8 @@ export const guides: GuideConfig[] = [
       "The difference between unweighted 4.0 GPA and weighted Honors/AP GPA, with examples.",
     keywords: ["weighted vs unweighted gpa", "weighted gpa", "unweighted gpa"],
     readTime: "10 min read",
-    relatedGuides: ["gpa-scale-explained", "how-to-raise-your-gpa"],
-    relatedCalculators: ["weighted-gpa-calculator", "high-school-gpa-calculator"],
+    relatedGuides: ["gpa-scale-explained", "how-to-raise-your-gpa", "gpa-needed-for-uc-csu", "what-is-a-good-gpa"],
+    relatedCalculators: ["weighted-gpa-calculator", "high-school-gpa-calculator", "uc-gpa-calculator", "csu-gpa-calculator"],
     sections: [
       {
         heading: "Unweighted GPA treats every course the same",
@@ -612,7 +619,7 @@ export const guides: GuideConfig[] = [
     keywords: ["how to raise gpa", "improve gpa"],
     readTime: "8 min read",
     embeddedCalculator: "raise-gpa-calculator",
-    relatedGuides: ["how-to-calculate-gpa", "what-grade-do-i-need-on-my-final"],
+    relatedGuides: ["how-to-calculate-gpa", "what-grade-do-i-need-on-my-final", "is-a-3-5-gpa-good", "gpa-for-financial-aid", "latin-honors-gpa"],
     relatedCalculators: ["raise-gpa-calculator", "cumulative-gpa-calculator"],
     sections: [
       {
@@ -662,18 +669,33 @@ export const guides: GuideConfig[] = [
   {
     slug: "understanding-letter-grades",
     path: "/guides/understanding-letter-grades",
-    title: "Understanding Letter Grades",
+    title: "What Is a B+, A− or C Worth? Letter Grade Midpoints Explained",
     description:
-      "What A through F mean in percentages and GPA points, and why the same letter differs by school.",
-    keywords: ["letter grades", "what is a b plus", "letter grade percentage"],
+      "Convert a letter grade back to a percentage and GPA points: the midpoint to use for a B+, A−, or C in a weighted average, and why the number differs by school.",
+    keywords: [
+      "what percentage is a b plus",
+      "what is a b plus",
+      "a minus percentage",
+      "letter grade midpoint",
+      "letter grade to gpa",
+    ],
     readTime: "10 min read",
     relatedGuides: ["gpa-scale-explained", "how-to-calculate-weighted-grades", "gcse-9-1-grades"],
     relatedCalculators: ["letter-grade-calculator", "percentage-to-letter-grade"],
+    relatedReference: [
+      { label: "Letter grade calculator: percentage range for any letter", href: "/letter-grade-calculator" },
+      { label: "US grading scale chart", href: "/grading-scales/us" },
+    ],
     sections: [
+      {
+        heading: "This guide is about going backwards",
+        body:
+          "The US grading scale page lists the full A+ to F chart and the 10-point, plus/minus and 7-point cutoffs. This guide answers the opposite question: your teacher gave you a letter and you need a number for a weighted average or a GPA calculation. Each letter is a percentage band, and the number you plug in is that band's midpoint.",
+      },
       {
         heading: "A letter is a band, not a single percent",
         body:
-          "On our US Standard table, B is 83–86% and B+ is 87–89%. The letter-grade calculator shows the midpoint of that band so you can plug a letter into a weighted average when the teacher never published a percent.",
+          "On the plus/minus scale, B is 83–86% and B+ is 87–89%, so a B+ converts to about 88% and a B to about 84.5%. On the 10-point scale a plain B is 80–89%, so its midpoint is 84.5% too, but there is no B+ at all. The letter-grade calculator shows the midpoint for the scale you select so you can plug a letter into a weighted average when the teacher never published a percent.",
       },
       {
         heading: "Plus and minus matter",
@@ -703,9 +725,19 @@ export const guides: GuideConfig[] = [
     ],
     faqs: [
       {
+        question: "What percentage is a B+?",
+        answer:
+          "On the US plus/minus scale a B+ is 87–89%, so use 88% when you need one number. Its GPA value is 3.3. Schools on a straight 10-point scale do not award a B+; the whole 80–89% band is a B worth 3.0.",
+      },
+      {
+        question: "What percentage is an A−?",
+        answer:
+          "An A− is 90–92% on the plus/minus scale and converts to 3.7 GPA points. Use 91% as the midpoint. On the 7-point scale an A does not start until 93%, so a 91% there is a B.",
+      },
+      {
         question: "What percentage is a B?",
         answer:
-          "On US Standard, B is typically 83–86%. Your school may start B at 80% or 84%.",
+          "On the plus/minus scale a plain B is 83–86% (midpoint about 84.5%). On the 10-point scale B is 80–89%. Your school may start B at 80%, 83%, or 85%, so check the report card legend before converting.",
       },
       {
         question: "Why does the same letter grade mean different percentages at different schools?",
@@ -725,7 +757,7 @@ export const guides: GuideConfig[] = [
     title: "Final Exam Study Tips for a Target Score",
     description:
       "Turn a required final percentage into a study plan, and know when the target is already locked in.",
-    keywords: ["final exam tips", "study for finals", "what do i need on my final"],
+    keywords: ["final exam tips", "study for finals", "final exam study plan"],
     readTime: "10 min read",
     relatedGuides: [
       "how-final-grades-are-calculated",
@@ -795,15 +827,15 @@ export const guides: GuideConfig[] = [
     description:
       "Understand England’s GCSE 9–1 scale, what a standard pass means, and how to map a percentage to a grade for planning.",
     keywords: [
-      "gcse grades",
-      "gcse 9-1",
+      "how gcse grades work",
+      "gcse grades explained",
       "what is a gcse grade 4",
-      "gcse percentage to grade",
     ],
     readTime: "10 min read",
     embeddedCalculator: "gcse-grade-calculator",
     relatedGuides: ["understanding-letter-grades", "gpa-scale-explained"],
     relatedCalculators: ["gcse-grade-calculator", "degree-classification-calculator", "percentage-to-letter-grade"],
+    relatedReference: [{ label: "GCSE 9–1 grading scale table", href: "/grading-scales/gcse" }],
     sections: [
       {
         heading: "9 is the top, 1 is the bottom",
@@ -861,15 +893,14 @@ export const guides: GuideConfig[] = [
     description:
       "Learn CBSE ×9.5, ×10, and SPPU formulas, plus Pakistan planning estimates and how SGPA rolls into CGPA.",
     keywords: [
-      "cgpa to percentage",
       "how to convert cgpa to percentage",
+      "cgpa to percentage formula",
       "sgpa vs cgpa",
-      "hec cgpa to percentage",
       "cbse cgpa formula",
     ],
     readTime: "8 min read",
     embeddedCalculator: "cgpa-to-percentage",
-    relatedGuides: ["how-to-calculate-gpa", "gpa-scale-explained"],
+    relatedGuides: ["how-to-calculate-gpa", "gpa-scale-explained", "university-cgpa-to-percentage", "gpa-to-percentage"],
     relatedCalculators: ["cgpa-to-percentage", "sgpa-to-cgpa", "cgpa-calculator", "percentage-to-cgpa"],
     sections: [
       {
@@ -987,6 +1018,7 @@ export const guides: GuideConfig[] = [
       },
     ],
   },
+  ...gapGuides,
 ];
 
 export const guideBySlug = Object.fromEntries(guides.map((g) => [g.slug, g])) as Record<

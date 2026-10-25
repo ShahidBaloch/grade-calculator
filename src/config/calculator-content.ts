@@ -31,7 +31,7 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
     ],
     formula: "Score % = (Correct ÷ Total) × 100",
     workedExample:
-      "A 10-question quiz with 2 wrong answers: 8 correct → 80% → typically a B− on the US scale.",
+      "A 10-question quiz with 2 wrong answers: 8 correct → 80% → a B on the 10-point scale (a B− if your school uses plus/minus).",
     faqs: [
       {
         question: "How do I grade a test quickly?",
@@ -39,14 +39,14 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
           "Enter total questions and wrong answers. The EZ grader shows the percentage and letter grade immediately, plus a full chart for every wrong-count.",
       },
       {
-        question: "Can teachers use this as an easy grader?",
+        question: "Is this a free teacher grader (easy grader)?",
         answer:
-          "Yes. Teachers use it to score quizzes in seconds without login. Print the grading chart for your desk.",
+          "Yes. It is a free teacher grader and easy grader: enter the number of questions, then read each student's score, percentage, and letter grade from the chart. No login. Print the chart to grade a stack of papers by hand.",
       },
       {
         question: "What grading scale is used?",
         answer:
-          "We default to the common US 4.0 GPA scale. Visitors in some countries may see a local preset automatically; everyone can pick another scale (including New Zealand 9-point) in the calculator settings.",
+          "The EZ grader defaults to the US 10-point scale most teachers grade on: A 90–100, B 80–89, C 70–79, D 60–69, F below 60. Switch to the plus/minus 4.0 scale (A− 90–92, B+ 87–89…), the 7-point scale (A starts at 93, F below 70), or another country's scale in the grading scale selector. Visitors outside the US may see a local preset automatically.",
       },
       {
         question: "Is there a free online EZ grader?",
@@ -69,6 +69,21 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
           "Enter the total number of questions and how many you got wrong. The EZ grader shows your score, percentage, and letter grade immediately. For example: 20 questions with 3 wrong = 17 correct = 85% = B. If you need your overall class grade rather than a single test score, use the weighted grade calculator.",
       },
       {
+        question: "How do I calculate my grade?",
+        answer:
+          "Divide the points you earned by the points possible and multiply by 100. Example: 42 out of 50 = 0.84 × 100 = 84%, a B on the 10-point scale. For a whole class with weighted categories (tests, homework, final), use the weighted grade calculator instead.",
+      },
+      {
+        question: "Is a 90% an A or an A−?",
+        answer:
+          "On the common US 10-point scale it is an A: A = 90–100%, B = 80–89%, C = 70–79%, D = 60–69%, and F = below 60%. Plus/minus schools split each band, for example A− = 90–92% and A = 93–100%. The grading scales page lists every band.",
+      },
+      {
+        question: "What grading system do US schools use?",
+        answer:
+          "Most US schools use A–F letter grades on a 10-point scale with a 4.0 GPA (A = 4.0, B = 3.0, C = 2.0, D = 1.0, F = 0). Some districts use a stricter 7-point scale (A = 93+) or add plus/minus grades. Check your syllabus for the exact cutoffs.",
+      },
+      {
         question: "How do I get a percentage from wrong answers?",
         answer:
           "Percentage = (Total − Wrong) ÷ Total × 100. The EZ grader does that math for you and maps the result to a letter on your selected scale.",
@@ -86,12 +101,12 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
       {
         question: "What is a grading chart?",
         answer:
-          "A grading chart shows the percentage and letter grade for every possible score on a quiz or test. For example, on a 20-question test, missing 2 questions gives 90% (A−), missing 4 gives 80% (B−), and missing 8 gives 60% (D−). The EZ grader below automatically generates a full grading chart once you set the total number of questions.",
+          "A grading chart shows the percentage and letter grade for every possible score on a quiz or test. For example, on a 20-question test, missing 2 questions gives 90% (A), missing 4 gives 80% (B), and missing 8 gives 60% (D) on the 10-point scale. The EZ grader above generates the full chart once you set the total number of questions, and you can print it.",
       },
       {
         question: "What does the grade scale selector do?",
         answer:
-          "The grade scale selector switches the letter grades shown in the chart and throughout the site. The default is the US 4.0 standard scale (A 93%+, B 83%, C 73%, D 63%). You can switch to the US 10-point scale, UK degree classifications, Australian HD/D/C/P bands, New Zealand 9-point university scale, or others. All calculators on the site update together when you change the scale.",
+          "The grade scale selector switches the letter grades shown in the chart. On the EZ grader the default is the US 10-point scale (A 90+, B 80+, C 70+, D 60+). You can switch to the plus/minus 4.0 scale (A 93+, A− 90+, B+ 87+…), the 7-point scale (A 93+, B 85+, C 77+, D 70+), UK degree classifications, Australian HD/D/C/P bands, the New Zealand 9-point university scale, or others. Your choice is remembered on this device.",
       },
     ],
   },
@@ -611,7 +626,7 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
       {
         question: "Does 85% always become a B?",
         answer:
-          "Not on every scale. US 10-point letter bands may call 85% a B+, and UK or Australian tables use different cutoffs. Change the scale before you convert.",
+          "Not on every scale. The US 10-point scale calls 85% a plain B, the 7-point scale calls it a B as well but starts the A at 93, and UK or Australian tables use different cutoffs. Change the scale before you convert.",
       },
       {
         question: "What percentage is an A?",
@@ -1427,12 +1442,12 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
       },
     ],
     howItWorks: [
-      "Choose UC or CSU. For UC, choose California resident or nonresident.",
-      "Add one row per semester of an a-g course. A year-long class is two rows.",
-      "Mark approved honors, AP/IB, or a college course. The result shows capped honors points and the GPA.",
+      "Choose California resident or nonresident (the honors courses that count differ).",
+      "Add one row per semester of an a-g course from 10th and 11th grade. A year-long class is two rows.",
+      "Mark approved honors, AP/IB, or a college course. The result shows the capped UC GPA, the honors points used, and the unweighted GPA.",
     ],
     formula:
-      "GPA = (letter points + capped honors points) ÷ semester grades. A=4, B=3, C=2, D=1, F=0. Plus and minus are ignored.",
+      "UC GPA = (letter points + capped honors points) ÷ semester grades. A=4, B=3, C=2, D=1, F=0. Plus and minus are ignored.",
     workedExample:
       "Four UC semesters: A regular, A honors, B+ AP, B regular. Letter points are 4+4+3+3 = 14. Two honors points apply. GPA = 16 ÷ 4 = 4.00. Without honors points it is 3.50.",
     faqs: [
@@ -1442,9 +1457,14 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
           "Use a-g letter grades from the summer after 9th grade through the summer after 11th. A=4, B=3, C=2, D=1, F=0, and plus/minus do not change those points. Add one honors point per semester of an approved honors, AP, IB, or transferable college course with a C or better, up to 8 points and no more than 4 from 10th grade.",
       },
       {
-        question: "How is CSU GPA different?",
+        question: "What is the difference between capped and fully weighted UC GPA?",
         answer:
-          "CSU also uses a-g grades after 9th grade, including 12th grade. The honors cap is still 8 semesters, but only 2 of those points can come from 10th grade. A C- can earn the extra CSU point. A C- does not earn the extra UC point.",
+          "The capped GPA (what this calculator shows) limits honors points to 8 semesters. The fully weighted GPA counts every honors semester with no cap. UC campuses see both; the capped figure is the one most admissions data tables quote.",
+      },
+      {
+        question: "Is UC GPA the same as CSU GPA?",
+        answer:
+          "No. CSU includes 12th-grade a-g courses, allows only 2 honors points from 10th grade, and lets a C- earn the extra honors point. Use the CSU GPA calculator for a Cal State estimate.",
       },
       {
         question: "Does 9th grade count?",
@@ -1460,6 +1480,66 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
         question: "What UC GPA do I need to be admitted?",
         answer:
           "UC campuses are test-blind and use a holistic review, but published data shows that most admitted UC Berkeley and UCLA students have a weighted UC GPA above 4.15, while less selective UC campuses typically admit students around 3.8–4.0. You can research each campus's Common Data Set for the middle 50% GPA range of admitted freshmen. A strong UC GPA is necessary but not sufficient — UC also evaluates 13 comprehensive review criteria.",
+      },
+    ],
+  },
+  "csu-gpa-calculator": {
+    primarySources: [
+      {
+        label: "CSU — freshman admission requirements (a-g GPA and honors points)",
+        href: "https://www.calstate.edu/apply/freshman/getting_into_the_csu/pages/admission-requirements.aspx",
+      },
+      {
+        label: "Cal State Apply — first-time freshman applicants",
+        href: "https://www.calstate.edu/apply/freshman",
+      },
+    ],
+    assumptions: [
+      "Only courses on your high school's UC/CSU a-g course list count. Ninth-grade a-g courses do not.",
+      "Letter grades map to A=4, B=3, C=2, D=1, F=0. Plus and minus never change the points.",
+      "One honors point per semester of an approved honors, AP, IB, or transferable college course graded C- or better, capped at 8 semesters with no more than 2 from 10th grade.",
+      "On CSU, each transferable college semester grade counts twice: its letter points and the semester divisor are doubled, matching the official CSU GPA calculator. It still fills only one honors slot.",
+      "Twelfth-grade courses in progress can be entered with expected grades for planning; Cal State Apply uses grades from your transcript.",
+    ],
+    howItWorks: [
+      "Add one row per semester of an a-g course from 10th, 11th, or 12th grade. A year-long class is two rows.",
+      "Mark approved honors, AP/IB, or college courses so the calculator can award honors points. College courses count twice on CSU.",
+      "Read your CSU a-g GPA, the honors points used, and the unweighted GPA underneath.",
+    ],
+    formula:
+      "CSU GPA = (letter points + capped honors points) ÷ semester grades. A=4, B=3, C=2, D=1, F=0. Honors points max out at 8, with no more than 2 earned in 10th grade. Each college semester counts twice (points and divisor).",
+    workedExample:
+      "Six CSU semesters: B+ regular (10th), A honors (10th), B AP (11th), A- regular (11th), A AP (12th), B regular (12th). Letter points are 3+4+3+4+4+3 = 21. Three honors semesters qualify, and only one is from 10th grade, so all 3 points count. GPA = 24 ÷ 6 = 4.00. Without honors points it is 3.50.",
+    faqs: [
+      {
+        question: "How do you calculate CSU GPA?",
+        answer:
+          "Take every a-g course from 10th grade through 12th grade, convert each semester grade to points (A=4, B=3, C=2, D=1, F=0), add one honors point for each approved honors, AP, IB, or college semester with a C- or better, and divide by the number of semesters. The honors points are capped at 8, and only 2 of them may come from 10th grade.",
+      },
+      {
+        question: "Does CSU use 12th grade grades?",
+        answer:
+          "Yes for planning and for many campuses' review, which is the main difference from UC. UC stops at 11th grade. CSU counts a-g courses from 10th, 11th, and 12th grade, so your senior-year schedule can move your CSU GPA.",
+      },
+      {
+        question: "Do college courses count twice for CSU GPA?",
+        answer:
+          "Yes. CSU counts each transferable college semester grade twice, so an A in a college course adds 8 letter points and 2 semesters to the divisor, plus one honors point. UC counts college courses once.",
+      },
+      {
+        question: "Does a C- get an honors point at CSU?",
+        answer:
+          "Yes. CSU awards the extra point for a C- or better in an approved honors course. UC requires a C or better, so a C- in an AP class adds a point to your CSU GPA but not to your UC GPA.",
+      },
+      {
+        question: "What CSU GPA do I need?",
+        answer:
+          "California residents and graduates of California high schools with an a-g GPA of 2.50 or higher are eligible for admission to the CSU system, though impacted campuses and majors set higher thresholds. Applicants with a GPA between 2.00 and 2.49 may be evaluated on additional factors. Check each campus's impaction page for its current cutoffs.",
+      },
+      {
+        question: "Is this my official Cal State Apply GPA?",
+        answer:
+          "No. This is a planning estimate from the grades you enter. Cal State Apply calculates the official GPA from your self-reported coursework and your school's a-g list, and campuses verify it against your final transcript.",
       },
     ],
   },
@@ -1507,6 +1587,67 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
       "All classes count equally — there is no credit-hour weighting in middle school GPA.",
       "Electives, PE, and study hall are included only if your school counts them in the GPA; omit them otherwise.",
       "Plus and minus grades use the US 4.0 scale sub-divisions (A− = 3.7, B+ = 3.3); toggle them off if your school uses only whole letters.",
+    ],
+  },
+  "grade-percentage-calculator": {
+    howItWorks: [
+      "Enter the points you earned and the points possible to get your grade percentage.",
+      "Or type a percentage to see its letter grade and GPA points on the scale you choose.",
+      "Compare the result with the US A–F ranges in the table below and your syllabus.",
+    ],
+    formula: "Grade percentage = (points earned ÷ points possible) × 100. Letter = the band that percentage falls in.",
+    workedExample: "43 out of 50 points: 43 ÷ 50 = 0.86 → 86%, a B on the common US plus/minus scale (83–86%).",
+    faqs: [
+      {
+        question: "How do I calculate my grade percentage?",
+        answer:
+          "Divide the points you earned by the points possible and multiply by 100. For example, 172 out of 200 points is 172 ÷ 200 × 100 = 86%.",
+      },
+      {
+        question: "What percentage is each letter grade?",
+        answer:
+          "On the common US 10-point scale, A is 90–100%, B is 80–89%, C is 70–79%, D is 60–69%, and F is below 60%. Plus/minus cutoffs (such as A− at 90–92%) vary by school.",
+      },
+      {
+        question: "Is a grade percentage the same as my class grade?",
+        answer:
+          "Only if every assignment counts by points. If your syllabus weights categories (for example exams 50%, homework 20%), use the weighted grade calculator or college grade calculator instead.",
+      },
+    ],
+    assumptions: [
+      "Letter grades use the scale selected in the converter; the points tool uses the common US A–F scale.",
+      "Extra credit above the total can push the percentage past 100%.",
+    ],
+  },
+  "college-grade-calculator": {
+    howItWorks: [
+      "Copy each grading category and its weight from your college syllabus (for example exams 40%, homework 20%).",
+      "Enter your current average in each category as a percentage or points.",
+      "Read your current class grade and letter, and add the weight still to come to see what you need on the rest.",
+    ],
+    formula: "Class grade = Σ(category average × category weight) ÷ Σ(weights entered so far).",
+    workedExample:
+      "Exams 84% (40%), homework 92% (20%), labs 88% (15%), participation 95% (10%): (33.6 + 18.4 + 13.2 + 9.5) ÷ 0.85 = 87.9%, a B+ so far with 15% of the course left.",
+    faqs: [
+      {
+        question: "How do I calculate my grade in a college class?",
+        answer:
+          "Multiply each category average by its syllabus weight, add the results, and divide by the total weight graded so far. That gives your current course grade before the final.",
+      },
+      {
+        question: "Is this the same as a college GPA calculator?",
+        answer:
+          "No. This finds the grade in one class. A college GPA calculator combines letter grades from many classes using credit hours.",
+      },
+      {
+        question: "What if my professor uses total points instead of weights?",
+        answer:
+          "Switch the calculator to points mode, or divide total points earned by total points possible. Points-based classes do not need category weights.",
+      },
+    ],
+    assumptions: [
+      "Weights come from your syllabus; the calculator renormalizes if they do not add to 100% yet.",
+      "Letter grades follow the scale selected in the calculator; your professor's cutoffs may differ.",
     ],
   },
 };

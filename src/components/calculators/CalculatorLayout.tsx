@@ -24,29 +24,43 @@ export function CalculatorLayout({
   below,
   focus = false,
 }: CalculatorLayoutProps) {
-  const shell = focus ? "mx-auto max-w-3xl px-4 py-6 md:py-8" : "mx-auto max-w-7xl px-4 py-6 md:py-8";
+  // Focus mode (homepage): a tighter header so the inputs and score sit above the fold on phones.
+  const shell = focus ? "mx-auto max-w-3xl px-4 py-4 md:py-8" : "mx-auto max-w-7xl px-4 py-6 md:py-8";
 
   return (
     <div className={shell}>
       <div className="no-print">
         <Breadcrumbs items={breadcrumbs} />
       </div>
-      <div className={focus ? "mt-4" : "mt-4 lg:grid lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:gap-10"}>
+      <div className={focus ? "mt-3" : "mt-4 lg:grid lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:gap-10"}>
         <article aria-labelledby="calculator-page-title">
           <h1 id="calculator-page-title" className="text-2xl font-bold tracking-tight text-[var(--color-text)] sm:text-3xl print:text-xl">
             {title}
           </h1>
-          <p className="mt-2 max-w-2xl text-base leading-relaxed text-[var(--color-text-muted)] print:mt-1 print:text-sm">
+          <p
+            className={
+              focus
+                ? "mt-1.5 max-w-2xl text-sm leading-relaxed text-[var(--color-text-muted)] sm:text-base print:mt-1 print:text-sm"
+                : "mt-2 max-w-2xl text-base leading-relaxed text-[var(--color-text-muted)] print:mt-1 print:text-sm"
+            }
+          >
             {description}
           </p>
           <GeoPageHint />
-          <div className="no-print">
-            <EditorialByline compact className="mt-3 max-w-2xl" />
-          </div>
+          {!focus && (
+            <div className="no-print">
+              <EditorialByline compact className="mt-3 max-w-2xl" />
+            </div>
+          )}
           <p className="mt-1 hidden text-xs text-[var(--color-text-muted)] print:block">
             {siteConfig.name} · {siteConfig.url}
           </p>
-          <div className="mt-6 print:mt-3">{calculator}</div>
+          <div className={focus ? "mt-4 print:mt-3" : "mt-6 print:mt-3"}>{calculator}</div>
+          {focus && (
+            <div className="no-print">
+              <EditorialByline compact className="mt-6 max-w-2xl" />
+            </div>
+          )}
         </article>
         {content && !focus && (
           <aside className="no-print mt-10 lg:mt-0 lg:sticky lg:top-20 lg:self-start" aria-label="Help and FAQ">

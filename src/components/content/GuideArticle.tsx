@@ -58,6 +58,21 @@ export function GuideArticle({ guide, embeddedCalculator }: GuideArticleProps) {
         </section>
       )}
 
+      {guide.relatedReference && guide.relatedReference.length > 0 && (
+        <section>
+          <h2 className="text-xl font-semibold">Look it up</h2>
+          <ul className="mt-3 space-y-2">
+            {guide.relatedReference.map((link) => (
+              <li key={link.href}>
+                <Link href={link.href} className="inline-flex min-h-6 items-center text-[var(--color-primary)] hover:underline">
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
       <section>
         <h2 className="text-xl font-semibold">Related calculators</h2>
         <div className="mt-4">

@@ -47,8 +47,7 @@ export function EzGrader({ slug = "ez-grader" }: { slug?: CalculatorSlug }) {
 
   return (
     <div className="calculator-print-area space-y-6">
-      <CalculatorToolbar onShare={shareUrl} onReset={handleReset} copied={copied} />
-      <ExampleDataNotice visible={showExampleNotice} />
+      {/* Inputs first: on a phone the two steppers and the score must fit above the fold. */}
       <div className="grid gap-4 sm:grid-cols-2">
         <NumberStepper
           label="Total questions"
@@ -89,6 +88,9 @@ export function EzGrader({ slug = "ez-grader" }: { slug?: CalculatorSlug }) {
         letterGrade={result.data?.letterGrade}
         gpa={result.data?.gpa}
       />
+      <ScaleSelector />
+      <ExampleDataNotice visible={showExampleNotice} />
+      <CalculatorToolbar onShare={shareUrl} onReset={handleReset} copied={copied} />
       <ExampleScenarios
         examples={examples}
         onSelect={(values) => {
@@ -101,7 +103,6 @@ export function EzGrader({ slug = "ez-grader" }: { slug?: CalculatorSlug }) {
           });
         }}
       />
-      <ScaleSelector />
       {result.data?.chart && <GradeChart rows={result.data.chart} highlightWrong={wrongAnswers} />}
       {flow && result.status === "valid" && <NextStepCard flow={flow} />}
     </div>

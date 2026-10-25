@@ -22,7 +22,7 @@ const gradingScalesHub = { path: "/grading-scales", title: "Grading Scales by Co
 export const calculatorResourceLinks: Record<CalculatorSlug, CalculatorResourceLinks> = {
   "ez-grader": {
     guide: guide("understanding-letter-grades"),
-    gradingScale: gradingScalesHub,
+    gradingScale: scale("us"),
   },
   "test-grade-calculator": {
     guide: guide("understanding-letter-grades"),
@@ -128,8 +128,20 @@ export const calculatorResourceLinks: Record<CalculatorSlug, CalculatorResourceL
     guide: guide("how-to-calculate-gpa"),
     gradingScale: scale("us"),
   },
+  "csu-gpa-calculator": {
+    guide: guide("weighted-vs-unweighted-gpa"),
+    gradingScale: scale("us"),
+  },
   "middle-school-gpa-calculator": {
     guide: guide("how-to-calculate-gpa"),
+    gradingScale: scale("us"),
+  },
+  "grade-percentage-calculator": {
+    guide: guide("understanding-letter-grades"),
+    gradingScale: scale("us"),
+  },
+  "college-grade-calculator": {
+    guide: guide("how-to-calculate-weighted-grades"),
     gradingScale: scale("us"),
   },
 };

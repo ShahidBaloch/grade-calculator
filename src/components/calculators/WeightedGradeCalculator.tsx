@@ -25,7 +25,7 @@ import { WeightInput } from "@/components/calculators/shared/WeightInput";
 type ScoreMode = WeightedGradeInput["globalMode"];
 type WeightMode = WeightedGradeInput["weightMode"];
 
-interface WeightedRow {
+export interface WeightedRow {
   name: string;
   score: number | string;
   weight: number;
@@ -73,14 +73,24 @@ function ModeButtons<T extends string>({
   );
 }
 
-export function WeightedGradeCalculator() {
+interface WeightedGradeCalculatorProps {
+  /** Persistence key, so pages that reuse this engine keep their own saved rows. */
+  storageKey?: string;
+  /** Starting rows for this page. */
+  initialItems?: WeightedRow[];
+}
+
+export function WeightedGradeCalculator({
+  storageKey = "weighted-grade-calculator",
+  initialItems = defaultItems,
+}: WeightedGradeCalculatorProps = {}) {
   const { scaleId } = useGradingScale();
   const { state, setState, resetState, shareUrl, copied } = useCalculatorPersistence(
-    "weighted-grade-calculator",
+    storageKey,
     {
       globalMode: "percentage" as ScoreMode,
       weightMode: "percent" as WeightMode,
-      items: defaultItems,
+      items: initialItems,
       desiredOverall: 90,
       remainingWeight: 0,
     },

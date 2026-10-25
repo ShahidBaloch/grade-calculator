@@ -24,7 +24,7 @@ export const metadata = createPageMetadata({
   description:
     "Free online grade calculators: EZ grader, weighted grades, final exam, GPA, and more.",
   path: "/calculators",
-  keywords: ["grade calculators", "gpa calculator", "ez grader"],
+  keywords: ["grade calculators", "all grade calculators", "free grade calculators"],
 });
 
 const allGrade = [...mvpCalculators, ...extendedCalculators].filter((c) => c.category === "grade");
@@ -55,6 +55,14 @@ export default function CalculatorsHubPage() {
               <CalculatorCard key={calculator.slug} calculator={calculator} />
             ))}
           </div>
+        </section>
+
+        <section className="mt-10 max-w-2xl" aria-labelledby="more-grade-tools-heading">
+          <h2 id="more-grade-tools-heading" className="text-xl font-semibold">More grade tools</h2>
+          <ul className="mt-3 list-disc space-y-1 pl-5">
+            <li><Link href="/score" className="underline">Score out of total (what is 15 out of 20?)</Link></li>
+            <li><Link href="/powerschool-grade-calculator" className="underline">PowerSchool grade calculator</Link></li>
+          </ul>
         </section>
 
         <section id="gpa" className="mt-10">

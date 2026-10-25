@@ -47,15 +47,32 @@ function formatExact(value: number): string {
   return text;
 }
 
-export function UcCsuGpaCalculator() {
+const defaultCsuCourses: CourseRow[] = [
+  { name: "English", grade: "B+", year: "10", kind: "regular" },
+  { name: "Honors Biology", grade: "A", year: "10", kind: "honors" },
+  { name: "AP World History", grade: "B", year: "11", kind: "ap-ib" },
+  { name: "Algebra II", grade: "A-", year: "11", kind: "regular" },
+  { name: "AP English Language", grade: "A", year: "12", kind: "ap-ib" },
+  { name: "Spanish 3", grade: "B", year: "12", kind: "regular" },
+];
+
+interface UcCsuGpaCalculatorProps {
+  /** Persistence key and example source. */
+  slug?: "uc-gpa-calculator" | "csu-gpa-calculator";
+  /** System the page opens with; the user can still switch. */
+  defaultSystem?: UcCsuSystem;
+}
+
+export function UcCsuGpaCalculator({ slug = "uc-gpa-calculator", defaultSystem = "uc" }: UcCsuGpaCalculatorProps = {}) {
+  const initialCourses = defaultSystem === "csu" ? defaultCsuCourses : defaultCourses;
   const { state, setState, resetState, shareUrl, copied } = useCalculatorPersistence<CalculatorState>(
-    "uc-gpa-calculator",
-    { system: "uc", residency: "resident", courses: defaultCourses },
+    slug,
+    { system: defaultSystem, residency: "resident", courses: initialCourses },
   );
-  const examples = calculatorBySlug["uc-gpa-calculator"].examples;
+  const examples = calculatorBySlug[slug].examples;
   const system = state.system === "csu" ? "csu" : "uc";
   const residency = state.residency === "nonresident" ? "nonresident" : "resident";
-  const courses = Array.isArray(state.courses) && state.courses.length > 0 ? state.courses : defaultCourses;
+  const courses = Array.isArray(state.courses) && state.courses.length > 0 ? state.courses : initialCourses;
 
   const result = React.useMemo(
     () => calculateUcCsuGpa({ system, residency, courses }),
@@ -69,8 +86,10 @@ export function UcCsuGpaCalculator() {
       <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
       <p className="rounded-md border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-3 text-sm text-[var(--color-text-muted)]">
         Planning estimate for California A–G GPA. One row is one semester. A year-long class is two
-        rows. Pluses and minuses do not change the points. UC and CSU calculate the official GPA on
-        the application.
+        rows. Pluses and minuses do not change the points.{" "}
+        {system === "csu"
+          ? "Cal State Apply calculates the official CSU GPA from your transcript."
+          : "UC calculates the official GPA on the application."}
       </p>
       {examples.length > 0 && (
         <ExampleScenarios
@@ -140,7 +159,7 @@ export function UcCsuGpaCalculator() {
       <p className="text-sm text-[var(--color-text-muted)]">
         {system === "uc"
           ? "UC uses 10th and 11th grade only, including summers after 9th, 10th, and 11th. Up to 8 honors points, and no more than 4 of those from 10th grade. A C- does not get the extra point."
-          : "CSU uses grades after 9th grade, including 12th. Up to 8 honors points, and no more than 2 of those from 10th grade. A C- can get the extra point."}
+          : "CSU uses grades after 9th grade, including 12th. Up to 8 honors points, and no more than 2 of those from 10th grade. A C- can get the extra point. College courses count twice."}
       </p>
 
       <DynamicRowList
@@ -226,7 +245,7 @@ export function UcCsuGpaCalculator() {
           </p>
           <p className="text-5xl font-bold">{formatExact(result.data.gpa)}</p>
           <p className="mt-3 text-sm text-[var(--color-text)]">
-            {result.data.gradePoints} grade points + {result.data.honorsPoints} honors points ={" "}
+            {result.data.gradePoints} grade points + {result.data.honorsPoints} honors {result.data.honorsPoints === 1 ? "point" : "points"} ={" "}
             {result.data.totalPoints} ÷ {result.data.courseCount} semesters
           </p>
           <p className="mt-2 text-sm text-[var(--color-text-muted)]">

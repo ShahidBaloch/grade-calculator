@@ -24,6 +24,11 @@ export const questionCharts: QuestionChartConfig[] = [
   { total: 40, popularScores: [32, 35, 37, 34, 33] },
   { total: 50, popularScores: [45, 35, 38, 43, 42.5, 40] },
   { total: 100, popularScores: [90, 86, 88, 75, 65] },
+  // Search Console (Oct 2026): "118 out of 150 grade", "118/150 as a grade", "144 out of 150",
+  // "116/150", "100/150", "123/150", "108–112/150" all rank top 10 with no page to land on.
+  { total: 150, popularScores: [118, 144, 116, 100, 123, 112, 108] },
+  // "176 out of 200 grade", "150/200 grade", "180 out of 200", "200 grade chart".
+  { total: 200, popularScores: [176, 150, 180, 160, 190] },
 ];
 
 export function questionChartSlug(total: number): string {

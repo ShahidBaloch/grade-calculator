@@ -9,6 +9,7 @@ import { geoProgrammaticPaths } from "@/lib/seo/geo-programmatic";
 import { pageUpdated } from "@/config/page-updated";
 import { questionChartPath, questionCharts } from "@/config/question-charts";
 import { siteConfig } from "@/config/site";
+import { SCORE_HUB_PATH, scorePairs, scorePath } from "@/config/score-pages";
 
 export const dynamic = "force-static";
 
@@ -21,6 +22,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/calculators", priority: 0.9, changeFrequency: "weekly" as const },
     { path: "/guides", priority: 0.7, changeFrequency: "monthly" as const },
     { path: "/grading-scales", priority: 0.8, changeFrequency: "monthly" as const },
+    { path: SCORE_HUB_PATH, priority: 0.8, changeFrequency: "monthly" as const },
+    { path: "/powerschool-grade-calculator", priority: 0.8, changeFrequency: "monthly" as const },
     { path: "/faq", priority: 0.7, changeFrequency: "monthly" as const },
     { path: "/about", priority: 0.4, changeFrequency: "yearly" as const },
     { path: "/methodology", priority: 0.4, changeFrequency: "yearly" as const },
@@ -52,6 +55,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: "monthly" as const,
   }));
 
+  const scorePages = scorePairs.map((pair) => ({
+    path: scorePath(pair),
+    priority: 0.6,
+    changeFrequency: "yearly" as const,
+  }));
+
   const guidePages = guides.map((g) => ({
     path: g.path,
     priority: 0.7,
@@ -70,7 +79,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: "monthly" as const,
   }));
 
-  const all = [...staticPages, ...calculatorPages, ...questionChartPages, ...guidePages, ...scalePages, ...hubPages];
+  const all = [...staticPages, ...calculatorPages, ...questionChartPages, ...scorePages, ...guidePages, ...scalePages, ...hubPages];
 
   const ogImageUrl = `${siteConfig.url}/opengraph-image`;
 

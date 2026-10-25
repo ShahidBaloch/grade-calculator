@@ -25,7 +25,6 @@ describe("resolve-scale", () => {
   });
 
   it("locks US recording scales on core North American calculator paths", () => {
-    expect(getLockedScaleFromPath("/")).toBe("us-standard");
     expect(getLockedScaleFromPath("/gpa-calculator")).toBe("us-standard");
     expect(getLockedScaleFromPath("/weighted-grade-calculator")).toBe("us-standard");
     expect(getLockedScaleFromPath("/college-gpa-calculator")).toBe("us-standard");
@@ -54,11 +53,28 @@ describe("resolve-scale", () => {
   it("defaults to US standard without geo or user preference", () => {
     expect(
       resolveDefaultScaleId({
-        pathname: "/",
+        pathname: "/cgpa-calculator",
         userScaleId: null,
         geoScaleId: null,
         useLocaleHint: false,
       }),
+    ).toBe("us-standard");
+  });
+
+  it("homepage EZ grader is unlocked and defaults to the US 10-point scale, even for US visitors", () => {
+    expect(getLockedScaleFromPath("/")).toBeNull();
+    expect(
+      resolveDefaultScaleId({ pathname: "/", userScaleId: null, geoScaleId: null, useLocaleHint: false }),
+    ).toBe("us-lenient");
+    expect(
+      resolveDefaultScaleId({ pathname: "/", userScaleId: null, geoScaleId: "us-standard", useLocaleHint: false }),
+    ).toBe("us-lenient");
+    // Other countries still get their preset; an explicit user pick always wins.
+    expect(
+      resolveDefaultScaleId({ pathname: "/", userScaleId: null, geoScaleId: "nz-nine-point", useLocaleHint: false }),
+    ).toBe("nz-nine-point");
+    expect(
+      resolveDefaultScaleId({ pathname: "/", userScaleId: "us-standard", geoScaleId: null, useLocaleHint: false }),
     ).toBe("us-standard");
   });
 

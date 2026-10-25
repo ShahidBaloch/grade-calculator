@@ -2,7 +2,7 @@ import type { GradingScale } from "@/types/grading-scale";
 
 export const usStandardScale: GradingScale = {
   id: "us-standard",
-  name: "Common US 4.0 GPA Scale",
+  name: "US plus/minus 4.0 scale (A 93+, A− 90+)",
   country: "US",
   gpaMax: 4.0,
   passPercent: 60,

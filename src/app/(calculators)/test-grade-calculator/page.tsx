@@ -5,6 +5,7 @@ import { createPageMetadata } from "@/lib/seo/metadata";
 import { calculatorKeywords } from "@/lib/seo/keywords";
 import { pageDescription, pageTitle } from "@/lib/seo/page-copy";
 import { calculatorBySlug } from "@/config/calculators";
+import { PopularScoreLinks } from "@/components/content/PopularScoreLinks";
 import { QuestionChartLinks } from "@/components/content/QuestionChartLinks";
 
 const config = calculatorBySlug["test-grade-calculator"];
@@ -22,7 +23,12 @@ export default function TestGradeCalculatorPage() {
     <CalculatorRoute
       slug="test-grade-calculator"
       calculator={<TestGradeCalculator />}
-      below={<QuestionChartLinks />}
+      below={
+        <div className="space-y-10">
+          <PopularScoreLinks />
+          <QuestionChartLinks />
+        </div>
+      }
     />
   );
 }

@@ -3,6 +3,7 @@ export type CountryCode = "US" | "UK" | "CA" | "AU" | "NZ" | "IN" | "PK";
 export type ScaleId =
   | "us-standard"
   | "us-lenient"
+  | "us-seven-point"
   | "uk-degree"
   | "uk-gcse"
   | "ca-standard"
