@@ -12,6 +12,7 @@ import {
 import { GEO_COOKIES, STORAGE_KEYS } from "@/lib/constants";
 import { useStorageItem } from "@/hooks/useStorageItem";
 import { getCookie } from "@/lib/utils/cookies";
+import { subscribeGeo } from "@/lib/utils/geo-client";
 import { setStorageItem } from "@/lib/utils/storage";
 import type { GradingScale, ScaleId } from "@/types/grading-scale";
 
@@ -21,7 +22,7 @@ interface GradingScaleContextValue {
   setScaleId: (scaleId: ScaleId) => void;
   /** True on `/uk/`, `/au/`, etc. — scale follows the page, not user preference. */
   isScaleLocked: boolean;
-  /** Scale inferred from IP geo cookie (middleware). */
+  /** Scale inferred from IP geo cookie (/api/geo). */
   geoScaleId: ScaleId | null;
 }
 
@@ -39,7 +40,7 @@ export function GradingScaleProvider({ children }: { children: React.ReactNode }
 
   const userScaleRaw = useStorageItem(STORAGE_KEYS.scale);
   const geoScaleId = React.useSyncExternalStore(
-    () => () => {},
+    subscribeGeo,
     readGeoScaleFromCookie,
     () => null,
   );

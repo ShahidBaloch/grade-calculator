@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { GEO_COOKIES } from "@/lib/constants";
 import { geoPageHint } from "@/lib/utils/geo-navigation";
 import { getCookie } from "@/lib/utils/cookies";
+import { subscribeGeo } from "@/lib/utils/geo-client";
 import { useSyncExternalStore } from "react";
 
 function readCountry(): string | null {
@@ -14,7 +15,7 @@ function readCountry(): string | null {
 /** Single line when this page is the wrong tool for the visitor's country. */
 export function GeoPageHint() {
   const pathname = usePathname();
-  const country = useSyncExternalStore(() => () => {}, readCountry, () => null);
+  const country = useSyncExternalStore(subscribeGeo, readCountry, () => null);
   const hint = geoPageHint(pathname, country);
   if (!hint) return null;
 

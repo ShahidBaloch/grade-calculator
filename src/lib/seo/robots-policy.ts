@@ -1,8 +1,8 @@
 /**
  * Paths that should not be crawled (non-page endpoints only). The favicon (/icon.svg)
  * stays crawlable: Google needs it for the site icon in search results.
- * Legacy junk URL patterns (e.g. /3/4-as-a-percent) are NOT listed here: middleware
- * answers them with 404 + noindex, and Google must be able to crawl them to see that.
+ * Legacy junk URL patterns (e.g. /3/4-as-a-percent) are NOT listed here: no route
+ * matches them (dynamicParams = false), so they 404 with noindex, and Google must be able to crawl them to see that.
  */
 export const robotsDisallowPaths = [
   "/api/",

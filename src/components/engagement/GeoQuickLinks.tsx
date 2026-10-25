@@ -4,6 +4,7 @@ import Link from "next/link";
 import { GEO_COOKIES } from "@/lib/constants";
 import { quickToolsForCountry } from "@/lib/utils/geo-navigation";
 import { getCookie } from "@/lib/utils/cookies";
+import { subscribeGeo } from "@/lib/utils/geo-client";
 import { useSyncExternalStore } from "react";
 
 function readCountry(): string | null {
@@ -12,7 +13,7 @@ function readCountry(): string | null {
 
 /** Three or four tool links under the homepage calculator. Destinations follow location. */
 export function GeoQuickLinks() {
-  const country = useSyncExternalStore(() => () => {}, readCountry, () => null);
+  const country = useSyncExternalStore(subscribeGeo, readCountry, () => null);
   const links = quickToolsForCountry(country);
 
   return (

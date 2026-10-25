@@ -7,7 +7,7 @@ export const STORAGE_KEYS = {
 
 export const URL_STATE_PARAM = "s";
 
-/** Set by middleware from IP geo — not a user preference. */
+/** Set client-side from /api/geo (IP geo) — not a user preference. */
 export const GEO_COOKIES = {
   scale: "gc-geo-scale",
   country: "gc-geo-country",
