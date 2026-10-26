@@ -217,7 +217,7 @@ export const countryHubs: CountryHubConfig[] = [
       {
         question: "Where is the ATAR calculator?",
         answer:
-          "Use the worldwide default at /atar-calculator, or the Australia page at /au/atar-calculator. Enter scaled subject scores. The result is an educational estimate, not an official UAC or QTAC ATAR — and it is not a GPA or UK classification.",
+          "Use the worldwide default at /atar-calculator, or the Australia page at /au/atar-calculator. Enter scaled subject scores. The result is an educational estimate. It isn't an official UAC or QTAC ATAR, and it isn't a GPA or UK classification either.",
       },
       {
         question: "Can I turn my ATAR into a US or university GPA on this site?",

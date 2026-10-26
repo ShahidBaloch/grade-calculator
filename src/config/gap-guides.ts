@@ -579,7 +579,7 @@ export const gapGuides: GuideConfig[] = [
       {
         heading: "Short answer",
         body:
-          "Standard rounding is generally acceptable on a resume; rounding up past the rule is not. 3.46 → 3.5 is normal rounding to one decimal. 3.44 → 3.5 is not rounding — it is misstating your GPA.",
+          "Standard rounding is generally acceptable on a resume; rounding up past the rule is not. 3.46 → 3.5 is normal rounding to one decimal. 3.44 → 3.5 isn't rounding at all; that's misstating your GPA.",
       },
       {
         heading: "How to round correctly",

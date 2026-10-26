@@ -886,7 +886,7 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
     assumptions: [
       "Enter the group average score for each assignment group, not individual assignment scores.",
       "Weights are the percentages published in Canvas — if they do not add to 100%, a warning appears.",
-      "Drop-lowest, late penalties, and excused assignments are not modeled here — use Canvas for the official figure.",
+      "Drop-lowest rules, late penalties, and excused assignments aren't modeled here, so check Canvas for the official figure.",
     ],
   },
   "eoc-grade-calculator": {
@@ -1494,7 +1494,7 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
       {
         question: "What UC GPA do I need to be admitted?",
         answer:
-          "UC campuses are test-blind and use a holistic review, but published data shows that most admitted UC Berkeley and UCLA students have a weighted UC GPA above 4.15, while less selective UC campuses typically admit students around 3.8–4.0. You can research each campus's Common Data Set for the middle 50% GPA range of admitted freshmen. A strong UC GPA is necessary but not sufficient — UC also evaluates 13 comprehensive review criteria.",
+          "UC campuses are test-blind and use a holistic review, but published data shows that most admitted UC Berkeley and UCLA students have a weighted UC GPA above 4.15, while less selective UC campuses typically admit students around 3.8–4.0. You can research each campus's Common Data Set for the middle 50% GPA range of admitted freshmen. A strong UC GPA gets you considered, but it won't get you in on its own: UC also weighs 13 comprehensive review criteria.",
       },
     ],
   },

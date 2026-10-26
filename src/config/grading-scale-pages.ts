@@ -220,7 +220,7 @@ export const gradingScalePages: GradingScalePageConfig[] = [
     intro:
       "This chart is an illustrative 10-point university preset (O–F) for planning. Letter cutoffs vary by campus. CBSE board marks and university CGPA are different systems. CBSE historically used ×9.5 on some certificates; UGC does not publish one national ×9.5 rule.",
     notes: [
-      "Board marksheets and university CGPA tables are not identical — check your institution.",
+      "Board marksheets and university CGPA tables don't always match, so check with your institution.",
       "Use the CGPA to Percentage calculator for ×9.5, ×10, and SPPU-style formulas.",
       "US applications may need a separate 4.0 conversion via WES or the target school.",
     ],

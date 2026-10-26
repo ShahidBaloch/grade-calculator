@@ -358,7 +358,7 @@ export const guides: GuideConfig[] = [
       {
         heading: "Unposted, missing, and dropped scores",
         body:
-          "LMS totals often exclude missing work until a due date passes, or drop the lowest quiz. Recalculate after the gradebook updates. Our tools do not log into your school account — you type the averages your portal shows.",
+          "LMS totals often exclude missing work until a due date passes, or drop the lowest quiz. Recalculate after the gradebook updates. Our tools never log into your school account. You just type in the averages your portal shows.",
       },
       {
         heading: "Teachers and privacy",
@@ -448,7 +448,7 @@ export const guides: GuideConfig[] = [
       {
         heading: "Dropped scores and extra credit",
         body:
-          "If the syllabus drops the lowest quiz, omit that quiz from the list rather than giving it a zero. Extra credit that adds points after the average is not a weight — add it as bonus in the test-grade tool or raise the category score first.",
+          "If the syllabus drops the lowest quiz, omit that quiz from the list rather than giving it a zero. Extra credit that adds points after the average isn't a weight. Add it as a bonus in the test-grade tool, or raise the category score first.",
       },
       {
         heading: "Canvas groups vs a paper syllabus",
@@ -463,7 +463,7 @@ export const guides: GuideConfig[] = [
       {
         heading: "UK and Australian weighting",
         body:
-          "UK degrees often weight Year 3 more than Year 2. That is year weighting, not assignment weighting — use the degree classification calculator. Australian course grades use HD/D/C/P bands; you can still use this tool for a single unit, then read the letter on the Australian scale.",
+          "UK degrees often weight Year 3 more than Year 2. That's year weighting rather than assignment weighting, so use the degree classification calculator instead. Australian course grades use HD/D/C/P bands; you can still use this tool for a single unit, then read the letter on the Australian scale.",
       },
     ],
     faqs: [
@@ -846,7 +846,7 @@ export const guides: GuideConfig[] = [
       {
         heading: "What counts as a pass",
         body:
-          "Grade 4 is a standard pass. Grade 5 is often called a strong pass. Many sixth forms and employers ask for grade 4 or 5 in English and maths. That is not the same as a US D or C — do not convert it on a US A–F table.",
+          "Grade 4 is a standard pass. Grade 5 is often called a strong pass. Many sixth forms and employers ask for grade 4 or 5 in English and maths. It doesn't mean the same thing as a US D or C, so don't convert it with a US A–F table.",
       },
       {
         heading: "Percentage bands are not official",
@@ -912,7 +912,7 @@ export const guides: GuideConfig[] = [
       {
         heading: "CGPA vs percentage",
         body:
-          "Many Indian and Pakistani universities report a Cumulative Grade Point Average (CGPA) on a points scale. Percentage is a 0–100 mark. Conversion is a policy choice, not a universal law — always prefer the formula on your marksheet or handbook.",
+          "Many Indian and Pakistani universities report a Cumulative Grade Point Average (CGPA) on a points scale. Percentage is a 0–100 mark. There's no universal conversion: each board or university sets its own policy, so always use the formula on your marksheet or in your handbook.",
       },
       {
         heading: "India: CBSE ×9.5, not a UGC rule",
@@ -1008,7 +1008,7 @@ export const guides: GuideConfig[] = [
       {
         heading: "Weighted course grade (assignments)",
         body:
-          "Distinct from weighted GPA: a course average where exams and homework count different percentages (e.g., finals 40%). Use the weighted grade calculator — not the GPA calculator — for that math.",
+          "Distinct from weighted GPA: a course average where exams and homework count different percentages (e.g., finals 40%). For that math you want the weighted grade calculator, not the GPA calculator.",
       },
       {
         heading: "Terms we label as estimates",
