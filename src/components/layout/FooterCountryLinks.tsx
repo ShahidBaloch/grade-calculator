@@ -20,15 +20,10 @@ export function FooterCountryLinks({ links }: { links: NavLink[] }) {
               href={link.href}
               aria-current={currentPage ? "page" : active ? "true" : undefined}
               className={cn(
-                "country-footer-link inline-flex min-h-8 items-center gap-2 rounded-md px-1.5",
+                "country-footer-link inline-flex min-h-8 items-center rounded-md px-1.5",
                 active && "country-footer-current",
               )}
             >
-              {link.flag ? (
-                <span aria-hidden className="text-base leading-none">
-                  {link.flag}
-                </span>
-              ) : null}
               {link.label}
             </Link>
           </li>

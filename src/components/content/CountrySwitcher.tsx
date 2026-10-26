@@ -16,15 +16,12 @@ export function CountrySwitcher({ currentPath }: { currentPath: string }) {
                 prefetch={false}
                 aria-current={active ? "page" : undefined}
                 className={cn(
-                  "inline-flex min-h-11 items-center gap-2 rounded-md border px-3 text-sm font-medium transition-colors",
+                  "inline-flex min-h-11 items-center rounded-md border px-3 text-sm font-medium transition-colors",
                   active
                     ? "nav-current"
                     : "country-chip border-[var(--color-btn-border)] bg-[var(--color-btn-bg)] text-[var(--color-text)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)]",
                 )}
               >
-                <span aria-hidden className="text-base leading-none">
-                  {hub.flag}
-                </span>
                 {hub.name}
               </Link>
             </li>
