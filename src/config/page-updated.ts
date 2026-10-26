@@ -64,7 +64,6 @@ export const pageUpdated: Record<string, string> = {
   "/grade-chart/200-questions": "2026-10-25",
   "/high-school-gpa-calculator": "2026-10-05",
   "/letter-grade-calculator": "2026-10-08",
-  "/mcmaster-gpa-to-us-gpa": "2026-10-05",
   "/middle-school-gpa-calculator": "2026-10-05",
   "/percentage-to-cgpa": "2026-10-05",
   "/percentage-to-letter-grade": "2026-10-20",

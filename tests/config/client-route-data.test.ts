@@ -18,7 +18,12 @@ describe("client route data stays in sync with page configs", () => {
   });
 
   it("calculator paths match the configured path for every tool", () => {
-    const relocated = new Set(["ez-grader", "atar-calculator", "degree-classification-calculator"]);
+    const relocated = new Set([
+      "ez-grader",
+      "atar-calculator",
+      "degree-classification-calculator",
+      "mcmaster-gpa-to-us-gpa",
+    ]);
     for (const slug of CALCULATOR_SLUGS) {
       if (relocated.has(slug)) continue;
       expect(getCalculatorPath(slug)).toBe(calculatorBySlug[slug].path);

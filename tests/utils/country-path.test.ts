@@ -19,18 +19,21 @@ describe("country-path", () => {
     expect(resolveCalculatorPath("cumulative-gpa-calculator", "/au/gpa-calculator")).toBe(
       "/au/cumulative-gpa-calculator",
     );
-    expect(resolveCalculatorPath("percentage-to-letter-grade", "/uk/letter-grade-calculator")).toBe(
-      "/uk/percentage-to-letter-grade",
+    expect(resolveCalculatorPath("percentage-to-letter-grade", "/uk/degree-classification-calculator")).toBe(
+      "/percentage-to-letter-grade",
     );
     expect(resolveCalculatorPath("gpa-calculator", "/uk/degree-classification-calculator")).toBe(
       "/uk/degree-classification-calculator",
     );
     expect(resolveSiteHref("/gpa-calculator", "/uk")).toBe("/uk/degree-classification-calculator");
-    expect(resolveCalculatorPath("letter-grade-calculator", "/uk/gcse-grade-calculator")).toBe(
-      "/uk/letter-grade-calculator",
+    expect(resolveCalculatorPath("letter-grade-calculator", "/uk/degree-classification-calculator")).toBe(
+      "/letter-grade-calculator",
     );
-    expect(resolveCalculatorPath("weighted-grade-calculator", "/uk/gcse-grade-calculator")).toBe(
-      "/uk/weighted-grade-calculator",
+    expect(resolveCalculatorPath("weighted-grade-calculator", "/uk/degree-classification-calculator")).toBe(
+      "/weighted-grade-calculator",
+    );
+    expect(resolveCalculatorPath("gcse-grade-calculator", "/uk/degree-classification-calculator")).toBe(
+      "/gcse-grade-calculator",
     );
     expect(resolveCalculatorPath("cgpa-to-gpa", "/uk/degree-classification-calculator")).toBe(
       "/in/cgpa-to-gpa",
@@ -43,9 +46,12 @@ describe("country-path", () => {
       "/nz/weighted-grade-calculator",
     );
     expect(resolveSiteHref("/final-grade-calculator", "/nz/gpa-calculator")).toBe(
-      "/nz/final-grade-calculator",
+      "/final-grade-calculator",
     );
-    expect(resolveSiteHref("/final-grade-calculator", "/nz")).toBe("/nz/final-grade-calculator");
+    expect(resolveSiteHref("/final-grade-calculator", "/nz")).toBe("/final-grade-calculator");
+    expect(resolveSiteHref("/average-grade-calculator", "/nz/gpa-calculator")).toBe(
+      "/average-grade-calculator",
+    );
   });
 
   it("keeps Canada on the URL through several calculator hops", () => {
@@ -57,13 +63,16 @@ describe("country-path", () => {
     ctx = resolveSiteHref("/cumulative-gpa-calculator", ctx);
     expect(ctx).toBe("/ca/cumulative-gpa-calculator");
     ctx = resolveSiteHref("/test-grade-calculator", ctx);
-    expect(ctx).toBe("/ca/test-grade-calculator");
-    expect(getCountryPrefixFromPath(ctx)).toBe("/ca");
+    expect(ctx).toBe("/test-grade-calculator");
+    expect(getCountryPrefixFromPath(ctx)).toBeNull();
   });
 
   it("rewrites footer calculator links on country pages", () => {
     expect(resolveSiteHref("/percentage-to-letter-grade", "/au/gpa-calculator")).toBe(
-      "/au/percentage-to-letter-grade",
+      "/percentage-to-letter-grade",
+    );
+    expect(resolveSiteHref("/letter-grade-calculator", "/au/gpa-calculator")).toBe(
+      "/au/letter-grade-calculator",
     );
     expect(resolveSiteHref("/cumulative-gpa-calculator", "/au/gpa-calculator")).toBe(
       "/au/cumulative-gpa-calculator",

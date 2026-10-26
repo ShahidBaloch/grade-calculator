@@ -2,15 +2,15 @@ import { getCalculatorPath } from "@/config/calculator-paths";
 import { calculatorBySlug } from "@/config/calculators";
 import { countryHubs } from "@/config/country-hubs";
 import { mainCountryPath } from "@/config/country-hub-routes";
-import { canonicalPathForSlug } from "@/lib/seo/canonical-path";
+import { canonicalPathForSlug, isIndexableGeoCalculator } from "@/lib/seo/canonical-path";
 import type { NavLink } from "@/config/navigation";
 import { CALCULATOR_SLUGS, type CalculatorSlug } from "@/types/calculator";
 
-/** Slugs that open a real `/xx/{slug}` page for this hub (not an alias or worldwide-only tool). */
+/** Slugs with an indexable geo URL for this hub (sitemap + menu). Others use worldwide paths. */
 export function selectableCalculatorSlugsForHub(hubPath: string): CalculatorSlug[] {
   return CALCULATOR_SLUGS.filter((slug) => {
     if (slug === "ez-grader") return false;
-    return canonicalPathForSlug(slug, hubPath) === `${hubPath}/${slug}`;
+    return isIndexableGeoCalculator(hubPath, slug);
   });
 }
 

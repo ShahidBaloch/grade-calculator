@@ -138,7 +138,7 @@ describe("hub calculator offerings (all countries)", () => {
   it("does not invent geo URLs for another market's tools", () => {
     expect(canonicalPathForSlug("cgpa-to-gpa", "/uk")).toBe("/in/cgpa-to-gpa");
     expect(canonicalPathForSlug("atar-calculator", "/ca")).toBe("/au/atar-calculator");
-    expect(canonicalPathForSlug("mcmaster-gpa-to-us-gpa", "/in")).toBe("/mcmaster-gpa-to-us-gpa");
+    expect(canonicalPathForSlug("mcmaster-gpa-to-us-gpa", "/in")).toBe("/ca/mcmaster-gpa-to-us-gpa");
     expect(canonicalPathForSlug("gcse-grade-calculator", "/au")).toBe("/gcse-grade-calculator");
     expect(canonicalPathForSlug("cgpa-to-gpa", "/pk")).toBe("/in/cgpa-to-gpa");
     expect(canonicalPathForSlug("high-school-gpa-calculator", "/au")).toBe("/high-school-gpa-calculator");
@@ -169,15 +169,21 @@ describe("hub calculator offerings (all countries)", () => {
     }
   });
 
-  it("does not generate impossible geo static params", () => {
+  it("only indexable geo slugs get a hub-prefixed canonical", () => {
     for (const hub of hubs) {
       for (const slug of CALCULATOR_SLUGS) {
         const geo = `${hub.path}/${slug}`;
         const canonical = canonicalPathForSlug(slug, hub.path);
-        if (canonical !== geo && isHubOfferedCalculator(hub.path, slug)) {
-          throw new Error(`Inconsistent: ${hub.path} offers ${slug} but canonical is ${canonical}`);
+        if (canonical === geo) {
+          expect(selectableCalculatorSlugsForHub(hub.path)).toContain(slug);
         }
       }
     }
+  });
+
+  it("redirects non-indexable geo URLs away from hub duplicates", () => {
+    expect(canonicalPathForSlug("final-grade-calculator", "/uk")).toBe("/final-grade-calculator");
+    expect(canonicalPathForSlug("average-grade-calculator", "/au")).toBe("/average-grade-calculator");
+    expect(canonicalPathForSlug("gcse-grade-calculator", "/uk")).toBe("/gcse-grade-calculator");
   });
 });

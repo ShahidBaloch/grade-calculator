@@ -126,14 +126,21 @@ export function isHubOfferedCalculator(hubPath: string, slug: CalculatorSlug): b
   return false;
 }
 
-function hubPrefixedPath(hubPath: string, slug: CalculatorSlug): string | null {
-  if (!isHubOfferedCalculator(hubPath, slug)) return null;
-  return `${hubPath}/${slug}`;
+/**
+ * True when `/hub/slug` should be built, sitemapped, and self-canonical (distinct geo intent).
+ * Generic syllabus tools stay worldwide even if they appear on a hub menu.
+ */
+export function isIndexableGeoCalculator(hubPath: string, slug: CalculatorSlug): boolean {
+  if (hubPath === mainCountryPath) return false;
+  const hub = countryHubs.find((h) => h.path === hubPath);
+  if (!hub?.featuredCalculators.includes(slug)) return false;
+  if (!isHubOfferedCalculator(hubPath, slug)) return false;
+  return isCountrySpecificSlug(hubPath, slug);
 }
 
 /**
  * True when this hub has its own indexable URL for the tool (hreflang / sitemap).
- * Navigation can still use hub-prefixed URLs for more slugs via {@link canonicalPathForSlug}.
+ * Stricter than {@link isHubOfferedCalculator} (menu / session nav).
  */
 export function isCountrySpecificSlug(hubPath: string, slug: CalculatorSlug): boolean {
   if (hubPath === mainCountryPath) return false;
@@ -152,9 +159,7 @@ export function canonicalPathForSlug(slug: CalculatorSlug, hubPath?: string | nu
   if (hubPath === "/ca" && CA_GPA_ALIAS.has(slug)) {
     return "/ca/gpa-calculator";
   }
-  const prefixed = hubPath ? hubPrefixedPath(hubPath, slug) : null;
-  if (prefixed) return prefixed;
-  if (hubPath && isCountrySpecificSlug(hubPath, slug)) {
+  if (hubPath && isIndexableGeoCalculator(hubPath, slug)) {
     return `${hubPath}/${slug}`;
   }
   return getCalculatorPath(slug);

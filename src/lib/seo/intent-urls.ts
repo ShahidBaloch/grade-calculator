@@ -2,7 +2,11 @@ import { calculators, getCalculatorPath } from "../../config/calculators";
 import { countryHubs } from "../../config/country-hubs";
 
 import { CALCULATOR_SLUGS } from "../../types/calculator";
-import { UK_GPA_SLUGS, canonicalPathForSlug, isCountrySpecificSlug } from "./canonical-path";
+import {
+  UK_GPA_SLUGS,
+  canonicalPathForSlug,
+  isIndexableGeoCalculator,
+} from "./canonical-path";
 import { mainCountryPath } from "../../config/country-hub-routes";
 
 export {
@@ -14,10 +18,12 @@ export {
 export function indexableGeoCalculatorPaths(): string[] {
   return countryHubs.flatMap((hub) =>
     hub.featuredCalculators
-      .filter((slug) => isCountrySpecificSlug(hub.path, slug))
+      .filter((slug) => isIndexableGeoCalculator(hub.path, slug))
       .map((slug) => `${hub.path}/${slug}`),
   );
 }
+
+export { isIndexableGeoCalculator } from "./canonical-path";
 
 const STATIC_REDIRECTS: Array<{ source: string; destination: string }> = [
   { source: "/index", destination: "/" },

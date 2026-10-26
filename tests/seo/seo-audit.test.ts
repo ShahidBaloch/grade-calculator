@@ -40,6 +40,7 @@ describe("SEO audit", () => {
     for (const calculator of calculators) {
       if (calculator.slug === "ez-grader") continue;
       const path = getCalculatorPath(calculator.slug);
+      if (isRedirectOnlyPath(path)) continue;
       expect(urls.some((url) => new URL(url).pathname === path)).toBe(true);
     }
   });

@@ -10,7 +10,7 @@ describe("hub calculator nav catalog", () => {
   it("lists only tools with a dedicated hub URL", () => {
     const uk = selectableCalculatorSlugsForHub("/uk");
     expect(uk).toContain("degree-classification-calculator");
-    expect(uk).toContain("gcse-grade-calculator");
+    expect(uk).not.toContain("gcse-grade-calculator");
     expect(uk).not.toContain("gpa-calculator");
     expect(uk).not.toContain("raise-gpa-calculator");
     expect(uk).not.toContain("cgpa-to-gpa");
