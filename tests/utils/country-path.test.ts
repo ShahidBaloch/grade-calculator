@@ -33,9 +33,9 @@ describe("country-path", () => {
       "/uk/weighted-grade-calculator",
     );
     expect(resolveCalculatorPath("cgpa-to-gpa", "/uk/degree-classification-calculator")).toBe(
-      "/cgpa-to-gpa",
+      "/in/cgpa-to-gpa",
     );
-    expect(resolveSiteHref("/cgpa-to-gpa", "/uk/gcse-grade-calculator")).toBe("/cgpa-to-gpa");
+    expect(resolveSiteHref("/in/cgpa-to-gpa", "/uk/gcse-grade-calculator")).toBe("/in/cgpa-to-gpa");
     expect(resolveCalculatorPath("high-school-gpa-calculator", "/ca/gpa-calculator")).toBe(
       "/ca/gpa-calculator",
     );

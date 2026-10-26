@@ -29,9 +29,10 @@ import { WeightedGradeCalculator } from "@/components/calculators/WeightedGradeC
 import { WeightedGpaCalculator } from "@/components/calculators/WeightedGpaCalculator";
 import { GradePercentageCalculator } from "@/components/calculators/GradePercentageCalculator";
 import { CollegeGradeCalculator } from "@/components/calculators/CollegeGradeCalculator";
+import type { ComponentType } from "react";
 import type { CalculatorSlug } from "@/types/calculator";
 
-export const calculatorComponentBySlug: Record<CalculatorSlug, React.ComponentType> = {
+export const calculatorComponentBySlug: Record<CalculatorSlug, ComponentType> = {
   "ez-grader": EzGrader,
   "test-grade-calculator": TestGradeCalculator,
   "weighted-grade-calculator": WeightedGradeCalculator,

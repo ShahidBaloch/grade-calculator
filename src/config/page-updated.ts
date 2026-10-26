@@ -40,7 +40,6 @@ export const pageUpdated: Record<string, string> = {
   "/average-grade-calculator": "2026-10-20",
   "/canvas-grade-calculator": "2026-10-25",
   "/cgpa-calculator": "2026-10-23",
-  "/cgpa-to-gpa": "2026-10-05",
   "/cgpa-to-percentage": "2026-10-05",
   "/college-gpa-calculator": "2026-10-05",
   "/cumulative-gpa-calculator": "2026-10-05",

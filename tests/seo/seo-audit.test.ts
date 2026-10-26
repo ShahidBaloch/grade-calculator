@@ -463,6 +463,17 @@ describe("SEO audit", () => {
     const appSource = readFileSync(resolve("src/app/layout.tsx"), "utf8");
     expect(appSource).not.toMatch(/Loading calculator/i);
     expect(appSource).not.toMatch(/sr-only">Loading/);
+    expect(appSource).toContain("HeaderSeoNav");
+  });
+
+  it("SSR-first lazy widgets (score tool defers JS, not primary copy)", () => {
+    const scoreLazy = readFileSync(
+      resolve("src/components/calculators/ScoreOutOfCalculatorLazy.tsx"),
+      "utf8",
+    );
+    expect(scoreLazy).toMatch(/ssr:\s*true/);
+    const seoNav = readFileSync(resolve("src/components/layout/HeaderSeoNav.tsx"), "utf8");
+    expect(seoNav).toMatch(/sr-only/);
   });
 
   it("keeps US A–F letter tools and India/Pakistan CGPA tools in separate related lists", () => {

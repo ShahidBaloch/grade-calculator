@@ -3,8 +3,11 @@ import { Inter } from "next/font/google";
 import { GradeInputPrivacyNotice } from "@/components/content/GradeInputPrivacyNotice";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
-import { PreferredCountryHubSync } from "@/components/layout/PreferredCountryHubSync";
-import { ToolSwitcher } from "@/components/engagement/ToolSwitcher";
+import { HeaderSeoNav } from "@/components/layout/HeaderSeoNav";
+import {
+  DeferredPreferredCountryHubSync,
+  DeferredToolSwitcher,
+} from "@/components/layout/DeferredLayoutClient";
 import { GradingScaleProvider } from "@/components/providers/grading-scale-provider";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -18,9 +21,11 @@ export const dynamic = "force-static";
 
 const inter = Inter({
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-inter",
   display: "swap",
   adjustFontFallback: true,
+  preload: true,
 });
 
 export const metadata: Metadata = {
@@ -43,8 +48,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             >
               Skip to content
             </a>
-            <PreferredCountryHubSync />
+            <DeferredPreferredCountryHubSync />
             <Header nav={mainNav} />
+            <HeaderSeoNav />
             <div className="no-print px-4 py-1.5" data-print-chrome>
               <div className="mx-auto max-w-7xl">
                 <GradeInputPrivacyNotice />
@@ -54,7 +60,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               {children}
             </main>
             <Footer />
-            <ToolSwitcher />
+            <DeferredToolSwitcher />
           </GradingScaleProvider>
         </ThemeProvider>
       </body>

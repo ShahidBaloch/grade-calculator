@@ -18,6 +18,7 @@ const ROOT_REGION: Partial<Record<CalculatorSlug, string>> = {
   "percentage-to-cgpa": "en-IN",
   "sgpa-to-cgpa": "en-IN",
   "cgpa-calculator": "en-IN",
+  "cgpa-to-gpa": "en-IN",
 };
 
 /** Country pages that are regional versions of this tool (excludes the worldwide URL). */

@@ -8,5 +8,6 @@ export function getCalculatorPath(slug: CalculatorSlug): string {
   if (slug === "ez-grader") return "/";
   if (slug === "atar-calculator") return "/au/atar-calculator";
   if (slug === "degree-classification-calculator") return "/uk/degree-classification-calculator";
+  if (slug === "cgpa-to-gpa") return "/in/cgpa-to-gpa";
   return `/${slug}`;
 }

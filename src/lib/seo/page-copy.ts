@@ -145,6 +145,11 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
     description:
       "Estimate a US 4.0 from an Indian 10-point CGPA for planning only. A US class percentage still converts on the A–F letter calculator, not this one.",
   },
+  "/in/cgpa-to-gpa": {
+    title: "India CGPA to US 4.0 — Planning Estimate",
+    description:
+      "Estimate a US 4.0 from an Indian 10-point CGPA for planning only. A US class percentage still converts on the A–F letter calculator, not this one.",
+  },
   "/mcmaster-gpa-to-us-gpa": {
     title: "McMaster GPA Calculator — 12-Point to US 4.0 GPA",
     description:

@@ -1,7 +1,7 @@
 import { AppLink as Link } from "@/components/navigation/AppLink";
 import { notFound } from "next/navigation";
 import { ContentPageLayout } from "@/components/content/ContentPageLayout";
-import { ScoreOutOfCalculator } from "@/components/calculators/ScoreOutOfCalculator";
+import { ScoreOutOfCalculatorLazy } from "@/components/calculators/ScoreOutOfCalculatorLazy";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { questionChartPath, questionCharts } from "@/config/question-charts";
@@ -132,7 +132,7 @@ export default async function ScorePairPage({ params }: PageProps) {
           , which is {article(f.letter)} <strong>{f.letter}</strong> on the common US grading scale ({f.wrong === 0 ? "a perfect score" : `${parseFloat(f.wrong.toFixed(1))} point${f.wrong === 1 ? "" : "s"} missed`}).
         </p>
         <div className="not-prose my-6">
-          <ScoreOutOfCalculator initialScore={score} initialTotal={total} />
+          <ScoreOutOfCalculatorLazy initialScore={score} initialTotal={total} />
         </div>
 
         <h2>How to calculate {score} out of {total}</h2>

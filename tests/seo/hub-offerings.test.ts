@@ -136,11 +136,11 @@ describe("hub calculator offerings (all countries)", () => {
   }
 
   it("does not invent geo URLs for another market's tools", () => {
-    expect(canonicalPathForSlug("cgpa-to-gpa", "/uk")).toBe("/cgpa-to-gpa");
+    expect(canonicalPathForSlug("cgpa-to-gpa", "/uk")).toBe("/in/cgpa-to-gpa");
     expect(canonicalPathForSlug("atar-calculator", "/ca")).toBe("/au/atar-calculator");
     expect(canonicalPathForSlug("mcmaster-gpa-to-us-gpa", "/in")).toBe("/mcmaster-gpa-to-us-gpa");
     expect(canonicalPathForSlug("gcse-grade-calculator", "/au")).toBe("/gcse-grade-calculator");
-    expect(canonicalPathForSlug("cgpa-to-gpa", "/pk")).toBe("/cgpa-to-gpa");
+    expect(canonicalPathForSlug("cgpa-to-gpa", "/pk")).toBe("/in/cgpa-to-gpa");
     expect(canonicalPathForSlug("high-school-gpa-calculator", "/au")).toBe("/high-school-gpa-calculator");
     expect(canonicalPathForSlug("atar-calculator", "/ca")).not.toBe("/ca/atar-calculator");
   });

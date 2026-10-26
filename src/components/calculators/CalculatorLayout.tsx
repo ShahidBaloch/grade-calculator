@@ -1,4 +1,4 @@
-import { GeoPageHint } from "@/components/engagement/GeoPageHint";
+import { GeoPageHintLazy } from "@/components/engagement/GeoPageHintLazy";
 import { EditorialByline } from "@/components/content/EditorialByline";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { siteConfig } from "@/config/site";
@@ -46,7 +46,7 @@ export function CalculatorLayout({
           >
             {description}
           </p>
-          <GeoPageHint />
+          <GeoPageHintLazy />
           {!focus && (
             <div className="no-print">
               <EditorialByline compact className="mt-3 max-w-2xl" />

@@ -21,6 +21,7 @@ export function indexableGeoCalculatorPaths(): string[] {
 
 const STATIC_REDIRECTS: Array<{ source: string; destination: string }> = [
   { source: "/index", destination: "/" },
+  { source: "/cgpa-to-gpa", destination: "/in/cgpa-to-gpa" },
   { source: "/letter-grade-to-percentage", destination: "/letter-grade-calculator" },
   { source: "/ez-grader", destination: "/" },
   { source: "/us/ez-grader", destination: "/" },

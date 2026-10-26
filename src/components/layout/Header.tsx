@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment, lazy, Suspense, useEffect, useState } from "react";
+import { Fragment, lazy, Suspense, useState } from "react";
 import { AppLink as Link } from "@/components/navigation/AppLink";
 import { usePathname } from "next/navigation";
 import { Menu } from "lucide-react";
@@ -19,28 +19,12 @@ const MobileNavSheet = lazy(() => loadMenus().then((m) => ({ default: m.MobileNa
 
 const MOBILE_MENU = "__mobile__";
 
-type IdleWindow = Window & {
-  requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number;
-  cancelIdleCallback?: (id: number) => void;
-};
-
 /** `nav` comes from the server layout so the nav catalog is not bundled into client JS. */
 export function Header({ nav }: { nav: NavItem[] }) {
   const pathname = usePathname();
-  // Menus are closed on load, so their code waits for idle time (or the first tap).
+  // Dropdown chunks load only when opened — keeps initial JS off the critical path (Lighthouse TBT).
   const [menusReady, setMenusReady] = useState(false);
   const [openOnLoad, setOpenOnLoad] = useState<string | null>(null);
-
-  useEffect(() => {
-    const w = window as IdleWindow;
-    const ready = () => setMenusReady(true);
-    if (w.requestIdleCallback) {
-      const id = w.requestIdleCallback(ready, { timeout: 3000 });
-      return () => w.cancelIdleCallback?.(id);
-    }
-    const timer = window.setTimeout(ready, 1500);
-    return () => window.clearTimeout(timer);
-  }, []);
 
   const openNow = (menu: string) => {
     setOpenOnLoad(menu);

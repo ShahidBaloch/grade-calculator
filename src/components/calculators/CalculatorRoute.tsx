@@ -8,6 +8,7 @@ import { countryHubByPath } from "@/config/country-hubs";
 import { webApplicationJsonLd, howToJsonLd } from "@/lib/seo/jsonld";
 import { calculatorCountryVersionsGroup } from "@/lib/seo/geo-programmatic";
 import { getCalculatorHowItWorks } from "@/lib/content/calculator-how-it-works";
+import { geoCalculatorHeading } from "@/lib/seo/geo-calculator-heading";
 import { pageDescription, pageTitle } from "@/lib/seo/page-copy";
 import type { CalculatorSlug } from "@/types/calculator";
 
@@ -41,7 +42,9 @@ export function CalculatorRoute({
   const description = pageDescription(pagePath, config.description);
   const title = pageTitle(pagePath, config.name);
   // H1 = pure keyword only (no tagline). Geo pages prefix the country name.
-  const heading = headingOverride ?? (geoHub ? `${geoHub.name} ${config.name}` : config.name);
+  const heading =
+    headingOverride ??
+    (geoHub ? geoCalculatorHeading(geoHub.path, geoHub.name, config.name) : config.name);
   const howItWorksSteps = getCalculatorHowItWorks(slug, pagePath);
   const countryVersions = calculatorCountryVersionsGroup(slug, pagePath);
   const breadcrumbs = breadcrumbHome

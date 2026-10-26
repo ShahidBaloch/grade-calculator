@@ -490,7 +490,7 @@ export const calculators: CalculatorConfig[] = [
     shortName: "10→4 GPA",
     description:
       "Estimate a US 4.0 from an Indian 10-point CGPA for planning. A US A–F percentage uses the letter grade calculator.",
-    path: "/cgpa-to-gpa",
+    path: "/in/cgpa-to-gpa",
     icon: "ArrowLeftRight",
     category: "conversion",
     mvp: false,
