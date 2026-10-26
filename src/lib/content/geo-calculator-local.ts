@@ -9,7 +9,7 @@
  */
 import { countryHubByPath } from "@/config/country-hubs";
 import { calculatorContent } from "@/config/calculator-content";
-import { getScale, getBandRangeLabel } from "@/lib/grading-scales";
+import { getScale, getBandRangeLabel, percentToLetter } from "@/lib/grading-scales";
 import { findHecBandByCgpa, hecCgpaToBandMinimumPercent } from "@/lib/calculators/pakistan-hec-bands";
 import { getCountryPrefixFromPath } from "@/lib/utils/country-path";
 import type { GeoPageSection } from "@/lib/content/geo-page-copy";
@@ -41,7 +41,24 @@ interface CountryProfile {
   faqs: FaqItem[];
   /** Worldwide FAQs that do not apply in this country. */
   dropFaq: RegExp;
+  /** What students call the document that lists assessment weights. */
+  outlineLabel: string;
+  /** What the last big exam is called locally. */
+  finalTerm: string;
+  /** Final-grade example: current course mark, exam weight (%), target grade label. */
+  finalCase: { current: number; weight: number; target: string };
+  /** Weighted-grade example: [assessment, mark %, weight %]. Weights add to 100. */
+  assessment: Array<[string, number, number]>;
+  /** Replace the GPA-centred FAQs on course-mark tools (final / weighted grade). */
+  syllabusFaqs: Partial<Record<SyllabusSlug, FaqItem[]>>;
 }
+
+/** Course-mark tools: the worldwide copy is US syllabus wording, so country pages need their own. */
+type SyllabusSlug = "final-grade-calculator" | "weighted-grade-calculator";
+const SYLLABUS_SLUGS = new Set<CalculatorSlug>(["final-grade-calculator", "weighted-grade-calculator"]);
+
+/** Worldwide FAQs still worth showing on a country course-mark page (math, not US context). */
+const SYLLABUS_BASE_FAQ = /What if it says impossible|Can I use this as a midterm calculator|weights don't add to 100|what-if grade calculator/i;
 
 /** Worldwide FAQs that are about US schools only. */
 const US_ONLY = /\bAP\b|Honors|graduate school|dean's list|high school|US 4\.0 scale|common US|NCES/i;
@@ -75,6 +92,40 @@ const COUNTRY: Record<CountryCode, CountryProfile> = {
       },
     ],
     dropFaq: /Australian|India|Pakistan|CGPA|O grade/i,
+    outlineLabel: "course outline",
+    finalTerm: "final exam",
+    finalCase: { current: 74, weight: 40, target: "B+" },
+    assessment: [
+      ["Assignments", 84, 25],
+      ["Midterm", 72, 25],
+      ["Final exam", 78, 50],
+    ],
+    syllabusFaqs: {
+      "final-grade-calculator": [
+        {
+          question: "Do I have to pass the final exam to pass a course in Canada?",
+          answer:
+            "Some courses require it. Many Canadian course outlines set a minimum mark on the final exam, often 50%, that you must reach to pass the course whatever your term average is. This calculator only does the weighting math, so check your outline for an exam minimum.",
+        },
+        {
+          question: "What percentage is a B+ in Canada?",
+          answer:
+            "On this page's preset a B+ starts at 77%, which is common at Ontario universities, but cut-offs vary. If your faculty calendar gives a different percentage for the grade you want, enter that instead.",
+        },
+      ],
+      "weighted-grade-calculator": [
+        {
+          question: "Where do I find my course weights in Canada?",
+          answer:
+            "In the course outline (syllabus) your instructor posts at the start of term. It lists each assignment, test, midterm and final exam with its share of the final mark. Enter those exact weights here.",
+        },
+        {
+          question: "How does my course mark become a GPA in Canada?",
+          answer:
+            "Your university converts the final percentage to a letter and grade points using its own table. Take the course mark from here into the Canada GPA calculator to see the term GPA on the 4.0 preset.",
+        },
+      ],
+    },
   },
   au: {
     scaleName: "UQ 7-point",
@@ -109,6 +160,40 @@ const COUNTRY: Record<CountryCode, CountryProfile> = {
       },
     ],
     dropFaq: /India|Pakistan|CGPA|O grade/i,
+    outlineLabel: "course profile",
+    finalTerm: "final exam",
+    finalCase: { current: 68, weight: 50, target: "6 (D)" },
+    assessment: [
+      ["Assignment", 76, 30],
+      ["Mid-semester exam", 64, 20],
+      ["Final exam", 70, 50],
+    ],
+    syllabusFaqs: {
+      "final-grade-calculator": [
+        {
+          question: "What is a hurdle requirement on an Australian final exam?",
+          answer:
+            "A hurdle is a minimum you must reach on one assessment, often the final exam, to pass the course even if your total is above 50%. Monash, UQ and other universities use them in some courses. Check your course profile; this calculator does not apply hurdles.",
+        },
+        {
+          question: "What exam mark do I need for a Distinction?",
+          answer:
+            "On the UQ bands used here a 6 (Distinction) starts at 75% overall. Enter your current mark and the exam weight, pick 6 (D) as the target, and the calculator solves for the exam mark. Other universities set their own cut-offs.",
+        },
+      ],
+      "weighted-grade-calculator": [
+        {
+          question: "Is my weighted course mark the same as WAM?",
+          answer:
+            "No. This page averages the assessments inside one course. WAM (Weighted Average Mark) averages your final course marks across all courses, weighted by units. Work out each course mark here first.",
+        },
+        {
+          question: "Where are assessment weights listed at Australian universities?",
+          answer:
+            "In the course profile or unit guide for each course. It lists every assessment item, its weight and any hurdle. Enter those weights exactly as written.",
+        },
+      ],
+    },
   },
   nz: {
     scaleName: "NZ 9-point",
@@ -138,6 +223,40 @@ const COUNTRY: Record<CountryCode, CountryProfile> = {
       },
     ],
     dropFaq: /Australian|India|Pakistan|CGPA|O grade/i,
+    outlineLabel: "course outline",
+    finalTerm: "final exam",
+    finalCase: { current: 72, weight: 50, target: "A-" },
+    assessment: [
+      ["Assignments", 80, 30],
+      ["Test", 70, 20],
+      ["Final exam", 74, 50],
+    ],
+    syllabusFaqs: {
+      "final-grade-calculator": [
+        {
+          question: "Is there a minimum exam mark in New Zealand university courses?",
+          answer:
+            "Some papers have one. A course outline may require a set mark in the final exam, for example 40%, as well as 50% overall. This calculator only works out the weighted mark, so check your outline for an exam requirement.",
+        },
+        {
+          question: "What final exam mark do I need for an A- in NZ?",
+          answer:
+            "An A- starts at 80% on the 9-point bands used here. With 72% going in and an exam worth 50%, you need 88% in the exam. Change the numbers to match your paper.",
+        },
+      ],
+      "weighted-grade-calculator": [
+        {
+          question: "How are coursework and exam marks combined in NZ?",
+          answer:
+            "Each paper's course outline gives the split, for example 50% coursework and 50% exam. Your course mark is the weighted average of those parts, and that mark sets the letter grade.",
+        },
+        {
+          question: "How does my course mark turn into a 9-point GPA?",
+          answer:
+            "The course mark gives a letter (for example 75% is a B+), and each letter has grade points from A+ = 9 down to C- = 1. Use the NZ GPA calculator to average those points across papers.",
+        },
+      ],
+    },
   },
   in: {
     scaleName: "India 10-point",
@@ -167,6 +286,39 @@ const COUNTRY: Record<CountryCode, CountryProfile> = {
       },
     ],
     dropFaq: /Australian|Pakistan|HEC/i,
+    outlineLabel: "scheme of examination",
+    finalTerm: "end-semester exam",
+    finalCase: { current: 76, weight: 60, target: "A+" },
+    assessment: [
+      ["Internal assessment", 85, 40],
+      ["End-semester exam", 70, 60],
+    ],
+    syllabusFaqs: {
+      "final-grade-calculator": [
+        {
+          question: "How do internal and end-semester marks combine in India?",
+          answer:
+            "Most universities split each course between internal (continuous) assessment and the end-semester exam, for example 30/70, 40/60 or 50/50. Enter your internal percentage as the current mark and the end-semester share as the exam weight.",
+        },
+        {
+          question: "Is there a minimum mark in the end-semester exam?",
+          answer:
+            "Often, yes. Many universities require a minimum in the external exam (commonly 35–40%) as well as an overall pass. This calculator does not apply that rule, so check your university's regulations.",
+        },
+      ],
+      "weighted-grade-calculator": [
+        {
+          question: "How do I add internal and external marks for a subject?",
+          answer:
+            "Enter internal assessment and the end-semester exam as two rows with the weights from your scheme of examination. The result is your subject percentage, which sets the letter grade (O, A+, A…) on the 10-point scale.",
+        },
+        {
+          question: "Is this subject percentage my SGPA?",
+          answer:
+            "No. SGPA averages the grade points of all subjects in a semester, weighted by credits. Work out each subject here, then use the India GPA calculator for SGPA.",
+        },
+      ],
+    },
   },
   pk: {
     scaleName: "HEC 4.0",
@@ -196,6 +348,40 @@ const COUNTRY: Record<CountryCode, CountryProfile> = {
       },
     ],
     dropFaq: /Australian|India|Indian|CBSE|O grade|SPPU|10-point|UGC/i,
+    outlineLabel: "course outline",
+    finalTerm: "final-term exam",
+    finalCase: { current: 72, weight: 50, target: "B+" },
+    assessment: [
+      ["Sessional (quizzes, assignments)", 85, 20],
+      ["Midterm", 70, 30],
+      ["Final term", 76, 50],
+    ],
+    syllabusFaqs: {
+      "final-grade-calculator": [
+        {
+          question: "How are sessional, midterm and final-term marks split in Pakistan?",
+          answer:
+            "Many universities on the semester system use about 20–25% sessional work, 25–30% midterm and 50% final term, but each university sets its own split. Enter your sessional and midterm result as the current mark and the final-term share as the weight.",
+        },
+        {
+          question: "What final-term mark do I need for a B+?",
+          answer:
+            "A B+ starts at 75% on the HEC bands. With 72% before the final term and a final worth 50%, you need 78%. Your university's own cut-offs may differ inside the HEC bands.",
+        },
+      ],
+      "weighted-grade-calculator": [
+        {
+          question: "How do I calculate my subject marks out of 100 in Pakistan?",
+          answer:
+            "Add sessional, midterm and final-term marks as rows with their weights (for example 20, 30 and 50). The weighted total is your subject percentage, which sets the HEC letter and grade points.",
+        },
+        {
+          question: "Does this percentage give my grade points directly?",
+          answer:
+            "It gives the HEC band. For example 76% falls in B+ (75–79%), worth up to 3.33 grade points. Your university may award a fractional value inside the band, which appears on your transcript.",
+        },
+      ],
+    },
   },
 };
 
@@ -243,8 +429,69 @@ function termSentence(scale: GradingScale, profile: CountryProfile, noun: string
   };
 }
 
+const capitalize = (text: string) => `${text[0].toUpperCase()}${text.slice(1)}`;
+/** "an A", "an O", "an F", "a B", "a 6 (D)". */
+const withArticle = (grade: string) => `${/^[AEFHILMNORSX8]/.test(grade) ? "an" : "a"} ${grade}`;
+
+function finalNeeded(current: number, weight: number, target: number) {
+  const w = weight / 100;
+  return (target - current * (1 - w)) / w;
+}
+
+function finalExample(code: CountryCode, scale: GradingScale): { example: string; section: GeoPageSection } {
+  const { finalCase: c, finalTerm, scaleName } = COUNTRY[code];
+  const target = band(scale, c.target);
+  const needed = finalNeeded(c.current, c.weight, target.min);
+  const rows = scale.bands
+    .filter((b) => b.min >= scale.passPercent && b.gpa != null)
+    .map((b) => {
+      const req = finalNeeded(c.current, c.weight, b.min);
+      const status = req > 100 ? "Not reachable" : req <= 0 ? "Already secured" : `${fmt(req, 1)}%`;
+      return [b.letter, `${b.min}%`, status];
+    });
+  return {
+    example: `Course mark ${c.current}% before the ${finalTerm}, ${finalTerm} worth ${c.weight}%, target ${c.target} (${target.min}% on the ${scaleName} scale) → (${target.min} − ${c.current} × ${fmt(1 - c.weight / 100)}) ÷ ${fmt(c.weight / 100)} = ${fmt(needed, 1)}% needed in the ${finalTerm}.`,
+    section: {
+      heading: `${capitalize(finalTerm)} mark needed for each ${scaleName} grade`,
+      paragraphs: [
+        `Starting from ${c.current}% with the ${finalTerm} worth ${c.weight}%, this is the lowest ${finalTerm} mark that reaches each passing grade. Change the inputs above for your own course.`,
+      ],
+      table: {
+        caption: `${capitalize(finalTerm)} mark needed from ${c.current}% (${finalTerm} worth ${c.weight}%) on the ${scale.name} scale`,
+        head: ["Grade", "Course mark needed", `${capitalize(finalTerm)} mark needed`],
+        rows,
+      },
+    },
+  };
+}
+
+function weightedExample(code: CountryCode, scale: GradingScale): { example: string; section: GeoPageSection } {
+  const { assessment, scaleName, outlineLabel } = COUNTRY[code];
+  const total = assessment.reduce((sum, [, mark, weight]) => sum + (mark * weight) / 100, 0);
+  const letter = percentToLetter(total, scale.id).letter;
+  return {
+    example: `${assessment.map(([name, mark, weight]) => `${name} ${mark}% (${weight}%)`).join(", ")} → ${fmt(total, 1)}% course mark, ${withArticle(letter)} on the ${scaleName} scale.`,
+    section: {
+      heading: `A typical ${outlineLabel} split, worked through`,
+      paragraphs: [
+        `Each mark is multiplied by its weight and the results are added. Use the weights printed in your own ${outlineLabel}; they differ by course.`,
+      ],
+      table: {
+        caption: `Weighted course mark from a sample ${outlineLabel} — ${scale.name}`,
+        head: ["Assessment", "Mark", "Weight", "Contribution"],
+        rows: [
+          ...assessment.map(([name, mark, weight]) => [name, `${mark}%`, `${weight}%`, `${fmt((mark * weight) / 100, 1)}%`]),
+          ["Course mark", "", "100%", `${fmt(total, 1)}% (${letter})`],
+        ],
+      },
+    },
+  };
+}
+
 function exampleFor(slug: CalculatorSlug, code: CountryCode, scale: GradingScale): { example: string; section?: GeoPageSection } {
   const profile = COUNTRY[code];
+  if (slug === "final-grade-calculator") return finalExample(code, scale);
+  if (slug === "weighted-grade-calculator") return weightedExample(code, scale);
   const noun = code === "in" ? "SGPA" : code === "pk" && slug === "cgpa-calculator" ? "SGPA" : "GPA";
 
   if (slug === "cumulative-gpa-calculator") {
@@ -302,7 +549,21 @@ function exampleFor(slug: CalculatorSlug, code: CountryCode, scale: GradingScale
 }
 
 function stepsFor(slug: CalculatorSlug, code: CountryCode, scale: GradingScale, base: string[]): string[] {
-  const { weightLabel: w, scaleName } = COUNTRY[code];
+  const { weightLabel: w, scaleName, finalTerm, outlineLabel, assessment } = COUNTRY[code];
+  if (slug === "final-grade-calculator") {
+    return [
+      `Enter your course mark so far and how much the ${finalTerm} is worth, from your ${outlineLabel}.`,
+      `Pick the grade you want; the ${scaleName} cut-offs below set the percentage to aim for.`,
+      `Read the lowest ${finalTerm} mark you need. Above 100% means that grade is out of reach.`,
+    ];
+  }
+  if (slug === "weighted-grade-calculator") {
+    return [
+      `Add each assessment from your ${outlineLabel} (for example ${assessment.map(([name]) => name.toLowerCase()).join(", ")}) with your mark and its weight.`,
+      base[1],
+      `Your weighted course mark and its ${scaleName} grade update as you type.`,
+    ];
+  }
   if (["gpa-calculator", "college-gpa-calculator", "cgpa-calculator"].includes(slug)) {
     return [
       `List this term's courses with the grade or percentage from your results and the ${w} for each.`,
@@ -362,9 +623,14 @@ export function geoCalculatorLocal(slug: CalculatorSlug, pagePath?: string): Geo
   );
   const sources = [...scaleSources, ...baseSources.filter((s) => !scaleSources.some((x) => x.href === s.href))];
 
+  const syllabus = SYLLABUS_SLUGS.has(slug);
   const baseFaqs = content.faqs.filter(
-    (f) => !US_ONLY.test(`${f.question} ${f.answer}`) && !profile.dropFaq.test(`${f.question} ${f.answer}`),
+    (f) =>
+      !US_ONLY.test(`${f.question} ${f.answer}`) &&
+      !profile.dropFaq.test(`${f.question} ${f.answer}`) &&
+      (!syllabus || SYLLABUS_BASE_FAQ.test(f.question)),
   );
+  const localFaqs = syllabus ? (profile.syllabusFaqs[slug as SyllabusSlug] ?? []) : profile.faqs;
   const sections: GeoPageSection[] = [scaleTableSection(hub.name, scale)];
   if (section) sections.push(section);
 
@@ -378,6 +644,6 @@ export function geoCalculatorLocal(slug: CalculatorSlug, pagePath?: string): Geo
     ],
     primarySources: sources,
     sections,
-    faqs: [...profile.faqs, ...baseFaqs],
+    faqs: [...localFaqs, ...baseFaqs],
   };
 }

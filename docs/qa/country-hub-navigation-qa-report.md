@@ -18,7 +18,7 @@
 | **Market rules** | Region-specific tools (e.g. India CGPA→GPA, McMaster, ATAR, UK degree class) must **not** appear under unrelated countries. |
 | **URL persistence** | From `/ca/...`, switching calculators keeps the **country prefix** only when the target is **indexable** on that hub. Generic tools (final grade, average, test grade, canvas, etc. on most hubs) navigate to **worldwide** paths even from hub context. |
 | **Session memory** | Choosing a non-US country stores the hub in **`sessionStorage`**. It **survives a hard refresh** and clears when the **tab/window closes**, or when the user visits `/us` explicitly (C3). Session rewrite follows the same indexable-geo rules as in-URL context. |
-| **UK GPA** | US-style GPA menu items on UK context route to **UK degree classification**, not duplicate “selected” GPA rows. Direct `/uk/*gpa*` URLs **308** to degree classification. **No** indexable geo pages for UK final/GCSE/weighted (worldwide canonical). |
+| **UK GPA** | US-style GPA menu items on UK context route to **UK degree classification**, not duplicate “selected” GPA rows. Direct `/uk/*gpa*` URLs **308** to degree classification. **No** indexable geo pages for UK final/GCSE/weighted (worldwide canonical), but GCSE, UK→US reference, Final, Weighted and Letter Grade **are listed in the UK Calculators menu** at their canonical URLs. |
 | **Canada GPA** | High school / weighted / raise GPA aliases **308** to **`/ca/gpa-calculator`**. McMaster lives at **`/ca/mcmaster-gpa-to-us-gpa`**; worldwide `/mcmaster-gpa-to-us-gpa` **308** → CA. |
 | **Stale geo URLs** | Old nonsense URLs (e.g. `/uk/cgpa-to-gpa`) **308** to canonical. **Generic** stale URLs (e.g. `/uk/final-grade-calculator`) **308** to worldwide tool URL. |
 | **Chrome / labels** | Country header shows country name on hub; Calculators header shows current tool name; breadcrumb current page is teal/semibold. |
@@ -91,7 +91,7 @@ Uses **`sessionStorage`** (survives refresh; clears on tab close).
 
 | ID | Steps | Expected |
 |----|--------|----------|
-| C1 | Incognito → visit `/nz/gpa-calculator` → open **Final Grade** via menu or link | **`/final-grade-calculator`** (worldwide) — Final Grade is **not** indexable on NZ. |
+| C1 | Incognito → visit `/nz/gpa-calculator` → open **Final Grade** via menu or link | **`/nz/final-grade-calculator`** (200, NZ 9-point bands) — the worldwide page locks US letters, so NZ keeps its own copy. |
 | C1b | Incognito → visit `/ca/gpa-calculator` → open **Final Grade** | **`/ca/final-grade-calculator`** (indexable on CA). |
 | C2 | After C1b, hard refresh on `/ca/final-grade-calculator` | Still CA URL; menu unchanged (**sessionStorage** survives refresh). |
 | C3 | Visit `/us` hub explicitly | Preferred non-US session cleared; subsequent worldwide links use default (no `/pk/` etc.) until user picks another country again. **No automated vitest covers “visit /us clears preference” end-to-end — manual required.** |
@@ -107,14 +107,14 @@ Open Calculators dropdown on a calculator page for each hub. **Pass = only liste
 | Hub | Must include (examples) | Approx selectable count (indexable menu) |
 |-----|-------------------------|------------------------------------------|
 | `/ca` | GPA, Cumulative GPA, College GPA, McMaster 12-Point→US, Final Grade, Letter Grade (weighted if listed) | **7** |
-| `/uk` | **Degree Classification only** (no GCSE / final / weighted in dropdown) | **1** |
+| `/uk` | Degree Classification (`/uk/…`), then GCSE, UK→US reference, Weighted, Final, Letter Grade (worldwide URLs) | **6** |
 | `/au` | GPA, Cumulative GPA, **ATAR**, Letter Grade (and other indexable AU featured tools) | **5** |
-| `/nz` | GPA, Cumulative GPA, Letter Grade, Weighted Grade (**no ATAR**, **no Final Grade row**) | **4** |
-| `/in` | CGPA suite, India CGPA→US GPA, GPA Calculator, etc. (indexable IN set) | **6** |
+| `/nz` | GPA, Cumulative GPA, Letter Grade, Weighted Grade, **Final Grade** (`/nz/final-grade-calculator`) (**no ATAR**) | **5** |
+| `/in` | CGPA suite, India CGPA→US GPA, GPA Calculator, **Final Grade** (`/in/final-grade-calculator`) | **7** |
 | `/pk` | CGPA suite, GPA, Cumulative GPA (**no India CGPA→US GPA row**) | **6** |
 
 > **Note:** “CGPA↔%” means **two** menu rows: `cgpa-to-percentage` and `percentage-to-cgpa`.  
-> **Note:** GCSE, UK→US reference, and generic grade tools remain reachable from the **hub page cards** or worldwide menu, not necessarily from the UK Calculators dropdown.
+> **Note:** Every featured hub tool is in that hub's Calculators menu. Tools without a geo page (e.g. UK GCSE) link to their single canonical URL.
 
 ### D2 — Menu stability
 
@@ -139,11 +139,11 @@ Start on hub calculator; use **Calculators** menu to switch tools.
 |----|-----------|------------|--------------|
 | E1 | `/ca/gpa-calculator` | Weighted Grade Calculator | `/ca/weighted-grade-calculator` (if in CA indexable menu) or worldwide if not listed |
 | E2 | `/ca/weighted-grade-calculator` | Final Grade Calculator | `/ca/final-grade-calculator` |
-| E3 | `/uk/degree-classification-calculator` | *(no GCSE in menu)* | Open GCSE from **hub card** or worldwide menu → **`/gcse-grade-calculator`** (not `/uk/gcse-grade-calculator`) |
+| E3 | `/uk/degree-classification-calculator` | GCSE Grade Calculator | **`/gcse-grade-calculator`** (UK GCSE 9–1 scale locked; not `/uk/gcse-grade-calculator`) |
 | E4 | `/pk/cgpa-calculator` | GPA Calculator | `/pk/gpa-calculator` |
 | E5 | `/au/gpa-calculator` | ATAR Calculator | `/au/atar-calculator` |
 | E6 | `/in/cgpa-to-gpa` | CGPA to Percentage | `/in/cgpa-to-percentage` |
-| E7 | `/nz/gpa-calculator` | Final Grade Calculator | **`/final-grade-calculator`** (worldwide) |
+| E7 | `/nz/gpa-calculator` | Final Grade Calculator | **`/nz/final-grade-calculator`** |
 
 ---
 
@@ -158,9 +158,9 @@ Start on hub calculator; use **Calculators** menu to switch tools.
 | **CA** | ATAR, GCSE, UK degree class, UK→US reference, all CGPA tools, India CGPA→US GPA, EOC, UC/CSU, middle school GPA. **Note:** high-school / weighted / raise GPA are **aliases** → **308** to `/ca/gpa-calculator` (not separate menu rows). |
 | **UK** | Separate US GPA calculator **menu rows**, CGPA suite, McMaster, ATAR, EOC, UC/CSU, middle school GPA. **Note:** `/uk/gpa-calculator`, `/uk/raise-gpa-calculator`, etc. **308** to `/uk/degree-classification-calculator`. **Note:** `/uk/final-grade-calculator`, `/uk/gcse-grade-calculator`, `/uk/weighted-grade-calculator` **308** to worldwide (no UK geo copy). |
 | **AU** | McMaster, GCSE, UK tools, CGPA suite, EOC, UC/CSU, US high school / weighted / raise GPA. **Note:** `/au/average-grade-calculator` and other generic featured tools **308** worldwide if probed with `/au/` prefix. |
-| **NZ** | **ATAR** (menu **and** `/nz/atar-calculator` → **308** `/au/atar-calculator`), McMaster, GCSE, UK tools, CGPA suite, US-only GPA variants, **Final Grade** as `/nz/final-grade-calculator` |
-| **IN** | McMaster, ATAR, GCSE, UK tools, EOC, UC/CSU, US high school / weighted / raise GPA, **Cumulative GPA**, **College GPA** (both redirect worldwide; Cumulative not in IN menu) |
-| **PK** | **India CGPA→US GPA**, McMaster, ATAR, GCSE, UK tools, US-only variants: high-school, weighted, raise, **college**, middle-school (PK **does** include Cumulative GPA in menu) |
+| **NZ** | **ATAR** (menu **and** `/nz/atar-calculator` → **308** `/au/atar-calculator`), McMaster, GCSE, UK tools, CGPA suite, US-only GPA variants, US-only GPA variants. **College GPA** → **308** `/nz/gpa-calculator` |
+| **IN** | McMaster, ATAR, GCSE, UK tools, EOC, UC/CSU, US high school / weighted / raise GPA, **Cumulative GPA** (redirects worldwide; not in IN menu). **College GPA** → **308** `/in/gpa-calculator` |
+| **PK** | **India CGPA→US GPA**, McMaster, ATAR, GCSE, UK tools, US-only variants: high-school, weighted, raise, middle-school. **College GPA** → **308** `/pk/gpa-calculator` (PK **does** include Cumulative GPA in menu) |
 
 | ID | Steps | Expected |
 |----|--------|----------|
@@ -170,7 +170,7 @@ Start on hub calculator; use **Calculators** menu to switch tools.
 | F4 | Direct visit `/au/high-school-gpa-calculator` | **308** to worldwide `/high-school-gpa-calculator` |
 | F5 | Direct visit `/nz/atar-calculator` | **308** to `/au/atar-calculator` |
 | F6 | Direct visit `/in/cumulative-gpa-calculator` | **308** away (worldwide cumulative); not an IN page |
-| F7 | Direct visit `/in/college-gpa-calculator` | **308** away (worldwide college); not an IN page |
+| F7 | Direct visit `/in/college-gpa-calculator` | **308** to `/in/gpa-calculator` (India 10-point university GPA) |
 | F8 | Direct visit `/uk/final-grade-calculator` | **308** to `/final-grade-calculator` (**not** 200 with UK H1) |
 | F9 | Direct visit `/uk/gcse-grade-calculator` | **308** to `/gcse-grade-calculator` |
 | F10 | Direct visit `/au/average-grade-calculator` | **308** to `/average-grade-calculator` |
@@ -181,7 +181,7 @@ Start on hub calculator; use **Calculators** menu to switch tools.
 
 | ID | Steps | Expected |
 |----|--------|----------|
-| G1 | On `/uk/...`, open Calculators | **One** degree-classification entry; **no** separate “GPA Calculator”, “Raise GPA”, “Cumulative GPA”, **GCSE**, **Final Grade** rows |
+| G1 | On `/uk/...`, open Calculators | **One** degree-classification entry; **no** separate “GPA Calculator”, “Raise GPA”, “Cumulative GPA” rows. GCSE, Final, Weighted, Letter and UK→US reference rows **are** listed (worldwide URLs) |
 | G2 | From `/uk` hub, click GCSE featured card | Lands **`/gcse-grade-calculator`** (worldwide), not `/uk/gcse-grade-calculator` |
 | G3 | On `/uk/degree-classification-calculator`, click each menu item | Each navigates; **only one** item appears selected |
 | G4 | H1 check | H1 must not double-prefix (fixed live 2026-10-26: “UK Degree Classification Calculator”) |
@@ -246,7 +246,8 @@ Use curl (`-sI` / follow Location) or browser Network (disable cache). Live retu
 | `/pk/atar-calculator` | `/au/atar-calculator` |
 | `/in/atar-calculator` | `/au/atar-calculator` |
 | `/in/cumulative-gpa-calculator` | `/cumulative-gpa-calculator` (worldwide) |
-| `/in/college-gpa-calculator` | `/college-gpa-calculator` (worldwide) |
+| `/in/college-gpa-calculator` | `/in/gpa-calculator` |
+| `/au/college-gpa-calculator` | `/au/gpa-calculator` |
 
 | ID | Pass criteria |
 |----|----------------|
@@ -274,7 +275,7 @@ Use curl (`-sI` / follow Location) or browser Network (disable cache). Live retu
 
 | ID | Steps | Expected |
 |----|--------|----------|
-| M1 | On `/au/gpa-calculator`, click related calculator in sidebar/footer | Stays under `/au/` when tool is **indexable** on AU; otherwise worldwide |
+| M1 | On `/au/gpa-calculator`, click related calculator in sidebar/footer | Stays under `/au/` when tool is **indexable** on AU. **College GPA** → `/au/gpa-calculator` (AU presets), not the US 4.0 page. Other tools → worldwide |
 | M2 | On `/grading-scales/pakistan`, click GPA/CGPA links | Routes to `/pk/...` tools |
 
 ---

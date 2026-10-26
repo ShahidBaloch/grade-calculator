@@ -30,6 +30,18 @@ describe("indexable geo pages (SEO structure)", () => {
     expect(redirects.get("/uk/gcse-grade-calculator")).toBe("/gcse-grade-calculator");
   });
 
+  it("keeps scale-dependent tools on hubs where letter bands differ (P0 regressions)", () => {
+    expect(isIndexableGeoCalculator("/nz", "final-grade-calculator")).toBe(true);
+    expect(isIndexableGeoCalculator("/in", "final-grade-calculator")).toBe(true);
+    expect(generateGeoStaticParams("nz").map((p) => p.slug)).toContain("final-grade-calculator");
+    expect(generateGeoStaticParams("in").map((p) => p.slug)).toContain("final-grade-calculator");
+    const redirects = new Map(seoRedirects().map((r) => [r.source, r.destination]));
+    expect(redirects.has("/nz/final-grade-calculator")).toBe(false);
+    expect(redirects.has("/in/final-grade-calculator")).toBe(false);
+    // AU "college GPA" is university GPA — send it to the AU tool, not the US 4.0 page.
+    expect(redirects.get("/au/college-gpa-calculator")).toBe("/au/gpa-calculator");
+  });
+
   it("has no redirect chains", () => {
     const redirects = new Map(seoRedirects().map((r) => [r.source, r.destination]));
     const chains = [...redirects].filter(([, destination]) => redirects.has(destination));

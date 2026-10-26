@@ -14,13 +14,30 @@ export function selectableCalculatorSlugsForHub(hubPath: string): CalculatorSlug
   });
 }
 
+/**
+ * Menu rows for a country hub: its geo tools, then the hub's other featured tools (e.g. GCSE on UK)
+ * at their single canonical URL. Rows that resolve to the same page are listed once.
+ */
+export function hubMenuCalculatorSlugs(hubPath: string): CalculatorSlug[] {
+  const hub = countryHubs.find((h) => h.path === hubPath);
+  if (!hub) return [];
+  const seen = new Set<string>();
+  return [...selectableCalculatorSlugsForHub(hubPath), ...hub.featuredCalculators].filter((slug) => {
+    if (slug === "ez-grader") return false;
+    const target = canonicalPathForSlug(slug, hubPath);
+    if (seen.has(target)) return false;
+    seen.add(target);
+    return true;
+  });
+}
+
 /** Calculators dropdown for a country hub — only tools the visitor can actually open there. */
 export function countryCalculatorNavLinks(hubPath: string): NavLink[] {
   const hub = countryHubs.find((h) => h.path === hubPath);
   if (!hub || hubPath === mainCountryPath) return [];
 
   return [
-    ...selectableCalculatorSlugsForHub(hubPath).map((slug) => ({
+    ...hubMenuCalculatorSlugs(hubPath).map((slug) => ({
       label: calculatorBySlug[slug].name,
       href: getCalculatorPath(slug),
     })),

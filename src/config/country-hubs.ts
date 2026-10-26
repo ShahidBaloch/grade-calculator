@@ -276,6 +276,7 @@ export const countryHubs: CountryHubConfig[] = [
     featuredCalculators: [
       "gpa-calculator",
       "weighted-grade-calculator",
+      "final-grade-calculator",
       "letter-grade-calculator",
       "cumulative-gpa-calculator",
     ],
@@ -334,6 +335,7 @@ export const countryHubs: CountryHubConfig[] = [
       "percentage-to-cgpa",
       "cgpa-to-gpa",
       "gpa-calculator",
+      "final-grade-calculator",
     ],
     keywords: [
       "cgpa calculator india",

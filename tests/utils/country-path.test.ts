@@ -45,10 +45,17 @@ describe("country-path", () => {
     expect(resolveCalculatorPath("weighted-grade-calculator", "/nz/gpa-calculator")).toBe(
       "/nz/weighted-grade-calculator",
     );
+    // NZ letter bands change the exam mark needed, so Final Grade keeps the NZ scale.
     expect(resolveSiteHref("/final-grade-calculator", "/nz/gpa-calculator")).toBe(
-      "/final-grade-calculator",
+      "/nz/final-grade-calculator",
     );
-    expect(resolveSiteHref("/final-grade-calculator", "/nz")).toBe("/final-grade-calculator");
+    expect(resolveSiteHref("/final-grade-calculator", "/nz")).toBe("/nz/final-grade-calculator");
+    expect(resolveSiteHref("/final-grade-calculator", "/uk")).toBe("/final-grade-calculator");
+    // Outside North America "college GPA" is university GPA on the hub scale.
+    expect(resolveCalculatorPath("college-gpa-calculator", "/au/gpa-calculator")).toBe("/au/gpa-calculator");
+    expect(resolveCalculatorPath("college-gpa-calculator", "/ca/gpa-calculator")).toBe(
+      "/ca/college-gpa-calculator",
+    );
     expect(resolveSiteHref("/average-grade-calculator", "/nz/gpa-calculator")).toBe(
       "/average-grade-calculator",
     );

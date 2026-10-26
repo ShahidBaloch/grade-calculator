@@ -210,6 +210,41 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
     description:
       "Look up a New Zealand university letter on the 9-point scale (A+ = 9), with its percentage band. University grades, not NCEA, US A–F, or India CGPA.",
   },
+  "/ca/final-grade-calculator": {
+    title: "Final Exam Mark Calculator Canada — Grade Needed",
+    description:
+      "Find the final exam mark you need for an A, B+ or a pass in a Canadian course. Uses the Canadian letter preset; check your outline for an exam minimum.",
+  },
+  "/ca/weighted-grade-calculator": {
+    title: "Canada Course Mark Calculator — Weighted Grades",
+    description:
+      "Add assignments, midterm and final exam weights from your course outline to get your Canadian course mark and letter grade on the 4.0 preset.",
+  },
+  "/au/weighted-grade-calculator": {
+    title: "Australia Weighted Mark Calculator — Course Mark",
+    description:
+      "Combine assignments and exams from your course profile into one weighted course mark, with the UQ 7-point grade (HD, D, C, P). Not WAM.",
+  },
+  "/au/letter-grade-calculator": {
+    title: "Australia Grade Calculator — HD, D, C, P Bands",
+    description:
+      "Look up the percentage band for an Australian High Distinction, Distinction, Credit or Pass on the UQ 7-point scale. Your university's table wins if it differs.",
+  },
+  "/nz/final-grade-calculator": {
+    title: "NZ Final Exam Calculator — Mark Needed for A, B, C",
+    description:
+      "Work out the exam mark you need for an A+, A- or B+ in a New Zealand university paper on the 9-point letter bands. Check your outline for an exam minimum.",
+  },
+  "/nz/weighted-grade-calculator": {
+    title: "NZ Course Mark Calculator — Coursework + Exam",
+    description:
+      "Combine coursework and exam weights from your NZ course outline into one course mark and letter grade on the 9-point university scale.",
+  },
+  "/in/final-grade-calculator": {
+    title: "End-Semester Marks Calculator India — Marks Needed",
+    description:
+      "Find the end-semester exam marks you need for an O, A+ or a pass from your internal assessment marks, on the India 10-point scale.",
+  },
   "/uk/degree-classification-calculator": {
     title: "UK Degree Classification Calculator — First, 2:1, 2:2",
     description:

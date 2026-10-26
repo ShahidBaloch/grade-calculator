@@ -45,6 +45,12 @@ export const CA_GPA_ALIAS = new Set<CalculatorSlug>([
   "raise-gpa-calculator",
 ]);
 
+/**
+ * "College GPA" means university GPA outside North America. On these hubs the worldwide
+ * tool would lock the US 4.0 scale, so the hub's own GPA calculator serves the intent.
+ */
+const UNIVERSITY_GPA_ALIAS_HUBS = new Set(["/au", "/nz", "/in", "/pk"]);
+
 /** Hubs where switching calculators should keep the country in the URL (local scale lock). */
 const HUB_NAV_PREFIX_PATHS = new Set(["/ca", "/au", "/nz", "/in", "/pk", "/uk"]);
 
@@ -158,6 +164,9 @@ export function canonicalPathForSlug(slug: CalculatorSlug, hubPath?: string | nu
   }
   if (hubPath === "/ca" && CA_GPA_ALIAS.has(slug)) {
     return "/ca/gpa-calculator";
+  }
+  if (hubPath && slug === "college-gpa-calculator" && UNIVERSITY_GPA_ALIAS_HUBS.has(hubPath)) {
+    return `${hubPath}/gpa-calculator`;
   }
   if (hubPath && isIndexableGeoCalculator(hubPath, slug)) {
     return `${hubPath}/${slug}`;
