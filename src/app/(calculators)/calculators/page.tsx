@@ -22,7 +22,7 @@ const featuredGuideLinks = [
 export const metadata = createPageMetadata({
   title: "All Grade Calculators",
   description:
-    "Free online grade calculators: EZ grader, weighted grades, final exam, GPA, and more.",
+    "Free online grade calculators: EZ grader, weighted grades, final exam, GPA, CGPA, PowerSchool, Canvas, and score-out-of-total tools in one place.",
   path: "/calculators",
   keywords: ["grade calculators", "all grade calculators", "free grade calculators"],
 });

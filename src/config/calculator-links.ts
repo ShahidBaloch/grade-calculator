@@ -5,6 +5,55 @@ import { gradingScaleBySlug } from "@/config/grading-scale-pages";
 export interface CalculatorResourceLinks {
   guide?: { path: string; title: string };
   gradingScale?: { path: string; title: string };
+  /** One outbound link when this page is the wrong grading family. */
+  otherSystem?: { path: string; title: string };
+}
+
+const FAMILY_MISMATCH: Partial<Record<CalculatorSlug, { path: string; title: string }>> = {
+  "letter-grade-calculator": {
+    path: "/cgpa-calculator",
+    title: "Different system: India & Pakistan CGPA calculator",
+  },
+  "percentage-to-letter-grade": {
+    path: "/percentage-to-cgpa",
+    title: "Different system: India & Pakistan percentage to CGPA",
+  },
+  "cgpa-calculator": {
+    path: "/letter-grade-calculator",
+    title: "Different system: US A–F letter grade calculator",
+  },
+  "cgpa-to-percentage": {
+    path: "/percentage-to-letter-grade",
+    title: "Different system: US percentage to A–F letter",
+  },
+  "percentage-to-cgpa": {
+    path: "/percentage-to-letter-grade",
+    title: "Different system: US percentage to A–F letter",
+  },
+  "sgpa-to-cgpa": {
+    path: "/cumulative-gpa-calculator",
+    title: "Different system: US cumulative GPA (4.0)",
+  },
+  "cgpa-to-gpa": {
+    path: "/percentage-to-letter-grade",
+    title: "Different system: US percentage to A–F letter",
+  },
+};
+
+/** India/Pakistan GPA hubs are CGPA intent; other country GPA pages stay in their own family. */
+const GEO_CGPA_GPA_PATHS = new Set(["/in/gpa-calculator", "/pk/gpa-calculator", "/pk/cumulative-gpa-calculator"]);
+
+export function intentMismatchLink(
+  slug: CalculatorSlug,
+  pagePath?: string,
+): { path: string; title: string } | undefined {
+  if (pagePath && GEO_CGPA_GPA_PATHS.has(pagePath)) {
+    return {
+      path: "/letter-grade-calculator",
+      title: "Different system: US A–F letter grade calculator",
+    };
+  }
+  return FAMILY_MISMATCH[slug];
 }
 
 function guide(slug: keyof typeof guideBySlug) {

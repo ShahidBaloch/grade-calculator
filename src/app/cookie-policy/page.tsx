@@ -6,7 +6,7 @@ import { createPageMetadata } from "@/lib/seo/metadata";
 
 export const metadata = createPageMetadata({
   title: "Cookie Policy",
-  description: `How ${siteConfig.name} uses cookies — geo detection, optional analytics, and advertising if enabled.`,
+  description: `How ${siteConfig.name} uses cookies and local storage: country detection for grading scales, optional analytics, advertising if enabled, and your choices.`,
   path: "/cookie-policy",
 });
 

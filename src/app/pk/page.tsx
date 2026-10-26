@@ -6,7 +6,7 @@ import { createPageMetadata } from "@/lib/seo/metadata";
 const hub = countryHubByPath["/pk"];
 
 export const metadata = createPageMetadata({
-  title: "Pakistan Grading Tools — HEC GPA and CGPA",
+  title: "Pakistan HEC Hub — CGPA and Percentage",
   description: hub.description,
   path: "/pk",
   keywords: hub.keywords,

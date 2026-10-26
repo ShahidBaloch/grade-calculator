@@ -120,13 +120,13 @@ test.describe("Core calculator flows", () => {
   test("legacy ez-grader URL redirects home", async ({ page }) => {
     await page.goto("/ez-grader");
     await expect(page).toHaveURL(/\/$/);
-    await expect(page.getByRole("heading", { level: 1, name: /ez grader/i })).toBeVisible();
+    await expect(page.getByRole("heading", { level: 1, name: /grade calculator/i })).toBeVisible();
   });
 
   test("easy-grader alias redirects home", async ({ page }) => {
     await page.goto("/easy-grader");
     await expect(page).toHaveURL(/\/$/);
-    await expect(page.getByRole("heading", { level: 1, name: /ez grader/i })).toBeVisible();
+    await expect(page.getByRole("heading", { level: 1, name: /grade calculator/i })).toBeVisible();
   });
 
   test("average grade calculator averages scores and class-average alias redirects", async ({ page }) => {

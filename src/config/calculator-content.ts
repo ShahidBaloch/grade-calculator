@@ -615,6 +615,11 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
     workedExample: "85% on the common US 4.0 scale → B (83–86%).",
     faqs: [
       {
+        question: "Does this convert India or Pakistan CGPA?",
+        answer:
+          "No. This page turns a percentage into a US A–F letter. Many American schools place B at 83–86%. Indian CGPA and Pakistan HEC use other formulas — HEC’s B band is 71–74%. Use the CGPA calculator or the CGPA percentage converters for those scales.",
+      },
+      {
         question: "How do I find a grade from a percentage?",
         answer:
           "Enter the percentage in the calculator above and it shows the letter grade and GPA points for your selected grading scale. For a quick reference: 90–100% = A, 80–89% = B, 70–79% = C, 60–69% = D, below 60% = F on the standard US scale. Your school may use slightly different cutoffs, so check your syllabus.",
@@ -676,7 +681,7 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
     ],
     assumptions: [
       "Scores are expressed as a percentage out of 100, not raw points on a different scale.",
-      "Band boundaries are from the selected grading scale — switch scales for non-US systems.",
+      "This page’s default is the common US A–F chart. Canada and New Zealand have their own letter pages. India CGPA and Pakistan HEC have separate calculators.",
       "Plus and minus grades are included on scales that use them; plain A/B/C scales group more scores into each band.",
     ],
   },
@@ -689,6 +694,11 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
     formula: "Percentage = midpoint of letter grade band on selected scale",
     workedExample: "B+ on the common US 4.0 scale → approximately 88% (87–89% range).",
     faqs: [
+      {
+        question: "Is an India or Pakistan CGPA letter the same as a US letter?",
+        answer:
+          "No. This page reads common US A–F bands (A is often 93–96%, B often 83–86%). India uses a 10-point O–F scale, and Pakistan HEC maps B to about 71–74%. Use the CGPA calculator for those transcripts.",
+      },
       {
         question: "What percentage is an A?",
         answer: "On the common US 4.0 scale, A is 93–96% and A+ is 97–100%. Select your scale for exact ranges.",
@@ -1115,6 +1125,11 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
       "An 8.2 CGPA on the CBSE ×9.5 rule becomes 77.9%. HEC §13.1 maps 3.00 CGPA to 71% (B band minimum). The ×25 shortcut would show 75% for 3.00 — that is not the §13.1 table.",
     faqs: [
       {
+        question: "Is CGPA to percentage the same as a US letter grade?",
+        answer:
+          "No. This page converts India or Pakistan CGPA with CBSE ×9.5, campus multipliers, or HEC §13.1. A class percentage on a US A–F scale uses the percentage to letter grade calculator. HEC’s B band is 71–74%; many American schools place B at 83–86%.",
+      },
+      {
         question: "Which India formula should I use?",
         answer:
           "Use the formula on your marksheet. CBSE historically used ×9.5 on some certificates. UGC does not set one national ×9.5 rule. Anna University, VIT, and some IITs/NITs use ×10. SPPU/Mumbai often use (CGPA − 0.75) × 10.",
@@ -1286,7 +1301,7 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
     ],
     assumptions: [
       "One semester at a time — enter all courses in the current term before reading SGPA.",
-      "Grade points per letter follow the India 10-point or HEC 4.0 scale selected.",
+      "Grade points follow the India 10-point (O–F) or Pakistan HEC scale. US A–F percentage bands are a different calculator.",
       "Credits are the full load for each course; enter the value printed on your timetable or marksheet.",
     ],
   },

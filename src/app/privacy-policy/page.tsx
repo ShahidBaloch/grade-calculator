@@ -6,7 +6,7 @@ import { createPageMetadata } from "@/lib/seo/metadata";
 
 export const metadata = createPageMetadata({
   title: "Privacy Policy",
-  description: `Privacy policy for ${siteConfig.name} — client-side calculators, no grade data collection.`,
+  description: `Privacy policy for ${siteConfig.name}: calculators run in your browser, we never collect grade data, and here is what analytics and cookies we use.`,
   path: "/privacy-policy",
   noIndex: false,
 });

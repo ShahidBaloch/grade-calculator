@@ -29,7 +29,7 @@ export const countryHubs: CountryHubConfig[] = [
     flag: "🇺🇸",
     scaleId: "us-standard",
     description:
-      "Free grade and GPA calculators for US students and teachers. Common US 4.0 GPA scale preset.",
+      "Free grade and GPA calculators for US students and teachers: test, weighted, final exam, PowerSchool, and Canvas tools with the US 4.0 scale.",
     details: [
       "US high schools often report both unweighted 4.0 GPA and weighted GPA with Honors, AP, or IB bonuses. Colleges usually recast that onto their own scale.",
       "Florida law can require End-of-Course (EOC) exams to count up to 30% of the course grade for specified courses. Texas uses statewide EOC assessments, but course-weight rules vary by district — check your district policy before using the EOC calculator.",
@@ -91,7 +91,7 @@ export const countryHubs: CountryHubConfig[] = [
     flag: "🇨🇦",
     scaleId: "ca-standard",
     description:
-      "Canadian grade and GPA tools with illustrative presets — each university publishes its own tables.",
+      "Canadian grade and GPA calculators with 4.0 and 4.33 presets plus a McMaster 12-point tool. Each university publishes its own tables, so check yours.",
     details: [
       "Canadian institutions mix percentage marks, 4.0 GPA, 4.33 scales (A+ = 4.33), and specialty scales such as McMaster's 12-point GPA. There is no one “standard Canadian conversion” shared by UBC, Waterloo, and Guelph.",
       "This hub defaults GPA tools to an illustrative 4.0-cap preset for planning. For McMaster 12-point transcripts, use the dedicated McMaster→US lookup. Always check your faculty calendar before official submissions.",
@@ -144,7 +144,7 @@ export const countryHubs: CountryHubConfig[] = [
     flag: "🇬🇧",
     scaleId: "uk-degree",
     description:
-      "UK degree classification reference and grade tools for university and GCSE-style percentage bands.",
+      "UK degree classification calculator and grade tools for university marks and GCSE-style percentage bands: First, 2:1, 2:2, and Third.",
     details: [
       "UK undergraduate results are usually First (70%+), Upper Second / 2:1 (60–69%), Lower Second / 2:2 (50–59%), and Third (40–49%). That is a classification, not a US 4.0 GPA.",
       "Use the UK degree classification calculator for First / 2:1 / 2:2 / Third, and the GCSE calculator for 9–1 percentage bands.",
@@ -192,7 +192,7 @@ export const countryHubs: CountryHubConfig[] = [
     flag: "🇦🇺",
     scaleId: "au-uq-seven-point",
     description:
-      "Australian grade tools with institution-specific GPA presets — not one national scale.",
+      "Australian grade and GPA calculators with institution-specific presets (7-point and 4-point). Australia has no single national GPA scale.",
     details: [
       "Australian universities use different GPA methodologies. UQ publishes a 7-point scale; Monash uses a 4-point GPA (maximum 4.0). UNSW and others may report WAM (Weighted Average Mark) instead of GPA. Grade points are not universal across institutions.",
       "Pick your university preset in the GPA calculators on this hub, or use the generic 7-point example for illustration only. ATAR is a separate school-leaver rank — it is not a course GPA.",
@@ -240,7 +240,7 @@ export const countryHubs: CountryHubConfig[] = [
     flag: "🇳🇿",
     scaleId: "nz-nine-point",
     description:
-      "New Zealand grade tools with the 9-point GPA scale used by several universities.",
+      "New Zealand grade and GPA calculators using the 9-point GPA scale from several universities, including cumulative GPA across terms.",
     details: [
       "NZ universities often use A+ through C- letter bands on a 9-point GPA (A+ = 9). NCEA is the secondary qualification and uses Achieved / Merit / Excellence, which is not the same as university GPA.",
       "Select the New Zealand scale inside a calculator to map percentages to local letters.",
@@ -288,7 +288,7 @@ export const countryHubs: CountryHubConfig[] = [
     flag: "🇮🇳",
     scaleId: "in-ten-point",
     description:
-      "India CGPA and grade tools with an illustrative 10-point university preset — boards and campuses publish their own tables.",
+      "India 10-point CGPA hub for an O–F semester average and CBSE, ×10, or SPPU percentage formulas. US A–F letter grades are a different scale.",
     details: [
       "Many universities use a 10-point CGPA (O = 10), but letter cutoffs and quality points differ by IIT, NIT, state university, and affiliated college.",
       "CBSE board marks and university CGPA are separate systems. CBSE historically used Percentage ≈ CGPA × 9.5 on some certificates. UGC does not set one national multiplier. Anna University and some campuses use ×10 or (CGPA − 0.75) × 10.",
@@ -349,7 +349,7 @@ export const countryHubs: CountryHubConfig[] = [
     flag: "🇵🇰",
     scaleId: "pk-hec",
     description:
-      "Pakistan grade and GPA tools on the common HEC 4.0 letter scale, with CGPA-to-percentage converters and planning estimates.",
+      "Pakistan HEC 4.0 CGPA tools and percentage converters. HEC’s B band is 71–74%, which is a different cutoff from a US A–F B at about 83–86%.",
     details: [
       "HEC’s Uniform Semester System policy (§13.1) maps fractional GPA/CGPA bands to percentage ranges — for example B = 2.67–3.00 and 71–74%, with D+ at 54–57% and D at 50–53% as the usual pass floor.",
       "For CGPA-to-percentage planning, HEC assigns the minimum percentage of the band your CGPA falls into (3.00 CGPA → 71%, not a flat ×25).",

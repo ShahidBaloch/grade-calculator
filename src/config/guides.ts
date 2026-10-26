@@ -24,7 +24,7 @@ export const guides: GuideConfig[] = [
     path: "/guides/how-to-calculate-gpa",
     title: "How to Calculate GPA",
     description:
-      "Learn how to calculate semester and cumulative GPA step by step, with examples and a free GPA calculator.",
+      "Learn how to calculate semester and cumulative GPA step by step: grade points, credit hours, worked examples, and a free GPA calculator.",
     keywords: ["how to calculate gpa", "gpa formula", "semester gpa", "college gpa"],
     readTime: "12 min read",
     embeddedCalculator: "gpa-calculator",
@@ -484,7 +484,7 @@ export const guides: GuideConfig[] = [
     path: "/guides/gpa-scale-explained",
     title: "4.0 vs 5.0 vs 7.0: Different GPA Scales Explained",
     description:
-      "How 4.0, 4.33, 5.0, and 7.0 GPA scales differ, and how to read letter grades on each one.",
+      "How 4.0, 4.33, 5.0, and 7.0 GPA scales differ, how to read letter grades on each one, and why converting between them is only approximate.",
     keywords: ["4.0 vs 5.0 gpa scale", "different gpa scales", "gpa scales explained", "4.33 gpa scale", "4.0 vs 7.0 gpa"],
     readTime: "11 min read",
     relatedGuides: ["weighted-vs-unweighted-gpa", "how-to-calculate-gpa", "gpa-glossary", "gpa-to-percentage"],
@@ -550,7 +550,7 @@ export const guides: GuideConfig[] = [
     path: "/guides/weighted-vs-unweighted-gpa",
     title: "Weighted vs Unweighted GPA",
     description:
-      "The difference between unweighted 4.0 GPA and weighted Honors/AP GPA, with examples.",
+      "The difference between unweighted 4.0 GPA and weighted Honors/AP GPA, how colleges read each one, and worked examples for both.",
     keywords: ["weighted vs unweighted gpa", "weighted gpa", "unweighted gpa"],
     readTime: "10 min read",
     relatedGuides: ["gpa-scale-explained", "how-to-raise-your-gpa", "gpa-needed-for-uc-csu", "what-is-a-good-gpa"],
@@ -615,7 +615,7 @@ export const guides: GuideConfig[] = [
     path: "/guides/how-to-raise-your-gpa",
     title: "How to Raise Your GPA",
     description:
-      "See why leftover credits matter more than motivation, and calculate the GPA you still need.",
+      "See why your remaining credits limit how far your GPA can move, and calculate the term GPA you still need to reach your target.",
     keywords: ["how to raise gpa", "improve gpa"],
     readTime: "8 min read",
     embeddedCalculator: "raise-gpa-calculator",
@@ -669,7 +669,7 @@ export const guides: GuideConfig[] = [
   {
     slug: "understanding-letter-grades",
     path: "/guides/understanding-letter-grades",
-    title: "What Is a B+, A− or C Worth? Letter Grade Midpoints Explained",
+    title: "What Is a B+, A− or C Worth? Letter Grade Midpoints",
     description:
       "Convert a letter grade back to a percentage and GPA points: the midpoint to use for a B+, A−, or C in a weighted average, and why the number differs by school.",
     keywords: [
@@ -685,6 +685,7 @@ export const guides: GuideConfig[] = [
     relatedReference: [
       { label: "Letter grade calculator: percentage range for any letter", href: "/letter-grade-calculator" },
       { label: "US grading scale chart", href: "/grading-scales/us" },
+      { label: "Different system: India & Pakistan CGPA calculator", href: "/cgpa-calculator" },
     ],
     sections: [
       {
@@ -710,7 +711,7 @@ export const guides: GuideConfig[] = [
       {
         heading: "International letters are not US letters",
         body:
-          "A UK 60% is often a 2:1, not a US D. An Australian HD is closer to a US A. Always switch the scale before you convert.",
+          "A UK 60% is often a 2:1, not a US D. An Australian HD is closer to a US A. India 10-point CGPA uses O–F, and a Pakistan HEC B is about 71–74%, not a US B at 83–86%. Those transcripts belong on the CGPA calculator, not this US A–F chart.",
       },
       {
         heading: "GCSE 9–1 is another letter system",
@@ -891,7 +892,7 @@ export const guides: GuideConfig[] = [
     path: "/guides/cgpa-to-percentage",
     title: "How to Convert CGPA to Percentage (India & Pakistan)",
     description:
-      "Learn CBSE ×9.5, ×10, and SPPU formulas, plus Pakistan planning estimates and how SGPA rolls into CGPA.",
+      "Learn CBSE ×9.5, ×10, and SPPU CGPA to percentage formulas, plus Pakistan planning estimates and how SGPA rolls into CGPA.",
     keywords: [
       "how to convert cgpa to percentage",
       "cgpa to percentage formula",
@@ -900,8 +901,13 @@ export const guides: GuideConfig[] = [
     ],
     readTime: "8 min read",
     embeddedCalculator: "cgpa-to-percentage",
-    relatedGuides: ["how-to-calculate-gpa", "gpa-scale-explained", "university-cgpa-to-percentage", "gpa-to-percentage"],
+    relatedGuides: ["university-cgpa-to-percentage"],
     relatedCalculators: ["cgpa-to-percentage", "sgpa-to-cgpa", "cgpa-calculator", "percentage-to-cgpa"],
+    relatedReference: [
+      { label: "India 10-point CGPA scale", href: "/grading-scales/india" },
+      { label: "Pakistan HEC grading scale", href: "/grading-scales/pakistan" },
+      { label: "Different system: US A–F letter grade calculator", href: "/letter-grade-calculator" },
+    ],
     sections: [
       {
         heading: "CGPA vs percentage",
@@ -932,6 +938,11 @@ export const guides: GuideConfig[] = [
         heading: "10-point CGPA to US 4.0 GPA",
         body:
           "There is no single official map. A simple planning estimate is US GPA ≈ CGPA × 0.4. Admissions offices and WES may use different tables — treat converters as educational only.",
+      },
+      {
+        heading: "US A–F letters are a different chart",
+        body:
+          "A US percentage such as 85% is often a B on an American A–F scale (about 83–86%). That conversion does not produce an Indian CGPA or an HEC percentage. Use the US percentage to letter grade calculator for A–F, and keep this guide for India and Pakistan CGPA formulas.",
       },
     ],
     faqs: [
@@ -992,7 +1003,7 @@ export const guides: GuideConfig[] = [
       {
         heading: "Letter grade vs percentage",
         body:
-          "Percentage is raw score out of 100. Letter grades are bands (A, B+, etc.) mapped from percentage using your school's scale. GradCalc lets you pick a scale preset; cut-offs can differ from your syllabus.",
+          "Percentage is a raw score out of 100. US letter grades are A–F bands mapped from that percentage, and the cutoffs differ by school. India 10-point CGPA (O–F) and Pakistan HEC use different bands — HEC’s B is about 71–74%, while many American schools place B at 83–86%. Use the CGPA calculator for those transcripts.",
       },
       {
         heading: "Weighted course grade (assignments)",

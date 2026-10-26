@@ -166,7 +166,7 @@ export const gradingScalePages: GradingScalePageConfig[] = [
     scaleId: "ca-four-three-three",
     title: "Illustrative Canadian Preset (A+ = 4.33 GPA)",
     description:
-      "Example chart where A+ earns 4.33 quality points — used at some universities, not universal across Canada.",
+      "Example 4.33 GPA chart where A+ earns 4.33 quality points, with percentage bands. Used at some universities, not universal across Canada.",
     keywords: ["canada 4.33 gpa", "canadian a+ 4.33", "ubc grading scale"],
     intro:
       "Several Canadian universities record A+ as 4.33 quality points on a 4.33-cap scale. That is still institution-specific — identical percentage cutoffs are not guaranteed for every program or admissions conversion.",
@@ -231,7 +231,7 @@ export const gradingScalePages: GradingScalePageConfig[] = [
     scaleId: "pk-hec",
     title: "Pakistan HEC 4.0 Grading Scale",
     description:
-      "HEC Uniform Semester System fractionalized grading (§13.1) on a 4.0 GPA scale with official percentage bands.",
+      "Pakistan HEC grading scale: Uniform Semester System fractionalized grading (§13.1) on a 4.0 GPA scale with official percentage bands.",
     keywords: ["hec grading scale", "pakistan gpa scale", "hec fractionalized grading"],
     intro:
       "HEC’s Uniform Semester System policy (§13.1) publishes a grade-point range for each percentage band — for example A is 3.67–4.00 at 85% and above, and B is 2.67–3.00 at 71–74%. A CGPA is given the minimum percentage of its band (3.00 → 71%).",

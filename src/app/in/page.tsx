@@ -6,7 +6,7 @@ import { createPageMetadata } from "@/lib/seo/metadata";
 const hub = countryHubByPath["/in"];
 
 export const metadata = createPageMetadata({
-  title: "India Grading Tools — CGPA and 10-Point GPA",
+  title: "India CGPA Hub — 10-Point University Scale",
   description: hub.description,
   path: "/in",
   keywords: hub.keywords,

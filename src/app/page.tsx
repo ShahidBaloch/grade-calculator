@@ -94,6 +94,8 @@ function HomeToolLinks() {
     { href: "/score", label: "Score out of total" },
     { href: "/gpa-calculator", label: "GPA calculator" },
     { href: "/grading-scales", label: "Grading scale (US A–F)" },
+    { href: "/powerschool-grade-calculator", label: "PowerSchool grade calculator" },
+    { href: "/canvas-grade-calculator", label: "Canvas grade calculator" },
   ];
   return (
     <section aria-labelledby="home-tools-heading" className="no-print">

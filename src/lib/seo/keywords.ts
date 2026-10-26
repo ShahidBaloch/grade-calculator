@@ -139,7 +139,7 @@ export const calculatorKeywords: Record<CalculatorSlug, string[]> = {
   "percentage-to-letter-grade": [
     "percentage to letter grade",
     "percent to letter grade",
-    "grade converter",
+    "us percentage to letter grade",
     "grades from percentages",
     "b grade percentage",
     "c grade percentage",
@@ -154,7 +154,7 @@ export const calculatorKeywords: Record<CalculatorSlug, string[]> = {
     "letter to percent",
     "letter grading to percentage",
     "what percentage is each letter grade",
-    "value of grades",
+    "us a to f letter grades",
   ],
   "canvas-grade-calculator": [
     "canvas grade calculator",
@@ -191,6 +191,8 @@ export const calculatorKeywords: Record<CalculatorSlug, string[]> = {
     "percent to cgpa",
     "marks to cgpa",
     "percentage to cgpa india",
+    "percentage to cgpa pakistan",
+    "hec percentage to cgpa",
   ],
   "sgpa-to-cgpa": [
     "sgpa to cgpa",

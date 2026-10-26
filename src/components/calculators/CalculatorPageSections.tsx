@@ -1,5 +1,5 @@
 import { calculatorBySlug } from "@/config/calculators";
-import { calculatorResourceLinks } from "@/config/calculator-links";
+import { calculatorResourceLinks, intentMismatchLink } from "@/config/calculator-links";
 import { calculatorContent } from "@/config/calculator-content";
 import { countryHubByPath } from "@/config/country-hubs";
 import { getCalculatorHowItWorks } from "@/lib/content/calculator-how-it-works";
@@ -29,18 +29,21 @@ export function CalculatorPageSections({
     ? countryHubByPath[getCountryPrefixFromPath(pagePath)!]
     : undefined;
   const resourceLinks = calculatorResourceLinks[slug];
-  const localizedResources = hub?.gradingScalePath
-    ? {
-        ...resourceLinks,
-        gradingScale: resourceLinks.gradingScale
-          ? {
-              ...resourceLinks.gradingScale,
-              path: hub.gradingScalePath,
-              title: `${hub.name} grading scale`,
-            }
-          : undefined,
-      }
-    : resourceLinks;
+  const localizedResources = {
+    ...(hub?.gradingScalePath
+      ? {
+          ...resourceLinks,
+          gradingScale: resourceLinks.gradingScale
+            ? {
+                ...resourceLinks.gradingScale,
+                path: hub.gradingScalePath,
+                title: `${hub.name} grading scale`,
+              }
+            : undefined,
+        }
+      : resourceLinks),
+    otherSystem: intentMismatchLink(slug, pagePath),
+  };
 
   const assumptions =
     local?.assumptions ?? content.assumptions ?? [

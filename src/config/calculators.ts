@@ -102,7 +102,7 @@ export const calculators: CalculatorConfig[] = [
     icon: "LayoutGrid",
     category: "grade",
     mvp: false,
-    relatedSlugs: ["ez-grader", "test-grade-calculator", "percentage-to-letter-grade"],
+    relatedSlugs: ["ez-grader", "test-grade-calculator", "percentage-to-letter-grade", "letter-grade-calculator"],
     examples: [],
   },
   {
@@ -263,9 +263,9 @@ export const calculators: CalculatorConfig[] = [
   },
   {
     slug: "percentage-to-letter-grade",
-    name: "Percentage to Letter Grade",
+    name: "US Percentage to Letter Grade",
     shortName: "% → Letter",
-    description: "Convert a percentage score to a letter grade and GPA points.",
+    description: "Convert a percentage to a US A–F letter and 4.0 points. India and Pakistan CGPA use a different tool.",
     path: "/percentage-to-letter-grade",
     icon: "ArrowRight",
     category: "conversion",
@@ -275,9 +275,9 @@ export const calculators: CalculatorConfig[] = [
   },
   {
     slug: "letter-grade-calculator",
-    name: "Letter Grade Calculator",
+    name: "US Letter Grade Calculator",
     shortName: "Letter → %",
-    description: "Convert a letter grade to its percentage equivalent and GPA points.",
+    description: "Look up the US percentage band and 4.0 points for A+ through F. Not an India or Pakistan CGPA chart.",
     path: "/letter-grade-calculator",
     icon: "ArrowLeft",
     category: "conversion",
@@ -391,10 +391,10 @@ export const calculators: CalculatorConfig[] = [
   },
   {
     slug: "cgpa-to-percentage",
-    name: "CGPA to Percentage Calculator",
+    name: "CGPA to Percentage",
     shortName: "CGPA %",
     description:
-      "Convert CGPA to percentage with CBSE ×9.5, campus formulas, HEC §13.1 band minimums, or the unofficial Pakistan ×25 shortcut.",
+      "Convert India or Pakistan CGPA to a percentage with CBSE ×9.5, campus formulas, HEC §13.1, or the unofficial ×25 shortcut.",
     path: "/cgpa-to-percentage",
     icon: "Percent",
     category: "conversion",
@@ -415,10 +415,10 @@ export const calculators: CalculatorConfig[] = [
   },
   {
     slug: "percentage-to-cgpa",
-    name: "Percentage to CGPA Calculator",
+    name: "Percentage to CGPA",
     shortName: "% → CGPA",
     description:
-      "Convert percentage marks to CGPA with CBSE ×9.5, campus formulas, HEC §13.1 planning bands, or the unofficial Pakistan ×25 shortcut.",
+      "Convert an India or Pakistan percentage to CGPA with CBSE ×9.5, campus formulas, HEC §13.1, or the unofficial ×25 shortcut.",
     path: "/percentage-to-cgpa",
     icon: "Percent",
     category: "conversion",
@@ -438,15 +438,15 @@ export const calculators: CalculatorConfig[] = [
   },
   {
     slug: "sgpa-to-cgpa",
-    name: "SGPA to CGPA Calculator",
+    name: "SGPA to CGPA",
     shortName: "SGPA→CGPA",
     description:
-      "Combine semester SGPA values and credits into an overall credit-weighted CGPA.",
+      "Combine India or Pakistan semester SGPA values and credits into one CGPA.",
     path: "/sgpa-to-cgpa",
     icon: "Layers",
     category: "gpa",
     mvp: false,
-    relatedSlugs: ["cgpa-calculator", "cgpa-to-percentage", "cumulative-gpa-calculator"],
+    relatedSlugs: ["cgpa-calculator", "cgpa-to-percentage", "percentage-to-cgpa"],
     examples: [
       {
         label: "3 semesters",
@@ -465,7 +465,7 @@ export const calculators: CalculatorConfig[] = [
     name: "CGPA Calculator",
     shortName: "CGPA",
     description:
-      "Calculate semester SGPA / CGPA from course grades and credits on India 10-point or Pakistan HEC scales.",
+      "Calculate semester SGPA from India 10-point (O–F) or Pakistan HEC course grades and credits.",
     path: "/cgpa-calculator",
     icon: "GraduationCap",
     category: "gpa",
@@ -486,15 +486,15 @@ export const calculators: CalculatorConfig[] = [
   },
   {
     slug: "cgpa-to-gpa",
-    name: "CGPA to GPA Converter (10 to 4.0)",
+    name: "India CGPA to US 4.0 GPA",
     shortName: "10→4 GPA",
     description:
-      "Convert Indian 10-point CGPA to an estimated US 4.0 GPA for planning applications abroad.",
+      "Estimate a US 4.0 from an Indian 10-point CGPA for planning. A US A–F percentage uses the letter grade calculator.",
     path: "/cgpa-to-gpa",
     icon: "ArrowLeftRight",
     category: "conversion",
     mvp: false,
-    relatedSlugs: ["cgpa-to-percentage", "cgpa-calculator", "gpa-calculator", "mcmaster-gpa-to-us-gpa"],
+    relatedSlugs: ["cgpa-to-percentage", "cgpa-calculator", "percentage-to-cgpa", "sgpa-to-cgpa"],
     examples: [
       { label: "8.2 → 4.0", values: { cgpa: 8.2, methodId: "linear-0.4" } },
       { label: "Via % bridge", values: { cgpa: 8.2, methodId: "percent-bridge" } },
@@ -510,7 +510,7 @@ export const calculators: CalculatorConfig[] = [
     icon: "ArrowLeftRight",
     category: "conversion",
     mvp: false,
-    relatedSlugs: ["cgpa-to-gpa", "gpa-calculator", "college-gpa-calculator"],
+    relatedSlugs: ["gpa-calculator", "college-gpa-calculator", "cumulative-gpa-calculator"],
     examples: [
       { label: "11 → 3.9", values: { mcmasterTwelve: 11 } },
       { label: "10 → 3.7", values: { mcmasterTwelve: 10 } },

@@ -41,7 +41,7 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
       "Free UC GPA calculator: enter 10th and 11th grade a-g semester grades to get your capped UC GPA (8 honors points max, 4 from 10th grade) and unweighted GPA.",
   },
   "/csu-gpa-calculator": {
-    title: "CSU GPA Calculator — Cal State A–G GPA with Honors Points",
+    title: "CSU GPA Calculator — Cal State A–G GPA with Honors",
     description:
       "Free CSU GPA calculator: enter 10th–12th grade a-g semester grades to get your Cal State GPA with up to 8 honors points (2 from 10th grade). Planning estimate.",
   },
@@ -76,27 +76,27 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
       "Calculate college semester GPA weighted by credit hours. Excludes pass/fail and audited courses, and shows dean's list and good-standing thresholds.",
   },
   "/percentage-to-letter-grade": {
-    title: "Percentage to Letter Grade — Grades from Percentages",
+    title: "US Percentage to Letter Grade — A–F Scale",
     description:
-      "Convert any percentage to a letter grade and GPA points instantly. Supports US, Canadian, and other grading scales, with the full A–F table.",
+      "Convert a percentage to a US A–F letter and 4.0 points, including plus and minus bands. A typical B is 83–86%. India and Pakistan CGPA use a different calculator.",
   },
   "/letter-grade-calculator": {
-    title: "Letter Grade Calculator — Percentage & GPA Points",
+    title: "US Letter Grade Calculator — A–F to Percent",
     description:
-      "Look up the percentage range for any letter grade, A to F, with its GPA quality points on standard and plus/minus scales.",
+      "Look up the US percentage band and 4.0 points for A+ through F. India 10-point CGPA and Pakistan HEC letters use a different calculator.",
   },
   "/canvas-grade-calculator": {
-    title: "Canvas Grade Calculator — Weighted Assignment Groups & What-If",
+    title: "Canvas Grade Calculator — Weighted Groups & What-If",
     description:
       "Free Canvas grade calculator for US students. Enter each assignment group's weight and score to check your Canvas course grade and what you need on the rest.",
   },
   "/grade-percentage-calculator": {
-    title: "Grade Percentage Calculator — Points to Percent & Letter",
+    title: "Grade Percentage Calculator — Points to % & Letter",
     description:
       "Free grade percentage calculator: turn points earned out of points possible into a percentage and US letter grade, or convert any percentage to A–F.",
   },
   "/college-grade-calculator": {
-    title: "College Grade Calculator — Class Grade from Your Syllabus",
+    title: "College Grade Calculator — Grade from Your Syllabus",
     description:
       "Calculate your college class grade from syllabus weights for exams, homework, labs, and participation. See your current grade and what you need to finish.",
   },
@@ -121,29 +121,29 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
       "Convert a percentage mark to an England 9–1 GCSE grade. See the old A*–G equivalent and whether it is a standard pass (4+) or strong pass (5+).",
   },
   "/cgpa-to-percentage": {
-    title: "CGPA to Percentage Calculator — India & Pakistan",
+    title: "CGPA to Percentage — India & Pakistan",
     description:
-      "Convert CGPA to percentage with CBSE ×9.5, Anna University ×10, SPPU, or Pakistan HEC §13.1 formulas, plus the unofficial ×25 shortcut to compare.",
+      "Convert India or Pakistan CGPA to a percentage with CBSE ×9.5, ×10, SPPU, or HEC §13.1. HEC’s B band is 71–74%, which is a different scale from US A–F.",
   },
   "/percentage-to-cgpa": {
-    title: "Percentage to CGPA Calculator — Reverse Conversion",
+    title: "Percentage to CGPA — India & Pakistan",
     description:
-      "Reverse-convert a percentage mark to an estimated CGPA on India or Pakistan grading scales. Choose CBSE ×9.5, ×10, SPPU, or HEC §13.1 planning band method.",
+      "Turn an India or Pakistan percentage into CGPA with CBSE ÷9.5, ×10, SPPU, or HEC §13.1. For a US A–F letter from a percentage, use the US letter converter.",
   },
   "/sgpa-to-cgpa": {
-    title: "SGPA to CGPA Calculator — Credit-Weighted Average",
+    title: "SGPA to CGPA — India & Pakistan Terms",
     description:
-      "Combine semester GPAs (SGPA) and their credit totals into an overall CGPA. Credit-weighted formula works for Indian 10-point and Pakistan HEC 4.0 scales.",
+      "Combine India 10-point or Pakistan HEC semester SGPAs and credits into one CGPA. A US 4.0 cumulative GPA is a different calculator.",
   },
   "/cgpa-calculator": {
-    title: "CGPA Calculator — Semester SGPA from Courses & Credits",
+    title: "CGPA Calculator — India 10-Point & HEC",
     description:
-      "Calculate one semester's SGPA from course grades and credit hours on the Indian 10-point or Pakistan HEC 4.0 scale, then combine semesters into CGPA.",
+      "Calculate one semester SGPA from India 10-point grades (O–F) or Pakistan HEC letters and credits. US A–F percentages use the letter grade calculator.",
   },
   "/cgpa-to-gpa": {
-    title: "CGPA to GPA Converter — India 10-Point to US 4.0",
+    title: "India CGPA to US 4.0 — Planning Estimate",
     description:
-      "Convert an Indian 10-point CGPA to an approximate US 4.0 GPA for grad school planning with linear-scale methods. An estimate, not a credential evaluation.",
+      "Estimate a US 4.0 from an Indian 10-point CGPA for planning only. A US class percentage still converts on the A–F letter calculator, not this one.",
   },
   "/mcmaster-gpa-to-us-gpa": {
     title: "McMaster GPA Calculator — 12-Point to US 4.0 GPA",
@@ -188,7 +188,7 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
   "/ca/letter-grade-calculator": {
     title: "Canada Letter Grade Calculator",
     description:
-      "See the percentage band for a Canadian letter grade on the illustrative preset. Your university’s calendar overrides this chart.",
+      "See the percentage band for a Canadian letter grade on the illustrative preset. Your university’s calendar overrides this chart. India CGPA and Pakistan HEC are separate tools.",
   },
   "/nz/gpa-calculator": {
     title: "New Zealand GPA Calculator — 9-Point Scale",
@@ -198,52 +198,52 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
   "/nz/cumulative-gpa-calculator": {
     title: "New Zealand Cumulative GPA Calculator",
     description:
-      "Combine New Zealand university terms on the 9-point GPA scale. Use the same grade-point table for every term.",
+      "Combine New Zealand university terms into one cumulative GPA on the 9-point scale. Use the same grade-point table for every term.",
   },
   "/nz/letter-grade-calculator": {
     title: "NZ Letter Grade Calculator — 9-Point University Scale",
     description:
-      "Look up a New Zealand university letter grade on the 9-point scale (A+ = 9), with its percentage band and GPA. University grades, not NCEA.",
+      "Look up a New Zealand university letter on the 9-point scale (A+ = 9), with its percentage band. University grades, not NCEA, US A–F, or India CGPA.",
   },
   "/uk/degree-classification-calculator": {
     title: "UK Degree Classification Calculator — First, 2:1, 2:2",
     description:
-      "Turn UK module marks into a degree class: First, 2:1, 2:2, or Third. UK results are not a US 4.0 GPA.",
+      "Turn UK module marks into a degree class: First, 2:1, 2:2, or Third, using credit-weighted averages. UK results are not a US 4.0 GPA.",
   },
   "/in/gpa-calculator": {
-    title: "India GPA Calculator — 10-Point CGPA",
+    title: "India Semester GPA — 10-Point O–F Average",
     description:
-      "Average Indian course grades on a 10-point CGPA scale. For a percentage, use the CGPA-to-percentage calculator and your board’s formula.",
+      "Average this term’s India 10-point course grades (O–F) and credits. CBSE percentage formulas and Pakistan HEC live on the CGPA converters. US A–F is a different scale.",
   },
   "/pk/gpa-calculator": {
-    title: "Pakistan GPA Calculator — HEC Scale",
+    title: "Pakistan HEC Term GPA — One Semester",
     description:
-      "Calculate a semester GPA on the Pakistan HEC-style scale. Confirm the grade-point table in your university prospectus.",
+      "Average one Pakistan semester on the HEC 4.0 scale. HEC’s B band is 71–74%, unlike a US B at 83–86%. CGPA-to-percentage uses the HEC converter.",
   },
   "/pk/cumulative-gpa-calculator": {
-    title: "Pakistan Cumulative GPA Calculator — HEC 4.0 Scale",
+    title: "Pakistan Cumulative CGPA — Add This Term",
     description:
-      "Combine Pakistani university semesters into an overall CGPA on the HEC 4.0 letter scale. Enter prior CGPA and credits, then add this term's courses.",
+      "Add this term’s HEC courses to a prior CGPA and credit total. If you already have each semester’s SGPA, use SGPA to CGPA. This is not a US 4.0 cumulative GPA.",
   },
   "/pk/cgpa-to-percentage": {
-    title: "Pakistan CGPA to Percentage Calculator — HEC §13.1",
+    title: "Pakistan CGPA to Percentage — HEC §13.1",
     description:
-      "Convert HEC CGPA to percentage with the §13.1 band table, plus the ×25 shortcut to compare. HEC no longer converts CGPA — use your transcript value.",
+      "Convert HEC CGPA to a percentage with the §13.1 band table, or compare the ×25 shortcut. This is not a US A–F letter chart. Use the percentage on your transcript.",
   },
   "/pk/percentage-to-cgpa": {
-    title: "Pakistan Percentage to CGPA Calculator — HEC Scale",
+    title: "Pakistan Percentage to CGPA — HEC Scale",
     description:
-      "Convert a percentage to an estimated HEC CGPA using the §13.1 bands or the unofficial ×25 shortcut. Your transcript figure is the official one.",
+      "Convert a Pakistan percentage to an estimated HEC CGPA with §13.1 bands or the ×25 shortcut. A US percentage-to-letter conversion uses the A–F calculator.",
   },
   "/pk/cgpa-calculator": {
-    title: "Pakistan Semester CGPA Calculator — HEC Grading",
+    title: "Pakistan SGPA — HEC Course Grades",
     description:
-      "Calculate one semester's SGPA on the Pakistan HEC 4.0 scale (A+ to F) from course grades and credit hours, then combine semesters into CGPA.",
+      "Turn this semester’s HEC course grades and credits into SGPA, then combine finished terms into CGPA. HEC letters are not the US A–F percentage chart.",
   },
   "/pk/sgpa-to-cgpa": {
-    title: "Pakistan SGPA to CGPA Calculator — HEC Formula",
+    title: "Pakistan SGPA to CGPA — HEC Formula",
     description:
-      "Combine HEC semester GPAs (SGPA) into an overall CGPA. Enter each semester's SGPA and credit total. The credit-weighted result is your Pakistan CGPA.",
+      "Combine marksheet SGPAs and their credit totals into a Pakistan CGPA. Use this when each semester SGPA is already printed. A US 4.0 cumulative GPA is separate.",
   },
   "/about": {
     title: "About GradCalc — Free Grade & GPA Tools",

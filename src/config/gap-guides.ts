@@ -15,7 +15,7 @@ export const gapGuides: GuideConfig[] = [
     keywords: ["what is a good gpa", "good gpa for college", "good high school gpa", "average gpa"],
     readTime: "8 min read",
     embeddedCalculator: "gpa-calculator",
-    relatedGuides: ["is-a-3-5-gpa-good", "how-to-calculate-gpa", "weighted-vs-unweighted-gpa", "gpa-scale-explained"],
+    relatedGuides: ["is-a-3-5-gpa-good", "how-to-calculate-gpa", "weighted-vs-unweighted-gpa", "gpa-scale-explained", "gpa-for-financial-aid"],
     relatedCalculators: ["gpa-calculator", "high-school-gpa-calculator", "college-gpa-calculator", "weighted-gpa-calculator"],
     relatedReference: [{ label: "US Grading Scale & GPA Scale", href: "/grading-scales/us" }],
     sections: [
@@ -76,13 +76,13 @@ export const gapGuides: GuideConfig[] = [
   {
     slug: "is-a-3-5-gpa-good",
     path: "/guides/is-a-3-5-gpa-good",
-    title: "Is a 3.5 GPA Good? (Plus 2.0, 3.0, 3.8, and 4.0 Explained)",
+    title: "Is a 3.5 GPA Good? Plus 2.0, 3.0, 3.8 and 4.0",
     description:
       "What a 2.0, 3.0, 3.5, 3.8, and 4.0 GPA mean in high school and college, what letter averages they reflect, and what each one typically opens up.",
     keywords: ["is a 3.5 gpa good", "is a 3.0 gpa good", "is a 3.8 gpa good", "is a 2.0 gpa good"],
     readTime: "9 min read",
     embeddedCalculator: "gpa-calculator",
-    relatedGuides: ["what-is-a-good-gpa", "how-to-raise-your-gpa", "weighted-vs-unweighted-gpa", "how-to-calculate-gpa"],
+    relatedGuides: ["what-is-a-good-gpa", "how-to-raise-your-gpa", "weighted-vs-unweighted-gpa", "how-to-calculate-gpa", "gpa-for-financial-aid"],
     relatedCalculators: ["gpa-calculator", "raise-gpa-calculator", "cumulative-gpa-calculator", "high-school-gpa-calculator"],
     sections: [
       {
@@ -146,16 +146,16 @@ export const gapGuides: GuideConfig[] = [
   {
     slug: "gpa-to-percentage",
     path: "/guides/gpa-to-percentage",
-    title: "GPA to Percentage: How Conversion Works (and Its Limits)",
+    title: "GPA to Percentage: How Conversion Works",
     description:
       "How to convert a 4.0 GPA to a percentage, why there is no single official formula, and which conversion your school or application expects.",
     keywords: ["gpa to percentage", "convert gpa to percentage", "4.0 gpa to percentage", "gpa percentage equivalent"],
     readTime: "7 min read",
-    relatedGuides: ["gpa-scale-explained", "cgpa-to-percentage", "university-cgpa-to-percentage", "understanding-letter-grades"],
-    relatedCalculators: ["percentage-to-letter-grade", "cgpa-to-percentage", "percentage-to-cgpa", "gpa-calculator"],
+    relatedGuides: ["gpa-scale-explained", "understanding-letter-grades", "how-to-calculate-gpa"],
+    relatedCalculators: ["percentage-to-letter-grade", "letter-grade-calculator", "gpa-calculator"],
     relatedReference: [
       { label: "US Grading Scale & GPA Scale", href: "/grading-scales/us" },
-      { label: "Grading Scales by Country", href: "/grading-scales" },
+      { label: "Different system: India & Pakistan CGPA to percentage", href: "/cgpa-to-percentage" },
     ],
     sections: [
       {
@@ -204,7 +204,7 @@ export const gapGuides: GuideConfig[] = [
   {
     slug: "university-cgpa-to-percentage",
     path: "/guides/university-cgpa-to-percentage",
-    title: "VTU, VIT, Anna, Mumbai & HEC CGPA to Percentage Formulas",
+    title: "VTU, VIT, Anna, Mumbai & HEC CGPA to Percentage",
     description:
       "Commonly cited CGPA-to-percentage formulas for VTU, VIT, Anna University, Mumbai University, and HEC Pakistan, with worked examples and verification tips.",
     keywords: [
@@ -280,7 +280,7 @@ export const gapGuides: GuideConfig[] = [
   {
     slug: "how-to-check-gpa-on-powerschool",
     path: "/guides/how-to-check-gpa-on-powerschool",
-    title: "How to Check Your GPA on PowerSchool (and Infinite Campus)",
+    title: "Check Your GPA on PowerSchool & Infinite Campus",
     description:
       "Where to find GPA in PowerSchool and Infinite Campus, why it may be missing, and how to calculate it yourself from your grades.",
     keywords: [
@@ -341,7 +341,7 @@ export const gapGuides: GuideConfig[] = [
   {
     slug: "canvas-what-if-grades",
     path: "/guides/canvas-what-if-grades",
-    title: "Canvas What-If Grades: How to Test Scores Before They Post",
+    title: "Canvas What-If Grades: Test Scores Before They Post",
     description:
       "How to use Canvas What-If grades to see how future scores change your course grade, plus limits and how to double-check the math.",
     keywords: ["canvas what if grades", "canvas what if scores", "what if grades canvas", "show what if scores canvas"],
@@ -396,7 +396,7 @@ export const gapGuides: GuideConfig[] = [
   {
     slug: "latin-honors-gpa",
     path: "/guides/latin-honors-gpa",
-    title: "Latin Honors GPA: Cum Laude, Magna Cum Laude & Summa Cum Laude",
+    title: "Latin Honors GPA: Cum Laude, Magna & Summa Cum Laude",
     description:
       "What cum laude, magna cum laude, and summa cum laude mean, why GPA cutoffs differ by school, and how to check whether you are on track.",
     keywords: ["latin honors gpa", "cum laude gpa", "magna cum laude gpa", "summa cum laude gpa"],
@@ -450,7 +450,7 @@ export const gapGuides: GuideConfig[] = [
   {
     slug: "gpa-for-financial-aid",
     path: "/guides/gpa-for-financial-aid",
-    title: "GPA for Financial Aid: Satisfactory Academic Progress (SAP) Explained",
+    title: "GPA for Financial Aid: SAP Requirements Explained",
     description:
       "How GPA affects federal financial aid through Satisfactory Academic Progress, what pace and maximum timeframe mean, and what to do if you fall below.",
     keywords: ["gpa for financial aid", "satisfactory academic progress gpa", "sap gpa requirement", "financial aid gpa requirement"],
@@ -515,7 +515,7 @@ export const gapGuides: GuideConfig[] = [
   {
     slug: "does-gpa-matter-for-jobs",
     path: "/guides/does-gpa-matter-for-jobs",
-    title: "Does GPA Matter for Jobs? When Employers Care and When They Don’t",
+    title: "Does GPA Matter for Jobs? When Employers Care",
     description:
       "When employers ask for GPA, common screening cutoffs, whether to list it on your resume, and what matters more after your first job.",
     keywords: ["does gpa matter for jobs", "gpa for jobs", "do employers look at gpa", "should i put gpa on resume"],
@@ -568,7 +568,7 @@ export const gapGuides: GuideConfig[] = [
   {
     slug: "rounding-gpa-on-resume",
     path: "/guides/rounding-gpa-on-resume",
-    title: "Can I Round Up My GPA? Rules for Resumes and Applications",
+    title: "Can I Round Up My GPA? Rules for Resumes",
     description:
       "When rounding your GPA is acceptable, how to round correctly to one or two decimals, and why you should never round up on official applications.",
     keywords: ["can i round up my gpa", "rounding gpa on resume", "round gpa 3.49", "gpa decimal places"],
@@ -682,7 +682,7 @@ export const gapGuides: GuideConfig[] = [
   {
     slug: "gpa-needed-for-uc-csu",
     path: "/guides/gpa-needed-for-uc-csu",
-    title: "GPA for UC Admission (and CSU): Minimums vs Competitive Ranges",
+    title: "GPA for UC & CSU Admission: Minimum vs Competitive",
     description:
       "Minimum GPA for UC and CSU admission, how each system calculates GPA, why competitive ranges are higher, and how to estimate your own UC and CSU GPA.",
     keywords: ["gpa for uc admission", "csu gpa requirement", "uc minimum gpa", "gpa needed for csu"],

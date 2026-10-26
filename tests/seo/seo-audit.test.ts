@@ -1,7 +1,8 @@
 import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
+import type { CalculatorSlug } from "@/types/calculator";
 import { describe, expect, it } from "vitest";
-import { calculators } from "@/config/calculators";
+import { calculatorBySlug, calculators } from "@/config/calculators";
 import { indexableGeoCalculatorPaths, seoRedirects } from "@/lib/seo/intent-urls";
 import { calculatorContent } from "@/config/calculator-content";
 import { calculatorKeywords } from "@/lib/seo/keywords";
@@ -20,7 +21,7 @@ import {
 import robots from "@/app/robots";
 import sitemap from "@/app/sitemap";
 import { getCalculatorPath } from "@/config/calculators";
-import { calculatorResourceLinks } from "@/config/calculator-links";
+import { calculatorResourceLinks, intentMismatchLink } from "@/config/calculator-links";
 import { footerNav, mainNav } from "@/config/navigation";
 import { calculatorHreflangLanguages, countryHubHreflangLanguages } from "@/lib/seo/hreflang";
 import { pageUpdated } from "@/config/page-updated";
@@ -28,6 +29,7 @@ import { siteConfig } from "@/config/site";
 import { siteFaqs } from "@/config/site-faq";
 import { assertSameOrigin, canonicalUrlForPath, isRedirectOnlyPath } from "@/lib/seo/canonical";
 import { createPageMetadata } from "@/lib/seo/metadata";
+import { DISTINCT_PAGE_COPY } from "@/lib/seo/page-copy";
 import { isLowValueProgrammaticPath } from "@/lib/seo/programmatic-pages";
 
 describe("SEO audit", () => {
@@ -411,6 +413,37 @@ describe("SEO audit", () => {
     const appSource = readFileSync(resolve("src/app/layout.tsx"), "utf8");
     expect(appSource).not.toMatch(/Loading calculator/i);
     expect(appSource).not.toMatch(/sr-only">Loading/);
+  });
+
+  it("keeps US A–F letter tools and India/Pakistan CGPA tools in separate related lists", () => {
+    const letter = new Set<CalculatorSlug>(["letter-grade-calculator", "percentage-to-letter-grade"]);
+    const cgpa = new Set<CalculatorSlug>([
+      "cgpa-calculator",
+      "cgpa-to-percentage",
+      "percentage-to-cgpa",
+      "sgpa-to-cgpa",
+      "cgpa-to-gpa",
+    ]);
+    for (const slug of letter) {
+      for (const related of calculatorBySlug[slug].relatedSlugs) {
+        expect(cgpa.has(related), `${slug} related ${related}`).toBe(false);
+      }
+      expect(intentMismatchLink(slug)?.path).toMatch(/cgpa/);
+    }
+    for (const slug of cgpa) {
+      for (const related of calculatorBySlug[slug].relatedSlugs) {
+        expect(letter.has(related), `${slug} related ${related}`).toBe(false);
+        expect(related === "gpa-calculator" || related === "cumulative-gpa-calculator", related).toBe(false);
+      }
+      expect(intentMismatchLink(slug)?.path.startsWith("/")).toBe(true);
+    }
+    expect(intentMismatchLink("gpa-calculator", "/in/gpa-calculator")?.path).toBe("/letter-grade-calculator");
+    expect(intentMismatchLink("gpa-calculator", "/au/gpa-calculator")).toBeUndefined();
+    expect(DISTINCT_PAGE_COPY["/percentage-to-letter-grade"].title).toMatch(/US|A–F/);
+    expect(DISTINCT_PAGE_COPY["/percentage-to-letter-grade"].description).not.toMatch(/other grading scales/i);
+    expect(DISTINCT_PAGE_COPY["/percentage-to-cgpa"].title).toMatch(/India|Pakistan/);
+    expect(DISTINCT_PAGE_COPY["/letter-grade-calculator"].description).toMatch(/India|Pakistan|HEC/);
+    expect(DISTINCT_PAGE_COPY["/cgpa-calculator"].description).toMatch(/India|HEC|Pakistan/);
   });
 
   it("weighted-grade copy is consistent about 100% weights", () => {

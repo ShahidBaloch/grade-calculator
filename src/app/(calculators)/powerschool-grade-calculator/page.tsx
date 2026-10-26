@@ -10,7 +10,7 @@ import { absoluteUrl } from "@/config/site";
 const path = "/powerschool-grade-calculator";
 const title = "PowerSchool Grade Calculator — Check Your Class Grade";
 const description =
-  "Free PowerSchool grade calculator for US students and parents. Enter the category weights and scores from PowerSchool to check your class grade and what you need next.";
+  "Free PowerSchool grade calculator. Enter your PowerSchool category weights and scores to check your class grade and see what you need next.";
 
 /** Common US high school PowerSchool categories. */
 const powerSchoolCategories: WeightedRow[] = [

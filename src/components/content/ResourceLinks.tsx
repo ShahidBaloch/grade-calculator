@@ -3,12 +3,23 @@ import { ArrowRight } from "lucide-react";
 import type { CalculatorResourceLinks } from "@/config/calculator-links";
 
 export function ResourceLinks({ links }: { links: CalculatorResourceLinks }) {
-  if (!links.guide && !links.gradingScale) return null;
+  if (!links.guide && !links.gradingScale && !links.otherSystem) return null;
 
   return (
     <section className="rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-4">
       <h2 className="text-sm font-semibold">Helpful resources</h2>
       <ul className="mt-2 space-y-2">
+        {links.otherSystem && (
+          <li>
+            <Link
+              href={links.otherSystem.path}
+              className="inline-flex min-h-6 items-center gap-1 text-sm text-[var(--color-primary)] hover:underline"
+            >
+              {links.otherSystem.title}
+              <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          </li>
+        )}
         {links.guide && (
           <li>
             <Link

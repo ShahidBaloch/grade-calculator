@@ -83,7 +83,12 @@ export default async function ScorePairPage({ params }: PageProps) {
   const { title, description } = copyFor(pair);
   const f = facts(pair);
   const hasChart = questionCharts.some((c) => c.total === total);
-  const neighbors = scorePairs.filter((p) => p.total === total && Math.abs(p.score - score) <= 3 && p.score !== score);
+  // Closest pairs by score, not a fixed ±3 window: /150 and /200 pairs are spaced 4–10 apart and would get no links.
+  const neighbors = scorePairs
+    .filter((p) => p.total === total && p.score !== score)
+    .sort((a, b) => Math.abs(a.score - score) - Math.abs(b.score - score))
+    .slice(0, 6)
+    .sort((a, b) => a.score - b.score);
   const sameScore = scorePairs.filter((p) => p.score === score && p.total !== total).slice(0, 6);
 
   const faqs = [
