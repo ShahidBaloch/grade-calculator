@@ -15,5 +15,8 @@ describe("geoCalculatorHeading", () => {
     expect(geoCalculatorHeading("/ca", "Canada", "Final Grade Calculator")).toBe(
       "Canada Final Grade Calculator",
     );
+    expect(geoCalculatorHeading("/au", "Australia", "US Letter Grade Calculator")).toBe(
+      "Australia Letter Grade Calculator",
+    );
   });
 });

@@ -9,7 +9,8 @@ const TOOL_NAME_ALREADY_HAS_HUB: Partial<Record<string, RegExp>> = {
 };
 
 export function geoCalculatorHeading(hubPath: string, hubName: string, toolName: string): string {
-  const trimmed = toolName.trim();
+  // "US Letter Grade Calculator" on /au would read "Australia US Letter…" — the hub scale replaces US.
+  const trimmed = hubPath === "/us" ? toolName.trim() : toolName.trim().replace(/^US\s+/, "");
   if (TOOL_NAME_ALREADY_HAS_HUB[hubPath]?.test(trimmed)) return trimmed;
   if (trimmed.toLowerCase().startsWith(hubName.toLowerCase())) return trimmed;
   return `${hubName} ${trimmed}`;

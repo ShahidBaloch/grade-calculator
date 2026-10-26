@@ -250,6 +250,21 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
     description:
       "Turn UK module marks into a degree class: First, 2:1, 2:2, or Third, using credit-weighted averages. UK results are not a US 4.0 GPA.",
   },
+  "/uk/gcse-grade-calculator": {
+    title: "GCSE Grade Calculator UK — Mark to 9–1 Grade",
+    description:
+      "Turn a GCSE paper or mock percentage into an England 9–1 grade, with the A*–G equivalent and whether it counts as a standard pass (4) or strong pass (5).",
+  },
+  "/uk/weighted-grade-calculator": {
+    title: "UK Module Mark Calculator — Weighted Coursework & Exam",
+    description:
+      "Combine coursework and exam weights from your module handbook into one module mark, shown against UK bands: First, 2:1, 2:2 and Third.",
+  },
+  "/uk/letter-grade-calculator": {
+    title: "UK Mark to Degree Class — First, 2:1, 2:2, Third Bands",
+    description:
+      "See which UK classification band a percentage mark falls in: First 70%+, 2:1 60–69%, 2:2 50–59%, Third 40–49%. UK marks are not US letter grades.",
+  },
   "/in/gpa-calculator": {
     title: "India Semester GPA — 10-Point O–F Average",
     description:

@@ -83,12 +83,21 @@ export function seoRedirects(): Array<{ source: string; destination: string }> {
     }
   }
 
+  // Short names people type for the McMaster converter, at the root and under any hub (/in/mcmaster).
+  const mcmasterPath = canonicalPathForSlug("mcmaster-gpa-to-us-gpa", "/ca");
+  for (const prefix of ["", ...countryHubs.map((hub) => hub.path)]) {
+    for (const alias of ["mcmaster", "mcmaster-gpa-calculator"]) {
+      pairs.push({ source: `${prefix}/${alias}`, destination: mcmasterPath });
+    }
+  }
+
   for (const slug of UK_GPA_SLUGS) {
     pairs.push({
       source: `/uk/${slug}`,
       destination: "/uk/degree-classification-calculator",
     });
   }
+  pairs.push({ source: "/uk/gcse", destination: canonicalPathForSlug("gcse-grade-calculator", "/uk") });
 
   for (const hub of countryHubs) {
     if (hub.path === mainCountryPath) continue;

@@ -27,13 +27,13 @@ describe("country-path", () => {
     );
     expect(resolveSiteHref("/gpa-calculator", "/uk")).toBe("/uk/degree-classification-calculator");
     expect(resolveCalculatorPath("letter-grade-calculator", "/uk/degree-classification-calculator")).toBe(
-      "/letter-grade-calculator",
+      "/uk/letter-grade-calculator",
     );
     expect(resolveCalculatorPath("weighted-grade-calculator", "/uk/degree-classification-calculator")).toBe(
-      "/weighted-grade-calculator",
+      "/uk/weighted-grade-calculator",
     );
     expect(resolveCalculatorPath("gcse-grade-calculator", "/uk/degree-classification-calculator")).toBe(
-      "/gcse-grade-calculator",
+      "/uk/gcse-grade-calculator",
     );
     expect(resolveCalculatorPath("cgpa-to-gpa", "/uk/degree-classification-calculator")).toBe(
       "/in/cgpa-to-gpa",

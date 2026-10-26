@@ -1,4 +1,3 @@
-import { getCalculatorPath } from "@/config/calculator-paths";
 import { calculatorBySlug } from "@/config/calculators";
 import { countryHubs } from "@/config/country-hubs";
 import { mainCountryPath } from "@/config/country-hub-routes";
@@ -15,14 +14,19 @@ export function selectableCalculatorSlugsForHub(hubPath: string): CalculatorSlug
 }
 
 /**
- * Menu rows for a country hub: its geo tools, then the hub's other featured tools (e.g. GCSE on UK)
- * at their single canonical URL. Rows that resolve to the same page are listed once.
+ * Menu rows for a country hub: its geo tools, then the hub's other featured and menu-only tools
+ * (e.g. GCSE on UK, Final Grade on AU) at their single canonical URL. Rows that resolve to the
+ * same page are listed once.
  */
 export function hubMenuCalculatorSlugs(hubPath: string): CalculatorSlug[] {
   const hub = countryHubs.find((h) => h.path === hubPath);
   if (!hub) return [];
   const seen = new Set<string>();
-  return [...selectableCalculatorSlugsForHub(hubPath), ...hub.featuredCalculators].filter((slug) => {
+  return [
+    ...selectableCalculatorSlugsForHub(hubPath),
+    ...hub.featuredCalculators,
+    ...(hub.menuOnlyCalculators ?? []),
+  ].filter((slug) => {
     if (slug === "ez-grader") return false;
     const target = canonicalPathForSlug(slug, hubPath);
     if (seen.has(target)) return false;
@@ -38,8 +42,9 @@ export function countryCalculatorNavLinks(hubPath: string): NavLink[] {
 
   return [
     ...hubMenuCalculatorSlugs(hubPath).map((slug) => ({
-      label: calculatorBySlug[slug].name,
-      href: getCalculatorPath(slug),
+      // The hub's own scale replaces US here ("US Letter Grade Calculator" → "Letter Grade Calculator").
+      label: calculatorBySlug[slug].name.replace(/^US\s+/, ""),
+      href: canonicalPathForSlug(slug, hubPath),
     })),
     { label: `All ${hub.name} tools`, href: hub.path },
     { label: "All Calculators", href: "/calculators" },

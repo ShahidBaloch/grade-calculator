@@ -77,6 +77,9 @@ export const pageUpdated: Record<string, string> = {
   "/score": "2026-10-25",
   "/uk-degree-to-us-gpa-reference": "2026-10-05",
   "/uk/degree-classification-calculator": "2026-10-05",
+  "/uk/gcse-grade-calculator": "2026-10-26",
+  "/uk/weighted-grade-calculator": "2026-10-26",
+  "/uk/letter-grade-calculator": "2026-10-26",
   "/weighted-gpa-calculator": "2026-10-20",
   "/weighted-grade-calculator": "2026-10-20",
   // Country calculators

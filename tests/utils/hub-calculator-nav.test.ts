@@ -11,7 +11,8 @@ describe("hub calculator nav catalog", () => {
   it("lists only tools with a dedicated hub URL", () => {
     const uk = selectableCalculatorSlugsForHub("/uk");
     expect(uk).toContain("degree-classification-calculator");
-    expect(uk).not.toContain("gcse-grade-calculator");
+    expect(uk).toContain("gcse-grade-calculator");
+    expect(uk).not.toContain("final-grade-calculator");
     expect(uk).not.toContain("gpa-calculator");
     expect(uk).not.toContain("raise-gpa-calculator");
     expect(uk).not.toContain("cgpa-to-gpa");
@@ -26,10 +27,20 @@ describe("hub calculator nav catalog", () => {
   });
 
   it("menu still lists each hub's featured tools at their canonical URL", () => {
-    // UK GCSE has one URL (/gcse-grade-calculator) but UK visitors must find it in the UK menu.
+    // UK menu keeps UK-scale tools on /uk; Final Grade has one worldwide URL but is still listed.
     const ukMenu = countryCalculatorNavLinks("/uk").map((link) => link.href);
-    expect(ukMenu).toContain("/gcse-grade-calculator");
+    expect(ukMenu).toContain("/uk/gcse-grade-calculator");
+    expect(ukMenu).toContain("/uk/weighted-grade-calculator");
+    expect(ukMenu).toContain("/uk/letter-grade-calculator");
     expect(ukMenu).toContain("/uk/degree-classification-calculator");
+    expect(ukMenu).toContain("/final-grade-calculator");
+    const ukLabels = countryCalculatorNavLinks("/uk").map((link) => link.label);
+    expect(ukLabels).toContain("Letter Grade Calculator");
+    expect(ukLabels.some((label) => label.startsWith("US "))).toBe(false);
+
+    // AU / PK list Final Grade at its worldwide URL (menu-only, no geo page).
+    expect(countryCalculatorNavLinks("/au").map((link) => link.href)).toContain("/final-grade-calculator");
+    expect(countryCalculatorNavLinks("/pk").map((link) => link.href)).toContain("/final-grade-calculator");
 
     expect(hubMenuCalculatorSlugs("/nz")).toContain("final-grade-calculator");
     expect(hubMenuCalculatorSlugs("/in")).toContain("final-grade-calculator");

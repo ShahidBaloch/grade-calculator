@@ -13,6 +13,11 @@ export interface CountryHubConfig {
   faqs?: FaqItem[];
   gradingScalePath: string;
   featuredCalculators: CalculatorSlug[];
+  /**
+   * Extra Calculators-menu rows that open the single worldwide URL. Unlike featuredCalculators,
+   * these never create a geo page, sitemap entry or hreflang (no local copy to justify one).
+   */
+  menuOnlyCalculators?: CalculatorSlug[];
   keywords: string[];
   hreflang: string;
   /** Overrides the default “tools lock to this hub’s scale” banner. */
@@ -235,6 +240,7 @@ export const countryHubs: CountryHubConfig[] = [
       "weighted-grade-calculator",
       "letter-grade-calculator",
     ],
+    menuOnlyCalculators: ["final-grade-calculator"],
     keywords: ["australian gpa calculator", "uq gpa scale", "monash gpa", "grade calculator australia"],
     hreflang: "en-AU",
   },
@@ -399,6 +405,7 @@ export const countryHubs: CountryHubConfig[] = [
       "gpa-calculator",
       "cumulative-gpa-calculator",
     ],
+    menuOnlyCalculators: ["final-grade-calculator"],
     keywords: [
       "cgpa calculator pakistan",
       "hec cgpa to percentage",

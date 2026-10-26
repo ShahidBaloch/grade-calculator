@@ -184,6 +184,7 @@ describe("hub calculator offerings (all countries)", () => {
   it("redirects non-indexable geo URLs away from hub duplicates", () => {
     expect(canonicalPathForSlug("final-grade-calculator", "/uk")).toBe("/final-grade-calculator");
     expect(canonicalPathForSlug("average-grade-calculator", "/au")).toBe("/average-grade-calculator");
-    expect(canonicalPathForSlug("gcse-grade-calculator", "/uk")).toBe("/gcse-grade-calculator");
+    expect(canonicalPathForSlug("gcse-grade-calculator", "/uk")).toBe("/uk/gcse-grade-calculator");
+    expect(canonicalPathForSlug("gcse-grade-calculator")).toBe("/gcse-grade-calculator");
   });
 });

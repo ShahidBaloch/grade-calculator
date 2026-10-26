@@ -27,7 +27,16 @@ describe("indexable geo pages (SEO structure)", () => {
     const redirects = new Map(seoRedirects().map((r) => [r.source, r.destination]));
     expect(redirects.get("/uk/final-grade-calculator")).toBe("/final-grade-calculator");
     expect(redirects.get("/au/average-grade-calculator")).toBe("/average-grade-calculator");
-    expect(redirects.get("/uk/gcse-grade-calculator")).toBe("/gcse-grade-calculator");
+  });
+
+  it("serves UK-scale GCSE, weighted and letter pages under /uk", () => {
+    for (const slug of ["gcse-grade-calculator", "weighted-grade-calculator", "letter-grade-calculator"] as const) {
+      expect(isIndexableGeoCalculator("/uk", slug)).toBe(true);
+      expect(generateGeoStaticParams("uk").map((p) => p.slug)).toContain(slug);
+    }
+    const redirects = new Map(seoRedirects().map((r) => [r.source, r.destination]));
+    expect(redirects.has("/uk/gcse-grade-calculator")).toBe(false);
+    expect(redirects.get("/uk/gcse")).toBe("/uk/gcse-grade-calculator");
   });
 
   it("keeps scale-dependent tools on hubs where letter bands differ (P0 regressions)", () => {
@@ -52,6 +61,7 @@ describe("indexable geo pages (SEO structure)", () => {
     const redirects = new Map(seoRedirects().map((r) => [r.source, r.destination]));
     expect(redirects.get("/mcmaster-gpa-to-us-gpa")).toBe("/ca/mcmaster-gpa-to-us-gpa");
     expect(redirects.get("/uk/mcmaster-gpa-to-us-gpa")).toBe("/ca/mcmaster-gpa-to-us-gpa");
+    expect(redirects.get("/in/mcmaster")).toBe("/ca/mcmaster-gpa-to-us-gpa");
     expect(canonicalPathForSlug("mcmaster-gpa-to-us-gpa")).toBe("/ca/mcmaster-gpa-to-us-gpa");
   });
 
