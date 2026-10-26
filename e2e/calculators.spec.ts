@@ -49,12 +49,14 @@ test.describe("Core calculator flows", () => {
     await expect(page.getByText("Upper Second (2:1)").first()).toBeVisible();
   });
 
-  test("UK hub GCSE URL redirects to the single worldwide GCSE page", async ({ page }) => {
+  test("UK hub serves its own GCSE page, and /uk/gcse redirects to it", async ({ page }) => {
     const response = await page.goto("/uk/gcse-grade-calculator");
-    expect(response?.status()).toBeLessThan(400);
-    await expect(page).toHaveURL(/\/gcse-grade-calculator$/);
-    await expect(page).not.toHaveURL(/\/uk\//);
+    expect(response?.status()).toBe(200);
+    await expect(page).toHaveURL(/\/uk\/gcse-grade-calculator$/);
     await expect(page.getByRole("heading", { level: 1, name: /gcse/i })).toBeVisible();
+
+    await page.goto("/uk/gcse");
+    await expect(page).toHaveURL(/\/uk\/gcse-grade-calculator$/);
   });
 
   test("GCSE calculator maps a percentage", async ({ page }) => {

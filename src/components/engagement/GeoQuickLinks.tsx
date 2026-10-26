@@ -17,7 +17,7 @@ export function GeoQuickLinks() {
   const links = quickToolsForCountry(country);
 
   return (
-    <nav aria-label="Other calculators" className="offscreen-defer no-print">
+    <nav aria-label="Other calculators" className="no-print">
       <p className="text-sm font-medium text-[var(--color-text)]">Popular next steps</p>
       <ul className="mt-2 flex flex-wrap gap-2">
         {links.map((link) => (

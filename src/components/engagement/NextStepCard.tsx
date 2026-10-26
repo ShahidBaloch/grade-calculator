@@ -7,6 +7,7 @@ import type { CalculatorSlug } from "@/types/calculator";
 import type { EngagementFlow } from "@/config/engagement-flows";
 import { resolveCalculatorPath } from "@/lib/utils/country-path";
 import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/card";
+import { usePreferredCountryHub } from "@/hooks/usePreferredCountryHub";
 
 function resolveHref(to: EngagementFlow["to"], pathname: string | null): string {
   if (to === "grading-scales") return "/grading-scales";
@@ -18,6 +19,8 @@ function resolveHref(to: EngagementFlow["to"], pathname: string | null): string 
 
 export function NextStepCard({ flow }: { flow: EngagementFlow }) {
   const pathname = usePathname();
+  // Re-render with the session hub after hydration (null in server HTML).
+  usePreferredCountryHub();
   const href = resolveHref(flow.to, pathname);
 
   return (

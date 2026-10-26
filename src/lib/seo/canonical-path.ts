@@ -1,6 +1,5 @@
 import { getCalculatorPath } from "../../config/calculator-paths";
-import { countryHubs } from "../../config/country-hubs";
-import { mainCountryPath } from "../../config/country-hub-routes";
+import { countryHubRoutes, mainCountryPath } from "../../config/country-hub-routes";
 import type { CalculatorSlug } from "../../types/calculator";
 
 /**
@@ -120,7 +119,7 @@ export function isHubOfferedCalculator(hubPath: string, slug: CalculatorSlug): b
 
   if (GENERIC_HUB_CALCULATORS.has(slug)) return true;
 
-  const hub = countryHubs.find((h) => h.path === hubPath);
+  const hub = countryHubRoutes.find((h) => h.path === hubPath);
   if (!hub) return false;
 
   if (COUNTRY_SPECIFIC_SLUGS[hubPath]?.includes(slug)) return true;
@@ -143,7 +142,7 @@ export function isHubOfferedCalculator(hubPath: string, slug: CalculatorSlug): b
  */
 export function isIndexableGeoCalculator(hubPath: string, slug: CalculatorSlug): boolean {
   if (hubPath === mainCountryPath) return false;
-  const hub = countryHubs.find((h) => h.path === hubPath);
+  const hub = countryHubRoutes.find((h) => h.path === hubPath);
   if (!hub?.featuredCalculators.includes(slug)) return false;
   if (!isHubOfferedCalculator(hubPath, slug)) return false;
   return isCountrySpecificSlug(hubPath, slug);
@@ -157,7 +156,7 @@ export function isCountrySpecificSlug(hubPath: string, slug: CalculatorSlug): bo
   if (hubPath === mainCountryPath) return false;
   if (COUNTRY_SPECIFIC_SLUGS[hubPath]?.includes(slug)) return true;
   if (hubPath === "/uk") return false;
-  const hub = countryHubs.find((h) => h.path === hubPath);
+  const hub = countryHubRoutes.find((h) => h.path === hubPath);
   return Boolean(hub?.featuredCalculators.includes(slug));
 }
 

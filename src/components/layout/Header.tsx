@@ -12,6 +12,7 @@ import { cn } from "@/lib/utils";
 import { CalculatorsMenuButton, CountryMenuButton } from "./CountryMenuButton";
 import { LogoMark } from "./LogoMark";
 import { ThemeToggle } from "./ThemeToggle";
+import { usePreferredCountryHub } from "@/hooks/usePreferredCountryHub";
 
 const loadMenus = () => import("./HeaderMenus");
 const DesktopNavMenu = lazy(() => loadMenus().then((m) => ({ default: m.DesktopNavMenu })));
@@ -22,6 +23,8 @@ const MOBILE_MENU = "__mobile__";
 /** `nav` comes from the server layout so the nav catalog is not bundled into client JS. */
 export function Header({ nav }: { nav: NavItem[] }) {
   const pathname = usePathname();
+  // Re-render with the session hub after hydration (null in server HTML).
+  usePreferredCountryHub();
   // Dropdown chunks load only when opened — keeps initial JS off the critical path (Lighthouse TBT).
   const [menusReady, setMenusReady] = useState(false);
   const [openOnLoad, setOpenOnLoad] = useState<string | null>(null);

@@ -136,9 +136,7 @@ export function GpaCalculator() {
         )}
       </div>
       {getPrimaryFlow("gpa-calculator") && result.status === "valid" && (
-        <div className="offscreen-defer">
-          <NextStepCard flow={getPrimaryFlow("gpa-calculator")!} />
-        </div>
+        <NextStepCard flow={getPrimaryFlow("gpa-calculator")!} />
       )}
     </div>
   );

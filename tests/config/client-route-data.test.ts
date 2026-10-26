@@ -8,9 +8,13 @@ import { CALCULATOR_SLUGS } from "@/types/calculator";
 // The slim route modules are what client bundles import; they must match the full configs.
 describe("client route data stays in sync with page configs", () => {
   it("country hub routes match country hub configs", () => {
-    expect(countryHubRoutes.map(({ code, path, gradingScalePath }) => ({ code, path, gradingScalePath }))).toEqual(
-      countryHubs.map(({ code, path, gradingScalePath }) => ({ code, path, gradingScalePath })),
-    );
+    const pick = ({ code, path, gradingScalePath, featuredCalculators }: (typeof countryHubRoutes)[number]) => ({
+      code,
+      path,
+      gradingScalePath,
+      featuredCalculators: [...featuredCalculators],
+    });
+    expect(countryHubRoutes.map(pick)).toEqual(countryHubs.map(pick));
   });
 
   it("calculator slug list matches calculator configs", () => {

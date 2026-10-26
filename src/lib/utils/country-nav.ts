@@ -19,6 +19,16 @@ export function isCountryLinkActive(href: string, pathname: string | null | unde
   return (activeCountryHub(pathname) ?? mainCountryPath) === href;
 }
 
+/**
+ * Header Countries menu tick. Uses the session hub too, so it matches the trigger label
+ * ("Pakistan" on /calculators after visiting /pk). Client-only menus — the SSR footer keeps
+ * {@link isCountryLinkActive}.
+ */
+export function isMenuCountrySelected(href: string, pathname: string | null | undefined): boolean {
+  if (!pathname) return false;
+  return (navigationCountryHub(pathname) ?? mainCountryPath) === href;
+}
+
 /** Menu links for `item` on this route: country catalog when a hub is in context, else worldwide. */
 export function navChildrenFor(item: NavItem, pathname: string | null | undefined): NavLink[] | undefined {
   const hub = navigationCountryHub(pathname);

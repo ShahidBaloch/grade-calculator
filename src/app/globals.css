@@ -208,11 +208,6 @@ p a {
     padding-bottom: 0 !important;
   }
 
-  .offscreen-defer {
-    content-visibility: visible !important;
-    contain-intrinsic-size: none !important;
-  }
-
   a[href]::after {
     content: none !important;
   }
@@ -304,12 +299,6 @@ p a {
 .dark .country-chip:hover {
   border-color: var(--color-primary-hover);
   color: var(--color-primary-hover);
-}
-
-/* Below-fold blocks skip layout until they near the viewport so the hero can paint sooner. */
-.offscreen-defer {
-  content-visibility: auto;
-  contain-intrinsic-size: auto 28rem;
 }
 
 .country-footer-link {

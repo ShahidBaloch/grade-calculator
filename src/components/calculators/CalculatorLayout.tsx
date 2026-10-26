@@ -72,7 +72,7 @@ export function CalculatorLayout({
         )}
       </div>
       {below && (
-        <div className="offscreen-defer no-print mt-12 max-w-3xl border-t border-[var(--color-border)] pt-10">
+        <div className="no-print mt-12 max-w-3xl border-t border-[var(--color-border)] pt-10">
           {below}
         </div>
       )}

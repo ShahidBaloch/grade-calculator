@@ -1,20 +1,21 @@
 import { URL_STATE_PARAM } from "@/lib/constants";
 
+/**
+ * UTF-8 → base64 with btoa/atob (browser and Node 16+). Avoids `Buffer`, which pulled a ~9 KB
+ * polyfill into every calculator page, and lets names like "Español" survive (raw btoa throws).
+ * ASCII-only links made by the old encoder decode the same way.
+ */
 export function encodeCalculatorState(state: unknown): string {
-  const json = JSON.stringify(state);
-  if (typeof window !== "undefined" && typeof window.btoa === "function") {
-    return window.btoa(json);
-  }
-  return Buffer.from(json, "utf-8").toString("base64");
+  const bytes = new TextEncoder().encode(JSON.stringify(state));
+  let binary = "";
+  for (const byte of bytes) binary += String.fromCharCode(byte);
+  return btoa(binary);
 }
 
 export function decodeCalculatorState<T>(encoded: string): T | null {
   try {
-    const json =
-      typeof window !== "undefined" && typeof window.atob === "function"
-        ? window.atob(encoded)
-        : Buffer.from(encoded, "base64").toString("utf-8");
-    return JSON.parse(json) as T;
+    const bytes = Uint8Array.from(atob(encoded), (char) => char.charCodeAt(0));
+    return JSON.parse(new TextDecoder().decode(bytes)) as T;
   } catch {
     return null;
   }

@@ -3,7 +3,7 @@
 import { AppLink as Link } from "@/components/navigation/AppLink";
 import { ArrowRight, Check, Menu } from "lucide-react";
 import type { NavItem } from "@/config/navigation";
-import { isCountryLinkActive, isNavItemActive, isNavLinkCurrent, navChildrenFor } from "@/lib/utils/country-nav";
+import { isMenuCountrySelected, isNavItemActive, isNavLinkCurrent, navChildrenFor } from "@/lib/utils/country-nav";
 import { resolveSiteHref } from "@/lib/utils/country-path";
 import { cn } from "@/lib/utils";
 import { CalculatorsMenuButton, CountryMenuButton } from "./CountryMenuButton";
@@ -88,7 +88,7 @@ function CountryDesktopMenu({
         className="w-64 overflow-visible rounded-lg border-[var(--color-border-strong)] p-1.5 shadow-lg"
       >
         {item.children?.map((child) => {
-          const selected = isCountryLinkActive(child.href, pathname);
+          const selected = isMenuCountrySelected(child.href, pathname);
           const currentPage = pathname === child.href;
           return (
             <DropdownMenuItem
@@ -147,7 +147,7 @@ export function MobileNavSheet({
                 </p>
                 {(navChildrenFor(item, pathname) ?? item.children).map((child) => {
                   const current = isNavLinkCurrent(child.href, pathname);
-                  const selected = child.flag ? isCountryLinkActive(child.href, pathname) : current;
+                  const selected = child.flag ? isMenuCountrySelected(child.href, pathname) : current;
                   return (
                     <Link
                       key={`${child.href}-${child.label}`}
