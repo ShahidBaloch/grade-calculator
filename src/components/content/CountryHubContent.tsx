@@ -5,10 +5,11 @@ import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 import { calculatorBySlug } from "@/config/calculators";
 import { canonicalPathForSlug } from "@/lib/seo/intent-urls";
-import type { CountryHubConfig } from "@/config/country-hubs";
+import { countryHubHeading, type CountryHubConfig } from "@/config/country-hubs";
 import { getScale } from "@/lib/grading-scales";
 import { GeoLinkList } from "@/components/content/GeoProgrammaticPage";
 import { hubGeoLinkGroups } from "@/lib/seo/geo-programmatic";
+import { CountrySwitcher } from "@/components/content/CountrySwitcher";
 
 interface CountryHubContentProps {
   hub: CountryHubConfig;
@@ -29,9 +30,10 @@ export function CountryHubContent({ hub }: CountryHubContentProps) {
       <BreadcrumbJsonLd items={breadcrumbs} />
       <Breadcrumbs items={breadcrumbs} />
       <header className="mt-4 max-w-2xl">
-        <h1 className="text-3xl font-bold">{hub.name} grading tools</h1>
+        <h1 className="text-3xl font-bold">{countryHubHeading(hub)}</h1>
         <p className="mt-2 text-[var(--color-text-muted)]">{hub.description}</p>
       </header>
+      <CountrySwitcher currentPath={hub.path} />
 
       <section className="mt-8" aria-labelledby="hub-calculators-heading">
         <h2 id="hub-calculators-heading" className="text-xl font-semibold">Calculators</h2>

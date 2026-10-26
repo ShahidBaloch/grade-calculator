@@ -136,9 +136,9 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
       "Combine India 10-point or Pakistan HEC semester SGPAs and credits into one CGPA. A US 4.0 cumulative GPA is a different calculator.",
   },
   "/cgpa-calculator": {
-    title: "CGPA Calculator — India 10-Point & HEC",
+    title: "CGPA Calculator — India 10-Point SGPA",
     description:
-      "Calculate one semester SGPA from India 10-point grades (O–F) or Pakistan HEC letters and credits. US A–F percentages use the letter grade calculator.",
+      "Calculate semester SGPA from India 10-point grades (O–F) and credits. Choose Pakistan HEC in the grading scale for HEC letters. US A–F percentages use the letter grade calculator.",
   },
   "/cgpa-to-gpa": {
     title: "India CGPA to US 4.0 — Planning Estimate",

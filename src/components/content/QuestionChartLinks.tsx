@@ -17,7 +17,7 @@ export function QuestionChartLinks({ heading = "Grading scale by number of quest
             <Link
               href={questionChartPath(chart.total)}
               prefetch={false}
-              className="inline-flex min-h-11 items-center rounded-md border border-[var(--color-border)] px-3 text-sm font-medium hover:bg-[var(--color-bg-subtle)]"
+              className="inline-flex min-h-11 items-center rounded-md border border-[var(--color-btn-border)] bg-[var(--color-btn-bg)] px-3 text-sm font-medium text-[var(--color-text)] transition-colors hover:border-[var(--color-primary)] hover:text-[var(--color-primary)]"
             >
               {chart.total} questions
             </Link>

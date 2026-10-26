@@ -1,4 +1,4 @@
-import { letterToPercent, percentToLetter } from "@/lib/grading-scales";
+import { letterToPercent } from "@/lib/grading-scales";
 import { resolveGradeToGpaPoints } from "@/lib/grading-scales/grade-points";
 import type { ScaleId } from "@/types/grading-scale";
 

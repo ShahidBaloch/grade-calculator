@@ -1,6 +1,7 @@
 import { footerNav } from "@/config/navigation";
 import { siteConfig } from "@/config/site";
 import { CountryAwareLink } from "@/components/navigation/CountryAwareLink";
+import { FooterCountryLinks } from "./FooterCountryLinks";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -34,15 +35,7 @@ export function Footer() {
         </div>
         <div>
           <h2 className="mb-3 text-sm font-semibold">Countries</h2>
-          <ul className="space-y-1 text-sm text-[var(--color-text-muted)]">
-            {footerNav.countries.map((link) => (
-              <li key={link.href}>
-                <CountryAwareLink href={link.href} className="inline-flex min-h-6 items-center hover:text-[var(--color-primary)]">
-                  {link.label}
-                </CountryAwareLink>
-              </li>
-            ))}
-          </ul>
+          <FooterCountryLinks links={footerNav.countries} />
         </div>
         <div>
           <h2 className="mb-3 text-sm font-semibold">Reference</h2>

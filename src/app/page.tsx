@@ -62,7 +62,7 @@ function UsEocLinks() {
           <Link
             href="/eoc-grade-calculator"
             prefetch={false}
-            className="inline-flex min-h-11 items-center rounded-md border border-[var(--color-border)] px-3 text-sm font-medium hover:bg-[var(--color-bg-subtle)]"
+            className="inline-flex min-h-11 items-center rounded-md border border-[var(--color-btn-border)] bg-[var(--color-btn-bg)] px-3 text-sm font-medium text-[var(--color-text)] transition-colors hover:border-[var(--color-primary)] hover:text-[var(--color-primary)]"
           >
             EOC grade calculator
           </Link>
@@ -72,7 +72,7 @@ function UsEocLinks() {
             <Link
               href={link.href}
               prefetch={false}
-              className="inline-flex min-h-11 items-center rounded-md border border-[var(--color-border)] px-3 text-sm font-medium hover:bg-[var(--color-bg-subtle)]"
+              className="inline-flex min-h-11 items-center rounded-md border border-[var(--color-btn-border)] bg-[var(--color-btn-bg)] px-3 text-sm font-medium text-[var(--color-text)] transition-colors hover:border-[var(--color-primary)] hover:text-[var(--color-primary)]"
             >
               {link.title}
             </Link>
@@ -111,7 +111,7 @@ function HomeToolLinks() {
             <Link
               href={tool.href}
               prefetch={false}
-              className="inline-flex min-h-11 items-center rounded-md border border-[var(--color-border)] px-3 text-sm font-medium hover:bg-[var(--color-bg-subtle)]"
+              className="inline-flex min-h-11 items-center rounded-md border border-[var(--color-btn-border)] bg-[var(--color-btn-bg)] px-3 text-sm font-medium text-[var(--color-text)] transition-colors hover:border-[var(--color-primary)] hover:text-[var(--color-primary)]"
             >
               {tool.label}
             </Link>

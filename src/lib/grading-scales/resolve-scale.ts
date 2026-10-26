@@ -24,6 +24,9 @@ const US_RECORDING_CALCULATOR_PATHS = new Set([
 /** Map URL prefixes to locked scale (geo landing pages). */
 const PATH_SCALE_LOCKS: Array<{ prefix: string; scaleId: ScaleId }> = [
   { prefix: "/canvas-grade-calculator", scaleId: "us-standard" },
+  { prefix: "/college-grade-calculator", scaleId: "us-standard" },
+  { prefix: "/grade-percentage-calculator", scaleId: "us-standard" },
+  { prefix: "/powerschool-grade-calculator", scaleId: "us-standard" },
   { prefix: "/eoc-grade-calculator/", scaleId: "us-standard" },
   { prefix: "/degree-classification-calculator", scaleId: "uk-degree" },
   { prefix: "/gcse-grade-calculator", scaleId: "uk-gcse" },
@@ -75,9 +78,13 @@ export function getPathDefaultScaleId(pathname: string): ScaleId | null {
   return null;
 }
 
-/** Geo cookies pick a country's recording scale; on the EZ grader the US one is replaced by the 10-point default. */
-function geoOverridesPathDefault(pathname: string, geoScaleId: ScaleId): boolean {
-  if (pathname === "/" && geoScaleId === "us-standard") return false;
+/**
+ * Location may suggest a scale on pages that are not a single country's tool.
+ * The homepage is the US grade calculator, so a UK or Canadian visit must not
+ * replace the US 10-point scale. The visitor can still change it.
+ */
+function geoOverridesPathDefault(pathname: string): boolean {
+  if (pathname === "/") return false;
   return true;
 }
 
@@ -114,8 +121,13 @@ export function resolveDefaultScaleId({
 }): ScaleId {
   const locked = getLockedScaleFromPath(pathname);
   if (locked) return locked;
+  // India 10-point is the default. Pakistan HEC is an explicit choice, not a US or Canadian scale.
+  if (pathname === "/cgpa-calculator") {
+    if (userScaleId === "in-ten-point" || userScaleId === "pk-hec") return userScaleId;
+    return "in-ten-point";
+  }
   if (isValidScaleId(userScaleId)) return userScaleId;
-  if (isValidScaleId(geoScaleId) && geoOverridesPathDefault(pathname, geoScaleId)) return geoScaleId;
+  if (isValidScaleId(geoScaleId) && geoOverridesPathDefault(pathname)) return geoScaleId;
   const pathDefault = getPathDefaultScaleId(pathname);
   if (pathDefault) return pathDefault;
   if (useLocaleHint) {

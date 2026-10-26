@@ -7,6 +7,9 @@ import { Menu } from "lucide-react";
 import type { NavItem } from "@/config/navigation";
 import { siteConfig } from "@/config/site";
 import { Button } from "@/components/ui/button";
+import { isNavItemActive } from "@/lib/utils/country-nav";
+import { cn } from "@/lib/utils";
+import { CalculatorsMenuButton, CountryMenuButton } from "./CountryMenuButton";
 import { LogoMark } from "./LogoMark";
 import { ThemeToggle } from "./ThemeToggle";
 
@@ -68,30 +71,40 @@ export function Header({ nav }: { nav: NavItem[] }) {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-6 md:flex" aria-label="Main">
+        <nav className="hidden items-center gap-2 md:flex" aria-label="Main">
           {nav.map((item) => {
             if (!item.children) {
               return (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="text-sm font-medium hover:text-[var(--color-primary)]"
+                  aria-current={pathname === item.href ? "page" : isNavItemActive(item, pathname) ? "true" : undefined}
+                  className={cn(
+                    "inline-flex h-11 items-center rounded-none px-3 text-sm font-medium hover:text-[var(--color-primary)]",
+                    isNavItemActive(item, pathname) && "nav-active",
+                  )}
                 >
                   {item.label}
                 </Link>
               );
             }
-            const trigger = (
-              <Button
-                variant="ghost"
-                className="px-2"
-                aria-haspopup="menu"
-                aria-expanded={false}
-                onClick={() => openNow(item.label)}
-              >
-                {item.label}
-              </Button>
-            );
+            const openMenu = () => openNow(item.label);
+            const trigger =
+              item.variant === "countries" ? (
+                <CountryMenuButton
+                  item={item}
+                  pathname={pathname}
+                  onClick={openMenu}
+                  onKeyDown={(event) => {
+                    if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+                      event.preventDefault();
+                      openMenu();
+                    }
+                  }}
+                />
+              ) : (
+                <CalculatorsMenuButton item={item} pathname={pathname} onClick={openMenu} />
+              );
             return menusReady ? (
               <Suspense key={item.label} fallback={trigger}>
                 <DesktopNavMenu item={item} pathname={pathname} defaultOpen={openOnLoad === item.label} />

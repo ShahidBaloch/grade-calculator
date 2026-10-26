@@ -17,7 +17,7 @@ export function GeoQuickLinks() {
   const links = quickToolsForCountry(country);
 
   return (
-    <nav aria-label="Other calculators" className="no-print">
+    <nav aria-label="Other calculators" className="offscreen-defer no-print">
       <p className="text-sm font-medium text-[var(--color-text)]">Popular next steps</p>
       <ul className="mt-2 flex flex-wrap gap-2">
         {links.map((link) => (
@@ -25,7 +25,7 @@ export function GeoQuickLinks() {
             <Link
               href={link.href}
               prefetch={false}
-              className="inline-flex min-h-11 items-center rounded-md border border-[var(--color-border)] px-3 text-sm font-medium hover:bg-[var(--color-bg-subtle)]"
+              className="inline-flex min-h-11 items-center rounded-md border border-[var(--color-btn-border)] bg-[var(--color-btn-bg)] px-3 text-sm font-medium text-[var(--color-text)] transition-colors hover:border-[var(--color-primary)] hover:text-[var(--color-primary)]"
             >
               {link.label}
             </Link>

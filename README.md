@@ -4,7 +4,7 @@ Organic SEO grade calculator site built with Next.js 15, TypeScript, and Tailwin
 
 ## Requirements
 
-- Node.js 20+
+- Node.js 22.19+
 - npm
 
 ## Setup

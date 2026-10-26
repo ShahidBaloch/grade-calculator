@@ -63,13 +63,16 @@ export function CalculatorLayout({
           )}
         </article>
         {content && !focus && (
-          <aside className="no-print mt-10 lg:mt-0 lg:sticky lg:top-20 lg:self-start" aria-label="Help and FAQ">
+          <aside
+            className="no-print mt-10 lg:mt-0 lg:sticky lg:top-20 lg:self-start"
+            aria-label="Help and FAQ"
+          >
             {content}
           </aside>
         )}
       </div>
       {below && (
-        <div className="no-print mt-12 max-w-3xl border-t border-[var(--color-border)] pt-10">
+        <div className="offscreen-defer no-print mt-12 max-w-3xl border-t border-[var(--color-border)] pt-10">
           {below}
         </div>
       )}

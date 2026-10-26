@@ -1,7 +1,9 @@
 import { calculators, getCalculatorPath } from "../../config/calculators";
 import { countryHubs } from "../../config/country-hubs";
 
+import { CALCULATOR_SLUGS } from "../../types/calculator";
 import { UK_GPA_SLUGS, canonicalPathForSlug, isCountrySpecificSlug } from "./canonical-path";
+import { mainCountryPath } from "../../config/country-hub-routes";
 
 export {
   COUNTRY_SPECIFIC_SLUGS,
@@ -79,6 +81,17 @@ export function seoRedirects(): Array<{ source: string; destination: string }> {
       source: `/uk/${slug}`,
       destination: "/uk/degree-classification-calculator",
     });
+  }
+
+  for (const hub of countryHubs) {
+    if (hub.path === mainCountryPath) continue;
+    for (const slug of CALCULATOR_SLUGS) {
+      const source = `${hub.path}/${slug}`;
+      const destination = canonicalPathForSlug(slug, hub.path);
+      if (source !== destination) {
+        pairs.push({ source, destination });
+      }
+    }
   }
 
   const seen = new Set<string>();

@@ -68,11 +68,43 @@ describe("SEO audit", () => {
     );
   });
 
-  it("country hubs do not claim to be alternates of the homepage or each other", () => {
+  it("country hubs use the US hub as the default and keep a self canonical", () => {
     const languages = countryHubHreflangLanguages("/uk");
-    expect(languages["x-default"]).toBe(`${siteConfig.url}/uk`);
-    expect(languages.en).toBe(`${siteConfig.url}/uk`);
-    expect(Object.values(languages).some((url) => url === siteConfig.url)).toBe(false);
+    expect(languages["x-default"]).toBe(`${siteConfig.url}/us`);
+    expect(languages.en).toBe(`${siteConfig.url}/us`);
+    expect(languages["en-US"]).toBe(`${siteConfig.url}/us`);
+    expect(languages["en-GB"]).toBe(`${siteConfig.url}/uk`);
+    expect(languages["en-IN"]).toBe(`${siteConfig.url}/in`);
+    expect(languages["en-PK"]).toBe(`${siteConfig.url}/pk`);
+    expect(languages["en-CA"]).toBe(`${siteConfig.url}/ca`);
+    expect(languages["en-AU"]).toBe(`${siteConfig.url}/au`);
+    expect(languages["en-NZ"]).toBe(`${siteConfig.url}/nz`);
+    for (const hub of countryHubs) {
+      expect(countryHubHreflangLanguages(hub.path)).toEqual(languages);
+    }
+    const metadata = createPageMetadata({
+      title: "United Kingdom Grading Tools",
+      description: "UK grading tools",
+      path: "/uk",
+      languages,
+    });
+    expect(metadata.alternates?.canonical).toBe(`${siteConfig.url}/uk`);
+    expect(metadata.alternates?.languages).toMatchObject({
+      "x-default": `${siteConfig.url}/us`,
+      en: `${siteConfig.url}/us`,
+      "en-GB": `${siteConfig.url}/uk`,
+    });
+  });
+
+  it("country hub H1s are keyword-bearing and unique", async () => {
+    const { countryHubHeading } = await import("@/config/country-hubs");
+    const headings = countryHubs.map((hub) => countryHubHeading(hub));
+    expect(new Set(headings).size).toBe(countryHubs.length);
+    for (const hub of countryHubs) {
+      const heading = countryHubHeading(hub);
+      expect(heading).toBe(`${hub.name} grading tools`);
+      expect(heading).not.toBe(hub.name);
+    }
   });
 
   it("emits Organization and WebSite JSON-LD", () => {
@@ -211,10 +243,19 @@ describe("SEO audit", () => {
     }
     expect(footerNav.reference.some((link) => link.href === "/grading-scales/us")).toBe(true);
     expect(footerNav.reference.some((link) => link.href === "/grading-scales")).toBe(true);
+    const countriesNav = mainNav.find((item) => item.variant === "countries");
     for (const hub of countryHubs) {
-      expect(footerNav.countries.some((l) => l.href === hub.path), `footer missing hub ${hub.code}`).toBe(
-        true,
-      );
+      const footerLink = footerNav.countries.find((link) => link.href === hub.path);
+      expect(footerLink, `footer missing hub ${hub.code}`).toMatchObject({
+        label: hub.name,
+        flag: hub.flag,
+        code: hub.code,
+      });
+      expect(countriesNav?.children?.find((link) => link.href === hub.path)).toMatchObject({
+        label: hub.name,
+        flag: hub.flag,
+        code: hub.code,
+      });
     }
   });
 
@@ -327,7 +368,7 @@ describe("SEO audit", () => {
       `${siteConfig.url}/ca/cumulative-gpa-calculator`,
     );
     expect(calculatorHreflangLanguages("sgpa-to-cgpa")["en-PK"]).toBe(`${siteConfig.url}/pk/sgpa-to-cgpa`);
-    expect(calculatorHreflangLanguages("sgpa-to-cgpa")["en-IN"]).toBe(`${siteConfig.url}/sgpa-to-cgpa`);
+    expect(calculatorHreflangLanguages("sgpa-to-cgpa")["en-IN"]).toBe(`${siteConfig.url}/in/sgpa-to-cgpa`);
     expect(calculatorHreflangLanguages("sgpa-to-cgpa")["en-US"]).toBeUndefined();
   });
 
@@ -386,6 +427,15 @@ describe("SEO audit", () => {
     });
     expect(blockedRule?.disallow).toContain("/");
     expect(blockedRule?.allow).toBeUndefined();
+    const blockedAgents = agentsOnly(blockedRule!);
+    expect(blockedAgents).toContain("ClaudeBot");
+    expect(blockedAgents).not.toContain("GPTBot");
+    expect(blockedAgents).not.toContain("ChatGPT-User");
+
+    const openAiRule = rules.find((rule) => agentsOnly(rule).includes("GPTBot"));
+    expect(agentsOnly(openAiRule!)).toEqual(["GPTBot", "ChatGPT-User"]);
+    expect(openAiRule?.allow).toContain("/");
+    expect(openAiRule?.disallow ?? []).not.toContain("/");
 
     const adsRule = rules.find((rule) => {
       const agents = agentsOnly(rule);

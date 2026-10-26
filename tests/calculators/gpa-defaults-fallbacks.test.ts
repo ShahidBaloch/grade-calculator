@@ -51,6 +51,8 @@ describe("gpa-defaults fallbacks for small scales", () => {
 
   it("labels semester results by scale", () => {
     expect(semesterResultLabel("in-ten-point")).toBe("Semester SGPA");
+    expect(semesterResultLabel("pk-hec")).toBe("Semester GPA");
+    expect(semesterResultLabel("pk-hec", "sgpa")).toBe("Semester SGPA");
     expect(semesterResultLabel(scale("two-band"))).toBe("Semester GPA");
   });
 

@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import { GradeInputPrivacyNotice } from "@/components/content/GradeInputPrivacyNotice";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
+import { PreferredCountryHubSync } from "@/components/layout/PreferredCountryHubSync";
 import { ToolSwitcher } from "@/components/engagement/ToolSwitcher";
 import { GradingScaleProvider } from "@/components/providers/grading-scale-provider";
 import { ThemeProvider } from "@/components/providers/theme-provider";
@@ -38,10 +39,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <JsonLd data={webSiteJsonLd()} />
             <a
               href="#main-content"
-              className="no-print fixed left-4 top-4 z-[100] inline-flex min-h-11 -translate-y-[200%] items-center rounded-md bg-[var(--color-primary)] px-4 py-2 text-white focus:translate-y-0"
+              className="no-print fixed left-4 top-4 z-[100] inline-flex min-h-11 -translate-y-[200%] items-center rounded-md bg-[var(--color-action)] px-4 py-2 text-[var(--color-action-fg)] focus:translate-y-0"
             >
               Skip to content
             </a>
+            <PreferredCountryHubSync />
             <Header nav={mainNav} />
             <div className="no-print px-4 py-1.5" data-print-chrome>
               <div className="mx-auto max-w-7xl">

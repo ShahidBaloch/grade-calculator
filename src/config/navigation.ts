@@ -1,33 +1,62 @@
-import { calculators, getCalculatorPath } from "@/config/calculators";
+import { calculatorBySlug, calculators, getCalculatorPath } from "@/config/calculators";
 import { countryHubs } from "@/config/country-hubs";
+import { mainCountryPath } from "@/config/country-hub-routes";
 import { gradingScalePages } from "@/config/grading-scale-pages";
 import { guides } from "@/config/guides";
+import { countryCalculatorNavLinks } from "@/lib/utils/hub-calculator-nav";
 
 const calculatorLinks = calculators.map((calculator) => ({
   label: calculator.name,
   href: getCalculatorPath(calculator.slug),
 }));
 
-const countryLinks = countryHubs.map((hub) => ({
+export interface NavLink {
+  label: string;
+  href: string;
+  /** From `countryHubs[].flag`. Present on country links only. */
+  flag?: string;
+  /** From `countryHubs[].code`. Present on country links only. */
+  code?: string;
+}
+
+const countryLinks: NavLink[] = countryHubs.map((hub) => ({
   label: hub.name,
   href: hub.path,
+  flag: hub.flag,
+  code: hub.code,
 }));
 
 export interface NavItem {
   label: string;
   href: string;
-  children?: Array<{ label: string; href: string }>;
+  children?: NavLink[];
+  /** Country switcher treatment. Calculators keeps the plain menu. */
+  variant?: "countries";
+  /**
+   * Menu shown instead of `children` while the visitor is inside a country hub
+   * (keyed by hub path). Lets /pk show Pakistan's tools instead of the US list.
+   */
+  countryChildren?: Record<string, NavLink[]>;
 }
+
+/** Per-country catalog: only calculators with a real hub URL for that market. */
+const countryCalculatorLinks: Record<string, NavLink[]> = Object.fromEntries(
+  countryHubs
+    .filter((hub) => hub.path !== mainCountryPath)
+    .map((hub) => [hub.path, countryCalculatorNavLinks(hub.path)]),
+);
 
 export const mainNav: NavItem[] = [
   {
     label: "Calculators",
     href: "/calculators",
     children: [...calculatorLinks, { label: "All Calculators", href: "/calculators" }],
+    countryChildren: countryCalculatorLinks,
   },
   {
     label: "Countries",
     href: "/us",
+    variant: "countries",
     children: countryLinks,
   },
   { label: "Guides", href: "/guides" },

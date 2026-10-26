@@ -29,7 +29,7 @@ export function NextStepCard({ flow }: { flow: EngagementFlow }) {
       <CardContent>
         <Link
           href={href}
-          className="inline-flex min-h-11 items-center gap-2 text-sm font-medium text-[var(--color-primary)] underline underline-offset-2"
+          className="inline-flex min-h-11 items-center gap-2 rounded-md bg-[var(--color-action)] px-4 text-sm font-medium text-[var(--color-action-fg)] transition-colors hover:bg-[var(--color-action-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)]"
         >
           Continue
           <ArrowRight className="h-4 w-4" />

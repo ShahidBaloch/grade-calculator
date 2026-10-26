@@ -1,10 +1,20 @@
 @import "tailwindcss";
 
 :root {
-  /* Trust / action: blue reads calm and familiar for education tools */
-  --color-primary: #2563eb;
-  --color-primary-hover: #1d4ed8;
-  --color-primary-subtle: #eff6ff;
+  /* Logo palette: teal gradient (#14b8a6 → #0d6b63) + gold check (#fbbf24) */
+  --color-brand: #0d6b63;
+  --color-brand-hover: #0a5c56;
+  --color-brand-light: #14b8a6;
+  --color-brand-subtle: #ccfbf1;
+  --color-brand-accent: #b45309;
+
+  --color-primary: var(--color-brand);
+  --color-primary-hover: var(--color-brand-hover);
+  --color-primary-subtle: var(--color-brand-subtle);
+  /* Filled actions. Light: white on logo dark teal (~5.5:1). */
+  --color-action: var(--color-brand);
+  --color-action-hover: var(--color-brand-hover);
+  --color-action-fg: #ffffff;
   --color-success: #16a34a;
   --color-warning: #b45309;
   --color-error: #dc2626;
@@ -12,18 +22,22 @@
   --color-notice-bg: #fffbeb;
   --color-notice-border: #fcd34d;
   --color-notice-text: #78350f;
-  --color-result-accent: #2563eb;
+  --color-result-accent: var(--color-brand-light);
   --color-bg: #ffffff;
   --color-bg-subtle: #f8fafc;
   --color-bg-muted: #f1f5f9;
   --color-border: #e2e8f0;
+  --color-border-strong: #94a3b8;
+  /* Secondary buttons: soft gray fill + visible border */
+  --color-btn-bg: #f1f5f9;
+  --color-btn-border: #cbd5e1;
   --color-text: #0f172a;
   /* Slightly darker muted text for comfortable reading (WCAG AA on white) */
   --color-text-muted: #475569;
   --grade-a-bg: #dcfce7;
   --grade-a-text: #166534;
-  --grade-b-bg: #dbeafe;
-  --grade-b-text: #1e40af;
+  --grade-b-bg: #ccfbf1;
+  --grade-b-text: #115e59;
   --grade-c-bg: #fef9c3;
   --grade-c-text: #854d0e;
   --grade-d-bg: #ffedd5;
@@ -40,9 +54,19 @@
 }
 
 .dark {
-  --color-primary: #3b82f6;
-  --color-primary-hover: #60a5fa;
-  --color-primary-subtle: #1e3a5f;
+  --color-brand: #2dd4bf;
+  --color-brand-hover: #14b8a6;
+  --color-brand-light: #5eead4;
+  --color-brand-subtle: #134e4a;
+  --color-brand-accent: #fbbf24;
+
+  --color-primary: var(--color-brand-light);
+  --color-primary-hover: var(--color-brand);
+  --color-primary-subtle: var(--color-brand-subtle);
+  /* Lighter teal fill; label uses page background (~7:1 on hover). */
+  --color-action: var(--color-brand-light);
+  --color-action-hover: var(--color-brand);
+  --color-action-fg: #0f172a;
   --color-success: #22c55e;
   --color-warning: #f59e0b;
   --color-error: #ef4444;
@@ -50,17 +74,20 @@
   --color-notice-bg: #422006;
   --color-notice-border: #b45309;
   --color-notice-text: #fef3c7;
-  --color-result-accent: #60a5fa;
+  --color-result-accent: var(--color-brand);
   --color-bg: #0f172a;
   --color-bg-subtle: #1e293b;
   --color-bg-muted: #334155;
   --color-border: #475569;
+  --color-border-strong: #7c8ba1;
+  --color-btn-bg: #1e293b;
+  --color-btn-border: #64748b;
   --color-text: #f1f5f9;
   --color-text-muted: #94a3b8;
   --grade-a-bg: #14532d;
   --grade-a-text: #86efac;
-  --grade-b-bg: #1e3a8a;
-  --grade-b-text: #93c5fd;
+  --grade-b-bg: #134e4a;
+  --grade-b-text: #5eead4;
   --grade-c-bg: #713f12;
   --grade-c-text: #fde047;
   --grade-d-bg: #7c2d12;
@@ -181,6 +208,11 @@ p a {
     padding-bottom: 0 !important;
   }
 
+  .offscreen-defer {
+    content-visibility: visible !important;
+    contain-intrinsic-size: none !important;
+  }
+
   a[href]::after {
     content: none !important;
   }
@@ -219,4 +251,103 @@ p a {
     padding-top: 0.12rem !important;
     padding-bottom: 0.12rem !important;
   }
+}
+
+.nav-option:hover,
+.nav-option[data-highlighted],
+.nav-option:focus {
+  background-color: var(--color-brand-subtle);
+  color: var(--color-brand);
+}
+.dark .nav-option:hover,
+.dark .nav-option[data-highlighted],
+.dark .nav-option:focus {
+  background-color: var(--color-brand-subtle);
+  color: var(--color-brand-light);
+}
+.nav-option:focus-visible {
+  outline: 2px solid var(--color-brand-light);
+  outline-offset: -2px;
+}
+
+/* Selected menu row — logo dark teal fill, white label (matches mark background). */
+.nav-current {
+  border-color: var(--color-brand);
+  background-color: var(--color-brand);
+  color: #fff;
+  font-weight: 600;
+}
+.nav-current:hover,
+.nav-current:focus,
+.nav-current[data-highlighted] {
+  border-color: var(--color-brand-hover);
+  background-color: var(--color-brand-hover);
+  color: #fff;
+}
+.dark .nav-current,
+.dark .nav-current:hover,
+.dark .nav-current:focus,
+.dark .nav-current[data-highlighted] {
+  border-color: var(--color-brand-hover);
+  background-color: var(--color-brand-hover);
+  color: var(--color-bg);
+}
+.nav-current:focus-visible {
+  outline: 2px solid var(--color-text);
+  outline-offset: 2px;
+}
+
+.country-chip:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+.dark .country-chip:hover {
+  border-color: var(--color-primary-hover);
+  color: var(--color-primary-hover);
+}
+
+/* Below-fold blocks skip layout until they near the viewport so the hero can paint sooner. */
+.offscreen-defer {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 28rem;
+}
+
+.country-footer-link {
+  color: var(--color-text);
+}
+.country-footer-link:hover {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+.dark .country-footer-link:hover {
+  color: var(--color-primary-hover);
+}
+.country-footer-current {
+  border-radius: var(--radius-sm);
+  background-color: var(--color-primary-subtle);
+  color: var(--color-primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+.dark .country-footer-current,
+.dark .country-footer-current:hover {
+  color: var(--color-text);
+  box-shadow: inset 3px 0 0 var(--color-primary-hover);
+}
+.country-footer-current:hover {
+  color: var(--color-primary-hover);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+/* Current top-level section: logo teal text + light-teal underline bar. */
+.nav-active {
+  color: var(--color-brand);
+  box-shadow: inset 0 -2px 0 var(--color-brand-light);
+  border-radius: 0;
+}
+.dark .nav-active {
+  color: var(--color-brand-light);
+  box-shadow: inset 0 -2px 0 var(--color-brand);
 }

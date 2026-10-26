@@ -1,4 +1,6 @@
 import { getCalculatorPath } from "../../config/calculator-paths";
+import { countryHubs } from "../../config/country-hubs";
+import { mainCountryPath } from "../../config/country-hub-routes";
 import type { CalculatorSlug } from "../../types/calculator";
 
 /**
@@ -36,14 +38,109 @@ export const UK_GPA_SLUGS = new Set<CalculatorSlug>([
   "raise-gpa-calculator",
 ]);
 
-const CA_GPA_ALIAS = new Set<CalculatorSlug>([
+/** CA menu rows that all open the same GPA tool — hide duplicates in the country catalog. */
+export const CA_GPA_ALIAS = new Set<CalculatorSlug>([
   "high-school-gpa-calculator",
   "weighted-gpa-calculator",
   "raise-gpa-calculator",
 ]);
 
+/** Hubs where switching calculators should keep the country in the URL (local scale lock). */
+const HUB_NAV_PREFIX_PATHS = new Set(["/ca", "/au", "/nz", "/in", "/pk", "/uk"]);
+
+/** Tools that stay worldwide even when browsing from a country hub. */
+const HUB_NAV_EXCLUDED_SLUGS = new Set<CalculatorSlug>([
+  "ez-grader",
+  "eoc-grade-calculator",
+  "uc-gpa-calculator",
+  "csu-gpa-calculator",
+]);
+
+/** Syllabus / LMS tools that make sense on any country hub. */
+const GENERIC_HUB_CALCULATORS = new Set<CalculatorSlug>([
+  "test-grade-calculator",
+  "weighted-grade-calculator",
+  "average-grade-calculator",
+  "grade-chart",
+  "final-grade-calculator",
+  "percentage-to-letter-grade",
+  "letter-grade-calculator",
+  "canvas-grade-calculator",
+  "grade-percentage-calculator",
+  "college-grade-calculator",
+]);
+
+/** Region-specific tools — only these hubs may host `/xx/slug` (not every prefix hub). */
+const MARKET_BOUND_HUBS: Partial<Record<CalculatorSlug, readonly string[]>> = {
+  "cgpa-to-gpa": ["/in"],
+  "cgpa-to-percentage": ["/in", "/pk"],
+  "percentage-to-cgpa": ["/in", "/pk"],
+  "sgpa-to-cgpa": ["/in", "/pk"],
+  "cgpa-calculator": ["/in", "/pk"],
+  "mcmaster-gpa-to-us-gpa": ["/ca"],
+  "atar-calculator": ["/au"],
+  "gcse-grade-calculator": ["/uk"],
+  "degree-classification-calculator": ["/uk"],
+  "uk-degree-to-us-gpa-reference": ["/uk"],
+  "eoc-grade-calculator": [mainCountryPath],
+  "uc-gpa-calculator": [mainCountryPath],
+  "csu-gpa-calculator": [mainCountryPath],
+  "middle-school-gpa-calculator": [mainCountryPath],
+  "high-school-gpa-calculator": [mainCountryPath],
+  "weighted-gpa-calculator": [mainCountryPath],
+  "raise-gpa-calculator": [mainCountryPath],
+};
+
+const GPA_NAV_SLUGS = new Set<CalculatorSlug>([
+  "gpa-calculator",
+  "cumulative-gpa-calculator",
+  "college-gpa-calculator",
+  "high-school-gpa-calculator",
+  "weighted-gpa-calculator",
+  "raise-gpa-calculator",
+]);
+
+/** True when this hub should keep `/hub/slug` in nav and serve a geo copy. */
+export function isHubOfferedCalculator(hubPath: string, slug: CalculatorSlug): boolean {
+  if (!HUB_NAV_PREFIX_PATHS.has(hubPath) || HUB_NAV_EXCLUDED_SLUGS.has(slug)) return false;
+
+  const marketHubs = MARKET_BOUND_HUBS[slug];
+  if (marketHubs) return marketHubs.includes(hubPath);
+
+  if (GENERIC_HUB_CALCULATORS.has(slug)) return true;
+
+  const hub = countryHubs.find((h) => h.path === hubPath);
+  if (!hub) return false;
+
+  if (COUNTRY_SPECIFIC_SLUGS[hubPath]?.includes(slug)) return true;
+  if (hub.featuredCalculators.includes(slug)) return true;
+
+  if (GPA_NAV_SLUGS.has(slug)) {
+    if (hubPath === "/uk") return false;
+    return (
+      hub.featuredCalculators.includes(slug) ||
+      Boolean(COUNTRY_SPECIFIC_SLUGS[hubPath]?.includes(slug))
+    );
+  }
+
+  return false;
+}
+
+function hubPrefixedPath(hubPath: string, slug: CalculatorSlug): string | null {
+  if (!isHubOfferedCalculator(hubPath, slug)) return null;
+  return `${hubPath}/${slug}`;
+}
+
+/**
+ * True when this hub has its own indexable URL for the tool (hreflang / sitemap).
+ * Navigation can still use hub-prefixed URLs for more slugs via {@link canonicalPathForSlug}.
+ */
 export function isCountrySpecificSlug(hubPath: string, slug: CalculatorSlug): boolean {
-  return COUNTRY_SPECIFIC_SLUGS[hubPath]?.includes(slug) ?? false;
+  if (hubPath === mainCountryPath) return false;
+  if (COUNTRY_SPECIFIC_SLUGS[hubPath]?.includes(slug)) return true;
+  if (hubPath === "/uk") return false;
+  const hub = countryHubs.find((h) => h.path === hubPath);
+  return Boolean(hub?.featuredCalculators.includes(slug));
 }
 
 /** The one URL that should rank and that visitors should open for this tool. */
@@ -55,6 +152,8 @@ export function canonicalPathForSlug(slug: CalculatorSlug, hubPath?: string | nu
   if (hubPath === "/ca" && CA_GPA_ALIAS.has(slug)) {
     return "/ca/gpa-calculator";
   }
+  const prefixed = hubPath ? hubPrefixedPath(hubPath, slug) : null;
+  if (prefixed) return prefixed;
   if (hubPath && isCountrySpecificSlug(hubPath, slug)) {
     return `${hubPath}/${slug}`;
   }

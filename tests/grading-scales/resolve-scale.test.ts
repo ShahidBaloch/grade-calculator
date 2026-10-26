@@ -28,6 +28,9 @@ describe("resolve-scale", () => {
     expect(getLockedScaleFromPath("/gpa-calculator")).toBe("us-standard");
     expect(getLockedScaleFromPath("/weighted-grade-calculator")).toBe("us-standard");
     expect(getLockedScaleFromPath("/college-gpa-calculator")).toBe("us-standard");
+    expect(getLockedScaleFromPath("/college-grade-calculator")).toBe("us-standard");
+    expect(getLockedScaleFromPath("/grade-percentage-calculator")).toBe("us-standard");
+    expect(getLockedScaleFromPath("/powerschool-grade-calculator")).toBe("us-standard");
   });
 
   it("locks UK recording scales on degree and GCSE paths", () => {
@@ -50,10 +53,10 @@ describe("resolve-scale", () => {
     expect(getLockedScaleFromPath("/uk/gpa-calculator")).toBe("uk-degree");
   });
 
-  it("defaults to US standard without geo or user preference", () => {
+  it("defaults an unlocked non-US tool to US standard without geo or user preference", () => {
     expect(
       resolveDefaultScaleId({
-        pathname: "/cgpa-calculator",
+        pathname: "/not-a-calculator",
         userScaleId: null,
         geoScaleId: null,
         useLocaleHint: false,
@@ -69,10 +72,13 @@ describe("resolve-scale", () => {
     expect(
       resolveDefaultScaleId({ pathname: "/", userScaleId: null, geoScaleId: "us-standard", useLocaleHint: false }),
     ).toBe("us-lenient");
-    // Other countries still get their preset; an explicit user pick always wins.
+    // Location must not replace the US 10-point scale. An explicit user pick still wins.
     expect(
       resolveDefaultScaleId({ pathname: "/", userScaleId: null, geoScaleId: "nz-nine-point", useLocaleHint: false }),
-    ).toBe("nz-nine-point");
+    ).toBe("us-lenient");
+    expect(
+      resolveDefaultScaleId({ pathname: "/", userScaleId: null, geoScaleId: "pk-hec", useLocaleHint: false }),
+    ).toBe("us-lenient");
     expect(
       resolveDefaultScaleId({ pathname: "/", userScaleId: "us-standard", geoScaleId: null, useLocaleHint: false }),
     ).toBe("us-standard");
@@ -81,7 +87,7 @@ describe("resolve-scale", () => {
   it("uses geo scale before locale hint on unlocked paths", () => {
     expect(
       resolveDefaultScaleId({
-        pathname: "/cgpa-calculator",
+        pathname: "/not-a-calculator",
         userScaleId: null,
         geoScaleId: "ca-standard",
         useLocaleHint: true,
@@ -89,10 +95,37 @@ describe("resolve-scale", () => {
     ).toBe("ca-standard");
   });
 
-  it("user preference overrides geo on unlocked paths", () => {
+  it("keeps the CGPA calculator on India or Pakistan scales", () => {
     expect(
       resolveDefaultScaleId({
         pathname: "/cgpa-calculator",
+        userScaleId: null,
+        geoScaleId: "ca-standard",
+        useLocaleHint: false,
+      }),
+    ).toBe("in-ten-point");
+    expect(
+      resolveDefaultScaleId({
+        pathname: "/cgpa-calculator",
+        userScaleId: "us-lenient",
+        geoScaleId: "ca-standard",
+        useLocaleHint: false,
+      }),
+    ).toBe("in-ten-point");
+    expect(
+      resolveDefaultScaleId({
+        pathname: "/cgpa-calculator",
+        userScaleId: "pk-hec",
+        geoScaleId: null,
+        useLocaleHint: false,
+      }),
+    ).toBe("pk-hec");
+  });
+
+  it("user preference overrides geo on unlocked paths", () => {
+    expect(
+      resolveDefaultScaleId({
+        pathname: "/not-a-calculator",
         userScaleId: "us-lenient",
         geoScaleId: "ca-standard",
         useLocaleHint: false,

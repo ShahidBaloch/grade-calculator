@@ -8,10 +8,13 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-[var(--color-primary)] text-white hover:bg-[var(--color-primary-hover)]",
+        default:
+          "bg-[var(--color-action)] text-[var(--color-action-fg)] hover:bg-[var(--color-action-hover)]",
         outline:
-          "border border-[var(--color-border)] bg-transparent hover:bg-[var(--color-bg-subtle)]",
-        ghost: "hover:bg-[var(--color-bg-subtle)]",
+          "border border-[var(--color-btn-border)] bg-[var(--color-btn-bg)] text-[var(--color-text)] hover:border-[var(--color-primary)] hover:text-[var(--color-primary)]",
+        ghost: "hover:bg-[var(--color-bg-muted)]",
+        neutral:
+          "border border-[var(--color-btn-border)] bg-[var(--color-btn-bg)] text-[var(--color-text)] hover:border-[var(--color-error)] hover:text-[var(--color-error)]",
         secondary: "bg-[var(--color-bg-muted)] text-[var(--color-text)]",
       },
       size: {

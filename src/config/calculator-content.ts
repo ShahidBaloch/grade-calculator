@@ -36,7 +36,7 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
       {
         question: "How do I grade a test quickly?",
         answer:
-          "Enter total questions and wrong answers. The EZ grader shows the percentage and letter grade immediately, plus a full chart for every wrong-count.",
+          "Enter the total number of questions and the number of wrong answers. The EZ grader shows the percentage and letter grade immediately, plus a full chart for every wrong-answer count.",
       },
       {
         question: "Is this a free teacher grader (easy grader)?",
@@ -51,12 +51,12 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
       {
         question: "Is there a free online EZ grader?",
         answer:
-          "Yes. This page is an online EZ grader: enter total questions and wrong answers for an instant percentage, letter grade, and a full wrong-count chart. No login required; use Print for a paper chart.",
+          "Yes. This page is an online EZ grader: enter the total number of questions and the number of wrong answers for an instant percentage, letter grade, and a full wrong-answer chart. No login required. Use Print for a paper chart.",
       },
       {
         question: "How much is each question worth on a test?",
         answer:
-          "On a test with equal-weight questions, each question is worth 100 ÷ total questions percent. Example: 20 questions → 5% each; one wrong answer usually drops the score by about 5%. The chart below shows your grade for every wrong-count.",
+          "On a test where every question is worth the same, each question is worth 100 divided by the total number of questions, as a percent. Example: 20 questions means 5% each, so one wrong answer usually drops the score by about 5%. The chart below shows the grade for every wrong-answer count.",
       },
       {
         question: "What grade is 8 out of 13 or 12 out of 20?",
@@ -127,7 +127,7 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
       {
         question: "How is a test grade calculated?",
         answer:
-          "Divide correct answers by total questions and multiply by 100 to get the percentage: Score % = (Correct ÷ Total) × 100. Then compare the percentage to your school's grading scale to find the letter grade. For example, 17 correct out of 20 = 85% = a B on the standard US scale. If your teacher adds bonus points, those are added after the percentage is calculated, and the score can exceed 100%.",
+          "Divide the number of correct answers by the total number of questions and multiply by 100: Score % = (Correct ÷ Total) × 100. Then compare that percentage with your school's grading scale to find the letter grade. For example, 17 correct out of 20 is 85%, a B on the US plus/minus scale and a B on the 10-point scale. If your teacher adds bonus points, they are added after the percentage is calculated. This calculator caps the displayed score at 100%.",
       },
       {
         question: "What if bonus pushes me over 100%?",
@@ -156,7 +156,7 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
       {
         question: "What is 11 out of 15 as a percentage?",
         answer:
-          "11 out of 15 is 11 ÷ 15 ≈ 73.3%, which is a C on the standard US scale. Enter total 15 and correct 11 in the calculator above for the exact letter grade on your scale.",
+          "11 out of 15 is 11 ÷ 15 ≈ 73.3%, which is a C on the US plus/minus scale (73–76%) and a C on the 10-point scale (70–79%). Enter a total of 15 and 11 correct to see the letter grade on your grading scale.",
       },
       {
         question: "What percentage is 12 out of 15?",
@@ -166,7 +166,7 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
       {
         question: "What grade is 13 out of 15?",
         answer:
-          "13 out of 15 is 13 ÷ 15 ≈ 86.7%, which is a B on the US standard scale (B+ under some cutoffs). Enter total 15 and correct 13 to see the result on whichever grading scale you have selected.",
+          "13 out of 15 is 13 ÷ 15 ≈ 86.7%, which is a B on the US plus/minus scale (83–86%) and a B on the 10-point scale (80–89%). A school that rounds 86.7% up to 87% may call it a B+. Enter a total of 15 and 13 correct to see the letter grade on your grading scale.",
       },
       {
         question: "What is 18 out of 20 as a grade?",
@@ -176,7 +176,7 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
       {
         question: "What is 15 out of 20 as a grade?",
         answer:
-          "15 out of 20 is 15 ÷ 20 = 75%, which is a C on the US standard scale (C+ under some cutoffs, C on a 10-point scale). Enter total 20 and correct 15 to see your percentage and letter grade.",
+          "15 out of 20 is 15 ÷ 20 = 75%, which is a C on the US plus/minus scale (73–76%) and a C on the 10-point scale (70–79%). Enter a total of 20 and 15 correct to see the percentage and letter grade.",
       },
       {
         question: "What grade is 16 out of 20?",
@@ -186,12 +186,12 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
       {
         question: "What grade is 17 out of 20?",
         answer:
-          "17 out of 20 is 17 ÷ 20 = 85%, which is a B on the US standard scale (B+ on a 10-point scale). Enter total 20 and correct 17 for the exact letter on your grading scale.",
+          "17 out of 20 is 17 ÷ 20 = 85%, which is a B on the US plus/minus scale (83–86%) and a B on the 10-point scale (80–89%). Enter a total of 20 and 17 correct to see the letter grade on your grading scale.",
       },
       {
         question: "What is 13 out of 20 as a percentage?",
         answer:
-          "13 out of 20 is 13 ÷ 20 = 65%, which is a D on the US standard scale (70 is the C cutoff). Enter total 20 and correct 13 above to see your percentage and letter grade.",
+          "13 out of 20 is 13 ÷ 20 = 65%, which is a D on the US plus/minus scale (63–66%) and a D on the 10-point scale (60–69%). Enter a total of 20 and 13 correct to see the percentage and letter grade.",
       },
       {
         question: "How do I calculate my grade on a test?",
@@ -213,7 +213,7 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
       {
         question: "What is a weighted grade?",
         answer:
-          "A weighted grade is a course average where different assignment categories count for different portions of the final grade. For example, if homework counts 20%, quizzes 30%, and the final exam 50%, a score in the final exam has 2.5× the impact of the same score in homework. This reflects the emphasis your instructor places on each type of work. Weighted grading is standard in most US high school and college courses.",
+          "A weighted grade is a course average where different assignment categories count for different portions of the final grade. For example, if homework counts 20%, quizzes 30%, and the final exam 50%, a score on the final exam has 2.5× the impact of the same score on homework. That matches the emphasis your instructor places on each type of work. Weighted grading is standard in most US high school and college courses.",
       },
       {
         question: "My weights don't add to 100%. Is that OK?",
@@ -726,7 +726,7 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
       {
         question: "What letter grade is a 2.0 GPA?",
         answer:
-          "A 2.0 GPA corresponds to a C grade on the standard US 4.0 scale, which typically covers the 73–76% range. Many schools require at least a 2.0 cumulative GPA to remain in good academic standing.",
+          "A 2.0 GPA is a C on the US 4.0 scale. On the plus/minus scale that C band is 73–76%. On the 10-point scale a C is 70–79% and is still worth 2.0. Many schools require at least a 2.0 cumulative GPA to stay in good academic standing.",
       },
       {
         question: "What is the value of each letter grade?",
@@ -736,11 +736,11 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
       {
         question: "How do I convert a letter grade to a percentage?",
         answer:
-          "Use the midpoint of each letter's percentage band. On the US standard scale: A = ~95%, B = ~85%, C = ~75%, D = ~65%. For plus/minus: B+ ≈ 88%, B ≈ 85%, B− ≈ 81%. Enter the letter above and we show the full band and midpoint for the scale you have selected.",
+          "Use the midpoint of each letter grade's percentage band. On the US 10-point scale, A is about 95%, B about 85%, C about 75%, and D about 65%. On the plus/minus scale, B+ is about 88%, B about 85%, and B− about 81%. Enter the letter above to see the full band and midpoint for the scale you selected.",
       },
     ],
     assumptions: [
-      "Grade labels entered match those on the selected scale (A, B+, HD, First, etc.).",
+      "The grade labels you enter match the selected scale (A, B+, HD, First, and so on).",
       "Midpoint values are averages of each band's boundaries — useful for estimation, not for official transcript calculations.",
       "Scales with no plus/minus collapse A−, A, A+ into a single A band.",
     ],

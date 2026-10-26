@@ -13,6 +13,7 @@ import { calculateSemesterGpa } from "@/lib/calculators/gpa";
 import {
   defaultCoursesForScale,
   gradePlaceholderForScale,
+  hecPlanningNote,
   semesterResultLabel,
 } from "@/lib/calculators/gpa-defaults";
 import { formatGpa } from "@/lib/utils/format";
@@ -128,12 +129,17 @@ export function CgpaCalculator() {
         aria-live="polite"
         className="rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-6"
       >
-        <p className="text-sm text-[var(--color-text-muted)]">{semesterResultLabel(scaleId)}</p>
+        <p className="text-sm text-[var(--color-text-muted)]">
+          {semesterResultLabel(scaleId, "sgpa")}
+        </p>
         <p className="text-5xl font-bold">{result.data ? formatGpa(result.data.gpa) : "—"}</p>
         {result.data && (
           <p className="mt-2 text-sm text-[var(--color-text-muted)]">
             {result.data.totalCredits} credit hours this term
           </p>
+        )}
+        {scaleId === "pk-hec" && (
+          <p className="mt-2 text-sm text-[var(--color-text-muted)]">{hecPlanningNote()}</p>
         )}
       </div>
       {getPrimaryFlow("cgpa-calculator") && result.status === "valid" && (

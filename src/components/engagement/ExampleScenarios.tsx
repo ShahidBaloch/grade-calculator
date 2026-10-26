@@ -46,7 +46,8 @@ export function ExampleScenarios({ examples, onSelect, activeValues }: ExampleSc
             size="sm"
             className={cn(
               "shrink-0",
-              selected && "border-[var(--color-primary)] bg-[var(--color-primary-subtle)]",
+              selected &&
+                "border-[var(--color-primary)] bg-[var(--color-primary-subtle)] text-[var(--color-primary)]",
             )}
             aria-pressed={selected}
             onClick={() => onSelect(example.values)}

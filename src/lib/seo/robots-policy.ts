@@ -29,12 +29,13 @@ export const blockedCrawlerUserAgents = [
   "MauiBot",
   "Ezooms",
   "LinkdexBot",
-  "GPTBot",
-  "ChatGPT-User",
   "CCBot",
   "anthropic-ai",
   "ClaudeBot",
 ] as const;
+
+/** OpenAI crawlers. Allowed on purpose; other AI crawlers stay in the block list. */
+export const openAiCrawlerUserAgents = ["GPTBot", "ChatGPT-User"] as const;
 
 /** Google Search, previews, and AdSense verification — no crawl delay. */
 export const googleSearchUserAgents = [

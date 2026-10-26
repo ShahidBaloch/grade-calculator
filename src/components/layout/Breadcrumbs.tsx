@@ -18,7 +18,7 @@ export function Breadcrumbs({ items }: BreadcrumbsProps) {
               {isLast ? (
                 <span
                   aria-current="page"
-                  className="font-medium text-[var(--color-text)] truncate max-w-[12rem] sm:max-w-none"
+                  className="font-semibold text-[var(--color-primary)] truncate max-w-[12rem] sm:max-w-none"
                 >
                   {item.name}
                 </span>

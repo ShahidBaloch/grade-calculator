@@ -35,20 +35,29 @@ export function useCalculatorPersistence<T>(slug: string, initialState: T) {
   }, [slug, pathname]);
 
   React.useEffect(() => {
-    const fromUrl = readStateFromSearchParams<T>(window.location.search);
-    if (fromUrl) {
-      setState({ ...initialState, ...fromUrl });
-      setHydrated(true);
-      return;
-    }
+    let cancelled = false;
+    // Apply the URL or saved snapshot in a callback so the server HTML hydrates
+    // first. A direct setState here re-renders in the same effect flush.
+    queueMicrotask(() => {
+      if (cancelled) return;
+      const fromUrl = readStateFromSearchParams<T>(window.location.search);
+      if (fromUrl) {
+        setState({ ...initialState, ...fromUrl });
+        setHydrated(true);
+        return;
+      }
 
-    const stored = getStorageItem(storageKey);
-    if (stored) {
-      const parsed = decodeCalculatorState<Partial<T>>(stored);
-      // Merge so newly added fields keep their defaults after schema upgrades.
-      if (parsed) setState({ ...initialState, ...parsed });
-    }
-    setHydrated(true);
+      const stored = getStorageItem(storageKey);
+      if (stored) {
+        const parsed = decodeCalculatorState<Partial<T>>(stored);
+        // Merge so newly added fields keep their defaults after schema upgrades.
+        if (parsed) setState({ ...initialState, ...parsed });
+      }
+      setHydrated(true);
+    });
+    return () => {
+      cancelled = true;
+    };
     // initialState is only used for first hydrate / schema upgrades — omit from deps
     // eslint-disable-next-line react-hooks/exhaustive-deps -- avoid re-hydrate loops from inline defaults
   }, [storageKey]);

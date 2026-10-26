@@ -15,6 +15,7 @@ import {
   defaultCoursesForScale,
   defaultGradeForScale,
   gradePlaceholderForScale,
+  hecPlanningNote,
   semesterResultLabel,
 } from "@/lib/calculators/gpa-defaults";
 import { formatGpa } from "@/lib/utils/format";
@@ -130,9 +131,14 @@ export function GpaCalculator() {
             {result.data.totalCredits} credit hours
           </p>
         )}
+        {scaleId === "pk-hec" && (
+          <p className="mt-2 text-sm text-[var(--color-text-muted)]">{hecPlanningNote()}</p>
+        )}
       </div>
       {getPrimaryFlow("gpa-calculator") && result.status === "valid" && (
-        <NextStepCard flow={getPrimaryFlow("gpa-calculator")!} />
+        <div className="offscreen-defer">
+          <NextStepCard flow={getPrimaryFlow("gpa-calculator")!} />
+        </div>
       )}
     </div>
   );

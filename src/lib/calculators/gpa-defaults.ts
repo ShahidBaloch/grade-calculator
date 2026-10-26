@@ -44,7 +44,16 @@ export function letterPlaceholderForScale(scaleId: ScaleId): string {
   return samples ? `e.g. ${samples}` : "Enter grade on this scale";
 }
 
-export function semesterResultLabel(scaleId: ScaleId): string {
-  if (scaleId === "in-ten-point") return "Semester SGPA";
+/**
+ * One-term result name. The CGPA calculator passes `"sgpa"` so Pakistan HEC
+ * says SGPA there, while the GPA calculator keeps "Semester GPA".
+ */
+export function semesterResultLabel(scaleId: ScaleId, term: "gpa" | "sgpa" = "gpa"): string {
+  if (term === "sgpa" || scaleId === "in-ten-point") return "Semester SGPA";
   return "Semester GPA";
+}
+
+/** Shown next to an HEC total. The published table is a range, not one quality point. */
+export function hecPlanningNote(): string {
+  return "Planning figure only. HEC §13.1 gives each letter a grade-point range (an A is 3.67–4.00). This total uses the top of each range.";
 }

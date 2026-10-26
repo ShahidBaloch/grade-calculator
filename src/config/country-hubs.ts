@@ -21,6 +21,11 @@ export interface CountryHubConfig {
   relatedGuides?: Array<{ path: string; title: string }>;
 }
 
+/** One H1 per hub. The country name alone is too thin for the query. */
+export function countryHubHeading(hub: Pick<CountryHubConfig, "name">): string {
+  return `${hub.name} grading tools`;
+}
+
 export const countryHubs: CountryHubConfig[] = [
   {
     code: "us",

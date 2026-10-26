@@ -3,6 +3,9 @@
  * keywords). Client components import this; `country-hubs.ts` holds the content.
  * A test keeps the two in sync.
  */
+/** Main market. Pages with no country in the URL belong to this hub. */
+export const mainCountryPath = "/us";
+
 export const countryHubRoutes = [
   { code: "us", path: "/us", gradingScalePath: "/grading-scales/us" },
   { code: "ca", path: "/ca", gradingScalePath: "/grading-scales/canada" },

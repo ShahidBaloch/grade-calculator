@@ -4,6 +4,7 @@ import {
   blockedCrawlerUserAgents,
   bingSearchUserAgents,
   googleSearchUserAgents,
+  openAiCrawlerUserAgents,
   otherSearchUserAgents,
   robotsDisallowPaths,
   yandexSearchUserAgents,
@@ -28,6 +29,7 @@ export default function robots(): MetadataRoute.Robots {
       searchCrawlerRule(bingSearchUserAgents),
       searchCrawlerRule(yandexSearchUserAgents),
       searchCrawlerRule(otherSearchUserAgents),
+      searchCrawlerRule(openAiCrawlerUserAgents),
       {
         userAgent: [...blockedCrawlerUserAgents],
         disallow: "/",

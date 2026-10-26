@@ -69,7 +69,7 @@ export function GradeChart({ rows, highlightWrong }: GradeChartProps) {
       </table>
       {canCollapse && (
         <div className="no-print border-t border-[var(--color-border)] p-2 text-center">
-          <Button type="button" variant="ghost" size="sm" onClick={() => setExpanded((value) => !value)}>
+          <Button type="button" variant="outline" size="sm" onClick={() => setExpanded((value) => !value)}>
             {expanded ? "Show fewer rows" : `Show all ${rows.length} rows`}
           </Button>
         </div>

@@ -45,8 +45,24 @@ export function calculatorHreflangLanguages(slug: CalculatorSlug): Record<string
   };
 }
 
-/** Country hubs index different grading systems, so each hub stands alone. */
+/**
+ * USA is the main market. x-default and generic `en` point at the US hub.
+ * Each hub keeps its own canonical URL, and its regional tag points at itself,
+ * so a UK or Pakistan query can still land on that hub.
+ * Unknown paths stay self-referencing so a typo cannot join the group.
+ */
 export function countryHubHreflangLanguages(hubPath: string): Record<string, string> {
-  const url = absoluteUrl(hubPath);
-  return { "x-default": url, en: url };
+  const current = countryHubs.find((hub) => hub.path === hubPath);
+  if (!current) {
+    const url = absoluteUrl(hubPath);
+    return { "x-default": url, en: url };
+  }
+
+  const primary = countryHubs.find((hub) => hub.hreflang === "en-US") ?? countryHubs[0];
+  const primaryUrl = absoluteUrl(primary.path);
+  return {
+    "x-default": primaryUrl,
+    en: primaryUrl,
+    ...Object.fromEntries(countryHubs.map((hub) => [hub.hreflang, absoluteUrl(hub.path)])),
+  };
 }

@@ -33,7 +33,7 @@ export const gradingScalePages: GradingScalePageConfig[] = [
       "7 point grading scale",
     ],
     intro:
-      "The common US 4.0 GPA scale is the standard grading scale for American high schools and colleges. Each letter grade covers a percentage range: A (including A− and A+) is 90–100%, B is 80–89%, C is 70–79%, D is 60–69%, and F is below 60%. Letter grades also convert to GPA quality points used in semester calculations. Percentage cutoffs can vary slightly by school, district, or instructor — always verify your institution's official grading policy.",
+      "The common US grading scale pairs A–F letter grades with a 4.0 GPA. On the 10-point scale, A is 90–100%, B is 80–89%, C is 70–79%, D is 60–69%, and F is below 60%. Plus/minus schools split each band — for example, B is 83–86% and B+ is 87–89%. Those letters convert to GPA points for a semester GPA. Cutoffs vary by school, district, or instructor, so check your syllabus.",
     notes: [
       "Many schools use plus/minus modifiers (A−, B+, etc.). On this scale A+ is 97–100%, A is 93–96%, A− is 90–92%, B+ is 87–89%, B is 83–86%, and B− is 80–82%.",
       "For federal statistics, NCES uses a four-point framework (A=4, B=3, C=2, D=1, F=0); it does not define one national plus/minus percentage table.",

@@ -7,7 +7,6 @@ import { GeoLinkList } from "@/components/content/GeoProgrammaticPage";
 import { countryHubByPath } from "@/config/country-hubs";
 import { webApplicationJsonLd, howToJsonLd } from "@/lib/seo/jsonld";
 import { calculatorCountryVersionsGroup } from "@/lib/seo/geo-programmatic";
-import { calculatorContent } from "@/config/calculator-content";
 import { getCalculatorHowItWorks } from "@/lib/content/calculator-how-it-works";
 import { pageDescription, pageTitle } from "@/lib/seo/page-copy";
 import type { CalculatorSlug } from "@/types/calculator";
@@ -36,7 +35,6 @@ export function CalculatorRoute({
   heading: headingOverride,
 }: CalculatorRouteProps) {
   const config = calculatorBySlug[slug];
-  const content = calculatorContent[slug];
   const pagePath = path ?? getCalculatorPath(slug);
   const geoSegment = pagePath.split("/").filter(Boolean)[0];
   const geoHub = geoSegment ? countryHubByPath[`/${geoSegment}`] : undefined;

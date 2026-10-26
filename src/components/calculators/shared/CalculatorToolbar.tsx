@@ -18,7 +18,7 @@ export function CalculatorToolbar({ onShare, onReset, copied }: CalculatorToolba
         Print
       </Button>
       {onShare && (
-        <Button type="button" variant="outline" size="sm" onClick={onShare}>
+        <Button type="button" variant="default" size="sm" onClick={onShare}>
           <Share2 className="mr-1.5 h-4 w-4" />
           {copied ? "Link copied!" : "Share"}
         </Button>
@@ -26,7 +26,7 @@ export function CalculatorToolbar({ onShare, onReset, copied }: CalculatorToolba
       {onReset && (
         <Button
           type="button"
-          variant="ghost"
+          variant="neutral"
           size="sm"
           onClick={onReset}
           title="Clears this calculator. Saved inputs for this tool are removed from this browser."

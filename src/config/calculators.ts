@@ -465,7 +465,7 @@ export const calculators: CalculatorConfig[] = [
     name: "CGPA Calculator",
     shortName: "CGPA",
     description:
-      "Calculate semester SGPA from India 10-point (O–F) or Pakistan HEC course grades and credits.",
+      "Calculate semester SGPA from India 10-point (O–F) grades and credits. Switch the scale to Pakistan HEC for HEC letters.",
     path: "/cgpa-calculator",
     icon: "GraduationCap",
     category: "gpa",
