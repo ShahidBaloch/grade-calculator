@@ -131,7 +131,7 @@ export function GradingScaleGuide({ scale }: { scale: GradingScale }) {
           <ul className="mt-3 space-y-3">
             {tools.map((tool) => (
               <li key={tool.href}>
-                <Link href={tool.href} className="inline-flex min-h-6 items-center font-medium text-[var(--color-primary)] hover:underline">
+                <Link href={tool.href} className="inline-flex min-h-11 items-center font-medium text-[var(--color-primary)] hover:underline">
                   {tool.label}
                 </Link>
                 <span className="text-[var(--color-text-muted)]"> — {tool.description}</span>

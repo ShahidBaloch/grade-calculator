@@ -1,4 +1,4 @@
-import { calculatorBySlug, calculators, getCalculatorPath } from "@/config/calculators";
+import { calculators, getCalculatorPath } from "@/config/calculators";
 import { countryHubs } from "@/config/country-hubs";
 import { mainCountryPath } from "@/config/country-hub-routes";
 import { gradingScalePages } from "@/config/grading-scale-pages";

@@ -601,7 +601,7 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
       {
         question: "How does college GPA affect graduate school admissions?",
         answer:
-          "Most master's and PhD programs publish a minimum GPA requirement of 3.0 on a 4.0 scale, though competitive programmes average 3.5–3.8 among admitted students. A strong upward GPA trend in upper-division courses can offset a lower overall figure. Graduate admissions also weigh GRE/GMAT, research experience, and letters of recommendation alongside GPA — check each programme's admissions statistics for the full picture.",
+          "Most master's and PhD programs publish a minimum GPA requirement of 3.0 on a 4.0 scale, though competitive programs average 3.5–3.8 among admitted students. A strong upward GPA trend in upper-division courses can offset a lower overall figure. Graduate admissions also weigh GRE/GMAT, research experience, and letters of recommendation alongside GPA — check each program's admissions statistics for the full picture.",
       },
     ],
   },
@@ -1431,7 +1431,7 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
       {
         question: "Does a 2:2 disqualify me from US master's programs?",
         answer:
-          "Not automatically. A Lower Second (2:2) is the minimum UK honours degree and is considered a completed undergraduate degree. US programs assess the full application — research experience, statement of purpose, references, and GRE/test scores often matter as much as the degree class. Some programmes set a 2:1 minimum, but others accept strong 2:2 candidates with compensating strengths.",
+          "Not automatically. A Lower Second (2:2) is the minimum UK honours degree and is considered a completed undergraduate degree. US programs assess the full application — research experience, statement of purpose, references, and GRE/test scores often matter as much as the degree class. Some programs set a 2:1 minimum, but others accept strong 2:2 candidates with compensating strengths.",
       },
       {
         question: "How do US schools read UK percentage marks vs degree class?",

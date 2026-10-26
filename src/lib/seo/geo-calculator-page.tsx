@@ -6,7 +6,7 @@ import { countryHubs } from "@/config/country-hubs";
 import { calculatorKeywords } from "@/lib/seo/keywords";
 import { calculatorHreflangLanguages } from "@/lib/seo/hreflang";
 import { createPageMetadata } from "@/lib/seo/metadata";
-import { canonicalPathForSlug, isIndexableGeoCalculator } from "@/lib/seo/intent-urls";
+import { isIndexableGeoCalculator } from "@/lib/seo/intent-urls";
 import { DISTINCT_PAGE_COPY } from "@/lib/seo/page-copy";
 import { GeoLinkList } from "@/components/content/GeoProgrammaticPage";
 import { caUniversityLinkGroup } from "@/lib/seo/geo-programmatic";

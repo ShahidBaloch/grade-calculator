@@ -22,10 +22,14 @@ async function checkSeo(page: Page, path: string, market: "en-CA" | "en-US") {
   await expect(page.locator(`link[rel="alternate"][hreflang="${market}"]`)).toHaveAttribute("href", `${SITE}${path}`);
   await expect(page.locator('link[rel="alternate"][hreflang="x-default"]')).toHaveAttribute("href", `${SITE}${path}`);
   expect(await page.locator('link[rel="alternate"][hreflang]').count()).toBe(2);
-  const visibleWords = await page.evaluate(
-    () => document.querySelector("main")?.innerText.split(/\s+/).filter((w) => /[A-Za-z0-9]/.test(w)).length ?? 0,
-  );
-  expect(visibleWords).toBeGreaterThanOrEqual(500);
+  // textContent, not innerText: below-the-fold copy uses content-visibility: auto, so innerText is empty
+  // for it until scrolled into view on a phone, even though it is in the HTML that crawlers index.
+  const contentWords = await page.evaluate(() => {
+    const main = document.querySelector("main")?.cloneNode(true) as HTMLElement | undefined;
+    main?.querySelectorAll("script, style").forEach((el) => el.remove());
+    return main?.textContent?.split(/\s+/).filter((w) => /[A-Za-z0-9]/.test(w)).length ?? 0;
+  });
+  expect(contentWords).toBeGreaterThanOrEqual(500);
 }
 
 test.describe("Canada university GPA pages", () => {

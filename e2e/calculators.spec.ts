@@ -1,6 +1,17 @@
 import { test, expect } from "@playwright/test";
 
 test.describe("Core calculator flows", () => {
+  test("score page answers the query and recalculates", async ({ page }) => {
+    await page.goto("/score/18-out-of-20");
+    await expect(page).toHaveTitle(/18 out of 20 as a Grade & Percentage — 90% \(A\)/);
+    await expect(page.getByRole("heading", { level: 1, name: /18 out of 20/i })).toBeVisible();
+    const scales = page.getByRole("table").filter({ hasText: "Grading scale" });
+    await expect(scales.getByRole("row")).toHaveCount(4);
+    await expect(scales.getByRole("row", { name: /7-point/ })).toContainText("B");
+    await page.getByLabel("Your score (points earned)").fill("15");
+    await expect(page.getByText(/75%/).first()).toBeVisible();
+  });
+
   test("homepage EZ grader shows score", async ({ page }) => {
     await page.goto("/");
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
@@ -82,10 +93,15 @@ test.describe("Core calculator flows", () => {
     await expect(page.getByRole("heading", { level: 1, name: /degree classification/i })).toBeVisible();
   });
 
-  test("Canada hub 404s a tool that is not featured", async ({ page }) => {
-    const response = await page.goto("/ca/ez-grader");
+  test("Canada hub 404s an unknown tool slug", async ({ page }) => {
+    const response = await page.goto("/ca/not-a-calculator");
     expect(response?.status()).toBe(404);
     await expect(page.getByRole("heading", { level: 1, name: /page not found/i })).toBeVisible();
+  });
+
+  test("Canada hub redirects the retired EZ grader URL to the homepage", async ({ page }) => {
+    await page.goto("/ca/ez-grader");
+    await expect(page).toHaveURL(/localhost:\d+\/$/);
   });
 
   test("UK hub redirects shared tools to the worldwide calculator URL", async ({ page }) => {

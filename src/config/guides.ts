@@ -657,12 +657,12 @@ export const guides: GuideConfig[] = [
       {
         question: "Does grade replacement help raise GPA?",
         answer:
-          "Yes, if your school offers it. Grade replacement policies let you retake a course and have the new grade replace the old one in the GPA calculation, so the failed or low grade no longer drags the average down. Policies vary widely: some schools average the two attempts, others only replace up to a certain number of credits, and many graduate programmes do not offer it at all. Check your academic regulations before repeating a course for this purpose.",
+          "Yes, if your school offers it. Grade replacement policies let you retake a course and have the new grade replace the old one in the GPA calculation, so the failed or low grade no longer drags the average down. Policies vary widely: some schools average the two attempts, others only replace up to a certain number of credits, and many graduate programs do not offer it at all. Check your academic regulations before repeating a course for this purpose.",
       },
       {
         question: "What GPA do I need for academic probation or dismissal?",
         answer:
-          "Most US universities place students on academic probation when their cumulative GPA falls below 2.0, and may dismiss after a second consecutive semester below that threshold. Some programmes (nursing, engineering, education) set a higher minimum — often 2.5 or 3.0 — for continuation. Check your school's academic standards policy in the student handbook for the exact terms.",
+          "Most US universities place students on academic probation when their cumulative GPA falls below 2.0, and may dismiss after a second consecutive semester below that threshold. Some programs (nursing, engineering, education) set a higher minimum — often 2.5 or 3.0 — for continuation. Check your school's academic standards policy in the student handbook for the exact terms.",
       },
     ],
   },
@@ -748,7 +748,7 @@ export const guides: GuideConfig[] = [
       {
         question: "Is a D a passing grade in college?",
         answer:
-          "In most US colleges, a D (60–69%) is technically passing and earns credit toward graduation, but many majors and programmes require a C or better in core courses. Graduate programmes almost always require B or better. A D may also put you on academic probation if it pulls your cumulative GPA below the minimum required for good standing.",
+          "In most US colleges, a D (60–69%) is technically passing and earns credit toward graduation, but many majors and programs require a C or better in core courses. Graduate programs almost always require B or better. A D may also put you on academic probation if it pulls your cumulative GPA below the minimum required for good standing.",
       },
     ],
   },
@@ -1008,7 +1008,7 @@ export const guides: GuideConfig[] = [
       {
         heading: "Weighted course grade (assignments)",
         body:
-          "Distinct from weighted GPA: a course average where exams and homework count different percentages (e.g. finals 40%). Use the weighted grade calculator — not the GPA calculator — for that math.",
+          "Distinct from weighted GPA: a course average where exams and homework count different percentages (e.g., finals 40%). Use the weighted grade calculator — not the GPA calculator — for that math.",
       },
       {
         heading: "Terms we label as estimates",

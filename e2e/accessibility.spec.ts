@@ -16,6 +16,8 @@ const criticalPages = [
   "/grading-scales/pakistan",
   "/pk",
   "/in",
+  "/score/18-out-of-20",
+  "/ca/gpa-calculator",
 ];
 
 for (const path of criticalPages) {
