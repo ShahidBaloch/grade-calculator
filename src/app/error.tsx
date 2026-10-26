@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import Link from "next/link";
+import { AppLink as Link } from "@/components/navigation/AppLink";
 import { Button } from "@/components/ui/button";
 
 export default function ErrorPage({

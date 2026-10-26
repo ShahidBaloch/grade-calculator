@@ -22,6 +22,9 @@ const nextConfig: NextConfig = {
   async headers() {
     const cacheableMeta =
       "public, max-age=86400, stale-while-revalidate=604800";
+    /** CDN caches HTML; browsers revalidate (SEO-safe stale-while-revalidate at edge). */
+    const cdnHtmlCache =
+      "public, max-age=0, must-revalidate, s-maxage=86400, stale-while-revalidate=604800";
 
     const securityHeaders = [
       { key: "X-Content-Type-Options", value: "nosniff" },
@@ -35,8 +38,8 @@ const nextConfig: NextConfig = {
 
     return [
       {
-        source: "/:path*",
-        headers: securityHeaders,
+        source: "/api/:path*",
+        headers: [...securityHeaders, { key: "X-Robots-Tag", value: "noindex, nofollow" }],
       },
       {
         source: "/sitemap.xml",
@@ -47,6 +50,15 @@ const nextConfig: NextConfig = {
         headers: [{ key: "Cache-Control", value: cacheableMeta }],
       },
       {
+        source: "/",
+        headers: [...securityHeaders, { key: "Cache-Control", value: cdnHtmlCache }],
+      },
+      {
+        source:
+          "/((?!api|_next/static|_next/image|.*\\..*).*)",
+        headers: [...securityHeaders, { key: "Cache-Control", value: cdnHtmlCache }],
+      },
+      {
         source: "/:path*\\.(svg|jpg|jpeg|png|gif|webp|ico|woff2)",
         headers: [
           ...securityHeaders,
@@ -55,6 +67,10 @@ const nextConfig: NextConfig = {
             value: "public, max-age=31536000, immutable",
           },
         ],
+      },
+      {
+        source: "/:path*",
+        headers: securityHeaders,
       },
     ];
   },

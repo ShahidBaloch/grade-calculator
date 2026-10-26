@@ -1,7 +1,7 @@
 "use client";
 
 import { Fragment, lazy, Suspense, useEffect, useState } from "react";
-import Link from "next/link";
+import { AppLink as Link } from "@/components/navigation/AppLink";
 import { usePathname } from "next/navigation";
 import { Menu } from "lucide-react";
 import type { NavItem } from "@/config/navigation";

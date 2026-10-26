@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { AppLink as Link } from "@/components/navigation/AppLink";
 import { usePathname } from "next/navigation";
 import { GEO_COOKIES } from "@/lib/constants";
 import { geoPageHint } from "@/lib/utils/geo-navigation";

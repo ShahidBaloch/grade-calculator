@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { AppLink as Link } from "@/components/navigation/AppLink";
 import { calculatorBySlug } from "@/config/calculators";
 import { countryHubs } from "@/config/country-hubs";
 import { percentToLetter } from "@/lib/grading-scales";

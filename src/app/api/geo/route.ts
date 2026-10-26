@@ -1,6 +1,6 @@
 import { getAutoScaleIdFromGeoCountry } from "@/lib/grading-scales/geo-scale";
 
-export const dynamic = "force-dynamic";
+export const runtime = "edge";
 
 /**
  * Country + default grading scale from Vercel's IP geo header.

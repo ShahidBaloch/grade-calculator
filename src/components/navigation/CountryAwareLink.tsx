@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { AppLink as Link } from "@/components/navigation/AppLink";
 import { usePathname } from "next/navigation";
 import { resolveSiteHref } from "@/lib/utils/country-path";
 

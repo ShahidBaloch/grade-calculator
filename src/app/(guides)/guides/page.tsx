@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { AppLink as Link } from "@/components/navigation/AppLink";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { guides } from "@/config/guides";
 import { createPageMetadata } from "@/lib/seo/metadata";

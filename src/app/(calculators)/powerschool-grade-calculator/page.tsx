@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { AppLink as Link } from "@/components/navigation/AppLink";
 import { ContentPageLayout } from "@/components/content/ContentPageLayout";
 import { WeightedGradeCalculator, type WeightedRow } from "@/components/calculators/WeightedGradeCalculator";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";

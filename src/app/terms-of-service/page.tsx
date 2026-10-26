@@ -1,3 +1,4 @@
+import { AppLink as Link } from "@/components/navigation/AppLink";
 import { ContentPageLayout } from "@/components/content/ContentPageLayout";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 import { siteConfig } from "@/config/site";
@@ -27,9 +28,9 @@ export default function TermsPage() {
             <p className="mt-2">
               These terms apply to {siteConfig.name}, published at {siteConfig.domainLabel} (
               {siteConfig.url}). Calculator results are planning estimates only — see our{" "}
-              <a href="/disclaimer" className="text-[var(--color-primary)] hover:underline">
+              <Link href="/disclaimer" className="text-[var(--color-primary)] hover:underline">
                 Educational Disclaimer
-              </a>
+              </Link>
               .
             </p>
           </section>

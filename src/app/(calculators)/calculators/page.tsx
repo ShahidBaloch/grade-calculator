@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { AppLink as Link } from "@/components/navigation/AppLink";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { CalculatorCard } from "@/components/calculators/shared/CalculatorCard";
 import { CalculatorIntentGuide } from "@/components/engagement/CalculatorIntentGuide";

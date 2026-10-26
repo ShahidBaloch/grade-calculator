@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { AppLink as Link } from "@/components/navigation/AppLink";
 import { notFound } from "next/navigation";
 import { ContentPageLayout } from "@/components/content/ContentPageLayout";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";

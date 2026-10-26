@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { AppLink as Link } from "@/components/navigation/AppLink";
 import { FormEvent, useState } from "react";
 import { contactConfig } from "@/data/contact";
 import { Button } from "@/components/ui/button";

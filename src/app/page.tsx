@@ -5,7 +5,7 @@ import { GeoQuickLinks } from "@/components/engagement/GeoQuickLinks";
 import { PopularScoreLinks } from "@/components/content/PopularScoreLinks";
 import { QuestionChartLinks } from "@/components/content/QuestionChartLinks";
 import { usEocStateLinkGroup } from "@/lib/seo/geo-programmatic";
-import Link from "next/link";
+import { AppLink as Link } from "@/components/navigation/AppLink";
 import { createPageMetadata } from "@/lib/seo/metadata";
 import { calculatorHreflangLanguages } from "@/lib/seo/hreflang";
 import { calculatorKeywords } from "@/lib/seo/keywords";

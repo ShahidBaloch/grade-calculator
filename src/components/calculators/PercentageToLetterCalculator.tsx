@@ -1,5 +1,6 @@
 "use client";
 
+import { AppLink as Link } from "@/components/navigation/AppLink";
 import * as React from "react";
 import { getPrimaryFlow } from "@/config/engagement-flows";
 import { calculatorBySlug } from "@/config/calculators";
@@ -69,9 +70,9 @@ export function PercentageToLetterCalculator() {
             <p className="text-sm text-[var(--color-text-muted)]">
               UK classifications are not US GPA. For an illustrative US 4.0 comparison only (not for
               self-reporting), open the{" "}
-              <a href="/uk-degree-to-us-gpa-reference" className="text-[var(--color-primary)] hover:underline">
+              <Link href="/uk-degree-to-us-gpa-reference" className="text-[var(--color-primary)] hover:underline">
                 UK degree class to US GPA reference
-              </a>
+              </Link>
               .
             </p>
           )}

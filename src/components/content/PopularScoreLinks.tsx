@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { AppLink as Link } from "@/components/navigation/AppLink";
 import { SCORE_HUB_PATH, scorePairBySlug, scorePath } from "@/config/score-pages";
 
 /** Most-searched "X out of Y" pairs (Semrush US export, Oct 2026). Every slug must exist in score-pages. */

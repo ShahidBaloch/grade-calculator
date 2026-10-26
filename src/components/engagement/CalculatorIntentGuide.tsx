@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { AppLink as Link } from "@/components/navigation/AppLink";
 import { calculatorIntents, intentHref } from "@/config/calculator-intents";
 
 /** Short “what do you need?” block — helps users pick the right tool fast. */

@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { AppLink as Link } from "@/components/navigation/AppLink";
 import { CalculatorLayout } from "@/components/calculators/CalculatorLayout";
 import { HowItWorks } from "@/components/content/HowItWorks";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";

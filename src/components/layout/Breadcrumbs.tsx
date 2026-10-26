@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { AppLink as Link } from "@/components/navigation/AppLink";
 import { ChevronRight } from "lucide-react";
 import type { BreadcrumbItem } from "@/types/seo";
 

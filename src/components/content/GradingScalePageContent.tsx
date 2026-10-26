@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { AppLink as Link } from "@/components/navigation/AppLink";
 import { FaqAccordion } from "@/components/content/FaqAccordion";
 import { GradingScaleGuide } from "@/components/content/GradingScaleGuide";
 import { GradingScaleTable } from "@/components/content/GradingScaleTable";

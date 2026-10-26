@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { AppLink as Link } from "@/components/navigation/AppLink";
 import { questionChartPath, questionCharts } from "@/config/question-charts";
 
 /** Links to the "grading scale for N questions" charts (homepage, /grade-chart, test grade calculator). */

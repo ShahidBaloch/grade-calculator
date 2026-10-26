@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { AppLink as Link } from "@/components/navigation/AppLink";
 
 /** Site-wide trust line — grades stay client-side; ads/analytics described in legal pages. */
 export function GradeInputPrivacyNotice({ className = "" }: { className?: string }) {

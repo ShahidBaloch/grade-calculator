@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { AppLink as Link } from "@/components/navigation/AppLink";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { gradingScalePages } from "@/config/grading-scale-pages";
 import { createPageMetadata } from "@/lib/seo/metadata";

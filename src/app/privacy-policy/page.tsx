@@ -1,3 +1,4 @@
+import { AppLink as Link } from "@/components/navigation/AppLink";
 import { ContentPageLayout } from "@/components/content/ContentPageLayout";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 import { siteConfig } from "@/config/site";
@@ -60,9 +61,9 @@ export default function PrivacyPolicyPage() {
               <li>
                 <strong>Advertising:</strong> If we enable Google AdSense or similar programs, ad
                 partners may set cookies or use similar technologies to show and measure ads. See our{" "}
-                <a href="/cookie-policy" className="inline-block py-0.5 text-[var(--color-primary)] underline underline-offset-2">
+                <Link href="/cookie-policy" className="inline-block py-0.5 text-[var(--color-primary)] underline underline-offset-2">
                   Cookie Policy
-                </a>{" "}
+                </Link>{" "}
                 for details and how to manage preferences.
               </li>
             </ul>
@@ -78,9 +79,9 @@ export default function PrivacyPolicyPage() {
             <h2 className="text-lg font-semibold text-[var(--color-text)]">Contact form</h2>
             <p className="mt-2">
               If you use the contact form at{" "}
-              <a href="/contact" className="text-[var(--color-primary)] underline underline-offset-2">
+              <Link href="/contact" className="text-[var(--color-primary)] underline underline-offset-2">
                 gradcalc.com/contact
-              </a>
+              </Link>
               , we receive your name, email address, and message so we can reply. We do not ask for
               grades or student records on that form. Messages are delivered to our team inbox through
               our email provider (SMTP or transactional email) when configured on the server.

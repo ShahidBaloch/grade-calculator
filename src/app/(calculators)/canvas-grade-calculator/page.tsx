@@ -4,7 +4,7 @@ import { calculatorHreflangLanguages } from "@/lib/seo/hreflang";
 import { createPageMetadata } from "@/lib/seo/metadata";
 import { pageDescription, pageTitle } from "@/lib/seo/page-copy";
 import { calculatorKeywords } from "@/lib/seo/keywords";
-import Link from "next/link";
+import { AppLink as Link } from "@/components/navigation/AppLink";
 import { calculatorBySlug } from "@/config/calculators";
 
 const config = calculatorBySlug["canvas-grade-calculator"];

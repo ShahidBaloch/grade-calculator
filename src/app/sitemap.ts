@@ -81,8 +81,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const all = [...staticPages, ...calculatorPages, ...questionChartPages, ...scorePages, ...guidePages, ...scalePages, ...hubPages];
 
-  const ogImageUrl = `${siteConfig.url}/opengraph-image`;
-
   const seen = new Set<string>();
   const entries: MetadataRoute.Sitemap = [];
 
@@ -99,7 +97,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: pageUpdated[path] ?? FALLBACK_UPDATED,
       changeFrequency,
       priority,
-      images: [ogImageUrl],
     });
   }
 

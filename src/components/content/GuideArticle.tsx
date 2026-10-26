@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { AppLink as Link } from "@/components/navigation/AppLink";
 import { EditorialByline } from "@/components/content/EditorialByline";
 import { FaqAccordion } from "@/components/content/FaqAccordion";
 import { RelatedCalculators } from "@/components/content/RelatedCalculators";

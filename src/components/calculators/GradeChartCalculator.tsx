@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import Link from "next/link";
+import { AppLink as Link } from "@/components/navigation/AppLink";
 import { getPrimaryFlow } from "@/config/engagement-flows";
 import { NextStepCard } from "@/components/engagement/NextStepCard";
 import { CalculatorToolbar } from "@/components/calculators/shared/CalculatorToolbar";

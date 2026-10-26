@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { AppLink as Link } from "@/components/navigation/AppLink";
 import { ArrowRight } from "lucide-react";
 import type { CalculatorResourceLinks } from "@/config/calculator-links";
 

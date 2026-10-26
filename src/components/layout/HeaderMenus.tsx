@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { AppLink as Link } from "@/components/navigation/AppLink";
 import { Menu } from "lucide-react";
 import type { NavItem } from "@/config/navigation";
 import { resolveSiteHref } from "@/lib/utils/country-path";

@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { AppLink as Link } from "@/components/navigation/AppLink";
 import * as React from "react";
 import { calculatorBySlug } from "@/config/calculators";
 import { STORAGE_KEYS } from "@/lib/constants";

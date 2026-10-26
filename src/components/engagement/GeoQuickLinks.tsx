@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { AppLink as Link } from "@/components/navigation/AppLink";
 import { GEO_COOKIES } from "@/lib/constants";
 import { quickToolsForCountry } from "@/lib/utils/geo-navigation";
 import { getCookie } from "@/lib/utils/cookies";
