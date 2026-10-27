@@ -1,12 +1,28 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import {
   calculatorStorageScope,
   getCountryPrefixFromPath,
+  navigationCountryHub,
   resolveCalculatorPath,
   resolveSiteHref,
 } from "@/lib/utils/country-path";
+import { enablePreferredCountryHub, setPreferredCountryHub } from "@/lib/utils/preferred-country-hub";
 
 describe("country-path", () => {
+  it("keeps worldwide calculator URLs in the US market even with a session hub", () => {
+    const store = new Map<string, string>();
+    vi.stubGlobal("sessionStorage", {
+      getItem: (key: string) => store.get(key) ?? null,
+      setItem: (key: string, value: string) => store.set(key, value),
+      removeItem: (key: string) => store.delete(key),
+    });
+    enablePreferredCountryHub();
+    setPreferredCountryHub("/pk");
+    expect(navigationCountryHub("/gpa-calculator")).toBe("/us");
+    expect(resolveCalculatorPath("gpa-calculator", "/gpa-calculator")).toBe("/gpa-calculator");
+    expect(navigationCountryHub("/calculators")).toBe("/pk");
+  });
+
   it("detects country hub prefixes", () => {
     expect(getCountryPrefixFromPath("/au/gpa-calculator")).toBe("/au");
     expect(getCountryPrefixFromPath("/gpa-calculator")).toBeNull();

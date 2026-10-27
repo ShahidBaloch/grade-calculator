@@ -84,7 +84,7 @@ export function getPathDefaultScaleId(pathname: string): ScaleId | null {
  * replace the US 10-point scale. The visitor can still change it.
  */
 function geoOverridesPathDefault(pathname: string): boolean {
-  if (pathname === "/") return false;
+  if (pathname === "/" || US_RECORDING_CALCULATOR_PATHS.has(pathname)) return false;
   return true;
 }
 

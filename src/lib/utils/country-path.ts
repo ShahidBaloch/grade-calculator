@@ -8,6 +8,16 @@ import { mainCountryPath } from "@/config/country-hub-routes";
 
 const SLUG_BY_WORLD_PATH = new Map(CALCULATOR_SLUGS.map((slug) => [getCalculatorPath(slug), slug]));
 
+/**
+ * Root calculator URLs without a country prefix (e.g. `/gpa-calculator`, `/`).
+ * These are the US worldwide market URLs Google indexes — session hub must not rewrite them.
+ */
+export function isWorldwideUsMarketPath(pathname: string | null | undefined): boolean {
+  if (!pathname || pathname === "/") return true;
+  if (getCountryPrefixFromPath(pathname)) return false;
+  return slugFromWorldPath(pathname) !== null;
+}
+
 /** e.g. `/au/gpa-calculator` → `/au` */
 export function getCountryPrefixFromPath(pathname: string | null | undefined): string | null {
   if (!pathname) return null;
@@ -32,9 +42,12 @@ export function activeCountryHub(pathname: string | null | undefined): string | 
   return hub?.path ?? null;
 }
 
-/** URL hub first, then session choice — used for calculator menu links. */
+/** URL hub first; worldwide US calculator URLs stay US; session hub only on hub/catalog pages. */
 export function navigationCountryHub(pathname: string | null | undefined): string | null {
-  return activeCountryHub(pathname) ?? getPreferredCountryHub();
+  const active = activeCountryHub(pathname);
+  if (active) return active;
+  if (isWorldwideUsMarketPath(pathname)) return mainCountryPath;
+  return getPreferredCountryHub();
 }
 
 /** Persist non-US hub visits for the session (client only). */
@@ -47,6 +60,10 @@ export function syncPreferredCountryHubFromPath(pathname: string | null | undefi
   }
   if (hub) {
     setPreferredCountryHub(hub);
+    return;
+  }
+  if (isWorldwideUsMarketPath(pathname)) {
+    setPreferredCountryHub(null);
   }
 }
 

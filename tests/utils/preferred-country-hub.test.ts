@@ -54,10 +54,12 @@ describe("header Countries menu tick", () => {
     enablePreferredCountryHub();
   });
 
-  it("ticks the session hub on worldwide pages, matching the trigger label", () => {
+  it("ticks the session hub on the catalog, but US money pages stay US", () => {
     setPreferredCountryHub("/pk");
     expect(isMenuCountrySelected("/pk", "/calculators")).toBe(true);
     expect(isMenuCountrySelected("/us", "/calculators")).toBe(false);
+    expect(isMenuCountrySelected("/us", "/gpa-calculator")).toBe(true);
+    expect(isMenuCountrySelected("/pk", "/gpa-calculator")).toBe(false);
     // A country URL still wins over the session.
     expect(isMenuCountrySelected("/uk", "/uk/gcse-grade-calculator")).toBe(true);
     expect(isMenuCountrySelected("/pk", "/uk/gcse-grade-calculator")).toBe(false);
