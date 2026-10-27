@@ -9,6 +9,7 @@ import { ResourceLinks } from "@/components/content/ResourceLinks";
 import { FaqAccordion } from "@/components/content/FaqAccordion";
 import { HowItWorks } from "@/components/content/HowItWorks";
 import { RelatedCalculators } from "@/components/content/RelatedCalculators";
+import { relatedCalculatorSlugsForPage } from "@/lib/seo/related-calculators";
 import { SectionBlock } from "@/components/content/GeoProgrammaticPage";
 import { geoCalculatorLocal } from "@/lib/content/geo-calculator-local";
 import type { CalculatorSlug } from "@/types/calculator";
@@ -23,7 +24,7 @@ export function CalculatorPageSections({
   const content = calculatorContent[slug];
   // Country pages swap the US-centred copy for their own scale, example, FAQs and sources.
   const local = geoCalculatorLocal(slug, pagePath);
-  const relatedSlugs = calculatorBySlug[slug].relatedSlugs;
+  const relatedSlugs = relatedCalculatorSlugsForPage(calculatorBySlug[slug].relatedSlugs, pagePath);
   const howItWorks = getCalculatorHowItWorks(slug, pagePath);
   const hub = getCountryPrefixFromPath(pagePath)
     ? countryHubByPath[getCountryPrefixFromPath(pagePath)!]

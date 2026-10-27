@@ -50,7 +50,7 @@ describe("country-path", () => {
       "/nz/final-grade-calculator",
     );
     expect(resolveSiteHref("/final-grade-calculator", "/nz")).toBe("/nz/final-grade-calculator");
-    expect(resolveSiteHref("/final-grade-calculator", "/uk")).toBe("/final-grade-calculator");
+    expect(resolveSiteHref("/final-grade-calculator", "/uk")).toBe("/uk/final-grade-calculator");
     // Outside North America "college GPA" is university GPA on the hub scale.
     expect(resolveCalculatorPath("college-gpa-calculator", "/au/gpa-calculator")).toBe("/au/gpa-calculator");
     expect(resolveCalculatorPath("college-gpa-calculator", "/ca/gpa-calculator")).toBe(

@@ -280,6 +280,11 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
     description:
       "See which UK classification band a percentage mark falls in: First 70%+, 2:1 60–69%, 2:2 50–59%, Third 40–49%. UK marks are not US letter grades.",
   },
+  "/uk/final-grade-calculator": {
+    title: "Final Exam Mark Calculator UK — Module & Course Planning",
+    description:
+      "Work out the mark you need on a UK final exam or end-of-module assessment using your current module average and exam weight from the handbook.",
+  },
   "/in/gpa-calculator": {
     title: "India Semester GPA — 10-Point O–F Average",
     description:

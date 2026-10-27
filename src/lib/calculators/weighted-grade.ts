@@ -7,6 +7,10 @@ import {
   type WeightedGradeInput,
 } from "./schemas/weighted-grade.schema";
 
+function isBlankScore(score: number | string): boolean {
+  return typeof score === "string" && score.trim() === "";
+}
+
 export interface WeightedGradeRowResult {
   name?: string;
   normalizedPercent: number;
@@ -46,6 +50,10 @@ export function calculateWeightedGrade(
     const percent = scoreToPercent(item.score, scaleId, { maxPoints });
 
     if (percent == null) {
+      if (isBlankScore(item.score)) {
+        warnings.push(`Row ${index + 1}: blank score — excluded from the average until you enter a value.`);
+        continue;
+      }
       errors.push(`Row ${index + 1}: invalid score or grade`);
       continue;
     }

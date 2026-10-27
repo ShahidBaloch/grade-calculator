@@ -27,9 +27,13 @@ export function calculateGcseGrade(percent: number): CalculatorResult<GcseGradeR
   }
 
   const scale = getScale("uk-gcse");
-  const band =
-    scale.bands.find((item) => percent >= item.min && percent <= item.max) ??
-    scale.bands[scale.bands.length - 1];
+  // Integer band tops (e.g. 39 max for grade 3) leave gaps at 39.9 — use the highest band whose floor applies.
+  const band = [...scale.bands]
+    .sort((a, b) => a.min - b.min)
+    .reduce(
+      (chosen, item) => (percent >= item.min ? item : chosen),
+      scale.bands[scale.bands.length - 1]!,
+    );
   const grade = band.letter;
   const isStandardPass = Number(grade) >= 4;
 

@@ -2,6 +2,21 @@ import { describe, expect, it } from "vitest";
 import { calculateWeightedGrade } from "@/lib/calculators/weighted-grade";
 
 describe("calculateWeightedGrade", () => {
+  it("ignores rows with blank scores but counts filled rows", () => {
+    const result = calculateWeightedGrade({
+      globalMode: "percentage",
+      weightMode: "percent",
+      items: [
+        { score: 90, weight: 50 },
+        { score: 85, weight: 30 },
+        { score: "", weight: 20 },
+      ],
+    });
+    expect(result.status).toBe("warning");
+    expect(result.data?.weightedAverage).toBeCloseTo(88.125, 2);
+    expect(result.warnings?.some((w) => w.includes("blank score"))).toBe(true);
+  });
+
   it("calculates weighted average", () => {
     const result = calculateWeightedGrade({
       globalMode: "percentage",

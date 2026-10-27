@@ -62,6 +62,7 @@ export const pageUpdated: Record<string, string> = {
   "/uk/gcse-grade-calculator": "2026-10-26",
   "/uk/weighted-grade-calculator": "2026-10-26",
   "/uk/letter-grade-calculator": "2026-10-26",
+  "/uk/final-grade-calculator": "2026-10-27",
   "/weighted-gpa-calculator": "2026-10-20",
   "/weighted-grade-calculator": "2026-10-20",
   // Country calculators

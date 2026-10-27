@@ -12,7 +12,7 @@ describe("hub calculator nav catalog", () => {
     const uk = selectableCalculatorSlugsForHub("/uk");
     expect(uk).toContain("degree-classification-calculator");
     expect(uk).toContain("gcse-grade-calculator");
-    expect(uk).not.toContain("final-grade-calculator");
+    expect(uk).toContain("final-grade-calculator");
     expect(uk).not.toContain("gpa-calculator");
     expect(uk).not.toContain("raise-gpa-calculator");
     expect(uk).not.toContain("cgpa-to-gpa");
@@ -33,7 +33,7 @@ describe("hub calculator nav catalog", () => {
     expect(ukMenu).toContain("/uk/weighted-grade-calculator");
     expect(ukMenu).toContain("/uk/letter-grade-calculator");
     expect(ukMenu).toContain("/uk/degree-classification-calculator");
-    expect(ukMenu).toContain("/final-grade-calculator");
+    expect(ukMenu).toContain("/uk/final-grade-calculator");
     const ukLabels = countryCalculatorNavLinks("/uk").map((link) => link.label);
     expect(ukLabels).toContain("Letter Grade Calculator");
     expect(ukLabels.some((label) => label.startsWith("US "))).toBe(false);

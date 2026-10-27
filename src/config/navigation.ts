@@ -166,6 +166,13 @@ function footerCalculatorLinksForHub(hubPath: string | null) {
 }
 
 function footerGuideLinksForHub(hubPath: string | null) {
+  const hub = hubPath ? countryHubs.find((item) => item.path === hubPath) : undefined;
+  if (hub?.relatedGuides?.length) {
+    return [
+      ...hub.relatedGuides.map((guide) => ({ label: guide.title, href: guide.path })),
+      { label: "All Guides", href: "/guides" },
+    ];
+  }
   const slugs = FOOTER_GUIDE_SLUGS.filter(
     (slug) => !hubPath || hubPath === mainCountryPath || !US_ONLY_FOOTER_GUIDE_SLUGS.has(slug),
   );

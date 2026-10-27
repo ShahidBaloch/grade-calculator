@@ -18,19 +18,21 @@ describe("indexable geo pages (SEO structure)", () => {
   });
 
   it("does not build indexable geo pages for generic syllabus duplicates", () => {
-    expect(isIndexableGeoCalculator("/uk", "final-grade-calculator")).toBe(false);
     expect(isIndexableGeoCalculator("/au", "average-grade-calculator")).toBe(false);
-    expect(generateGeoStaticParams("uk").map((p) => p.slug)).not.toContain("final-grade-calculator");
   });
 
   it("redirects stale hub-prefixed generic URLs to worldwide", () => {
     const redirects = new Map(seoRedirects().map((r) => [r.source, r.destination]));
-    expect(redirects.get("/uk/final-grade-calculator")).toBe("/final-grade-calculator");
     expect(redirects.get("/au/average-grade-calculator")).toBe("/average-grade-calculator");
   });
 
   it("serves UK-scale GCSE, weighted and letter pages under /uk", () => {
-    for (const slug of ["gcse-grade-calculator", "weighted-grade-calculator", "letter-grade-calculator"] as const) {
+    for (const slug of [
+      "gcse-grade-calculator",
+      "weighted-grade-calculator",
+      "letter-grade-calculator",
+      "final-grade-calculator",
+    ] as const) {
       expect(isIndexableGeoCalculator("/uk", slug)).toBe(true);
       expect(generateGeoStaticParams("uk").map((p) => p.slug)).toContain(slug);
     }
@@ -55,6 +57,7 @@ describe("indexable geo pages (SEO structure)", () => {
     expect(redirects.has("/in/final-grade-calculator")).toBe(false);
     expect(redirects.has("/au/final-grade-calculator")).toBe(false);
     expect(redirects.has("/pk/final-grade-calculator")).toBe(false);
+    expect(redirects.has("/uk/final-grade-calculator")).toBe(false);
     expect(redirects.has("/pk/cgpa-to-gpa")).toBe(false);
     expect(redirects.get("/gcse-grade-calculator")).toBe("/uk/gcse-grade-calculator");
     expect(redirects.get("/grade-calculator")).toBe("/");

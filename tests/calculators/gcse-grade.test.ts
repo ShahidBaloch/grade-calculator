@@ -2,6 +2,12 @@ import { describe, expect, it } from "vitest";
 import { calculateGcseGrade } from "@/lib/calculators/gcse-grade";
 
 describe("calculateGcseGrade", () => {
+  it("maps decimal percentages below integer band tops correctly", () => {
+    expect(calculateGcseGrade(39.9).data?.grade).toBe("3");
+    expect(calculateGcseGrade(69.9).data?.grade).toBe("6");
+    expect(calculateGcseGrade(89.9).data?.grade).toBe("8");
+  });
+
   it("maps 72% to grade 7 and a standard pass", () => {
     const result = calculateGcseGrade(72);
     expect(result.data?.grade).toBe("7");
