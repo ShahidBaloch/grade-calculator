@@ -66,7 +66,10 @@ const STATIC_REDIRECTS: Array<{ source: string; destination: string }> = [
   { source: "/junior-high-gpa-calculator", destination: "/middle-school-gpa-calculator" },
 ];
 
-/** 301 map. Sources must not be indexed. */
+/**
+ * Permanent redirects (Next.js `permanent: true`). Sources must not be indexed.
+ * Do not delete a public URL that may have GSC impressions without adding its path here first.
+ */
 export function seoRedirects(): Array<{ source: string; destination: string }> {
   const pairs = [...STATIC_REDIRECTS];
 
