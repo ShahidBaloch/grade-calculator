@@ -27,6 +27,10 @@ try {
   git tag -f gradecalc-sync main
   Write-Host "Done. gradecalc-sync -> $(git rev-parse --short main)"
 } finally {
-  git checkout main *> $null
-  git branch -D gradecalc-publish *> $null
+  $prevEap = $ErrorActionPreference
+  $ErrorActionPreference = "Continue"
+  git checkout main 2>&1 | Out-Null
+  git branch -D gradecalc-publish 2>&1 | Out-Null
+  $ErrorActionPreference = $prevEap
 }
+exit 0
