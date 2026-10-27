@@ -399,7 +399,7 @@ describe("SEO audit", () => {
     expect(new Set(paths.map((path) => pageUpdated[path])).size).toBeGreaterThan(1);
   });
 
-  it("robots.txt allows Google, Bing, and Yandex with no crawl delay; blocks SEO scrapers", () => {
+  it("robots.txt allows only Google crawlers; blocks all other bots via *", () => {
     const config = robots();
     expect(config.sitemap).toBe(`${siteConfig.url}/sitemap.xml`);
     expect(config.host).toBe(new URL(siteConfig.url).host);
@@ -408,52 +408,19 @@ describe("SEO audit", () => {
     const agentsOnly = (rule: (typeof rules)[number]) =>
       Array.isArray(rule.userAgent) ? rule.userAgent : [rule.userAgent];
 
-    const googleRule = rules.find((rule) => {
-      const agents = agentsOnly(rule);
-      return agents.includes("Googlebot") && !agents.includes("Bingbot");
-    });
+    expect(rules).toHaveLength(2);
+
+    const googleRule = rules.find((rule) => agentsOnly(rule).includes("Googlebot"));
     expect(googleRule?.allow).toContain("/");
-    // Junk URL patterns must stay crawlable so Google sees the 404 + noindex.
     expect(googleRule?.disallow).not.toContain("/*as-a-percent*");
     expect(googleRule?.disallow).not.toContain("/*out-of-*");
-    expect(googleRule?.crawlDelay).toBeUndefined();
-
-    const bingRule = rules.find((rule) => {
-      const agents = agentsOnly(rule);
-      return agents.includes("Bingbot") && agents.length <= 4;
-    });
-    expect(bingRule?.allow).toContain("/");
-    expect(bingRule?.crawlDelay).toBeUndefined();
-
-    const yandexRule = rules.find((rule) => agentsOnly(rule).includes("YandexBot"));
-    expect(yandexRule?.allow).toContain("/");
-    expect(yandexRule?.crawlDelay).toBeUndefined();
-
-    const blockedRule = rules.find((rule) => {
-      const agents = agentsOnly(rule);
-      return agents.includes("AhrefsBot") && agents.includes("SemrushBot");
-    });
-    expect(blockedRule?.disallow).toContain("/");
-    expect(blockedRule?.allow).toBeUndefined();
-    const blockedAgents = agentsOnly(blockedRule!);
-    expect(blockedAgents).toContain("ClaudeBot");
-    expect(blockedAgents).not.toContain("GPTBot");
-    expect(blockedAgents).not.toContain("ChatGPT-User");
-
-    const openAiRule = rules.find((rule) => agentsOnly(rule).includes("GPTBot"));
-    expect(agentsOnly(openAiRule!)).toEqual(["GPTBot", "ChatGPT-User"]);
-    expect(openAiRule?.allow).toContain("/");
-    expect(openAiRule?.disallow ?? []).not.toContain("/");
-
-    const adsRule = rules.find((rule) => {
-      const agents = agentsOnly(rule);
-      return agents.includes("AdsBot-Google") && agents.includes("Mediapartners-Google");
-    });
-    expect(adsRule?.allow).toContain("/");
+    expect(agentsOnly(googleRule!)).toContain("AdsBot-Google");
+    expect(agentsOnly(googleRule!)).toContain("Mediapartners-Google");
+    expect(agentsOnly(googleRule!)).not.toContain("Bingbot");
 
     const wildcardRule = rules.find((rule) => agentsOnly(rule).includes("*"));
-    expect(wildcardRule?.crawlDelay).toBeUndefined();
-    expect(wildcardRule?.allow).toContain("/");
+    expect(wildcardRule?.disallow).toContain("/");
+    expect(wildcardRule?.allow).toBeUndefined();
   });
 
   it("sitemap excludes low-value programmatic URL patterns", () => {
