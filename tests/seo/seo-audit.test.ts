@@ -333,6 +333,13 @@ describe("SEO audit", () => {
     expect(faq?.answer).toMatch(/last inputs/i);
   });
 
+  it("sitemap lists www URLs so entries match the canonical host (no extra redirect hop)", () => {
+    expect(new URL(siteConfig.url).host).toBe("www.gradcalc.com");
+    for (const entry of sitemap()) {
+      expect(new URL(entry.url).host, entry.url).toBe("www.gradcalc.com");
+    }
+  });
+
   it("sitemap URLs are unique and omit redirect-only paths", () => {
     const urls = sitemap().map((entry) => entry.url);
     expect(new Set(urls).size).toBe(urls.length);
