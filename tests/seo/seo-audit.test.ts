@@ -408,7 +408,7 @@ describe("SEO audit", () => {
     expect(new Set(paths.map((path) => pageUpdated[path])).size).toBeGreaterThan(1);
   });
 
-  it("robots.txt allows only Google crawlers; blocks all other bots via *", () => {
+  it("robots.txt allows major search engines; blocks SEO scrapers", () => {
     const config = robots();
     expect(config.sitemap).toBe(`${siteConfig.url}/sitemap.xml`);
     expect(config.host).toBe(new URL(siteConfig.url).host);
@@ -417,19 +417,27 @@ describe("SEO audit", () => {
     const agentsOnly = (rule: (typeof rules)[number]) =>
       Array.isArray(rule.userAgent) ? rule.userAgent : [rule.userAgent];
 
-    expect(rules).toHaveLength(2);
-
-    const googleRule = rules.find((rule) => agentsOnly(rule).includes("Googlebot"));
+    const googleRule = rules.find((rule) => {
+      const agents = agentsOnly(rule);
+      return agents.includes("Googlebot") && !agents.includes("Bingbot");
+    });
     expect(googleRule?.allow).toContain("/");
-    expect(googleRule?.disallow).not.toContain("/*as-a-percent*");
-    expect(googleRule?.disallow).not.toContain("/*out-of-*");
-    expect(agentsOnly(googleRule!)).toContain("AdsBot-Google");
-    expect(agentsOnly(googleRule!)).toContain("Mediapartners-Google");
-    expect(agentsOnly(googleRule!)).not.toContain("Bingbot");
+
+    const bingRule = rules.find((rule) => agentsOnly(rule).includes("Bingbot"));
+    expect(bingRule?.allow).toContain("/");
+
+    const yandexRule = rules.find((rule) => agentsOnly(rule).includes("YandexBot"));
+    expect(yandexRule?.allow).toContain("/");
+
+    const blockedRule = rules.find((rule) => {
+      const agents = agentsOnly(rule);
+      return agents.includes("AhrefsBot") && agents.includes("SemrushBot");
+    });
+    expect(blockedRule?.disallow).toContain("/");
+    expect(agentsOnly(blockedRule!).includes("Bingbot")).toBe(false);
 
     const wildcardRule = rules.find((rule) => agentsOnly(rule).includes("*"));
-    expect(wildcardRule?.disallow).toContain("/");
-    expect(wildcardRule?.allow).toBeUndefined();
+    expect(wildcardRule?.allow).toContain("/");
   });
 
   it("sitemap excludes low-value programmatic URL patterns", () => {

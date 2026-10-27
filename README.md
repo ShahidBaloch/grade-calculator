@@ -66,7 +66,7 @@ The tag `gradecalc-sync` marks what is already on gradcalculator GitHub; only co
 1. **Canonical URL** — Set `NEXT_PUBLIC_SITE_URL=https://www.gradcalc.com` in Vercel.
 2. **Domains (critical)** — Canonical host is **`www.gradcalc.com`**. In Vercel → **Settings → Domains**, set **`www.gradcalc.com` as Primary** and let **`gradcalc.com` redirect to www** (default). **Remove** any rule that redirects **www → apex** — combining that with `vercel.json` / middleware “apex → www” causes a **redirect loop** and Search Console **Couldn’t fetch** on `/sitemap.xml`. After deploy, `https://www.gradcalc.com/sitemap.xml` must return **200** (not redirect).
 3. **Contact form** — Configure **SMTP** (`SMTP_HOST`, `SMTP_USER`, `SMTP_PASS`, optional `CONTACT_FROM` / `CONTACT_TO`) like FancifyText, **or** `RESEND_API_KEY` + `CONTACT_FROM_EMAIL`. Posts to `POST /api/contact`.
-4. **Crawlers** — `robots.txt` allows **Google** crawlers only (`User-agent: *` → `Disallow: /`). In Vercel → Firewall, do **not** challenge **Googlebot**. Confirm `https://www.gradcalc.com/robots.txt` and `/sitemap.xml` return **200**.
+4. **Crawlers** — `robots.txt` allows **Google, Bing, Yandex**, and other major search bots; blocks SEO scrapers (Ahrefs, Semrush, etc.). Do not challenge verified search bots in Vercel Firewall.
 5. **Uptime** — Optional monitor target: `GET /api/health` (returns `{ "ok": true }`, no store cache).
 6. **QA** — After deploy: Rich Results Test on `/` and `/contact`; run `npm run test:qa` in CI.
 

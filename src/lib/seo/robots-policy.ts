@@ -34,18 +34,9 @@ export const blockedCrawlerUserAgents = [
   "CCBot",
   "anthropic-ai",
   "ClaudeBot",
-  "Bingbot",
-  "msnbot",
-  "BingPreview",
-  "YandexBot",
-  "YandexImages",
-  "YandexMobileBot",
-  "Applebot",
-  "DuckDuckBot",
-  "Slurp",
 ] as const;
 
-/** Google Search, previews, and AdSense verification — only these may crawl (see robots.ts). */
+/** Google Search, previews, and AdSense verification. */
 export const googleSearchUserAgents = [
   "Googlebot",
   "Googlebot-Image",
