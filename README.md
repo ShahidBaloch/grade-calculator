@@ -37,10 +37,11 @@ Open [http://localhost:3000](http://localhost:3000).
 ## Production checklist (Google-friendly)
 
 1. **Canonical URL** — Set `NEXT_PUBLIC_SITE_URL=https://www.gradcalc.com` in Vercel.
-2. **Contact form** — Configure **SMTP** (`SMTP_HOST`, `SMTP_USER`, `SMTP_PASS`, optional `CONTACT_FROM` / `CONTACT_TO`) like FancifyText, **or** `RESEND_API_KEY` + `CONTACT_FROM_EMAIL`. Posts to `POST /api/contact`.
-3. **Crawlers** — In Vercel → Firewall / Bot Protection, do **not** challenge verified search bots (Googlebot, Bingbot). Confirm **Google Search Console → Crawl stats** and that `https://www.gradcalc.com/robots.txt` and `/sitemap.xml` return **200** without a browser checkpoint. `vercel.json` sets cache headers for those URLs; it does not replace firewall rules.
-4. **Uptime** — Optional monitor target: `GET /api/health` (returns `{ "ok": true }`, no store cache).
-5. **QA** — After deploy: Rich Results Test on `/` and `/contact`; run `npm run test:qa` in CI.
+2. **Domains (critical)** — In Vercel → **Settings → Domains**, pick **one** primary host. Either **www** is primary and `gradcalc.com` redirects to www, **or** apex is primary and you remove any app-level redirect the other way. Do **not** combine “www → apex” in Vercel with `vercel.json` “apex → www” — that creates a redirect loop and Search Console will show **Couldn’t fetch** for `/sitemap.xml`.
+3. **Contact form** — Configure **SMTP** (`SMTP_HOST`, `SMTP_USER`, `SMTP_PASS`, optional `CONTACT_FROM` / `CONTACT_TO`) like FancifyText, **or** `RESEND_API_KEY` + `CONTACT_FROM_EMAIL`. Posts to `POST /api/contact`.
+4. **Crawlers** — In Vercel → Firewall / Bot Protection, do **not** challenge verified search bots (Googlebot, Bingbot). Confirm **Google Search Console → Crawl stats** and that `https://www.gradcalc.com/robots.txt` and `/sitemap.xml` return **200** without a browser checkpoint. `vercel.json` sets cache headers for those URLs; it does not replace firewall rules.
+5. **Uptime** — Optional monitor target: `GET /api/health` (returns `{ "ok": true }`, no store cache).
+6. **QA** — After deploy: Rich Results Test on `/` and `/contact`; run `npm run test:qa` in CI.
 
 
 - `src/app/` — Next.js App Router pages
