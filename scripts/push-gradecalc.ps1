@@ -27,6 +27,6 @@ try {
   git tag -f gradecalc-sync main
   Write-Host "Done. gradecalc-sync -> $(git rev-parse --short main)"
 } finally {
-  git checkout main 2>$null
-  git branch -D gradecalc-publish 2>$null
+  git checkout main *> $null
+  git branch -D gradecalc-publish *> $null
 }
