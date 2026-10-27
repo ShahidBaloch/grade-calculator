@@ -33,6 +33,33 @@ Open [http://localhost:3000](http://localhost:3000).
 | `npm run test:coverage` | Unit tests with coverage |
 | `npm run test:e2e:chromium` | Playwright E2E (Chromium) |
 | `npm run test:qa` | Build + coverage + E2E smoke |
+| `npm run push:gradecalc` | Push **new** commits to [gradcalculator-dot/GradeCalc](https://github.com/gradcalculator-dot/GradeCalc) (see below) |
+
+## gradcalculator GitHub (clean history)
+
+Two remotes:
+
+| Remote | Repo | History on GitHub |
+|--------|------|-------------------|
+| `origin` | ShahidBaloch/grade-calculator | Full dev history |
+| `gradecalc` | gradcalculator-dot/GradeCalc | **One** initial commit + **each new publish** (no old commits) |
+
+**Do not** `git push gradecalc main` — that would upload the entire old history.
+
+After commits on `main`:
+
+```bash
+npm run push:gradecalc
+```
+
+One-time on this machine (if the tag is missing):
+
+```bash
+git fetch gradecalc
+git tag gradecalc-sync gradecalc/main
+```
+
+The tag `gradecalc-sync` marks what is already on gradcalculator GitHub; only commits **after** it are cherry-picked and pushed with their real messages.
 
 ## Production checklist (Google-friendly)
 
