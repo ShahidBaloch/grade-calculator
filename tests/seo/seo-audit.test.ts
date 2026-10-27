@@ -499,6 +499,32 @@ describe("SEO audit", () => {
     expect(DISTINCT_PAGE_COPY["/cgpa-calculator"].description).toMatch(/India|HEC|Pakistan/);
   });
 
+  it("distinct page titles and meta descriptions fit common SERP limits", () => {
+    const suffix = ` | ${siteConfig.name}`;
+    for (const [path, copy] of Object.entries(DISTINCT_PAGE_COPY)) {
+      const fullTitle = copy.title.includes(siteConfig.name) ? copy.title : copy.title + suffix;
+      expect(fullTitle.length, path).toBeLessThanOrEqual(60);
+      expect(copy.description.length, path).toBeLessThanOrEqual(160);
+    }
+  });
+
+  it("distinct page titles keep primary search keywords", () => {
+    expect(DISTINCT_PAGE_COPY["/"].title).toMatch(/grade calculator/i);
+    expect(DISTINCT_PAGE_COPY["/"].title).toMatch(/ez grader|grading/i);
+    expect(DISTINCT_PAGE_COPY["/weighted-grade-calculator"].title).toMatch(/weighted grade calculator/i);
+    expect(DISTINCT_PAGE_COPY["/weighted-grade-calculator"].title).toMatch(/gradebook/i);
+    expect(DISTINCT_PAGE_COPY["/gpa-calculator"].title).toMatch(/gpa calculator/i);
+    expect(DISTINCT_PAGE_COPY["/final-grade-calculator"].title).toMatch(/final grade calculator/i);
+    expect(DISTINCT_PAGE_COPY["/canvas-grade-calculator"].title).toMatch(/canvas grade calculator/i);
+    expect(DISTINCT_PAGE_COPY["/canvas-grade-calculator"].title).toMatch(/weighted|what-if/i);
+    expect(DISTINCT_PAGE_COPY["/weighted-gpa-calculator"].title).toMatch(/weighted gpa calculator/i);
+    expect(DISTINCT_PAGE_COPY["/weighted-gpa-calculator"].title).toMatch(/honors|ap|ib/i);
+    expect(DISTINCT_PAGE_COPY["/csu-gpa-calculator"].title).toMatch(/csu gpa calculator/i);
+    expect(DISTINCT_PAGE_COPY["/csu-gpa-calculator"].title).toMatch(/honors|a–g/i);
+    expect(DISTINCT_PAGE_COPY["/atar-calculator"].title).toMatch(/atar calculator/i);
+    expect(DISTINCT_PAGE_COPY["/uk/gcse-grade-calculator"].title).toMatch(/gcse grade calculator/i);
+  });
+
   it("weighted-grade copy is consistent about 100% weights", () => {
     const content = calculatorContent["weighted-grade-calculator"];
     const blobs = [

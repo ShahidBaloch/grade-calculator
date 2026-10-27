@@ -9,16 +9,16 @@ $KeyLocation = "$SiteOrigin/$IndexNowKey.txt"
 $Sitemap = "$SiteOrigin/sitemap.xml"
 
 $PriorityUrls = @(
+  "$SiteOrigin/",
+  "$SiteOrigin/gpa-calculator",
+  "$SiteOrigin/weighted-grade-calculator",
+  "$SiteOrigin/final-grade-calculator",
+  "$SiteOrigin/test-grade-calculator",
+  "$SiteOrigin/grade-chart",
+  "$SiteOrigin/calculators",
+  "$SiteOrigin/uk/gcse-grade-calculator",
   "$SiteOrigin/about",
-  "$SiteOrigin/disclaimer",
-  "$SiteOrigin/ca/cumulative-gpa-calculator",
-  "$SiteOrigin/nz/gpa-calculator",
-  "$SiteOrigin/pk/cgpa-calculator",
-  "$SiteOrigin/pk/percentage-to-cgpa",
-  "$SiteOrigin/guides/final-exam-tips",
-  "$SiteOrigin/guides/gpa-glossary",
-  "$SiteOrigin/guides",
-  "$SiteOrigin/calculators"
+  "$SiteOrigin/disclaimer"
 )
 
 Write-Host "=== Yandex sitemap ping ==="

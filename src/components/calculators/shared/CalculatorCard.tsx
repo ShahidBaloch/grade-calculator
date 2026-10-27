@@ -40,9 +40,17 @@ interface CalculatorCardProps {
   calculator: CalculatorConfig;
   variant?: "default" | "mini";
   href?: string;
+  title?: string;
+  description?: string;
 }
 
-export function CalculatorCard({ calculator, variant = "default", href }: CalculatorCardProps) {
+export function CalculatorCard({
+  calculator,
+  variant = "default",
+  href,
+  title,
+  description,
+}: CalculatorCardProps) {
   const Icon = iconMap[calculator.icon as keyof typeof iconMap] ?? Calculator;
   const path = href ?? getCalculatorPath(calculator.slug);
 
@@ -66,8 +74,8 @@ export function CalculatorCard({ calculator, variant = "default", href }: Calcul
           <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-lg bg-[var(--color-primary-subtle)]">
             <Icon className="h-5 w-5 text-[var(--color-primary)]" />
           </div>
-          <CardTitle className="text-base">{calculator.name}</CardTitle>
-          <CardDescription>{calculator.description}</CardDescription>
+          <CardTitle className="text-base">{title ?? calculator.name}</CardTitle>
+          <CardDescription>{description ?? calculator.description}</CardDescription>
         </CardHeader>
       </Card>
     </Link>

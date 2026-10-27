@@ -2,6 +2,7 @@ import { getScale } from "@/lib/grading-scales";
 import type { CalculatorResult } from "./types";
 
 const LEGACY_LETTER: Record<string, string> = {
+  U: "Unclassified",
   "9": "A*",
   "8": "A*",
   "7": "A",
@@ -24,6 +25,26 @@ export interface GcseGradeResult {
 export function calculateGcseGrade(percent: number): CalculatorResult<GcseGradeResult> {
   if (!Number.isFinite(percent) || percent < 0 || percent > 100) {
     return { status: "error", errors: ["Percentage must be between 0 and 100"] };
+  }
+
+  if (percent === 0) {
+    return {
+      status: "warning",
+      warnings: [
+        "Official GCSE grade boundaries change by subject and exam series. This uses a simplified 9–1 percentage map for planning only.",
+        "0% is shown as U (unclassified) on this planner — grade 1 covers roughly 1–19%.",
+      ],
+      data: {
+        grade: "U",
+        legacyLetter: LEGACY_LETTER.U,
+        isStandardPass: false,
+        rangeLabel: "0%",
+        formulaSteps: [
+          "0% is treated as U (unclassified) for planning — not a numeric grade 1.",
+          "Marks from about 1% upward fall in the grade 1 band on this simplified table.",
+        ],
+      },
+    };
   }
 
   const scale = getScale("uk-gcse");

@@ -5,7 +5,9 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { calculatorBySlug, getCalculatorPath } from "@/config/calculators";
 import { GeoLinkList } from "@/components/content/GeoProgrammaticPage";
 import { countryHubByPath } from "@/config/country-hubs";
-import { webApplicationJsonLd, howToJsonLd } from "@/lib/seo/jsonld";
+import { calculatorContent } from "@/config/calculator-content";
+import { geoCalculatorLocal } from "@/lib/content/geo-calculator-local";
+import { faqPageJsonLd, howToJsonLd, webApplicationJsonLd } from "@/lib/seo/jsonld";
 import { calculatorCountryVersionsGroup } from "@/lib/seo/geo-programmatic";
 import { getCalculatorHowItWorks } from "@/lib/content/calculator-how-it-works";
 import { geoCalculatorHeading } from "@/lib/seo/geo-calculator-heading";
@@ -47,6 +49,7 @@ export function CalculatorRoute({
     (geoHub ? geoCalculatorHeading(geoHub.path, geoHub.name, config.name) : config.name);
   const howItWorksSteps = getCalculatorHowItWorks(slug, pagePath);
   const countryVersions = calculatorCountryVersionsGroup(slug, pagePath);
+  const faqs = geoCalculatorLocal(slug, pagePath)?.faqs ?? calculatorContent[slug]?.faqs;
   const breadcrumbs = breadcrumbHome
     ? [{ name: "Home", href: "/" }]
     : geoHub
@@ -77,6 +80,7 @@ export function CalculatorRoute({
           steps: howItWorksSteps,
         })}
       />
+      {faqs && faqs.length > 0 && <JsonLd data={faqPageJsonLd(faqs)} />}
       <BreadcrumbJsonLd items={breadcrumbs} />
       <CalculatorLayout
         title={heading}

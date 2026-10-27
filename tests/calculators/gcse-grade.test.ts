@@ -15,6 +15,12 @@ describe("calculateGcseGrade", () => {
     expect(result.data?.legacyLetter).toContain("A");
   });
 
+  it("maps 0% to U (unclassified)", () => {
+    const result = calculateGcseGrade(0);
+    expect(result.data?.grade).toBe("U");
+    expect(result.data?.isStandardPass).toBe(false);
+  });
+
   it("treats 35% as below a standard pass", () => {
     const result = calculateGcseGrade(35);
     expect(result.data?.grade).toBe("3");

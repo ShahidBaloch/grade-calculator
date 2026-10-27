@@ -18,9 +18,22 @@ export function GcseGradeCalculator() {
     { percent: 72 },
   );
   const examples = calculatorBySlug["gcse-grade-calculator"].examples;
+  const [percentText, setPercentText] = React.useState(() => String(state.percent));
 
-  const result = React.useMemo(() => calculateGcseGrade(state.percent), [state.percent]);
-  const data = result.data;
+  React.useEffect(() => {
+    setPercentText(String(state.percent));
+  }, [state.percent]);
+
+  const parsedPercent =
+    percentText.trim() === "" ? null : Number(percentText.trim());
+  const result = React.useMemo(
+    () =>
+      parsedPercent == null || !Number.isFinite(parsedPercent)
+        ? null
+        : calculateGcseGrade(parsedPercent),
+    [parsedPercent],
+  );
+  const data = result?.data;
 
   return (
     <div className="calculator-print-area space-y-6">
@@ -48,17 +61,24 @@ export function GcseGradeCalculator() {
           max={100}
           step="any"
           inputMode="decimal"
-          value={state.percent}
+          value={percentText}
           onChange={(e) => {
             const raw = e.target.value;
-            if (raw === "") return;
+            setPercentText(raw);
+            if (raw.trim() === "") return;
             const next = Number(raw);
             if (Number.isFinite(next)) setState({ percent: next });
           }}
         />
       </div>
-      {result.errors?.[0] && <p className="text-sm text-[var(--color-error)]">{result.errors[0]}</p>}
-      {result.warnings?.map((warning) => (
+      {parsedPercent == null && (
+        <p className="text-sm text-[var(--color-error)]">Enter a percentage between 0 and 100.</p>
+      )}
+      {parsedPercent != null && !Number.isFinite(parsedPercent) && (
+        <p className="text-sm text-[var(--color-error)]">Enter a valid number.</p>
+      )}
+      {result?.errors?.[0] && <p className="text-sm text-[var(--color-error)]">{result.errors[0]}</p>}
+      {result?.warnings?.map((warning) => (
         <p key={warning} className="text-sm text-[var(--color-warning)]">
           {warning}
         </p>
