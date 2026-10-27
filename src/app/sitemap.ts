@@ -7,9 +7,9 @@ import { isRedirectOnlyPath } from "@/lib/seo/canonical";
 import { indexableGeoCalculatorPaths } from "@/lib/seo/intent-urls";
 import { geoProgrammaticPaths } from "@/lib/seo/geo-programmatic";
 import { pageUpdated } from "@/config/page-updated";
-import { questionChartPath, questionCharts } from "@/config/question-charts";
 import { siteConfig } from "@/config/site";
-import { SCORE_HUB_PATH, scorePairs, scorePath } from "@/config/score-pages";
+import { SCORE_HUB_PATH } from "@/config/score-pages";
+import { isBulkProgrammaticSitemapPath } from "@/lib/seo/sitemap-policy";
 
 export const dynamic = "force-static";
 
@@ -49,18 +49,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
   ];
 
-  const questionChartPages = questionCharts.map((chart) => ({
-    path: questionChartPath(chart.total),
-    priority: 0.7,
-    changeFrequency: "monthly" as const,
-  }));
-
-  const scorePages = scorePairs.map((pair) => ({
-    path: scorePath(pair),
-    priority: 0.6,
-    changeFrequency: "yearly" as const,
-  }));
-
   const guidePages = guides.map((g) => ({
     path: g.path,
     priority: 0.7,
@@ -79,14 +67,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: "monthly" as const,
   }));
 
-  const all = [...staticPages, ...calculatorPages, ...questionChartPages, ...scorePages, ...guidePages, ...scalePages, ...hubPages];
+  const all = [...staticPages, ...calculatorPages, ...guidePages, ...scalePages, ...hubPages];
 
   const seen = new Set<string>();
   const entries: MetadataRoute.Sitemap = [];
 
   for (const { path, priority, changeFrequency } of all) {
     const pathname = path === "/" ? "/" : path;
-    if (isRedirectOnlyPath(pathname)) {
+    if (isRedirectOnlyPath(pathname) || isBulkProgrammaticSitemapPath(pathname)) {
       continue;
     }
     const url = `${siteConfig.url}${path === "/" ? "" : path}`;

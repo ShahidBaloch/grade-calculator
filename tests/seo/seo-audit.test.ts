@@ -333,6 +333,15 @@ describe("SEO audit", () => {
     expect(faq?.answer).toMatch(/last inputs/i);
   });
 
+  it("sitemap omits bulk score and grade-chart variants (primary indexable set only)", () => {
+    const paths = sitemap().map((entry) => new URL(entry.url).pathname);
+    expect(paths.filter((p) => p.startsWith("/score/"))).toEqual([]);
+    expect(paths.filter((p) => /^\/grade-chart\/\d+-questions$/.test(p))).toEqual([]);
+    expect(paths).toContain("/score");
+    expect(paths).toContain("/grade-chart");
+    expect(sitemap().length).toBe(126);
+  });
+
   it("sitemap lists www URLs so entries match the canonical host (no extra redirect hop)", () => {
     expect(new URL(siteConfig.url).host).toBe("www.gradcalc.com");
     for (const entry of sitemap()) {

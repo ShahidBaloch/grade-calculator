@@ -46,6 +46,7 @@ describe("USA competitor gap fill", () => {
     for (const slug of popularScoreSlugs) expect(scorePairBySlug[slug], slug).toBeDefined();
     const paths = sitemap().map((e) => new URL(e.url).pathname);
     expect(paths).toContain("/score");
+    expect(paths.filter((p) => p.startsWith("/score/")).length).toBe(0);
     expect(paths).toContain("/powerschool-grade-calculator");
     expect(paths).toContain("/grade-percentage-calculator");
     expect(paths).toContain("/college-grade-calculator");

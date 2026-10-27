@@ -5,10 +5,7 @@
  * page teaches Google to ignore lastmod. tests/seo/seo-audit.test.ts checks every
  * sitemap URL has an entry here.
  */
-import { scorePairs, scorePath } from "@/config/score-pages";
-
 export const pageUpdated: Record<string, string> = {
-  ...Object.fromEntries(scorePairs.map((pair) => [scorePath(pair), "2026-10-25"])),
   "/powerschool-grade-calculator": "2026-10-25",
   // Site pages
   "/": "2026-10-25",
@@ -48,20 +45,7 @@ export const pageUpdated: Record<string, string> = {
   "/gcse-grade-calculator": "2026-10-23",
   "/gpa-calculator": "2026-10-05",
   "/grade-chart": "2026-10-23",
-  "/grade-chart/10-questions": "2026-10-23",
-  "/grade-chart/12-questions": "2026-10-23",
-  "/grade-chart/13-questions": "2026-10-23",
-  "/grade-chart/15-questions": "2026-10-23",
-  "/grade-chart/16-questions": "2026-10-23",
-  "/grade-chart/18-questions": "2026-10-23",
-  "/grade-chart/20-questions": "2026-10-23",
-  "/grade-chart/25-questions": "2026-10-23",
-  "/grade-chart/30-questions": "2026-10-23",
-  "/grade-chart/40-questions": "2026-10-23",
-  "/grade-chart/50-questions": "2026-10-23",
-  "/grade-chart/100-questions": "2026-10-23",
-  "/grade-chart/150-questions": "2026-10-25",
-  "/grade-chart/200-questions": "2026-10-25",
+  "/score": "2026-10-25",
   "/high-school-gpa-calculator": "2026-10-05",
   "/letter-grade-calculator": "2026-10-08",
   "/middle-school-gpa-calculator": "2026-10-05",
@@ -74,7 +58,6 @@ export const pageUpdated: Record<string, string> = {
   "/csu-gpa-calculator": "2026-10-25",
   "/grade-percentage-calculator": "2026-10-25",
   "/college-grade-calculator": "2026-10-25",
-  "/score": "2026-10-25",
   "/uk-degree-to-us-gpa-reference": "2026-10-05",
   "/uk/degree-classification-calculator": "2026-10-05",
   "/uk/gcse-grade-calculator": "2026-10-26",
