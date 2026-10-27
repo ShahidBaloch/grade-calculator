@@ -133,7 +133,7 @@ export const pageUpdated: Record<string, string> = {
   "/grading-scales/new-zealand": "2026-10-20",
   "/grading-scales/pakistan": "2026-10-20",
   "/grading-scales/uk": "2026-10-20",
-  "/grading-scales/us": "2026-10-25",
+  "/grading-scales/us": "2026-10-27",
   // Country hubs
   "/au": "2026-10-20",
   "/ca": "2026-10-20",

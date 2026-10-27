@@ -21,9 +21,9 @@ export const gradingScalePages: GradingScalePageConfig[] = [
     slug: "us",
     path: "/grading-scales/us",
     scaleId: "us-standard",
-    title: "US Grading Scale & 4.0 GPA Scale — Letter Grade Chart",
+    title: "GPA Scale — US 4.0 Grading Scale Chart",
     description:
-      "US grading scale chart: every letter grade from A+ to F with its percentage range and 4.0 GPA points, plus the 10-point and 7-point scales schools use.",
+      "US GPA scale and grading scale chart: A+ through F with percentage ranges and 4.0 grade points, plus 10-point and 7-point high school scales compared.",
     keywords: [
       "us grading scale chart",
       "gpa scale",
@@ -33,7 +33,7 @@ export const gradingScalePages: GradingScalePageConfig[] = [
       "7 point grading scale",
     ],
     intro:
-      "The common US grading scale pairs A–F letter grades with a 4.0 GPA. On the 10-point scale, A is 90–100%, B is 80–89%, C is 70–79%, D is 60–69%, and F is below 60%. Plus/minus schools split each band — for example, B is 83–86% and B+ is 87–89%. Those letters convert to GPA points for a semester GPA. Cutoffs vary by school, district, or instructor, so check your syllabus.",
+      "The main chart below is a common US plus/minus scale (A+ through F) with percentage bands and 4.0 grade points — the style many colleges and high schools use for GPA. Other districts use a plain 10-point scale (A 90–100%, B 80–89%, C 70–79%, D 60–69%, F below 60%) or a stricter 7-point scale (A from 93%, fail below 70%). The comparison table shows the same score on all three. Cutoffs vary by school; check your syllabus.",
     notes: [
       "Many schools use plus/minus modifiers (A−, B+, etc.). On this scale A+ is 97–100%, A is 93–96%, A− is 90–92%, B+ is 87–89%, B is 83–86%, and B− is 80–82%.",
       "For federal statistics, NCES uses a four-point framework (A=4, B=3, C=2, D=1, F=0); it does not define one national plus/minus percentage table.",
@@ -46,7 +46,7 @@ export const gradingScalePages: GradingScalePageConfig[] = [
       {
         question: "What is the grading scale for high school?",
         answer:
-          "Most US high schools use a 10-point scale: A 90–100%, B 80–89%, C 70–79%, D 60–69%, F below 60%. Many add plus/minus steps inside each band (A− 90–92, B+ 87–89, and so on). Some districts, especially in the Southeast, still use a 7-point scale where an A starts at 93% and anything under 70% fails. Your student handbook or report card legend shows which one applies.",
+          "Many US high schools use a 10-point scale: A 90–100%, B 80–89%, C 70–79%, D 60–69%, F below 60%. Others use plus/minus bands (for example A 93–96%, A− 90–92%, B+ 87–89%) or a 7-point scale where an A starts at 93% and anything under 70% fails. Your student handbook or report card legend shows which one applies.",
       },
       {
         question: "What is a 7-point grading scale?",

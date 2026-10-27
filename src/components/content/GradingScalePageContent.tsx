@@ -14,7 +14,13 @@ export function GradingScalePageContent({ config }: { config: GradingScalePageCo
   return (
     <div className="space-y-8">
       <p className="leading-relaxed text-[var(--color-text-muted)]">{config.intro}</p>
-      <GradingScaleTable scale={scale} />
+      <section>
+        <h2 className="text-xl font-semibold">Letter grades, percentages, and GPA points</h2>
+        <p className="mt-2 text-sm text-[var(--color-text-muted)]">{scale.name}</p>
+        <div className="mt-4">
+          <GradingScaleTable scale={scale} />
+        </div>
+      </section>
       {compareIds.length > 1 && (
         <section>
           <h2 className="text-xl font-semibold">10-point vs plus/minus vs 7-point: the same percentage, side by side</h2>

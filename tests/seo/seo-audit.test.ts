@@ -180,6 +180,19 @@ describe("SEO audit", () => {
     }
   });
 
+  it("US grading scale page keeps core GPA scale keywords and SERP limits", () => {
+    const us = gradingScalePages.find((p) => p.slug === "us")!;
+    const suffix = ` | ${siteConfig.name}`;
+    const fullTitle = us.title.includes(siteConfig.name) ? us.title : us.title + suffix;
+    expect(fullTitle.length).toBeLessThanOrEqual(60);
+    expect(us.description.length).toBeLessThanOrEqual(160);
+    expect(us.title).toMatch(/gpa scale/i);
+    expect(us.title).toMatch(/grading scale/i);
+    expect(us.scaleId).toBe("us-standard");
+    expect(us.intro).toMatch(/plus\/minus/i);
+    expect(us.compareScaleIds).toEqual(["us-lenient", "us-standard", "us-seven-point"]);
+  });
+
   it("JSON-LD generators produce schema.org types", () => {
     const webApp = webApplicationJsonLd({
       name: "Test",
