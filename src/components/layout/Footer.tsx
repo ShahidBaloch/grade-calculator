@@ -1,12 +1,18 @@
+"use client";
+
 import { footerNavForPath } from "@/config/navigation";
 import { siteConfig } from "@/config/site";
 import { AppLink as Link } from "@/components/navigation/AppLink";
 import { FooterCountryLinks } from "./FooterCountryLinks";
-import { headers } from "next/headers";
+import { usePathname } from "next/navigation";
 
-export async function Footer() {
+/**
+ * Hub-specific footer links must follow the current URL. Root layout is force-static,
+ * so a server Footer using headers() bakes the US list on every page at build time.
+ */
+export function Footer() {
   const year = new Date().getFullYear();
-  const pathname = (await headers()).get("x-pathname");
+  const pathname = usePathname();
   const footerNav = footerNavForPath(pathname);
 
   return (

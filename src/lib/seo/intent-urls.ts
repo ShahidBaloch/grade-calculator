@@ -28,6 +28,7 @@ export { isIndexableGeoCalculator } from "./canonical-path";
 const STATIC_REDIRECTS: Array<{ source: string; destination: string }> = [
   { source: "/index", destination: "/" },
   { source: "/grade-calculator", destination: "/" },
+  { source: "/terms", destination: "/terms-of-service" },
   { source: "/gcse-grade-calculator", destination: "/uk/gcse-grade-calculator" },
   { source: "/cgpa-to-gpa", destination: "/in/cgpa-to-gpa" },
   { source: "/letter-grade-to-percentage", destination: "/letter-grade-calculator" },
