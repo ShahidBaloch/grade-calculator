@@ -96,7 +96,6 @@ const FORBIDDEN_ON_HUB: Record<string, CalculatorSlug[]> = {
     "raise-gpa-calculator",
   ],
   "/pk": [
-    "cgpa-to-gpa",
     "mcmaster-gpa-to-us-gpa",
     "atar-calculator",
     "gcse-grade-calculator",
@@ -139,8 +138,8 @@ describe("hub calculator offerings (all countries)", () => {
     expect(canonicalPathForSlug("cgpa-to-gpa", "/uk")).toBe("/in/cgpa-to-gpa");
     expect(canonicalPathForSlug("atar-calculator", "/ca")).toBe("/au/atar-calculator");
     expect(canonicalPathForSlug("mcmaster-gpa-to-us-gpa", "/in")).toBe("/ca/mcmaster-gpa-to-us-gpa");
-    expect(canonicalPathForSlug("gcse-grade-calculator", "/au")).toBe("/gcse-grade-calculator");
-    expect(canonicalPathForSlug("cgpa-to-gpa", "/pk")).toBe("/in/cgpa-to-gpa");
+    expect(canonicalPathForSlug("gcse-grade-calculator", "/au")).toBe("/uk/gcse-grade-calculator");
+    expect(canonicalPathForSlug("cgpa-to-gpa", "/pk")).toBe("/pk/cgpa-to-gpa");
     expect(canonicalPathForSlug("high-school-gpa-calculator", "/au")).toBe("/high-school-gpa-calculator");
     expect(canonicalPathForSlug("atar-calculator", "/ca")).not.toBe("/ca/atar-calculator");
   });
@@ -155,7 +154,7 @@ describe("hub calculator offerings (all countries)", () => {
 
   it("market-bound tools only prefix on allowed hubs", () => {
     const bound: Array<[CalculatorSlug, string[]]> = [
-      ["cgpa-to-gpa", ["/in"]],
+      ["cgpa-to-gpa", ["/in", "/pk"]],
       ["mcmaster-gpa-to-us-gpa", ["/ca"]],
       ["atar-calculator", ["/au"]],
       ["gcse-grade-calculator", ["/uk"]],
@@ -185,6 +184,6 @@ describe("hub calculator offerings (all countries)", () => {
     expect(canonicalPathForSlug("final-grade-calculator", "/uk")).toBe("/final-grade-calculator");
     expect(canonicalPathForSlug("average-grade-calculator", "/au")).toBe("/average-grade-calculator");
     expect(canonicalPathForSlug("gcse-grade-calculator", "/uk")).toBe("/uk/gcse-grade-calculator");
-    expect(canonicalPathForSlug("gcse-grade-calculator")).toBe("/gcse-grade-calculator");
+    expect(canonicalPathForSlug("gcse-grade-calculator")).toBe("/uk/gcse-grade-calculator");
   });
 });

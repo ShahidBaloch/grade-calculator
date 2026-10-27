@@ -1,5 +1,14 @@
 const DEFAULT_SITE_URL = "https://www.gradcalc.com";
 
+/** Production host is www; apex env values must not leak into canonicals or sitemap. */
+function normalizeSiteOrigin(origin: string): string {
+  const url = new URL(origin);
+  if (url.hostname === "gradcalc.com") {
+    url.hostname = "www.gradcalc.com";
+  }
+  return url.origin;
+}
+
 function resolveSiteOrigin(): string {
   const fromPublic = process.env.NEXT_PUBLIC_SITE_URL?.trim();
   const candidates = [fromPublic, DEFAULT_SITE_URL];
@@ -8,7 +17,7 @@ function resolveSiteOrigin(): string {
     if (!candidate) continue;
     const withProtocol = /^https?:\/\//i.test(candidate) ? candidate : `https://${candidate}`;
     try {
-      return new URL(withProtocol).origin;
+      return normalizeSiteOrigin(new URL(withProtocol).origin);
     } catch {
       // try next candidate
     }

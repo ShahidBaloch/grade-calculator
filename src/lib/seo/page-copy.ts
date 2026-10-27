@@ -150,6 +150,21 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
     description:
       "Estimate a US 4.0 from an Indian 10-point CGPA for planning only. A US class percentage still converts on the A–F letter calculator, not this one.",
   },
+  "/pk/cgpa-to-gpa": {
+    title: "Pakistan HEC CGPA to US 4.0 — Planning Note",
+    description:
+      "HEC CGPA is already on a 4.0-style scale — compare it to US 4.0 for planning, not a 10-point India conversion. India O–F CGPA uses the India hub tool.",
+  },
+  "/au/final-grade-calculator": {
+    title: "Final Exam Mark Calculator Australia — Grade Needed",
+    description:
+      "Find the mark you need on an Australian final exam or end-of-semester assessment. Uses your university’s letter preset — not a US high-school weighting chart.",
+  },
+  "/pk/final-grade-calculator": {
+    title: "Final Exam Mark Calculator Pakistan — HEC Course Planning",
+    description:
+      "Plan the mark you need on a Pakistan final term or exam using HEC percentage bands. This is course-mark math, not CGPA-to-percentage conversion.",
+  },
   "/mcmaster-gpa-to-us-gpa": {
     title: "McMaster GPA Calculator — 12-Point to US 4.0 GPA",
     description:

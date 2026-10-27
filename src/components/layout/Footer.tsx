@@ -1,10 +1,13 @@
-import { footerNav } from "@/config/navigation";
+import { footerNavForPath } from "@/config/navigation";
 import { siteConfig } from "@/config/site";
-import { CountryAwareLink } from "@/components/navigation/CountryAwareLink";
+import { AppLink as Link } from "@/components/navigation/AppLink";
 import { FooterCountryLinks } from "./FooterCountryLinks";
+import { headers } from "next/headers";
 
-export function Footer() {
+export async function Footer() {
   const year = new Date().getFullYear();
+  const pathname = (await headers()).get("x-pathname");
+  const footerNav = footerNavForPath(pathname);
 
   return (
     <footer className="border-t border-[var(--color-border)] bg-[var(--color-bg-subtle)]">
@@ -14,9 +17,9 @@ export function Footer() {
           <ul className="space-y-1 text-sm text-[var(--color-text-muted)]">
             {footerNav.calculators.map((link) => (
               <li key={link.href}>
-                <CountryAwareLink href={link.href} className="inline-flex min-h-6 items-center hover:text-[var(--color-primary)]">
+                <Link href={link.href} className="inline-flex min-h-6 items-center hover:text-[var(--color-primary)]">
                   {link.label}
-                </CountryAwareLink>
+                </Link>
               </li>
             ))}
           </ul>
@@ -26,9 +29,9 @@ export function Footer() {
           <ul className="space-y-1 text-sm text-[var(--color-text-muted)]">
             {footerNav.guides.map((link) => (
               <li key={link.href}>
-                <CountryAwareLink href={link.href} className="inline-flex min-h-6 items-center hover:text-[var(--color-primary)]">
+                <Link href={link.href} className="inline-flex min-h-6 items-center hover:text-[var(--color-primary)]">
                   {link.label}
-                </CountryAwareLink>
+                </Link>
               </li>
             ))}
           </ul>
@@ -42,9 +45,9 @@ export function Footer() {
           <ul className="space-y-1 text-sm text-[var(--color-text-muted)]">
             {footerNav.reference.map((link) => (
               <li key={link.href}>
-                <CountryAwareLink href={link.href} className="inline-flex min-h-6 items-center hover:text-[var(--color-primary)]">
+                <Link href={link.href} className="inline-flex min-h-6 items-center hover:text-[var(--color-primary)]">
                   {link.label}
-                </CountryAwareLink>
+                </Link>
               </li>
             ))}
           </ul>
@@ -54,9 +57,9 @@ export function Footer() {
           <ul className="space-y-1 text-sm text-[var(--color-text-muted)]">
             {footerNav.company.map((link) => (
               <li key={link.href}>
-                <CountryAwareLink href={link.href} className="inline-flex min-h-6 items-center hover:text-[var(--color-primary)]">
+                <Link href={link.href} className="inline-flex min-h-6 items-center hover:text-[var(--color-primary)]">
                   {link.label}
-                </CountryAwareLink>
+                </Link>
               </li>
             ))}
           </ul>

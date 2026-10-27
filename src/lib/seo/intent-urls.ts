@@ -27,6 +27,8 @@ export { isIndexableGeoCalculator } from "./canonical-path";
 
 const STATIC_REDIRECTS: Array<{ source: string; destination: string }> = [
   { source: "/index", destination: "/" },
+  { source: "/grade-calculator", destination: "/" },
+  { source: "/gcse-grade-calculator", destination: "/uk/gcse-grade-calculator" },
   { source: "/cgpa-to-gpa", destination: "/in/cgpa-to-gpa" },
   { source: "/letter-grade-to-percentage", destination: "/letter-grade-calculator" },
   { source: "/ez-grader", destination: "/" },
@@ -86,7 +88,7 @@ export function seoRedirects(): Array<{ source: string; destination: string }> {
   // Short names people type for the McMaster converter, at the root and under any hub (/in/mcmaster).
   const mcmasterPath = canonicalPathForSlug("mcmaster-gpa-to-us-gpa", "/ca");
   for (const prefix of ["", ...countryHubs.map((hub) => hub.path)]) {
-    for (const alias of ["mcmaster", "mcmaster-gpa-calculator"]) {
+    for (const alias of ["mcmaster", "mcmaster-gpa", "mcmaster-gpa-calculator"]) {
       pairs.push({ source: `${prefix}/${alias}`, destination: mcmasterPath });
     }
   }

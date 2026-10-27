@@ -68,6 +68,7 @@ export const countryHubRoutes: readonly CountryHubRoute[] = [
       "gpa-calculator",
       "cumulative-gpa-calculator",
       "weighted-grade-calculator",
+      "final-grade-calculator",
       "letter-grade-calculator",
     ],
   },
@@ -106,8 +107,10 @@ export const countryHubRoutes: readonly CountryHubRoute[] = [
       "cgpa-calculator",
       "sgpa-to-cgpa",
       "percentage-to-cgpa",
+      "cgpa-to-gpa",
       "gpa-calculator",
       "cumulative-gpa-calculator",
+      "final-grade-calculator",
     ],
   },
 ];

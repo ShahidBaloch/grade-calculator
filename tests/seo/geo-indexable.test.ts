@@ -42,11 +42,23 @@ describe("indexable geo pages (SEO structure)", () => {
   it("keeps scale-dependent tools on hubs where letter bands differ (P0 regressions)", () => {
     expect(isIndexableGeoCalculator("/nz", "final-grade-calculator")).toBe(true);
     expect(isIndexableGeoCalculator("/in", "final-grade-calculator")).toBe(true);
+    expect(isIndexableGeoCalculator("/au", "final-grade-calculator")).toBe(true);
+    expect(isIndexableGeoCalculator("/pk", "final-grade-calculator")).toBe(true);
+    expect(isIndexableGeoCalculator("/pk", "cgpa-to-gpa")).toBe(true);
     expect(generateGeoStaticParams("nz").map((p) => p.slug)).toContain("final-grade-calculator");
     expect(generateGeoStaticParams("in").map((p) => p.slug)).toContain("final-grade-calculator");
+    expect(generateGeoStaticParams("au").map((p) => p.slug)).toContain("final-grade-calculator");
+    expect(generateGeoStaticParams("pk").map((p) => p.slug)).toContain("final-grade-calculator");
+    expect(generateGeoStaticParams("pk").map((p) => p.slug)).toContain("cgpa-to-gpa");
     const redirects = new Map(seoRedirects().map((r) => [r.source, r.destination]));
     expect(redirects.has("/nz/final-grade-calculator")).toBe(false);
     expect(redirects.has("/in/final-grade-calculator")).toBe(false);
+    expect(redirects.has("/au/final-grade-calculator")).toBe(false);
+    expect(redirects.has("/pk/final-grade-calculator")).toBe(false);
+    expect(redirects.has("/pk/cgpa-to-gpa")).toBe(false);
+    expect(redirects.get("/gcse-grade-calculator")).toBe("/uk/gcse-grade-calculator");
+    expect(redirects.get("/grade-calculator")).toBe("/");
+    expect(redirects.get("/mcmaster-gpa")).toBe("/ca/mcmaster-gpa-to-us-gpa");
     // AU "college GPA" is university GPA — send it to the AU tool, not the US 4.0 page.
     expect(redirects.get("/au/college-gpa-calculator")).toBe("/au/gpa-calculator");
   });

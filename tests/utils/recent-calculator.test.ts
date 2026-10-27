@@ -5,7 +5,7 @@ describe("recent calculator storage", () => {
   it("reads a legacy slug string as the worldwide path", () => {
     expect(parseRecentCalculator("gcse-grade-calculator")).toEqual({
       slug: "gcse-grade-calculator",
-      path: "/gcse-grade-calculator",
+      path: "/uk/gcse-grade-calculator",
     });
   });
 

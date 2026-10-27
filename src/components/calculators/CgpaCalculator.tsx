@@ -19,6 +19,8 @@ import {
 import { formatGpa } from "@/lib/utils/format";
 import { useCalculatorPersistence } from "@/hooks/useCalculatorPersistence";
 import { useGradingScale } from "@/hooks/useGradingScale";
+import { usePathname } from "next/navigation";
+import { activeCountryHub } from "@/lib/utils/country-path";
 
 /** Course-based SGPA tool for India/Pakistan “CGPA calculator” search intent. */
 export function CgpaCalculator() {
@@ -29,7 +31,17 @@ export function CgpaCalculator() {
   );
   const { courses } = state;
   const setCourses = (next: typeof courses) => setState({ courses: next });
-  const examples = calculatorBySlug["cgpa-calculator"].examples;
+  const pathname = usePathname();
+  const examples = React.useMemo(() => {
+    const all = calculatorBySlug["cgpa-calculator"].examples;
+    if (activeCountryHub(pathname) === "/pk" || scaleId === "pk-hec") {
+      return all.filter((example) => example.label !== "India sample");
+    }
+    if (activeCountryHub(pathname) === "/in" || scaleId === "in-ten-point") {
+      return all.filter((example) => example.label !== "Pakistan HEC sample");
+    }
+    return all;
+  }, [pathname, scaleId]);
 
   React.useEffect(() => {
     if (!isScaleLocked && scaleId !== "in-ten-point" && scaleId !== "pk-hec") {

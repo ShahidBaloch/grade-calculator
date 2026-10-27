@@ -38,9 +38,9 @@ describe("hub calculator nav catalog", () => {
     expect(ukLabels).toContain("Letter Grade Calculator");
     expect(ukLabels.some((label) => label.startsWith("US "))).toBe(false);
 
-    // AU / PK list Final Grade at its worldwide URL (menu-only, no geo page).
-    expect(countryCalculatorNavLinks("/au").map((link) => link.href)).toContain("/final-grade-calculator");
-    expect(countryCalculatorNavLinks("/pk").map((link) => link.href)).toContain("/final-grade-calculator");
+    expect(countryCalculatorNavLinks("/au").map((link) => link.href)).toContain("/au/final-grade-calculator");
+    expect(countryCalculatorNavLinks("/pk").map((link) => link.href)).toContain("/pk/final-grade-calculator");
+    expect(countryCalculatorNavLinks("/pk").map((link) => link.href)).toContain("/pk/cgpa-to-gpa");
 
     expect(hubMenuCalculatorSlugs("/nz")).toContain("final-grade-calculator");
     expect(hubMenuCalculatorSlugs("/in")).toContain("final-grade-calculator");

@@ -82,7 +82,7 @@ const GENERIC_HUB_CALCULATORS = new Set<CalculatorSlug>([
 
 /** Region-specific tools — only these hubs may host `/xx/slug` (not every prefix hub). */
 const MARKET_BOUND_HUBS: Partial<Record<CalculatorSlug, readonly string[]>> = {
-  "cgpa-to-gpa": ["/in"],
+  "cgpa-to-gpa": ["/in", "/pk"],
   "cgpa-to-percentage": ["/in", "/pk"],
   "percentage-to-cgpa": ["/in", "/pk"],
   "sgpa-to-cgpa": ["/in", "/pk"],

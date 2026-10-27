@@ -339,7 +339,7 @@ describe("SEO audit", () => {
     expect(paths.filter((p) => /^\/grade-chart\/\d+-questions$/.test(p))).toEqual([]);
     expect(paths).toContain("/score");
     expect(paths).toContain("/grade-chart");
-    expect(sitemap().length).toBe(126);
+    expect(sitemap().length).toBe(128);
   });
 
   it("sitemap lists www URLs so entries match the canonical host (no extra redirect hop)", () => {

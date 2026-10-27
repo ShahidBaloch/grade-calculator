@@ -167,7 +167,15 @@ export function WeightedGradeCalculator({
       <DynamicRowList
         items={items}
         onAdd={() =>
-          updateItems([...items, { name: "", score: globalMode === "letter" ? "B" : 0, weight: 0, maxPoints: 100 }])
+          updateItems([
+            ...items,
+            {
+              name: "",
+              score: globalMode === "letter" ? "B" : "",
+              weight: weightMode === "percent" ? 10 : 1,
+              maxPoints: 100,
+            },
+          ])
         }
         onRemove={(index) => updateItems(items.filter((_, i) => i !== index))}
         renderRow={(item, index) => (
@@ -184,6 +192,8 @@ export function WeightedGradeCalculator({
             />
             <Input
               type={globalMode === "letter" ? "text" : "number"}
+              step={globalMode === "letter" ? undefined : "any"}
+              inputMode={globalMode === "letter" ? "text" : "decimal"}
               placeholder={globalMode === "letter" ? "Grade (A, B+)" : "Score"}
               aria-label={`Assignment ${index + 1} score`}
               value={item.score}
@@ -191,7 +201,12 @@ export function WeightedGradeCalculator({
                 const next = [...items];
                 next[index] = {
                   ...item,
-                  score: globalMode === "letter" ? e.target.value : Number(e.target.value) || 0,
+                  score:
+                    globalMode === "letter"
+                      ? e.target.value
+                      : e.target.value === ""
+                        ? ""
+                        : Number(e.target.value),
                 };
                 updateItems(next);
               }}

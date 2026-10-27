@@ -46,8 +46,15 @@ export function GcseGradeCalculator() {
           type="number"
           min={0}
           max={100}
+          step="any"
+          inputMode="decimal"
           value={state.percent}
-          onChange={(e) => setState({ percent: Number(e.target.value) })}
+          onChange={(e) => {
+            const raw = e.target.value;
+            if (raw === "") return;
+            const next = Number(raw);
+            if (Number.isFinite(next)) setState({ percent: next });
+          }}
         />
       </div>
       {result.errors?.[0] && <p className="text-sm text-[var(--color-error)]">{result.errors[0]}</p>}

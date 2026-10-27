@@ -379,7 +379,7 @@ export const calculators: CalculatorConfig[] = [
     name: "GCSE Grade Calculator",
     shortName: "GCSE",
     description: "Convert a percentage to the England 9–1 GCSE scale (educational boundaries).",
-    path: "/gcse-grade-calculator",
+    path: "/uk/gcse-grade-calculator",
     icon: "Hash",
     category: "conversion",
     mvp: false,
@@ -479,6 +479,16 @@ export const calculators: CalculatorConfig[] = [
             { name: "Physics", grade: "O", credits: 4 },
             { name: "Mathematics", grade: "A+", credits: 4 },
             { name: "Chemistry", grade: "A", credits: 3 },
+          ],
+        },
+      },
+      {
+        label: "Pakistan HEC sample",
+        values: {
+          courses: [
+            { name: "Physics", grade: "A", credits: 3 },
+            { name: "Mathematics", grade: "A-", credits: 3 },
+            { name: "Urdu", grade: "B+", credits: 2 },
           ],
         },
       },
