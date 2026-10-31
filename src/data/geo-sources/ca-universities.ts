@@ -4,8 +4,9 @@ import type { DroppedCandidate, OfficialSource } from "./types";
 /** One row of a university's own percentage → letter (→ points) table. */
 export interface UniversityBand {
   letter: string;
-  min: number;
-  max: number;
+  /** Percentage range; absent when the school publishes letters only (SFU). */
+  min?: number;
+  max?: number;
   /** Grade points on the university's own scale; absent when the school publishes no points. */
   points?: number;
 }
@@ -23,14 +24,36 @@ export type UniversityResultKind =
 
 export interface CaUniversityProfile {
   /** URL segment: /ca/university/{slug}-gpa-calculator */
-  slug: "omsas" | "ubc" | "uoft" | "waterloo" | "guelph";
+  slug:
+    | "omsas"
+    | "ubc"
+    | "uoft"
+    | "waterloo"
+    | "guelph"
+    | "york"
+    | "mcmaster"
+    | "queens"
+    | "uottawa"
+    | "western"
+    | "laurier"
+    | "tmu"
+    | "sfu"
+    | "mcgill";
   name: string;
   shortName: string;
   province: string;
   /** Native result the school itself reports. */
   result: UniversityResultKind;
-  /** Grades the student types in. */
-  gradeInput: "percent" | "percent-or-letter";
+  /** Top of the school's own GPA scale as shown on results ("4.0" when unset). */
+  gpaScale?: string;
+  /** Grades the student types in ("letter" when the school publishes no percentage table). */
+  gradeInput: "percent" | "percent-or-letter" | "letter";
+  /** Round a typed percentage to a whole number before reading the letter (TMU, uOttawa). */
+  roundPercent?: boolean;
+  /** "truncate" when the school cuts the GPA to two decimals instead of rounding (McGill). */
+  gpaRounding?: "truncate";
+  /** Failing marks below this count as this value in percentage averages (Waterloo 32, Western 40). */
+  averageFloor?: number;
   /** Name of the course-weight field on the transcript. */
   weightLabel: string;
   weightOptions: CourseWeightOption[];
@@ -131,6 +154,208 @@ const GUELPH_DEANS_HONOURS: OfficialSource = {
   edition: "2026-2027 Academic Calendar",
   readVia: guelphReadVia("2026-04-21"),
 };
+
+const YORK_CHECKED = "2026-10-30";
+
+const YORK_CALENDAR: OfficialSource = {
+  publisher: "York University",
+  title: "Undergraduate Academic Calendar — Grades and Grading Schemes",
+  href: "https://calendars.students.yorku.ca/2025-2026/grades-and-grading-schemes",
+  checked: YORK_CHECKED,
+  edition: "2026-2027 Undergraduate Academic Calendar",
+};
+
+const YORK_NEW_SCHEMES: OfficialSource = {
+  publisher: "York University Secretariat",
+  title: "Implementation of the New Grading Schemes",
+  href: "https://www.yorku.ca/secretariat/senate/academic-standards-curriculum-and-pedagogy-committee/implementation-of-the-new-grading-schemes/",
+  checked: YORK_CHECKED,
+};
+
+/** York undergraduate grading scheme (9-point). E and F are separate grades: E = 1, F = 0. */
+export const YORK_BANDS: UniversityBand[] = [
+  { letter: "A+", min: 90, max: 100, points: 9 },
+  { letter: "A", min: 80, max: 89, points: 8 },
+  { letter: "B+", min: 75, max: 79, points: 7 },
+  { letter: "B", min: 70, max: 74, points: 6 },
+  { letter: "C+", min: 65, max: 69, points: 5 },
+  { letter: "C", min: 60, max: 64, points: 4 },
+  { letter: "D+", min: 55, max: 59, points: 3 },
+  { letter: "D", min: 50, max: 54, points: 2 },
+  { letter: "E", min: 40, max: 49, points: 1 },
+  { letter: "F", min: 0, max: 39, points: 0 },
+];
+
+const BATCH_CHECKED = "2026-10-30";
+
+const MCMASTER_GRADES: OfficialSource = {
+  publisher: "McMaster University Office of the Registrar",
+  title: "Grades — grade points and equivalent percentages",
+  href: "https://registrar.mcmaster.ca/exams-grades/grades/",
+  checked: BATCH_CHECKED,
+};
+
+const QUEENS_GPA_SCALE: OfficialSource = {
+  publisher: "Queen's University Office of the University Registrar",
+  title: "Official GPA Grading Scale",
+  href: "https://www.queensu.ca/registrar/academic-info/grades/official-gpa-scale",
+  checked: BATCH_CHECKED,
+};
+
+const UOTTAWA_A3: OfficialSource = {
+  publisher: "University of Ottawa",
+  title: "Academic Regulation A-3 — Grading System",
+  href: "https://www.uottawa.ca/about-us/leadership-governance/policies-regulations/a-3-grading-system",
+  checked: BATCH_CHECKED,
+  edition: "Approved by the Senate on February 12, 2024, effective May 1, 2024",
+};
+
+const WESTERN_CALENDAR: OfficialSource = {
+  publisher: "Western University",
+  title: "Academic Calendar 2026 — Marks/Grades and Marking Scales",
+  href: "https://westerncalendar.uwo.ca/PolicyPages.cfm?ArchiveID=&PolicyCategoryID=5&SelectedCalendar=Live&command=showCategory",
+  checked: BATCH_CHECKED,
+  edition: "Academic Calendar 2026",
+};
+
+const LAURIER_GPA: OfficialSource = {
+  publisher: "Wilfrid Laurier University",
+  title: "GPA Calculator — 12-point grade scale",
+  href: "https://students.wlu.ca/academics/support-and-advising/gpa-calculator/index.html",
+  checked: BATCH_CHECKED,
+};
+
+const TMU_LEGEND: OfficialSource = {
+  publisher: "Toronto Metropolitan University",
+  title: "Transcript Legend — undergraduate grading (September 2013 to present)",
+  href: "https://www.torontomu.ca/current-students/grades-standings/transcripts/legend/",
+  checked: BATCH_CHECKED,
+};
+
+const SFU_CALENDAR: OfficialSource = {
+  publisher: "Simon Fraser University",
+  title: "Undergraduate Grading Systems and Policies",
+  href: "https://www.sfu.ca/students/calendar/2026/spring/fees-and-regulations/grading-policy/grading-systems-and-policies.html",
+  checked: BATCH_CHECKED,
+  edition: "Spring 2026 Calendar",
+};
+
+const MCGILL_CATALOGUE: OfficialSource = {
+  publisher: "McGill University",
+  title: "Course Catalogue — Grading and Grade Point Averages (GPA), Undergraduate",
+  href: "https://coursecatalogue.mcgill.ca/en/regulations/undergraduate/student-records/grading-gpa/",
+  checked: BATCH_CHECKED,
+};
+
+/** McMaster and Laurier publish the same 12-point table. */
+const TWELVE_POINT_BANDS: UniversityBand[] = [
+  { letter: "A+", min: 90, max: 100, points: 12 },
+  { letter: "A", min: 85, max: 89, points: 11 },
+  { letter: "A-", min: 80, max: 84, points: 10 },
+  { letter: "B+", min: 77, max: 79, points: 9 },
+  { letter: "B", min: 73, max: 76, points: 8 },
+  { letter: "B-", min: 70, max: 72, points: 7 },
+  { letter: "C+", min: 67, max: 69, points: 6 },
+  { letter: "C", min: 63, max: 66, points: 5 },
+  { letter: "C-", min: 60, max: 62, points: 4 },
+  { letter: "D+", min: 57, max: 59, points: 3 },
+  { letter: "D", min: 53, max: 56, points: 2 },
+  { letter: "D-", min: 50, max: 52, points: 1 },
+  { letter: "F", min: 0, max: 49, points: 0 },
+];
+
+export const MCMASTER_BANDS = TWELVE_POINT_BANDS;
+export const LAURIER_BANDS = TWELVE_POINT_BANDS;
+
+/** Queen's official GPA scale (Arts and Science, Smith Business, Smith Engineering, SGS, Health Sciences). */
+export const QUEENS_BANDS: UniversityBand[] = [
+  { letter: "A+", min: 90, max: 100, points: 4.3 },
+  { letter: "A", min: 85, max: 89.9, points: 4.0 },
+  { letter: "A-", min: 80, max: 84.9, points: 3.7 },
+  { letter: "B+", min: 77, max: 79.9, points: 3.3 },
+  { letter: "B", min: 73, max: 76.9, points: 3.0 },
+  { letter: "B-", min: 70, max: 72.9, points: 2.7 },
+  { letter: "C+", min: 67, max: 69.9, points: 2.3 },
+  { letter: "C", min: 63, max: 66.9, points: 2.0 },
+  { letter: "C-", min: 60, max: 62.9, points: 1.7 },
+  { letter: "D+", min: 57, max: 59.9, points: 1.3 },
+  { letter: "D", min: 53, max: 56.9, points: 1.0 },
+  { letter: "D-", min: 50, max: 52.9, points: 0.7 },
+  { letter: "F", min: 0, max: 49.9, points: 0 },
+];
+
+/** uOttawa Regulation A-3 alphanumeric scale. No B-; E and F are separate grades. */
+export const UOTTAWA_BANDS: UniversityBand[] = [
+  { letter: "A+", min: 90, max: 100, points: 10 },
+  { letter: "A", min: 85, max: 89, points: 9 },
+  { letter: "A-", min: 80, max: 84, points: 8 },
+  { letter: "B+", min: 75, max: 79, points: 7 },
+  { letter: "B", min: 70, max: 74, points: 6 },
+  { letter: "C+", min: 65, max: 69, points: 5 },
+  { letter: "C", min: 60, max: 64, points: 4 },
+  { letter: "D+", min: 55, max: 59, points: 3 },
+  { letter: "D", min: 50, max: 54, points: 2 },
+  { letter: "E", min: 40, max: 49, points: 1 },
+  { letter: "F", min: 0, max: 39, points: 0 },
+];
+
+/** Western undergraduate letter bands (no grade points). */
+export const WESTERN_BANDS: UniversityBand[] = [
+  { letter: "A+", min: 90, max: 100 },
+  { letter: "A", min: 80, max: 89 },
+  { letter: "B", min: 70, max: 79 },
+  { letter: "C", min: 60, max: 69 },
+  { letter: "D", min: 50, max: 59 },
+  { letter: "F", min: 0, max: 49 },
+];
+
+/** Western: failed marks below 40% count as 40% in averages. */
+export const WESTERN_AVERAGE_FLOOR = 40;
+
+/** TMU undergraduate scale, September 2013 to present (all faculties). */
+export const TMU_BANDS: UniversityBand[] = [
+  { letter: "A+", min: 90, max: 100, points: 4.33 },
+  { letter: "A", min: 85, max: 89, points: 4.0 },
+  { letter: "A-", min: 80, max: 84, points: 3.67 },
+  { letter: "B+", min: 77, max: 79, points: 3.33 },
+  { letter: "B", min: 73, max: 76, points: 3.0 },
+  { letter: "B-", min: 70, max: 72, points: 2.67 },
+  { letter: "C+", min: 67, max: 69, points: 2.33 },
+  { letter: "C", min: 63, max: 66, points: 2.0 },
+  { letter: "C-", min: 60, max: 62, points: 1.67 },
+  { letter: "D+", min: 57, max: 59, points: 1.33 },
+  { letter: "D", min: 53, max: 56, points: 1.0 },
+  { letter: "D-", min: 50, max: 52, points: 0.67 },
+  { letter: "F", min: 0, max: 49, points: 0 },
+];
+
+/** SFU standard letter grades. The calendar publishes no percentage equivalents. */
+export const SFU_BANDS: UniversityBand[] = [
+  { letter: "A+", points: 4.33 },
+  { letter: "A", points: 4.0 },
+  { letter: "A-", points: 3.67 },
+  { letter: "B+", points: 3.33 },
+  { letter: "B", points: 3.0 },
+  { letter: "B-", points: 2.67 },
+  { letter: "C+", points: 2.33 },
+  { letter: "C", points: 2.0 },
+  { letter: "C-", points: 1.67 },
+  { letter: "D", points: 1.0 },
+  { letter: "F", points: 0 },
+];
+
+/** McGill undergraduate scale: no A+; the letter grade is the official course grade. */
+export const MCGILL_BANDS: UniversityBand[] = [
+  { letter: "A", min: 85, max: 100, points: 4.0 },
+  { letter: "A-", min: 80, max: 84, points: 3.7 },
+  { letter: "B+", min: 75, max: 79, points: 3.3 },
+  { letter: "B", min: 70, max: 74, points: 3.0 },
+  { letter: "B-", min: 65, max: 69, points: 2.7 },
+  { letter: "C+", min: 60, max: 64, points: 2.3 },
+  { letter: "C", min: 55, max: 59, points: 2.0 },
+  { letter: "D", min: 50, max: 54, points: 1.0 },
+  { letter: "F", min: 0, max: 49, points: 0 },
+];
 
 /** Guelph undergraduate grading system (Senate, effective Spring 1992). No grade points are published. */
 export const GUELPH_BANDS: UniversityBand[] = [
@@ -293,6 +518,7 @@ export const caUniversityProfiles: CaUniversityProfile[] = [
     province: "Ontario",
     result: "percent-average",
     gradeInput: "percent",
+    averageFloor: WATERLOO_AVERAGE_FLOOR,
     weightLabel: "Unit weight",
     weightOptions: [
       { label: "0.50 units (one-term course)", weight: 0.5 },
@@ -338,6 +564,247 @@ export const caUniversityProfiles: CaUniversityProfile[] = [
       "OUAC lists Guelph under percentage Scale 3, so OMSAS converts Guelph percentages with Scale 3 (an 85–89% is 3.9).",
     ],
     sources: [GUELPH_GRADES, GUELPH_GLOSSARY, GUELPH_FAILED_COURSES, GUELPH_DEANS_HONOURS, OUAC_CONVERSION_SOURCE],
+  },
+  {
+    slug: "york",
+    name: "York University GPA",
+    shortName: "York",
+    province: "Ontario",
+    result: "gpa",
+    gpaScale: "9-point",
+    gradeInput: "percent-or-letter",
+    weightLabel: "Credits",
+    weightOptions: [
+      { label: "3.00 (one term)", weight: 3 },
+      { label: "6.00 (full year)", weight: 6 },
+    ],
+    defaultWeight: 3,
+    bands: YORK_BANDS,
+    omsasScales: [9],
+    omsasWeightFactor: 1 / 3,
+    facts: [
+      "York undergraduate courses use a letter-grade scheme in which each grade carries grade points from 9 (A+, 90–100%) down to 0 (F, 0–39%). There are no minus grades.",
+      "Sessional and cumulative grade point averages are credit-weighted: multiply each course's grade points by its credits, add them up, and divide by the total credits. Only courses taken at York count.",
+      "A D (50–54%) or better passes. An E (40–49%) is a marginal fail that still earns 1 grade point, while an F (0–39%) earns 0.",
+      "York's Senate has approved a new 4.0 grading scheme, but York lists its effective date as still to be determined, so current transcripts use the 9-point scale.",
+      "OUAC lists York under letter Scale 9, so OMSAS converts York letters with Scale 9: an A+ is 4.0 and an A (80–89%) is 3.8.",
+    ],
+    sources: [YORK_CALENDAR, YORK_NEW_SCHEMES, OUAC_CONVERSION_SOURCE],
+  },
+  {
+    slug: "mcmaster",
+    name: "McMaster GPA",
+    shortName: "McMaster",
+    province: "Ontario",
+    result: "gpa",
+    gpaScale: "12-point",
+    gradeInput: "percent-or-letter",
+    weightLabel: "Units",
+    weightOptions: [
+      { label: "3 units (one term)", weight: 3 },
+      { label: "6 units (full year)", weight: 6 },
+    ],
+    defaultWeight: 3,
+    bands: MCMASTER_BANDS,
+    omsasScales: [7],
+    omsasWeightFactor: 1 / 3,
+    facts: [
+      "McMaster grades undergraduate courses on a 12-point scale: A+ (90–100%) is 12, A (85–89%) is 11 and A- (80–84%) is 10, down to D- (50–52%) at 1 and F (0–49%) at 0.",
+      "Course points are a course's units multiplied by the grade point value of its final grade. Your GPA is your total course points divided by your GPA units.",
+      "Non-numeric grades such as P, NC, AUD and COM earn no points and are left out of the GPA.",
+      "To turn a McMaster 12-point GPA into a US 4.0 figure, use McMaster's published lookup table — dividing by 3 is not accurate.",
+      "OUAC lists McMaster under letter Scale 7, so OMSAS converts McMaster letters with Scale 7: an A+ is 4.0 and an A is 3.9.",
+    ],
+    sources: [MCMASTER_GRADES, OUAC_CONVERSION_SOURCE],
+  },
+  {
+    slug: "queens",
+    name: "Queen's University GPA",
+    shortName: "Queen's",
+    province: "Ontario",
+    result: "gpa",
+    gpaScale: "4.3",
+    gradeInput: "percent-or-letter",
+    weightLabel: "Course length",
+    weightOptions: [
+      { label: "One-term course", weight: 1 },
+      { label: "Full-year course", weight: 2 },
+    ],
+    defaultWeight: 1,
+    bands: QUEENS_BANDS,
+    omsasScales: [3, 7],
+    omsasWeightFactor: 1,
+    facts: [
+      "Queen's official grading scale runs to 4.3: A+ (90–100%) is 4.3, A (85–89.9%) is 4.0 and A- (80–84.9%) is 3.7, down to D- (50–52.9%) at 0.7 and F (below 50%) at 0.",
+      "The scale covers Arts and Science, Smith School of Business, Smith Engineering, the School of Graduate Studies and Health Sciences. Other faculties, such as Law and Education, have their own scales.",
+      "Your GPA is the credit-weighted average of your grade points, so a full-year course counts twice as much as a one-term course.",
+      "Since January 7, 2014, Queen's no longer prints the cumulative GPA on the official transcript.",
+      "OUAC lists Queen's under Scales 3 and 7, so OMSAS converts Queen's percentages with Scale 3 and letter grades with Scale 7.",
+    ],
+    sources: [QUEENS_GPA_SCALE, OUAC_CONVERSION_SOURCE],
+  },
+  {
+    slug: "uottawa",
+    name: "University of Ottawa GPA",
+    shortName: "uOttawa",
+    province: "Ontario",
+    result: "gpa",
+    gpaScale: "10-point",
+    gradeInput: "percent-or-letter",
+    roundPercent: true,
+    weightLabel: "Units",
+    weightOptions: [
+      { label: "3 units (one term)", weight: 3 },
+      { label: "6 units (full year)", weight: 6 },
+    ],
+    defaultWeight: 3,
+    bands: UOTTAWA_BANDS,
+    omsasScales: [7],
+    omsasWeightFactor: 1 / 3,
+    facts: [
+      "uOttawa's official grading system is alphanumeric: A+ (90–100%) is worth 10, A (85–89%) 9 and A- (80–84%) 8, down to D (50–54%) at 2, E (40–49%) at 1 and F (0–39%) at 0. There is no B-.",
+      "Grade points are the course units multiplied by the numeric value of the letter grade. Your CGPA is the sum of all grade points divided by all course units taken, passed or not, rounded to two decimals.",
+      "Final course grades are rounded to a whole percentage before the letter is assigned: a first decimal of 5 or higher rounds up.",
+      "The minimum passing grade is D for undergraduate courses, except C in Education, the MD program and the PharmD program, and C+ in nursing (NSG) courses.",
+      "OUAC lists Ottawa under letter Scale 7, so OMSAS converts uOttawa letters with Scale 7; E and F both become 0.0.",
+    ],
+    sources: [UOTTAWA_A3, OUAC_CONVERSION_SOURCE],
+  },
+  {
+    slug: "western",
+    name: "Western University Average",
+    shortName: "Western",
+    province: "Ontario",
+    result: "percent-average",
+    gradeInput: "percent",
+    averageFloor: WESTERN_AVERAGE_FLOOR,
+    weightLabel: "Course weight",
+    weightOptions: [
+      { label: "0.5 (half course)", weight: 0.5 },
+      { label: "1.0 (full course)", weight: 1 },
+    ],
+    defaultWeight: 0.5,
+    bands: WESTERN_BANDS,
+    omsasScales: [3],
+    omsasWeightFactor: 2,
+    facts: [
+      "Western grades undergraduate courses in percentages: A+ is 90–100%, A is 80–89%, B is 70–79%, C is 60–69%, D is 50–59% and F is below 50%.",
+      "Failed marks count in averages: marks below 40% are included as 40%, and marks from 40% to 49% as the actual mark.",
+      "Cumulative and term averages are calculated to two decimals and rounded to the nearest whole number, with .45 rounded up, for progression, scholarship retention and the Dean's Honour List.",
+      "Western reports percentage averages rather than grade points, so if an application asks for a 4.0 GPA, use the scale that program publishes.",
+      "OUAC lists Western under percentage Scale 3, so OMSAS converts Western percentages with Scale 3 (an 85–89% is 3.9).",
+    ],
+    sources: [WESTERN_CALENDAR, OUAC_CONVERSION_SOURCE],
+  },
+  {
+    slug: "laurier",
+    name: "Wilfrid Laurier GPA",
+    shortName: "Laurier",
+    province: "Ontario",
+    result: "gpa",
+    gpaScale: "12-point",
+    gradeInput: "percent-or-letter",
+    weightLabel: "Credits",
+    weightOptions: [
+      { label: "0.5 credit", weight: 0.5 },
+      { label: "1.0 credit", weight: 1 },
+      { label: "0.25 credit", weight: 0.25 },
+      { label: "0.75 credit", weight: 0.75 },
+      { label: "1.5 credits", weight: 1.5 },
+    ],
+    defaultWeight: 0.5,
+    bands: LAURIER_BANDS,
+    omsasScales: [7],
+    omsasWeightFactor: 2,
+    facts: [
+      "Laurier uses a 12-point grade scale: A+ (90–100%) is 12, A (85–89%) is 11 and A- (80–84%) is 10, down to D- (50–52%) at 1 and F (0–49%) at 0.",
+      "Your GPA weights each course by its credit value, so a 0.5-credit course counts half as much as a 1.0-credit course.",
+      "Count failed attempts (F, XF and DR are worth 0) but leave out courses graded CR or WD. For a repeated course, use only the grade from the second attempt.",
+      "Laurier's own GPA tools are unofficial; your official GPA is the one in LORIS.",
+      "OUAC lists Wilfrid Laurier under letter Scale 7, so OMSAS converts Laurier letters with Scale 7: an A+ is 4.0 and an A is 3.9.",
+    ],
+    sources: [LAURIER_GPA, OUAC_CONVERSION_SOURCE],
+  },
+  {
+    slug: "tmu",
+    name: "Toronto Metropolitan University GPA",
+    shortName: "TMU",
+    province: "Ontario",
+    result: "gpa",
+    gpaScale: "4.33",
+    gradeInput: "percent-or-letter",
+    roundPercent: true,
+    weightLabel: "Course weight",
+    weightOptions: [
+      { label: "1 (one-term course)", weight: 1 },
+      { label: "2 (two-term course)", weight: 2 },
+    ],
+    defaultWeight: 1,
+    bands: TMU_BANDS,
+    omsasScales: [],
+    omsasWeightFactor: 1,
+    facts: [
+      "Since September 2013, TMU has graded undergraduates in all faculties on a 4.33 scale: A+ (90–100%) is 4.33, A (85–89%) is 4.00 and A- (80–84%) is 3.67, down to D- (50–52%) at 0.67 and F (0–49%) at 0.",
+      "Your final percentage is rounded to a whole number before it becomes a letter, so 49.5% rounds up to 50% (a D-, which passes) while 49.4% stays 49% (an F).",
+      "For GPA, a one-term course is weighted 1 and a two-term course 2.",
+      "This page shows TMU's own 4.33 GPA only; it does not convert TMU grades to the OMSAS 4.0 scale.",
+    ],
+    sources: [TMU_LEGEND],
+  },
+  {
+    slug: "sfu",
+    name: "SFU GPA",
+    shortName: "SFU",
+    province: "British Columbia",
+    result: "gpa",
+    gpaScale: "4.33",
+    gradeInput: "letter",
+    weightLabel: "Units",
+    weightOptions: [
+      { label: "3 units", weight: 3 },
+      { label: "4 units", weight: 4 },
+      { label: "2 units", weight: 2 },
+      { label: "1 unit", weight: 1 },
+    ],
+    defaultWeight: 3,
+    bands: SFU_BANDS,
+    omsasScales: [7],
+    omsasWeightFactor: 1 / 3,
+    facts: [
+      "SFU grades undergraduate courses with letter grades worth up to 4.33: A+ is 4.33, A 4.00 and A- 3.67, down to C- at 1.67, D at 1.00 and F at 0.00. There is no D+ or D-.",
+      "Each grade's value is multiplied by the course's units to give grade points. Your term GPA is the grade points earned divided by the units completed that term; your CGPA uses every term to date. Both are calculated to two decimals.",
+      "SFU's calendar publishes no percentage equivalents — each instructor or department sets the cut-offs, so check your course outline.",
+      "OUAC lists Simon Fraser under letter Scale 7, so OMSAS converts SFU letters with Scale 7: an A+ is 4.0 and an A is 3.9.",
+    ],
+    sources: [SFU_CALENDAR, OUAC_CONVERSION_SOURCE],
+  },
+  {
+    slug: "mcgill",
+    name: "McGill GPA",
+    shortName: "McGill",
+    province: "Quebec",
+    result: "gpa",
+    gradeInput: "percent-or-letter",
+    gpaRounding: "truncate",
+    weightLabel: "Credits",
+    weightOptions: [
+      { label: "3 credits", weight: 3 },
+      { label: "4 credits", weight: 4 },
+      { label: "6 credits", weight: 6 },
+      { label: "1 credit", weight: 1 },
+    ],
+    defaultWeight: 3,
+    bands: MCGILL_BANDS,
+    omsasScales: [8],
+    omsasWeightFactor: 1 / 3,
+    facts: [
+      "McGill's official course grade is the letter grade, on a 4.0 scale with no A+: A (85–100%) is 4.0, A- (80–84%) 3.7 and B+ (75–79%) 3.3, down to D (50–54%) at 1.0 and F (0–49%) at 0.",
+      "Your GPA is each course's credits times its grade points, added up and divided by your total GPA course credits — and McGill truncates it to two decimals, so 3.596 shows as 3.59, not 3.60.",
+      "A to C are satisfactory passes, D is a conditional (non-continuation) pass and F is a failure. Courses that count toward program requirements need a C or better.",
+      "Repeated courses all count: earlier D or F grades stay in your CGPA. You need a CGPA of at least 2.00 to graduate.",
+      "In Engineering, professors may set their own letter-grade cut-offs, and the Faculty of Law does not use this scale. OUAC lists McGill under letter Scale 8, whose points match McGill's own.",
+    ],
+    sources: [MCGILL_CATALOGUE, OUAC_CONVERSION_SOURCE],
   },
 ];
 

@@ -1634,6 +1634,42 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
       "Extra credit above the total can push the percentage past 100%.",
     ],
   },
+  "semester-grade-calculator": {
+    howItWorks: [
+      "Enter your Quarter 1 and Quarter 2 grades as percentages, plus your semester exam score.",
+      "Set the weights your school uses (40/40/20 is common; check your handbook or syllabus).",
+      "Read your semester grade and letter. Leave the exam row out to see where you stand before the exam.",
+    ],
+    formula: "Semester grade = (Q1 × Q1 weight) + (Q2 × Q2 weight) + (exam × exam weight), with the weights adding to 100%.",
+    workedExample:
+      "Quarter 1 88% and Quarter 2 84% at 40% each, semester exam 80% at 20%: (88 × 0.40) + (84 × 0.40) + (80 × 0.20) = 35.2 + 33.6 + 16 = 84.8%, a B on the common 10-point scale.",
+    faqs: [
+      {
+        question: "How is a semester grade calculated?",
+        answer:
+          "Multiply each quarter grade and the semester exam by its weight, then add the results. With quarters at 40% each and the exam at 20%, quarters of 88% and 84% and an exam of 80% give a semester grade of 84.8%.",
+      },
+      {
+        question: "What weights do schools use for quarters and the semester exam?",
+        answer:
+          "It depends on the district. Splits like 40/40/20 and 45/45/10 are common, and some schools exempt students from the exam or skip it entirely. Your student handbook or course syllabus has the exact weights.",
+      },
+      {
+        question: "What do I need on my semester exam?",
+        answer:
+          "Use the final grade calculator with your quarter average as the current grade and the exam weight. With an 86% quarter average and a 20% exam, you need an 81% on the exam for an 85% semester grade, but a 90% semester grade would take 106%, so it is out of reach.",
+      },
+      {
+        question: "Does the semester grade go on my transcript?",
+        answer:
+          "In many US high schools, yes: the semester grade, not each quarter grade, is what appears on the transcript and counts toward GPA. Policies vary, so check how your school reports grades.",
+      },
+    ],
+    assumptions: [
+      "Weights come from your school; the calculator renormalizes if the rows you enter do not add to 100% yet.",
+      "Letter grades follow the scale selected in the calculator; your school's cutoffs may differ.",
+    ],
+  },
   "college-grade-calculator": {
     howItWorks: [
       "Copy each grading category and its weight from your college syllabus (for example exams 40%, homework 20%).",

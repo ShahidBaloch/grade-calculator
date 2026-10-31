@@ -40,7 +40,8 @@ export type CalculatorSlug =
   | "csu-gpa-calculator"
   | "middle-school-gpa-calculator"
   | "grade-percentage-calculator"
-  | "college-grade-calculator";
+  | "college-grade-calculator"
+  | "semester-grade-calculator";
 
 export const CALCULATOR_SLUGS: CalculatorSlug[] = [
   "ez-grader",
@@ -74,6 +75,7 @@ export const CALCULATOR_SLUGS: CalculatorSlug[] = [
   "middle-school-gpa-calculator",
   "grade-percentage-calculator",
   "college-grade-calculator",
+  "semester-grade-calculator",
 ];
 
 export function isCalculatorSlug(value: string): value is CalculatorSlug {

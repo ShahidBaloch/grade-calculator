@@ -1,5 +1,3 @@
-"use client";
-
 import { AppLink as Link } from "@/components/navigation/AppLink";
 import { usePathname } from "next/navigation";
 import type { NavLink } from "@/config/navigation";

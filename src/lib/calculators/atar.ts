@@ -7,6 +7,8 @@ export interface AtarSubject {
   qceType?: "general" | "applied" | "vet";
   /** HSC English study for UAC (best two English units). */
   hscEnglish?: boolean;
+  /** HSC course units for UAC: 2 for most courses, 1 for Extension courses (default 2). */
+  hscUnits?: 1 | 2;
   /** QCE English row for QTAC eligibility (satisfactory completion, minimum C). */
   qceEnglish?: boolean;
   /** When false, English does not meet QTAC's minimum C eligibility. */
@@ -96,7 +98,7 @@ function countedSet(
     case "uac":
       return uacCountedSet(subjects);
     case "vtac":
-      return vtacCountedSet(scores);
+      return vtacCountedSet(vtacOrderedScores(subjects).scores);
     case "satac":
       return satacCountedSet(scores);
     case "tisc":
@@ -155,8 +157,7 @@ function qtacCountedSet(subjects: AtarSubject[]): {
 }
 
 function isHscEnglishSubject(subject: AtarSubject): boolean {
-  if (subject.hscEnglish) return true;
-  return /english/i.test(subject.name ?? "");
+  return subject.hscEnglish ?? /english/i.test(subject.name ?? "");
 }
 
 function isQceEnglishSubject(subject: AtarSubject): boolean {
@@ -185,18 +186,19 @@ function uacCountedSet(subjects: AtarSubject[]): {
   average: number;
   methodNote: string;
 } {
-  const english = subjects
-    .filter(isHscEnglishSubject)
-    .map((s) => s.scaledScore)
-    .sort((a, b) => b - a);
-  const other = subjects
-    .filter((s) => !isHscEnglishSubject(s))
-    .map((s) => s.scaledScore)
-    .sort((a, b) => b - a);
-
-  const countedEnglish = english.slice(0, 2);
-  const countedOther = other.slice(0, 8);
-  const counted = [...countedEnglish, ...countedOther];
+  // UAC counts units, not courses: most HSC courses are 2 units, Extension courses 1 unit.
+  // Best 2 units of English first, then the best 8 of all remaining units (English included).
+  type Unit = { score: number; row: AtarSubject };
+  const units: Unit[] = subjects.flatMap((row) =>
+    Array.from({ length: row.hscUnits ?? 2 }, () => ({ score: row.scaledScore, row })),
+  );
+  const byScore = (a: Unit, b: Unit) => b.score - a.score;
+  const englishUnits = units.filter((u) => isHscEnglishSubject(u.row)).sort(byScore).slice(0, 2);
+  const remaining = units
+    .filter((u) => !englishUnits.includes(u))
+    .sort(byScore)
+    .slice(0, 8);
+  const counted = [...englishUnits, ...remaining].map((u) => u.score);
 
   if (counted.length === 0) {
     return { scores: [], average: 0, methodNote: "No scaled scores entered." };
@@ -206,7 +208,7 @@ function uacCountedSet(subjects: AtarSubject[]): {
     scores: counted,
     average: mean(counted),
     methodNote:
-      "NSW HSC (UAC): best two units of English plus best eight units from remaining courses — not a simple average of your five highest scores. Tag English rows or include “English” in the subject name for this planning view.",
+      "NSW HSC (UAC): best two units of English plus the best eight of your remaining units (each 2-unit course counts as two units, an Extension course as one). Tag English rows or include “English” in the subject name.",
   };
 }
 
@@ -255,12 +257,9 @@ function tiscCountedSet(subjects: AtarSubject[]): {
     .filter((s) => s.waceBonus === "maths-specialist")
     .map((s) => s.scaledScore);
 
-  const primary = subjects
-    .filter((s) => !s.waceBonus || s.waceBonus === "none")
-    .map((s) => s.scaledScore)
-    .sort((a, b) => b - a);
-
-  const top4 = (primary.length >= 4 ? primary : scaled).slice(0, 4);
+  // TISC: the best four come from all scaled scores; the 10% bonuses are added whether or not the
+  // LOTE / Methods / Specialist course is one of those four.
+  const top4 = scaled.slice(0, 4);
   const loteBonus = loteScores.length ? Math.max(...loteScores) * 0.1 : 0;
   const methodsBonus = methodsScores.length ? Math.max(...methodsScores) * 0.1 : 0;
   const specialistBonus = specialistScores.length ? Math.max(...specialistScores) * 0.1 : 0;
@@ -279,7 +278,7 @@ function tiscCountedSet(subjects: AtarSubject[]): {
     ],
     average: aggregate / divisor,
     methodNote:
-      "Western Australia (TISC/WACE): best four scaled scores plus 10% LOTE, 10% Mathematics Methods, and 10% Mathematics Specialist where applicable — not best four plus LOTE only.",
+      "Western Australia (TISC/WACE): best four scaled scores plus 10% of your best LOTE, 10% of Mathematics Methods and 10% of Mathematics Specialist — the bonuses apply even when those courses are also in your best four (maximum TEA 430).",
   };
 }
 
@@ -306,6 +305,31 @@ function genericPrimaryFourCountedSet(scores: number[]): {
     methodNote:
       "Generic planning estimate: best four scaled scores in full plus 10% of a fifth — pick your state authority for rules that differ from this shortcut.",
   };
+}
+
+/** VCE English group: English, English (EAL), Literature, English Language. */
+function isVceEnglishGroup(subject: AtarSubject): boolean {
+  return /english|literature/i.test(subject.name ?? "");
+}
+
+/**
+ * VTAC primary four: the best English-group study plus the next three best. When no row is an
+ * English-group study, fall back to the best four overall (VTAC needs one, so we flag it).
+ */
+function vtacOrderedScores(subjects: AtarSubject[]): { scores: number[]; hasEnglish: boolean } {
+  const rows = subjects.filter((s) => Number.isFinite(s.scaledScore));
+  const english = rows.filter(isVceEnglishGroup).sort((a, b) => b.scaledScore - a.scaledScore);
+  if (english.length === 0) {
+    return { scores: rows.map((s) => s.scaledScore).sort((a, b) => b - a), hasEnglish: false };
+  }
+  const [bestEnglish] = english;
+  const rest = rows
+    .filter((s) => s !== bestEnglish)
+    .map((s) => s.scaledScore)
+    .sort((a, b) => b - a);
+  // English first, then the next best three; anything after them is a possible increment.
+  const primary = [bestEnglish.scaledScore, ...rest.slice(0, 3)];
+  return { scores: [...primary, ...rest.slice(3)], hasEnglish: true };
 }
 
 /** VTAC/VCE: primary four at full value + up to two 10% study increments (5th/6th), not unlimited extras. */
@@ -341,7 +365,7 @@ function vtacCountedSet(scores: number[]): {
     scores: countedScores,
     average: aggregate / divisor,
     methodNote:
-      "Victoria (VTAC/VCE): primary four scaled scores at full value, plus up to two permitted 10% increments (typically from fifth and/or sixth permissible study). Additional subjects beyond the sixth do not add further increments in this simplified model.",
+      "Victoria (VTAC/VCE): primary four = your best English-group study plus the next three best scaled study scores, at full value, plus up to two 10% increments from a fifth and sixth study. Only the best six studies count.",
   };
 }
 
@@ -418,6 +442,11 @@ export function calculateAtar(input: AtarInput): CalculatorResult<AtarResult> {
   const warnings = [DISCLAIMER, ATAR_CROSS_SYSTEM_DISCLAIMER];
   if (authority === "qtac") {
     warnings.push(...qtacEnglishEligibilityWarnings(input.subjects));
+  }
+  if (authority === "vtac" && !vtacOrderedScores(input.subjects).hasEnglish) {
+    warnings.push(
+      "Victoria (VTAC): your primary four must include an English-group study (English, English EAL, Literature or English Language). Name one row accordingly so it is counted first.",
+    );
   }
 
   return {

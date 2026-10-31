@@ -25,9 +25,12 @@ async function linkStatus(page: Page, href: string) {
   return checkedHrefs.get(href)!;
 }
 
+/** Worldwide US pages: the nav is US there and the session hub is cleared (country-path.ts). */
+const WORLDWIDE_US = new Set(["/", "/gpa-calculator"]);
+
 function expectedCountry(target: string, session: string | null) {
   const urlHub = Object.keys(HUB_NAME).find((p) => target === p || target.startsWith(`${p}/`));
-  if (target === "/us" || target.startsWith("/us/")) return null;
+  if (target === "/us" || target.startsWith("/us/") || WORLDWIDE_US.has(target)) return null;
   return urlHub ?? session;
 }
 

@@ -79,6 +79,7 @@ const GENERIC_HUB_CALCULATORS = new Set<CalculatorSlug>([
   "canvas-grade-calculator",
   "grade-percentage-calculator",
   "college-grade-calculator",
+  "semester-grade-calculator",
 ]);
 
 /** Region-specific tools — only these hubs may host `/xx/slug` (not every prefix hub). */

@@ -17,7 +17,7 @@
 /lighthouse-reports/
 /.lighthouseci/
 
-# next.js
+# next.js (pre-Astro builds)
 /.next/
 /out/
 
@@ -58,3 +58,7 @@ vitest.config.ts.timestamp-*
 /*.md
 !/README.md
 /*.csv
+
+# astro
+/dist/
+/.astro/

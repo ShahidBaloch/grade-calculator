@@ -58,7 +58,8 @@ export function UniversityGpaCalculator({ slug }: { slug: CaUniversityProfile["s
     [courses, profile, omsasScales, slug, university],
   );
   const data = result.status === "valid" ? result.data : null;
-  const gradeHint = profile.gradeInput === "percent" ? "Mark (%)" : "Grade (% or letter)";
+  const gradeHint =
+    profile.gradeInput === "percent" ? "Mark (%)" : profile.gradeInput === "letter" ? "Letter grade" : "Grade (% or letter)";
 
   return (
     <div className="calculator-print-area space-y-6">
@@ -104,7 +105,9 @@ export function UniversityGpaCalculator({ slug }: { slug: CaUniversityProfile["s
             />
             <Input
               aria-label={`Course ${index + 1} grade`}
-              placeholder={profile.gradeInput === "percent" ? "e.g. 84" : "e.g. 84 or A-"}
+              placeholder={
+                profile.gradeInput === "percent" ? "e.g. 84" : profile.gradeInput === "letter" ? "e.g. A-" : "e.g. 84 or A-"
+              }
               inputMode={profile.gradeInput === "percent" ? "decimal" : "text"}
               value={course.grade}
               onChange={(e) => {
@@ -147,23 +150,25 @@ export function UniversityGpaCalculator({ slug }: { slug: CaUniversityProfile["s
           />
         ) : profile.slug !== "omsas" ? (
           <ResultCard
-            label={`${profile.shortName} GPA (4.0)`}
+            label={`${profile.shortName} GPA (${profile.gpaScale ?? "4.0"})`}
             value={data ? formatGpa(data.native.value) : "—"}
-            detail={data ? `${data.totalWeight} credits` : undefined}
+            detail={data ? `${profile.weightLabel}: ${Math.round(data.totalWeight * 100) / 100}` : undefined}
           />
         ) : null}
         {data?.equivalency433 != null && (
           <ResultCard label="UBC Arts 4.33 equivalent" value={formatGpa(data.equivalency433)} detail="Planning figure — evaluators may use their own scale" />
         )}
-        <ResultCard
-          label="OMSAS GPA (4.0)"
-          value={data ? formatGpa(data.omsasGpa) : "—"}
-          detail={
-            data
-              ? `OUAC ${slug === "omsas" ? `Scale ${(omsasScales ?? []).join(", ")}` : `Scale ${profile.omsasScales.join(", ")}`} · weight ${data.omsasTotalWeight}`
-              : undefined
-          }
-        />
+        {(slug === "omsas" || profile.omsasScales.length > 0) && (
+          <ResultCard
+            label="OMSAS GPA (4.0)"
+            value={data?.omsasGpa != null ? formatGpa(data.omsasGpa) : "—"}
+            detail={
+              data
+                ? `OUAC ${slug === "omsas" ? `Scale ${(omsasScales ?? []).join(", ")}` : `Scale ${profile.omsasScales.join(", ")}`} · weight ${Math.round(data.omsasTotalWeight * 100) / 100}`
+                : undefined
+            }
+          />
+        )}
       </div>
       {data && <FormulaBreakdown steps={data.formulaSteps} />}
     </div>

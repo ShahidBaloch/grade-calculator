@@ -1,0 +1,9 @@
+---
+import Document from "@/layouts/Document.astro";
+import NotFound, { metadata } from "@/app/not-found";
+import { setServerPathname } from "@/shims/router-state";
+
+setServerPathname("/404");
+---
+
+<Document metadata={metadata} tree={NotFound()} />

@@ -1,7 +1,18 @@
 import { describe, expect, it } from "vitest";
 import fixture from "../fixtures/ouac-conversion-table.json";
 import { OMSAS_SCALES, OMSAS_UNIVERSITY_SCALES, type OmsasScaleNumber } from "@/data/geo-sources/omsas";
-import { caUniversityProfiles, UBC_BANDS, UOFT_BANDS } from "@/data/geo-sources/ca-universities";
+import {
+  caUniversityProfiles,
+  MCGILL_BANDS,
+  MCMASTER_BANDS,
+  QUEENS_BANDS,
+  TMU_BANDS,
+  UBC_BANDS,
+  UOFT_BANDS,
+  UOTTAWA_BANDS,
+  WESTERN_BANDS,
+  YORK_BANDS,
+} from "@/data/geo-sources/ca-universities";
 import { droppedUsEocCandidates, usEocStateRules } from "@/data/geo-sources/us-eoc-states";
 
 /** Rebuild each OUAC column from the typed data, in the printed format ("90–100", "≤ 49", "A+"). */
@@ -43,13 +54,24 @@ describe("geo source data", () => {
         .map((scale) => scale.rows),
       UBC_BANDS,
       UOFT_BANDS,
+      YORK_BANDS,
+      MCMASTER_BANDS,
+      UOTTAWA_BANDS,
+      WESTERN_BANDS,
+      TMU_BANDS,
+      MCGILL_BANDS,
     ];
     for (const rows of tables) {
-      const sorted = [...rows].sort((a, b) => a.min - b.min);
+      const sorted = [...rows].sort((a, b) => a.min! - b.min!);
       expect(sorted[0].min).toBe(0);
       expect(sorted[sorted.length - 1].max).toBe(100);
-      for (let i = 1; i < sorted.length; i++) expect(sorted[i].min).toBe(sorted[i - 1].max + 1);
+      for (let i = 1; i < sorted.length; i++) expect(sorted[i].min).toBe(sorted[i - 1].max! + 1);
     }
+    // Queen's publishes one-decimal ranges (85–89.9).
+    const queens = [...QUEENS_BANDS].sort((a, b) => a.min! - b.min!);
+    expect(queens[0].min).toBe(0);
+    expect(queens[queens.length - 1].max).toBe(100);
+    for (let i = 1; i < queens.length; i++) expect(queens[i].min).toBeCloseTo(queens[i - 1].max! + 0.1, 5);
   });
 
   it("every published page cites an https source with a check date", () => {

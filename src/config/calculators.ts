@@ -114,7 +114,7 @@ export const calculators: CalculatorConfig[] = [
     icon: "Target",
     category: "grade",
     mvp: true,
-    relatedSlugs: ["weighted-grade-calculator", "gpa-calculator"],
+    relatedSlugs: ["weighted-grade-calculator", "semester-grade-calculator", "gpa-calculator"],
     examples: [
       { label: "Need 90% final", values: { currentGrade: 85, desiredGrade: 90, finalWeight: 40 } },
     ],
@@ -660,7 +660,31 @@ export const calculators: CalculatorConfig[] = [
         },
       },
     ],
+  },  {
+    slug: "semester-grade-calculator",
+    name: "Semester Grade Calculator",
+    shortName: "Semester",
+    description:
+      "Calculate your semester grade from your two quarter grades and the semester exam, using the weights your school sets, and see the letter grade.",
+    path: "/semester-grade-calculator",
+    icon: "Layers",
+    category: "grade",
+    mvp: false,
+    relatedSlugs: ["final-grade-calculator", "weighted-grade-calculator", "high-school-gpa-calculator", "test-grade-calculator"],
+    examples: [
+      {
+        label: "40/40/20 split",
+        values: {
+          items: [
+            { score: 88, weight: 40 },
+            { score: 84, weight: 40 },
+            { score: 80, weight: 20 },
+          ],
+        },
+      },
+    ],
   },
+
 ];
 
 export const calculatorBySlug = Object.fromEntries(

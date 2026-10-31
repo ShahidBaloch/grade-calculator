@@ -90,6 +90,7 @@ function HomeToolLinks() {
     { href: "/weighted-grade-calculator", label: "Weighted grade calculator" },
     { href: "/final-grade-calculator", label: "Final grade calculator" },
     { href: "/college-grade-calculator", label: "College grade calculator" },
+    { href: "/semester-grade-calculator", label: "Semester grade calculator" },
     { href: "/grade-percentage-calculator", label: "Grade percentage calculator" },
     { href: "/score", label: "Score out of total" },
     { href: "/gpa-calculator", label: "GPA calculator" },

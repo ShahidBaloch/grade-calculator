@@ -6,9 +6,9 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
       "Free grade calculator for US teachers and students. Enter questions and wrong answers to get the score, percentage, letter grade, and a full grading chart.",
   },
   "/weighted-grade-calculator": {
-    title: "Weighted Grade Calculator — Gradebook Tool",
+    title: "Weighted Grade Calculator — Weighted Average",
     description:
-      "Free weighted grade calculator and gradebook. Add each category or grading period with its weight to see your class or course average update instantly.",
+      "Free weighted grade calculator: find your weighted average from each category or grading period and its weight, and see your class grade update instantly.",
   },
   "/test-grade-calculator": {
     title: "Test & Exam Grade Calculator — Score Any Quiz",
@@ -18,7 +18,7 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
   "/gpa-calculator": {
     title: "GPA Calculator — Semester & Term GPA",
     description:
-      "Free GPA calculator for semester and term GPA. Add courses with letter grades or percentages and credit hours on your grading scale.",
+      "Free GPA calculator for semester and term GPA. Add letter grades or percentages; leave every course at the same credits to average without credit hours.",
   },
   "/average-grade-calculator": {
     title: "Average Grade Calculator — Test & Class Average",
@@ -53,7 +53,7 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
   "/cumulative-gpa-calculator": {
     title: "Cumulative GPA Calculator — Multiple Semester GPA",
     description:
-      "Combine grades from two or more semesters into one overall GPA. Enter each term's GPA and credit hours, or add courses directly. Works on any 4.0 scale.",
+      "Combine two or more semesters into one cumulative (accumulated) GPA. Enter each term's GPA and credit hours, or add courses directly. Works on any 4.0 scale.",
   },
   "/weighted-gpa-calculator": {
     title: "Weighted GPA Calculator — Honors AP & IB",
@@ -95,6 +95,11 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
     description:
       "Free grade percentage calculator: turn points earned out of points possible into a percentage and US letter grade, or convert any percentage to A–F.",
   },
+  "/semester-grade-calculator": {
+    title: "Semester Grade Calculator — Quarters + Exam",
+    description:
+      "Free semester grade calculator: combine your quarter grades and semester exam using your school's weights, like 40/40/20, to get your semester grade.",
+  },
   "/college-grade-calculator": {
     title: "College Grade Calculator — Syllabus Grade",
     description:
@@ -106,7 +111,7 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
       "Free EOC calculator: enter your class average, your state's EOC weight (e.g. 30% in Florida) and goal grade to see the End-of-Course exam score you need.",
   },
   "/degree-classification-calculator": {
-    title: "UK Degree Class Calculator — 1st, 2:1, 2:2",
+    title: "UK Degree Classification Calculator — 1st, 2:1",
     description:
       "Estimate UK degree class from credit-weighted module marks, with optional Year 2/3 weighting (e.g. 40/60). Covers First, 2:1, 2:2, and Third.",
   },
@@ -261,9 +266,14 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
       "Find the end-semester exam marks you need for an O, A+ or a pass from your internal assessment marks, on the India 10-point scale.",
   },
   "/uk/degree-classification-calculator": {
-    title: "UK Degree Class Calculator — 1st, 2:1, 2:2",
+    title: "UK Degree Classification Calculator — 1st, 2:1",
     description:
-      "Turn UK module marks into a degree class: First, 2:1, 2:2, or Third, using credit-weighted averages. UK results are not a US 4.0 GPA.",
+      "Turn UK module marks into your undergraduate honours degree classification: First, 2:1, 2:2 or Third, from credit-weighted averages. Not a US 4.0 GPA.",
+  },
+  "/grading-scales/uk": {
+    title: "UK University Grading System — Degree Classes",
+    description:
+      "The UK (British) university grading system: First (70%+), 2:1, 2:2, Third and Fail with percentage boundaries for honours degrees. Not a US GPA.",
   },
   "/uk/gcse-grade-calculator": {
     title: "GCSE Grade Calculator UK — Mark to 9–1 Grade",
@@ -334,6 +344,11 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
     title: "Grade & GPA Guides — How-To Articles",
     description:
       "Free guides on GPA, weighted grades, final exam targets, LMS gradebooks, and grading scales. Many articles include an embedded calculator.",
+  },
+  "/guides/how-to-calculate-gpa": {
+    title: "How to Calculate GPA — Formula & Examples",
+    description:
+      "Learn how to calculate semester and cumulative GPA step by step: grade points, credit hours, worked examples, and a free GPA calculator.",
   },
   "/guides/final-exam-tips": {
     title: "Final Exam Study Tips — Hit Your Target Score",

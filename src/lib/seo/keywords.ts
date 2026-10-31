@@ -258,6 +258,13 @@ export const calculatorKeywords: Record<CalculatorSlug, string[]> = {
     "grade to percentage calculator",
     "what percentage is my grade",
   ],
+  "semester-grade-calculator": [
+    "semester grade calculator",
+    "quarter grade calculator",
+    "semester exam grade calculator",
+    "final semester grade calculator",
+    "semester grade calculator high school",
+  ],
   "college-grade-calculator": [
     "college grade calculator",
     "grade calculator college",

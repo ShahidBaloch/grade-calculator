@@ -1,9 +1,11 @@
 import { CalculatorRoute } from "@/components/calculators/CalculatorRoute";
 import { AtarCalculator } from "@/components/calculators/AtarCalculator";
+import { GeoLinkList } from "@/components/content/GeoProgrammaticPage";
 import { calculatorHreflangLanguages } from "@/lib/seo/hreflang";
 import { calculatorKeywords } from "@/lib/seo/keywords";
 import { createPageMetadata } from "@/lib/seo/metadata";
 import { DISTINCT_PAGE_COPY } from "@/lib/seo/page-copy";
+import { auAtarStateLinkGroup } from "@/lib/seo/geo-programmatic";
 
 const auPath = "/au/atar-calculator";
 
@@ -16,5 +18,12 @@ export const metadata = createPageMetadata({
 });
 
 export default function AtarCalculatorPage() {
-  return <CalculatorRoute slug="atar-calculator" path={auPath} calculator={<AtarCalculator />} />;
+  return (
+    <CalculatorRoute
+      slug="atar-calculator"
+      path={auPath}
+      calculator={<AtarCalculator />}
+      below={<GeoLinkList group={auAtarStateLinkGroup()} />}
+    />
+  );
 }

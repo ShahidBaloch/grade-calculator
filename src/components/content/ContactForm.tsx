@@ -1,7 +1,7 @@
 "use client";
 
 import { AppLink as Link } from "@/components/navigation/AppLink";
-import { FormEvent, useState } from "react";
+import { useState, type FormEvent } from "react";
 import { contactConfig } from "@/data/contact";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";

@@ -1,5 +1,6 @@
 import { calculatorBySlug, getCalculatorPath } from "@/config/calculators";
 import { absoluteUrl } from "@/config/site";
+import { auAtarStates, type AuAtarState } from "@/data/geo-sources/au-atar-states";
 import { caUniversityProfiles, type CaUniversityProfile } from "@/data/geo-sources/ca-universities";
 import { usEocStateRules, type UsEocStateRule } from "@/data/geo-sources/us-eoc-states";
 import { getScale } from "@/lib/grading-scales";
@@ -20,6 +21,14 @@ export function usEocStatePath(slug: UsEocStateRule["slug"]): string {
   return `/eoc-grade-calculator/${slug}`;
 }
 
+export function auAtarStatePath(slug: AuAtarState["slug"]): string {
+  return `/au/atar-calculator/${slug}`;
+}
+
+export function auAtarStateByParam(param: string): AuAtarState | undefined {
+  return auAtarStates.find((state) => state.slug === param);
+}
+
 export function caUniversityByPageParam(param: string): CaUniversityProfile | undefined {
   return caUniversityProfiles.find((profile) => `${profile.slug}-gpa-calculator` === param);
 }
@@ -28,7 +37,7 @@ export function usEocStateByParam(param: string): UsEocStateRule | undefined {
   return usEocStateRules.find((rule) => rule.slug === param);
 }
 
-export function standaloneGeoHreflang(path: string, hreflang: "en-CA" | "en-US"): Record<string, string> {
+export function standaloneGeoHreflang(path: string, hreflang: "en-CA" | "en-US" | "en-AU"): Record<string, string> {
   const url = absoluteUrl(path);
   return { "x-default": url, [hreflang]: url };
 }
@@ -37,6 +46,7 @@ export function geoProgrammaticPaths(): string[] {
   return [
     ...caUniversityProfiles.map((profile) => caUniversityPath(profile.slug)),
     ...usEocStateRules.map((rule) => usEocStatePath(rule.slug)),
+    ...auAtarStates.map((state) => auAtarStatePath(state.slug)),
   ];
 }
 
@@ -78,6 +88,18 @@ export function usEocStateLinkGroup(): GeoLinkGroup {
   };
 }
 
+export function auAtarStateLinkGroup(): GeoLinkGroup {
+  return {
+    heading: "ATAR calculators by state",
+    intro: "Each page applies its admissions centre’s published rules for which subjects count.",
+    links: auAtarStates.map((state) => ({
+      href: auAtarStatePath(state.slug),
+      title: `${state.certificate} ATAR Calculator (${state.centre})`,
+      description: state.facts[0],
+    })),
+  };
+}
+
 export function eocWeightText(rule: UsEocStateRule): string {
   return weightText(rule);
 }
@@ -86,6 +108,7 @@ export function eocWeightText(rule: UsEocStateRule): string {
 export function hubGeoLinkGroups(hubPath: string): GeoLinkGroup[] {
   if (hubPath === "/ca") return [caUniversityLinkGroup()];
   if (hubPath === "/us") return [usEocStateLinkGroup()];
+  if (hubPath === "/au") return [auAtarStateLinkGroup()];
   return [];
 }
 

@@ -1,6 +1,10 @@
 # Grade Calculator
 
-Organic SEO grade calculator site built with Next.js 15, TypeScript, and Tailwind CSS.
+Organic SEO grade calculator site built with Astro, Preact, TypeScript, and Tailwind CSS.
+
+Every page is prerendered to static HTML and served from the Vercel CDN. Only the interactive parts
+(calculators, header menus, theme toggle, contact form) ship JavaScript, as Preact islands. Only
+`/api/*` runs as Vercel Functions.
 
 ## Requirements
 
@@ -19,16 +23,16 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+Open [http://localhost:4321](http://localhost:4321).
 
 ## Scripts
 
 | Command | Description |
 |---------|-------------|
 | `npm run dev` | Start development server |
-| `npm run build` | Production build |
-| `npm run start` | Start production server |
-| `npm run lint` | Run ESLint |
+| `npm run build` | Production build (`.vercel/output`, incl. redirects and cache headers) |
+| `npm run start` | Serve the production build locally on port 3000 |
+| `npm run check` | Type-check (`astro check`) |
 | `npm test` | Run unit tests (Vitest) |
 | `npm run test:coverage` | Unit tests with coverage |
 | `npm run test:e2e:chromium` | Playwright E2E (Chromium) |
@@ -64,14 +68,18 @@ The tag `gradecalc-sync` marks what is already on gradcalculator GitHub; only co
 ## Production checklist (Google-friendly)
 
 1. **Canonical URL** — Set `NEXT_PUBLIC_SITE_URL=https://www.gradcalc.com` in Vercel.
-2. **Domains (critical)** — Canonical host is **`www.gradcalc.com`**. In Vercel → **Settings → Domains**, set **`www.gradcalc.com` as Primary** and let **`gradcalc.com` redirect to www** (default). **Remove** any rule that redirects **www → apex** — combining that with `vercel.json` / middleware “apex → www” causes a **redirect loop** and Search Console **Couldn’t fetch** on `/sitemap.xml`. After deploy, `https://www.gradcalc.com/sitemap.xml` must return **200** (not redirect).
+2. **Domains (critical)** — Canonical host is **`www.gradcalc.com`**. In Vercel → **Settings → Domains**, set **`www.gradcalc.com` as Primary** and let **`gradcalc.com` redirect to www** (default). **Remove** any rule that redirects **www → apex** — combining that with the build’s own “apex → www” rule (`scripts/vercel-routes.ts`) causes a **redirect loop** and Search Console **Couldn’t fetch** on `/sitemap.xml`. After deploy, `https://www.gradcalc.com/sitemap.xml` must return **200** (not redirect).
 3. **Contact form** — Configure **SMTP** (`SMTP_HOST`, `SMTP_USER`, `SMTP_PASS`, optional `CONTACT_FROM` / `CONTACT_TO`) like FancifyText, **or** `RESEND_API_KEY` + `CONTACT_FROM_EMAIL`. Posts to `POST /api/contact`.
 4. **Crawlers** — `robots.txt` allows **Google, Bing, Yandex**, and other major search bots; blocks SEO scrapers (Ahrefs, Semrush, etc.). Do not challenge verified search bots in Vercel Firewall.
 5. **Uptime** — Optional monitor target: `GET /api/health` (returns `{ "ok": true }`, no store cache).
 6. **QA** — After deploy: Rich Results Test on `/` and `/contact`; run `npm run test:qa` in CI.
 
 
-- `src/app/` — Next.js App Router pages
+- `src/app/` — Pages, written in the Next.js App Router layout (`page.tsx`, `[param]`, `generateStaticParams`, `metadata`). `src/layouts/next-routes.ts` turns them into static Astro routes.
+- `src/pages/` — Astro entry points: the catch-all page router, 404, `robots.txt`, `sitemap.xml`, `/api/*`
+- `src/shims/` — Small stand-ins for `next/link`, `next/navigation`, `next/dynamic`, `next-themes`
+- `src/islands/` — Island runtime. Components in `"use client"` files hydrate on their own when used from server code (`integrations/use-client-islands.ts`).
+- `scripts/vercel-routes.ts` — Post-build step that writes redirects and cache/security headers into the Vercel output config (no middleware)
 - `src/components/` — UI and calculator components
 - `src/lib/calculators/` — Calculator engines and validation
 - `e2e/` — Playwright end-to-end tests

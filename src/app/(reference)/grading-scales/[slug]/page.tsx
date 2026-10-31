@@ -6,6 +6,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { gradingScaleBySlug, gradingScalePages } from "@/config/grading-scale-pages";
 import { faqPageJsonLd } from "@/lib/seo/jsonld";
 import { createPageMetadata } from "@/lib/seo/metadata";
+import { pageDescription, pageTitle } from "@/lib/seo/page-copy";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -23,8 +24,8 @@ export async function generateMetadata({ params }: PageProps) {
   const config = gradingScaleBySlug[slug];
   if (!config) return {};
   return createPageMetadata({
-    title: config.title,
-    description: config.description,
+    title: pageTitle(config.path, config.title),
+    description: pageDescription(config.path, config.description),
     path: config.path,
     keywords: config.keywords,
   });

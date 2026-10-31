@@ -22,10 +22,13 @@ import type { OfficialSource } from "@/data/geo-sources/types";
 import {
   calculateUniversityGpa,
   convertToOmsas,
+  normalizeLetter,
   omsasScalesForUniversity,
   type UniversityCourseInput,
 } from "@/lib/calculators/ca-university-gpa";
 import { calculateEocGrade } from "@/lib/calculators/eoc-grade";
+import { calculateAtar } from "@/lib/calculators/atar";
+import type { AuAtarState } from "@/data/geo-sources/au-atar-states";
 import { eocWeightText } from "@/lib/seo/geo-programmatic";
 import type { FaqItem } from "@/types/seo";
 
@@ -63,6 +66,11 @@ const pct = (value: number) => `${Number.isInteger(value) ? value : value.toFixe
 function listJoin(items: string[]): string {
   if (items.length <= 1) return items.join("");
   return `${items.slice(0, -1).join(", ")} and ${items[items.length - 1]}`;
+}
+
+/** Schools whose own scale carries grade points (U of T 4.0, York 9-point). */
+function hasOwnPoints(profile: CaUniversityProfile): boolean {
+  return profile.slug !== "omsas" && profile.bands.some((band) => band.points != null);
 }
 
 function scaleLabel(scale: OmsasScaleNumber): string {
@@ -105,7 +113,65 @@ export const CA_EXAMPLE_COURSES: Record<CaUniversityProfile["slug"], UniversityC
     { name: "Psychology", grade: "72", weight: 0.5 },
     { name: "Seminar", grade: "88", weight: 0.25 },
   ],
+  york: [
+    { name: "EECS 1012", grade: "84", weight: 3 },
+    { name: "MATH 1300", grade: "77", weight: 3 },
+    { name: "PSYC 1010 (full year)", grade: "B", weight: 6 },
+    { name: "ECON 1000", grade: "68", weight: 3 },
+  ],
+  mcmaster: [
+    { name: "BIOLOGY 1M03", grade: "84", weight: 3 },
+    { name: "CHEM 1A03", grade: "77", weight: 3 },
+    { name: "MATH 1ZA3", grade: "A", weight: 3 },
+    { name: "PSYCH 1X03", grade: "68", weight: 3 },
+  ],
+  queens: [
+    { name: "BIOL 102", grade: "86", weight: 1 },
+    { name: "CHEM 112 (full year)", grade: "78", weight: 2 },
+    { name: "MATH 121", grade: "A-", weight: 1 },
+    { name: "ECON 110", grade: "71", weight: 1 },
+  ],
+  uottawa: [
+    { name: "ADM 1300", grade: "86", weight: 3 },
+    { name: "MAT 1320", grade: "77", weight: 3 },
+    { name: "PSY 1101", grade: "B+", weight: 3 },
+    { name: "ECO 1102", grade: "68", weight: 3 },
+  ],
+  western: [
+    { name: "Biology 1001A", grade: "84", weight: 0.5 },
+    { name: "Chemistry 1301A", grade: "76", weight: 0.5 },
+    { name: "Calculus 1000A", grade: "91", weight: 0.5 },
+    { name: "Psychology 1002A", grade: "68", weight: 0.5 },
+    { name: "Writing 1000F", grade: "35", weight: 0.5 },
+  ],
+  laurier: [
+    { name: "BU 111", grade: "83", weight: 0.5 },
+    { name: "EC 120", grade: "76", weight: 0.5 },
+    { name: "MA 100", grade: "A-", weight: 0.5 },
+    { name: "PS 101", grade: "71", weight: 0.5 },
+  ],
+  tmu: [
+    { name: "CPS 109", grade: "84", weight: 1 },
+    { name: "MTH 110", grade: "79.5", weight: 1 },
+    { name: "PSY 102", grade: "B", weight: 1 },
+    { name: "ECN 104", grade: "68", weight: 1 },
+  ],
+  sfu: [
+    { name: "CMPT 120", grade: "A-", weight: 3 },
+    { name: "MATH 151", grade: "B+", weight: 3 },
+    { name: "PSYC 100", grade: "A", weight: 3 },
+    { name: "ECON 103", grade: "C+", weight: 4 },
+  ],
+  mcgill: [
+    { name: "COMP 202", grade: "A-", weight: 3 },
+    { name: "MATH 140", grade: "78", weight: 4 },
+    { name: "PSYC 100", grade: "B+", weight: 3 },
+    { name: "ECON 208", grade: "66", weight: 3 },
+  ],
 };
+
+/** A school's own grade points: one decimal when exact (3.7, 8.0), two otherwise (3.67, 4.33). */
+const ownPts = (value: number) => (Number.isInteger(Math.round(value * 1000) / 100) ? value.toFixed(1) : value.toFixed(2));
 
 /** University the OMSAS page opens with. */
 export const OMSAS_DEFAULT_UNIVERSITY = "Toronto";
@@ -121,17 +187,17 @@ function exampleSection(profile: CaUniversityProfile): GeoPageSection {
   const { data } = outcome;
 
   const head = ["Course", "Grade", profile.weightLabel];
-  if (profile.slug === "uoft") head.push("U of T points");
+  if (hasOwnPoints(profile)) head.push(`${profile.shortName} points`);
   if (profile.slug === "ubc") head.push("UBC Arts 4.33");
-  head.push("OMSAS points");
+  if (data.omsasGpa != null) head.push("OMSAS points");
 
   const rows = data.courses.map((course) => {
     const row = [course.name, course.percent != null ? pct(course.percent) : course.grade, String(course.weight)];
-    if (profile.slug === "uoft") row.push(pts(course.points!));
+    if (hasOwnPoints(profile)) row.push(ownPts(course.points!));
     if (profile.slug === "ubc") row.push(String(course.equivalency433));
-    row.push(
-      `${pts(course.omsas.points)}${course.omsas.viaLetter ? ` (via ${course.omsas.viaLetter})` : ""}`,
-    );
+    if (course.omsas) {
+      row.push(`${pts(course.omsas.points)}${course.omsas.viaLetter ? ` (via ${course.omsas.viaLetter})` : ""}`);
+    }
     return row;
   });
 
@@ -143,22 +209,27 @@ function exampleSection(profile: CaUniversityProfile): GeoPageSection {
       }.`,
     );
   } else if (profile.slug !== "omsas") {
-    paragraphs.push(`The ${profile.shortName} GPA for these courses is ${gpa(data.native.value)}.`);
+    paragraphs.push(
+      `The ${profile.shortName} GPA for these courses is ${gpa(data.native.value)}${profile.gpaScale ? ` on its ${profile.gpaScale} scale` : ""}.`,
+    );
   }
   if (data.equivalency433 != null) {
     paragraphs.push(
       `Using the UBC Arts percentage equivalencies, the same courses work out to ${gpa(data.equivalency433)} on a 4.33 scale.`,
     );
   }
-  paragraphs.push(
-    profile.slug === "omsas"
-      ? `For a University of Toronto transcript (OUAC Scales 3 and 7), OMSAS converts the percentages with Scale 3 and the letter grade with Scale 7. Weighted by course length, the OMSAS GPA is ${gpa(data.omsasGpa)}.`
-      : `OMSAS would convert the same transcript to ${gpa(data.omsasGpa)} on its 4.0 scale${
-          profile.slug === "uoft" && Math.abs(data.omsasGpa - data.native.value) > 0.004
-            ? ` — not ${gpa(data.native.value)}, because OMSAS gives an 85–89% A 3.9 while U of T gives it 4.0`
-            : ""
-        }.`,
-  );
+  if (data.omsasGpa != null) {
+    const omsasGpa = data.omsasGpa;
+    paragraphs.push(
+      profile.slug === "omsas"
+        ? `For a University of Toronto transcript (OUAC Scales 3 and 7), OMSAS converts the percentages with Scale 3 and the letter grade with Scale 7. Weighted by course length, the OMSAS GPA is ${gpa(omsasGpa)}.`
+        : `OMSAS would convert the same transcript to ${gpa(omsasGpa)} on its 4.0 scale${
+            profile.slug === "uoft" && Math.abs(omsasGpa - data.native.value) > 0.004
+              ? ` — not ${gpa(data.native.value)}, because OMSAS gives an 85–89% A 3.9 while U of T gives it 4.0`
+              : ""
+          }.`,
+    );
+  }
   paragraphs.push(`Steps: ${data.formulaSteps.join("; ")}.`);
 
   return {
@@ -167,6 +238,24 @@ function exampleSection(profile: CaUniversityProfile): GeoPageSection {
     table: { caption: `Example ${profile.shortName} transcript`, head, rows },
   };
 }
+
+/** Lead-in for each school's grading-scale table (schools added in the 2026-10 batch). */
+const SCALE_NOTES: Partial<Record<CaUniversityProfile["slug"], string>> = {
+  mcmaster:
+    "This is McMaster's undergraduate 12-point scale with the equivalent percentages the Registrar publishes. Graduate and MBA programs use different cut-offs.",
+  queens:
+    "This is Queen's official GPA grading scale for Arts and Science, Smith Business, Smith Engineering, Graduate Studies and Health Sciences. B- is the minimum pass in Graduate Studies, and C- in Medicine and Nursing.",
+  uottawa:
+    "This is the official alphanumeric scale in uOttawa's Academic Regulation A-3. Each grade's numeric value is multiplied by the course units; the OMSAS column is OUAC letter Scale 7, which gives E and F both 0.0.",
+  western:
+    "These are the undergraduate letter bands in Western's Academic Calendar. Western reports percentage averages rather than grade points; the OMSAS column is OUAC percentage Scale 3 at the bottom of each band.",
+  laurier:
+    "This is the 12-point grade scale Laurier publishes with its GPA calculator. Each course's grade points are weighted by its credit value.",
+  tmu: "This is TMU's undergraduate grading scale for all faculties from September 2013 onward. Percentages are rounded to a whole number before the letter is assigned.",
+  sfu: "This is SFU's standard undergraduate letter-grade scale. SFU publishes no official percentage ranges — your course outline sets the cut-offs.",
+  mcgill:
+    "This is McGill's undergraduate grading table. The letter grade is the official course grade; the percentages are McGill's numerical scale, which Engineering instructors may replace with their own.",
+};
 
 function nativeTableSection(profile: CaUniversityProfile): GeoPageSection | null {
   if (profile.slug === "omsas") return null;
@@ -187,21 +276,27 @@ function nativeTableSection(profile: CaUniversityProfile): GeoPageSection | null
   }
 
   const head = ["Letter", "Percentage"];
-  if (profile.slug === "uoft") head.push("U of T grade points");
+  if (hasOwnPoints(profile)) head.push(`${profile.shortName} grade points`);
   if (profile.slug === "ubc") head.push("UBC Arts 4.33 (at the low end)");
-  head.push("OMSAS 4.0");
+  const withOmsas = profile.omsasScales.length > 0;
+  if (withOmsas) head.push("OMSAS 4.0");
 
+  // OMSAS reads UBC and letter-only-scale schools (York, Scale 9) by letter, others by percentage.
+  const byLetter =
+    profile.slug === "ubc" || !profile.omsasScales.some((n) => OMSAS_SCALES[n].kind === "percentage");
   const rows = profile.bands.map((band) => {
-    const row = [band.letter, `${band.min}–${band.max}%`];
-    if (profile.slug === "uoft") row.push(pts(band.points!));
+    const row = [band.letter, band.min != null ? `${band.min}–${band.max}%` : "Not published"];
+    if (hasOwnPoints(profile)) row.push(ownPts(band.points!));
     if (profile.slug === "ubc") {
-      row.push(band.min >= 50 ? String(UBC_ARTS_433_EQUIVALENCY[Math.min(band.min, 90)]) : "—");
+      row.push(band.min! >= 50 ? String(UBC_ARTS_433_EQUIVALENCY[Math.min(band.min!, 90)]) : "—");
     }
-    const omsas = convertToOmsas(
-      profile.slug === "ubc" ? { percent: null, letter: band.letter === "F" ? "E/F" : band.letter } : { percent: band.min, letter: null },
-      profile.omsasScales,
-    );
-    row.push(typeof omsas === "string" ? "—" : pts(omsas.points));
+    if (withOmsas) {
+      const omsas = convertToOmsas(
+        byLetter ? { percent: null, letter: normalizeLetter(band.letter) } : { percent: band.min!, letter: null },
+        profile.omsasScales,
+      );
+      row.push(typeof omsas === "string" ? "—" : pts(omsas.points));
+    }
     return row;
   });
 
@@ -212,7 +307,11 @@ function nativeTableSection(profile: CaUniversityProfile): GeoPageSection | null
         ? "This is the percentage-to-letter table UBC Vancouver uses in most faculties. Some faculties and graduate programs set a higher pass mark (for example, F below 60% in Medicine, Nursing and graduate master's programs)."
         : profile.slug === "guelph"
           ? "This is the undergraduate grading system Guelph's Senate approved for courses from Spring 1992 onward. Guelph publishes letters and percentages only; the OMSAS column is OUAC Scale 3 at the bottom of each band. Graduate courses use a different scale."
-          : "This is the undergraduate Refined Letter Grade Scale from U of T's Grading Practices Policy. Each course grade carries the grade points shown; your GPA is the weighted average of those points.",
+          : profile.slug === "york"
+            ? "This is the undergraduate grading scheme in York's current Academic Calendar. Each course grade carries the grade points shown, on a 9-point scale; your GPA is the credit-weighted average of those points. The OMSAS column is OUAC letter Scale 9, which gives E and F both 0.0."
+            : profile.slug === "uoft"
+              ? "This is the undergraduate Refined Letter Grade Scale from U of T's Grading Practices Policy. Each course grade carries the grade points shown; your GPA is the weighted average of those points."
+              : SCALE_NOTES[profile.slug] ?? "",
     ],
     table: { caption: `${profile.shortName} letter grades, percentages and conversions`, head, rows },
   };
@@ -274,7 +373,7 @@ function caFaqs(profile: CaUniversityProfile): FaqItem[] {
       { question: "Is an 85% the same OMSAS GPA everywhere?", answer: "No. On Scale 3 (for example Toronto, Western, Guelph) 85–89% is 3.9; on Scale 5 an 85% falls in 80–86% and converts to 3.7; on Scale 4 it is 3.9 (84–92%). Pick your university so the right scale is used." },
       { question: "Will every Ontario medical school use this GPA?", answer: `${OMSAS_RULES.schoolDiscretion} Check each school's admission requirements for weighting rules such as dropping lowest years.` },
     );
-  } else {
+  } else if (profile.omsasScales.length) {
     const omsasScaleText = listJoin(profile.omsasScales.map(scaleLabel));
     faqs.push({
       question: `What OMSAS scale does ${s} use?`,
@@ -314,6 +413,32 @@ function caFaqs(profile: CaUniversityProfile): FaqItem[] {
       { question: "What average do I need for the Dean's Honours List?", answer: `A semester average of at least ${GUELPH_DEANS_HONOURS_AVERAGE.toFixed(1)}% as a full-time student. Part-time students need a cumulative average of ${GUELPH_DEANS_HONOURS_AVERAGE.toFixed(1)}% over at least 2.00 credits.` },
     );
   }
+  if (profile.slug === "york") {
+    faqs.push(
+      { question: "What is York University's grading scale?", answer: "A+ is 90–100% (9 points), A is 80–89% (8), B+ is 75–79% (7), B is 70–74% (6), C+ is 65–69% (5), C is 60–64% (4), D+ is 55–59% (3), D is 50–54% (2), E is 40–49% (1) and F is 0–39% (0)." },
+      { question: "How is my York GPA calculated?", answer: `${profile.facts[1]} For example, an A and a B+ in two 3.00-credit courses, a B in a 6.00-credit course and a C+ in a 3.00-credit course give (8×3 + 7×3 + 6×6 + 5×3) ÷ 15 = 6.40.` },
+      { question: "Is York switching to a 4.0 GPA?", answer: profile.facts[3] },
+      { question: "What is a passing grade at York?", answer: profile.facts[2] },
+      { question: "What is my York GPA on a 4.0 scale?", answer: "York does not publish an official 9-point to 4.0 conversion for current grades. For Ontario medical school applications OMSAS converts each York letter with OUAC Scale 9 (A+ 4.0, A 3.8, B+ 3.3, B 3.0, C+ 2.3, C 2.0, D+ 1.3, D 1.0, E/F 0.0), which this calculator shows. Other programs may use their own scale." },
+    );
+  }
+  if (SCALE_NOTES[profile.slug]) {
+    const scaleAnswer = profile.bands
+      .map((band) => {
+        const range = band.min != null ? ` (${band.min}–${band.max}%)` : "";
+        const value = band.points != null ? ` = ${ownPts(band.points)}` : "";
+        return `${band.letter}${range}${value}`;
+      })
+      .join(", ");
+    faqs.push(
+      {
+        question: `What is the ${s} grading scale?`,
+        answer: `${scaleAnswer}.${profile.gradeInput === "letter" ? ` ${s} publishes no official percentage ranges.` : ""}`,
+      },
+      { question: `How is the ${s} ${profile.result === "gpa" ? "GPA" : "average"} calculated?`, answer: profile.facts[1] },
+      { question: `What else changes the ${s} result?`, answer: profile.facts[2] },
+    );
+  }
   faqs.push({
     question: `Is this an official ${profile.slug === "omsas" ? "OMSAS" : s} calculator?`,
     answer: `No — it is an independent tool built from the published tables listed under Sources, checked on ${profile.sources[0].checked}. Your official ${profile.slug === "omsas" ? "OMSAS GPA appears in your application's Document Tracking section" : "result is the one on your transcript"}.`,
@@ -338,11 +463,11 @@ export function buildCaUniversityCopy(profile: CaUniversityProfile): GeoPageCopy
       keywords: ["ubc gpa calculator", "ubc average calculator", "ubc 4.33 gpa", "4.33 gpa calculator", "ubc grading scale"],
     },
     uoft: {
-      title: "U of T GPA Calculator — University of Toronto 4.0",
+      title: "U of T GPA Calculator & UofT Grading Scale",
       h1: "University of Toronto GPA Calculator",
       description:
-        "Calculate your U of T GPA from percentages or letters with the official Refined Letter Grade Scale and 0.5/1.0 course weights, plus the OMSAS 4.0 conversion.",
-      keywords: ["uoft gpa calculator", "u of t gpa calculator", "university of toronto gpa calculator", "uoft grading scale", "cgpa uoft"],
+        "Calculate your U of T CGPA (St. George, UTM or UTSC) from percentages or letters on the official Refined Letter Grade Scale, plus the OMSAS 4.0 GPA.",
+      keywords: ["uoft gpa calculator", "u of t gpa calculator", "university of toronto gpa calculator", "uoft grading scale", "cgpa uoft", "utm gpa calculator", "utsc gpa calculator"],
     },
     waterloo: {
       title: "Waterloo GPA Calculator — Average & OMSAS 4.0",
@@ -364,6 +489,75 @@ export function buildCaUniversityCopy(profile: CaUniversityProfile): GeoPageCopy
         "guelph gpa calculator",
       ],
     },
+    york: {
+      title: "York GPA Calculator & YorkU Grading Scale",
+      h1: "York University GPA Calculator",
+      description:
+        "Calculate your York University GPA on the official 9-point scale (A+ = 9) from percentages or letters and 3.00/6.00 credits, plus the OMSAS 4.0 conversion.",
+      keywords: [
+        "york gpa calculator",
+        "yorku gpa calculator",
+        "york university gpa calculator",
+        "yorku grading scale",
+        "york university grading scale",
+      ],
+    },
+    mcmaster: {
+      title: "McMaster GPA Calculator & 12-Point Grading Scale",
+      h1: "McMaster GPA Calculator",
+      description:
+        "Calculate your McMaster GPA on the official 12-point scale (A+ = 12, 90–100%) from percentages or letters and 3/6 units, plus the OMSAS 4.0 conversion.",
+      keywords: ["mcmaster gpa calculator", "mcmaster grading scale", "mcmaster 12 point scale", "mcmaster gpa", "mcmaster cumulative average"],
+    },
+    queens: {
+      title: "Queen's GPA Calculator & Grading Scale (4.3)",
+      h1: "Queen's University GPA Calculator",
+      description:
+        "Calculate your Queen's University GPA on the official 4.3 scale (A+ = 90–100%) from percentages or letters, weighting full-year courses double, plus OMSAS 4.0.",
+      keywords: ["queens gpa calculator", "queen's university grading scale", "queens grading scale", "queen's gpa calculator", "queens 4.3 gpa"],
+    },
+    uottawa: {
+      title: "uOttawa GPA Calculator & Grading Scale (10-Pt)",
+      h1: "University of Ottawa GPA Calculator",
+      description:
+        "Calculate your uOttawa CGPA on the official 10-point scale (A+ = 10) from percentages or letters with course units, per Regulation A-3, plus OMSAS 4.0.",
+      keywords: ["uottawa gpa calculator", "uottawa grading scale", "uottawa cgpa calculator", "university of ottawa gpa calculator", "uottawa 10 point scale"],
+    },
+    western: {
+      title: "Western (UWO) Average Calculator & Grading Scale",
+      h1: "Western University Average Calculator",
+      description:
+        "Calculate your Western University (UWO) weighted average the way the calendar does (marks below 40 count as 40), with the A+–F scale and an OMSAS 4.0 GPA.",
+      keywords: ["western gpa calculator", "uwo gpa calculator", "western university average calculator", "uwo grading scale", "grade calculator uwo"],
+    },
+    laurier: {
+      title: "Laurier GPA Calculator & 12-Point Grading Scale",
+      h1: "Wilfrid Laurier GPA Calculator",
+      description:
+        "Calculate your Wilfrid Laurier GPA on the 12-point scale (A+ = 12) from percentages or letters with 0.25–1.5 credit weights, plus the OMSAS 4.0 conversion.",
+      keywords: ["laurier gpa calculator", "laurier grading scale", "wilfrid laurier gpa calculator", "laurier grade calculator", "wlu gpa calculator"],
+    },
+    tmu: {
+      title: "TMU GPA Calculator & Grading Scale (4.33)",
+      h1: "Toronto Metropolitan University GPA Calculator",
+      description:
+        "Calculate your TMU GPA on the official 4.33 scale (A+ = 90–100%) from percentages or letters, rounded first as TMU does, for one- and two-term courses.",
+      keywords: ["tmu gpa calculator", "tmu grading scale", "tmu grade calculator", "toronto metropolitan university gpa calculator", "ryerson gpa calculator"],
+    },
+    sfu: {
+      title: "SFU GPA Calculator & SFU Grading Scale (4.33)",
+      h1: "SFU GPA Calculator",
+      description:
+        "Calculate your Simon Fraser University term GPA or CGPA from letter grades and units on SFU's official 4.33 scale (A+ = 4.33), plus the OMSAS 4.0 conversion.",
+      keywords: ["sfu gpa calculator", "sfu grading scale", "simon fraser gpa calculator", "calculate gpa sfu", "sfu cgpa calculator"],
+    },
+    mcgill: {
+      title: "McGill GPA Calculator & Grading Scale (4.0)",
+      h1: "McGill GPA Calculator",
+      description:
+        "Calculate your McGill TGPA or CGPA from letters or percentages and credits on McGill's official 4.0 scale — truncated to two decimals, exactly as McGill does.",
+      keywords: ["mcgill gpa calculator", "mcgill grading scale", "calculate gpa mcgill", "mcgill grade calculator", "mcgill cgpa calculator"],
+    },
   };
   const m = meta[profile.slug];
 
@@ -371,12 +565,19 @@ export function buildCaUniversityCopy(profile: CaUniversityProfile): GeoPageCopy
     profile.slug === "omsas"
       ? "your OMSAS 4.0 GPA"
       : profile.result === "gpa"
-        ? `your ${profile.shortName} GPA on its 4.0 scale`
+        ? `your ${profile.shortName} GPA on its ${profile.gpaScale ?? "4.0"} scale`
         : `your ${profile.shortName} ${profile.weightLabel.toLowerCase()}-weighted percentage average`;
 
+  const gradeWord =
+    profile.gradeInput === "percent"
+      ? "percentage mark"
+      : profile.gradeInput === "letter"
+        ? "letter grade"
+        : "percentage or letter grade";
+  const withOmsas = profile.slug !== "omsas" && profile.omsasScales.length > 0;
   const intro = [
-    `${m.h1}: enter each course's ${profile.gradeInput === "percent" ? "percentage mark" : "percentage or letter grade"} and its ${profile.weightLabel.toLowerCase()}. The calculator returns ${nativeResult}${
-      profile.slug === "omsas" ? "" : ", plus the 4.0 GPA OUAC calculates when you apply to Ontario medical schools through OMSAS"
+    `${m.h1}: enter each course's ${gradeWord} and its ${profile.weightLabel.toLowerCase()}. The calculator returns ${nativeResult}${
+      withOmsas ? ", plus the 4.0 GPA OUAC calculates when you apply to Ontario medical schools through OMSAS" : ""
     }.`,
     profile.facts[0],
     `Every cut-off on this page comes from ${listJoin([...new Set(profile.sources.map((src) => src.publisher))])}; nothing is estimated.`,
@@ -391,10 +592,10 @@ export function buildCaUniversityCopy(profile: CaUniversityProfile): GeoPageCopy
           "Read your OMSAS GPA, weighted by course length.",
         ]
       : [
-          `Enter each course's ${profile.gradeInput === "percent" ? "percentage" : "percentage or letter"}.`,
+          `Enter each course's ${profile.gradeInput === "percent" ? "percentage" : profile.gradeInput === "letter" ? "letter grade" : "percentage or letter"}.`,
           `Choose its ${profile.weightLabel.toLowerCase()} (${profile.weightOptions.map((o) => o.weight).join(", ")}).`,
           `Read ${nativeResult}${profile.slug === "ubc" ? ", letter and 4.33 equivalent" : ""}.`,
-          "Compare it with the OMSAS 4.0 GPA shown underneath.",
+          ...(withOmsas ? ["Compare it with the OMSAS 4.0 GPA shown underneath."] : []),
         ];
 
   const sections: GeoPageSection[] = [
@@ -567,6 +768,109 @@ export function buildUsEocStateCopy(rule: UsEocStateRule): GeoPageCopy {
     sections,
     faqs,
     sources: [rule.source],
+  };
+}
+
+/* ───────────────────────── Australian state ATAR pages ───────────────────────── */
+
+const ATAR_STATE_META: Record<AuAtarState["slug"], { title: string; h1: string; description: string; keywords: string[] }> = {
+  vce: {
+    title: "VCE ATAR Calculator — VTAC Aggregate Estimate",
+    h1: "VCE ATAR Calculator",
+    description:
+      "Estimate your VCE ATAR the VTAC way: your best English-group study plus the next three, and 10% of a fifth and sixth study. A planning estimate, not VTAC's.",
+    keywords: ["vce atar calculator", "atar calculator vce", "vtac atar calculator", "atar vce calculator", "victoria atar calculator"],
+  },
+  hsc: {
+    title: "HSC ATAR Calculator — UAC Best 10 Units",
+    h1: "HSC ATAR Calculator",
+    description:
+      "Estimate your NSW HSC ATAR the UAC way: your best 2 units of English plus your best 8 other units, with 1-unit Extension courses. A planning estimate only.",
+    keywords: ["hsc atar calculator", "atar calculator hsc", "uac atar calculator", "nsw atar calculator", "atar hsc calculator"],
+  },
+  qce: {
+    title: "QCE ATAR Calculator (QLD) — QTAC Best Five",
+    h1: "QCE ATAR Calculator (Queensland)",
+    description:
+      "Estimate your Queensland ATAR the QTAC way: your best five eligible scaled results from General, Applied or VET inputs, with the English C requirement checked.",
+    keywords: ["qce atar calculator", "atar calculator qld", "qld atar calculator", "atar calculator qce", "qtac atar calculator"],
+  },
+  wace: {
+    title: "WACE ATAR Calculator — TISC TEA & Bonuses",
+    h1: "WACE ATAR Calculator",
+    description:
+      "Estimate your WA ATAR from your Tertiary Entrance Aggregate: best four scaled scores plus TISC's 10% LOTE, Methods and Specialist bonuses (maximum TEA 430).",
+    keywords: ["wace atar calculator", "atar calculator wace", "tisc atar calculator", "wa atar calculator", "tea calculator wa"],
+  },
+  sace: {
+    title: "SACE ATAR Calculator — SATAC 90-Credit Aggregate",
+    h1: "SACE ATAR Calculator",
+    description:
+      "Plan your SACE university aggregate the SATAC way: your best three 20-credit subjects plus a 30-credit flexible option, out of 90. Covers SA and NT (NTCET).",
+    keywords: ["sace atar calculator", "atar calculator sace", "satac atar calculator", "sa atar calculator", "sace grade calculator"],
+  },
+};
+
+export function buildAuAtarStateCopy(state: AuAtarState): GeoPageCopy {
+  const m = ATAR_STATE_META[state.slug];
+  const outcome = calculateAtar({ subjects: state.subjects, authority: state.authority });
+  if (!outcome.data) throw new Error(`Example for ${state.slug} must calculate`);
+  const example = outcome.data;
+  const showsAtar = example.planningAtarRounded != null;
+
+  return {
+    ...m,
+    intro: [
+      `${m.h1}: enter your scaled ${state.slug === "vce" ? "study scores" : "results"} and the calculator applies ${state.centre}'s rules for which subjects count toward a ${state.region} ATAR, then shows ${showsAtar ? "a planning ATAR" : "your counted average"}.`,
+      state.facts[0],
+      `The counting rules on this page come from ${state.source.publisher}. The ATAR itself is only an estimate: admissions centres rescale results every year.`,
+    ],
+    steps: [
+      `Enter each ${state.certificate} subject with its scaled score on a 0–100 scale.`,
+      state.slug === "hsc"
+        ? "Tick English courses and set each course's units (2, or 1 for Extension)."
+        : state.slug === "qce"
+          ? "Mark each subject General, Applied or VET, and confirm your English result."
+          : state.slug === "wace"
+            ? "Mark LOTE, Mathematics Methods and Mathematics Specialist rows for the 10% bonuses."
+            : state.slug === "vce"
+              ? "Name your English-group study (English, EAL, Literature or English Language) so it is counted first."
+              : "Add your Stage 2 subjects; the best three 20-credit results count in full.",
+      showsAtar ? "Read the counted average and the planning ATAR." : "Read the counted average — SATAC does not recommend predicting an ATAR.",
+    ],
+    sections: [
+      { heading: `How ${state.centre} calculates your ATAR`, bullets: state.facts },
+      { heading: "What this calculator models", paragraphs: [state.modelNote] },
+      {
+        heading: "Worked example",
+        paragraphs: [
+          state.authority === "satac"
+            ? `With the subjects below, the best three results (${example.countedScores.slice(0, 3).map((n) => n.toFixed(1)).join(", ")}) count in full and the next results fill the 30-credit flexible option, for a counted average of ${example.countedAverage.toFixed(2)} on the 0–100 input scale.`
+            : `With the subjects below, ${state.centre}'s rules count ${example.countedScores.map((n) => n.toFixed(1)).join(", ")} for a counted average of ${example.countedAverage.toFixed(2)}${
+                showsAtar ? ` — a planning ATAR of about ${example.planningAtarRounded}` : ""
+              }.`,
+          `Steps: ${example.formulaSteps.slice(1).join(" ")}`,
+        ],
+        table: {
+          caption: `Example ${state.certificate} subjects`,
+          head: ["Subject", "Scaled score (0–100)"],
+          rows: state.subjects.map((s) => [
+            `${s.name ?? "Subject"}${s.hscUnits === 1 ? " (1 unit)" : ""}${s.waceBonus === "lote" ? " (LOTE)" : s.waceBonus === "maths-methods" ? " (Methods)" : ""}`,
+            String(s.scaledScore),
+          ]),
+        },
+      },
+    ],
+    faqs: [
+      { question: `How is the ${state.certificate} ATAR calculated?`, answer: `${state.facts[0]} ${state.facts[1]}` },
+      { question: `Is this an official ${state.centre} ATAR?`, answer: `No. ${state.centre} calculates the official ATAR from your final scaled results. ${state.modelNote}` },
+      { question: `What else does ${state.centre} require?`, answer: state.facts[2] },
+      {
+        question: "Can I convert my ATAR to a GPA?",
+        answer: "No. An ATAR is a rank of your Year 12 results against your age group, not a grade average, so there is no valid ATAR-to-GPA or ATAR-to-percentage conversion.",
+      },
+    ],
+    sources: [state.source],
   };
 }
 

@@ -189,6 +189,10 @@ export const calculatorResourceLinks: Record<CalculatorSlug, CalculatorResourceL
     guide: guide("understanding-letter-grades"),
     gradingScale: scale("us"),
   },
+  "semester-grade-calculator": {
+    guide: guide("how-final-grades-are-calculated"),
+    gradingScale: scale("us"),
+  },
   "college-grade-calculator": {
     guide: guide("how-to-calculate-weighted-grades"),
     gradingScale: scale("us"),

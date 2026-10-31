@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+/* Island wrappers (src/islands) must not affect layout. */
+gc-island,
+gc-slot {
+  display: contents;
+}
+
 :root {
   /* Logo palette: teal gradient (#14b8a6 → #0d6b63) + gold check (#fbbf24) */
   --color-brand: #0d6b63;
@@ -49,7 +55,13 @@
   --radius-md: 0.5rem;
   --radius-lg: 0.75rem;
   --radius-xl: 1rem;
-  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
+  /*
+   * System fonts: what the live site has always rendered (its Inter setup never applied), with
+   * no font download. Segoe UI on Windows, San Francisco on Apple, Roboto on Android.
+   */
+  --font-sans:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", Arial,
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-mono: ui-monospace, SFMono-Regular, monospace;
 }
 

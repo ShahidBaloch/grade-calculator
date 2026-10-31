@@ -1,0 +1,19 @@
+---
+import Document from "@/layouts/Document.astro";
+import { renderRoute, staticRoutes, type StaticRoute } from "@/layouts/next-routes";
+import { setServerPathname } from "@/shims/router-state";
+
+export async function getStaticPaths() {
+  const routes = await staticRoutes();
+  return routes.map((route) => ({
+    params: { path: route.pathname === "/" ? undefined : route.pathname.slice(1) },
+    props: { route },
+  }));
+}
+
+const { route } = Astro.props as { route: StaticRoute };
+setServerPathname(route.pathname);
+const { metadata, tree } = await renderRoute(route);
+---
+
+<Document metadata={metadata} tree={tree} />

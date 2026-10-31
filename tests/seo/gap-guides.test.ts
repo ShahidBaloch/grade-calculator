@@ -4,8 +4,8 @@ import { gapGuides } from "@/config/gap-guides";
 import { calculatorKeywords } from "@/lib/seo/keywords";
 
 describe("gap guides", () => {
-  it("adds 12 guides with unique slugs", () => {
-    expect(gapGuides).toHaveLength(12);
+  it("adds 14 guides with unique slugs", () => {
+    expect(gapGuides).toHaveLength(14);
     expect(new Set(guides.map((g) => g.slug)).size).toBe(guides.length);
   });
   it("primaries do not collide with calculator primaries or other guide primaries", () => {

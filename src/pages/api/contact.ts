@@ -2,7 +2,7 @@ import { contactFormSchema } from "@/lib/contact/schema";
 import { deliverContactMessage } from "@/lib/contact/deliver-contact-message";
 import { checkContactRateLimit, resolveClientIp } from "@/lib/contact/rate-limit";
 
-export const dynamic = "force-dynamic";
+export const prerender = false;
 
 type ContactBody = {
   name?: string;
@@ -11,7 +11,7 @@ type ContactBody = {
   website?: string;
 };
 
-export async function POST(req: Request) {
+export async function POST({ request: req }: { request: Request }) {
   const clientIp = resolveClientIp(
     req.headers.get("x-forwarded-for"),
     req.headers.get("x-real-ip"),

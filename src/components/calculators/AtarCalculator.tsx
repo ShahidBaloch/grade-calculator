@@ -32,12 +32,16 @@ const defaultSubjects: AtarSubject[] = [
   { name: "Visual Arts", scaledScore: 70 },
 ];
 
-export function AtarCalculator() {
-  const { state, setState, resetState, shareUrl, copied } = useCalculatorPersistence("atar-calculator", {
-    subjects: defaultSubjects,
-    targetAtar: 90 as number | "",
-    authority: "generic",
-  });
+/** State ATAR pages open on their own admission centre's model and keep separate saved inputs. */
+export function AtarCalculator({ preset }: { preset?: { authority: AtarAuthority; subjects?: AtarSubject[] } } = {}) {
+  const { state, setState, resetState, shareUrl, copied } = useCalculatorPersistence(
+    preset ? `atar-calculator:${preset.authority}` : "atar-calculator",
+    {
+      subjects: preset?.subjects ?? defaultSubjects,
+      targetAtar: 90 as number | "",
+      authority: preset?.authority ?? "generic",
+    },
+  );
   const { subjects, targetAtar } = state;
   const authority = (
     AUTHORITIES.some((item) => item.id === state.authority) ? state.authority : "generic"
@@ -248,19 +252,37 @@ export function AtarCalculator() {
               </div>
             )}
             {authority === "uac" && (
-              <label className="flex min-h-11 items-center gap-2 text-sm text-[var(--color-text-muted)]">
-                <input
-                  type="checkbox"
-                  className="h-6 w-6 shrink-0"
-                  checked={subject.hscEnglish ?? /english/i.test(subject.name ?? "")}
-                  onChange={(e) => {
+              <div className="grid gap-2 sm:grid-cols-2">
+                <label className="flex min-h-11 items-center gap-2 text-sm text-[var(--color-text-muted)]">
+                  <input
+                    type="checkbox"
+                    className="h-6 w-6 shrink-0"
+                    checked={subject.hscEnglish ?? /english/i.test(subject.name ?? "")}
+                    onChange={(e) => {
+                      const next = [...subjects];
+                      next[index] = { ...subject, hscEnglish: e.target.checked };
+                      updateSubjects(next);
+                    }}
+                  />
+                  Count as English (HSC / UAC)
+                </label>
+                <Select
+                  value={String(subject.hscUnits ?? 2)}
+                  onValueChange={(value) => {
                     const next = [...subjects];
-                    next[index] = { ...subject, hscEnglish: e.target.checked };
+                    next[index] = { ...subject, hscUnits: value === "1" ? 1 : 2 };
                     updateSubjects(next);
                   }}
-                />
-                Count as English (HSC / UAC)
-              </label>
+                >
+                  <SelectTrigger aria-label={`Subject ${index + 1} HSC units`}>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="2">2 units (most courses)</SelectItem>
+                    <SelectItem value="1">1 unit (Extension)</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
             )}
             {authority === "tisc" && (
               <div className="space-y-1">

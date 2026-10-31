@@ -103,7 +103,8 @@ test.describe("Core calculator flows", () => {
 
   test("Canada hub redirects the retired EZ grader URL to the homepage", async ({ page }) => {
     await page.goto("/ca/ez-grader");
-    await expect(page).toHaveURL(/localhost:\d+\/$/);
+    // Any host (local server or production): the path must be the homepage.
+    await expect(page).toHaveURL(/^https?:\/\/[^/]+\/$/);
   });
 
   test("UK hub redirects shared tools to the worldwide calculator URL", async ({ page }) => {

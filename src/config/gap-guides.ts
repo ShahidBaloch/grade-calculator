@@ -745,4 +745,133 @@ export const gapGuides: GuideConfig[] = [
       },
     ],
   },
+  {
+    slug: "what-is-gpa",
+    path: "/guides/what-is-gpa",
+    title: "What Is GPA? Meaning, Scale and UK Equivalents",
+    description:
+      "What GPA stands for, how letter grades become grade points on the 4.0 scale, and how GPA compares with UK degree classes and other countries' systems.",
+    keywords: ["what is gpa", "gpa meaning", "what does gpa stand for", "gpa definition"],
+    readTime: "6 min read",
+    embeddedCalculator: "gpa-calculator",
+    relatedGuides: ["how-to-calculate-gpa", "gpa-scale-explained", "what-is-a-good-gpa", "gpa-glossary"],
+    relatedCalculators: ["gpa-calculator", "cumulative-gpa-calculator", "uk-degree-to-us-gpa-reference"],
+    relatedReference: [
+      { label: "US 4.0 GPA scale", href: "/grading-scales/us" },
+      { label: "UK university grading system", href: "/grading-scales/uk" },
+    ],
+    sections: [
+      {
+        heading: "What GPA stands for",
+        body:
+          "GPA stands for grade point average. It turns all of your course grades into one number, so schools, scholarship committees and employers can compare results at a glance. In the US it usually runs from 0.0 to 4.0, where 4.0 means straight A grades.",
+      },
+      {
+        heading: "How letter grades become grade points",
+        body:
+          "Each letter grade has a point value. On the common US scale A = 4.0, B = 3.0, C = 2.0, D = 1.0 and F = 0. Schools that use plus and minus grades add steps in between, such as A− = 3.7 and B+ = 3.3. The GPA is the average of those points, with longer courses counting more.",
+      },
+      {
+        heading: "Why credit hours matter",
+        body:
+          "A course worth four credits pulls your GPA more than a one-credit course. Each grade point is multiplied by the course credits, the results are added, and the total is divided by all credits taken. The how to calculate GPA guide walks through a full example.",
+      },
+      {
+        heading: "Semester, cumulative, weighted and unweighted GPA",
+        body:
+          "A semester GPA covers one term; a cumulative GPA covers every term so far. An unweighted GPA treats every class the same on the 4.0 scale, while a weighted GPA adds bonus points for Honors, AP or IB classes, so it can go above 4.0.",
+      },
+      {
+        heading: "Do UK universities use GPA?",
+        body:
+          "Mostly not. UK bachelor's degrees are reported as honours classes: First, Upper Second (2:1), Lower Second (2:2) and Third, based on percentage marks. A few UK universities also publish a GPA alongside the class, but the classification is still the headline result employers ask for.",
+      },
+      {
+        heading: "Converting a UK degree to a US GPA",
+        body:
+          "There is no single official conversion. US graduate schools and credential evaluators each apply their own tables, and a First is usually read as A-range work while a 2:1 is often read in the B+ to A− range. Use the UK degree to US GPA reference as a starting point and check what your target school asks for.",
+      },
+      {
+        heading: "GPA in other countries",
+        body:
+          "Canada uses 4.0, 4.3 or 4.33 scales depending on the university, Australia commonly uses a 7-point scale, and India uses a 10-point CGPA. A 3.5 on one scale is not the same as 3.5 on another, so always compare numbers on the same scale.",
+      },
+    ],
+    faqs: [
+      {
+        question: "What does GPA stand for?",
+        answer: "Grade point average: the average of your course grades after each one is converted to points.",
+      },
+      {
+        question: "Is 4.0 the highest GPA?",
+        answer:
+          "On an unweighted US scale, yes. Weighted GPAs can exceed 4.0 because Honors, AP and IB classes earn bonus points, and some universities use 4.3 or 4.33 scales.",
+      },
+      {
+        question: "What is the UK equivalent of a GPA?",
+        answer:
+          "The closest equivalent is the degree classification (First, 2:1, 2:2, Third), which is based on your weighted average mark rather than grade points.",
+      },
+    ],
+  },
+  {
+    slug: "uk-masters-grading",
+    path: "/guides/uk-masters-grading",
+    title: "UK Master's Grading: Distinction, Merit and Pass",
+    description:
+      "What a Distinction, Merit and Pass mean on a UK master's degree, the usual percentage bands, how your overall result is worked out, and borderline rules.",
+    keywords: ["distinction grade", "what is a distinction grade", "uk masters grading system", "merit grade uk"],
+    readTime: "6 min read",
+    relatedGuides: ["what-is-gpa", "how-to-calculate-weighted-grades", "gpa-scale-explained"],
+    relatedCalculators: ["degree-classification-calculator", "weighted-grade-calculator", "uk-degree-to-us-gpa-reference"],
+    relatedReference: [{ label: "UK university grading system", href: "/grading-scales/uk" }],
+    sections: [
+      {
+        heading: "The usual master's bands",
+        body:
+          "Most UK universities grade taught master's degrees (MA, MSc, MBA, LLM) on these bands: Distinction at 70% or above, Merit at 60–69%, Pass at 50–59%, and Fail below 50%. Your university's regulations set the exact cutoffs, so check them before you plan around a number.",
+      },
+      {
+        heading: "What a Distinction means",
+        body:
+          "A Distinction is the top master's result. Marks of 70% and above are rare in UK marking, where 80% or more is reserved for exceptional work, so a Distinction signals consistently excellent performance across your modules and dissertation.",
+      },
+      {
+        heading: "Merit and Pass",
+        body:
+          "A Merit (60–69%) shows strong, above-average work and is a solid result for most jobs and PhD applications. A Pass (50–59%) means you have met the standard for the degree. Note that the master's pass mark is usually 50%, higher than the 40% pass mark common on bachelor's modules.",
+      },
+      {
+        heading: "How your overall result is worked out",
+        body:
+          "Your final mark is usually a credit-weighted average of your modules. A typical master's is 180 credits, often with a 60-credit dissertation, so the dissertation can carry a third of the weight. Multiply each module mark by its credits, add the results, and divide by the total credits.",
+      },
+      {
+        heading: "Borderline marks",
+        body:
+          "Many universities consider students just below a boundary, such as 68–69%, for the higher award. A common rule looks at whether most of your credits, or your dissertation, reached the higher band. These rules differ between universities, so read your programme handbook.",
+      },
+      {
+        heading: "Not the same as bachelor's classes or BTEC grades",
+        body:
+          "UK bachelor's honours degrees use classes (First, 2:1, 2:2, Third) instead of Distinction and Merit. BTEC and other vocational qualifications also use Distinction, Merit and Pass, but on their own scales unrelated to university percentages.",
+      },
+    ],
+    faqs: [
+      {
+        question: "What percentage is a Distinction in a UK master's?",
+        answer: "Usually 70% or above overall. Merit is usually 60–69% and Pass 50–59%, but check your university's regulations.",
+      },
+      {
+        question: "Is a Merit good?",
+        answer:
+          "Yes. A Merit shows above-average work and meets the entry requirement for many PhD programmes and graduate jobs.",
+      },
+      {
+        question: "What is a Distinction in US GPA terms?",
+        answer:
+          "There is no official conversion. Evaluators usually read a Distinction as A-range work, but each US school applies its own table.",
+      },
+    ],
+  },
 ];

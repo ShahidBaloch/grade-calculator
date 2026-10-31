@@ -22,6 +22,7 @@ const WORLDWIDE_SYLLABUS_RELATED = new Set<CalculatorSlug>([
   "canvas-grade-calculator",
   "grade-percentage-calculator",
   "college-grade-calculator",
+  "semester-grade-calculator",
 ]);
 
 /** Trim related-tool cards on geo pages so US-only calculators do not clutter the footer area. */

@@ -1,13 +1,13 @@
 import { getAutoScaleIdFromGeoCountry } from "@/lib/grading-scales/geo-scale";
 
-export const runtime = "edge";
+export const prerender = false;
 
 /**
  * Country + default grading scale from Vercel's IP geo header.
  * Called by the browser at most once per 30 days (see lib/utils/geo-client.ts),
  * so static pages never need a per-request function.
  */
-export function GET(request: Request) {
+export function GET({ request }: { request: Request }) {
   const raw =
     request.headers.get("x-vercel-ip-country") ?? request.headers.get("cf-ipcountry") ?? null;
   const country = raw && raw !== "XX" ? raw.toUpperCase() : null;

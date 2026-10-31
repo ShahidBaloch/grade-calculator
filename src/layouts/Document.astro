@@ -1,0 +1,47 @@
+---
+/**
+ * <html>/<head> shell for every page (Next's root layout + metadata + font + theme script).
+ * The body content is one Preact render (src/app/layout.tsx), so context spans the page.
+ */
+
+import "@/app/globals.css";
+import { headTags, mergeMetadata } from "./head-tags";
+import { metadata as layoutMetadata } from "@/app/layout";
+import PageBody from "./PageBody";
+
+interface Props {
+  metadata?: Record<string, unknown>;
+  tree: unknown;
+}
+
+const { metadata, tree } = Astro.props;
+const head = headTags(mergeMetadata(layoutMetadata, metadata));
+---
+
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>
+      (function () {
+        try {
+          var t = localStorage.getItem("gc-theme");
+          var d = t === "dark" || ((!t || t === "system") && matchMedia("(prefers-color-scheme: dark)").matches);
+          var r = document.documentElement;
+          r.classList.add(d ? "dark" : "light");
+          r.style.colorScheme = d ? "dark" : "light";
+        } catch (e) {}
+      })();
+    </script>
+    <Fragment set:html={head} />
+    <link rel="icon" href="/icon.svg" type="image/svg+xml" sizes="any" />
+    <link rel="apple-touch-icon" href="/apple-icon.png" type="image/png" sizes="180x180" />
+  </head>
+  <body class="min-h-screen antialiased pb-14 md:pb-0">
+    <PageBody tree={tree as never} />
+    <script>
+      import "@/islands/client";
+    </script>
+  </body>
+</html>

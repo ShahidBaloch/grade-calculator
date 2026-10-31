@@ -1,5 +1,4 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import type { ReactNode } from "react";
 import { GradeInputPrivacyNotice } from "@/components/content/GradeInputPrivacyNotice";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
@@ -9,61 +8,43 @@ import {
   DeferredToolSwitcher,
 } from "@/components/layout/DeferredLayoutClient";
 import { GradingScaleProvider } from "@/components/providers/grading-scale-provider";
-import { ThemeProvider } from "@/components/providers/theme-provider";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { mainNav } from "@/config/navigation";
 import { siteConfig } from "@/config/site";
 import { organizationJsonLd, webSiteJsonLd } from "@/lib/seo/jsonld";
-import "./globals.css";
 
-/** Deploy-time static pages — lower Vercel ISR usage (API routes stay dynamic). */
-export const dynamic = "force-static";
-
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-inter",
-  display: "swap",
-  adjustFontFallback: true,
-  preload: true,
-});
-
-export const metadata: Metadata = {
+/** Root layout defaults; page metadata overrides these (same merge as Next). */
+export const metadata = {
   metadataBase: new URL(siteConfig.url),
   title: siteConfig.name,
   description: siteConfig.description,
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+/** Everything inside <body>. The <html>/<head> shell lives in src/layouts/Document.astro. */
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en-US" suppressHydrationWarning>
-      <body className={`${inter.variable} min-h-screen antialiased pb-14 md:pb-0`}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem storageKey="gc-theme">
-          <GradingScaleProvider>
-            <JsonLd data={organizationJsonLd()} />
-            <JsonLd data={webSiteJsonLd()} />
-            <a
-              href="#main-content"
-              className="no-print fixed left-4 top-4 z-[100] inline-flex min-h-11 -translate-y-[200%] items-center rounded-md bg-[var(--color-action)] px-4 py-2 text-[var(--color-action-fg)] focus:translate-y-0"
-            >
-              Skip to content
-            </a>
-            <DeferredPreferredCountryHubSync />
-            <Header nav={mainNav} />
-            <HeaderSeoNav />
-            <div className="no-print px-4 py-1.5" data-print-chrome>
-              <div className="mx-auto max-w-7xl">
-                <GradeInputPrivacyNotice />
-              </div>
-            </div>
-            <main id="main-content" tabIndex={-1}>
-              {children}
-            </main>
-            <Footer />
-            <DeferredToolSwitcher />
-          </GradingScaleProvider>
-        </ThemeProvider>
-      </body>
-    </html>
+    <GradingScaleProvider>
+      <JsonLd data={organizationJsonLd()} />
+      <JsonLd data={webSiteJsonLd()} />
+      <a
+        href="#main-content"
+        className="no-print fixed left-4 top-4 z-[100] inline-flex min-h-11 -translate-y-[200%] items-center rounded-md bg-[var(--color-action)] px-4 py-2 text-[var(--color-action-fg)] focus:translate-y-0"
+      >
+        Skip to content
+      </a>
+      <DeferredPreferredCountryHubSync />
+      <Header nav={mainNav} />
+      <HeaderSeoNav />
+      <div className="no-print px-4 py-1.5" data-print-chrome>
+        <div className="mx-auto max-w-7xl">
+          <GradeInputPrivacyNotice />
+        </div>
+      </div>
+      <main id="main-content" tabIndex={-1}>
+        {children}
+      </main>
+      <Footer />
+      <DeferredToolSwitcher />
+    </GradingScaleProvider>
   );
 }

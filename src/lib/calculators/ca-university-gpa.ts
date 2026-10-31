@@ -6,7 +6,6 @@ import {
 import {
   UBC_ARTS_433_EQUIVALENCY,
   UBC_BANDS,
-  WATERLOO_AVERAGE_FLOOR,
   type CaUniversityProfile,
   type UniversityBand,
 } from "@/data/geo-sources/ca-universities";
@@ -39,7 +38,8 @@ export interface UniversityCourseResult {
   percent: number | null;
   /** UBC Arts 4.33 equivalency for this mark. */
   equivalency433: number | null;
-  omsas: OmsasConversion;
+  /** Null when the school is not in the OUAC conversion table. */
+  omsas: OmsasConversion | null;
 }
 
 export interface UniversityGpaResult {
@@ -49,8 +49,8 @@ export interface UniversityGpaResult {
   native: { kind: "gpa"; value: number } | { kind: "percent-average"; value: number; letter: string | null };
   /** Credit-weighted mean of the UBC Arts 4.33 equivalencies (UBC only). */
   equivalency433: number | null;
-  /** OMSAS 4.0 GPA, weighted by OMSAS course length. */
-  omsasGpa: number;
+  /** OMSAS 4.0 GPA, weighted by OMSAS course length; null when the school is not in the OUAC table. */
+  omsasGpa: number | null;
   omsasTotalWeight: number;
   formulaSteps: string[];
 }
@@ -80,11 +80,25 @@ export function parseGrade(raw: string): ParsedGrade | null {
 
 /** Highest band whose minimum the mark reaches — compares the raw mark, never rounds up. */
 export function bandForPercent(bands: UniversityBand[], percent: number): UniversityBand | null {
-  return [...bands].sort((a, b) => b.min - a.min).find((band) => percent >= band.min) ?? null;
+  return (
+    bands
+      .filter((band) => band.min != null)
+      .sort((a, b) => b.min! - a.min!)
+      .find((band) => percent >= band.min!) ?? null
+  );
 }
 
 function sameLetter(a: string, b: string): boolean {
   return normalizeLetter(a) === normalizeLetter(b);
+}
+
+/**
+ * The school's band for a typed letter. An exact match comes first so schools that grade E and F
+ * separately (York: E = 1, F = 0) keep them apart; OMSAS merges them into E/F either way.
+ */
+function bandForLetter(bands: UniversityBand[], typed: string): UniversityBand | undefined {
+  const exact = typed.trim().toUpperCase().replace(/[−–—]/g, "-").replace(/\s+/g, "");
+  return bands.find((band) => band.letter === exact) ?? bands.find((band) => sameLetter(band.letter, typed));
 }
 
 /** OUAC scales for a university name as OUAC prints it. */
@@ -149,8 +163,14 @@ export function calculateUniversityGpa(
 ): UniversityGpaOutcome {
   const omsasScales = options.omsasScales ?? profile.omsasScales;
   // OMSAS reads UBC transcripts by letter; the UBC page (and OMSAS with UBC picked) bridge % → UBC letter.
+  // Any other school on a letter-only OUAC scale (York, Scale 9) bridges through its own table.
+  const letterOnly = !omsasScales.some((n) => OMSAS_SCALES[n].kind === "percentage");
   const bridge =
-    profile.slug === "ubc" || options.omsasUniversity === "UBC" ? UBC_BANDS : undefined;
+    profile.slug === "ubc" || options.omsasUniversity === "UBC"
+      ? UBC_BANDS
+      : letterOnly && profile.bands.length
+        ? profile.bands
+        : undefined;
   const errors: string[] = [];
   const results: UniversityCourseResult[] = [];
 
@@ -166,12 +186,19 @@ export function calculateUniversityGpa(
       errors.push(`${label}: ${profile.shortName} reports percentages — enter the mark as a number`);
       continue;
     }
+    if (profile.gradeInput === "letter" && parsed.letter == null) {
+      errors.push(`${label}: ${profile.shortName} publishes no official percentages — enter the letter grade`);
+      continue;
+    }
+    // Schools that round the final mark to a whole number before reading the letter (TMU, uOttawa).
+    if (profile.roundPercent && parsed.percent != null) parsed.percent = Math.round(parsed.percent);
     if (!(course.weight > 0)) {
       errors.push(`${label}: ${profile.weightLabel.toLowerCase()} must be greater than 0`);
       continue;
     }
 
-    const omsas = convertToOmsas(parsed, omsasScales, bridge);
+    // A school missing from the OUAC table gets no OMSAS figure rather than a guessed one.
+    const omsas = omsasScales.length ? convertToOmsas(parsed, omsasScales, bridge) : null;
     if (typeof omsas === "string") {
       errors.push(`${label}: ${omsas}`);
       continue;
@@ -182,7 +209,7 @@ export function calculateUniversityGpa(
       const band =
         parsed.percent != null
           ? bandForPercent(profile.bands, parsed.percent)
-          : profile.bands.find((b) => sameLetter(b.letter, parsed.letter!));
+          : bandForLetter(profile.bands, course.grade);
       if (!band || band.points == null) {
         errors.push(`${label}: ${parsed.letter} is not on the ${profile.shortName} scale`);
         continue;
@@ -207,23 +234,27 @@ export function calculateUniversityGpa(
   const totalWeight = results.reduce((sum, r) => sum + r.weight, 0);
   const omsasWeights = results.map((r) => r.weight * profile.omsasWeightFactor);
   const omsasTotalWeight = omsasWeights.reduce((sum, w) => sum + w, 0);
-  const omsasGpa = results.reduce((sum, r, i) => sum + r.omsas.points * omsasWeights[i], 0) / omsasTotalWeight;
+  const omsasGpa = omsasScales.length
+    ? results.reduce((sum, r, i) => sum + r.omsas!.points * omsasWeights[i], 0) / omsasTotalWeight
+    : null;
   const steps: string[] = [];
 
   let native: UniversityGpaResult["native"];
   if (profile.result === "gpa") {
-    const value =
+    const raw =
       profile.slug === "omsas"
-        ? omsasGpa
+        ? omsasGpa!
         : results.reduce((sum, r) => sum + (r.points ?? 0) * r.weight, 0) / totalWeight;
+    // McGill truncates to two decimals (3.596 → 3.59) instead of rounding.
+    const value = profile.gpaRounding === "truncate" ? Math.floor(raw * 100 + 1e-9) / 100 : raw;
     native = { kind: "gpa", value };
     if (profile.slug !== "omsas") {
       steps.push(
-        `${profile.shortName} GPA = (${results.map((r) => `${r.points!.toFixed(1)}×${r.weight}`).join(" + ")}) ÷ ${round(totalWeight)} = ${value.toFixed(2)}`,
+        `${profile.shortName} GPA = (${results.map((r) => `${r.points!.toFixed(Number.isInteger(Math.round(r.points! * 1000) / 100) ? 1 : 2)}×${r.weight}`).join(" + ")}) ÷ ${round(totalWeight)} = ${value.toFixed(2)}${profile.gpaRounding === "truncate" ? " (truncated, not rounded)" : ""}`,
       );
     }
   } else {
-    const floor = profile.slug === "waterloo" ? WATERLOO_AVERAGE_FLOOR : 0;
+    const floor = profile.averageFloor ?? 0;
     const marks = results.map((r) => Math.max(r.percent!, floor));
     const value = marks.reduce((sum, mark, i) => sum + mark * results[i].weight, 0) / totalWeight;
     const letter = profile.bands.length ? bandForPercent(profile.bands, value)?.letter ?? null : null;
@@ -232,7 +263,7 @@ export function calculateUniversityGpa(
       `${profile.shortName} average = (${marks.map((mark, i) => `${mark}×${results[i].weight}`).join(" + ")}) ÷ ${round(totalWeight)} = ${value.toFixed(2)}%`,
     );
     if (floor && results.some((r) => r.percent! < floor)) {
-      steps.push(`Marks below ${floor} count as ${floor} in Waterloo averages for promotions and awards.`);
+      steps.push(`Marks below ${floor} count as ${floor} in ${profile.shortName} averages.`);
     }
   }
 
@@ -246,9 +277,11 @@ export function calculateUniversityGpa(
     );
   }
 
-  steps.push(
-    `OMSAS GPA = (${results.map((r, i) => `${r.omsas.points.toFixed(1)}×${round(omsasWeights[i])}`).join(" + ")}) ÷ ${round(omsasTotalWeight)} = ${omsasGpa.toFixed(2)}`,
-  );
+  if (omsasGpa != null) {
+    steps.push(
+      `OMSAS GPA = (${results.map((r, i) => `${r.omsas!.points.toFixed(1)}×${round(omsasWeights[i])}`).join(" + ")}) ÷ ${round(omsasTotalWeight)} = ${omsasGpa.toFixed(2)}`,
+    );
+  }
 
   return {
     status: "valid",

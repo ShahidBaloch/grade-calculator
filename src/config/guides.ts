@@ -225,7 +225,7 @@ export const guides: GuideConfig[] = [
       "lms-course-grades-explained",
       "final-exam-tips",
     ],
-    relatedCalculators: ["final-grade-calculator", "weighted-grade-calculator", "canvas-grade-calculator"],
+    relatedCalculators: ["final-grade-calculator", "weighted-grade-calculator", "semester-grade-calculator", "canvas-grade-calculator"],
     sections: [
       {
         heading: "Course grade vs final exam score",

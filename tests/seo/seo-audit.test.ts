@@ -352,7 +352,7 @@ describe("SEO audit", () => {
     expect(paths.filter((p) => /^\/grade-chart\/\d+-questions$/.test(p))).toEqual([]);
     expect(paths).toContain("/score");
     expect(paths).toContain("/grade-chart");
-    expect(sitemap().length).toBe(129);
+    expect(sitemap().length).toBe(146);
   });
 
   it("sitemap lists www URLs so entries match the canonical host (no extra redirect hop)", () => {
@@ -476,7 +476,9 @@ describe("SEO audit", () => {
       resolve("src/components/calculators/ScoreOutOfCalculatorLazy.tsx"),
       "utf8",
     );
-    expect(scoreLazy).toMatch(/ssr:\s*true/);
+    // The score tool is server-rendered (its own island chunk), never an ssr:false placeholder.
+    expect(scoreLazy).not.toMatch(/ssr:\s*false/);
+    expect(scoreLazy).toMatch(/ScoreOutOfCalculator/);
     const seoNav = readFileSync(resolve("src/components/layout/HeaderSeoNav.tsx"), "utf8");
     expect(seoNav).toMatch(/sr-only/);
   });
@@ -525,7 +527,7 @@ describe("SEO audit", () => {
     expect(DISTINCT_PAGE_COPY["/"].title).toMatch(/grade calculator/i);
     expect(DISTINCT_PAGE_COPY["/"].title).toMatch(/ez grader|grading/i);
     expect(DISTINCT_PAGE_COPY["/weighted-grade-calculator"].title).toMatch(/weighted grade calculator/i);
-    expect(DISTINCT_PAGE_COPY["/weighted-grade-calculator"].title).toMatch(/gradebook/i);
+    expect(DISTINCT_PAGE_COPY["/weighted-grade-calculator"].title).toMatch(/weighted average/i);
     expect(DISTINCT_PAGE_COPY["/gpa-calculator"].title).toMatch(/gpa calculator/i);
     expect(DISTINCT_PAGE_COPY["/final-grade-calculator"].title).toMatch(/final grade calculator/i);
     expect(DISTINCT_PAGE_COPY["/canvas-grade-calculator"].title).toMatch(/canvas grade calculator/i);
