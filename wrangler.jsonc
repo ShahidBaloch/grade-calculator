@@ -1,0 +1,27 @@
+{
+  // Cloudflare Workers (Free plan): static assets are served without invoking the worker;
+  // only /api/* runs worker/index.ts. Build first with `npm run build`.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "gradcalc",
+  "main": "worker/index.ts",
+  "compatibility_date": "2026-10-01",
+  // process.env for the shared src/ code (siteConfig, Resend fallback).
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": ".cloudflare/static",
+    "binding": "ASSETS",
+    // Pages are folder/index.html but their URLs have no trailing slash (trailingSlash: "never").
+    "html_handling": "drop-trailing-slash",
+    "not_found_handling": "404-page",
+    "run_worker_first": ["/api/*"]
+  },
+  // Test deploys live on workers.dev only until the custom domain is switched over.
+  "workers_dev": true,
+  "preview_urls": false,
+  "observability": { "enabled": false },
+  // Contact form via Cloudflare Email Routing (free). Set CONTACT_TO to a verified destination.
+  "send_email": [{ "name": "CONTACT_EMAIL" }],
+  "vars": {
+    "CONTACT_FROM": "contact@gradcalc.com"
+  }
+}

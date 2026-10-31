@@ -23,7 +23,10 @@
     "test:qa": "npm run build && npm run test:coverage && npm run test:e2e:chromium",
     "verify:contact-smtp": "node --env-file=.env.local scripts/verify-contact-smtp.mjs",
     "push:gradecalc": "powershell -ExecutionPolicy Bypass -File scripts/push-gradecalc.ps1",
-    "submit:discovery": "powershell -ExecutionPolicy Bypass -File scripts/submit-bing-yandex.ps1"
+    "submit:discovery": "powershell -ExecutionPolicy Bypass -File scripts/submit-bing-yandex.ps1",
+    "cf:dev": "wrangler dev",
+    "cf:deploy": "wrangler deploy",
+    "cf:check": "tsc -p worker"
   },
   "dependencies": {
     "@astrojs/preact": "^6.1.1",
@@ -43,6 +46,7 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.4",
     "@axe-core/playwright": "^4.10.2",
+    "@cloudflare/workers-types": "^5.20261031.1",
     "@lhci/cli": "^0.14.0",
     "@playwright/test": "^1.51.0",
     "@types/node": "^22.20.2",
@@ -54,7 +58,8 @@
     "lucide-react": "^1.65.0",
     "prettier": "^3.9.6",
     "typescript": "^6.0.3",
-    "vitest": "^5.0.0"
+    "vitest": "^5.0.0",
+    "wrangler": "^4.156.0"
   },
   "browserslist": [
     "chrome >= 111",

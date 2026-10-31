@@ -17,5 +17,6 @@
     }
   },
   "include": [".astro/types.d.ts", "**/*"],
-  "exclude": ["node_modules", "dist", ".vercel", "coverage"]
+  // worker/ has its own tsconfig (Cloudflare Workers types instead of the DOM).
+  "exclude": ["node_modules", "dist", ".vercel", ".cloudflare", ".wrangler", "coverage", "worker"]
 }
