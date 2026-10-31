@@ -15,10 +15,11 @@ export function Footer() {
 
   return (
     <footer className="border-t border-[var(--color-border)] bg-[var(--color-bg-subtle)]">
-      <div className="mx-auto grid max-w-7xl gap-8 px-4 py-12 sm:grid-cols-2 lg:grid-cols-5">
-        <div>
+      <div className="mx-auto grid max-w-7xl grid-cols-2 gap-8 px-4 py-12 lg:grid-cols-[minmax(0,27rem)_minmax(0,17rem)_0.8fr_1.3fr_0.9fr]">
+        <div className="col-span-2 lg:col-span-1">
           <h2 className="mb-3 text-sm font-semibold">Calculators</h2>
-          <ul className="space-y-1 text-sm text-[var(--color-text-muted)]">
+          {/* Two columns: one long list left most of the footer empty. */}
+          <ul className="gap-x-6 text-sm text-[var(--color-text-muted)] sm:columns-2 [&>li]:mb-1 [&>li]:break-inside-avoid">
             {footerNav.calculators.map((link) => (
               <li key={link.href}>
                 <Link href={link.href} className="inline-flex min-h-6 items-center hover:text-[var(--color-primary)]">
@@ -28,7 +29,7 @@ export function Footer() {
             ))}
           </ul>
         </div>
-        <div>
+        <div className="col-span-2 sm:col-span-1">
           <h2 className="mb-3 text-sm font-semibold">Guides</h2>
           <ul className="space-y-1 text-sm text-[var(--color-text-muted)]">
             {footerNav.guides.map((link) => (

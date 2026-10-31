@@ -89,7 +89,11 @@ export function GcseGradeCalculator() {
           <p className="text-5xl font-bold">{data.grade}</p>
           <p className="mt-2 text-sm text-[var(--color-text-muted)]">
             {data.rangeLabel} · legacy letter about {data.legacyLetter} ·{" "}
-            {data.isStandardPass ? "standard pass (grade 4+)" : "below a standard pass"}
+            {Number(data.grade) >= 5
+              ? "strong pass (grade 5+)"
+              : data.isStandardPass
+                ? "standard pass (grade 4)"
+                : "below a standard pass"}
           </p>
           <FormulaBreakdown steps={data.formulaSteps} />
         </div>

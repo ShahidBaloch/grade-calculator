@@ -10,10 +10,10 @@ import { DynamicRowList } from "@/components/calculators/shared/DynamicRowList";
 import { ScaleSelector } from "@/components/calculators/shared/ScaleSelector";
 import { AustralianGpaNotice } from "@/components/calculators/shared/AustralianGpaNotice";
 import { Input } from "@/components/ui/input";
+import { MobileField } from "@/components/calculators/shared/MobileField";
 import { calculateSemesterGpa } from "@/lib/calculators/gpa";
 import {
   defaultCoursesForScale,
-  defaultGradeForScale,
   gradePlaceholderForScale,
   hecPlanningNote,
   semesterResultLabel,
@@ -69,19 +69,20 @@ export function GpaCalculator() {
       )}
       <ScaleSelector />
       <AustralianGpaNotice />
-      <div className="hidden gap-2 text-xs text-[var(--color-text-muted)] sm:grid sm:grid-cols-3">
+      <div className="hidden gap-2 pr-12 text-xs text-[var(--color-text-muted)] sm:grid sm:grid-cols-3">
         <span>Course</span>
         <span>Grade</span>
         <span>Credits</span>
       </div>
       <DynamicRowList
         items={courses}
-        onAdd={() => setCourses([...courses, { name: "", grade: defaultGradeForScale(scaleId), credits: 3 }])}
+        onAdd={() => setCourses([...courses, { name: "", grade: "", credits: 3 }])}
         onRemove={(index) => setCourses(courses.filter((_, i) => i !== index))}
         addLabel="Add course"
         renderRow={(course, index) => (
-          <div className="grid gap-2 sm:grid-cols-3">
+          <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
             <Input
+              className="col-span-full sm:col-span-1"
               aria-label={`Course ${index + 1} name`}
               placeholder="Course"
               value={course.name}
@@ -91,27 +92,31 @@ export function GpaCalculator() {
                 setCourses(next);
               }}
             />
-            <Input
-              aria-label={`Course ${index + 1} grade`}
-              placeholder={gradePlaceholderForScale(scaleId)}
-              value={course.grade}
-              onChange={(e) => {
-                const next = [...courses];
-                next[index] = { ...course, grade: e.target.value };
-                setCourses(next);
-              }}
-            />
-            <Input
-              aria-label={`Course ${index + 1} credits`}
-              type="number"
-              placeholder="Credits"
-              value={course.credits}
-              onChange={(e) => {
-                const next = [...courses];
-                next[index] = { ...course, credits: Number(e.target.value) || 0 };
-                setCourses(next);
-              }}
-            />
+            <MobileField label="Grade">
+              <Input
+                aria-label={`Course ${index + 1} grade`}
+                placeholder={gradePlaceholderForScale(scaleId)}
+                value={course.grade}
+                onChange={(e) => {
+                  const next = [...courses];
+                  next[index] = { ...course, grade: e.target.value };
+                  setCourses(next);
+                }}
+              />
+            </MobileField>
+            <MobileField label="Credits">
+              <Input
+                aria-label={`Course ${index + 1} credits`}
+                type="number"
+                placeholder="Credits"
+                value={course.credits}
+                onChange={(e) => {
+                  const next = [...courses];
+                  next[index] = { ...course, credits: Number(e.target.value) || 0 };
+                  setCourses(next);
+                }}
+              />
+            </MobileField>
           </div>
         )}
       />
@@ -136,7 +141,7 @@ export function GpaCalculator() {
         )}
       </div>
       {getPrimaryFlow("gpa-calculator") && result.status === "valid" && (
-        <NextStepCard flow={getPrimaryFlow("gpa-calculator")!} />
+        <NextStepCard flow={getPrimaryFlow("gpa-calculator")!} handoff={{ courses }} />
       )}
     </div>
   );

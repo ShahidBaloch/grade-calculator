@@ -5,6 +5,12 @@ gc-island,
 gc-slot {
   display: contents;
 }
+/* A box-less wrapper drops the gap a parent's space-y-* puts on it, so hand it to the rendered
+   element (a class on that element still wins). */
+gc-island > *,
+gc-slot > * {
+  margin-block-end: inherit;
+}
 
 :root {
   /* Logo palette: teal gradient (#14b8a6 → #0d6b63) + gold check (#fbbf24) */
@@ -314,7 +320,7 @@ p a {
 }
 
 .country-footer-link {
-  color: var(--color-text);
+  color: var(--color-text-muted);
 }
 .country-footer-link:hover {
   color: var(--color-primary);

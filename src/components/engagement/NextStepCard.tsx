@@ -8,6 +8,7 @@ import type { EngagementFlow } from "@/config/engagement-flows";
 import { resolveCalculatorPath } from "@/lib/utils/country-path";
 import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/card";
 import { usePreferredCountryHub } from "@/hooks/usePreferredCountryHub";
+import { setCalculatorHandoff } from "@/lib/utils/storage";
 
 function resolveHref(to: EngagementFlow["to"], pathname: string | null): string {
   if (to === "grading-scales") return "/grading-scales";
@@ -17,7 +18,8 @@ function resolveHref(to: EngagementFlow["to"], pathname: string | null): string 
   return resolveCalculatorPath(to as CalculatorSlug, pathname);
 }
 
-export function NextStepCard({ flow }: { flow: EngagementFlow }) {
+/** `handoff`: inputs the next calculator should start from (e.g. this semester's courses). */
+export function NextStepCard({ flow, handoff }: { flow: EngagementFlow; handoff?: unknown }) {
   const pathname = usePathname();
   // Re-render with the session hub after hydration (null in server HTML).
   usePreferredCountryHub();
@@ -32,6 +34,7 @@ export function NextStepCard({ flow }: { flow: EngagementFlow }) {
       <CardContent>
         <Link
           href={href}
+          onClick={handoff === undefined ? undefined : () => setCalculatorHandoff(flow.to, handoff)}
           className="inline-flex min-h-11 items-center gap-2 rounded-md bg-[var(--color-action)] px-4 text-sm font-medium text-[var(--color-action-fg)] transition-colors hover:bg-[var(--color-action-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)]"
         >
           Continue

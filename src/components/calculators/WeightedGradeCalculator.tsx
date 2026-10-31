@@ -10,6 +10,7 @@ import { DynamicRowList } from "@/components/calculators/shared/DynamicRowList";
 import { ResultDisplay } from "@/components/calculators/shared/ResultDisplay";
 import { ScaleSelector } from "@/components/calculators/shared/ScaleSelector";
 import { Input } from "@/components/ui/input";
+import { MobileField } from "@/components/calculators/shared/MobileField";
 import { Label } from "@/components/ui/label";
 import {
   calculateRemainingWorkRequired,
@@ -59,7 +60,7 @@ function ModeButtons<T extends string>({
             type="button"
             aria-pressed={value === option.value}
             onClick={() => onChange(option.value)}
-            className={`rounded-md border px-4 py-2 text-sm min-h-11 ${
+            className={`rounded-md border px-3 py-2 text-sm min-h-11 whitespace-nowrap ${
               value === option.value
                 ? "border-[var(--color-primary)] bg-[var(--color-primary-subtle)]"
                 : "border-[var(--color-border)]"
@@ -143,7 +144,7 @@ export function WeightedGradeCalculator({
         />
       )}
       <ScaleSelector />
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="grid gap-4 sm:grid-cols-[3fr_2fr]">
         <ModeButtons
           label="Score format"
           value={globalMode}
@@ -164,6 +165,14 @@ export function WeightedGradeCalculator({
           ]}
         />
       </div>
+      <div
+        className={`hidden gap-2 pr-12 text-xs text-[var(--color-text-muted)] sm:grid ${globalMode === "points" ? "sm:grid-cols-4" : "sm:grid-cols-3"}`}
+      >
+        <span>Assignment</span>
+        <span>{globalMode === "letter" ? "Letter grade" : globalMode === "points" ? "Points earned" : "Score (%)"}</span>
+        {globalMode === "points" && <span>Max points</span>}
+        <span>{weightMode === "percent" ? "Weight (%)" : "Weight (points)"}</span>
+      </div>
       <DynamicRowList
         items={items}
         onAdd={() =>
@@ -171,7 +180,7 @@ export function WeightedGradeCalculator({
             ...items,
             {
               name: "",
-              score: globalMode === "letter" ? "B" : "",
+              score: "",
               weight: weightMode === "percent" ? 10 : 1,
               maxPoints: 100,
             },
@@ -179,8 +188,11 @@ export function WeightedGradeCalculator({
         }
         onRemove={(index) => updateItems(items.filter((_, i) => i !== index))}
         renderRow={(item, index) => (
-          <div className={`grid gap-2 ${globalMode === "points" ? "sm:grid-cols-4" : "sm:grid-cols-3"}`}>
+          <div
+            className={`grid gap-2 ${globalMode === "points" ? "grid-cols-3 sm:grid-cols-4" : "grid-cols-2 sm:grid-cols-3"}`}
+          >
             <Input
+              className="col-span-full sm:col-span-1"
               placeholder="Name"
               aria-label={`Assignment ${index + 1} name`}
               value={item.name}
@@ -190,51 +202,57 @@ export function WeightedGradeCalculator({
                 updateItems(next);
               }}
             />
-            <Input
-              type={globalMode === "letter" ? "text" : "number"}
-              step={globalMode === "letter" ? undefined : "any"}
-              inputMode={globalMode === "letter" ? "text" : "decimal"}
-              placeholder={globalMode === "letter" ? "Grade (A, B+)" : "Score"}
-              aria-label={`Assignment ${index + 1} score`}
-              value={item.score}
-              onChange={(e) => {
-                const next = [...items];
-                next[index] = {
-                  ...item,
-                  score:
-                    globalMode === "letter"
-                      ? e.target.value
-                      : e.target.value === ""
-                        ? ""
-                        : Number(e.target.value),
-                };
-                updateItems(next);
-              }}
-            />
-            {globalMode === "points" && (
+            <MobileField label={globalMode === "letter" ? "Grade" : globalMode === "points" ? "Points" : "Score (%)"}>
               <Input
-                type="number"
-                placeholder="Max points"
-                aria-label={`Assignment ${index + 1} max points`}
-                value={item.maxPoints ?? 100}
+                type={globalMode === "letter" ? "text" : "number"}
+                step={globalMode === "letter" ? undefined : "any"}
+                inputMode={globalMode === "letter" ? "text" : "decimal"}
+                placeholder={globalMode === "letter" ? "Grade (A, B+)" : "Score"}
+                aria-label={`Assignment ${index + 1} score`}
+                value={item.score}
                 onChange={(e) => {
                   const next = [...items];
-                  next[index] = { ...item, maxPoints: Number(e.target.value) || 0 };
+                  next[index] = {
+                    ...item,
+                    score:
+                      globalMode === "letter"
+                        ? e.target.value
+                        : e.target.value === ""
+                          ? ""
+                          : Number(e.target.value),
+                  };
                   updateItems(next);
                 }}
               />
+            </MobileField>
+            {globalMode === "points" && (
+              <MobileField label="Max points">
+                <Input
+                  type="number"
+                  placeholder="Max points"
+                  aria-label={`Assignment ${index + 1} max points`}
+                  value={item.maxPoints ?? 100}
+                  onChange={(e) => {
+                    const next = [...items];
+                    next[index] = { ...item, maxPoints: Number(e.target.value) || 0 };
+                    updateItems(next);
+                  }}
+                />
+              </MobileField>
             )}
-            <Input
-              type="number"
-              placeholder={weightMode === "percent" ? "Weight %" : "Weight points"}
-              aria-label={`Assignment ${index + 1} weight`}
-              value={item.weight}
-              onChange={(e) => {
-                const next = [...items];
-                next[index] = { ...item, weight: Number(e.target.value) || 0 };
-                updateItems(next);
-              }}
-            />
+            <MobileField label={weightMode === "percent" ? "Weight (%)" : "Weight"}>
+              <Input
+                type="number"
+                placeholder={weightMode === "percent" ? "Weight %" : "Weight points"}
+                aria-label={`Assignment ${index + 1} weight`}
+                value={item.weight}
+                onChange={(e) => {
+                  const next = [...items];
+                  next[index] = { ...item, weight: Number(e.target.value) || 0 };
+                  updateItems(next);
+                }}
+              />
+            </MobileField>
           </div>
         )}
       />

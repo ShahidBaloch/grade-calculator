@@ -68,7 +68,7 @@ export function MiddleSchoolGpaCalculator() {
       <DynamicRowList
         items={classes}
         addLabel="Add class"
-        onAdd={() => update([...classes, { name: "", grade: "B" }])}
+        onAdd={() => update([...classes, { name: "", grade: "" }])}
         onRemove={(index) => update(classes.filter((_, i) => i !== index))}
         renderRow={(row, index) => (
           <div className="grid gap-2 sm:grid-cols-2">

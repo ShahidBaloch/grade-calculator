@@ -112,7 +112,7 @@ export function CumulativeGpaCalculator() {
       </div>
       <DynamicRowList
         items={courses}
-        onAdd={() => setState({ ...state, courses: [...courses, { name: "", grade: "B", credits: 3 }] })}
+        onAdd={() => setState({ ...state, courses: [...courses, { name: "", grade: "", credits: 3 }] })}
         onRemove={(index) => setState({ ...state, courses: courses.filter((_, i) => i !== index) })}
         addLabel="Add course"
         renderRow={(course, index) => (
@@ -164,7 +164,7 @@ export function CumulativeGpaCalculator() {
         )}
       </div>
       {getPrimaryFlow("cumulative-gpa-calculator") && result.status === "valid" && (
-        <NextStepCard flow={getPrimaryFlow("cumulative-gpa-calculator")!} />
+        <NextStepCard flow={getPrimaryFlow("cumulative-gpa-calculator")!} handoff={{ courses }} />
       )}
     </div>
   );

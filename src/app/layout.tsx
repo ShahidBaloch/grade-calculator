@@ -35,8 +35,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <DeferredPreferredCountryHubSync />
       <Header nav={mainNav} />
       <HeaderSeoNav />
-      <div className="no-print px-4 py-1.5" data-print-chrome>
-        <div className="mx-auto max-w-7xl">
+      <div className="no-print py-1.5" data-print-chrome>
+        {/* Same box as the header row, so the line starts where the logo does. */}
+        <div className="mx-auto max-w-7xl px-4">
           <GradeInputPrivacyNotice />
         </div>
       </div>

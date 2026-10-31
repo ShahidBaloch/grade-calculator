@@ -18,7 +18,7 @@ export function FooterCountryLinks({ links }: { links: NavLink[] }) {
               href={link.href}
               aria-current={currentPage ? "page" : active ? "true" : undefined}
               className={cn(
-                "country-footer-link inline-flex min-h-8 items-center rounded-md px-1.5",
+                "country-footer-link -mx-1.5 inline-flex min-h-6 items-center rounded-md px-1.5",
                 active && "country-footer-current",
               )}
             >

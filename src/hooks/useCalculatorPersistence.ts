@@ -12,7 +12,7 @@ import {
 import { getCalculatorPath } from "@/config/calculators";
 import { serializeRecentCalculator } from "@/lib/utils/recent-calculator";
 import { calculatorStorageScope } from "@/lib/utils/country-path";
-import { getStorageItem, setStorageItem } from "@/lib/utils/storage";
+import { getStorageItem, setStorageItem, takeCalculatorHandoff } from "@/lib/utils/storage";
 import { isCalculatorSlug } from "@/types/calculator";
 
 export function useCalculatorPersistence<T>(slug: string, initialState: T) {
@@ -48,11 +48,11 @@ export function useCalculatorPersistence<T>(slug: string, initialState: T) {
       }
 
       const stored = getStorageItem(storageKey);
-      if (stored) {
-        const parsed = decodeCalculatorState<Partial<T>>(stored);
-        // Merge so newly added fields keep their defaults after schema upgrades.
-        if (parsed) setState({ ...initialState, ...parsed });
-      }
+      const parsed = stored ? decodeCalculatorState<Partial<T>>(stored) : null;
+      // Inputs handed over by the previous calculator's "Continue" link win over saved ones.
+      const handoff = takeCalculatorHandoff<T>(slug);
+      // Merge so newly added fields keep their defaults after schema upgrades.
+      if (parsed || handoff) setState({ ...initialState, ...parsed, ...handoff });
       setHydrated(true);
     });
     return () => {

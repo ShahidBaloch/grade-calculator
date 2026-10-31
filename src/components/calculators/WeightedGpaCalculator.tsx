@@ -73,7 +73,7 @@ export function WeightedGpaCalculator() {
       </p>
       <DynamicRowList
         items={courses}
-        onAdd={() => updateCourses([...courses, { name: "", grade: "B", credits: 3, courseType: "regular" }])}
+        onAdd={() => updateCourses([...courses, { name: "", grade: "", credits: 3, courseType: "regular" }])}
         onRemove={(index) => updateCourses(courses.filter((_, i) => i !== index))}
         addLabel="Add course"
         renderRow={(course, index) => (

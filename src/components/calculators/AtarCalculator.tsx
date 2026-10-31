@@ -316,9 +316,12 @@ export function AtarCalculator({ preset }: { preset?: { authority: AtarAuthority
       {result.errors?.map((e) => (
         <p key={e} className="text-sm text-[var(--color-error)]">{e}</p>
       ))}
-      {result.warnings?.map((w) => (
-        <p key={w} className="text-sm text-[var(--color-warning)]">{w}</p>
-      ))}
+      {/* The cross-system note is already shown above the subjects. */}
+      {result.warnings
+        ?.filter((w) => w !== ATAR_CROSS_SYSTEM_DISCLAIMER)
+        .map((w) => (
+          <p key={w} className="text-sm text-[var(--color-warning)]">{w}</p>
+        ))}
       {result.data && (
         <div aria-live="polite" className="rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-6">
           <Label>Counted average (planning)</Label>

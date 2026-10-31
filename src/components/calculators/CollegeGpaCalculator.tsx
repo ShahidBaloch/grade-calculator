@@ -89,7 +89,7 @@ export function CollegeGpaCalculator() {
       <DynamicRowList
         items={courses}
         onAdd={() =>
-          updateCourses([...courses, { name: "", grade: "B", credits: 3, countsTowardGpa: true }])
+          updateCourses([...courses, { name: "", grade: "", credits: 3, countsTowardGpa: true }])
         }
         onRemove={(index) => updateCourses(courses.filter((_, i) => i !== index))}
         addLabel="Add course"

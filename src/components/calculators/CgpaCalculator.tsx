@@ -92,7 +92,7 @@ export function CgpaCalculator() {
       </div>
       <DynamicRowList
         items={courses}
-        onAdd={() => setCourses([...courses, { name: "", grade: "A", credits: 3 }])}
+        onAdd={() => setCourses([...courses, { name: "", grade: "", credits: 3 }])}
         onRemove={(index) => setCourses(courses.filter((_, i) => i !== index))}
         addLabel="Add course"
         renderRow={(course, index) => (
