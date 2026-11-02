@@ -16,7 +16,7 @@ export default function PrivacyPolicyPage() {
     { name: "Home", href: "/" },
     { name: "Privacy Policy", href: "/privacy-policy" },
   ];
-  const updated = "September 26, 2026";
+  const updated = "November 2, 2026";
 
   return (
     <>
@@ -67,6 +67,42 @@ export default function PrivacyPolicyPage() {
                 for details and how to manage preferences.
               </li>
             </ul>
+          </section>
+          <section>
+            <h2 className="text-lg font-semibold text-[var(--color-text)]">Advertising and Google cookies</h2>
+            <ul className="mt-2 list-disc space-y-2 pl-5">
+              <li>
+                Third-party vendors, including Google, use cookies to serve ads based on a user&apos;s prior visits
+                to this website or other websites.
+              </li>
+              <li>
+                Google&apos;s use of advertising cookies enables it and its partners to serve ads to you based on your
+                visit to this site and/or other sites on the Internet.
+              </li>
+              <li>
+                You may opt out of personalized advertising by visiting{" "}
+                <a href="https://adssettings.google.com" className="text-[var(--color-primary)] underline underline-offset-2" rel="noopener noreferrer" target="_blank">Google Ads Settings</a>. You can also opt out of some
+                third-party vendors&apos; use of cookies for personalized advertising at{" "}
+                <a href="https://www.aboutads.info/choices/" className="text-[var(--color-primary)] underline underline-offset-2" rel="noopener noreferrer" target="_blank">aboutads.info</a>.
+              </li>
+              <li>
+                Learn{" "}
+                <a href="https://policies.google.com/technologies/partner-sites" className="text-[var(--color-primary)] underline underline-offset-2" rel="noopener noreferrer" target="_blank">how Google uses information from sites or apps that use its services</a>.
+              </li>
+              <li>
+                Visitors in the European Economic Area, the United Kingdom and Switzerland are asked for consent
+                through a Google-certified consent message before personalized ads or ad cookies are used, and can
+                change that choice at any time.
+              </li>
+            </ul>
+          </section>
+          <section>
+            <h2 className="text-lg font-semibold text-[var(--color-text)]">Children&apos;s privacy</h2>
+            <p className="mt-2">
+              {siteConfig.name} is a general-audience site and is not directed at children under 13. We do not
+              knowingly collect personal information from children under 13. If you believe a child has sent us
+              personal information through the contact form, email us and we will delete it.
+            </p>
           </section>
           <section>
             <h2 className="text-lg font-semibold text-[var(--color-text)]">Third parties</h2>

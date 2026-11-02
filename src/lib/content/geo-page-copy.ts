@@ -168,6 +168,24 @@ export const CA_EXAMPLE_COURSES: Record<CaUniversityProfile["slug"], UniversityC
     { name: "PSYC 100", grade: "B+", weight: 3 },
     { name: "ECON 208", grade: "66", weight: 3 },
   ],
+  carleton: [
+    { name: "COMP 1405", grade: "86", weight: 0.5 },
+    { name: "MATH 1007", grade: "74", weight: 0.5 },
+    { name: "PSYC 1001", grade: "B+", weight: 0.5 },
+    { name: "ECON 1001", grade: "68", weight: 0.5 },
+  ],
+  uvic: [
+    { name: "CSC 110", grade: "88", weight: 1.5 },
+    { name: "MATH 100", grade: "75", weight: 1.5 },
+    { name: "PSYC 100A", grade: "B+", weight: 1.5 },
+    { name: "ECON 103", grade: "66", weight: 1.5 },
+  ],
+  concordia: [
+    { name: "COMP 248", grade: "A-", weight: 3 },
+    { name: "MATH 203", grade: "B+", weight: 3 },
+    { name: "PSYC 200", grade: "A", weight: 3 },
+    { name: "ECON 201", grade: "B-", weight: 6 },
+  ],
 };
 
 /** A school's own grade points: one decimal when exact (3.7, 8.0), two otherwise (3.67, 4.33). */
@@ -253,6 +271,11 @@ const SCALE_NOTES: Partial<Record<CaUniversityProfile["slug"], string>> = {
     "This is the 12-point grade scale Laurier publishes with its GPA calculator. Each course's grade points are weighted by its credit value.",
   tmu: "This is TMU's undergraduate grading scale for all faculties from September 2013 onward. Percentages are rounded to a whole number before the letter is assigned.",
   sfu: "This is SFU's standard undergraduate letter-grade scale. SFU publishes no official percentage ranges — your course outline sets the cut-offs.",
+  carleton:
+    "This is the 12-point undergraduate grading system on Carleton's transcript legend. Grade points are for a 1.0-credit course and scale with the credit value.",
+  uvic: "This is UVic's undergraduate 9-point scale from the official transcript legend (effective 2014 Summer Session). There is no D+ or D-, and D covers 50–59%.",
+  concordia:
+    "This is Concordia's 4.3 grade point scale. Concordia publishes no official percentage ranges — your course outline sets the cut-offs.",
   mcgill:
     "This is McGill's undergraduate grading table. The letter grade is the official course grade; the percentages are McGill's numerical scale, which Engineering instructors may replace with their own.",
 };
@@ -557,6 +580,27 @@ export function buildCaUniversityCopy(profile: CaUniversityProfile): GeoPageCopy
       description:
         "Calculate your McGill TGPA or CGPA from letters or percentages and credits on McGill's official 4.0 scale — truncated to two decimals, exactly as McGill does.",
       keywords: ["mcgill gpa calculator", "mcgill grading scale", "calculate gpa mcgill", "mcgill grade calculator", "mcgill cgpa calculator"],
+    },
+    carleton: {
+      title: "Carleton GPA Calculator & 12-Point Grading Scale",
+      h1: "Carleton University GPA Calculator",
+      description:
+        "Calculate your Carleton CGPA on the official 12-point scale (A+ = 12, 90–100%) from percentages or letters with 0.5 and 1.0 credits, plus the OMSAS 4.0 conversion.",
+      keywords: ["carleton gpa calculator", "carleton grading scale", "carleton cgpa calculator", "carleton university gpa", "carleton 12 point scale"],
+    },
+    uvic: {
+      title: "UVic GPA Calculator & UVic Grading Scale (9-Pt)",
+      h1: "University of Victoria GPA Calculator",
+      description:
+        "Calculate your UVic GPA on the official 9-point scale (A+ = 9, 90–100%) from percentages or letters with 1.5- and 3-unit courses, plus the OMSAS 4.0 conversion.",
+      keywords: ["uvic gpa calculator", "uvic grading scale", "university of victoria gpa calculator", "uvic 9 point scale", "uvic grade calculator"],
+    },
+    concordia: {
+      title: "Concordia GPA Calculator & Grading Scale (4.3)",
+      h1: "Concordia University GPA Calculator",
+      description:
+        "Calculate your Concordia University (Montreal) term or cumulative GPA from letter grades and 3- or 6-credit courses on the official 4.3 scale (A+ = 4.30).",
+      keywords: ["concordia gpa calculator", "concordia grading scale", "concordia university gpa", "concordia cgpa calculator", "concordia 4.3 scale"],
     },
   };
   const m = meta[profile.slug];

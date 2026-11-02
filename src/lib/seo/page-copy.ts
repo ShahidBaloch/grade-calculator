@@ -71,7 +71,7 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
       "Calculate high school GPA by semester with optional Honors and AP/IB bonus points. Tracks cumulative GPA over four years on a 4.0 or 5.0 scale.",
   },
   "/college-gpa-calculator": {
-    title: "College GPA Calculator — Semester GPA",
+    title: "College GPA Calculator — Credit-Hour GPA",
     description:
       "Calculate college semester GPA weighted by credit hours. Excludes pass/fail and audited courses, and shows dean's list and good-standing thresholds.",
   },
@@ -286,7 +286,7 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
       "Combine coursework and exam weights from your module handbook into one module mark, shown against UK bands: First, 2:1, 2:2 and Third.",
   },
   "/uk/letter-grade-calculator": {
-    title: "UK Mark to Degree Class — 1st, 2:1, 2:2",
+    title: "UK Module Mark Checker — Percentage to Class Band",
     description:
       "See which UK classification band a percentage mark falls in: First 70%+, 2:1 60–69%, 2:2 50–59%, Third 40–49%. UK marks are not US letter grades.",
   },

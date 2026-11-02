@@ -352,7 +352,7 @@ describe("SEO audit", () => {
     expect(paths.filter((p) => /^\/grade-chart\/\d+-questions$/.test(p))).toEqual([]);
     expect(paths).toContain("/score");
     expect(paths).toContain("/grade-chart");
-    expect(sitemap().length).toBe(146);
+    expect(sitemap().length).toBe(149);
   });
 
   it("sitemap lists www URLs so entries match the canonical host (no extra redirect hop)", () => {
@@ -424,7 +424,7 @@ describe("SEO audit", () => {
   it("robots.txt allows major search engines; blocks SEO scrapers", () => {
     const config = robots();
     expect(config.sitemap).toBe(`${siteConfig.url}/sitemap.xml`);
-    expect(config.host).toBe(new URL(siteConfig.url).host);
+    expect(config.host).toBeUndefined();
 
     const rules = Array.isArray(config.rules) ? config.rules : [config.rules];
     const agentsOnly = (rule: (typeof rules)[number]) =>
@@ -448,6 +448,10 @@ describe("SEO audit", () => {
     });
     expect(blockedRule?.disallow).toContain("/");
     expect(agentsOnly(blockedRule!).includes("Bingbot")).toBe(false);
+    expect(agentsOnly(blockedRule!).includes("ChatGPT-User")).toBe(false);
+
+    const aiSearchRule = rules.find((rule) => agentsOnly(rule).includes("OAI-SearchBot"));
+    expect(aiSearchRule?.allow).toContain("/");
 
     const wildcardRule = rules.find((rule) => agentsOnly(rule).includes("*"));
     expect(wildcardRule?.allow).toContain("/");

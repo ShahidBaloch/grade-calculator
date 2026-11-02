@@ -82,6 +82,8 @@ export const countryHubs: CountryHubConfig[] = [
         path: "/guides/lms-course-grades-explained",
         title: "What Does LMS Graded Mean? LMS Grades Explained",
       },
+      { path: "/guides/gpa-needed-for-uc-csu", title: "GPA for UC & CSU admission" },
+      { path: "/guides/what-is-gpa", title: "What is GPA?" },
     ],
     keywords: [
       "grade calculator usa",
@@ -143,6 +145,7 @@ export const countryHubs: CountryHubConfig[] = [
     relatedGuides: [
       { path: "/guides/gpa-glossary", title: "GPA & grading glossary" },
       { path: "/guides/how-to-calculate-gpa", title: "How to calculate GPA" },
+      { path: "/ca/mcmaster-gpa-to-us-gpa", title: "McMaster 12-point GPA to US 4.0" },
     ],
     scaleLockNote:
       "GPA tools on this hub default to an illustrative Canadian 4.0-cap preset — not a national standard. Use /mcmaster-gpa-to-us-gpa for McMaster 12-point GPA and /grading-scales/canada-433 when A+ = 4.33 on your transcript.",
@@ -192,6 +195,11 @@ export const countryHubs: CountryHubConfig[] = [
     ],
     keywords: ["uk grade calculator", "degree classification calculator", "uk grading scale"],
     hreflang: "en-GB",
+    relatedGuides: [
+      { path: "/guides/uk-masters-grading", title: "UK master's grading: Distinction, Merit and Pass" },
+      { path: "/guides/what-is-gpa", title: "What is GPA? UK equivalents" },
+      { path: "/guides/gcse-9-1-grades", title: "How GCSE 9–1 grades work" },
+    ],
     scaleLockNote:
       "Tools on this hub lock to UK degree classification bands (not US GPA). For an illustrative US 4.0 comparison only, open /uk-degree-to-us-gpa-reference — not for self-reporting on applications.",
   },
@@ -255,6 +263,8 @@ export const countryHubs: CountryHubConfig[] = [
     details: [
       "NZ universities often use A+ through C- letter bands on a 9-point GPA (A+ = 9). NCEA is the secondary qualification and uses Achieved / Merit / Excellence, which is not the same as university GPA.",
       "Select the New Zealand scale inside a calculator to map percentages to local letters.",
+      "A New Zealand university GPA is weighted by course points: a 30-point course counts twice as much as a 15-point course. Fifty percent (C−) is the usual pass mark, and failing grades count as 0.",
+      "Use the final grade calculator to see the exam mark you need for a target letter, and the cumulative GPA calculator to combine several trimesters or semesters into one GPA.",
     ],
     faqs: [
       {
@@ -276,6 +286,16 @@ export const countryHubs: CountryHubConfig[] = [
         question: "How do I convert my NZ GPA to a US 4.0 equivalent for applications?",
         answer:
           "There is no official national conversion. Some US graduate programs ask you to report your GPA as it appears on your NZ transcript and evaluate it in context. If a program requires a 4.0-scale equivalent, use the credential evaluator service they name rather than a self-computed estimate.",
+      },
+      {
+        question: "What is a pass mark at a New Zealand university?",
+        answer:
+          "Fifty percent is the usual pass mark, which is a C−. Below that, universities use failing grades such as D and E (Canterbury) or D+, D and D− (Auckland), all worth 0 in the GPA.",
+      },
+      {
+        question: "How is NCEA University Entrance different from a GPA?",
+        answer:
+          "University Entrance is an NCEA-based threshold for starting degree study, built from Level 3 credits plus literacy and numeracy requirements. It is not a GPA. Once you are at university, your course grades build a 9-point GPA instead.",
       },
     ],
     gradingScalePath: "/grading-scales/new-zealand",
@@ -352,6 +372,10 @@ export const countryHubs: CountryHubConfig[] = [
       "sgpa to cgpa",
     ],
     hreflang: "en-IN",
+    relatedGuides: [
+      { path: "/guides/cgpa-to-percentage", title: "How to convert CGPA to percentage" },
+      { path: "/guides/university-cgpa-to-percentage", title: "VTU, VIT, Anna & Mumbai CGPA to percentage" },
+    ],
     scaleLockNote:
       "GPA tools on this hub use an illustrative India 10-point preset (O–F). Board percentages and your campus transcript may differ — check the grading scale reference and your handbook before official use.",
   },
@@ -417,6 +441,7 @@ export const countryHubs: CountryHubConfig[] = [
     relatedGuides: [
       { path: "/guides/gpa-glossary", title: "GPA & grading glossary" },
       { path: "/guides/final-exam-tips", title: "Final exam study tips" },
+      { path: "/guides/university-cgpa-to-percentage", title: "HEC and university CGPA to percentage" },
     ],
     scaleLockNote:
       "GPA tools on this hub use the HEC 4.0 letter scale (§13.1 bands, including D+). CGPA-to-percentage uses band minimums — not the unofficial ×25 shortcut unless you choose it in the converter.",

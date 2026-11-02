@@ -38,7 +38,10 @@ export interface CaUniversityProfile {
     | "laurier"
     | "tmu"
     | "sfu"
-    | "mcgill";
+    | "mcgill"
+    | "carleton"
+    | "uvic"
+    | "concordia";
   name: string;
   shortName: string;
   province: string;
@@ -247,7 +250,30 @@ const MCGILL_CATALOGUE: OfficialSource = {
   checked: BATCH_CHECKED,
 };
 
-/** McMaster and Laurier publish the same 12-point table. */
+const NOV_CHECKED = "2026-11-02";
+
+const CARLETON_LEGEND: OfficialSource = {
+  publisher: "Carleton University Office of the Registrar",
+  title: "Transcript Legend — undergraduate 12-point grading system",
+  href: "https://carleton.ca/registrar/transcript-legend/",
+  checked: NOV_CHECKED,
+};
+
+const UVIC_LEGEND: OfficialSource = {
+  publisher: "University of Victoria Office of the Registrar",
+  title: "University of Victoria Transcript Legend — undergraduate 9-point grading system",
+  href: "https://www.uvic.ca/registrar/assets/docs/ot-legend.pdf",
+  checked: NOV_CHECKED,
+};
+
+const CONCORDIA_GPA: OfficialSource = {
+  publisher: "Concordia University Faculty of Fine Arts",
+  title: "GPA and academic performance — grade points on the 4.3 scale",
+  href: "https://www.concordia.ca/finearts/academics/advising/gpa-and-academic-peformance.html",
+  checked: NOV_CHECKED,
+};
+
+/** McMaster, Laurier and Carleton publish the same 12-point table. */
 const TWELVE_POINT_BANDS: UniversityBand[] = [
   { letter: "A+", min: 90, max: 100, points: 12 },
   { letter: "A", min: 85, max: 89, points: 11 },
@@ -266,6 +292,38 @@ const TWELVE_POINT_BANDS: UniversityBand[] = [
 
 export const MCMASTER_BANDS = TWELVE_POINT_BANDS;
 export const LAURIER_BANDS = TWELVE_POINT_BANDS;
+export const CARLETON_BANDS = TWELVE_POINT_BANDS;
+
+/** UVic 9-point scale (effective 2014 Summer Session). No D+/D-; D covers 50–59%. */
+export const UVIC_BANDS: UniversityBand[] = [
+  { letter: "A+", min: 90, max: 100, points: 9 },
+  { letter: "A", min: 85, max: 89, points: 8 },
+  { letter: "A-", min: 80, max: 84, points: 7 },
+  { letter: "B+", min: 77, max: 79, points: 6 },
+  { letter: "B", min: 73, max: 76, points: 5 },
+  { letter: "B-", min: 70, max: 72, points: 4 },
+  { letter: "C+", min: 65, max: 69, points: 3 },
+  { letter: "C", min: 60, max: 64, points: 2 },
+  { letter: "D", min: 50, max: 59, points: 1 },
+  { letter: "F", min: 0, max: 49, points: 0 },
+];
+
+/** Concordia (Montreal) 4.3 scale. Concordia publishes no official percentage ranges. */
+export const CONCORDIA_BANDS: UniversityBand[] = [
+  { letter: "A+", points: 4.3 },
+  { letter: "A", points: 4.0 },
+  { letter: "A-", points: 3.7 },
+  { letter: "B+", points: 3.3 },
+  { letter: "B", points: 3.0 },
+  { letter: "B-", points: 2.7 },
+  { letter: "C+", points: 2.3 },
+  { letter: "C", points: 2.0 },
+  { letter: "C-", points: 1.7 },
+  { letter: "D+", points: 1.3 },
+  { letter: "D", points: 1.0 },
+  { letter: "D-", points: 0.7 },
+  { letter: "F", points: 0 },
+];
 
 /** Queen's official GPA scale (Arts and Science, Smith Business, Smith Engineering, SGS, Health Sciences). */
 export const QUEENS_BANDS: UniversityBand[] = [
@@ -805,6 +863,88 @@ export const caUniversityProfiles: CaUniversityProfile[] = [
       "In Engineering, professors may set their own letter-grade cut-offs, and the Faculty of Law does not use this scale. OUAC lists McGill under letter Scale 8, whose points match McGill's own.",
     ],
     sources: [MCGILL_CATALOGUE, OUAC_CONVERSION_SOURCE],
+  },
+  {
+    slug: "carleton",
+    name: "Carleton GPA",
+    shortName: "Carleton",
+    province: "Ontario",
+    result: "gpa",
+    gpaScale: "12-point",
+    gradeInput: "percent-or-letter",
+    weightLabel: "Credits",
+    weightOptions: [
+      { label: "0.5 credit", weight: 0.5 },
+      { label: "1.0 credit", weight: 1 },
+      { label: "0.25 credit", weight: 0.25 },
+    ],
+    defaultWeight: 0.5,
+    bands: CARLETON_BANDS,
+    omsasScales: [7],
+    omsasWeightFactor: 2,
+    facts: [
+      "Carleton uses a 12-point grade scale: A+ (90–100%) is 12, A (85–89%) is 11 and A- (80–84%) is 10, down to D- (50–52%) at 1 and F (0–49%) at 0.",
+      "The grade points are for a 1.0-credit course; a course worth more or less is adjusted proportionately, so a 0.5-credit course counts half as much.",
+      "Your official CGPA is the one in Carleton Central; this calculator gives an unofficial estimate.",
+      "OUAC lists Carleton under letter Scale 7, so OMSAS converts Carleton letters with Scale 7: an A+ is 4.0 and an A is 3.9.",
+    ],
+    sources: [CARLETON_LEGEND, OUAC_CONVERSION_SOURCE],
+  },
+  {
+    slug: "uvic",
+    name: "UVic GPA",
+    shortName: "UVic",
+    province: "British Columbia",
+    result: "gpa",
+    gpaScale: "9-point",
+    gradeInput: "percent-or-letter",
+    weightLabel: "Units",
+    weightOptions: [
+      { label: "1.5 units (one term)", weight: 1.5 },
+      { label: "3 units (full year)", weight: 3 },
+      { label: "1 unit", weight: 1 },
+      { label: "0.5 unit", weight: 0.5 },
+    ],
+    defaultWeight: 1.5,
+    bands: UVIC_BANDS,
+    omsasScales: [3, 7],
+    omsasWeightFactor: 2 / 3,
+    facts: [
+      "Since the 2014 Summer Session, UVic grades in percentages that translate to a 9-point scale: A+ (90–100%) is 9, A (85–89%) is 8 and A- (80–84%) is 7, down to D (50–59%) at 1 and F (0–49%) at 0.",
+      "There is no D+ or D- at UVic, and C+ starts at 65%. E (conditional supplemental) and N (incomplete) also count as 0.",
+      "The 9-point GPA is the sole basis for UVic grade point averages and academic standing. It covers every course with a unit value except COM, F/X and N/X grades and exchange courses.",
+      "A one-term course with three lecture hours a week is normally 1.5 units and a full-year course 3 units, so a full-year course counts double.",
+      "OUAC lists Victoria under percentage Scale 3 and letter Scale 7 for OMSAS.",
+    ],
+    sources: [UVIC_LEGEND, OUAC_CONVERSION_SOURCE],
+  },
+  {
+    slug: "concordia",
+    name: "Concordia GPA",
+    shortName: "Concordia",
+    province: "Quebec",
+    result: "gpa",
+    gpaScale: "4.3",
+    gradeInput: "letter",
+    weightLabel: "Credits",
+    weightOptions: [
+      { label: "3 credits", weight: 3 },
+      { label: "6 credits", weight: 6 },
+      { label: "1 credit", weight: 1 },
+      { label: "4 credits", weight: 4 },
+    ],
+    defaultWeight: 3,
+    bands: CONCORDIA_BANDS,
+    omsasScales: [7],
+    omsasWeightFactor: 1 / 3,
+    facts: [
+      "Concordia University (Montreal) uses letter grades on a 4.3 scale: A+ is 4.30, A 4.00 and A- 3.70, down to D- at 0.70 and F, FNS and R at 0.",
+      "Your GPA is each course's credit value (usually 3 or 6) times its grade points, added up and divided by the total credits attempted.",
+      "Concordia reports a term GPA, an assessment GPA (at the end of May, once you have attempted at least 12 credits) and a cumulative GPA.",
+      "Concordia publishes no official percentage ranges for its letters — each course outline sets the cut-offs.",
+      "OUAC lists Concordia under letter Scale 7, so OMSAS converts Concordia letters with Scale 7: an A+ is 4.0 and an A is 3.9.",
+    ],
+    sources: [CONCORDIA_GPA, OUAC_CONVERSION_SOURCE],
   },
 ];
 

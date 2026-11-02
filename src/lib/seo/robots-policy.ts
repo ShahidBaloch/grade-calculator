@@ -8,7 +8,7 @@
  */
 export const robotsDisallowPaths = [] as const;
 
-/** SEO tools and aggressive scrapers — full site disallow (honor-based). */
+/** SEO tools, aggressive scrapers and AI-training crawlers — full site disallow (honor-based). */
 export const blockedCrawlerUserAgents = [
   "AhrefsBot",
   "AhrefsSiteAudit",
@@ -30,10 +30,25 @@ export const blockedCrawlerUserAgents = [
   "Ezooms",
   "LinkdexBot",
   "GPTBot",
-  "ChatGPT-User",
   "CCBot",
   "anthropic-ai",
   "ClaudeBot",
+  "Google-Extended",
+  "Applebot-Extended",
+  "meta-externalagent",
+] as const;
+
+/**
+ * AI search and answer engines that fetch pages to cite and link them (ChatGPT search, Perplexity,
+ * Claude). They send referral traffic, so they stay allowed even though the training crawlers above are blocked.
+ */
+export const aiSearchUserAgents = [
+  "OAI-SearchBot",
+  "ChatGPT-User",
+  "PerplexityBot",
+  "Perplexity-User",
+  "Claude-SearchBot",
+  "Claude-User",
 ] as const;
 
 /** Google Search, previews, and AdSense verification. */

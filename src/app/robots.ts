@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/config/site";
 import {
+  aiSearchUserAgents,
   blockedCrawlerUserAgents,
   bingSearchUserAgents,
   googleSearchUserAgents,
@@ -28,6 +29,7 @@ export default function robots(): MetadataRoute.Robots {
       searchCrawlerRule(bingSearchUserAgents),
       searchCrawlerRule(yandexSearchUserAgents),
       searchCrawlerRule(otherSearchUserAgents),
+      searchCrawlerRule(aiSearchUserAgents),
       {
         userAgent: [...blockedCrawlerUserAgents],
         disallow: "/",
@@ -38,7 +40,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow,
       },
     ],
+    // No `Host:` line: it is a retired Yandex-only directive that Google reports as unknown.
     sitemap: `${siteConfig.url}/sitemap.xml`,
-    host: new URL(siteConfig.url).host,
   };
 }
