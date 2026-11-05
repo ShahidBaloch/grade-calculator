@@ -58,8 +58,8 @@ export default function CookiePolicyPage() {
               calculators.
             </p>
             <p className="mt-2">
-              If we show Google AdSense or other ads, Google and its partners may use cookies to serve
-              and measure ads. You can manage ad personalization in your Google account settings and
+              We show ads from Adsterra, and may also show Google AdSense ads. These ad networks and their
+              partners may use cookies to serve and measure ads. You can manage ad personalization in your Google account settings and
               clear ad-related cookies in your browser.
             </p>
           </section>

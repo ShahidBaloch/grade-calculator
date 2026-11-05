@@ -59,8 +59,9 @@ export default function PrivacyPolicyPage() {
                 you type into calculators.
               </li>
               <li>
-                <strong>Advertising:</strong> If we enable Google AdSense or similar programs, ad
-                partners may set cookies or use similar technologies to show and measure ads. See our{" "}
+                <strong>Advertising:</strong> We show ads from Adsterra, and may also use Google AdSense
+                or similar programs. Ad partners may set cookies or use similar technologies to show and
+                measure ads, and receive standard request data such as your IP address and browser type. See our{" "}
                 <Link href="/cookie-policy" className="inline-block py-0.5 text-[var(--color-primary)] underline underline-offset-2">
                   Cookie Policy
                 </Link>{" "}
