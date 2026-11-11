@@ -684,6 +684,19 @@ export const calculators: CalculatorConfig[] = [
       },
     ],
   },
+  {
+    slug: "grade-curve-calculator",
+    name: "Grade Curve Calculator",
+    shortName: "Curve",
+    description:
+      "Curve one test score or a whole class list: add flat points, lift the top score to 100, use the square root curve, or raise the class average to a target.",
+    path: "/grade-curve-calculator",
+    icon: "TrendingUp",
+    category: "grade",
+    mvp: false,
+    relatedSlugs: ["test-grade-calculator", "average-grade-calculator", "grade-chart", "percentage-to-letter-grade"],
+    examples: [],
+  },
 
 ];
 

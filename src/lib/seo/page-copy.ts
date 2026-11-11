@@ -1,14 +1,14 @@
 /** Visible copy that makes each indexable URL a different search intent. */
 export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: string }> = {
   "/": {
-    title: "Grade Calculator — Free EZ Grader for Teachers & Students",
+    title: "Grade Calculator — Free EZ Grader for Teachers",
     description:
-      "Free grade calculator for US teachers and students. Enter total questions and wrong answers to instantly get the score, percentage, letter grade, and a full grading chart. No login required.",
+      "Free grade calculator for US teachers and students. Enter questions and wrong answers to get the score, percentage, letter grade, and a full grading chart.",
   },
   "/weighted-grade-calculator": {
-    title: "Weighted Grade Calculator — Grade by Category & Weight",
+    title: "Weighted Grade Calculator — Weighted Average",
     description:
-      "Free weighted grade calculator: enter each grading category (homework, tests, final exam) with its percentage weight and score. Instantly calculates your overall weighted class grade and letter grade.",
+      "Free weighted grade calculator: enter each category (homework, tests, final exam) with its weight and score to get your weighted average and letter grade.",
   },
   "/test-grade-calculator": {
     title: "Test & Exam Grade Calculator — Score Any Quiz",
@@ -16,9 +16,9 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
       "Calculate test or exam grades from correct or wrong answers. See what 11 out of 15 or 12 out of 20 is as a percentage and letter grade, with bonus points.",
   },
   "/gpa-calculator": {
-    title: "GPA Calculator — Semester GPA from Grades & Credits",
+    title: "GPA Calculator — Semester GPA by Credit Hours",
     description:
-      "Free GPA calculator: add your letter grades or percentages and credit hours to calculate your semester GPA instantly. Works for college and high school on a standard 4.0 scale.",
+      "Free GPA calculator: add letter grades or percentages and credit hours to get your semester GPA on a 4.0 scale. Works for college and high school.",
   },
   "/average-grade-calculator": {
     title: "Average Grade Calculator — Test & Class Average",
@@ -31,9 +31,9 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
       "Free printable grade chart: every score out of 10, 20, 50, 100, 150, 200, or any total, with its percentage, letter grade, and points needed per grade.",
   },
   "/final-grade-calculator": {
-    title: "Final Grade Calculator — Score Needed to Pass",
+    title: "Final Grade Calculator — What Do I Need?",
     description:
-      "Find the exam score you need to get the grade you want. Enter your current class grade, the final exam weight, and your target grade — the final grade calculator shows the exact score you need to pass or ace the class.",
+      "Final grade calculator: enter your current grade, the final exam weight, and the grade you want to see the exact score you need on your final or midterm.",
   },
   "/uc-gpa-calculator": {
     title: "UC GPA Calculator — Capped & Unweighted A–G GPA",
@@ -51,9 +51,9 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
       "Free middle school and junior high GPA calculator. Enter each class letter grade. Every class counts the same — no credit hours and no Honors or AP bonus.",
   },
   "/cumulative-gpa-calculator": {
-    title: "Cumulative GPA Calculator — Combine Semesters into One GPA",
+    title: "Cumulative GPA Calculator — Combine Semesters",
     description:
-      "Free cumulative GPA calculator: combine two or more semester GPAs into one overall GPA. Enter each term's GPA and credit hours to find your running cumulative GPA for college or high school on any 4.0 scale.",
+      "Free cumulative GPA calculator: combine two or more semesters into one overall GPA. Enter each term's GPA and credit hours, or add courses. Any 4.0 scale.",
   },
   "/weighted-gpa-calculator": {
     title: "Weighted GPA Calculator — Honors AP & IB",
@@ -66,9 +66,9 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
       "Find how many credit hours and what grade you need to reach your target GPA. Enter current GPA and credits, set a goal, and plan semester by semester.",
   },
   "/high-school-gpa-calculator": {
-    title: "High School GPA Calculator — 4-Year Weighted & Unweighted",
+    title: "High School GPA Calculator — Weighted or 4.0",
     description:
-      "Free high school GPA calculator for all four years. Enter each class letter grade with optional Honors (+0.5) or AP/IB (+1.0) bonus points to find your weighted and unweighted high school GPA on a 4.0 or 5.0 scale.",
+      "Free high school GPA calculator: enter each class grade by semester, add Honors and AP/IB bonus points, and see weighted and unweighted GPA for all four years.",
   },
   "/college-gpa-calculator": {
     title: "College GPA Calculator — Credit-Hour GPA",
@@ -100,6 +100,11 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
     description:
       "Free semester grade calculator: combine your quarter grades and semester exam using your school's weights, like 40/40/20, to get your semester grade.",
   },
+  "/grade-curve-calculator": {
+    title: "Grade Curve Calculator — Curve Test Scores",
+    description:
+      "Free grade curve calculator: paste test scores and curve them with flat points, top score to 100, the square root curve, or a target class average.",
+  },
   "/college-grade-calculator": {
     title: "College Grade Calculator — Syllabus Grade",
     description:
@@ -108,7 +113,7 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
   "/eoc-grade-calculator": {
     title: "EOC Calculator — End-of-Course Exam Score Needed",
     description:
-      "Free EOC grade calculator: enter your class average, your state's EOC weight (e.g. 30% in Florida or 20% in Texas), and your goal grade to see the exact EOC exam score you need to pass.",
+      "Free EOC calculator: enter your class average, your state's EOC weight (e.g. 30% in Florida) and goal grade to see the End-of-Course exam score you need.",
   },
   "/degree-classification-calculator": {
     title: "UK Degree Classification Calculator — 1st, 2:1",

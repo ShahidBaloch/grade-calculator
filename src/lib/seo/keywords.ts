@@ -265,6 +265,14 @@ export const calculatorKeywords: Record<CalculatorSlug, string[]> = {
     "final semester grade calculator",
     "semester grade calculator high school",
   ],
+  "grade-curve-calculator": [
+    "grade curve calculator",
+    "curve grade calculator",
+    "test curve calculator",
+    "curve calculator",
+    "square root curve calculator",
+    "how to curve grades",
+  ],
   "college-grade-calculator": [
     "college grade calculator",
     "grade calculator college",

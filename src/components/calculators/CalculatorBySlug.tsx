@@ -30,6 +30,7 @@ import { MiddleSchoolGpaCalculator } from "@/components/calculators/MiddleSchool
 import { GradePercentageCalculator } from "@/components/calculators/GradePercentageCalculator";
 import { CollegeGradeCalculator } from "@/components/calculators/CollegeGradeCalculator";
 import { SemesterGradeCalculator } from "@/components/calculators/SemesterGradeCalculator";
+import { GradeCurveCalculator } from "@/components/calculators/GradeCurveCalculator";
 import type { ComponentType } from "react";
 import type { CalculatorSlug } from "@/types/calculator";
 
@@ -70,6 +71,7 @@ export const calculatorComponentBySlug: Record<CalculatorSlug, ComponentType> = 
   "grade-percentage-calculator": GradePercentageCalculator,
   "college-grade-calculator": CollegeGradeCalculator,
   "semester-grade-calculator": SemesterGradeCalculator,
+  "grade-curve-calculator": GradeCurveCalculator,
 };
 
 export function CalculatorBySlug({ slug }: { slug: CalculatorSlug }) {

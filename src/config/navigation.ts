@@ -87,6 +87,7 @@ const FOOTER_CALCULATOR_SLUGS = [
   "grade-percentage-calculator",
   "college-grade-calculator",
   "semester-grade-calculator",
+  "grade-curve-calculator",
   // Weakly linked non-core tools that otherwise only get 3–4 inbound links.
   "middle-school-gpa-calculator",
   "uc-gpa-calculator",

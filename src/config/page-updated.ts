@@ -153,7 +153,12 @@ export const pageUpdated: Record<string, string> = {
   "/grading-scales/new-zealand": "2026-10-20",
   "/grading-scales/pakistan": "2026-10-20",
   "/grading-scales/uk": "2026-10-20",
-  "/grading-scales/us": "2026-10-27",
+  "/grading-scales/us": "2026-11-11",
+  "/grading-scales/10-point": "2026-11-11",
+  "/grading-scales/7-point": "2026-11-11",
+  "/grading-scales/high-school": "2026-11-11",
+  "/grading-scales/college": "2026-11-11",
+  "/grade-curve-calculator": "2026-11-11",
   // Country hubs
   "/au": "2026-10-20",
   "/ca": "2026-10-20",

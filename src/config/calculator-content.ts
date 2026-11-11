@@ -1670,6 +1670,54 @@ export const calculatorContent: Record<CalculatorSlug, CalculatorContent> = {
       "Letter grades follow the scale selected in the calculator; your school's cutoffs may differ.",
     ],
   },
+  "grade-curve-calculator": {
+    howItWorks: [
+      "Type or paste the raw scores as percentages — one score to check your own grade, or the whole class list.",
+      "Pick the curve method your teacher uses: flat points, top score to 100, grading out of the top score, the square root curve, or a target class average.",
+      "Read each curved score and letter grade in the table, plus the class average before and after the curve.",
+    ],
+    formula:
+      "Flat curve: curved = raw + points. Top score to 100: curved = raw + (100 − highest score). Out of the top score: curved = raw ÷ highest × 100. Square root curve: curved = 10 × √raw. Target average: curved = raw + (target average − class average).",
+    workedExample:
+      "A class scores 62, 71, 78, 85 and 91, an average of 77.4%. Lifting the top score to 100 adds 100 − 91 = 9 points to everyone: 71, 80, 87, 94 and 100, an average of 86.4%. The 71% moves from a C to a B. With the square root curve instead, the 62% becomes 10 × √62 = 78.74% while the 91% becomes 95.39%, so the lowest scores gain the most.",
+    faqs: [
+      {
+        question: "How do you curve a grade?",
+        answer:
+          "The simplest curve adds the same number of points to every score. A common version finds the highest score in the class and adds the gap between it and 100 to everyone: if the top score is 91%, every student gets 9 points. Other teachers divide each score by the top score or use the square root curve.",
+      },
+      {
+        question: "What is the square root curve?",
+        answer:
+          "The square root curve takes the square root of the raw percentage and multiplies it by 10. A 49% becomes 70%, a 64% becomes 80%, an 81% becomes 90%, and 100% stays 100%. It never lowers a score and it helps low scores far more than high ones.",
+      },
+      {
+        question: "How many points is a 5% curve?",
+        answer:
+          "It depends on what the teacher means. A flat 5-point curve adds 5 percentage points, so a 78% becomes an 83%. A 5% boost of your own score multiplies it by 1.05, so a 78% becomes 81.9%. Ask which one applies; this calculator uses flat points.",
+      },
+      {
+        question: "Can a curve lower my grade?",
+        answer:
+          "The methods in this calculator only raise scores or leave them unchanged, unless you set a target average below the current class average. A strict bell curve, where a fixed share of the class gets each letter, can lower a grade, but it is rare outside some large college courses.",
+      },
+      {
+        question: "How do I curve a test so the average is 75 or 80?",
+        answer:
+          "Subtract the current class average from the average you want and add the difference to every score. With a class average of 68% and a target of 75%, every student gets 7 points. Choose “Raise the class average” and enter the target.",
+      },
+      {
+        question: "Should curved scores go above 100?",
+        answer:
+          "Most teachers cap curved scores at 100%, which is the default here. Untick the cap if your class allows extra credit to carry a score past 100%.",
+      },
+    ],
+    assumptions: [
+      "Scores are entered as percentages from 0 to 100; convert points to a percentage first if the test is out of another total.",
+      "Letter grades use the 10-point scale (A 90, B 80, C 70, D 60); your school's cutoffs may differ.",
+      "Your teacher decides whether and how a test is curved; this shows what each common method would do.",
+    ],
+  },
   "college-grade-calculator": {
     howItWorks: [
       "Copy each grading category and its weight from your college syllabus (for example exams 40%, homework 20%).",

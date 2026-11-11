@@ -21,9 +21,9 @@ export const gradingScalePages: GradingScalePageConfig[] = [
     slug: "us",
     path: "/grading-scales/us",
     scaleId: "us-standard",
-    title: "US Grading Scale — A–F Letter Grades & GPA Chart",
+    title: "US Grading Scale & GPA Scale Chart — A to F",
     description:
-      "US grading scale chart: A+ through F letter grades with percentage ranges and 4.0 GPA points. Covers the 10-point, plus/minus, and 7-point US grading scales used by high schools and colleges.",
+      "US grading scale chart: A+ through F with percentage ranges and 4.0 GPA points, plus the 10-point and 7-point high school grading scales side by side.",
     keywords: [
       "us grading scale",
       "us grading scale chart",
@@ -31,15 +31,13 @@ export const gradingScalePages: GradingScalePageConfig[] = [
       "gpa scale",
       "4.0 gpa scale",
       "letter grade scale us",
-      "10 point grading scale",
-      "7 point grading scale",
     ],
     intro:
-      "The US grading scale uses letter grades A through F to represent academic performance. The chart below shows the most common US grading scale — the plus/minus scale (A+ through F) — with percentage bands and 4.0 GPA grade points used by most colleges and high schools. Many districts also use a plain 10-point grading scale (A 90–100%, B 80–89%, C 70–79%, D 60–69%, F below 60%) or a stricter 7-point grading scale (A from 93%, fail below 70%). The comparison table shows the same score across all three US grading scales. Exact cutoffs vary by school; always check your syllabus.",
+      "The US grading scale uses letter grades A through F to represent academic performance. The chart below shows the most common US grading scale — the plus/minus scale (A+ through F) — with percentage bands and 4.0 GPA grade points used by most colleges and high schools. Many districts also use a plain 10-point grading scale (A 90–100%, B 80–89%, C 70–79%, D 60–69%, F below 60%) or a stricter 7-point grading scale (A from 93%, fail below 70%). The comparison table shows the same score on all three. Exact cutoffs vary by school; always check your syllabus.",
     notes: [
       "The US plus/minus grading scale splits each letter into three bands. A+ is 97–100%, A is 93–96%, A− is 90–92%, B+ is 87–89%, B is 83–86%, B− is 80–82%, C+ is 77–79%, C is 73–76%, C− is 70–72%, D+ is 67–69%, D is 63–66%, D− is 60–62%, and F is below 60%.",
       "For federal statistics, NCES uses a four-point framework (A=4, B=3, C=2, D=1, F=0); it does not define one national plus/minus percentage table.",
-      "The 10-point US grading scale is the most common: 90–100 = A, 80–89 = B, 70–79 = C, 60–69 = D, below 60 = F. It is the EZ grader's default setting.",
+      "The 10-point grading scale is common in US high schools: 90–100 = A, 80–89 = B, 70–79 = C, 60–69 = D, below 60 = F. It is the EZ grader's default setting.",
       "The 7-point US grading scale is stricter: A 93–100, B 85–92, C 77–84, D 70–76, F below 70. The same 92% earns a B on the 7-point scale but an A on the 10-point scale.",
       "Weighted GPA (Honors/AP/IB) adds bonus grade points above the standard 4.0 scale — typically +0.5 for Honors and +1.0 for AP or IB courses.",
     ],
@@ -51,19 +49,19 @@ export const gradingScalePages: GradingScalePageConfig[] = [
           "The US grading scale assigns letter grades A through F based on percentage scores. The most common US grading scale is the 10-point scale: A = 90–100%, B = 80–89%, C = 70–79%, D = 60–69%, F = below 60%. Many colleges and high schools use a plus/minus version that adds A−, B+, B−, etc. A third version — the 7-point grading scale — starts an A at 93% and fails anything below 70%.",
       },
       {
-        question: "What is the grading scale for US high school?",
+        question: "What is the grading scale for high school?",
         answer:
-          "Most US high schools use the 10-point grading scale: A 90–100%, B 80–89%, C 70–79%, D 60–69%, F below 60%. Some schools add plus/minus grades (A 93–96%, A− 90–92%, B+ 87–89%) and others use the stricter 7-point grading scale where an A starts at 93% and anything under 70% fails. Check your student handbook for which US grading scale your school uses.",
+          "Most US high schools use the 10-point grading scale: A 90–100%, B 80–89%, C 70–79%, D 60–69%, F below 60%. Some schools add plus/minus grades (A 93–96%, A− 90–92%, B+ 87–89%) and others use the stricter 7-point grading scale where an A starts at 93% and anything under 70% fails. Your student handbook or report card legend shows which one applies.",
       },
       {
         question: "What is a 10-point grading scale?",
         answer:
-          "The 10-point grading scale gives each US letter grade a 10-percentage-point band: A 90–100, B 80–89, C 70–79, D 60–69, F below 60. It is the most common US grading scale for high schools and colleges and the default on most grade calculators.",
+          "The 10-point grading scale gives each letter grade a 10-percentage-point band: A 90–100, B 80–89, C 70–79, D 60–69, F below 60. It is the scale most US high schools use and the default on most grade calculators.",
       },
       {
         question: "What is a 7-point grading scale?",
         answer:
-          "The 7-point grading scale is a stricter US grading scale where each letter covers a 7-point band: A 93–100, B 85–92, C 77–84, D 70–76, F below 70. A 92% earns a B on this scale instead of an A on the 10-point scale, and a 69% fails instead of earning a D.",
+          "The 7-point grading scale is stricter: each letter covers a 7-point band: A 93–100, B 85–92, C 77–84, D 70–76, F below 70. A 92% earns a B on this scale instead of an A on the 10-point scale, and a 69% fails instead of earning a D.",
       },
       {
         question: "What is the 4.0 GPA scale?",
@@ -73,17 +71,208 @@ export const gradingScalePages: GradingScalePageConfig[] = [
       {
         question: "Is a 93 an A or an A−?",
         answer:
-          "On the US plus/minus grading scale, 93% is an A (93–96%), while 90–92% is an A−. On the plain 10-point US grading scale, any score 90% or above is an A. On the 7-point grading scale, 93% is the minimum for an A.",
+          "On the US plus/minus grading scale, 93% is an A (93–96%), while 90–92% is an A−. On the plain 10-point scale, any score 90% or above is an A. On the 7-point grading scale, 93% is the minimum for an A.",
       },
       {
         question: "What percentage is a passing grade in the US?",
         answer:
-          "On the standard 10-point and plus/minus US grading scales, 60% or higher is passing (D− or better). On the 7-point US grading scale the pass mark rises to 70%. Many US colleges require a C (70%+) or better for a course to count toward a major or satisfy degree requirements.",
+          "On the standard 10-point and plus/minus US grading scales, 60% or higher is passing (D− or better). On the 7-point scale the pass mark rises to 70%. Many US colleges require a C (70%+) or better for a course to count toward a major or satisfy degree requirements.",
       },
       {
         question: "How does the US grading scale compare to other countries?",
         answer:
-          "The US A–F letter grading scale is unique to North America. The UK uses a First/2:1/2:2/Third degree classification based on percentages above 40%. Australia uses HD/D/C/P bands (High Distinction, Distinction, Credit, Pass). Canada largely follows the same A–F letter system as the US. Use our grading scales page to compare.",
+          "The A–F letter scale is mainly a North American system. The UK uses a First/2:1/2:2/Third degree classification based on percentages above 40%. Australia uses HD/D/C/P bands (High Distinction, Distinction, Credit, Pass). Canada largely follows the same A–F letter system as the US. Use our grading scales page to compare.",
+      },
+    ],
+  },
+  {
+    slug: "10-point",
+    path: "/grading-scales/10-point",
+    scaleId: "us-lenient",
+    title: "10-Point Grading Scale — A 90, B 80 Chart",
+    description:
+      "10-point grading scale chart: A 90–100, B 80–89, C 70–79, D 60–69, F below 60, with 4.0 GPA points and a side-by-side look at the 7-point scale.",
+    keywords: ["10 point grading scale", "10-point grading scale", "ten point grading scale", "90 80 70 60 grading scale"],
+    intro:
+      "On the 10-point grading scale each letter covers ten percentage points: 90 is the lowest A, 80 the lowest B, 70 the lowest C and 60 the lowest D. Anything under 60% is an F. It is the scale most US high schools and many college instructors use, and the one a paper EZ grader is printed for.",
+    notes: [
+      "Florida writes this scale into law: section 1003.437 of the Florida Statutes sets A at 90–100, B at 80–89, C at 70–79, D at 60–69 and F at 0–59 for public school students.",
+      "North Carolina moved every high school student to the 10-point scale in the 2015–16 school year, and South Carolina adopted a statewide 10-point scale in 2016–17. Both had used a 7-point scale before.",
+      "Schools that add plus and minus usually split each ten-point band in three: 90–92 is an A−, 93–96 an A, and 97–100 an A+.",
+      "On an unweighted 4.0 scale an A is 4.0, a B 3.0, a C 2.0, a D 1.0 and an F 0. Plus/minus schools use steps of about 0.3 instead.",
+    ],
+    compareScaleIds: ["us-lenient", "us-standard", "us-seven-point"],
+    faqs: [
+      {
+        question: "What is a 10-point grading scale?",
+        answer:
+          "It is a letter grade scale where each letter spans ten percentage points: A 90–100, B 80–89, C 70–79, D 60–69, and F below 60. A student needs 90% for an A and 60% to pass.",
+      },
+      {
+        question: "Is a 90 an A on the 10-point scale?",
+        answer:
+          "Yes. 90% is the lowest A on a plain 10-point scale. If the school adds plus and minus, 90–92% is usually an A−. An 89.5% is a B unless the teacher rounds to the nearest whole percent.",
+      },
+      {
+        question: "What is the difference between the 10-point and 7-point grading scales?",
+        answer:
+          "The 7-point scale sets every cutoff higher: an A starts at 93 instead of 90, a B at 85 instead of 80, a C at 77 instead of 70, and passing takes 70 instead of 60. A 91% is an A on the 10-point scale and a B on the 7-point scale.",
+      },
+      {
+        question: "Is 60 passing on a 10-point scale?",
+        answer:
+          "60% is a D, the lowest passing letter. Many schools still require a C (70%) or better for a prerequisite or a course in your major to count.",
+      },
+      {
+        question: "How many questions can I miss and still get an A?",
+        answer:
+          "You can miss up to 10% of the points. That is 1 wrong on a 10-question quiz, 2 wrong on 20 questions, 5 wrong on 50 and 10 wrong on 100.",
+      },
+    ],
+  },
+  {
+    slug: "7-point",
+    path: "/grading-scales/7-point",
+    scaleId: "us-seven-point",
+    title: "7-Point Grading Scale — A 93, B 85 Chart",
+    description:
+      "7-point grading scale chart: A 93–100, B 85–92, C 77–84, D 70–76, F below 70, with GPA points and the same scores on the 10-point scale.",
+    keywords: ["7 point grading scale", "7-point grading scale", "seven point grading scale", "93 85 77 70 grading scale"],
+    intro:
+      "The 7-point grading scale is the stricter of the two common US high school scales. An A takes 93%, a B 85%, a C 77% and a D 70%, so most letters cover seven or eight percentage points and anything under 70% fails. Some districts and private schools still use it, and a few shift the lines by a point, so check your handbook.",
+    notes: [
+      "The usual version is A 93–100, B 85–92, C 77–84, D 70–76 and F 0–69. Some schools use A 94–100 or pass at 69, which is why the handbook matters.",
+      "North Carolina and South Carolina both used a 7-point scale statewide before switching to the 10-point scale in 2015–16 and 2016–17.",
+      "The GPA points do not change: an A is still 4.0, a B 3.0, a C 2.0 and a D 1.0. A transcript from a 7-point school therefore shows a lower GPA for the same percentages.",
+      "Colleges read a transcript together with the school profile, which states the scale, so a B earned at 92% on a 7-point scale is seen in context.",
+    ],
+    compareScaleIds: ["us-seven-point", "us-lenient", "us-standard"],
+    faqs: [
+      {
+        question: "What is a 7-point grading scale?",
+        answer:
+          "It is a letter grade scale with higher cutoffs than the 10-point scale: A 93–100, B 85–92, C 77–84, D 70–76, and F below 70.",
+      },
+      {
+        question: "What is a 92 on a 7-point grading scale?",
+        answer:
+          "A 92% is a B, one point short of an A. The same 92% is an A on a plain 10-point scale and an A− on a plus/minus scale.",
+      },
+      {
+        question: "What is a passing grade on the 7-point scale?",
+        answer:
+          "70% is the lowest passing grade, a D. A 69% fails on the 7-point scale but is a D on the 10-point scale.",
+      },
+      {
+        question: "Is the 7-point scale harder than the 10-point scale?",
+        answer:
+          "Yes for the letter you get from a given percentage. Every cutoff is three to ten points higher, so a student with the same percentages earns lower letters and a lower GPA. The coursework itself is not changed by the scale.",
+      },
+      {
+        question: "How many questions can I miss and still get an A?",
+        answer:
+          "You can miss up to 7% of the points. That is 1 wrong on a 20-question test, 3 wrong on 50 questions and 7 wrong on 100. One wrong answer on a 10-question quiz is 90%, which is a B.",
+      },
+    ],
+  },
+  {
+    slug: "high-school",
+    path: "/grading-scales/high-school",
+    scaleId: "us-lenient",
+    title: "High School Grading Scale — A–F & GPA Chart",
+    description:
+      "High school grading scale chart: letter grades A–F with percentages and GPA points, 10-point vs 7-point cutoffs, and how Honors and AP weighting works.",
+    keywords: [
+      "high school grading scale",
+      "grade scale high school",
+      "what is the grading scale for high school",
+      "high school gpa scale",
+    ],
+    intro:
+      "Most US high schools grade on a 10-point scale: A 90–100, B 80–89, C 70–79, D 60–69 and F below 60. There is no national rule, so some districts use a plus/minus version or the stricter 7-point scale instead. The chart shows the 10-point scale, and the comparison table puts the three side by side so you can read your percentage on each.",
+    notes: [
+      "Your school's scale is printed in the student handbook and usually in the legend on the report card or transcript.",
+      "Unweighted GPA uses a 4.0 scale: A = 4, B = 3, C = 2, D = 1, F = 0. Weighted GPA adds points for harder classes, commonly +0.5 for Honors and +1.0 for AP or IB, which makes a 5.0 possible.",
+      "A D (60–69% on the 10-point scale) normally earns the credit, but many schools require a C or better to move on to the next course in a sequence.",
+      "Some states set one scale for every public high school. Florida's is in statute, and North Carolina and South Carolina each adopted a statewide 10-point scale.",
+      "Transcripts usually show semester or final course grades, not each quarter grade.",
+    ],
+    compareScaleIds: ["us-lenient", "us-standard", "us-seven-point"],
+    faqs: [
+      {
+        question: "What is the grading scale for high school?",
+        answer:
+          "The most common high school grading scale is the 10-point scale: A 90–100%, B 80–89%, C 70–79%, D 60–69%, F below 60%. Some schools add plus and minus grades, and some use a 7-point scale where an A starts at 93% and anything under 70% fails.",
+      },
+      {
+        question: "What is a passing grade in high school?",
+        answer:
+          "Usually a D, which is 60% on the 10-point scale and 70% on the 7-point scale. Passing earns the credit, though a C or better is often needed to take the next course.",
+      },
+      {
+        question: "What GPA is an A, B, C and D in high school?",
+        answer:
+          "On the unweighted 4.0 scale an A is 4.0, a B is 3.0, a C is 2.0, a D is 1.0 and an F is 0. In a weighted system an A in an AP class usually counts as 5.0 and an A in an Honors class as 4.5.",
+      },
+      {
+        question: "Is an 89.5 an A in high school?",
+        answer:
+          "Only if the teacher or the gradebook rounds to the nearest whole percent. Many districts do round 89.5% up to 90%, but it is a local policy, so check the syllabus.",
+      },
+      {
+        question: "Do colleges care which grading scale my high school uses?",
+        answer:
+          "Admissions offices read the transcript with the school profile, which explains the scale and the weighting. Many colleges also recalculate GPA their own way, so the letters on your transcript matter more than the scale behind them.",
+      },
+    ],
+  },
+  {
+    slug: "college",
+    path: "/grading-scales/college",
+    scaleId: "us-standard",
+    title: "College Grading Scale — Letter Grades & GPA",
+    description:
+      "College grading scale chart: A through F with plus/minus percentage ranges and 4.0 grade points, plus what W, I and P mean and the GPA needed to stay enrolled.",
+    keywords: ["college grading scale", "college grade scale", "university grading scale us", "college letter grades", "college gpa scale"],
+    intro:
+      "US colleges grade with letters A through F, usually with plus and minus, and turn each letter into grade points on a 4.0 scale. The percentage behind a letter is not set by the college: each instructor puts the cutoffs in the syllabus. The chart shows the most common plus/minus ranges and the grade points that go with them.",
+    notes: [
+      "Grade points are fixed by the college, not the instructor: A = 4.0, A− = 3.7, B+ = 3.3, B = 3.0, B− = 2.7, C+ = 2.3, C = 2.0, C− = 1.7, D+ = 1.3, D = 1.0, F = 0. Most colleges count an A+ as 4.0; a few use 4.3.",
+      "Your GPA weights each course by its credit hours, so an A in a 4-credit course counts twice as much as an A in a 2-credit course.",
+      "W (withdrawal), I (incomplete), P (pass) and AU (audit) appear on the transcript but do not change GPA. An F in a pass/fail course often does.",
+      "A D earns credit at most colleges, but majors and prerequisites commonly require a C or better, and a C− (1.7) may not satisfy a C requirement.",
+      "Undergraduates usually need a 2.0 cumulative GPA for good standing. Graduate programs usually require a 3.0.",
+    ],
+    faqs: [
+      {
+        question: "What is the grading scale in college?",
+        answer:
+          "Colleges use letter grades A through F with 4.0 grade points. A common percentage scale is A 93–100, A− 90–92, B+ 87–89, B 83–86, B− 80–82, C+ 77–79, C 73–76, C− 70–72, D 60–69 and F below 60, but each instructor sets the exact cutoffs in the syllabus.",
+      },
+      {
+        question: "Is a D passing in college?",
+        answer:
+          "A D usually earns credit toward the degree, but it often does not count for a major, a prerequisite or a transfer course, which normally need a C or better.",
+      },
+      {
+        question: "Is a C− the same as a C in college?",
+        answer:
+          "No. A C is 2.0 grade points and a C− is 1.7. Where a program requires a C or better, a C− usually does not meet it.",
+      },
+      {
+        question: "What GPA do you need to stay in college?",
+        answer:
+          "Most colleges require a cumulative 2.0 for good academic standing. Falling below it normally leads to academic probation first, not immediate dismissal. Scholarships and some majors set a higher bar.",
+      },
+      {
+        question: "Do W and P grades affect GPA?",
+        answer:
+          "No. A withdrawal and a pass both stay off the GPA calculation, though they show on the transcript. A failed pass/fail course is treated as an F at many colleges.",
+      },
+      {
+        question: "Is an A+ worth more than an A in college?",
+        answer:
+          "At most colleges both are 4.0. A small number of colleges award 4.3 for an A+, so check the registrar's grading policy.",
       },
     ],
   },
