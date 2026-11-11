@@ -122,27 +122,6 @@ export function WeightedGradeCalculator({
 
   return (
     <div className="calculator-print-area space-y-6">
-      <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
-      {examples.length > 0 && (
-        <ExampleScenarios
-          examples={examples}
-          onSelect={(values) => {
-            if (!Array.isArray(values.items)) return;
-            setState({
-              ...state,
-              items: values.items.map((row, index) => {
-                const item = row as { name?: string; score?: number | string; weight?: number; maxPoints?: number };
-                return {
-                  name: item.name ?? `Item ${index + 1}`,
-                  score: item.score ?? 0,
-                  weight: typeof item.weight === "number" ? item.weight : 0,
-                  maxPoints: item.maxPoints ?? 100,
-                };
-              }),
-            });
-          }}
-        />
-      )}
       <ScaleSelector />
       <div className="grid gap-4 sm:grid-cols-[3fr_2fr]">
         <ModeButtons
@@ -331,6 +310,27 @@ export function WeightedGradeCalculator({
       {getPrimaryFlow("weighted-grade-calculator") && result.data && (
         <NextStepCard flow={getPrimaryFlow("weighted-grade-calculator")!} />
       )}
+      {examples.length > 0 && (
+        <ExampleScenarios
+          examples={examples}
+          onSelect={(values) => {
+            if (!Array.isArray(values.items)) return;
+            setState({
+              ...state,
+              items: values.items.map((row, index) => {
+                const item = row as { name?: string; score?: number | string; weight?: number; maxPoints?: number };
+                return {
+                  name: item.name ?? `Item ${index + 1}`,
+                  score: item.score ?? 0,
+                  weight: typeof item.weight === "number" ? item.weight : 0,
+                  maxPoints: item.maxPoints ?? 100,
+                };
+              }),
+            });
+          }}
+        />
+      )}
+      <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
     </div>
   );
 }

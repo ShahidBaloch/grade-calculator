@@ -72,38 +72,6 @@ export function HighSchoolGpaCalculator() {
 
   return (
     <div className="calculator-print-area space-y-6">
-      <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
-      {examples.length > 0 && (
-        <ExampleScenarios
-          examples={examples}
-          onSelect={(values) => {
-            const nextWeighted = typeof values.weighted === "boolean" ? values.weighted : weighted;
-            if (!Array.isArray(values.periods)) {
-              setState({ periods, weighted: nextWeighted });
-              return;
-            }
-            setState({
-              weighted: nextWeighted,
-              periods: values.periods.map((row, periodIndex) => {
-                const period = row as Partial<PeriodRow>;
-                const courses = Array.isArray(period.courses) ? period.courses : [];
-                return {
-                  name: period.name ?? `Period ${periodIndex + 1}`,
-                  courses: courses.map((courseRow, courseIndex) => {
-                    const course = courseRow as Partial<CourseRow>;
-                    return {
-                      name: course.name ?? `Course ${courseIndex + 1}`,
-                      grade: String(course.grade ?? "B"),
-                      credits: typeof course.credits === "number" ? course.credits : 1,
-                      courseType: course.courseType ?? "regular",
-                    };
-                  }),
-                };
-              }),
-            });
-          }}
-        />
-      )}
       <ScaleSelector />
       <label className="flex min-h-11 items-center gap-2 text-sm">
         <input
@@ -246,6 +214,38 @@ export function HighSchoolGpaCalculator() {
       {getPrimaryFlow("high-school-gpa-calculator") && result.status === "valid" && (
         <NextStepCard flow={getPrimaryFlow("high-school-gpa-calculator")!} />
       )}
+      {examples.length > 0 && (
+        <ExampleScenarios
+          examples={examples}
+          onSelect={(values) => {
+            const nextWeighted = typeof values.weighted === "boolean" ? values.weighted : weighted;
+            if (!Array.isArray(values.periods)) {
+              setState({ periods, weighted: nextWeighted });
+              return;
+            }
+            setState({
+              weighted: nextWeighted,
+              periods: values.periods.map((row, periodIndex) => {
+                const period = row as Partial<PeriodRow>;
+                const courses = Array.isArray(period.courses) ? period.courses : [];
+                return {
+                  name: period.name ?? `Period ${periodIndex + 1}`,
+                  courses: courses.map((courseRow, courseIndex) => {
+                    const course = courseRow as Partial<CourseRow>;
+                    return {
+                      name: course.name ?? `Course ${courseIndex + 1}`,
+                      grade: String(course.grade ?? "B"),
+                      credits: typeof course.credits === "number" ? course.credits : 1,
+                      courseType: course.courseType ?? "regular",
+                    };
+                  }),
+                };
+              }),
+            });
+          }}
+        />
+      )}
+      <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
     </div>
   );
 }

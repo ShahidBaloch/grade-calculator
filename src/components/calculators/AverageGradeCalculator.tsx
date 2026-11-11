@@ -89,26 +89,6 @@ export function AverageGradeCalculator() {
 
   return (
     <div className="calculator-print-area space-y-6">
-      <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
-      {examples.length > 0 && (
-        <ExampleScenarios
-          examples={examples}
-          onSelect={(values) => {
-            if (!Array.isArray(values.items)) return;
-            setState({
-              scoreMode: (values.scoreMode as ScoreMode) ?? "percentage",
-              items: values.items.map((row, index) => {
-                const item = row as Partial<AverageRow>;
-                return {
-                  name: item.name ?? `Score ${index + 1}`,
-                  score: item.score ?? 0,
-                  maxPoints: item.maxPoints ?? 100,
-                };
-              }),
-            });
-          }}
-        />
-      )}
       <ScaleSelector />
       <div className="space-y-2">
         <Label>Score format</Label>
@@ -240,6 +220,26 @@ export function AverageGradeCalculator() {
       {getPrimaryFlow("average-grade-calculator") && result.data && (
         <NextStepCard flow={getPrimaryFlow("average-grade-calculator")!} />
       )}
+      {examples.length > 0 && (
+        <ExampleScenarios
+          examples={examples}
+          onSelect={(values) => {
+            if (!Array.isArray(values.items)) return;
+            setState({
+              scoreMode: (values.scoreMode as ScoreMode) ?? "percentage",
+              items: values.items.map((row, index) => {
+                const item = row as Partial<AverageRow>;
+                return {
+                  name: item.name ?? `Score ${index + 1}`,
+                  score: item.score ?? 0,
+                  maxPoints: item.maxPoints ?? 100,
+                };
+              }),
+            });
+          }}
+        />
+      )}
+      <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
     </div>
   );
 }

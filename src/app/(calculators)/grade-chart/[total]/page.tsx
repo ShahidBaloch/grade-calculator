@@ -86,7 +86,7 @@ export default async function QuestionChartPage({ params }: PageProps) {
     <>
       <BreadcrumbJsonLd items={breadcrumbs} />
       <JsonLd data={webPageJsonLd({ name: title, description, path })} />
-      <ContentPageLayout title={`Grading Scale for ${total} Questions`} description={description} breadcrumbs={breadcrumbs}>
+      <ContentPageLayout title={`Grading Scale for ${total} Questions`} description={description} breadcrumbs={breadcrumbs} richText>
         <p>
           On a {total}-question test where every question counts the same, each question is worth{" "}
           <strong>{pct(perQuestion)}</strong>. One wrong answer gives {pct(((total - 1) / total) * 100)}, a passing

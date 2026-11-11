@@ -50,25 +50,6 @@ export function CanvasGradeCalculator() {
 
   return (
     <div className="calculator-print-area space-y-6">
-      <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
-      {examples.length > 0 && (
-        <ExampleScenarios
-          examples={examples}
-          onSelect={(values) => {
-            if (!Array.isArray(values.groups)) return;
-            updateGroups(
-              values.groups.map((row, index) => {
-                const group = row as { name?: string; score?: number; current?: number; weight?: number };
-                return {
-                  name: group.name ?? `Group ${index + 1}`,
-                  score: typeof group.score === "number" ? group.score : (group.current ?? 0),
-                  weight: typeof group.weight === "number" ? group.weight : 0,
-                };
-              }),
-            );
-          }}
-        />
-      )}
       <ScaleSelector />
       <p className="text-sm text-[var(--color-text-muted)]">
         Enter each Canvas assignment group with its average score and weight percentage.
@@ -133,6 +114,25 @@ export function CanvasGradeCalculator() {
       {getPrimaryFlow("canvas-grade-calculator") && result.status === "valid" && (
         <NextStepCard flow={getPrimaryFlow("canvas-grade-calculator")!} />
       )}
+      {examples.length > 0 && (
+        <ExampleScenarios
+          examples={examples}
+          onSelect={(values) => {
+            if (!Array.isArray(values.groups)) return;
+            updateGroups(
+              values.groups.map((row, index) => {
+                const group = row as { name?: string; score?: number; current?: number; weight?: number };
+                return {
+                  name: group.name ?? `Group ${index + 1}`,
+                  score: typeof group.score === "number" ? group.score : (group.current ?? 0),
+                  weight: typeof group.weight === "number" ? group.weight : 0,
+                };
+              }),
+            );
+          }}
+        />
+      )}
+      <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
     </div>
   );
 }

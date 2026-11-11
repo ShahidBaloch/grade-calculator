@@ -5,6 +5,8 @@ interface ContentPageLayoutProps {
   title: string;
   description?: string;
   breadcrumbs: BreadcrumbItem[];
+  /** Style plain h2/p/ul/ol/table children (.gc-prose) for pages that write unclassed markup. */
+  richText?: boolean;
   children: React.ReactNode;
 }
 
@@ -12,6 +14,7 @@ export function ContentPageLayout({
   title,
   description,
   breadcrumbs,
+  richText = false,
   children,
 }: ContentPageLayoutProps) {
   return (
@@ -23,7 +26,7 @@ export function ContentPageLayout({
           <p className="mt-2 text-lg text-[var(--color-text-muted)]">{description}</p>
         )}
       </header>
-      <div className="prose prose-slate mt-8 max-w-none dark:prose-invert">{children}</div>
+      <div className={richText ? "gc-prose mt-6" : "mt-8"}>{children}</div>
     </article>
   );
 }

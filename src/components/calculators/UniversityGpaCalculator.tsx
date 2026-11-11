@@ -63,7 +63,6 @@ export function UniversityGpaCalculator({ slug }: { slug: CaUniversityProfile["s
 
   return (
     <div className="calculator-print-area space-y-6">
-      <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
       {slug === "omsas" && (
         <div className="space-y-2">
           <Label htmlFor="omsas-university">University on your transcript</Label>
@@ -171,6 +170,7 @@ export function UniversityGpaCalculator({ slug }: { slug: CaUniversityProfile["s
         )}
       </div>
       {data && <FormulaBreakdown steps={data.formulaSteps} />}
+      <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
     </div>
   );
 }

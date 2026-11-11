@@ -38,22 +38,6 @@ export function RaiseGpaCalculator() {
 
   return (
     <div className="calculator-print-area space-y-6">
-      <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
-      {examples.length > 0 && (
-        <ExampleScenarios
-          examples={examples}
-          onSelect={(values) =>
-            setState({
-              currentGpa: typeof values.currentGpa === "number" ? values.currentGpa : state.currentGpa,
-              currentCredits:
-                typeof values.currentCredits === "number" ? values.currentCredits : state.currentCredits,
-              targetGpa: typeof values.targetGpa === "number" ? values.targetGpa : state.targetGpa,
-              futureCredits:
-                typeof values.futureCredits === "number" ? values.futureCredits : state.futureCredits,
-            })
-          }
-        />
-      )}
       <ScaleSelector />
       <p className="text-sm text-[var(--color-text-muted)]">
         Impossible is judged against this scale&apos;s ceiling ({maxGpa.toFixed(1)}).
@@ -119,6 +103,22 @@ export function RaiseGpaCalculator() {
       {getPrimaryFlow("raise-gpa-calculator") && data && (
         <NextStepCard flow={getPrimaryFlow("raise-gpa-calculator")!} />
       )}
+      {examples.length > 0 && (
+        <ExampleScenarios
+          examples={examples}
+          onSelect={(values) =>
+            setState({
+              currentGpa: typeof values.currentGpa === "number" ? values.currentGpa : state.currentGpa,
+              currentCredits:
+                typeof values.currentCredits === "number" ? values.currentCredits : state.currentCredits,
+              targetGpa: typeof values.targetGpa === "number" ? values.targetGpa : state.targetGpa,
+              futureCredits:
+                typeof values.futureCredits === "number" ? values.futureCredits : state.futureCredits,
+            })
+          }
+        />
+      )}
+      <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
     </div>
   );
 }

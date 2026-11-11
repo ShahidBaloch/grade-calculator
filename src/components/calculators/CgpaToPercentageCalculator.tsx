@@ -83,25 +83,6 @@ export function CgpaToPercentageCalculator({
 
   return (
     <div className="calculator-print-area space-y-6">
-      <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
-      {examples.length > 0 && (
-        <ExampleScenarios
-          examples={examples}
-          onSelect={(values) =>
-            setState({
-              mode:
-                values.mode === "percent-to-cgpa" || values.mode === "cgpa-to-percent"
-                  ? values.mode
-                  : state.mode,
-              formulaId:
-                typeof values.formulaId === "string"
-                  ? (values.formulaId as CgpaFormulaId)
-                  : state.formulaId,
-              value: typeof values.value === "number" ? values.value : state.value,
-            })
-          }
-        />
-      )}
 
       <div className="space-y-2">
         <Label htmlFor="cgpa-mode">Conversion</Label>
@@ -184,6 +165,25 @@ export function CgpaToPercentageCalculator({
       {getPrimaryFlow(storageKey) && result.status === "valid" && (
         <NextStepCard flow={getPrimaryFlow(storageKey)!} />
       )}
+      {examples.length > 0 && (
+        <ExampleScenarios
+          examples={examples}
+          onSelect={(values) =>
+            setState({
+              mode:
+                values.mode === "percent-to-cgpa" || values.mode === "cgpa-to-percent"
+                  ? values.mode
+                  : state.mode,
+              formulaId:
+                typeof values.formulaId === "string"
+                  ? (values.formulaId as CgpaFormulaId)
+                  : state.formulaId,
+              value: typeof values.value === "number" ? values.value : state.value,
+            })
+          }
+        />
+      )}
+      <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
     </div>
   );
 }

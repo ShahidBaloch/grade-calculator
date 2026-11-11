@@ -63,20 +63,6 @@ export function CumulativeGpaCalculator() {
 
   return (
     <div className="calculator-print-area space-y-6">
-      <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
-      {examples.length > 0 && (
-        <ExampleScenarios
-          examples={examples}
-          onSelect={(values) =>
-            setState({
-              ...state,
-              previousGpa: typeof values.previousGpa === "number" ? values.previousGpa : state.previousGpa,
-              previousCredits:
-                typeof values.previousCredits === "number" ? values.previousCredits : state.previousCredits,
-            })
-          }
-        />
-      )}
       <ScaleSelector />
       <AustralianGpaNotice />
       <div className="grid gap-4 sm:grid-cols-2">
@@ -166,6 +152,20 @@ export function CumulativeGpaCalculator() {
       {getPrimaryFlow("cumulative-gpa-calculator") && result.status === "valid" && (
         <NextStepCard flow={getPrimaryFlow("cumulative-gpa-calculator")!} handoff={{ courses }} />
       )}
+      {examples.length > 0 && (
+        <ExampleScenarios
+          examples={examples}
+          onSelect={(values) =>
+            setState({
+              ...state,
+              previousGpa: typeof values.previousGpa === "number" ? values.previousGpa : state.previousGpa,
+              previousCredits:
+                typeof values.previousCredits === "number" ? values.previousCredits : state.previousCredits,
+            })
+          }
+        />
+      )}
+      <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
     </div>
   );
 }

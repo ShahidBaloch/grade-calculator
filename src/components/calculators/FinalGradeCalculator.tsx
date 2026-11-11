@@ -97,24 +97,6 @@ export function FinalGradeCalculator() {
 
   return (
     <div className="calculator-print-area space-y-6">
-      <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
-      <ExampleScenarios
-        examples={calculatorBySlug["final-grade-calculator"].examples}
-        activeValues={{
-          currentGrade: state.currentGrade,
-          desiredGrade: state.desiredGrade,
-          finalWeight: state.finalWeight,
-        }}
-        onSelect={(values) => {
-          setState({
-            ...state,
-            mode: "required",
-            ...(typeof values.currentGrade === "number" ? { currentGrade: values.currentGrade } : {}),
-            ...(typeof values.desiredGrade === "number" ? { desiredGrade: values.desiredGrade } : {}),
-            ...(typeof values.finalWeight === "number" ? { finalWeight: values.finalWeight } : {}),
-          });
-        }}
-      />
       <div className="space-y-2">
         <Label htmlFor="final-grade-mode">Calculation mode</Label>
         <Select
@@ -320,6 +302,24 @@ export function FinalGradeCalculator() {
       {getPrimaryFlow("final-grade-calculator") && result.status === "valid" && (
         <NextStepCard flow={getPrimaryFlow("final-grade-calculator")!} />
       )}
+      <ExampleScenarios
+        examples={calculatorBySlug["final-grade-calculator"].examples}
+        activeValues={{
+          currentGrade: state.currentGrade,
+          desiredGrade: state.desiredGrade,
+          finalWeight: state.finalWeight,
+        }}
+        onSelect={(values) => {
+          setState({
+            ...state,
+            mode: "required",
+            ...(typeof values.currentGrade === "number" ? { currentGrade: values.currentGrade } : {}),
+            ...(typeof values.desiredGrade === "number" ? { desiredGrade: values.desiredGrade } : {}),
+            ...(typeof values.finalWeight === "number" ? { finalWeight: values.finalWeight } : {}),
+          });
+        }}
+      />
+      <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
     </div>
   );
 }

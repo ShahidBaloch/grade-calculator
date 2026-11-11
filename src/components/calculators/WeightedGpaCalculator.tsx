@@ -47,26 +47,6 @@ export function WeightedGpaCalculator() {
 
   return (
     <div className="calculator-print-area space-y-6">
-      <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
-      {examples.length > 0 && (
-        <ExampleScenarios
-          examples={examples}
-          onSelect={(values) => {
-            if (!Array.isArray(values.courses)) return;
-            updateCourses(
-              values.courses.map((row, index) => {
-                const course = row as Partial<CourseRow>;
-                return {
-                  name: course.name ?? `Course ${index + 1}`,
-                  grade: String(course.grade ?? "B"),
-                  credits: typeof course.credits === "number" ? course.credits : 3,
-                  courseType: course.courseType ?? "regular",
-                };
-              }),
-            );
-          }}
-        />
-      )}
       <ScaleSelector />
       <p className="text-sm text-[var(--color-text-muted)]">
         Honors courses get +0.5 GPA points; AP/IB courses get +1.0. Check your school&apos;s policy.
@@ -153,6 +133,26 @@ export function WeightedGpaCalculator() {
       {getPrimaryFlow("weighted-gpa-calculator") && result.status === "valid" && (
         <NextStepCard flow={getPrimaryFlow("weighted-gpa-calculator")!} />
       )}
+      {examples.length > 0 && (
+        <ExampleScenarios
+          examples={examples}
+          onSelect={(values) => {
+            if (!Array.isArray(values.courses)) return;
+            updateCourses(
+              values.courses.map((row, index) => {
+                const course = row as Partial<CourseRow>;
+                return {
+                  name: course.name ?? `Course ${index + 1}`,
+                  grade: String(course.grade ?? "B"),
+                  credits: typeof course.credits === "number" ? course.credits : 3,
+                  courseType: course.courseType ?? "regular",
+                };
+              }),
+            );
+          }}
+        />
+      )}
+      <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
     </div>
   );
 }

@@ -38,17 +38,6 @@ export function LetterGradeCalculator() {
 
   return (
     <div className="calculator-print-area space-y-6">
-      <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
-      {examples.length > 0 && (
-        <ExampleScenarios
-          examples={examples}
-          onSelect={(values) =>
-            setState({
-              letter: typeof values.letter === "string" ? values.letter : state.letter,
-            })
-          }
-        />
-      )}
       <ScaleSelector />
       {scaleId === "uk-degree" && (
         <p className="rounded-md border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-3 text-sm text-[var(--color-text-muted)]">
@@ -82,6 +71,17 @@ export function LetterGradeCalculator() {
       {getPrimaryFlow("letter-grade-calculator") && result.status === "valid" && (
         <NextStepCard flow={getPrimaryFlow("letter-grade-calculator")!} />
       )}
+      {examples.length > 0 && (
+        <ExampleScenarios
+          examples={examples}
+          onSelect={(values) =>
+            setState({
+              letter: typeof values.letter === "string" ? values.letter : state.letter,
+            })
+          }
+        />
+      )}
+      <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
     </div>
   );
 }

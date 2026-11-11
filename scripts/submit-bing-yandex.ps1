@@ -16,6 +16,15 @@ $PriorityUrls = @(
   "$SiteOrigin/test-grade-calculator",
   "$SiteOrigin/grade-chart",
   "$SiteOrigin/calculators",
+  "$SiteOrigin/grade-curve-calculator",
+  "$SiteOrigin/grading-scales",
+  "$SiteOrigin/grading-scales/us",
+  "$SiteOrigin/grading-scales/10-point",
+  "$SiteOrigin/grading-scales/7-point",
+  "$SiteOrigin/grading-scales/high-school",
+  "$SiteOrigin/grading-scales/college",
+  "$SiteOrigin/high-school-gpa-calculator",
+  "$SiteOrigin/cumulative-gpa-calculator",
   "$SiteOrigin/uk/gcse-grade-calculator",
   "$SiteOrigin/about",
   "$SiteOrigin/disclaimer"
@@ -25,7 +34,7 @@ Write-Host "=== Yandex sitemap ping ==="
 $yandexPing = "https://webmaster.yandex.com/ping?sitemap=$([uri]::EscapeDataString($Sitemap))"
 try {
   $r = Invoke-WebRequest -Uri $yandexPing -Method GET -UseBasicParsing -TimeoutSec 60
-  Write-Host "Yandex ping status: $($r.StatusCode) body: $($r.Content.Trim())"
+  Write-Host "Yandex ping status: $($r.StatusCode) body: $("$($r.Content)".Trim())"
 } catch {
   Write-Warning "Yandex ping: $($_.Exception.Message)"
 }

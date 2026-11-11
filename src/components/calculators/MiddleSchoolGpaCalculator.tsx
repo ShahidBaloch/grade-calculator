@@ -46,7 +46,6 @@ export function MiddleSchoolGpaCalculator() {
 
   return (
     <div className="calculator-print-area space-y-6">
-      <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
       <p className="rounded-md border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-3 text-sm text-[var(--color-text-muted)]">
         Every class counts the same. There are no credit hours and no Honors or AP bonus. If your
         school ignores plus and minus, enter A, B, C, D, or F.
@@ -115,6 +114,7 @@ export function MiddleSchoolGpaCalculator() {
           </p>
         </div>
       )}
+      <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
     </div>
   );
 }

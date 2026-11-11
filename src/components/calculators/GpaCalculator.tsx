@@ -47,26 +47,6 @@ export function GpaCalculator() {
 
   return (
     <div className="calculator-print-area space-y-6">
-      <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
-      {examples.length > 0 && (
-        <ExampleScenarios
-          examples={examples}
-          onSelect={(values) => {
-            if (Array.isArray(values.courses)) {
-              setCourses(
-                values.courses.map((row, index) => {
-                  const course = row as { name?: string; grade?: string | number; credits?: number };
-                  return {
-                    name: course.name ?? `Course ${index + 1}`,
-                    grade: String(course.grade ?? "B"),
-                    credits: typeof course.credits === "number" ? course.credits : 3,
-                  };
-                }),
-              );
-            }
-          }}
-        />
-      )}
       <ScaleSelector />
       <AustralianGpaNotice />
       <div className="hidden gap-2 pr-12 text-xs text-[var(--color-text-muted)] sm:grid sm:grid-cols-3">
@@ -143,6 +123,26 @@ export function GpaCalculator() {
       {getPrimaryFlow("gpa-calculator") && result.status === "valid" && (
         <NextStepCard flow={getPrimaryFlow("gpa-calculator")!} handoff={{ courses }} />
       )}
+      {examples.length > 0 && (
+        <ExampleScenarios
+          examples={examples}
+          onSelect={(values) => {
+            if (Array.isArray(values.courses)) {
+              setCourses(
+                values.courses.map((row, index) => {
+                  const course = row as { name?: string; grade?: string | number; credits?: number };
+                  return {
+                    name: course.name ?? `Course ${index + 1}`,
+                    grade: String(course.grade ?? "B"),
+                    credits: typeof course.credits === "number" ? course.credits : 3,
+                  };
+                }),
+              );
+            }
+          }}
+        />
+      )}
+      <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
     </div>
   );
 }

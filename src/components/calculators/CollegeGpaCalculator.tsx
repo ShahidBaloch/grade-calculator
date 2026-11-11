@@ -54,27 +54,6 @@ export function CollegeGpaCalculator() {
 
   return (
     <div className="calculator-print-area space-y-6">
-      <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
-      {examples.length > 0 && (
-        <ExampleScenarios
-          examples={examples}
-          onSelect={(values) => {
-            if (Array.isArray(values.courses)) {
-              updateCourses(
-                values.courses.map((row, index) => {
-                  const course = row as Partial<CourseRow>;
-                  return {
-                    name: course.name ?? `Course ${index + 1}`,
-                    grade: String(course.grade ?? "B"),
-                    credits: typeof course.credits === "number" ? course.credits : 3,
-                    countsTowardGpa: course.countsTowardGpa !== false,
-                  };
-                }),
-              );
-            }
-          }}
-        />
-      )}
       <ScaleSelector />
       <p className="text-sm text-[var(--color-text-muted)]">
         Credit hours usually range from 1–5. Uncheck pass/fail, audits, and other courses your registrar
@@ -161,6 +140,27 @@ export function CollegeGpaCalculator() {
       {getPrimaryFlow("college-gpa-calculator") && result.status === "valid" && (
         <NextStepCard flow={getPrimaryFlow("college-gpa-calculator")!} />
       )}
+      {examples.length > 0 && (
+        <ExampleScenarios
+          examples={examples}
+          onSelect={(values) => {
+            if (Array.isArray(values.courses)) {
+              updateCourses(
+                values.courses.map((row, index) => {
+                  const course = row as Partial<CourseRow>;
+                  return {
+                    name: course.name ?? `Course ${index + 1}`,
+                    grade: String(course.grade ?? "B"),
+                    credits: typeof course.credits === "number" ? course.credits : 3,
+                    countsTowardGpa: course.countsTowardGpa !== false,
+                  };
+                }),
+              );
+            }
+          }}
+        />
+      )}
+      <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
     </div>
   );
 }

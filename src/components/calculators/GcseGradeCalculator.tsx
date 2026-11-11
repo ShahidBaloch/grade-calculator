@@ -37,17 +37,6 @@ export function GcseGradeCalculator() {
 
   return (
     <div className="calculator-print-area space-y-6">
-      <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
-      {examples.length > 0 && (
-        <ExampleScenarios
-          examples={examples}
-          onSelect={(values) =>
-            setState({
-              percent: typeof values.percent === "number" ? values.percent : state.percent,
-            })
-          }
-        />
-      )}
       <p className="text-sm text-[var(--color-text-muted)]">
         Convert a percentage to the England 9–1 GCSE scale. Boundaries are educational defaults, not
         this year&apos;s official paper.
@@ -101,6 +90,17 @@ export function GcseGradeCalculator() {
       {getPrimaryFlow("gcse-grade-calculator") && data && (
         <NextStepCard flow={getPrimaryFlow("gcse-grade-calculator")!} />
       )}
+      {examples.length > 0 && (
+        <ExampleScenarios
+          examples={examples}
+          onSelect={(values) =>
+            setState({
+              percent: typeof values.percent === "number" ? values.percent : state.percent,
+            })
+          }
+        />
+      )}
+      <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
     </div>
   );
 }

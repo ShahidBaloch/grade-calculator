@@ -47,19 +47,6 @@ export function TestGradeCalculator() {
 
   return (
     <div className="calculator-print-area space-y-6">
-      <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
-      <ExampleScenarios
-        examples={calculatorBySlug["test-grade-calculator"].examples}
-        onSelect={(values) => {
-          setState({
-            ...state,
-            totalQuestions: typeof values.totalQuestions === "number" ? values.totalQuestions : totalQuestions,
-            inputMode: typeof values.correctAnswers === "number" ? "correct" : inputMode,
-            count: typeof values.correctAnswers === "number" ? values.correctAnswers : count,
-            bonusPoints: typeof values.bonusPoints === "number" ? values.bonusPoints : bonusPoints,
-          });
-        }}
-      />
       <ScaleSelector />
       <div className="flex gap-2">
         {(["correct", "wrong"] as const).map((mode) => (
@@ -121,6 +108,19 @@ export function TestGradeCalculator() {
       {getPrimaryFlow("test-grade-calculator") && result.status !== "error" && (
         <NextStepCard flow={getPrimaryFlow("test-grade-calculator")!} />
       )}
+      <ExampleScenarios
+        examples={calculatorBySlug["test-grade-calculator"].examples}
+        onSelect={(values) => {
+          setState({
+            ...state,
+            totalQuestions: typeof values.totalQuestions === "number" ? values.totalQuestions : totalQuestions,
+            inputMode: typeof values.correctAnswers === "number" ? "correct" : inputMode,
+            count: typeof values.correctAnswers === "number" ? values.correctAnswers : count,
+            bonusPoints: typeof values.bonusPoints === "number" ? values.bonusPoints : bonusPoints,
+          });
+        }}
+      />
+      <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
     </div>
   );
 }

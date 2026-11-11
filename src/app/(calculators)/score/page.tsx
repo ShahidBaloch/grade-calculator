@@ -29,7 +29,7 @@ export default function ScoreHubPage() {
     <>
       <BreadcrumbJsonLd items={breadcrumbs} />
       <JsonLd data={webPageJsonLd({ name: title, description, path: SCORE_HUB_PATH })} />
-      <ContentPageLayout title="Score Out of Total to Grade Calculator" description={description} breadcrumbs={breadcrumbs}>
+      <ContentPageLayout title="Score Out of Total to Grade Calculator" description={description} breadcrumbs={breadcrumbs} richText>
         <div className="not-prose my-6">
           <ScoreOutOfCalculator />
         </div>

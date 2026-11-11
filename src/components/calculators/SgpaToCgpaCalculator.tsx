@@ -31,26 +31,6 @@ export function SgpaToCgpaCalculator() {
 
   return (
     <div className="calculator-print-area space-y-6">
-      <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
-      {examples.length > 0 && (
-        <ExampleScenarios
-          examples={examples}
-          onSelect={(values) => {
-            if (Array.isArray(values.terms)) {
-              setTerms(
-                values.terms.map((row, index) => {
-                  const term = row as { label?: string; sgpa?: number; credits?: number };
-                  return {
-                    label: term.label ?? `Semester ${index + 1}`,
-                    sgpa: typeof term.sgpa === "number" ? term.sgpa : 0,
-                    credits: typeof term.credits === "number" ? term.credits : 0,
-                  };
-                }),
-              );
-            }
-          }}
-        />
-      )}
 
       <div className="hidden gap-2 text-xs text-[var(--color-text-muted)] sm:grid sm:grid-cols-3">
         <span>Semester</span>
@@ -132,6 +112,26 @@ export function SgpaToCgpaCalculator() {
       {getPrimaryFlow("sgpa-to-cgpa") && result.status === "valid" && (
         <NextStepCard flow={getPrimaryFlow("sgpa-to-cgpa")!} />
       )}
+      {examples.length > 0 && (
+        <ExampleScenarios
+          examples={examples}
+          onSelect={(values) => {
+            if (Array.isArray(values.terms)) {
+              setTerms(
+                values.terms.map((row, index) => {
+                  const term = row as { label?: string; sgpa?: number; credits?: number };
+                  return {
+                    label: term.label ?? `Semester ${index + 1}`,
+                    sgpa: typeof term.sgpa === "number" ? term.sgpa : 0,
+                    credits: typeof term.credits === "number" ? term.credits : 0,
+                  };
+                }),
+              );
+            }
+          }}
+        />
+      )}
+      <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
     </div>
   );
 }

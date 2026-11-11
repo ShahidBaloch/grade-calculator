@@ -83,7 +83,6 @@ export function UcCsuGpaCalculator({ slug = "uc-gpa-calculator", defaultSystem =
 
   return (
     <div className="calculator-print-area space-y-6">
-      <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
       <p className="rounded-md border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-3 text-sm text-[var(--color-text-muted)]">
         Planning estimate for California A–G GPA. One row is one semester. A year-long class is two
         rows. Pluses and minuses do not change the points.{" "}
@@ -255,6 +254,7 @@ export function UcCsuGpaCalculator({ slug = "uc-gpa-calculator", defaultSystem =
           </p>
         </div>
       )}
+      <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
     </div>
   );
 }

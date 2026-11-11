@@ -63,28 +63,6 @@ export function AtarCalculator({ preset }: { preset?: { authority: AtarAuthority
 
   return (
     <div className="calculator-print-area space-y-6">
-      <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
-      {examples.length > 0 && (
-        <ExampleScenarios
-          examples={examples}
-          onSelect={(values) => {
-            const nextSubjects = Array.isArray(values.subjects)
-              ? values.subjects.map((row, index) => {
-                  const subject = row as Partial<AtarSubject>;
-                  return {
-                    name: subject.name ?? `Subject ${index + 1}`,
-                    scaledScore: typeof subject.scaledScore === "number" ? subject.scaledScore : 70,
-                  };
-                })
-              : subjects;
-            setState({
-              ...state,
-              subjects: nextSubjects,
-              targetAtar: typeof values.targetAtar === "number" ? values.targetAtar : targetAtar,
-            });
-          }}
-        />
-      )}
       <p className="rounded-md border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-3 text-sm text-[var(--color-text-muted)]">
         Use <strong className="font-medium text-[var(--color-text)]">scaled</strong> subject scores
         (after state scaling), not raw school marks. Raw marks will overestimate or underestimate ATAR.
@@ -350,6 +328,28 @@ export function AtarCalculator({ preset }: { preset?: { authority: AtarAuthority
       {getPrimaryFlow("atar-calculator") && result.data && (
         <NextStepCard flow={getPrimaryFlow("atar-calculator")!} />
       )}
+      {examples.length > 0 && (
+        <ExampleScenarios
+          examples={examples}
+          onSelect={(values) => {
+            const nextSubjects = Array.isArray(values.subjects)
+              ? values.subjects.map((row, index) => {
+                  const subject = row as Partial<AtarSubject>;
+                  return {
+                    name: subject.name ?? `Subject ${index + 1}`,
+                    scaledScore: typeof subject.scaledScore === "number" ? subject.scaledScore : 70,
+                  };
+                })
+              : subjects;
+            setState({
+              ...state,
+              subjects: nextSubjects,
+              targetAtar: typeof values.targetAtar === "number" ? values.targetAtar : targetAtar,
+            });
+          }}
+        />
+      )}
+      <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
     </div>
   );
 }

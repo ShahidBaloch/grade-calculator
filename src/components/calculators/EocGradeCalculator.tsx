@@ -47,19 +47,6 @@ export function EocGradeCalculator({ preset }: EocGradeCalculatorProps = {}) {
 
   return (
     <div className="calculator-print-area space-y-6">
-      <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
-      {examples.length > 0 && (
-        <ExampleScenarios
-          examples={examples}
-          onSelect={(values) =>
-            setState({
-              currentGrade: typeof values.currentGrade === "number" ? values.currentGrade : state.currentGrade,
-              eocWeight: typeof values.eocWeight === "number" ? values.eocWeight : state.eocWeight,
-              targetGrade: typeof values.targetGrade === "number" ? values.targetGrade : state.targetGrade,
-            })
-          }
-        />
-      )}
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="space-y-2">
           <Label htmlFor="eoc-current-grade">Current course grade (%)</Label>
@@ -106,6 +93,19 @@ export function EocGradeCalculator({ preset }: EocGradeCalculatorProps = {}) {
       {getPrimaryFlow("eoc-grade-calculator") && data && (
         <NextStepCard flow={getPrimaryFlow("eoc-grade-calculator")!} />
       )}
+      {examples.length > 0 && (
+        <ExampleScenarios
+          examples={examples}
+          onSelect={(values) =>
+            setState({
+              currentGrade: typeof values.currentGrade === "number" ? values.currentGrade : state.currentGrade,
+              eocWeight: typeof values.eocWeight === "number" ? values.eocWeight : state.eocWeight,
+              targetGrade: typeof values.targetGrade === "number" ? values.targetGrade : state.targetGrade,
+            })
+          }
+        />
+      )}
+      <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
     </div>
   );
 }

@@ -39,30 +39,6 @@ export function DegreeClassificationCalculator() {
 
   return (
     <div className="calculator-print-area space-y-6">
-      <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
-      {examples.length > 0 && (
-        <ExampleScenarios
-          examples={examples}
-          onSelect={(values) => {
-            const nextModules = Array.isArray(values.modules)
-              ? values.modules.map((row, index) => {
-                  const courseModule = row as Partial<DegreeModule>;
-                  return {
-                    name: courseModule.name ?? `Module ${index + 1}`,
-                    mark: typeof courseModule.mark === "number" ? courseModule.mark : 60,
-                    credits: typeof courseModule.credits === "number" ? courseModule.credits : 20,
-                    year: courseModule.year === 2 || courseModule.year === 3 ? courseModule.year : 3,
-                  };
-                })
-              : modules;
-            setState({
-              modules: nextModules,
-              year2Weight: typeof values.year2Weight === "number" ? values.year2Weight : year2Weight,
-              year3Weight: typeof values.year3Weight === "number" ? values.year3Weight : year3Weight,
-            });
-          }}
-        />
-      )}
       <p className="text-sm text-[var(--color-text-muted)]">
         Enter module marks and credits. If you include both Year 2 and Year 3, we apply your year
         weights (common pattern: 40% / 60%).
@@ -166,6 +142,30 @@ export function DegreeClassificationCalculator() {
       {getPrimaryFlow("degree-classification-calculator") && result.status !== "error" && (
         <NextStepCard flow={getPrimaryFlow("degree-classification-calculator")!} />
       )}
+      {examples.length > 0 && (
+        <ExampleScenarios
+          examples={examples}
+          onSelect={(values) => {
+            const nextModules = Array.isArray(values.modules)
+              ? values.modules.map((row, index) => {
+                  const courseModule = row as Partial<DegreeModule>;
+                  return {
+                    name: courseModule.name ?? `Module ${index + 1}`,
+                    mark: typeof courseModule.mark === "number" ? courseModule.mark : 60,
+                    credits: typeof courseModule.credits === "number" ? courseModule.credits : 20,
+                    year: courseModule.year === 2 || courseModule.year === 3 ? courseModule.year : 3,
+                  };
+                })
+              : modules;
+            setState({
+              modules: nextModules,
+              year2Weight: typeof values.year2Weight === "number" ? values.year2Weight : year2Weight,
+              year3Weight: typeof values.year3Weight === "number" ? values.year3Weight : year3Weight,
+            });
+          }}
+        />
+      )}
+      <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
     </div>
   );
 }

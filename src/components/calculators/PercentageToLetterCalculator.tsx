@@ -30,17 +30,6 @@ export function PercentageToLetterCalculator() {
 
   return (
     <div className="calculator-print-area space-y-6">
-      <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
-      {examples.length > 0 && (
-        <ExampleScenarios
-          examples={examples}
-          onSelect={(values) =>
-            setState({
-              percent: typeof values.percent === "number" ? values.percent : state.percent,
-            })
-          }
-        />
-      )}
       <ScaleSelector />
       <div className="space-y-2">
         <Label htmlFor="percent-to-letter">Percentage</Label>
@@ -81,6 +70,17 @@ export function PercentageToLetterCalculator() {
           )}
         </>
       )}
+      {examples.length > 0 && (
+        <ExampleScenarios
+          examples={examples}
+          onSelect={(values) =>
+            setState({
+              percent: typeof values.percent === "number" ? values.percent : state.percent,
+            })
+          }
+        />
+      )}
+      <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
     </div>
   );
 }

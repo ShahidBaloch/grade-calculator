@@ -184,21 +184,48 @@ export default async function ScorePairPage({ params }: PageProps) {
       <JsonLd data={faqPageJsonLd(faqs)} />
       <ContentPageLayout
         title={`What Is ${score} Out of ${total} as a Grade?`}
-        description={description}
         breadcrumbs={breadcrumbs}
+        richText
       >
-        <p>
-          <strong>
-            {score} out of {total} = {formatPercent(f.percent)}
-          </strong>
-          , which is {article(f.letter)} <strong>{f.letter}</strong> on the common US grading scale
-          (
-          {f.wrong === 0
-            ? "a perfect score"
-            : `${parseFloat(f.wrong.toFixed(1))} point${f.wrong === 1 ? "" : "s"} missed`}
-          ).
-        </p>
-        <div className="not-prose my-6">
+        <div className="not-prose rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-5 sm:p-6">
+          <div className="flex flex-wrap items-center gap-4">
+            <p className="text-5xl font-bold tracking-tight sm:text-6xl">{formatPercent(f.percent)}</p>
+            <span
+              className="inline-flex h-14 min-w-14 items-center justify-center rounded-xl px-3 text-3xl font-bold"
+              style={{
+                background: `var(--grade-${f.letter[0].toLowerCase()}-bg)`,
+                color: `var(--grade-${f.letter[0].toLowerCase()}-text)`,
+              }}
+            >
+              {f.letter}
+            </span>
+          </div>
+          <p className="mt-3 text-lg leading-relaxed">
+            <strong>
+              {score} out of {total} is {formatPercent(f.percent)}
+            </strong>
+            , {article(f.letter)} <strong>{f.letter}</strong> on the common US 10-point grading scale.
+          </p>
+          <dl className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
+            {[
+              { label: "Points missed", value: f.wrong === 0 ? "None" : String(parseFloat(f.wrong.toFixed(1))) },
+              { label: "GPA points (4.0)", value: (f.gpa ?? 0).toFixed(1) },
+              { label: "Each point is worth", value: formatPercent(100 / total) },
+              {
+                label: f.next ? `To reach ${withArticle(f.next.letter)}` : "Next letter",
+                value: f.next ? `${f.pointsToNext} more point${f.pointsToNext === 1 ? "" : "s"}` : "Top band",
+              },
+            ].map((item) => (
+              <div key={item.label} className="rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)] p-3">
+                <dt className="text-xs text-[var(--color-text-muted)]">{item.label}</dt>
+                <dd className="mt-1 text-lg font-semibold">{item.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+
+        <h2>Check a different score</h2>
+        <div className="not-prose">
           <ScoreOutOfCalculatorLazy initialScore={score} initialTotal={total} />
         </div>
 
@@ -283,15 +310,23 @@ export default async function ScorePairPage({ params }: PageProps) {
         </div>
 
         <h2>Nearby scores out of {total}</h2>
-        <ul>
+        <ul className="not-prose grid gap-2 sm:grid-cols-2">
           {neighbors.map((p) => {
             const nf = facts(p);
             return (
               <li key={scoreSlug(p)}>
-                <Link href={scorePath(p)} prefetch={false}>
-                  {p.score} out of {total}
-                </Link>{" "}
-                = {formatPercent(nf.percent)} ({nf.letter})
+                <Link
+                  href={scorePath(p)}
+                  prefetch={false}
+                  className="flex min-h-11 items-center justify-between gap-3 rounded-lg border border-[var(--color-border)] px-3 py-2 hover:border-[var(--color-primary)]"
+                >
+                  <span className="font-medium text-[var(--color-primary)]">
+                    {p.score} out of {total}
+                  </span>
+                  <span className="text-sm text-[var(--color-text-muted)]">
+                    {formatPercent(nf.percent)} ({nf.letter})
+                  </span>
+                </Link>
               </li>
             );
           })}
@@ -300,13 +335,19 @@ export default async function ScorePairPage({ params }: PageProps) {
         {sameScore.length > 0 && (
           <>
             <h2>{score} out of other totals</h2>
-            <ul>
+            <ul className="not-prose grid gap-2 sm:grid-cols-2">
               {sameScore.map((p) => (
                 <li key={scoreSlug(p)}>
-                  <Link href={scorePath(p)} prefetch={false}>
-                    {score} out of {p.total}
-                  </Link>{" "}
-                  = {formatPercent((score / p.total) * 100)}
+                  <Link
+                    href={scorePath(p)}
+                    prefetch={false}
+                    className="flex min-h-11 items-center justify-between gap-3 rounded-lg border border-[var(--color-border)] px-3 py-2 hover:border-[var(--color-primary)]"
+                  >
+                    <span className="font-medium text-[var(--color-primary)]">
+                      {score} out of {p.total}
+                    </span>
+                    <span className="text-sm text-[var(--color-text-muted)]">{formatPercent((score / p.total) * 100)}</span>
+                  </Link>
                 </li>
               ))}
             </ul>

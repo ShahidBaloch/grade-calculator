@@ -48,7 +48,6 @@ export function UkDegreeToUsGpaReferenceCalculator() {
 
   return (
     <div className="calculator-print-area space-y-6">
-      <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
       <p className="rounded-md border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-3 text-sm text-[var(--color-text-muted)]">
         {UK_DEGREE_US_GPA_REFERENCE_DISCLAIMER}
       </p>
@@ -139,6 +138,7 @@ export function UkDegreeToUsGpaReferenceCalculator() {
           <p className="mt-2 text-xs text-[var(--color-text-muted)]">{result.data.rangeNote}</p>
         </div>
       )}
+      <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
     </div>
   );
 }

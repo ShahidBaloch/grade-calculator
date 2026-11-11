@@ -73,7 +73,7 @@ export default function PowerSchoolGradeCalculatorPage() {
       <JsonLd data={webPageJsonLd({ name: title, description, path })} />
       <JsonLd data={webApplicationJsonLd({ name: "PowerSchool Grade Calculator", description, path })} />
       <JsonLd data={faqPageJsonLd(faqs)} />
-      <ContentPageLayout title="PowerSchool Grade Calculator" description={description} breadcrumbs={breadcrumbs}>
+      <ContentPageLayout title="PowerSchool Grade Calculator" description={description} breadcrumbs={breadcrumbs} richText>
         <div className="not-prose my-6">
           <WeightedGradeCalculator storageKey="powerschool-grade-calculator" initialItems={powerSchoolCategories} />
         </div>

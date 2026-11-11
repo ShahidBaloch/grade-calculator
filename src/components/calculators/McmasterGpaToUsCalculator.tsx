@@ -24,7 +24,6 @@ export function McmasterGpaToUsCalculator() {
 
   return (
     <div className="calculator-print-area space-y-6">
-      <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
       <p className="rounded-md border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-3 text-sm text-[var(--color-text-muted)]">
         McMaster publishes a <strong className="font-medium text-[var(--color-text)]">lookup table</strong>{" "}
         from its 12-point GPA to a US 4.0 equivalent. Do not use 12-point GPA ÷ 3 — for example, 11
@@ -81,6 +80,7 @@ export function McmasterGpaToUsCalculator() {
           </p>
         </div>
       )}
+      <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
     </div>
   );
 }

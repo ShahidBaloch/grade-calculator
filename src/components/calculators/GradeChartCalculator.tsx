@@ -38,7 +38,6 @@ export function GradeChartCalculator() {
 
   return (
     <div className="calculator-print-area space-y-6">
-      <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
       <ScaleSelector />
 
       <div className="space-y-2">
@@ -177,6 +176,7 @@ export function GradeChartCalculator() {
       )}
 
       {getPrimaryFlow("grade-chart") && data && <NextStepCard flow={getPrimaryFlow("grade-chart")!} />}
+      <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
     </div>
   );
 }

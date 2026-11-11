@@ -38,21 +38,6 @@ export function CgpaToGpaCalculator() {
 
   return (
     <div className="calculator-print-area space-y-6">
-      <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
-      {examples.length > 0 && (
-        <ExampleScenarios
-          examples={examples}
-          onSelect={(values) =>
-            setState({
-              cgpa: typeof values.cgpa === "number" ? values.cgpa : state.cgpa,
-              methodId:
-                typeof values.methodId === "string"
-                  ? (values.methodId as CgpaToGpaMethodId)
-                  : state.methodId,
-            })
-          }
-        />
-      )}
 
       <div className="space-y-2">
         <Label htmlFor="cgpa10">10-point CGPA (0–10)</Label>
@@ -113,6 +98,21 @@ export function CgpaToGpaCalculator() {
       {getPrimaryFlow("cgpa-to-gpa") && result.status === "valid" && (
         <NextStepCard flow={getPrimaryFlow("cgpa-to-gpa")!} />
       )}
+      {examples.length > 0 && (
+        <ExampleScenarios
+          examples={examples}
+          onSelect={(values) =>
+            setState({
+              cgpa: typeof values.cgpa === "number" ? values.cgpa : state.cgpa,
+              methodId:
+                typeof values.methodId === "string"
+                  ? (values.methodId as CgpaToGpaMethodId)
+                  : state.methodId,
+            })
+          }
+        />
+      )}
+      <CalculatorToolbar onShare={shareUrl} onReset={resetState} copied={copied} />
     </div>
   );
 }
