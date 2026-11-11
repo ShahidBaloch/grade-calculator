@@ -1,9 +1,9 @@
 /** Visible copy that makes each indexable URL a different search intent. */
 export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: string }> = {
   "/": {
-    title: "Grade Calculator — EZ Grader & Grading Calc",
+    title: "Grade Calculator — Free EZ Grader for Teachers & Students",
     description:
-      "Free grade calculator for US teachers and students. Enter questions and wrong answers to get the score, percentage, letter grade, and a full grading chart.",
+      "Free grade calculator for US teachers and students. Enter total questions and wrong answers to instantly get the score, percentage, letter grade, and a full grading chart. No login required.",
   },
   "/weighted-grade-calculator": {
     title: "Weighted Grade Calculator — Weighted Average",
@@ -108,7 +108,7 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
   "/eoc-grade-calculator": {
     title: "EOC Calculator — End-of-Course Exam Score Needed",
     description:
-      "Free EOC calculator: enter your class average, your state's EOC weight (e.g. 30% in Florida) and goal grade to see the End-of-Course exam score you need.",
+      "Free EOC grade calculator: enter your class average, your state's EOC weight (e.g. 30% in Florida or 20% in Texas), and your goal grade to see the exact EOC exam score you need to pass.",
   },
   "/degree-classification-calculator": {
     title: "UK Degree Classification Calculator — 1st, 2:1",

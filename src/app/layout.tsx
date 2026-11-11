@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { GradeInputPrivacyNotice } from "@/components/content/GradeInputPrivacyNotice";
-import { AdSlots } from "@/components/layout/AdSlots";
+// import { AdSlots } from "@/components/layout/AdSlots"; // ads temporarily disabled
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { HeaderSeoNav } from "@/components/layout/HeaderSeoNav";
@@ -45,7 +45,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <main id="main-content" tabIndex={-1}>
         {children}
       </main>
-      <AdSlots />
+      {/* <AdSlots /> */}
       <Footer />
       <DeferredToolSwitcher />
     </GradingScaleProvider>
