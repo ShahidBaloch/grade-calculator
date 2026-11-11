@@ -6,9 +6,9 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
       "Free grade calculator for US teachers and students. Enter total questions and wrong answers to instantly get the score, percentage, letter grade, and a full grading chart. No login required.",
   },
   "/weighted-grade-calculator": {
-    title: "Weighted Grade Calculator — Weighted Average",
+    title: "Weighted Grade Calculator — Grade by Category & Weight",
     description:
-      "Free weighted grade calculator: find your weighted average from each category or grading period and its weight, and see your class grade update instantly.",
+      "Free weighted grade calculator: enter each grading category (homework, tests, final exam) with its percentage weight and score. Instantly calculates your overall weighted class grade and letter grade.",
   },
   "/test-grade-calculator": {
     title: "Test & Exam Grade Calculator — Score Any Quiz",
@@ -16,9 +16,9 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
       "Calculate test or exam grades from correct or wrong answers. See what 11 out of 15 or 12 out of 20 is as a percentage and letter grade, with bonus points.",
   },
   "/gpa-calculator": {
-    title: "GPA Calculator — Semester & Term GPA",
+    title: "GPA Calculator — Semester GPA from Grades & Credits",
     description:
-      "Free GPA calculator for semester and term GPA. Add letter grades or percentages; leave every course at the same credits to average without credit hours.",
+      "Free GPA calculator: add your letter grades or percentages and credit hours to calculate your semester GPA instantly. Works for college and high school on a standard 4.0 scale.",
   },
   "/average-grade-calculator": {
     title: "Average Grade Calculator — Test & Class Average",
@@ -31,9 +31,9 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
       "Free printable grade chart: every score out of 10, 20, 50, 100, 150, 200, or any total, with its percentage, letter grade, and points needed per grade.",
   },
   "/final-grade-calculator": {
-    title: "Final Grade Calculator — Midterm & Final",
+    title: "Final Grade Calculator — Score Needed to Pass",
     description:
-      "Find the score you need on your final exam or midterm. Enter your current grade, the exam weight, and your target grade to see the score you need.",
+      "Find the exam score you need to get the grade you want. Enter your current class grade, the final exam weight, and your target grade — the final grade calculator shows the exact score you need to pass or ace the class.",
   },
   "/uc-gpa-calculator": {
     title: "UC GPA Calculator — Capped & Unweighted A–G GPA",
@@ -51,9 +51,9 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
       "Free middle school and junior high GPA calculator. Enter each class letter grade. Every class counts the same — no credit hours and no Honors or AP bonus.",
   },
   "/cumulative-gpa-calculator": {
-    title: "Cumulative GPA Calculator — Multiple Semester GPA",
+    title: "Cumulative GPA Calculator — Combine Semesters into One GPA",
     description:
-      "Combine two or more semesters into one cumulative (accumulated) GPA. Enter each term's GPA and credit hours, or add courses directly. Works on any 4.0 scale.",
+      "Free cumulative GPA calculator: combine two or more semester GPAs into one overall GPA. Enter each term's GPA and credit hours to find your running cumulative GPA for college or high school on any 4.0 scale.",
   },
   "/weighted-gpa-calculator": {
     title: "Weighted GPA Calculator — Honors AP & IB",
@@ -66,9 +66,9 @@ export const DISTINCT_PAGE_COPY: Record<string, { title: string; description: st
       "Find how many credit hours and what grade you need to reach your target GPA. Enter current GPA and credits, set a goal, and plan semester by semester.",
   },
   "/high-school-gpa-calculator": {
-    title: "High School GPA Calculator — Weighted & Unw.",
+    title: "High School GPA Calculator — 4-Year Weighted & Unweighted",
     description:
-      "Calculate high school GPA by semester with optional Honors and AP/IB bonus points. Tracks cumulative GPA over four years on a 4.0 or 5.0 scale.",
+      "Free high school GPA calculator for all four years. Enter each class letter grade with optional Honors (+0.5) or AP/IB (+1.0) bonus points to find your weighted and unweighted high school GPA on a 4.0 or 5.0 scale.",
   },
   "/college-gpa-calculator": {
     title: "College GPA Calculator — Credit-Hour GPA",
