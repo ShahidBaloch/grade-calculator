@@ -122,7 +122,6 @@ export function WeightedGradeCalculator({
 
   return (
     <div className="calculator-print-area space-y-6">
-      <ScaleSelector />
       <div className="grid gap-4 sm:grid-cols-[3fr_2fr]">
         <ModeButtons
           label="Score format"
@@ -247,6 +246,7 @@ export function WeightedGradeCalculator({
       {result.warnings?.map((w) => (
         <p key={w} className="text-sm text-[var(--color-warning)]">{w}</p>
       ))}
+      <ScaleSelector />
       <ResultDisplay
         label="Weighted average"
         percent={result.data?.weightedAverage}

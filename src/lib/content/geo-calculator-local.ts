@@ -27,7 +27,7 @@ export interface GeoCalculatorLocal {
   faqs: FaqItem[];
 }
 
-type CountryCode = "ca" | "au" | "nz" | "in" | "pk";
+type CountryCode = "ca" | "au" | "nz" | "in" | "pk" | "uk";
 
 interface CountryProfile {
   /** Short scale name for running text. */
@@ -383,13 +383,81 @@ const COUNTRY: Record<CountryCode, CountryProfile> = {
       ],
     },
   },
+  uk: {
+    scaleName: "UK classification",
+    weightLabel: "credits",
+    // UK hubs have no GPA tools (they redirect to the degree classification calculator).
+    term: [],
+    prior: { gpa: 0, weight: 0 },
+    faqs: [
+      {
+        question: "What percentage is a First, 2:1, 2:2 and Third?",
+        answer:
+          "The common UK pattern is 70% and above for a First, 60–69% for an Upper Second (2:1), 50–59% for a Lower Second (2:2) and 40–49% for a Third. Below 40% is a fail at undergraduate level. Your programme handbook has the exact rules.",
+      },
+      {
+        question: "Is 40% a pass at a UK university?",
+        answer:
+          "For most undergraduate modules, yes: 40% is the pass mark. Taught master's modules usually need 50%. Some modules also set a minimum mark for each piece of assessment, so check the module handbook.",
+      },
+      {
+        question: "Do UK universities use A–F letter grades?",
+        answer:
+          "Mostly not. UK universities report a percentage mark for each module and a degree classification at the end, and a few use their own alphanumeric scales. If an overseas form asks for a letter grade or GPA, send the transcript as issued and let the receiving institution convert it.",
+      },
+    ],
+    dropFaq: /Australian|India|Pakistan|CGPA|O grade|\bGPA\b|4\.0/i,
+    outlineLabel: "module handbook",
+    finalTerm: "exam",
+    finalCase: { current: 62, weight: 50, target: "First (1st)" },
+    assessment: [
+      ["Coursework essay", 64, 40],
+      ["Presentation", 68, 10],
+      ["Exam", 58, 50],
+    ],
+    syllabusFaqs: {
+      "final-grade-calculator": [
+        {
+          question: "What mark do I need in my exam to get a 2:1 in a module?",
+          answer:
+            "Enter your coursework mark, the exam weighting and 60% as the target. With 62% so far and an exam worth 50%, you need 58% in the exam to finish the module on 60%. For a First (70%) the same module needs 78%.",
+        },
+        {
+          question: "Do I have to pass the exam to pass the module?",
+          answer:
+            "It depends on the module. Many only need an overall 40%, but some set a qualifying mark for the exam or for each component. This calculator does the weighting only, so read the assessment rules in your module handbook.",
+        },
+      ],
+      "weighted-grade-calculator": [
+        {
+          question: "Where do I find my assessment weightings?",
+          answer:
+            "In the module handbook or module specification, usually on the virtual learning environment. It lists each piece of coursework and the exam with its percentage of the module mark. Enter those weightings here.",
+        },
+        {
+          question: "How does a module mark feed into my degree classification?",
+          answer:
+            "Module marks are averaged by credits, and later years usually count for more than earlier ones; the first year often does not count at all. Take your module marks into the degree classification calculator to see the overall result.",
+        },
+      ],
+    },
+  },
 };
 
 const fmt = (value: number, places = 2) => value.toFixed(places);
 
-function band(scale: GradingScale, label: string) {
+/** False for scales that only have percentage bands (UK degree classes carry no grade points). */
+const hasGradePoints = (scale: GradingScale) => scale.bands.some((b) => b.gpa != null);
+
+function gradeBand(scale: GradingScale, label: string) {
   const found = scale.bands.find((b) => b.letter === label);
-  if (!found || found.gpa == null) throw new Error(`${label} is not a graded band on ${scale.id}`);
+  if (!found) throw new Error(`${label} is not a band on ${scale.id}`);
+  return found;
+}
+
+function band(scale: GradingScale, label: string) {
+  const found = gradeBand(scale, label);
+  if (found.gpa == null) throw new Error(`${label} is not a graded band on ${scale.id}`);
   return found as typeof found & { gpa: number };
 }
 
@@ -405,6 +473,17 @@ function termResult(scale: GradingScale, profile: CountryProfile) {
 
 function scaleTableSection(hubName: string, scale: GradingScale): GeoPageSection {
   const ranged = scale.bands.some((b) => b.gpaLabel);
+  if (!hasGradePoints(scale)) {
+    return {
+      heading: `${hubName} grading scale used on this page`,
+      paragraphs: [`Marks are read against the ${scale.name} preset, where ${scale.passPercent}% is the lowest pass.`],
+      table: {
+        caption: `${scale.name} — percentage bands`,
+        head: ["Classification", "Percentage"],
+        rows: scale.bands.filter((b) => b.min >= 0).map((b) => [b.letter, getBandRangeLabel(b)]),
+      },
+    };
+  }
   return {
     heading: `${hubName} grading scale used on this page`,
     paragraphs: [
@@ -431,7 +510,9 @@ function termSentence(scale: GradingScale, profile: CountryProfile, noun: string
 
 const capitalize = (text: string) => `${text[0].toUpperCase()}${text.slice(1)}`;
 /** "an A", "an O", "an F", "a B", "a 6 (D)". */
-const withArticle = (grade: string) => `${/^[AEFHILMNORSX8]/.test(grade) ? "an" : "a"} ${grade}`;
+const withArticle = (grade: string) =>
+  // Words ("First", "Upper Second") follow their first sound; single letters follow the letter's name.
+  `${(/^[A-Za-z]{3,}/.test(grade) ? /^[AEIOU]/i : /^[AEFHILMNORSX8]/).test(grade) ? "an" : "a"} ${grade}`;
 
 function finalNeeded(current: number, weight: number, target: number) {
   const w = weight / 100;
@@ -440,10 +521,11 @@ function finalNeeded(current: number, weight: number, target: number) {
 
 function finalExample(code: CountryCode, scale: GradingScale): { example: string; section: GeoPageSection } {
   const { finalCase: c, finalTerm, scaleName } = COUNTRY[code];
-  const target = band(scale, c.target);
+  const target = gradeBand(scale, c.target);
   const needed = finalNeeded(c.current, c.weight, target.min);
+  const pointed = hasGradePoints(scale);
   const rows = scale.bands
-    .filter((b) => b.min >= scale.passPercent && b.gpa != null)
+    .filter((b) => b.min >= scale.passPercent && (!pointed || b.gpa != null))
     .map((b) => {
       const req = finalNeeded(c.current, c.weight, b.min);
       const status = req > 100 ? "Not reachable" : req <= 0 ? "Already secured" : `${fmt(req, 1)}%`;
@@ -503,13 +585,20 @@ function exampleFor(slug: CalculatorSlug, code: CountryCode, scale: GradingScale
     };
   }
 
+  if (slug === "letter-grade-calculator" && !hasGradePoints(scale)) {
+    const lines = scale.bands
+      .filter((b) => b.min >= scale.passPercent)
+      .map((b) => `${b.letter} = ${getBandRangeLabel(b)} (midpoint ${Math.round((b.min + b.max) / 2)}%)`);
+    return { example: `On the ${profile.scaleName} scale: ${lines.join("; ")}.` };
+  }
+
   if (slug === "letter-grade-calculator") {
     const picks = scale.bands.filter((b) => b.min >= 0 && b.gpa != null && b.gpa > 0).slice(0, 4);
     const lines = picks.map((b) => `${b.letter} = ${getBandRangeLabel(b)} (midpoint ${Math.round((b.min + b.max) / 2)}%, ${b.gpa} points)`);
     return { example: `On the ${profile.scaleName} scale: ${lines.join("; ")}.` };
   }
 
-  if (slug === "sgpa-to-cgpa") {
+  if (code === "pk" && slug === "sgpa-to-cgpa") {
     const sems: Array<[number, number]> = [
       [3.45, 18],
       [3.1, 17],
@@ -522,7 +611,7 @@ function exampleFor(slug: CalculatorSlug, code: CountryCode, scale: GradingScale
     };
   }
 
-  if (slug === "cgpa-to-percentage" || slug === "percentage-to-cgpa") {
+  if (code === "pk" && (slug === "cgpa-to-percentage" || slug === "percentage-to-cgpa")) {
     const cgpas = [3.8, 3.5, 3.2, 3.0, 2.5, 2.0];
     const rows = cgpas.map((g) => [fmt(g), findHecBandByCgpa(g).letter, `${hecCgpaToBandMinimumPercent(g)}%`, `${fmt(g * 25, 0)}%`]);
     return {

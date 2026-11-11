@@ -352,7 +352,7 @@ describe("SEO audit", () => {
     expect(paths.filter((p) => /^\/grade-chart\/\d+-questions$/.test(p))).toEqual([]);
     expect(paths).toContain("/score");
     expect(paths).toContain("/grade-chart");
-    expect(sitemap().length).toBe(154);
+    expect(sitemap().length).toBe(150);
   });
 
   it("sitemap lists www URLs so entries match the canonical host (no extra redirect hop)", () => {
@@ -398,7 +398,7 @@ describe("SEO audit", () => {
       `${siteConfig.url}/ca/cumulative-gpa-calculator`,
     );
     expect(calculatorHreflangLanguages("sgpa-to-cgpa")["en-PK"]).toBe(`${siteConfig.url}/pk/sgpa-to-cgpa`);
-    expect(calculatorHreflangLanguages("sgpa-to-cgpa")["en-IN"]).toBe(`${siteConfig.url}/in/sgpa-to-cgpa`);
+    expect(calculatorHreflangLanguages("sgpa-to-cgpa")["en-IN"]).toBe(`${siteConfig.url}/sgpa-to-cgpa`);
     expect(calculatorHreflangLanguages("sgpa-to-cgpa")["en-US"]).toBeUndefined();
   });
 

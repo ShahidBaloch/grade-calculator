@@ -41,26 +41,19 @@ export function CalculatorLayout({
             className={
               focus
                 ? "mt-1.5 max-w-2xl text-sm leading-relaxed text-[var(--color-text-muted)] sm:text-base print:mt-1 print:text-sm"
-                : "mt-2 max-w-2xl text-base leading-relaxed text-[var(--color-text-muted)] print:mt-1 print:text-sm"
+                : "mt-2 max-w-2xl text-sm leading-relaxed text-[var(--color-text-muted)] sm:text-base print:mt-1 print:text-sm"
             }
           >
             {description}
           </p>
           <GeoPageHintLazy />
-          {!focus && (
-            <div className="no-print">
-              <EditorialByline compact className="mt-3 max-w-2xl" />
-            </div>
-          )}
           <p className="mt-1 hidden text-xs text-[var(--color-text-muted)] print:block">
             {siteConfig.name} · {siteConfig.url}
           </p>
-          <div className={focus ? "mt-4 print:mt-3" : "mt-6 print:mt-3"}>{calculator}</div>
-          {focus && (
-            <div className="no-print">
-              <EditorialByline compact className="mt-6 max-w-2xl" />
-            </div>
-          )}
+          <div className={focus ? "mt-4 print:mt-3" : "mt-5 print:mt-3"}>{calculator}</div>
+          <div className="no-print">
+            <EditorialByline compact className="mt-6 max-w-2xl" />
+          </div>
         </article>
         {content && !focus && (
           <aside

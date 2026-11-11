@@ -67,55 +67,6 @@ export function AtarCalculator({ preset }: { preset?: { authority: AtarAuthority
         Use <strong className="font-medium text-[var(--color-text)]">scaled</strong> subject scores
         (after state scaling), not raw school marks. Raw marks will overestimate or underestimate ATAR.
       </p>
-      <p className="text-sm text-[var(--color-text-muted)]">
-        Select your state admission centre, then enter{" "}
-        <strong className="font-medium text-[var(--color-text)]">scaled</strong> subject scores (0–100).
-        Each authority uses different aggregation rules — we apply a simplified planning model for the
-        option you choose, not an official {authorityMeta.name} calculation.
-        {authority === "generic" && (
-          <>
-            {" "}
-            Generic mode uses best four in full plus 10% of a fifth only — not VTAC’s two-increment rule
-            and not other states’ English, QCE, SATAC, or WACE rules. Pick your state for the right model.
-          </>
-        )}
-        {authority === "vtac" && (
-          <>
-            {" "}
-            For VCE, VTAC uses a primary four plus up to two 10% increments (fifth/sixth study), not 10% of
-            every extra score.
-          </>
-        )}
-        {authority === "qtac" && (
-          <>
-            {" "}
-            For QCE, mark Applied or VET subjects — QTAC eligible aggregates can be five General subjects,
-            four General plus one Applied, or four General plus Certificate III+ VET. QTAC also requires
-            satisfactory completion of an eligible English subject (minimum C) — tag English rows and confirm
-            eligibility below.
-          </>
-        )}
-        {authority === "uac" && (
-          <>
-            {" "}
-            For HSC, tick English rows (or include “English” in the name) so we model UAC’s best two English
-            units plus best eight remaining.
-          </>
-        )}
-        {authority === "tisc" && (
-          <>
-            {" "}
-            For WACE, tag LOTE, Mathematics Methods, and Mathematics Specialist rows for TISC 10% bonuses.
-          </>
-        )}
-        {authority === "satac" && (
-          <>
-            {" "}
-            For SACE/SATAC, enter at least five scaled scores so we can model 60 credits from your top three
-            TAS results plus a flexible 30-credit block.
-          </>
-        )}
-      </p>
       <div className="space-y-2">
         <Label htmlFor="atar-authority">State admission centre (changes the planning formula)</Label>
         <Select
@@ -328,6 +279,55 @@ export function AtarCalculator({ preset }: { preset?: { authority: AtarAuthority
       {getPrimaryFlow("atar-calculator") && result.data && (
         <NextStepCard flow={getPrimaryFlow("atar-calculator")!} />
       )}
+      <p className="text-sm text-[var(--color-text-muted)]">
+        Select your state admission centre, then enter{" "}
+        <strong className="font-medium text-[var(--color-text)]">scaled</strong> subject scores (0–100).
+        Each authority uses different aggregation rules — we apply a simplified planning model for the
+        option you choose, not an official {authorityMeta.name} calculation.
+        {authority === "generic" && (
+          <>
+            {" "}
+            Generic mode uses best four in full plus 10% of a fifth only — not VTAC’s two-increment rule
+            and not other states’ English, QCE, SATAC, or WACE rules. Pick your state for the right model.
+          </>
+        )}
+        {authority === "vtac" && (
+          <>
+            {" "}
+            For VCE, VTAC uses a primary four plus up to two 10% increments (fifth/sixth study), not 10% of
+            every extra score.
+          </>
+        )}
+        {authority === "qtac" && (
+          <>
+            {" "}
+            For QCE, mark Applied or VET subjects — QTAC eligible aggregates can be five General subjects,
+            four General plus one Applied, or four General plus Certificate III+ VET. QTAC also requires
+            satisfactory completion of an eligible English subject (minimum C) — tag English rows and confirm
+            eligibility below.
+          </>
+        )}
+        {authority === "uac" && (
+          <>
+            {" "}
+            For HSC, tick English rows (or include “English” in the name) so we model UAC’s best two English
+            units plus best eight remaining.
+          </>
+        )}
+        {authority === "tisc" && (
+          <>
+            {" "}
+            For WACE, tag LOTE, Mathematics Methods, and Mathematics Specialist rows for TISC 10% bonuses.
+          </>
+        )}
+        {authority === "satac" && (
+          <>
+            {" "}
+            For SACE/SATAC, enter at least five scaled scores so we can model 60 credits from your top three
+            TAS results plus a flexible 30-credit block.
+          </>
+        )}
+      </p>
       {examples.length > 0 && (
         <ExampleScenarios
           examples={examples}

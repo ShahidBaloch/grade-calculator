@@ -85,10 +85,12 @@ const GENERIC_HUB_CALCULATORS = new Set<CalculatorSlug>([
 /** Region-specific tools — only these hubs may host `/xx/slug` (not every prefix hub). */
 const MARKET_BOUND_HUBS: Partial<Record<CalculatorSlug, readonly string[]>> = {
   "cgpa-to-gpa": ["/in", "/pk"],
-  "cgpa-to-percentage": ["/in", "/pk"],
-  "percentage-to-cgpa": ["/in", "/pk"],
-  "sgpa-to-cgpa": ["/in", "/pk"],
-  "cgpa-calculator": ["/in", "/pk"],
+  // The worldwide URL of these four is already the India page (10-point CGPA, hreflang en-IN),
+  // so /in/... would be a second copy for the same market. Only Pakistan gets its own version.
+  "cgpa-to-percentage": ["/pk"],
+  "percentage-to-cgpa": ["/pk"],
+  "sgpa-to-cgpa": ["/pk"],
+  "cgpa-calculator": ["/pk"],
   "mcmaster-gpa-to-us-gpa": ["/ca"],
   "atar-calculator": ["/au"],
   "gcse-grade-calculator": ["/uk"],
@@ -156,6 +158,8 @@ export function isIndexableGeoCalculator(hubPath: string, slug: CalculatorSlug):
  */
 export function isCountrySpecificSlug(hubPath: string, slug: CalculatorSlug): boolean {
   if (hubPath === mainCountryPath) return false;
+  const marketHubs = MARKET_BOUND_HUBS[slug];
+  if (marketHubs && !marketHubs.includes(hubPath)) return false;
   if (COUNTRY_SPECIFIC_SLUGS[hubPath]?.includes(slug)) return true;
   if (hubPath === "/uk") return false;
   const hub = countryHubRoutes.find((h) => h.path === hubPath);
